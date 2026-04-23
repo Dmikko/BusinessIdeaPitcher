@@ -1,0 +1,107 @@
+[
+  {
+    "id": "worth-building",
+    "name": "worth-building",
+    "url": "https://github.com/kommuniker/worth-building",
+    "phaseIds": ["phase-1-ideation"],
+    "strength": "Best source for skeptical panel logic, explicit verdicts, and the council pattern.",
+    "adopt": [
+      "skeptical default",
+      "multi-role council mentality",
+      "clear build / validate / park / no-go framing"
+    ],
+    "avoid": [
+      "heavy file-writing flow during every turn"
+    ]
+  },
+  {
+    "id": "startup-skills",
+    "name": "startup-skills",
+    "url": "https://github.com/bwerneckm/startup-skills",
+    "phaseIds": ["phase-1-ideation"],
+    "strength": "Best source for framework-backed workflows and concrete deliverables.",
+    "adopt": [
+      "deliverable-oriented answers",
+      "kill criteria and validation tests",
+      "cross-skill thinking without generic fluff"
+    ],
+    "avoid": [
+      "full template dumps in the main chat loop"
+    ]
+  },
+  {
+    "id": "stratarts",
+    "name": "stratarts",
+    "url": "https://github.com/maigentic/stratarts",
+    "phaseIds": ["phase-1-ideation"],
+    "strength": "Best source for context chaining, output consistency, and structured skill packaging.",
+    "adopt": [
+      "context carry-over mindset",
+      "structured output contracts",
+      "future report-export path"
+    ],
+    "avoid": [
+      "wizard-heavy prompts and HTML generation as the default UX"
+    ]
+  },
+  {
+    "id": "get-shit-done",
+    "name": "get-shit-done",
+    "url": "https://github.com/gsd-build/get-shit-done",
+    "phaseIds": ["phase-2-spec"],
+    "strength": "Best source for strong phase boundaries, falsifiable requirements, and explicit acceptance framing.",
+    "adopt": [
+      "current versus target state framing",
+      "in-scope and out-of-scope discipline",
+      "falsifiable acceptance criteria"
+    ],
+    "avoid": [
+      "full planning filesystem and command-heavy workflow inside the chat loop"
+    ]
+  },
+  {
+    "id": "openspec",
+    "name": "OpenSpec",
+    "url": "https://github.com/Fission-AI/OpenSpec",
+    "phaseIds": ["phase-2-spec"],
+    "strength": "Best source for proposal to spec to design to tasks artifact flow without overloading the user.",
+    "adopt": [
+      "change-oriented spec thinking",
+      "requirements plus scenarios structure",
+      "artifact-ready handoff language"
+    ],
+    "avoid": [
+      "forcing the whole artifact stack into each panel answer"
+    ]
+  },
+  {
+    "id": "spec-kit",
+    "name": "spec-kit",
+    "url": "https://github.com/github/spec-kit",
+    "phaseIds": ["phase-2-spec"],
+    "strength": "Best source for clarification discipline, spec quality checks, and separation of what versus how.",
+    "adopt": [
+      "clarify before plan",
+      "technology-agnostic requirement writing",
+      "spec readiness checks"
+    ],
+    "avoid": [
+      "large command workflow dumps in the main chat"
+    ]
+  },
+  {
+    "id": "bmad-method",
+    "name": "BMAD-METHOD",
+    "url": "https://github.com/bmad-code-org/BMAD-METHOD",
+    "phaseIds": ["phase-2-spec"],
+    "strength": "Best source for PRD creation, UX and architecture handoff, and multi-role planning collaboration.",
+    "adopt": [
+      "PRD-oriented product framing",
+      "scenario and workflow facilitation",
+      "clean handoff into architecture and delivery planning"
+    ],
+    "avoid": [
+      "full step-by-step facilitator workflow during normal chat turns"
+    ]
+  }
+]

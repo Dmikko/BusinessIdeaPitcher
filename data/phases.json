@@ -1,0 +1,56 @@
+[
+  {
+    "id": "phase-1-ideation",
+    "shortLabel": "Phase 1",
+    "name": "Ideation Qualification",
+    "objective": "Pressure test whether the idea deserves deeper work at all.",
+    "exitCriteria": "The wedge, buyer, riskiest assumption, and first validation move are explicit.",
+    "accent": "#b85f2d",
+    "intro": "Use this room to challenge the idea before committing to spec work. The team should test buyer pain, urgency, alternatives, wedge, distribution reality, and the cheapest validation move.",
+    "examplePrompt": "We want to build an AI tool for clinics. Where is the sharpest wedge and what should we validate first?",
+    "defaultSummary": {
+      "signal": "Qualification pending",
+      "confidence": "Medium",
+      "focus": "Use this phase to pressure test the idea, buyer, urgency, and wedge.",
+      "mainRisk": "Jumping into spec work before the core idea is sharp enough.",
+      "nextStep": "Push until the room can name one buyer, one pain, and one validation move.",
+      "exitCriteria": "Move on only when the wedge and riskiest assumption are explicit."
+    }
+  },
+  {
+    "id": "phase-2-spec",
+    "shortLabel": "Phase 2",
+    "name": "Spec",
+    "objective": "Turn a qualified idea into a clear product brief with user, workflow, scope, assumptions, and testable acceptance criteria.",
+    "exitCriteria": "Problem, target user, core scenarios, v1 scope, non-goals, open assumptions, and acceptance criteria are explicit.",
+    "accent": "#2c7c6f",
+    "intro": "Use this room to turn a qualified idea into a spec-ready product brief. The team should define the problem, user, workflow, scenarios, v1 boundaries, assumptions, and acceptance criteria without drifting into implementation detail.",
+    "examplePrompt": "Assume the wedge is AI scribe for physical therapy clinics. Help me define the product brief, the core user scenarios, what belongs in v1, and what must stay out.",
+    "defaultSummary": {
+      "signal": "Spec framing",
+      "confidence": "Medium",
+      "focus": "Use this phase to define the product brief, the critical scenarios, and the scope boundaries engineering will inherit.",
+      "mainRisk": "Ambiguous users, soft requirements, and scope creep will poison the handoff to Phase 3.",
+      "nextStep": "Force the room to name user, workflow, assumptions, v1 scope, non-goals, and concrete acceptance language.",
+      "exitCriteria": "Move on only when the spec is specific enough that planning can proceed without guesswork."
+    }
+  },
+  {
+    "id": "phase-3-dev",
+    "shortLabel": "Phase 3",
+    "name": "Dev",
+    "objective": "Turn the spec into clear engineering instructions and guardrails before coding starts.",
+    "exitCriteria": "Stack, architecture, testing, security, and compliance expectations are explicit.",
+    "accent": "#365f95",
+    "intro": "Use this room to translate the product spec into engineering direction. The team should define stack choices, repo and code standards, architectural boundaries, testing strategy, and security or compliance requirements.",
+    "examplePrompt": "Given a PT clinic AI scribe SaaS, what stack, testing strategy, architecture, and security baseline should we set before building?",
+    "defaultSummary": {
+      "signal": "Delivery planning",
+      "confidence": "Medium",
+      "focus": "Use this phase to lock implementation defaults and technical guardrails before code is written.",
+      "mainRisk": "Coding without explicit architectural, quality, or security constraints creates expensive rework.",
+      "nextStep": "Freeze the boring defaults: stack, repo shape, test strategy, auth, data handling, and release gates.",
+      "exitCriteria": "Move on only when engineering guidance is clear enough to start implementation safely."
+    }
+  }
+]

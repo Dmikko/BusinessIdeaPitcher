@@ -1,0 +1,10 @@
+{
+  "name": "business-idea-pitcher",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local prototype for a multi-role business sparring partner.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  }
+}

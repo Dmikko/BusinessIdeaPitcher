@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Business Idea Pitcher</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="card roster">
+        <div class="eyebrow">Panel Room</div>
+        <h1>Business Idea Pitcher</h1>
+        <p class="lede">
+          A local prototype for a 3-phase idea pitcher with different expert
+          teams in each room.
+        </p>
+
+        <article class="mini-card">
+          <div class="eyebrow">Current Phase</div>
+          <div id="phaseCard" class="phase-card"></div>
+        </article>
+
+        <div class="section-label">Current Phase Team</div>
+        <div id="panelList" class="panel-list" aria-label="Advisor list"></div>
+
+        <div class="mini-grid">
+          <article class="mini-card">
+            <div class="eyebrow">Selected Role</div>
+            <div id="selectedRoleCard" class="role-detail"></div>
+          </article>
+
+          <article class="mini-card">
+            <div class="eyebrow">Runtime</div>
+            <div id="runtimeCard" class="runtime-card"></div>
+          </article>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <section class="card phase-strip">
+          <div class="eyebrow">Journey</div>
+          <h2>Three working phases</h2>
+          <div id="phaseTabs" class="phase-tabs" aria-label="Project phases"></div>
+        </section>
+
+        <section class="card stage">
+          <div class="stage-header">
+            <div>
+              <div id="stageEyebrow" class="eyebrow">Phase room</div>
+              <h2 id="stageTitle">Chat with the current team</h2>
+            </div>
+            <div id="runtimePill" class="status-pill">Booting...</div>
+          </div>
+          <p id="runtimeNote" class="runtime-note"></p>
+
+          <div id="thread" class="thread" aria-live="polite"></div>
+
+          <form id="composer" class="composer">
+            <label id="composerLabel" class="composer-label" for="promptInput"></label>
+            <textarea
+              id="promptInput"
+              name="prompt"
+              rows="4"
+            ></textarea>
+
+            <div class="composer-actions">
+              <button id="seedPrompt" class="ghost" type="button">
+                Insert example
+              </button>
+              <button id="sendButton" class="primary" type="submit">
+                Send to panel
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <article class="card insight-card">
+          <div class="eyebrow">Phase Synthesis</div>
+          <h2 id="summaryTitle">What this room should resolve</h2>
+          <div id="summaryCard" class="summary-grid"></div>
+        </article>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
