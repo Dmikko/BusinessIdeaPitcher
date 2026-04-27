@@ -54,6 +54,24 @@ npm start
 This starts the existing local Node server inside Electron and opens the app in
 a desktop window.
 
+If Electron starts in plain Node mode instead of opening a window, your shell
+may have `ELECTRON_RUN_AS_NODE=1` set globally. In that case, clear it for the
+launch command:
+
+PowerShell:
+
+```powershell
+$env:ELECTRON_RUN_AS_NODE = $null
+npm run desktop
+```
+
+Command Prompt:
+
+```bat
+set ELECTRON_RUN_AS_NODE=
+npm run desktop
+```
+
 ## Build a Windows installer
 
 After `npm install`, create a Windows installer with:
