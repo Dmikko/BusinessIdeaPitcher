@@ -1,0 +1,24 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: business-idea-pitcher:local
+    container_name: business-idea-pitcher
+    init: true
+    ports:
+      - "${PORT:-4173}:4173"
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      PORT: 4173
+      OPENAI_STORE: "${OPENAI_STORE:-false}"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp

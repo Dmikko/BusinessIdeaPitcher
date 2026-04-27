@@ -1,0 +1,13 @@
+.git
+node_modules
+dist
+build
+.env
+.env.*
+.DS_Store
+Thumbs.db
+npm-debug.log*
+
+# Local reference clones are tracked for product research, but they are not
+# needed by the runtime image.
+.sources

@@ -82,6 +82,26 @@ npm run dist
 
 The packaged output is written to `dist/`.
 
+## Run with Docker
+
+Build and start the local web app container:
+
+```bash
+docker compose up --build
+```
+
+Open `http://localhost:4173`.
+
+The container runs the Node server, not the Electron desktop shell. It reads
+runtime configuration from `.env` through Compose. If `OPENAI_API_KEY` is not
+set, the app runs in mock mode.
+
+Stop it with:
+
+```bash
+docker compose down
+```
+
 ## Environment variables
 
 - `PORT` optional, defaults to `4173`
