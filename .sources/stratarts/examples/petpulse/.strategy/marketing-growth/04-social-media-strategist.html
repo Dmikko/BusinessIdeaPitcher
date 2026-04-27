@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Strategy - PetPulse | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; background: #0a0a0a; color: #f5f5f5; line-height: 1.6; }
+        .container { margin: 0 auto; background: #0a0a0a; }
+
+        header { background: #0a0a0a; padding: 0; color: white; display: flex; justify-content: center; }
+        .header-content { position: relative; z-index: 1; max-width: 1600px; width: 100%; background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%); padding: 4rem 4rem 3rem 4rem; border-bottom: 1px solid rgba(16, 185, 129, 0.3); }
+        .kicker { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; opacity: 0.9; margin-bottom: 0.5rem; }
+        h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
+        .subtitle { font-size: 1.3rem; opacity: 0.95; font-weight: 400; margin-bottom: 2rem; }
+        .meta-info { display: flex; gap: 2rem; font-size: 0.9rem; opacity: 0.9; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.2); }
+        .meta-item { display: flex; align-items: center; gap: 0.5rem; }
+
+        .score-banner { background: #0a0a0a; padding: 0; display: flex; justify-content: center; }
+        .score-container { display: grid; grid-template-columns: auto 1fr auto; gap: 3rem; align-items: center; max-width: 1600px; width: 100%; margin: 0 auto; padding: 3rem 4rem; background: #1a1a1a; border-bottom: 1px solid rgba(16, 185, 129, 0.2); }
+        .score-main { text-align: center; }
+        .score-number { font-size: 5rem; font-weight: 700; background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+        .score-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; color: #a3a3a3; margin-top: 0.5rem; font-weight: 600; }
+        .score-interpretation { border-left: 3px solid #10b981; padding-left: 2rem; }
+        .interpretation-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; color: #f5f5f5; }
+        .interpretation-text { color: #d4d4d4; line-height: 1.7; }
+        .verdict-badge { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 1rem 2rem; border-radius: 50px; font-weight: 700; font-size: 1.1rem; white-space: nowrap; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+
+        .content { max-width: 1600px; margin: 0 auto; padding: 4rem 4rem; background: #0a0a0a; }
+        .section { margin-bottom: 4rem; }
+        .section-title { font-size: 2rem; font-weight: 700; color: #f5f5f5; margin-bottom: 0.5rem; }
+        .section-description { font-size: 1.05rem; color: #d4d4d4; max-width: 800px; margin-bottom: 2rem; }
+
+        .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .metric-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1.5rem; text-align: center; }
+        .metric-card .label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; color: #a3a3a3; margin-bottom: 0.5rem; font-weight: 600; }
+        .metric-card .value { font-size: 2.5rem; font-weight: 700; color: #10b981; line-height: 1.2; }
+
+        .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .chart-card { background: #1a1a1a; border-radius: 12px; padding: 2rem; border: 1px solid rgba(16, 185, 129, 0.2); }
+        .chart-card.full-width { grid-column: 1 / -1; }
+        .chart-wrapper { position: relative; height: 350px; margin-bottom: 1.5rem; }
+
+        .platform-card { background: linear-gradient(135deg, #1a1a1a, #0f0f0f); border-radius: 16px; padding: 1.5rem; border: 1px solid #2a2a2a; position: relative; overflow: hidden; }
+        .platform-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+        .platform-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        .platform-instagram { background: linear-gradient(135deg, #e1306c, #c13584); }
+        .platform-tiktok { background: linear-gradient(135deg, #000000, #25f4ee); }
+        .platform-facebook { background: linear-gradient(135deg, #1877f2, #0d65d9); }
+        .platform-youtube { background: linear-gradient(135deg, #ff0000, #cc0000); }
+        .platform-name { font-size: 1.25rem; font-weight: 700; color: #ffffff; }
+        .platform-priority { padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; margin-left: auto; }
+        .priority-primary { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .priority-secondary { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .priority-tertiary { background: rgba(107, 114, 128, 0.2); color: #9ca3af; }
+        .platform-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1rem; }
+        .platform-stat { background: #0a0a0a; border-radius: 8px; padding: 0.75rem; text-align: center; }
+        .stat-value { font-size: 1.125rem; font-weight: 700; color: #10b981; }
+        .stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; }
+        .platform-strategy { background: #0a0a0a; border-radius: 8px; padding: 1rem; border-left: 3px solid #10b981; }
+        .strategy-text { color: #ccc; font-size: 0.9rem; line-height: 1.5; }
+
+        .pillar-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; }
+        .pillar-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-bottom: 1rem; }
+        .pillar-health { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .pillar-tech { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .pillar-lifestyle { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
+        .pillar-community { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .pillar-title { font-weight: 700; color: #f5f5f5; margin-bottom: 0.5rem; }
+        .pillar-percent { font-size: 2rem; font-weight: 700; color: #10b981; margin-bottom: 0.5rem; }
+        .pillar-desc { font-size: 0.9rem; color: #a3a3a3; }
+
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; margin: 2rem 0; }
+        .day-column { background: #1a1a1a; border-radius: 12px; padding: 0.75rem; border: 1px solid #2a2a2a; }
+        .day-header { text-align: center; font-weight: 600; color: #10b981; font-size: 0.8rem; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #2a2a2a; }
+        .post-slot { background: #0a0a0a; border-radius: 6px; padding: 0.5rem; font-size: 0.7rem; margin-bottom: 0.5rem; }
+        .post-time { color: #10b981; font-weight: 600; margin-bottom: 0.25rem; }
+        .post-type { color: #888; }
+
+        .hashtag-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .hashtag-card { background: #1a1a1a; border-radius: 12px; padding: 1.5rem; border: 1px solid #2a2a2a; }
+        .hashtag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+        .hashtag { background: rgba(16, 185, 129, 0.1); color: #ccc; padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.8rem; }
+
+        .engagement-tactic { display: flex; gap: 1rem; background: #1a1a1a; border-radius: 12px; padding: 1.25rem; border: 1px solid #2a2a2a; margin-bottom: 0.75rem; }
+        .tactic-icon { width: 44px; height: 44px; background: rgba(16, 185, 129, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
+        .tactic-info { flex: 1; }
+        .tactic-name { font-weight: 600; color: #ffffff; font-size: 0.95rem; margin-bottom: 0.25rem; }
+        .tactic-description { color: #888; font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .tactic-frequency { font-size: 0.75rem; color: #10b981; font-weight: 500; }
+
+        .timeline-phase { background: #1a1a1a; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; border-left: 4px solid #10b981; }
+        .timeline-phase-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .timeline-phase-title { font-weight: 700; color: #f5f5f5; font-size: 1.1rem; }
+        .timeline-phase-period { font-size: 0.85rem; color: #10b981; font-weight: 600; }
+        .timeline-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; color: #d4d4d4; font-size: 0.9rem; }
+        .timeline-item::before { content: '□'; color: #10b981; font-size: 0.8rem; }
+
+        footer { background: #0a0a0a; display: flex; justify-content: center; }
+        .footer-content { max-width: 1600px; width: 100%; background: #1a1a1a; color: #a3a3a3; padding: 2rem 4rem; font-size: 0.85rem; text-align: center; border-top: 1px solid rgba(16, 185, 129, 0.2); }
+        .footer-content strong { color: #10b981; }
+
+        @media (max-width: 1024px) { .metric-grid, .feature-grid { grid-template-columns: 1fr; } .calendar-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2.5rem; } .score-container { grid-template-columns: 1fr; text-align: center; } .header-content, .content { padding: 2rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="kicker">Social Media Strategy</div>
+                <h1>PetPulse</h1>
+                <div class="subtitle">Building a community of engaged pet parents through educational content, visual storytelling, and authentic connection</div>
+                <div class="meta-info">
+                    <div class="meta-item"><span>📅</span><span>Generated: December 18, 2025</span></div>
+                    <div class="meta-item"><span>📊</span><span>Analysis Type: Multi-Platform Strategy</span></div>
+                    <div class="meta-item"><span>🎯</span><span>Version 1.0.0</span></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">8.4</div>
+                    <div class="score-label">Social Readiness</div>
+                </div>
+                <div class="score-interpretation">
+                    <div class="interpretation-title">What This Score Means</div>
+                    <div class="interpretation-text">
+                        Excellent social media opportunity for PetPulse. Pet content naturally performs well on visual platforms (Instagram, TikTok). Strong brand identity and educational value proposition provide rich content pillars. Target audience (premium pet parents 30-55) is highly active on Instagram and Facebook. Recommend Instagram as primary platform with TikTok for viral growth potential.
+                    </div>
+                </div>
+                <div class="verdict-badge">LAUNCH READY</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Strategy Overview -->
+            <section class="section">
+                <div class="section-title">Strategy Overview</div>
+                <div class="section-description">Multi-platform social media strategy focused on building trust through pet health education and authentic community engagement.</div>
+                <div class="metric-grid">
+                    <div class="metric-card"><div class="label">6-Month Target</div><div class="value">10K</div><div style="color:#888;font-size:0.8rem;margin-top:0.25rem;">Combined followers</div></div>
+                    <div class="metric-card"><div class="label">Engagement Target</div><div class="value">5%+</div><div style="color:#888;font-size:0.8rem;margin-top:0.25rem;">Avg engagement rate</div></div>
+                    <div class="metric-card"><div class="label">Weekly Posts</div><div class="value">18</div><div style="color:#888;font-size:0.8rem;margin-top:0.25rem;">Across all platforms</div></div>
+                    <div class="metric-card"><div class="label">Active Platforms</div><div class="value">3</div><div style="color:#888;font-size:0.8rem;margin-top:0.25rem;">Instagram, TikTok, Facebook</div></div>
+                </div>
+            </section>
+
+            <!-- Platform Strategy -->
+            <section class="section">
+                <div class="section-title">Platform Strategy</div>
+                <div class="section-description">Platform selection based on audience fit, content opportunity, and resource requirements.</div>
+                <div class="feature-grid">
+                    <div class="platform-card">
+                        <div class="platform-header">
+                            <div class="platform-icon platform-instagram">📸</div>
+                            <div class="platform-name">Instagram</div>
+                            <div class="platform-priority priority-primary">Primary</div>
+                        </div>
+                        <div class="platform-stats">
+                            <div class="platform-stat"><div class="stat-value">36/40</div><div class="stat-label">Fit Score</div></div>
+                            <div class="platform-stat"><div class="stat-value">50%</div><div class="stat-label">Effort</div></div>
+                            <div class="platform-stat"><div class="stat-value">10/wk</div><div class="stat-label">Posts</div></div>
+                        </div>
+                        <div class="platform-strategy">
+                            <div class="strategy-text"><strong>Content Mix:</strong> Feed Posts (40%), Reels (35%), Stories (25%)<br><strong>Focus:</strong> Visual pet health tips, product demos, user stories<br><strong>Best Times:</strong> Tue/Thu/Sat 9am, 12pm, 7pm</div>
+                        </div>
+                    </div>
+                    <div class="platform-card">
+                        <div class="platform-header">
+                            <div class="platform-icon platform-tiktok">🎵</div>
+                            <div class="platform-name">TikTok</div>
+                            <div class="platform-priority priority-secondary">Secondary</div>
+                        </div>
+                        <div class="platform-stats">
+                            <div class="platform-stat"><div class="stat-value">30/40</div><div class="stat-label">Fit Score</div></div>
+                            <div class="platform-stat"><div class="stat-value">30%</div><div class="stat-label">Effort</div></div>
+                            <div class="platform-stat"><div class="stat-value">5/wk</div><div class="stat-label">Videos</div></div>
+                        </div>
+                        <div class="platform-strategy">
+                            <div class="strategy-text"><strong>Content Mix:</strong> Pet health tips (40%), Product reactions (30%), Trends (30%)<br><strong>Focus:</strong> Short-form educational, entertaining pet content<br><strong>Best Times:</strong> Daily 6pm-9pm</div>
+                        </div>
+                    </div>
+                    <div class="platform-card">
+                        <div class="platform-header">
+                            <div class="platform-icon platform-facebook">📘</div>
+                            <div class="platform-name">Facebook</div>
+                            <div class="platform-priority priority-secondary">Secondary</div>
+                        </div>
+                        <div class="platform-stats">
+                            <div class="platform-stat"><div class="stat-value">28/40</div><div class="stat-label">Fit Score</div></div>
+                            <div class="platform-stat"><div class="stat-value">15%</div><div class="stat-label">Effort</div></div>
+                            <div class="platform-stat"><div class="stat-value">3/wk</div><div class="stat-label">Posts</div></div>
+                        </div>
+                        <div class="platform-strategy">
+                            <div class="strategy-text"><strong>Content Mix:</strong> Long-form articles (50%), Community posts (30%), Videos (20%)<br><strong>Focus:</strong> Community group, detailed health guides, support<br><strong>Best Times:</strong> Mon/Wed/Fri 9am, 1pm</div>
+                        </div>
+                    </div>
+                    <div class="platform-card">
+                        <div class="platform-header">
+                            <div class="platform-icon platform-youtube">▶️</div>
+                            <div class="platform-name">YouTube</div>
+                            <div class="platform-priority priority-tertiary">Experimental</div>
+                        </div>
+                        <div class="platform-stats">
+                            <div class="platform-stat"><div class="stat-value">24/40</div><div class="stat-label">Fit Score</div></div>
+                            <div class="platform-stat"><div class="stat-value">5%</div><div class="stat-label">Effort</div></div>
+                            <div class="platform-stat"><div class="stat-value">2/mo</div><div class="stat-label">Videos</div></div>
+                        </div>
+                        <div class="platform-strategy">
+                            <div class="strategy-text"><strong>Content Mix:</strong> Product tutorials (50%), Health guides (50%)<br><strong>Focus:</strong> Long-form educational content, SEO value<br><strong>Best Times:</strong> Sunday 2pm</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-card full-width" style="margin-top: 2rem;">
+                    <div class="chart-wrapper"><canvas id="platformChart"></canvas></div>
+                </div>
+            </section>
+
+            <!-- Content Pillars -->
+            <section class="section">
+                <div class="section-title">Content Pillars</div>
+                <div class="section-description">Four strategic content themes that align with brand values and audience interests.</div>
+                <div class="metric-grid">
+                    <div class="pillar-card">
+                        <div class="pillar-badge pillar-health">Pet Health Education</div>
+                        <div class="pillar-percent">35%</div>
+                        <div class="pillar-title">Health Tips & Guides</div>
+                        <div class="pillar-desc">Symptom awareness, preventive care, nutrition tips, exercise guides, seasonal health</div>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-badge pillar-tech">Product & Tech</div>
+                        <div class="pillar-percent">20%</div>
+                        <div class="pillar-title">Features & How-Tos</div>
+                        <div class="pillar-desc">Product demos, feature tutorials, app walkthrough, AI insights explained</div>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-badge pillar-lifestyle">Pet Parent Lifestyle</div>
+                        <div class="pillar-percent">25%</div>
+                        <div class="pillar-title">Stories & Connection</div>
+                        <div class="pillar-desc">Day in the life, pet parent tips, bonding moments, travel with pets</div>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-badge pillar-community">Community</div>
+                        <div class="pillar-percent">20%</div>
+                        <div class="pillar-title">UGC & Engagement</div>
+                        <div class="pillar-desc">User stories, Q&As, polls, pet spotlights, community celebrations</div>
+                    </div>
+                </div>
+                <div class="chart-card full-width" style="margin-top: 2rem;">
+                    <div class="chart-wrapper"><canvas id="pillarChart"></canvas></div>
+                </div>
+            </section>
+
+            <!-- Weekly Content Calendar -->
+            <section class="section">
+                <div class="section-title">Weekly Content Calendar</div>
+                <div class="section-description">Sample weekly posting schedule across platforms. Adjust based on analytics.</div>
+                <div class="calendar-grid">
+                    <div class="day-column">
+                        <div class="day-header">Mon</div>
+                        <div class="post-slot"><div class="post-time">9:00 AM</div><div class="post-type">IG Feed - Health Tip</div></div>
+                        <div class="post-slot"><div class="post-time">12:00 PM</div><div class="post-type">FB - Article Share</div></div>
+                        <div class="post-slot"><div class="post-time">7:00 PM</div><div class="post-type">TikTok - Quick Tip</div></div>
+                    </div>
+                    <div class="day-column">
+                        <div class="day-header">Tue</div>
+                        <div class="post-slot"><div class="post-time">9:00 AM</div><div class="post-type">IG Reel - Demo</div></div>
+                        <div class="post-slot"><div class="post-time">12:00 PM</div><div class="post-type">IG Stories - BTS</div></div>
+                        <div class="post-slot"><div class="post-time">7:00 PM</div><div class="post-type">TikTok - Trending</div></div>
+                    </div>
+                    <div class="day-column">
+                        <div class="day-header">Wed</div>
+                        <div class="post-slot"><div class="post-time">9:00 AM</div><div class="post-type">IG Feed - UGC</div></div>
+                        <div class="post-slot"><div class="post-time">1:00 PM</div><div class="post-type">FB - Community</div></div>
+                        <div class="post-slot"><div class="post-time">7:00 PM</div><div class="post-type">IG Stories - Poll</div></div>
+                    </div>
+                    <div class="day-column">
+                        <div class="day-header">Thu</div>
+                        <div class="post-slot"><div class="post-time">9:00 AM</div><div class="post-type">IG Reel - Health</div></div>
+                        <div class="post-slot"><div class="post-time">12:00 PM</div><div class="post-type">TikTok - Education</div></div>
+                        <div class="post-slot"><div class="post-time">7:00 PM</div><div class="post-type">IG Stories - Q&A</div></div>
+                    </div>
+                    <div class="day-column">
+                        <div class="day-header">Fri</div>
+                        <div class="post-slot"><div class="post-time">9:00 AM</div><div class="post-type">IG Feed - Lifestyle</div></div>
+                        <div class="post-slot"><div class="post-time">1:00 PM</div><div class="post-type">FB - Guide</div></div>
+                        <div class="post-slot"><div class="post-time">7:00 PM</div><div class="post-type">TikTok - Fun</div></div>
+                    </div>
+                    <div class="day-column">
+                        <div class="day-header">Sat</div>
+                        <div class="post-slot"><div class="post-time">10:00 AM</div><div class="post-type">IG Carousel - Tips</div></div>
+                        <div class="post-slot"><div class="post-time">2:00 PM</div><div class="post-type">IG Stories - BTS</div></div>
+                        <div class="post-slot"><div class="post-time">7:00 PM</div><div class="post-type">TikTok - Trend</div></div>
+                    </div>
+                    <div class="day-column">
+                        <div class="day-header">Sun</div>
+                        <div class="post-slot"><div class="post-time">10:00 AM</div><div class="post-type">IG Feed - Community</div></div>
+                        <div class="post-slot"><div class="post-time">2:00 PM</div><div class="post-type">YT - Long-form</div></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hashtag Strategy -->
+            <section class="section">
+                <div class="section-title">Hashtag Strategy</div>
+                <div class="hashtag-grid">
+                    <div class="hashtag-card">
+                        <h4 style="color: #f5f5f5; margin-bottom: 0.5rem;">Brand Hashtags</h4>
+                        <div class="hashtag-list">
+                            <span class="hashtag">#PetPulse</span>
+                            <span class="hashtag">#PetPulseFamily</span>
+                            <span class="hashtag">#PeaceOfMindPetParent</span>
+                            <span class="hashtag">#PetHealthMonitor</span>
+                            <span class="hashtag">#SmartPetCare</span>
+                        </div>
+                    </div>
+                    <div class="hashtag-card">
+                        <h4 style="color: #f5f5f5; margin-bottom: 0.5rem;">Industry Hashtags</h4>
+                        <div class="hashtag-list">
+                            <span class="hashtag">#PetHealth</span>
+                            <span class="hashtag">#DogMom</span>
+                            <span class="hashtag">#CatMom</span>
+                            <span class="hashtag">#PetParent</span>
+                            <span class="hashtag">#DogsOfInstagram</span>
+                            <span class="hashtag">#CatsOfInstagram</span>
+                            <span class="hashtag">#PetWellness</span>
+                            <span class="hashtag">#FurBaby</span>
+                            <span class="hashtag">#PetTech</span>
+                            <span class="hashtag">#HealthyPets</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Engagement Tactics -->
+            <section class="section">
+                <div class="section-title">Engagement Tactics</div>
+                <div class="feature-grid">
+                    <div>
+                        <h4 style="color: #f5f5f5; margin-bottom: 1rem;">Daily Routines</h4>
+                        <div class="engagement-tactic">
+                            <div class="tactic-icon">💬</div>
+                            <div class="tactic-info">
+                                <div class="tactic-name">Morning Engagement</div>
+                                <div class="tactic-description">Respond to overnight comments, engage with 15 pet accounts</div>
+                                <div class="tactic-frequency">Daily • 30 min • 8-8:30 AM</div>
+                            </div>
+                        </div>
+                        <div class="engagement-tactic">
+                            <div class="tactic-icon">📲</div>
+                            <div class="tactic-info">
+                                <div class="tactic-name">Midday Check</div>
+                                <div class="tactic-description">Respond to DMs, repost relevant UGC to stories</div>
+                                <div class="tactic-frequency">Daily • 15 min • 12:00 PM</div>
+                            </div>
+                        </div>
+                        <div class="engagement-tactic">
+                            <div class="tactic-icon">🔔</div>
+                            <div class="tactic-info">
+                                <div class="tactic-name">Evening Wrap</div>
+                                <div class="tactic-description">Respond to comments, plan next day content, track metrics</div>
+                                <div class="tactic-frequency">Daily • 30 min • 6:00 PM</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style="color: #f5f5f5; margin-bottom: 1rem;">Weekly Rituals</h4>
+                        <div class="engagement-tactic">
+                            <div class="tactic-icon">🎉</div>
+                            <div class="tactic-info">
+                                <div class="tactic-name">Pet Spotlight Sunday</div>
+                                <div class="tactic-description">Feature a customer's pet using PetPulse with their story</div>
+                                <div class="tactic-frequency">Every Sunday</div>
+                            </div>
+                        </div>
+                        <div class="engagement-tactic">
+                            <div class="tactic-icon">❓</div>
+                            <div class="tactic-info">
+                                <div class="tactic-name">Q&A Thursday</div>
+                                <div class="tactic-description">Weekly pet health Q&A in Instagram Stories</div>
+                                <div class="tactic-frequency">Every Thursday</div>
+                            </div>
+                        </div>
+                        <div class="engagement-tactic">
+                            <div class="tactic-icon">📊</div>
+                            <div class="tactic-info">
+                                <div class="tactic-name">Poll Wednesday</div>
+                                <div class="tactic-description">Interactive polls about pet care, preferences, opinions</div>
+                                <div class="tactic-frequency">Every Wednesday</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-card full-width" style="margin-top: 2rem;">
+                    <div class="chart-wrapper"><canvas id="engagementChart"></canvas></div>
+                </div>
+            </section>
+
+            <!-- KPIs & Metrics -->
+            <section class="section">
+                <div class="section-title">KPIs & Tracking</div>
+                <div class="metric-grid">
+                    <div class="metric-card"><div class="label">Month 3 Followers</div><div class="value">3K</div></div>
+                    <div class="metric-card"><div class="label">Month 6 Followers</div><div class="value">10K</div></div>
+                    <div class="metric-card"><div class="label">Engagement Rate</div><div class="value">5%+</div></div>
+                    <div class="metric-card"><div class="label">Website Clicks/Mo</div><div class="value">500+</div></div>
+                </div>
+                <div class="chart-card full-width" style="margin-top: 2rem;">
+                    <div class="chart-wrapper"><canvas id="growthChart"></canvas></div>
+                </div>
+            </section>
+
+            <!-- Implementation -->
+            <section class="section">
+                <div class="section-title">Implementation Timeline</div>
+                <div class="timeline-phase">
+                    <div class="timeline-phase-header">
+                        <div class="timeline-phase-title">Phase 1: Foundation</div>
+                        <div class="timeline-phase-period">Weeks 1-4</div>
+                    </div>
+                    <div class="timeline-item">Set up Instagram, TikTok, Facebook accounts with consistent branding</div>
+                    <div class="timeline-item">Create content templates (Canva) for each pillar</div>
+                    <div class="timeline-item">Set up scheduling tool (Later or Buffer)</div>
+                    <div class="timeline-item">Batch create first 2 weeks of content</div>
+                    <div class="timeline-item">Begin daily engagement routine</div>
+                </div>
+                <div class="timeline-phase">
+                    <div class="timeline-phase-header">
+                        <div class="timeline-phase-title">Phase 2: Consistency</div>
+                        <div class="timeline-phase-period">Weeks 5-8</div>
+                    </div>
+                    <div class="timeline-item">Hit target posting frequency (18 posts/week)</div>
+                    <div class="timeline-item">Launch weekly rituals (Pet Spotlight, Q&A Thursday)</div>
+                    <div class="timeline-item">Test content formats and track performance</div>
+                    <div class="timeline-item">Engage with 20+ pet accounts daily</div>
+                    <div class="timeline-item">Start collecting UGC from early customers</div>
+                </div>
+                <div class="timeline-phase">
+                    <div class="timeline-phase-header">
+                        <div class="timeline-phase-title">Phase 3: Growth</div>
+                        <div class="timeline-phase-period">Months 3-6</div>
+                    </div>
+                    <div class="timeline-item">Double down on top-performing content types</div>
+                    <div class="timeline-item">Launch influencer partnership program (5-10 micro-influencers)</div>
+                    <div class="timeline-item">Run UGC campaign (#PetPulseFamily challenge)</div>
+                    <div class="timeline-item">Test paid promotion for top organic content</div>
+                    <div class="timeline-item">Achieve 10K combined followers</div>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | social-media-strategist-v1.0.0</p>
+                <p style="margin-top: 5px;">Context Signature: social-media-strategist-v1.0.0-petpulse | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+        const tooltipConfig = { backgroundColor: '#1a1a1a', titleColor: '#f5f5f5', bodyColor: '#d4d4d4', borderColor: '#10b981', borderWidth: 1 };
+
+        // Platform Distribution Chart
+        new Chart(document.getElementById('platformChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Instagram', 'TikTok', 'Facebook', 'YouTube'],
+                datasets: [{ data: [50, 30, 15, 5], backgroundColor: ['#e1306c', '#25f4ee', '#1877f2', '#ff0000'], borderWidth: 0 }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { title: { display: true, text: 'Content Effort Distribution by Platform', color: '#fff', font: { size: 14, weight: '600' } }, legend: { position: 'right', labels: { color: '#ccc' } }, tooltip: tooltipConfig }
+            }
+        });
+
+        // Content Pillar Chart
+        new Chart(document.getElementById('pillarChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Pet Health Education', 'Product & Tech', 'Pet Parent Lifestyle', 'Community'],
+                datasets: [{ label: 'Content Mix %', data: [35, 20, 25, 20], backgroundColor: ['#10b981', '#3b82f6', '#a855f7', '#f59e0b'], borderRadius: 4 }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true, max: 50, ticks: { color: '#888', callback: v => v + '%' }, grid: { color: '#2a2a2a' } }, x: { ticks: { color: '#ccc' }, grid: { display: false } } },
+                plugins: { title: { display: true, text: 'Content Pillar Distribution', color: '#fff', font: { size: 14, weight: '600' } }, legend: { display: false }, tooltip: tooltipConfig }
+            }
+        });
+
+        // Engagement Radar Chart
+        new Chart(document.getElementById('engagementChart'), {
+            type: 'radar',
+            data: {
+                labels: ['Comments', 'Shares', 'Saves', 'DMs', 'Story Views', 'Reel Views'],
+                datasets: [
+                    { label: 'Current', data: [5, 4, 5, 3, 6, 7], backgroundColor: 'rgba(107, 114, 128, 0.3)', borderColor: '#6b7280', borderWidth: 2 },
+                    { label: 'Target (Month 6)', data: [8, 7, 8, 6, 8, 9], backgroundColor: 'rgba(16, 185, 129, 0.2)', borderColor: '#10b981', borderWidth: 2, pointBackgroundColor: '#10b981' }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: { r: { beginAtZero: true, max: 10, ticks: { color: '#888', stepSize: 2 }, grid: { color: '#2a2a2a' }, pointLabels: { color: '#ccc', font: { size: 11 } } } },
+                plugins: { title: { display: true, text: 'Engagement Performance Targets', color: '#fff', font: { size: 14, weight: '600' } }, legend: { labels: { color: '#ccc' } }, tooltip: tooltipConfig }
+            }
+        });
+
+        // Growth Projection Chart
+        new Chart(document.getElementById('growthChart'), {
+            type: 'line',
+            data: {
+                labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                datasets: [
+                    { label: 'Followers (Combined)', data: [500, 1200, 3000, 5000, 7500, 10000], borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.1)', fill: true, tension: 0.4 },
+                    { label: 'Engagement Rate %', data: [3.5, 4.0, 4.5, 4.8, 5.0, 5.2], borderColor: '#f59e0b', backgroundColor: 'transparent', tension: 0.4, yAxisID: 'y1' }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: {
+                    y: { type: 'linear', position: 'left', beginAtZero: true, ticks: { color: '#888' }, grid: { color: '#2a2a2a' } },
+                    y1: { type: 'linear', position: 'right', beginAtZero: true, max: 10, ticks: { color: '#888', callback: v => v + '%' }, grid: { drawOnChartArea: false } },
+                    x: { ticks: { color: '#ccc' }, grid: { display: false } }
+                },
+                plugins: { title: { display: true, text: '6-Month Social Media Growth Projection', color: '#fff', font: { size: 14, weight: '600' } }, legend: { labels: { color: '#ccc' } }, tooltip: tooltipConfig }
+            }
+        });
+    </script>
+</body>
+</html>

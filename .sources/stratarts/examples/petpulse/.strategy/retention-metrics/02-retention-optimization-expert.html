@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retention Optimization Strategy - PetPulse | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #0a0a0a;
+        }
+
+        /* === HEADER === */
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .header-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* === SCORE BANNER === */
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-main {
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .score-interpretation {
+            border-left: 3px solid #10b981;
+            padding-left: 2rem;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #f5f5f5;
+        }
+
+        .interpretation-text {
+            color: #d4d4d4;
+            line-height: 1.7;
+        }
+
+        .verdict-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        /* === CONTENT === */
+        .content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 4rem;
+            background: #0a0a0a;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: #d4d4d4;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+
+        /* === GRIDS === */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-card .label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .metric-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #10b981;
+            line-height: 1.2;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .small-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .small-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        /* === CHART === */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+        }
+
+        /* === CURVE TYPE === */
+        .curve-type-container {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .curve-type-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+        }
+
+        .curve-description {
+            color: #888;
+            font-size: 0.95rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* === COHORT TABLE === */
+        .cohort-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .cohort-table th,
+        .cohort-table td {
+            padding: 0.75rem;
+            text-align: center;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .cohort-table th {
+            background: #1a1a1a;
+            color: #10b981;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .cohort-table th:first-child,
+        .cohort-table td:first-child {
+            text-align: left;
+        }
+
+        .cohort-table td:first-child {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .retention-cell {
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .ret-high { background: rgba(16, 185, 129, 0.3); color: #10b981; }
+        .ret-med { background: rgba(245, 158, 11, 0.3); color: #f59e0b; }
+        .ret-low { background: rgba(239, 68, 68, 0.3); color: #ef4444; }
+
+        /* === SEGMENTS === */
+        .segment-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .segment-name {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .segment-metrics {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .segment-metric {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .segment-metric-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .segment-metric-label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        /* === RISK INDICATORS === */
+        .risk-indicator {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+            margin-bottom: 0.75rem;
+        }
+
+        .risk-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(239, 68, 68, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .risk-info {
+            flex: 1;
+        }
+
+        .risk-title {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .risk-description {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        /* === HEALTH DISTRIBUTION === */
+        .health-distribution {
+            display: flex;
+            gap: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+
+        .health-segment {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .health-green { background: linear-gradient(135deg, #10b981, #059669); }
+        .health-yellow { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .health-red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+
+        .health-percent {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .health-label {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .health-factors {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+
+        .health-factor {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem;
+            background: #1a1a1a;
+            border-radius: 8px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .factor-name {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .factor-weight {
+            color: #10b981;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* === WINBACK === */
+        .winback-tier {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .winback-tier:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .tier-timing {
+            min-width: 120px;
+        }
+
+        .tier-days {
+            font-weight: 700;
+            color: #10b981;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .tier-name {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        .tier-actions {
+            flex: 1;
+        }
+
+        .tier-action-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .tier-action-item::before {
+            content: '→';
+            color: #10b981;
+        }
+
+        /* === CHURN TABLE === */
+        .churn-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .churn-table th,
+        .churn-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .churn-table th {
+            background: #1a1a1a;
+            color: #10b981;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .churn-table td {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .churn-table td:first-child {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .addressable-yes {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .addressable-maybe {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .addressable-no {
+            background: rgba(107, 114, 128, 0.2);
+            color: #9ca3af;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* === LOOPS === */
+        .loop-card {
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .loop-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .loop-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .loop-name {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1.125rem;
+        }
+
+        .loop-description {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .loop-cycle {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .cycle-step {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .cycle-arrow {
+            color: #10b981;
+            font-size: 1rem;
+        }
+
+        /* === CS MODEL === */
+        .cs-model-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .cs-model-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+        }
+
+        .cs-model-ratio {
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+
+        .touchpoint-phase {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .phase-name {
+            font-weight: 700;
+            color: #10b981;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .touchpoint-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .touchpoint-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ccc;
+            font-size: 0.85rem;
+        }
+
+        .touchpoint-item::before {
+            content: '•';
+            color: #10b981;
+        }
+
+        /* === INSIGHTS === */
+        .insights-panel {
+            background: #0a0a0a;
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .insight-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .insight-list {
+            list-style: none;
+        }
+
+        .insight-list li {
+            padding: 0.6rem 0;
+            color: #d4d4d4;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .insight-list li:last-child {
+            border-bottom: none;
+        }
+
+        .insight-list li strong {
+            color: #10b981;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content strong {
+            color: #10b981;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 1200px) {
+            .metric-grid { grid-template-columns: repeat(2, 1fr); }
+            .small-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .chart-grid, .feature-grid { grid-template-columns: 1fr; }
+            .metric-grid { grid-template-columns: 1fr; }
+            .score-container { grid-template-columns: 1fr; text-align: center; }
+            .score-interpretation { border-left: none; border-top: 3px solid #10b981; padding-left: 0; padding-top: 1.5rem; }
+            .header-content, .score-container, .content, .footer-content { padding: 2rem; }
+            .health-distribution { flex-direction: column; }
+            .winback-tier { flex-direction: column; gap: 0.75rem; }
+            .loop-cycle { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">Retention Optimization Strategy</div>
+                <h1>PetPulse Retention</h1>
+                <div class="subtitle">Reduce churn and turn pet parents into lifelong customers</div>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span>📅</span>
+                        <span>Generated: December 18, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>📊</span>
+                        <span>D30 Retention: 85%</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🎯</span>
+                        <span>Target Churn: <5%</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SCORE BANNER -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">85%</div>
+                    <div class="score-label">D30 Retention</div>
+                </div>
+
+                <div class="score-interpretation">
+                    <div class="interpretation-title">Excellent Retention Foundation</div>
+                    <div class="interpretation-text">
+                        PetPulse's projected 85% 30-day retention exceeds SaaS benchmarks (30-50%).
+                        The health monitoring value proposition creates natural daily engagement.
+                        Focus on maintaining this strength while improving activation and referral.
+                    </div>
+                </div>
+
+                <div class="verdict-badge">
+                    ABOVE BENCHMARK
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+            <!-- Retention Overview -->
+            <div class="section">
+                <h2 class="section-title">Retention Overview</h2>
+
+                <div class="curve-type-container">
+                    <div class="curve-type-name">Steep Drop, Then Strong Plateau (Excellent)</div>
+                    <div class="curve-description">
+                        After initial activation drop (D1-D7), PetPulse retention stabilizes at a high level.
+                        Users who experience the "aha moment" (first health insight) become long-term customers.
+                        This indicates strong product-market fit with the core user base.
+                    </div>
+                </div>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <div class="label">D1 Retention</div>
+                        <div class="value">75%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">D7 Retention</div>
+                        <div class="value">65%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">D30 Retention</div>
+                        <div class="value">85%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">At-Risk Users</div>
+                        <div class="value">12%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Retention Curve -->
+            <div class="section">
+                <h2 class="section-title">Retention Curve</h2>
+
+                <div class="chart-grid">
+                    <div class="chart-card">
+                        <div class="chart-wrapper">
+                            <canvas id="retentionCurveChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="insights-panel" style="margin: 0;">
+                            <div class="insight-title">Curve Insights</div>
+                            <ul class="insight-list">
+                                <li><strong>Critical Period:</strong> D1-D7 shows steepest drop (75% → 65%)</li>
+                                <li><strong>Stabilization:</strong> D7+ retention flattens - activated users stay</li>
+                                <li><strong>Long-term:</strong> D90 projected at 75%+ (excellent for subscription)</li>
+                                <li><strong>Action:</strong> Focus intervention on D1-D7 activation window</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cohort Analysis -->
+            <div class="section">
+                <h2 class="section-title">Cohort Analysis (Projected)</h2>
+                <p class="section-description">
+                    As PetPulse launches, track cohort retention monthly to identify trends and
+                    measure the impact of product improvements on user retention.
+                </p>
+
+                <table class="cohort-table">
+                    <thead>
+                        <tr>
+                            <th>Cohort</th>
+                            <th>M0</th>
+                            <th>M1</th>
+                            <th>M2</th>
+                            <th>M3</th>
+                            <th>M6</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Launch (M1)</td>
+                            <td><span class="retention-cell ret-high">100%</span></td>
+                            <td><span class="retention-cell ret-high">82%</span></td>
+                            <td><span class="retention-cell ret-high">78%</span></td>
+                            <td><span class="retention-cell ret-high">75%</span></td>
+                            <td><span class="retention-cell ret-high">70%</span></td>
+                        </tr>
+                        <tr>
+                            <td>Month 2</td>
+                            <td><span class="retention-cell ret-high">100%</span></td>
+                            <td><span class="retention-cell ret-high">84%</span></td>
+                            <td><span class="retention-cell ret-high">80%</span></td>
+                            <td><span class="retention-cell ret-high">77%</span></td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Month 3</td>
+                            <td><span class="retention-cell ret-high">100%</span></td>
+                            <td><span class="retention-cell ret-high">85%</span></td>
+                            <td><span class="retention-cell ret-high">82%</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Month 4 (Target)</td>
+                            <td><span class="retention-cell ret-high">100%</span></td>
+                            <td><span class="retention-cell ret-high">88%</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="chart-card" style="margin-top: 2rem;">
+                    <div class="chart-wrapper">
+                        <canvas id="cohortChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segment Retention -->
+            <div class="section">
+                <h2 class="section-title">Segment Retention</h2>
+
+                <div class="small-grid">
+                    <div class="segment-card">
+                        <div class="segment-name">Premium Subscribers ($49/mo)</div>
+                        <div class="segment-metrics">
+                            <div class="segment-metric">
+                                <div class="segment-metric-value">92%</div>
+                                <div class="segment-metric-label">D30 Retention</div>
+                            </div>
+                            <div class="segment-metric">
+                                <div class="segment-metric-value">2%</div>
+                                <div class="segment-metric-label">Churn Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="segment-card">
+                        <div class="segment-name">Standard Subscribers ($29/mo)</div>
+                        <div class="segment-metrics">
+                            <div class="segment-metric">
+                                <div class="segment-metric-value">85%</div>
+                                <div class="segment-metric-label">D30 Retention</div>
+                            </div>
+                            <div class="segment-metric">
+                                <div class="segment-metric-value">4%</div>
+                                <div class="segment-metric-label">Churn Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="segment-card">
+                        <div class="segment-name">Basic Subscribers ($19/mo)</div>
+                        <div class="segment-metrics">
+                            <div class="segment-metric">
+                                <div class="segment-metric-value">78%</div>
+                                <div class="segment-metric-label">D30 Retention</div>
+                            </div>
+                            <div class="segment-metric">
+                                <div class="segment-metric-value">6%</div>
+                                <div class="segment-metric-label">Churn Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="color: #888; margin-top: 1.5rem; font-size: 0.9rem;">
+                    <strong style="color: #10b981;">Insight:</strong> Premium subscribers retain significantly better (92% vs 78%).
+                    Consider: (1) Upgrade path for Basic users, (2) Feature differentiation that drives upgrade,
+                    (3) Are Basic subscribers a poor ICP fit?
+                </p>
+            </div>
+
+            <!-- At-Risk Identification -->
+            <div class="section">
+                <h2 class="section-title">At-Risk User Identification</h2>
+                <p class="section-description">
+                    Leading indicators that predict churn 2-4 weeks before it happens.
+                    Monitor these signals to intervene proactively.
+                </p>
+
+                <div class="risk-indicator">
+                    <div class="risk-icon">📉</div>
+                    <div class="risk-info">
+                        <div class="risk-title">Declining App Opens</div>
+                        <div class="risk-description">User opened app 10+ times last week, only 2x this week</div>
+                    </div>
+                </div>
+                <div class="risk-indicator">
+                    <div class="risk-icon">🔕</div>
+                    <div class="risk-info">
+                        <div class="risk-title">Ignoring Health Alerts</div>
+                        <div class="risk-description">User hasn't acknowledged health notifications in 7+ days</div>
+                    </div>
+                </div>
+                <div class="risk-indicator">
+                    <div class="risk-icon">❌</div>
+                    <div class="risk-info">
+                        <div class="risk-title">No Collar Sync</div>
+                        <div class="risk-description">Pet collar hasn't synced data in 14+ days (not being used)</div>
+                    </div>
+                </div>
+                <div class="risk-indicator">
+                    <div class="risk-icon">⚠️</div>
+                    <div class="risk-info">
+                        <div class="risk-title">Support Escalation</div>
+                        <div class="risk-description">User has 2+ open support tickets or negative feedback</div>
+                    </div>
+                </div>
+                <div class="risk-indicator">
+                    <div class="risk-icon">💳</div>
+                    <div class="risk-info">
+                        <div class="risk-title">Payment Failed</div>
+                        <div class="risk-description">Credit card declined and not updated within 48 hours</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Health Score -->
+            <div class="section">
+                <h2 class="section-title">Customer Health Score</h2>
+
+                <div class="health-distribution">
+                    <div class="health-segment health-green" style="flex: 70;">
+                        <div class="health-percent">70%</div>
+                        <div class="health-label">Healthy</div>
+                    </div>
+                    <div class="health-segment health-yellow" style="flex: 18;">
+                        <div class="health-percent">18%</div>
+                        <div class="health-label">At Risk</div>
+                    </div>
+                    <div class="health-segment health-red" style="flex: 12;">
+                        <div class="health-percent">12%</div>
+                        <div class="health-label">Churn Risk</div>
+                    </div>
+                </div>
+
+                <h3 style="color: #f5f5f5; margin: 1.5rem 0 1rem;">Health Score Factors</h3>
+                <div class="health-factors">
+                    <div class="health-factor">
+                        <span class="factor-name">App Open Frequency (daily engagement)</span>
+                        <span class="factor-weight">30%</span>
+                    </div>
+                    <div class="health-factor">
+                        <span class="factor-name">Feature Usage (health insights, telehealth, alerts)</span>
+                        <span class="factor-weight">25%</span>
+                    </div>
+                    <div class="health-factor">
+                        <span class="factor-name">Collar Sync Consistency</span>
+                        <span class="factor-weight">20%</span>
+                    </div>
+                    <div class="health-factor">
+                        <span class="factor-name">Support Ticket Sentiment</span>
+                        <span class="factor-weight">15%</span>
+                    </div>
+                    <div class="health-factor">
+                        <span class="factor-name">Payment Status</span>
+                        <span class="factor-weight">10%</span>
+                    </div>
+                </div>
+
+                <div class="chart-card" style="margin-top: 2rem;">
+                    <div class="chart-wrapper" style="height: 300px;">
+                        <canvas id="healthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Win-Back Campaign -->
+            <div class="section">
+                <h2 class="section-title">Win-Back Campaign</h2>
+                <p class="section-description">
+                    Multi-touch re-engagement sequence for users showing declining engagement.
+                    Escalates from subtle reminders to direct incentives.
+                </p>
+
+                <div style="margin: 2rem 0;">
+                    <div class="winback-tier">
+                        <div class="tier-timing">
+                            <div class="tier-days">Days 3-7</div>
+                            <div class="tier-name">Subtle Reminder</div>
+                        </div>
+                        <div class="tier-actions">
+                            <div class="tier-action-item">Push notification: "Luna hasn't synced today. Check in!"</div>
+                            <div class="tier-action-item">Email: "This week's pet health insights are ready"</div>
+                            <div class="tier-action-item">In-app badge showing unread health alerts</div>
+                        </div>
+                    </div>
+
+                    <div class="winback-tier">
+                        <div class="tier-timing">
+                            <div class="tier-days">Days 8-14</div>
+                            <div class="tier-name">Value Reminder</div>
+                        </div>
+                        <div class="tier-actions">
+                            <div class="tier-action-item">Email: "Here's what PetPulse caught for [Customer Name]" (case study)</div>
+                            <div class="tier-action-item">Push: "New health feature: [Feature] now available"</div>
+                            <div class="tier-action-item">Survey: "What would make PetPulse more useful for you?"</div>
+                        </div>
+                    </div>
+
+                    <div class="winback-tier">
+                        <div class="tier-timing">
+                            <div class="tier-days">Days 15-21</div>
+                            <div class="tier-name">Direct Incentive</div>
+                        </div>
+                        <div class="tier-actions">
+                            <div class="tier-action-item">Email: "We miss you! Get 1 free month on us"</div>
+                            <div class="tier-action-item">Personal email from CEO: "How can we help?"</div>
+                            <div class="tier-action-item">Free telehealth consultation offer</div>
+                        </div>
+                    </div>
+
+                    <div class="winback-tier">
+                        <div class="tier-timing">
+                            <div class="tier-days">Days 22-30</div>
+                            <div class="tier-name">Last Chance</div>
+                        </div>
+                        <div class="tier-actions">
+                            <div class="tier-action-item">Email: "Your PetPulse data will be archived in 7 days"</div>
+                            <div class="tier-action-item">Phone call from Customer Success (high-value users)</div>
+                            <div class="tier-action-item">Exit survey: "Why are you leaving? What would bring you back?"</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Churn Reasons -->
+            <div class="section">
+                <h2 class="section-title">Churn Reason Analysis (Projected)</h2>
+
+                <table class="churn-table">
+                    <thead>
+                        <tr>
+                            <th>Churn Reason</th>
+                            <th>%</th>
+                            <th>Addressable</th>
+                            <th>Action Plan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Didn't see value / low usage</td>
+                            <td>28%</td>
+                            <td><span class="addressable-yes">Yes</span></td>
+                            <td>Improve onboarding, faster time-to-value</td>
+                        </tr>
+                        <tr>
+                            <td>Too expensive</td>
+                            <td>22%</td>
+                            <td><span class="addressable-yes">Yes</span></td>
+                            <td>Introduce annual discount, flexible plans</td>
+                        </tr>
+                        <tr>
+                            <td>Pet no longer needs monitoring</td>
+                            <td>18%</td>
+                            <td><span class="addressable-maybe">Maybe</span></td>
+                            <td>Wellness-focused messaging, preventive care</td>
+                        </tr>
+                        <tr>
+                            <td>Technical issues / collar problems</td>
+                            <td>15%</td>
+                            <td><span class="addressable-yes">Yes</span></td>
+                            <td>Hardware QA, proactive replacement</td>
+                        </tr>
+                        <tr>
+                            <td>Found alternative product</td>
+                            <td>10%</td>
+                            <td><span class="addressable-maybe">Maybe</span></td>
+                            <td>Competitive differentiation, switching costs</td>
+                        </tr>
+                        <tr>
+                            <td>Pet passed away</td>
+                            <td>7%</td>
+                            <td><span class="addressable-no">No</span></td>
+                            <td>Compassionate off-boarding, memorial feature</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="chart-card" style="margin-top: 2rem;">
+                    <div class="chart-wrapper">
+                        <canvas id="churnChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Retention Loops -->
+            <div class="section">
+                <h2 class="section-title">Retention Loops</h2>
+                <p class="section-description">
+                    Automated cycles that bring users back to PetPulse daily without requiring
+                    marketing intervention.
+                </p>
+
+                <div class="feature-grid">
+                    <div class="loop-card">
+                        <div class="loop-header">
+                            <div class="loop-icon">❤️</div>
+                            <div class="loop-name">Daily Health Loop</div>
+                        </div>
+                        <div class="loop-description">
+                            Pet's health data creates natural daily engagement. Each day generates
+                            new insights, activity summaries, and trend comparisons that pet parents
+                            want to check.
+                        </div>
+                        <div class="loop-cycle">
+                            <span class="cycle-step">Pet wears collar</span>
+                            <span class="cycle-arrow">→</span>
+                            <span class="cycle-step">Data syncs overnight</span>
+                            <span class="cycle-arrow">→</span>
+                            <span class="cycle-step">Morning notification</span>
+                            <span class="cycle-arrow">→</span>
+                            <span class="cycle-step">User checks app</span>
+                            <span class="cycle-arrow">→</span>
+                            <span class="cycle-step">Repeat</span>
+                        </div>
+                    </div>
+
+                    <div class="loop-card">
+                        <div class="loop-header">
+                            <div class="loop-icon">🔔</div>
+                            <div class="loop-name">Alert Response Loop</div>
+                        </div>
+                        <div class="loop-description">
+                            Health anomalies trigger alerts that require action. Users receive
+                            push notifications for important changes, creating urgency to engage.
+                        </div>
+                        <div class="loop-cycle">
+                            <span class="cycle-step">AI detects anomaly</span>
+                            <span class="cycle-arrow">→</span>
+                            <span class="cycle-step">Push alert sent</span>
+                            <span class="cycle-arrow">→</span>
+                            <span class="cycle-step">User reviews data</span>
+                            <span class="cycle-arrow">→</span>
+                            <span class="cycle-step">Takes action/dismisses</span>
+                            <span class="cycle-arrow">→</span>
+                            <span class="cycle-step">Trust builds</span>
+                        </div>
+                    </div>
+
+                    <div class="loop-card">
+                        <div class="loop-header">
+                            <div class="loop-icon">📊</div>
+                            <div class="loop-name">Weekly Digest Loop</div>
+                        </div>
+                        <div class="loop-description">
+                            Weekly email summarizing pet's health trends, activity levels, and
+                            comparison to breed averages. Even less engaged users receive value.
+                        </div>
+                        <div class="loop-cycle">
+                            <span class="cycle-step">Week ends</span>
+                            <span class="cycle-arrow">→</span>
+                            <span class="cycle-step">Digest email sent</span>
+                            <span class="cycle-arrow">→</span>
+                            <span class="cycle-step">User opens email</span>
+                            <span class="cycle-arrow">→</span>
+                            <span class="cycle-step">Clicks to app</span>
+                            <span class="cycle-arrow">→</span>
+                            <span class="cycle-step">Re-engaged</span>
+                        </div>
+                    </div>
+
+                    <div class="loop-card">
+                        <div class="loop-header">
+                            <div class="loop-icon">🎯</div>
+                            <div class="loop-name">Milestone Celebration Loop</div>
+                        </div>
+                        <div class="loop-description">
+                            Celebrate pet health milestones (100 days monitored, improved activity,
+                            weight goal reached) creating positive associations and shareable moments.
+                        </div>
+                        <div class="loop-cycle">
+                            <span class="cycle-step">Milestone achieved</span>
+                            <span class="cycle-arrow">→</span>
+                            <span class="cycle-step">Badge/celebration</span>
+                            <span class="cycle-arrow">→</span>
+                            <span class="cycle-step">User shares on social</span>
+                            <span class="cycle-arrow">→</span>
+                            <span class="cycle-step">Friends discover</span>
+                            <span class="cycle-arrow">→</span>
+                            <span class="cycle-step">Referral</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Success -->
+            <div class="section">
+                <h2 class="section-title">Customer Success Strategy</h2>
+
+                <div class="cs-model-card">
+                    <div class="cs-model-name">Tech-Touch Model (Automated)</div>
+                    <div class="cs-model-ratio">1 CSM : ∞ Users | ARPU $34/mo | Automated touchpoints with human escalation</div>
+                </div>
+
+                <h3 style="color: #f5f5f5; margin: 1.5rem 0 1rem;">Touchpoint Cadence</h3>
+                <div class="small-grid">
+                    <div class="touchpoint-phase">
+                        <div class="phase-name">Onboarding (Days 0-30)</div>
+                        <div class="touchpoint-list">
+                            <div class="touchpoint-item">Day 0: Welcome email + setup guide</div>
+                            <div class="touchpoint-item">Day 1: Collar setup confirmation</div>
+                            <div class="touchpoint-item">Day 3: "First health insight" celebration</div>
+                            <div class="touchpoint-item">Day 7: Feature tutorial (telehealth)</div>
+                            <div class="touchpoint-item">Day 14: Onboarding complete check-in</div>
+                            <div class="touchpoint-item">Day 30: "How's it going?" survey</div>
+                        </div>
+                    </div>
+                    <div class="touchpoint-phase">
+                        <div class="phase-name">Ongoing Success (Month 2+)</div>
+                        <div class="touchpoint-list">
+                            <div class="touchpoint-item">Weekly health digest email</div>
+                            <div class="touchpoint-item">Monthly usage summary</div>
+                            <div class="touchpoint-item">Quarterly NPS survey</div>
+                            <div class="touchpoint-item">Feature announcement emails</div>
+                            <div class="touchpoint-item">At-risk user intervention (automated trigger)</div>
+                        </div>
+                    </div>
+                    <div class="touchpoint-phase">
+                        <div class="phase-name">Renewal (Day 25-30)</div>
+                        <div class="touchpoint-list">
+                            <div class="touchpoint-item">Day 25: Renewal reminder email</div>
+                            <div class="touchpoint-item">Day 28: "Value delivered" summary</div>
+                            <div class="touchpoint-item">Day 30: Auto-renewal confirmation</div>
+                            <div class="touchpoint-item">Annual: Upgrade offer (annual savings)</div>
+                            <div class="touchpoint-item">Expansion: Multi-pet discount offer</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Implementation Roadmap -->
+            <div class="section">
+                <h2 class="section-title">90-Day Implementation Roadmap</h2>
+
+                <div class="small-grid">
+                    <div class="small-card" style="border-top: 3px solid #10b981;">
+                        <div style="font-weight: 700; color: #10b981; margin-bottom: 0.5rem;">Phase 1: Analyze</div>
+                        <div style="font-size: 0.85rem; color: #fff; margin-bottom: 0.75rem;">Weeks 1-3</div>
+                        <ul style="color: #888; font-size: 0.85rem; margin-left: 1rem; line-height: 1.8;">
+                            <li>Set up cohort tracking in Mixpanel</li>
+                            <li>Define health score algorithm</li>
+                            <li>Create at-risk user dashboard</li>
+                            <li>Implement exit survey</li>
+                        </ul>
+                    </div>
+                    <div class="small-card" style="border-top: 3px solid #059669;">
+                        <div style="font-weight: 700; color: #059669; margin-bottom: 0.5rem;">Phase 2: Intervene</div>
+                        <div style="font-size: 0.85rem; color: #fff; margin-bottom: 0.75rem;">Weeks 4-6</div>
+                        <ul style="color: #888; font-size: 0.85rem; margin-left: 1rem; line-height: 1.8;">
+                            <li>Launch win-back email sequence</li>
+                            <li>Implement dunning campaign</li>
+                            <li>Create at-risk user alerts</li>
+                            <li>Build weekly digest email</li>
+                        </ul>
+                    </div>
+                    <div class="small-card" style="border-top: 3px solid #047857;">
+                        <div style="font-weight: 700; color: #047857; margin-bottom: 0.5rem;">Phase 3: Optimize</div>
+                        <div style="font-size: 0.85rem; color: #fff; margin-bottom: 0.75rem;">Weeks 7-12</div>
+                        <ul style="color: #888; font-size: 0.85rem; margin-left: 1rem; line-height: 1.8;">
+                            <li>A/B test win-back incentives</li>
+                            <li>Implement milestone celebrations</li>
+                            <li>Launch referral program</li>
+                            <li>Monthly retention review cadence</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="section">
+                <h2 class="section-title">Next Steps</h2>
+
+                <div class="feature-grid">
+                    <div class="loop-card" style="border-color: #10b981;">
+                        <h4 style="color: #10b981; margin-bottom: 1rem;">This Week</h4>
+                        <ul style="color: #d4d4d4; line-height: 2;">
+                            <li>□ Define health score factors and weights</li>
+                            <li>□ Create at-risk user criteria in analytics</li>
+                            <li>□ Draft win-back email sequence</li>
+                            <li>□ Set up exit survey (trigger on cancel)</li>
+                        </ul>
+                    </div>
+                    <div class="loop-card">
+                        <h4 style="color: #10b981; margin-bottom: 1rem;">This Month</h4>
+                        <ul style="color: #d4d4d4; line-height: 2;">
+                            <li>□ Launch win-back campaign</li>
+                            <li>□ Implement dunning sequence</li>
+                            <li>□ Build retention dashboard</li>
+                            <li>□ Schedule weekly retention review</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | retention-optimization-expert-v1.0.0</p>
+                <p style="margin-top: 5px;">Context Signature: retention-optimization-expert-v1.0.0 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        // Retention Curve Chart
+        const curveCtx = document.getElementById('retentionCurveChart');
+        if (curveCtx) {
+            new Chart(curveCtx, {
+                type: 'line',
+                data: {
+                    labels: ['D0', 'D1', 'D7', 'D14', 'D30', 'D60', 'D90'],
+                    datasets: [{
+                        label: 'Retention %',
+                        data: [100, 75, 65, 58, 50, 45, 42],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                color: '#888',
+                                callback: function(value) { return value + '%'; }
+                            },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'PetPulse Retention Curve (Projected)',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Cohort Chart
+        const cohortCtx = document.getElementById('cohortChart');
+        if (cohortCtx) {
+            new Chart(cohortCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Launch', 'Month 2', 'Month 3', 'Month 4 (Target)'],
+                    datasets: [{
+                        label: 'M1 Retention %',
+                        data: [82, 84, 85, 88],
+                        backgroundColor: '#10b981',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 75,
+                            max: 95,
+                            ticks: {
+                                color: '#888',
+                                callback: function(value) { return value + '%'; }
+                            },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'M1 Retention by Cohort (Improving Trend Target)',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Health Distribution Chart
+        const healthCtx = document.getElementById('healthChart');
+        if (healthCtx) {
+            new Chart(healthCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Healthy (80-100)', 'At Risk (50-79)', 'Churn Risk (<50)'],
+                    datasets: [{
+                        data: [70, 18, 12],
+                        backgroundColor: ['#10b981', '#f59e0b', '#ef4444'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Customer Health Distribution',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: {
+                            position: 'right',
+                            labels: { color: '#ccc', padding: 15 }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Churn Reasons Chart
+        const churnCtx = document.getElementById('churnChart');
+        if (churnCtx) {
+            new Chart(churnCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Low Usage', 'Too Expensive', 'Pet Healthy', 'Tech Issues', 'Alternative', 'Pet Passed'],
+                    datasets: [{
+                        label: 'Churn Reason %',
+                        data: [28, 22, 18, 15, 10, 7],
+                        backgroundColor: ['#ef4444', '#ef4444', '#f59e0b', '#10b981', '#f59e0b', '#6b7280'],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 35,
+                            ticks: {
+                                color: '#888',
+                                callback: function(value) { return value + '%'; }
+                            },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        y: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Projected Churn Reasons',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

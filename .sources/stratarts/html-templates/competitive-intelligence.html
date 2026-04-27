@@ -1,0 +1,1097 @@
+<!--
+═══════════════════════════════════════════════════════════════════════════════
+STRATARTS HTML SKELETON TEMPLATE
+Skill: competitive-intelligence
+Version: 1.0.0
+
+INSTRUCTIONS:
+1. Read base-template.html first for shared CSS/JS structure
+2. Replace all {{PLACEHOLDER}} markers with actual data
+3. This template defines skill-specific content sections and charts
+═══════════════════════════════════════════════════════════════════════════════
+-->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     TEMPLATE VARIABLES (Replace with actual data)
+     ════════════════════════════════════════════════════════════════════════════
+
+     HEADER:
+     {{PAGE_TITLE}}          = "Competitive Intelligence Report"
+     {{KICKER}}              = "StratArts Business Analysis"
+     {{TITLE}}               = "Competitive Intelligence"
+     {{SUBTITLE}}            = "{BUSINESS_NAME} - {MARKET_CATEGORY}"
+     {{DATE}}                = "November 28, 2025"
+     {{ANALYSIS_TYPE}}       = "Foundation Strategy"
+     {{VERSION}}             = "1.0"
+
+     SCORE BANNER:
+     {{PRIMARY_SCORE}}       = "7.2" (competitive landscape favorability 0-10)
+     {{SCORE_LABEL}}         = "Competitive Landscape Score"
+     {{SCORE_INTERPRETATION}}= "This score indicates..."
+     {{VERDICT}}             = "✓ FAVORABLE" | "⚠️ MODERATE COMPETITION" | "✗ INTENSE COMPETITION"
+
+     FOOTER:
+     {{PROJECT_NAME}}        = "{PROJECT_FOLDER_NAME}"
+     {{SKILL_NAME}}          = "competitive-intelligence"
+     {{CONTEXT_SIGNATURE}}   = "competitive-intelligence-v1.0.0"
+     {{ITERATIONS}}          = "1"
+     {{ITERATIONS_PLURAL}}   = "" or "s"
+
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     SKILL-SPECIFIC CSS (Add to {{SKILL_SPECIFIC_CSS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+<style>
+/* Competitor Cards */
+.competitor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.competitor-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.competitor-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(16, 185, 129, 0.4);
+}
+
+.competitor-card.direct {
+    border-left: 4px solid #f97316;
+}
+
+.competitor-card.indirect {
+    border-left: 4px solid #3b82f6;
+}
+
+.competitor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.competitor-name {
+    font-weight: 700;
+    color: #f5f5f5;
+    font-size: 1.1rem;
+}
+
+.competitor-type {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.competitor-type.direct {
+    background: rgba(249, 115, 22, 0.2);
+    color: #f97316;
+}
+
+.competitor-type.indirect {
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+}
+
+.competitor-description {
+    color: rgba(245, 245, 245, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.competitor-meta {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.competitor-meta-item {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.competitor-meta-label {
+    color: rgba(245, 245, 245, 0.5);
+}
+
+.competitor-meta-value {
+    color: #10b981;
+    font-weight: 600;
+}
+
+.threat-level {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.threat-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.threat-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s;
+}
+
+.threat-fill.high { background: #ef4444; }
+.threat-fill.medium { background: #f97316; }
+.threat-fill.low { background: #10b981; }
+
+.threat-score {
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+/* Porter's Five Forces Cards */
+.forces-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.force-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.force-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.force-name {
+    font-weight: 700;
+    color: #f5f5f5;
+    font-size: 1rem;
+}
+
+.force-level {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    text-transform: uppercase;
+}
+
+.force-level.high {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.force-level.medium {
+    background: rgba(249, 115, 22, 0.2);
+    color: #f97316;
+}
+
+.force-level.low {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.force-description {
+    color: rgba(245, 245, 245, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* SWOT Grid */
+.swot-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.swot-quadrant {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.swot-quadrant.strengths {
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.swot-quadrant.weaknesses {
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.swot-quadrant.opportunities {
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.swot-quadrant.threats {
+    border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+.swot-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.swot-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.strengths .swot-icon { background: rgba(16, 185, 129, 0.2); }
+.weaknesses .swot-icon { background: rgba(239, 68, 68, 0.2); }
+.opportunities .swot-icon { background: rgba(59, 130, 246, 0.2); }
+.threats .swot-icon { background: rgba(249, 115, 22, 0.2); }
+
+.swot-title {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.strengths .swot-title { color: #10b981; }
+.weaknesses .swot-title { color: #ef4444; }
+.opportunities .swot-title { color: #3b82f6; }
+.threats .swot-title { color: #f97316; }
+
+.swot-list {
+    list-style: none;
+    padding: 0;
+}
+
+.swot-list li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: rgba(245, 245, 245, 0.8);
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.05);
+}
+
+.swot-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+}
+
+.strengths .swot-list li::before { color: #10b981; }
+.weaknesses .swot-list li::before { color: #ef4444; }
+.opportunities .swot-list li::before { color: #3b82f6; }
+.threats .swot-list li::before { color: #f97316; }
+
+/* White Space Cards */
+.whitespace-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.whitespace-card {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.whitespace-number {
+    width: 28px;
+    height: 28px;
+    background: rgba(16, 185, 129, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #10b981;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.whitespace-title {
+    font-weight: 700;
+    color: #f5f5f5;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.whitespace-description {
+    color: rgba(245, 245, 245, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Strategy Cards */
+.strategy-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.strategy-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.strategy-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.strategy-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.strategy-name {
+    font-weight: 700;
+    color: #10b981;
+    font-size: 1.1rem;
+}
+
+.strategy-description {
+    color: rgba(245, 245, 245, 0.8);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.strategy-actions {
+    list-style: none;
+    padding: 0;
+    background: rgba(16, 185, 129, 0.05);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.strategy-actions li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: rgba(245, 245, 245, 0.8);
+    font-size: 0.9rem;
+}
+
+.strategy-actions li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #10b981;
+}
+
+/* Monitoring Table */
+.monitoring-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
+
+.monitoring-table th {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.monitoring-table td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+    color: rgba(245, 245, 245, 0.8);
+}
+
+.monitoring-table tr:hover td {
+    background: rgba(16, 185, 129, 0.05);
+}
+
+/* Threat Assessment Cards */
+.threat-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.threat-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(249, 115, 22, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.threat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.threat-name {
+    font-weight: 700;
+    color: #f5f5f5;
+    font-size: 1.1rem;
+}
+
+.threat-badges {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.threat-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.threat-badge.likelihood {
+    background: rgba(249, 115, 22, 0.2);
+    color: #f97316;
+}
+
+.threat-badge.impact {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.threat-nature {
+    color: rgba(245, 245, 245, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.threat-mitigation {
+    background: rgba(16, 185, 129, 0.1);
+    border-left: 3px solid #10b981;
+    padding: 1rem;
+    border-radius: 0 8px 8px 0;
+}
+
+.threat-mitigation-label {
+    font-size: 0.75rem;
+    color: #10b981;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.threat-mitigation-text {
+    color: rgba(245, 245, 245, 0.8);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Positioning Statement Box */
+.positioning-box {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.positioning-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #10b981;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.positioning-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #f5f5f5;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .swot-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CONTENT SECTIONS
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- SECTION: Executive Summary -->
+<section class="content-section">
+    <h2>Executive Summary</h2>
+    <div class="summary-text">
+        {{EXECUTIVE_SUMMARY}}
+    </div>
+
+    <div class="key-metrics-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2rem;">
+        <div class="metric-box">
+            <div class="metric-label">Competitive Intensity</div>
+            <div class="metric-value">{{COMPETITIVE_INTENSITY}}</div>
+        </div>
+        <div class="metric-box">
+            <div class="metric-label">Direct Competitors</div>
+            <div class="metric-value">{{DIRECT_COMPETITOR_COUNT}}</div>
+        </div>
+        <div class="metric-box">
+            <div class="metric-label">Market Attractiveness</div>
+            <div class="metric-value">{{MARKET_ATTRACTIVENESS}}</div>
+        </div>
+        <div class="metric-box">
+            <div class="metric-label">Recommended Position</div>
+            <div class="metric-value">{{RECOMMENDED_POSITION}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: Competitive Landscape -->
+<section class="content-section">
+    <h2>Competitive Landscape</h2>
+
+    <h3>Direct Competitors</h3>
+    <div class="competitor-grid">
+        <!-- Repeat for each direct competitor -->
+        <div class="competitor-card direct">
+            <div class="competitor-header">
+                <div class="competitor-name">{{COMP_1_NAME}}</div>
+                <span class="competitor-type direct">Direct</span>
+            </div>
+            <div class="competitor-description">{{COMP_1_DESCRIPTION}}</div>
+            <div class="competitor-meta">
+                <div class="competitor-meta-item">
+                    <span class="competitor-meta-label">Founded:</span>
+                    <span class="competitor-meta-value">{{COMP_1_FOUNDED}}</span>
+                </div>
+                <div class="competitor-meta-item">
+                    <span class="competitor-meta-label">Funding:</span>
+                    <span class="competitor-meta-value">{{COMP_1_FUNDING}}</span>
+                </div>
+                <div class="competitor-meta-item">
+                    <span class="competitor-meta-label">Team:</span>
+                    <span class="competitor-meta-value">{{COMP_1_TEAM}}</span>
+                </div>
+                <div class="competitor-meta-item">
+                    <span class="competitor-meta-label">Moat:</span>
+                    <span class="competitor-meta-value">{{COMP_1_MOAT}}</span>
+                </div>
+            </div>
+            <div class="threat-level">
+                <span class="threat-bar"><span class="threat-fill {{COMP_1_THREAT_CLASS}}" style="width: {{COMP_1_THREAT_PERCENT}}%"></span></span>
+                <span class="threat-score">{{COMP_1_THREAT}}/10</span>
+            </div>
+        </div>
+        <!-- Add more competitor cards as needed -->
+    </div>
+
+    <h3 style="margin-top: 2rem;">Indirect Competitors & Substitutes</h3>
+    <div class="competitor-grid">
+        <div class="competitor-card indirect">
+            <div class="competitor-header">
+                <div class="competitor-name">{{INDIRECT_1_NAME}}</div>
+                <span class="competitor-type indirect">Indirect</span>
+            </div>
+            <div class="competitor-description">{{INDIRECT_1_DESCRIPTION}}</div>
+        </div>
+        <!-- Add more indirect competitor cards -->
+    </div>
+</section>
+
+<!-- SECTION: Porter's Five Forces -->
+<section class="content-section">
+    <h2>Porter's Five Forces</h2>
+
+    <div class="chart-container">
+        <canvas id="fiveForcesRadar"></canvas>
+    </div>
+
+    <div class="forces-grid">
+        <div class="force-card">
+            <div class="force-header">
+                <span class="force-name">Threat of New Entrants</span>
+                <span class="force-level {{FORCE_1_LEVEL_CLASS}}">{{FORCE_1_LEVEL}}</span>
+            </div>
+            <div class="force-description">{{FORCE_1_DESCRIPTION}}</div>
+        </div>
+        <div class="force-card">
+            <div class="force-header">
+                <span class="force-name">Supplier Power</span>
+                <span class="force-level {{FORCE_2_LEVEL_CLASS}}">{{FORCE_2_LEVEL}}</span>
+            </div>
+            <div class="force-description">{{FORCE_2_DESCRIPTION}}</div>
+        </div>
+        <div class="force-card">
+            <div class="force-header">
+                <span class="force-name">Buyer Power</span>
+                <span class="force-level {{FORCE_3_LEVEL_CLASS}}">{{FORCE_3_LEVEL}}</span>
+            </div>
+            <div class="force-description">{{FORCE_3_DESCRIPTION}}</div>
+        </div>
+        <div class="force-card">
+            <div class="force-header">
+                <span class="force-name">Threat of Substitutes</span>
+                <span class="force-level {{FORCE_4_LEVEL_CLASS}}">{{FORCE_4_LEVEL}}</span>
+            </div>
+            <div class="force-description">{{FORCE_4_DESCRIPTION}}</div>
+        </div>
+        <div class="force-card">
+            <div class="force-header">
+                <span class="force-name">Competitive Rivalry</span>
+                <span class="force-level {{FORCE_5_LEVEL_CLASS}}">{{FORCE_5_LEVEL}}</span>
+            </div>
+            <div class="force-description">{{FORCE_5_DESCRIPTION}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: SWOT Analysis -->
+<section class="content-section">
+    <h2>SWOT Analysis</h2>
+
+    <div class="swot-grid">
+        <div class="swot-quadrant strengths">
+            <div class="swot-header">
+                <div class="swot-icon">&#128170;</div>
+                <div class="swot-title">Strengths</div>
+            </div>
+            <ul class="swot-list">
+                <li>{{STRENGTH_1}}</li>
+                <li>{{STRENGTH_2}}</li>
+                <li>{{STRENGTH_3}}</li>
+            </ul>
+        </div>
+        <div class="swot-quadrant weaknesses">
+            <div class="swot-header">
+                <div class="swot-icon">&#9888;</div>
+                <div class="swot-title">Weaknesses</div>
+            </div>
+            <ul class="swot-list">
+                <li>{{WEAKNESS_1}}</li>
+                <li>{{WEAKNESS_2}}</li>
+                <li>{{WEAKNESS_3}}</li>
+            </ul>
+        </div>
+        <div class="swot-quadrant opportunities">
+            <div class="swot-header">
+                <div class="swot-icon">&#127775;</div>
+                <div class="swot-title">Opportunities</div>
+            </div>
+            <ul class="swot-list">
+                <li>{{OPPORTUNITY_1}}</li>
+                <li>{{OPPORTUNITY_2}}</li>
+                <li>{{OPPORTUNITY_3}}</li>
+            </ul>
+        </div>
+        <div class="swot-quadrant threats">
+            <div class="swot-header">
+                <div class="swot-icon">&#9889;</div>
+                <div class="swot-title">Threats</div>
+            </div>
+            <ul class="swot-list">
+                <li>{{THREAT_1}}</li>
+                <li>{{THREAT_2}}</li>
+                <li>{{THREAT_3}}</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: Competitive Positioning Matrix -->
+<section class="content-section">
+    <h2>Competitive Positioning Matrix</h2>
+
+    <div class="chart-container">
+        <canvas id="positioningScatter"></canvas>
+    </div>
+
+    <h3 style="margin-top: 2rem;">White Space Opportunities</h3>
+    <div class="whitespace-grid">
+        <div class="whitespace-card">
+            <div class="whitespace-number">1</div>
+            <div class="whitespace-title">{{WHITESPACE_1_TITLE}}</div>
+            <div class="whitespace-description">{{WHITESPACE_1_DESCRIPTION}}</div>
+        </div>
+        <div class="whitespace-card">
+            <div class="whitespace-number">2</div>
+            <div class="whitespace-title">{{WHITESPACE_2_TITLE}}</div>
+            <div class="whitespace-description">{{WHITESPACE_2_DESCRIPTION}}</div>
+        </div>
+        <div class="whitespace-card">
+            <div class="whitespace-number">3</div>
+            <div class="whitespace-title">{{WHITESPACE_3_TITLE}}</div>
+            <div class="whitespace-description">{{WHITESPACE_3_DESCRIPTION}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: Strategic Recommendations -->
+<section class="content-section">
+    <h2>Strategic Recommendations</h2>
+
+    <div class="positioning-box">
+        <div class="positioning-label">Recommended Strategic Position</div>
+        <div class="positioning-text">{{POSITIONING_STATEMENT}}</div>
+    </div>
+
+    <div class="strategy-grid">
+        <div class="strategy-card">
+            <div class="strategy-header">
+                <div class="strategy-icon">&#127919;</div>
+                <div class="strategy-name">Differentiation Strategy</div>
+            </div>
+            <div class="strategy-description">{{DIFFERENTIATION_DESCRIPTION}}</div>
+            <ul class="strategy-actions">
+                <li>{{DIFF_ACTION_1}}</li>
+                <li>{{DIFF_ACTION_2}}</li>
+                <li>{{DIFF_ACTION_3}}</li>
+            </ul>
+        </div>
+        <div class="strategy-card">
+            <div class="strategy-header">
+                <div class="strategy-icon">&#128737;</div>
+                <div class="strategy-name">Defense Strategy</div>
+            </div>
+            <div class="strategy-description">{{DEFENSE_DESCRIPTION}}</div>
+            <ul class="strategy-actions">
+                <li>{{DEFENSE_ACTION_1}}</li>
+                <li>{{DEFENSE_ACTION_2}}</li>
+                <li>{{DEFENSE_ACTION_3}}</li>
+            </ul>
+        </div>
+        <div class="strategy-card">
+            <div class="strategy-header">
+                <div class="strategy-icon">&#9876;</div>
+                <div class="strategy-name">Attack Strategy</div>
+            </div>
+            <div class="strategy-description">{{ATTACK_DESCRIPTION}}</div>
+            <ul class="strategy-actions">
+                <li>{{ATTACK_ACTION_1}}</li>
+                <li>{{ATTACK_ACTION_2}}</li>
+                <li>{{ATTACK_ACTION_3}}</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: Top Threats & Mitigation -->
+<section class="content-section">
+    <h2>Top Competitive Threats</h2>
+
+    <div class="threat-grid">
+        <div class="threat-card">
+            <div class="threat-header">
+                <div class="threat-name">{{TOP_THREAT_1_NAME}}</div>
+                <div class="threat-badges">
+                    <span class="threat-badge likelihood">{{TOP_THREAT_1_LIKELIHOOD}}</span>
+                    <span class="threat-badge impact">{{TOP_THREAT_1_IMPACT}}</span>
+                </div>
+            </div>
+            <div class="threat-nature">{{TOP_THREAT_1_NATURE}}</div>
+            <div class="threat-mitigation">
+                <div class="threat-mitigation-label">Mitigation Plan</div>
+                <div class="threat-mitigation-text">{{TOP_THREAT_1_MITIGATION}}</div>
+            </div>
+        </div>
+        <div class="threat-card">
+            <div class="threat-header">
+                <div class="threat-name">{{TOP_THREAT_2_NAME}}</div>
+                <div class="threat-badges">
+                    <span class="threat-badge likelihood">{{TOP_THREAT_2_LIKELIHOOD}}</span>
+                    <span class="threat-badge impact">{{TOP_THREAT_2_IMPACT}}</span>
+                </div>
+            </div>
+            <div class="threat-nature">{{TOP_THREAT_2_NATURE}}</div>
+            <div class="threat-mitigation">
+                <div class="threat-mitigation-label">Mitigation Plan</div>
+                <div class="threat-mitigation-text">{{TOP_THREAT_2_MITIGATION}}</div>
+            </div>
+        </div>
+        <div class="threat-card">
+            <div class="threat-header">
+                <div class="threat-name">{{TOP_THREAT_3_NAME}}</div>
+                <div class="threat-badges">
+                    <span class="threat-badge likelihood">{{TOP_THREAT_3_LIKELIHOOD}}</span>
+                    <span class="threat-badge impact">{{TOP_THREAT_3_IMPACT}}</span>
+                </div>
+            </div>
+            <div class="threat-nature">{{TOP_THREAT_3_NATURE}}</div>
+            <div class="threat-mitigation">
+                <div class="threat-mitigation-label">Mitigation Plan</div>
+                <div class="threat-mitigation-text">{{TOP_THREAT_3_MITIGATION}}</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: Competitive Monitoring -->
+<section class="content-section">
+    <h2>Competitive Monitoring Plan</h2>
+
+    <table class="monitoring-table">
+        <thead>
+            <tr>
+                <th>What to Monitor</th>
+                <th>Frequency</th>
+                <th>Method</th>
+                <th>Owner</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Competitor Product Changes</td>
+                <td>{{MONITOR_1_FREQ}}</td>
+                <td>{{MONITOR_1_METHOD}}</td>
+                <td>{{MONITOR_1_OWNER}}</td>
+            </tr>
+            <tr>
+                <td>Competitor Funding/M&A</td>
+                <td>{{MONITOR_2_FREQ}}</td>
+                <td>{{MONITOR_2_METHOD}}</td>
+                <td>{{MONITOR_2_OWNER}}</td>
+            </tr>
+            <tr>
+                <td>Competitor Marketing & Positioning</td>
+                <td>{{MONITOR_3_FREQ}}</td>
+                <td>{{MONITOR_3_METHOD}}</td>
+                <td>{{MONITOR_3_OWNER}}</td>
+            </tr>
+            <tr>
+                <td>Win/Loss Analysis</td>
+                <td>{{MONITOR_4_FREQ}}</td>
+                <td>{{MONITOR_4_METHOD}}</td>
+                <td>{{MONITOR_4_OWNER}}</td>
+            </tr>
+            <tr>
+                <td>Market Trends & New Entrants</td>
+                <td>{{MONITOR_5_FREQ}}</td>
+                <td>{{MONITOR_5_METHOD}}</td>
+                <td>{{MONITOR_5_OWNER}}</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- SECTION: Next Steps -->
+<section class="content-section">
+    <h2>Implementation Checklist</h2>
+
+    <div class="checklist-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+        <div>
+            <h3 style="color: #10b981; margin-bottom: 1rem;">This Week</h3>
+            <ul class="checklist">
+                <li>{{NEXT_STEP_1}}</li>
+                <li>{{NEXT_STEP_2}}</li>
+                <li>{{NEXT_STEP_3}}</li>
+            </ul>
+        </div>
+        <div>
+            <h3 style="color: #10b981; margin-bottom: 1rem;">This Month</h3>
+            <ul class="checklist">
+                <li>{{MONTHLY_STEP_1}}</li>
+                <li>{{MONTHLY_STEP_2}}</li>
+                <li>{{MONTHLY_STEP_3}}</li>
+            </ul>
+        </div>
+        <div>
+            <h3 style="color: #10b981; margin-bottom: 1rem;">This Quarter</h3>
+            <ul class="checklist">
+                <li>{{QUARTERLY_STEP_1}}</li>
+                <li>{{QUARTERLY_STEP_2}}</li>
+                <li>{{QUARTERLY_STEP_3}}</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CHART INITIALIZATION SCRIPTS
+     ════════════════════════════════════════════════════════════════════════════ -->
+<script>
+// Chart 1: Porter's Five Forces Radar
+const fiveForcesCtx = document.getElementById('fiveForcesRadar').getContext('2d');
+new Chart(fiveForcesCtx, {
+    type: 'radar',
+    data: {
+        labels: [
+            'New Entrants',
+            'Supplier Power',
+            'Buyer Power',
+            'Substitutes',
+            'Rivalry'
+        ],
+        datasets: [{
+            label: 'Threat Level',
+            data: [{{FORCE_1_SCORE}}, {{FORCE_2_SCORE}}, {{FORCE_3_SCORE}}, {{FORCE_4_SCORE}}, {{FORCE_5_SCORE}}],
+            backgroundColor: 'rgba(249, 115, 22, 0.2)',
+            borderColor: '#f97316',
+            borderWidth: 2,
+            pointBackgroundColor: '#f97316',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: '#f97316'
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Porter\'s Five Forces (Higher = More Threatening)',
+                color: '#f5f5f5',
+                font: { size: 14 }
+            }
+        },
+        scales: {
+            r: {
+                beginAtZero: true,
+                max: 10,
+                ticks: {
+                    color: 'rgba(245, 245, 245, 0.6)',
+                    backdropColor: 'transparent'
+                },
+                grid: { color: 'rgba(249, 115, 22, 0.2)' },
+                pointLabels: {
+                    color: '#f5f5f5',
+                    font: { size: 12, weight: 600 }
+                }
+            }
+        }
+    }
+});
+
+// Chart 2: Competitive Positioning Scatter
+const positioningCtx = document.getElementById('positioningScatter').getContext('2d');
+new Chart(positioningCtx, {
+    type: 'scatter',
+    data: {
+        datasets: [
+            {
+                label: '{{BUSINESS_NAME}}',
+                data: [{ x: {{YOUR_PRICE}}, y: {{YOUR_FEATURES}} }],
+                backgroundColor: '#10b981',
+                borderColor: '#10b981',
+                pointRadius: 14,
+                pointHoverRadius: 16
+            },
+            {
+                label: '{{COMP_1_NAME}}',
+                data: [{ x: {{COMP_1_PRICE}}, y: {{COMP_1_FEATURES}} }],
+                backgroundColor: '#f97316',
+                borderColor: '#f97316',
+                pointRadius: 10,
+                pointHoverRadius: 12
+            },
+            {
+                label: '{{COMP_2_NAME}}',
+                data: [{ x: {{COMP_2_PRICE}}, y: {{COMP_2_FEATURES}} }],
+                backgroundColor: '#3b82f6',
+                borderColor: '#3b82f6',
+                pointRadius: 10,
+                pointHoverRadius: 12
+            },
+            {
+                label: '{{COMP_3_NAME}}',
+                data: [{ x: {{COMP_3_PRICE}}, y: {{COMP_3_FEATURES}} }],
+                backgroundColor: '#8b5cf6',
+                borderColor: '#8b5cf6',
+                pointRadius: 10,
+                pointHoverRadius: 12
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: {
+                labels: { color: '#f5f5f5' }
+            },
+            title: {
+                display: true,
+                text: 'Competitive Positioning: Price vs Feature Richness',
+                color: '#f5f5f5',
+                font: { size: 14 }
+            }
+        },
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Price (1=Cheapest, 10=Most Expensive)',
+                    color: 'rgba(245, 245, 245, 0.7)'
+                },
+                min: 0,
+                max: 10,
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: { color: 'rgba(245, 245, 245, 0.6)' }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Feature Richness (1=Simple, 10=Comprehensive)',
+                    color: 'rgba(245, 245, 245, 0.7)'
+                },
+                min: 0,
+                max: 10,
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: { color: 'rgba(245, 245, 245, 0.6)' }
+            }
+        }
+    }
+});
+</script>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     REQUIRED CHARTS SUMMARY:
+
+     1. fiveForcesRadar - Radar chart showing 5 forces threat levels
+     2. positioningScatter - Scatter plot showing Price vs Features positioning
+
+     ════════════════════════════════════════════════════════════════════════════ -->

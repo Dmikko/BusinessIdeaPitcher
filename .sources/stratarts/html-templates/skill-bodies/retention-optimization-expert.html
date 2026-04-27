@@ -1,0 +1,867 @@
+<!-- ═══ SKILL CSS START ═══ -->
+<style>
+    /* Retention Optimization Expert Specific Styles */
+    .curve-type-container {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
+        border: 2px solid rgba(16, 185, 129, 0.3);
+        border-radius: 20px;
+        padding: 2rem;
+        text-align: center;
+        margin: 2rem 0;
+    }
+
+    .curve-type-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #10b981;
+        margin-bottom: 0.5rem;
+    }
+
+    .curve-description {
+        color: #888;
+        font-size: 0.95rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .cohort-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+    }
+
+    .cohort-table th,
+    .cohort-table td {
+        padding: 0.75rem;
+        text-align: center;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .cohort-table th {
+        background: #1a1a1a;
+        color: #10b981;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .cohort-table th:first-child,
+    .cohort-table td:first-child {
+        text-align: left;
+    }
+
+    .cohort-table td:first-child {
+        color: #ffffff;
+        font-weight: 500;
+    }
+
+    .retention-cell {
+        padding: 0.5rem;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .ret-high { background: rgba(16, 185, 129, 0.3); color: #10b981; }
+    .ret-med { background: rgba(245, 158, 11, 0.3); color: #f59e0b; }
+    .ret-low { background: rgba(239, 68, 68, 0.3); color: #ef4444; }
+
+    .segment-card {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .segment-name {
+        font-weight: 700;
+        color: #ffffff;
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .segment-metrics {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    .segment-metric {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .segment-metric-value {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #10b981;
+    }
+
+    .segment-metric-label {
+        font-size: 0.7rem;
+        color: #888;
+        text-transform: uppercase;
+    }
+
+    .risk-indicator {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+        margin-bottom: 0.75rem;
+    }
+
+    .risk-icon {
+        width: 44px;
+        height: 44px;
+        background: rgba(239, 68, 68, 0.2);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+    }
+
+    .risk-info {
+        flex: 1;
+    }
+
+    .risk-title {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .risk-description {
+        color: #888;
+        font-size: 0.85rem;
+    }
+
+    .health-distribution {
+        display: flex;
+        gap: 0;
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 1.5rem 0;
+    }
+
+    .health-segment {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    .health-green {
+        background: linear-gradient(135deg, #10b981, #059669);
+    }
+
+    .health-yellow {
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+    }
+
+    .health-red {
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+    }
+
+    .health-percent {
+        font-size: 1.5rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .health-label {
+        font-size: 0.75rem;
+        opacity: 0.9;
+    }
+
+    .health-factors {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin: 1rem 0;
+    }
+
+    .health-factor {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem;
+        background: #1a1a1a;
+        border-radius: 8px;
+        border: 1px solid #2a2a2a;
+    }
+
+    .factor-name {
+        color: #ccc;
+        font-size: 0.9rem;
+    }
+
+    .factor-weight {
+        color: #10b981;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .winback-timeline {
+        position: relative;
+        margin: 2rem 0;
+    }
+
+    .winback-tier {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .winback-tier:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .tier-timing {
+        min-width: 120px;
+    }
+
+    .tier-days {
+        font-weight: 700;
+        color: #10b981;
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .tier-name {
+        color: #888;
+        font-size: 0.8rem;
+    }
+
+    .tier-actions {
+        flex: 1;
+    }
+
+    .tier-action-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0;
+        color: #ccc;
+        font-size: 0.9rem;
+    }
+
+    .tier-action-item::before {
+        content: '→';
+        color: #10b981;
+    }
+
+    .churn-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+    }
+
+    .churn-table th,
+    .churn-table td {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .churn-table th {
+        background: #1a1a1a;
+        color: #10b981;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .churn-table td {
+        color: #ccc;
+        font-size: 0.9rem;
+    }
+
+    .churn-table td:first-child {
+        color: #ffffff;
+        font-weight: 500;
+    }
+
+    .addressable-yes {
+        background: rgba(16, 185, 129, 0.2);
+        color: #10b981;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .addressable-maybe {
+        background: rgba(245, 158, 11, 0.2);
+        color: #f59e0b;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .addressable-no {
+        background: rgba(107, 114, 128, 0.2);
+        color: #9ca3af;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .loop-card {
+        background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+        border-radius: 16px;
+        padding: 1.5rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .loop-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .loop-icon {
+        width: 48px;
+        height: 48px;
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .loop-name {
+        font-weight: 700;
+        color: #ffffff;
+        font-size: 1.125rem;
+    }
+
+    .loop-description {
+        color: #888;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+    }
+
+    .loop-cycle {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .cycle-step {
+        background: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+
+    .cycle-arrow {
+        display: flex;
+        align-items: center;
+        color: #10b981;
+        font-size: 1rem;
+    }
+
+    .cs-model-card {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
+        border: 2px solid rgba(16, 185, 129, 0.3);
+        border-radius: 16px;
+        padding: 1.5rem;
+        text-align: center;
+        margin: 1.5rem 0;
+    }
+
+    .cs-model-name {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #10b981;
+        margin-bottom: 0.5rem;
+    }
+
+    .cs-model-ratio {
+        color: #ccc;
+        font-size: 0.95rem;
+    }
+
+    .touchpoint-phase {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .phase-name {
+        font-weight: 700;
+        color: #10b981;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 1rem;
+    }
+
+    .touchpoint-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .touchpoint-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #ccc;
+        font-size: 0.85rem;
+    }
+
+    .touchpoint-item::before {
+        content: '•';
+        color: #10b981;
+    }
+
+    @media (max-width: 768px) {
+        .winback-tier {
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .tier-timing {
+            min-width: auto;
+        }
+
+        .health-distribution {
+            flex-direction: column;
+        }
+
+        .loop-cycle {
+            flex-direction: column;
+        }
+
+        .cycle-arrow {
+            transform: rotate(90deg);
+            justify-content: center;
+        }
+    }
+</style>
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<div class="report-container">
+    <!-- Header Section -->
+    <header class="report-header">
+        <div class="header-content">
+            <div class="header-badge">RETENTION OPTIMIZATION</div>
+            <h1 class="report-title">{{COMPANY_NAME}}</h1>
+            <p class="report-subtitle">{{RETENTION_MISSION}}</p>
+        </div>
+        <div class="header-meta">
+            <div class="meta-item">
+                <span class="meta-label">Generated</span>
+                <span class="meta-value">{{GENERATION_DATE}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">D30 Retention</span>
+                <span class="meta-value">{{D30_RETENTION}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Churn Rate</span>
+                <span class="meta-value">{{CHURN_RATE}}</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Executive Summary Section -->
+    <section class="content-section">
+        <h2 class="section-title">Retention Overview</h2>
+
+        <div class="curve-type-container">
+            <div class="curve-type-name">{{CURVE_TYPE}}</div>
+            <div class="curve-description">{{CURVE_DESCRIPTION}}</div>
+        </div>
+
+        <div class="grid-4">
+            <div class="metric-card">
+                <div class="metric-label">D7 Retention</div>
+                <div class="metric-value">{{D7_RETENTION}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">D30 Retention</div>
+                <div class="metric-value">{{D30_RETENTION}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Monthly Churn</div>
+                <div class="metric-value">{{CHURN_RATE}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">At-Risk Users</div>
+                <div class="metric-value">{{AT_RISK_PERCENT}}</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Retention Curve Chart -->
+    <section class="content-section">
+        <h2 class="section-title">Retention Curve</h2>
+
+        <div class="chart-container">
+            <canvas id="retentionCurveChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Cohort Analysis Section -->
+    <section class="content-section">
+        <h2 class="section-title">Cohort Analysis</h2>
+
+        <p class="section-description">{{COHORT_OVERVIEW}}</p>
+
+        <table class="cohort-table">
+            <thead>
+                <tr>
+                    <th>Cohort</th>
+                    <th>M0</th>
+                    <th>M1</th>
+                    <th>M2</th>
+                    <th>M3</th>
+                    <th>M6</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{COHORT_ROWS}}
+            </tbody>
+        </table>
+
+        <!-- Cohort Comparison Chart -->
+        <div class="chart-container">
+            <canvas id="cohortChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Segment Retention Section -->
+    <section class="content-section">
+        <h2 class="section-title">Segment Retention</h2>
+
+        <div class="grid-3">
+            {{SEGMENT_CARDS}}
+        </div>
+    </section>
+
+    <!-- At-Risk Identification Section -->
+    <section class="content-section">
+        <h2 class="section-title">At-Risk User Identification</h2>
+
+        <p class="section-description">{{AT_RISK_OVERVIEW}}</p>
+
+        {{RISK_INDICATORS}}
+    </section>
+
+    <!-- Health Score Section -->
+    <section class="content-section">
+        <h2 class="section-title">Customer Health Score</h2>
+
+        <div class="health-distribution">
+            <div class="health-segment health-green" style="flex: {{HEALTH_GREEN}};">
+                <div class="health-percent">{{HEALTH_GREEN}}%</div>
+                <div class="health-label">Healthy</div>
+            </div>
+            <div class="health-segment health-yellow" style="flex: {{HEALTH_YELLOW}};">
+                <div class="health-percent">{{HEALTH_YELLOW}}%</div>
+                <div class="health-label">At Risk</div>
+            </div>
+            <div class="health-segment health-red" style="flex: {{HEALTH_RED}};">
+                <div class="health-percent">{{HEALTH_RED}}%</div>
+                <div class="health-label">Churn Risk</div>
+            </div>
+        </div>
+
+        <h3 class="subsection-title">Health Score Factors</h3>
+        <div class="health-factors">
+            {{HEALTH_FACTORS}}
+        </div>
+
+        <!-- Health Distribution Chart -->
+        <div class="chart-container">
+            <canvas id="healthChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Win-Back Campaign Section -->
+    <section class="content-section">
+        <h2 class="section-title">Win-Back Campaign</h2>
+
+        <p class="section-description">{{WINBACK_OVERVIEW}}</p>
+
+        <div class="winback-timeline">
+            {{WINBACK_TIERS}}
+        </div>
+    </section>
+
+    <!-- Churn Reasons Section -->
+    <section class="content-section">
+        <h2 class="section-title">Churn Reason Analysis</h2>
+
+        <table class="churn-table">
+            <thead>
+                <tr>
+                    <th>Churn Reason</th>
+                    <th>%</th>
+                    <th>Addressable</th>
+                    <th>Action Plan</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{CHURN_ROWS}}
+            </tbody>
+        </table>
+
+        <!-- Churn Reasons Chart -->
+        <div class="chart-container">
+            <canvas id="churnChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Retention Loops Section -->
+    <section class="content-section">
+        <h2 class="section-title">Retention Loops</h2>
+
+        <p class="section-description">{{LOOPS_OVERVIEW}}</p>
+
+        <div class="grid-2">
+            {{LOOP_CARDS}}
+        </div>
+    </section>
+
+    <!-- Customer Success Section -->
+    <section class="content-section">
+        <h2 class="section-title">Customer Success Strategy</h2>
+
+        <div class="cs-model-card">
+            <div class="cs-model-name">{{CS_MODEL_NAME}}</div>
+            <div class="cs-model-ratio">{{CS_MODEL_RATIO}}</div>
+        </div>
+
+        <h3 class="subsection-title">Touchpoint Cadence</h3>
+        <div class="grid-3">
+            {{TOUCHPOINT_PHASES}}
+        </div>
+    </section>
+
+    <!-- Implementation Roadmap -->
+    <section class="content-section">
+        <h2 class="section-title">90-Day Implementation Roadmap</h2>
+
+        <div class="timeline">
+            {{IMPLEMENTATION_TIMELINE}}
+        </div>
+    </section>
+
+    <!-- Report Footer -->
+    <footer class="report-footer">
+        <div class="footer-content">
+            <p class="footer-brand">Generated by StratArts Retention Optimization Expert</p>
+            <p class="footer-disclaimer">This retention strategy provides a framework for reducing churn and improving customer lifetime value. Monitor cohort metrics and iterate based on win-back campaign performance.</p>
+        </div>
+    </footer>
+</div>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Retention Curve Chart
+    const curveCtx = document.getElementById('retentionCurveChart');
+    if (curveCtx) {
+        new Chart(curveCtx, {
+            type: 'line',
+            data: {
+                labels: ['D0', 'D1', 'D7', 'D14', 'D30', 'D60', 'D90'],
+                datasets: [{
+                    label: 'Retention %',
+                    data: [100, 65, 52, 45, 38, 35, 32],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            color: '#888',
+                            callback: function(value) { return value + '%'; }
+                        },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'User Retention Curve',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // Cohort Comparison Chart
+    const cohortCtx = document.getElementById('cohortChart');
+    if (cohortCtx) {
+        new Chart(cohortCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan 2024', 'Feb 2024', 'Mar 2024', 'Apr 2024'],
+                datasets: [{
+                    label: 'M3 Retention %',
+                    data: [30, 32, 34, 36],
+                    backgroundColor: '#10b981',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 50,
+                        ticks: {
+                            color: '#888',
+                            callback: function(value) { return value + '%'; }
+                        },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'M3 Retention by Cohort (Improving Trend)',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // Health Distribution Chart
+    const healthCtx = document.getElementById('healthChart');
+    if (healthCtx) {
+        new Chart(healthCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Healthy (80-100)', 'At Risk (50-79)', 'Churn Risk (<50)'],
+                datasets: [{
+                    data: [62, 26, 12],
+                    backgroundColor: [
+                        '#10b981',
+                        '#f59e0b',
+                        '#ef4444'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Customer Health Distribution',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        position: 'right',
+                        labels: { color: '#ccc', padding: 15 }
+                    }
+                }
+            }
+        });
+    }
+
+    // Churn Reasons Chart
+    const churnCtx = document.getElementById('churnChart');
+    if (churnCtx) {
+        new Chart(churnCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Low Usage', 'Too Expensive', 'Missing Features', 'Found Alternative', 'Too Complicated', 'Poor Support'],
+                datasets: [{
+                    label: 'Churn Reasons %',
+                    data: [28, 22, 18, 14, 10, 8],
+                    backgroundColor: function(context) {
+                        const value = context.raw;
+                        if (value >= 20) return '#ef4444';
+                        if (value >= 15) return '#f59e0b';
+                        return '#10b981';
+                    },
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 35,
+                        ticks: {
+                            color: '#888',
+                            callback: function(value) { return value + '%'; }
+                        },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    y: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Top Churn Reasons',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+});
+</script>
+<!-- ═══ SKILL JS END ═══ -->

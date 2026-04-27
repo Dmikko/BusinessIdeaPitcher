@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Strategy | PetPulse | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        /* === RESET & BASE === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #0a0a0a;
+        }
+
+        /* === HEADER === */
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .header-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* === SCORE BANNER === */
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-main {
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .score-interpretation {
+            border-left: 3px solid #10b981;
+            padding-left: 2rem;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #f5f5f5;
+        }
+
+        .interpretation-text {
+            color: #d4d4d4;
+            line-height: 1.7;
+        }
+
+        .verdict-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        /* === CONTENT SECTIONS === */
+        .content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 4rem;
+            background: #0a0a0a;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section:last-child {
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: #d4d4d4;
+            max-width: 800px;
+        }
+
+        /* === CHART LAYOUTS === */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-subtitle {
+            font-size: 0.9rem;
+            color: #a3a3a3;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+            margin-bottom: 1.5rem;
+        }
+
+        /* === INSIGHTS PANEL === */
+        .insights-panel {
+            background: #0a0a0a;
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .insight-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .insight-list {
+            list-style: none;
+        }
+
+        .insight-list li {
+            padding: 0.6rem 0;
+            color: #d4d4d4;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .insight-list li:last-child {
+            border-bottom: none;
+        }
+
+        .insight-list li strong {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content p {
+            margin: 0.3rem 0;
+        }
+
+        .footer-content strong {
+            color: #10b981;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           PRICING STRATEGY SPECIFIC CSS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        /* Pricing Tier Cards */
+        .pricing-tiers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+            align-items: stretch;
+        }
+
+        .tier-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .tier-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15);
+        }
+
+        .tier-card.recommended {
+            border: 2px solid #10b981;
+            position: relative;
+        }
+
+        .tier-card.recommended::before {
+            content: "MOST POPULAR";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.4rem 1rem;
+            border-radius: 0 0 8px 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .tier-header {
+            padding: 2rem 1.5rem 1.5rem;
+            text-align: center;
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .tier-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .tier-description {
+            font-size: 0.85rem;
+            color: #a3a3a3;
+        }
+
+        .tier-price {
+            padding: 1.5rem;
+            text-align: center;
+            background: #1a1a1a;
+        }
+
+        .tier-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #10b981;
+            line-height: 1;
+        }
+
+        .tier-amount .currency {
+            font-size: 1.5rem;
+            vertical-align: top;
+        }
+
+        .tier-period {
+            font-size: 0.9rem;
+            color: #a3a3a3;
+            margin-top: 0.25rem;
+        }
+
+        .tier-annual {
+            font-size: 0.85rem;
+            color: #10b981;
+            margin-top: 0.5rem;
+        }
+
+        .tier-features {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .tier-features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tier-features-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.9rem;
+            color: #d4d4d4;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .tier-features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .tier-features-list li::before {
+            content: "\2713";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .tier-target {
+            padding: 1rem 1.5rem;
+            background: rgba(16, 185, 129, 0.05);
+            text-align: center;
+            font-size: 0.85rem;
+            color: #a3a3a3;
+        }
+
+        /* Unit Economics Grid */
+        .economics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+            margin-top: 2rem;
+        }
+
+        .economics-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .economics-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 0.25rem;
+        }
+
+        .economics-label {
+            font-size: 0.85rem;
+            color: #d4d4d4;
+            font-weight: 600;
+        }
+
+        .economics-target {
+            font-size: 0.75rem;
+            color: #a3a3a3;
+            margin-top: 0.25rem;
+        }
+
+        .economics-status {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .economics-status.healthy {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .economics-status.warning {
+            background: rgba(246, 173, 85, 0.2);
+            color: #f6ad55;
+        }
+
+        /* Competitor Grid */
+        .competitor-pricing {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .competitor-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .competitor-name {
+            font-weight: 700;
+            color: #f5f5f5;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .competitor-price {
+            font-size: 1.25rem;
+            color: #a3a3a3;
+        }
+
+        .competitor-model {
+            font-size: 0.8rem;
+            color: #a3a3a3;
+            margin-top: 0.25rem;
+        }
+
+        .competitor-card.you {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .competitor-card.you .competitor-price {
+            color: #10b981;
+        }
+
+        /* Psychology Cards */
+        .psychology-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .psychology-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .psychology-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .psychology-title {
+            font-weight: 700;
+            color: #f5f5f5;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .psychology-description {
+            font-size: 0.9rem;
+            color: #d4d4d4;
+            line-height: 1.5;
+        }
+
+        .psychology-example {
+            font-size: 0.85rem;
+            color: #10b981;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* Implementation Phases */
+        .implementation-phases {
+            margin-top: 2rem;
+        }
+
+        .phase-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .phase-name {
+            font-weight: 700;
+            color: #10b981;
+            font-size: 1.1rem;
+        }
+
+        .phase-timeline {
+            font-size: 0.85rem;
+            color: #a3a3a3;
+        }
+
+        .phase-tasks {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .phase-tasks li {
+            padding: 0.4rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+            font-size: 0.9rem;
+            color: #d4d4d4;
+        }
+
+        .phase-tasks li::before {
+            content: "\2610";
+            position: absolute;
+            left: 0;
+            color: #a3a3a3;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .pricing-tiers {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .economics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .psychology-grid { grid-template-columns: 1fr; }
+            .score-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .score-interpretation {
+                border-left: none;
+                border-top: 3px solid #10b981;
+                padding-left: 0;
+                padding-top: 1.5rem;
+            }
+            .header-content { padding: 2rem; }
+            .score-container { padding: 2rem; }
+            .content { padding: 2rem 2rem; }
+            .footer-content { padding: 2rem; }
+        }
+
+        /* Print */
+        @media print {
+            body { background: white; color: #000000; }
+            .container { background: white; }
+            header { background: white; }
+            .header-content { background: white; color: #000000; border: 2px solid #10b981; }
+            .header-content::before { display: none; }
+            h1 { color: #000000; }
+            .tier-card, .economics-card, .psychology-card, .phase-card {
+                background: white;
+                border: 2px solid #10b981;
+                page-break-inside: avoid;
+            }
+            .tier-name, .phase-name { color: #000000; }
+            .tier-amount, .economics-value { color: #10b981; }
+            footer { background: white; }
+            .footer-content { background: white; color: #666666; border-top: 2px solid #10b981; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">Market & Product Strategy</div>
+                <h1>Pricing Strategy</h1>
+                <div class="subtitle">Value-based pricing architecture with Good-Better-Best tier structure optimized for premium pet parent segment</div>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span>&#128197;</span>
+                        <span>Generated: December 18, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>&#128202;</span>
+                        <span>Analysis Type: Value-Based Pricing</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>&#127919;</span>
+                        <span>Version 1.0.0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SCORE BANNER -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">8.5</div>
+                    <div class="score-label">Pricing Confidence</div>
+                </div>
+
+                <div class="score-interpretation">
+                    <div class="interpretation-title">What This Score Means</div>
+                    <div class="interpretation-text">
+                        Strong pricing foundation with healthy unit economics. LTV:CAC ratio of 4.8:1 exceeds
+                        the 3:1 benchmark, and 6-month CAC payback enables aggressive growth investment.
+                        Premium positioning justified by AI health detection and integrated telehealth differentiation.
+                    </div>
+                </div>
+
+                <div class="verdict-badge">
+                    LAUNCH READY
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+            <!-- Section 1: Pricing Tiers -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Pricing Tiers</h2>
+                    <p class="section-description">
+                        Good-Better-Best pricing structure designed to capture different customer segments
+                        while driving 60-70% of customers to the Premium tier.
+                    </p>
+                </div>
+
+                <div class="pricing-tiers">
+                    <div class="tier-card">
+                        <div class="tier-header">
+                            <div class="tier-name">Essential</div>
+                            <div class="tier-description">Basic monitoring for budget-conscious pet parents</div>
+                        </div>
+                        <div class="tier-price">
+                            <div class="tier-amount"><span class="currency">$</span>19</div>
+                            <div class="tier-period">per month</div>
+                            <div class="tier-annual">$190/year (save 17%)</div>
+                        </div>
+                        <div class="tier-features">
+                            <ul class="tier-features-list">
+                                <li>PetPulse Collar device ($149)</li>
+                                <li>Real-time activity tracking</li>
+                                <li>Basic health metrics dashboard</li>
+                                <li>Weekly health summary reports</li>
+                            </ul>
+                        </div>
+                        <div class="tier-target">Target: Price-sensitive first-time users</div>
+                    </div>
+
+                    <div class="tier-card recommended">
+                        <div class="tier-header">
+                            <div class="tier-name">Premium</div>
+                            <div class="tier-description">Complete health intelligence with AI & telehealth</div>
+                        </div>
+                        <div class="tier-price">
+                            <div class="tier-amount"><span class="currency">$</span>29</div>
+                            <div class="tier-period">per month</div>
+                            <div class="tier-annual">$290/year (save 17%)</div>
+                        </div>
+                        <div class="tier-features">
+                            <ul class="tier-features-list">
+                                <li>Everything in Essential, plus:</li>
+                                <li>AI early health detection alerts</li>
+                                <li>2 telehealth consultations/month</li>
+                                <li>Vet record integration</li>
+                                <li>Priority support (4hr response)</li>
+                            </ul>
+                        </div>
+                        <div class="tier-target">Target: Premium pet parents (60-70% of customers)</div>
+                    </div>
+
+                    <div class="tier-card">
+                        <div class="tier-header">
+                            <div class="tier-name">Premium Plus</div>
+                            <div class="tier-description">Multi-pet households with white-glove service</div>
+                        </div>
+                        <div class="tier-price">
+                            <div class="tier-amount"><span class="currency">$</span>49</div>
+                            <div class="tier-period">per month</div>
+                            <div class="tier-annual">$490/year (save 17%)</div>
+                        </div>
+                        <div class="tier-features">
+                            <ul class="tier-features-list">
+                                <li>Everything in Premium, plus:</li>
+                                <li>Up to 3 pets on one plan</li>
+                                <li>Unlimited telehealth consultations</li>
+                                <li>Dedicated pet health advisor</li>
+                                <li>Annual comprehensive health report</li>
+                                <li>Priority 1hr support response</li>
+                            </ul>
+                        </div>
+                        <div class="tier-target">Target: Multi-pet households, enthusiasts</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Unit Economics -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Unit Economics</h2>
+                    <p class="section-description">
+                        Key financial metrics that determine pricing sustainability. LTV:CAC ratio >3:1 and
+                        payback period <12 months indicate healthy unit economics.
+                    </p>
+                </div>
+
+                <div class="economics-grid">
+                    <div class="economics-card">
+                        <div class="economics-value">$1,044</div>
+                        <div class="economics-label">Lifetime Value (LTV)</div>
+                        <div class="economics-target">Target: $1,000+</div>
+                        <span class="economics-status healthy">HEALTHY</span>
+                    </div>
+                    <div class="economics-card">
+                        <div class="economics-value">$218</div>
+                        <div class="economics-label">Customer Acquisition Cost</div>
+                        <div class="economics-target">Target: <$250</div>
+                        <span class="economics-status healthy">HEALTHY</span>
+                    </div>
+                    <div class="economics-card">
+                        <div class="economics-value">4.8:1</div>
+                        <div class="economics-label">LTV:CAC Ratio</div>
+                        <div class="economics-target">Target: >3:1</div>
+                        <span class="economics-status healthy">EXCELLENT</span>
+                    </div>
+                    <div class="economics-card">
+                        <div class="economics-value">6 mo</div>
+                        <div class="economics-label">CAC Payback Period</div>
+                        <div class="economics-target">Target: <12 months</div>
+                        <span class="economics-status healthy">EXCELLENT</span>
+                    </div>
+                </div>
+
+                <div class="economics-grid" style="margin-top: 1rem;">
+                    <div class="economics-card">
+                        <div class="economics-value">$29</div>
+                        <div class="economics-label">Avg Revenue Per User</div>
+                    </div>
+                    <div class="economics-card">
+                        <div class="economics-value">78%</div>
+                        <div class="economics-label">Gross Margin</div>
+                    </div>
+                    <div class="economics-card">
+                        <div class="economics-value">2.8%</div>
+                        <div class="economics-label">Monthly Churn Rate</div>
+                    </div>
+                    <div class="economics-card">
+                        <div class="economics-value">36 mo</div>
+                        <div class="economics-label">Avg Customer Lifetime</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Visual Analysis -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Visual Analysis</h2>
+                    <p class="section-description">
+                        Data visualizations showing price sensitivity, competitive positioning, tier distribution,
+                        and value delivery metrics.
+                    </p>
+                </div>
+
+                <div class="chart-grid">
+                    <!-- Chart 1: Van Westendorp -->
+                    <div class="chart-card">
+                        <div class="chart-title">Van Westendorp Price Sensitivity</div>
+                        <div class="chart-subtitle">
+                            Optimal price point based on willingness-to-pay analysis
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="vwChart"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Price Points</div>
+                            <ul class="insight-list">
+                                <li><strong>Optimal Price:</strong> $29/mo (sweet spot)</li>
+                                <li><strong>Acceptable Range:</strong> $19 - $45/mo</li>
+                                <li><strong>Premium Threshold:</strong> $55/mo</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Chart 2: Competitive Positioning -->
+                    <div class="chart-card">
+                        <div class="chart-title">Competitive Positioning</div>
+                        <div class="chart-subtitle">
+                            Price vs. feature richness compared to competitors
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="competitiveChart"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Market Position</div>
+                            <ul class="insight-list">
+                                <li><strong>Position:</strong> Premium Value Leader</li>
+                                <li><strong>Price Index:</strong> 1.2x vs market average</li>
+                                <li><strong>Differentiation:</strong> AI + Telehealth bundle</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Chart 3: Tier Distribution -->
+                    <div class="chart-card">
+                        <div class="chart-title">Target Tier Distribution</div>
+                        <div class="chart-subtitle">
+                            Expected customer distribution across pricing tiers
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="tierChart"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Distribution Strategy</div>
+                            <ul class="insight-list">
+                                <li><strong>Essential:</strong> 15% (anchor)</li>
+                                <li><strong>Premium:</strong> 65% (sweet spot)</li>
+                                <li><strong>Premium Plus:</strong> 20% (premium)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Chart 4: Value Analysis -->
+                    <div class="chart-card">
+                        <div class="chart-title">Value-to-Price Analysis</div>
+                        <div class="chart-subtitle">
+                            Customer value delivered relative to price paid
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="valueChart"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Value Metrics</div>
+                            <ul class="insight-list">
+                                <li><strong>Value Delivered:</strong> $2,400/year</li>
+                                <li><strong>Price Paid:</strong> $348/year</li>
+                                <li><strong>Value Ratio:</strong> 6.9:1</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Competitive Landscape -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Competitive Landscape</h2>
+                    <p class="section-description">
+                        How your pricing compares to key competitors in the market. Positioning decision
+                        based on differentiation strategy and target customer segment.
+                    </p>
+                </div>
+
+                <div class="competitor-pricing">
+                    <div class="competitor-card">
+                        <div class="competitor-name">Fi Collar</div>
+                        <div class="competitor-price">$99 + $4-8/month</div>
+                        <div class="competitor-model">Hardware + Subscription (GPS focus)</div>
+                    </div>
+                    <div class="competitor-card">
+                        <div class="competitor-name">Whistle Health</div>
+                        <div class="competitor-price">$99 + $7-10/month</div>
+                        <div class="competitor-model">Hardware + Subscription (Activity + Basic Health)</div>
+                    </div>
+                    <div class="competitor-card">
+                        <div class="competitor-name">Fuzzy</div>
+                        <div class="competitor-price">$35-149/month</div>
+                        <div class="competitor-model">Pure telehealth subscription (No device)</div>
+                    </div>
+                    <div class="competitor-card you">
+                        <div class="competitor-name">PetPulse (You)</div>
+                        <div class="competitor-price">$149 + $19-49/month</div>
+                        <div class="competitor-model">Premium hardware + AI Health + Telehealth bundle</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Pricing Psychology -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Pricing Psychology</h2>
+                    <p class="section-description">
+                        Psychological tactics applied to optimize conversion and perceived value.
+                    </p>
+                </div>
+
+                <div class="psychology-grid">
+                    <div class="psychology-card">
+                        <div class="psychology-icon">&#127919;</div>
+                        <div class="psychology-title">Decoy Effect</div>
+                        <div class="psychology-description">Essential tier at $19 makes Premium at $29 feel like exceptional value with telehealth + AI included.</div>
+                        <div class="psychology-example">$10/mo more for 5x the features creates clear upgrade path</div>
+                    </div>
+                    <div class="psychology-card">
+                        <div class="psychology-icon">&#9875;</div>
+                        <div class="psychology-title">Price Anchoring</div>
+                        <div class="psychology-description">Premium Plus at $49 anchors perception, making Premium at $29 feel reasonable for premium pet parents.</div>
+                        <div class="psychology-example">Display tiers left-to-right: Essential, Premium, Premium Plus</div>
+                    </div>
+                    <div class="psychology-card">
+                        <div class="psychology-icon">&#128202;</div>
+                        <div class="psychology-title">Annual Discount</div>
+                        <div class="psychology-description">17% annual discount improves cash flow and reduces churn by creating commitment.</div>
+                        <div class="psychology-example">$290/year vs $348 monthly = save $58</div>
+                    </div>
+                    <div class="psychology-card">
+                        <div class="psychology-icon">&#128176;</div>
+                        <div class="psychology-title">Value Framing</div>
+                        <div class="psychology-description">Frame $29/mo as "less than $1/day" for peace of mind about your pet's health.</div>
+                        <div class="psychology-example">"Less than your daily coffee for 24/7 pet health monitoring"</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Implementation Roadmap -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Implementation Roadmap</h2>
+                    <p class="section-description">
+                        Phased approach to pricing implementation: launch, optimize, scale.
+                    </p>
+                </div>
+
+                <div class="implementation-phases">
+                    <div class="phase-card">
+                        <div class="phase-header">
+                            <div class="phase-name">Phase 1: Launch</div>
+                            <div class="phase-timeline">Months 1-3</div>
+                        </div>
+                        <ul class="phase-tasks">
+                            <li>Finalize pricing page with 3-tier comparison table</li>
+                            <li>Set up Stripe billing with annual/monthly toggle</li>
+                            <li>Configure 14-day free trial for Premium tier</li>
+                            <li>Train support team on tier differences and upgrade paths</li>
+                        </ul>
+                    </div>
+
+                    <div class="phase-card">
+                        <div class="phase-header">
+                            <div class="phase-name">Phase 2: Optimize</div>
+                            <div class="phase-timeline">Months 4-9</div>
+                        </div>
+                        <ul class="phase-tasks">
+                            <li>A/B test Premium at $29 vs $34 for price elasticity</li>
+                            <li>Test annual discount at 17% vs 20% vs 25%</li>
+                            <li>Optimize trial-to-paid conversion funnel</li>
+                            <li>Analyze tier distribution and adjust packaging if needed</li>
+                        </ul>
+                    </div>
+
+                    <div class="phase-card">
+                        <div class="phase-header">
+                            <div class="phase-name">Phase 3: Scale</div>
+                            <div class="phase-timeline">Months 10-18</div>
+                        </div>
+                        <ul class="phase-tasks">
+                            <li>Introduce Enterprise tier for veterinary clinics</li>
+                            <li>Launch hardware bundle discounts (device + 12-mo subscription)</li>
+                            <li>Implement referral pricing (1 free month for referrals)</li>
+                            <li>Evaluate price increase for new customers (grandfather existing)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p>StratArts Business Strategy Skills | pricing-strategy-architect-v1.0.0</p>
+                <p>Context Signature: pricing-strategy-architect-v1.0.0 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Chart.js Global Configuration
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        const tooltipConfig = {
+            backgroundColor: '#1a1a1a',
+            titleColor: '#f5f5f5',
+            bodyColor: '#d4d4d4',
+            borderColor: '#10b981',
+            borderWidth: 1
+        };
+
+        // Pricing Data
+        const pricingData = {
+            vw: {
+                labels: ['Too Cheap', 'Great Value', 'Expensive but Worth It', 'Too Expensive'],
+                values: [12, 29, 45, 65]
+            },
+            competitive: {
+                labels: ['Fi Collar', 'Whistle', 'Fuzzy', 'PetPulse'],
+                prices: [8, 10, 75, 29],
+                features: [4, 5, 6, 9]
+            },
+            tiers: {
+                labels: ['Essential', 'Premium', 'Premium Plus'],
+                distribution: [15, 65, 20]
+            },
+            value: {
+                labels: ['Early Detection Savings', 'Time Savings', 'Peace of Mind', 'Telehealth Value'],
+                values: [8, 7, 9, 8]
+            }
+        };
+
+        // Chart 1: Van Westendorp (Bar)
+        const vwCtx = document.getElementById('vwChart').getContext('2d');
+        new Chart(vwCtx, {
+            type: 'bar',
+            data: {
+                labels: pricingData.vw.labels,
+                datasets: [{
+                    label: 'Price Point',
+                    data: pricingData.vw.values,
+                    backgroundColor: ['#fc8181', '#10b981', '#f6ad55', '#e53e3e'],
+                    borderRadius: 6,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#f5f5f5', font: { size: 11, weight: '600' } }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        ticks: {
+                            color: '#a3a3a3',
+                            font: { size: 11 },
+                            callback: function(value) { return '$' + value; }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        ...tooltipConfig,
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + context.parsed.y + '/month';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Competitive Positioning (Scatter)
+        const competitiveCtx = document.getElementById('competitiveChart').getContext('2d');
+        new Chart(competitiveCtx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Competitors',
+                    data: pricingData.competitive.labels.map((name, i) => ({
+                        x: pricingData.competitive.features[i],
+                        y: pricingData.competitive.prices[i],
+                        name: name
+                    })),
+                    backgroundColor: pricingData.competitive.labels.map((name, i) =>
+                        i === pricingData.competitive.labels.length - 1 ? '#10b981' : '#a3a3a3'
+                    ),
+                    borderColor: '#1a1a1a',
+                    borderWidth: 2,
+                    pointRadius: 14,
+                    pointHoverRadius: 18
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Feature Richness', color: '#a3a3a3', font: { size: 12, weight: '600' } },
+                        min: 0,
+                        max: 10,
+                        ticks: { color: '#a3a3a3', font: { size: 11 } },
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' }
+                    },
+                    y: {
+                        title: { display: true, text: 'Price/Month', color: '#a3a3a3', font: { size: 12, weight: '600' } },
+                        min: 0,
+                        max: 100,
+                        ticks: {
+                            color: '#a3a3a3',
+                            font: { size: 11 },
+                            callback: function(value) { return '$' + value; }
+                        },
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        ...tooltipConfig,
+                        callbacks: {
+                            label: function(context) {
+                                return context.raw.name + ': $' + context.parsed.y + '/mo, Features: ' + context.parsed.x + '/10';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 3: Tier Distribution (Doughnut)
+        const tierCtx = document.getElementById('tierChart').getContext('2d');
+        new Chart(tierCtx, {
+            type: 'doughnut',
+            data: {
+                labels: pricingData.tiers.labels,
+                datasets: [{
+                    data: pricingData.tiers.distribution,
+                    backgroundColor: ['#6ee7b7', '#10b981', '#059669'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '60%',
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: { color: '#d4d4d4', font: { size: 11 }, padding: 15 }
+                    },
+                    tooltip: {
+                        ...tooltipConfig,
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.parsed + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 4: Value Analysis (Radar)
+        const valueCtx = document.getElementById('valueChart').getContext('2d');
+        new Chart(valueCtx, {
+            type: 'radar',
+            data: {
+                labels: pricingData.value.labels,
+                datasets: [{
+                    label: 'Value Delivered',
+                    data: pricingData.value.values,
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                    borderColor: '#10b981',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#10b981',
+                    pointBorderColor: '#1a1a1a',
+                    pointRadius: 6,
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: { color: '#a3a3a3', stepSize: 2, font: { size: 10 } },
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        pointLabels: { color: '#f5f5f5', font: { size: 11, weight: '600' } }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        // Print support
+        window.addEventListener('beforeprint', function() {
+            Chart.defaults.color = '#000000';
+        });
+        window.addEventListener('afterprint', function() {
+            Chart.defaults.color = '#a3a3a3';
+        });
+    </script>
+</body>
+</html>

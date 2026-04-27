@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Brief Writer | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        :root {
+            --accent: #10b981;
+            --accent-light: #14b8a6;
+            --accent-dark: #059669;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #0a0a0a;
+        }
+
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .header-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1.5rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2.5rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .score-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #a3a3a3;
+            margin-top: 0.25rem;
+        }
+
+        .content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 4rem;
+            background: #0a0a0a;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section:last-child {
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: #d4d4d4;
+            max-width: 800px;
+        }
+
+        .chart-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            margin-top: 2rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-card .label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .metric-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #10b981;
+            line-height: 1.2;
+        }
+
+        .metric-card .description {
+            font-size: 0.85rem;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: #1a1a1a;
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .feature-card.primary {
+            border-color: #10b981;
+        }
+
+        .feature-name {
+            font-weight: 700;
+            color: #f5f5f5;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            color: #d4d4d4;
+            line-height: 1.6;
+        }
+
+        /* Investor Brief Writer Specific Styles */
+        .onepager-preview {
+            padding: 24px;
+            background: #1a1a1a;
+            border: 2px solid var(--accent);
+            border-radius: 16px;
+            margin: 20px 0;
+        }
+
+        .onepager-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .company-branding h3 {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .company-tagline {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+        }
+
+        .contact-info {
+            text-align: right;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .onepager-section {
+            margin-bottom: 20px;
+        }
+
+        .onepager-section h4 {
+            color: var(--accent);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .onepager-section p {
+            color: #d4d4d4;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .traction-highlight {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .traction-stat {
+            padding: 16px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .traction-stat .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .traction-stat .growth {
+            font-size: 0.8rem;
+            color: #10b981;
+        }
+
+        .traction-stat .label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 4px;
+        }
+
+        .email-preview {
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .email-header {
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .email-subject {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .email-subject span:first-child {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .email-subject span:last-child {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .email-body {
+            padding: 20px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .email-body p {
+            margin-bottom: 16px;
+        }
+
+        .email-signature {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .distribution-channel {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .channel-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(16, 185, 129, 0.15);
+            border-radius: 12px;
+            font-size: 1.5rem;
+        }
+
+        .channel-content h4 {
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .investor-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+
+        .investor-table th,
+        .investor-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .investor-table th {
+            background: rgba(16, 185, 129, 0.1);
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: #f5f5f5;
+        }
+
+        .investor-table td {
+            color: #d4d4d4;
+        }
+
+        .investor-table tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .intro-path {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .intro-path.warm { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .intro-path.cold { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .tier-1 { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .tier-2 { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .tier-3 { background: rgba(156, 163, 175, 0.2); color: #9ca3af; }
+
+        .team-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .team-avatar {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent), #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0a0a0a;
+        }
+
+        .team-info h4 {
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .team-title {
+            color: var(--accent);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .team-bio {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .next-step-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            color: #0a0a0a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        footer {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content strong {
+            color: #10b981;
+        }
+
+        @media (max-width: 1400px) {
+            .score-container { grid-template-columns: repeat(3, 1fr); }
+            .metric-grid { grid-template-columns: repeat(2, 1fr); }
+            .traction-highlight { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .metric-grid { grid-template-columns: 1fr; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .traction-highlight { grid-template-columns: 1fr; }
+            .score-container { grid-template-columns: repeat(2, 1fr); }
+            .header-content { padding: 2rem; }
+            .score-container { padding: 2rem; }
+            .content { padding: 2rem 2rem; }
+            .footer-content { padding: 2rem; }
+        }
+
+        @media print {
+            body { background: white; color: #000000; }
+            .container { background: white; }
+            .header-content { background: white; color: #000000; border: 2px solid #10b981; }
+            .score-container { background: white; border: 2px solid #10b981; }
+            .score-value { background: none; -webkit-text-fill-color: #10b981; }
+            .content { background: white; }
+            .onepager-preview, .email-preview, .team-card, .distribution-channel { background: white; border: 2px solid #10b981; }
+            footer { background: white; }
+            .footer-content { background: white; color: #666666; border-top: 2px solid #10b981; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">PetPulse Series A Materials</div>
+                <h1>Investor Brief Writer</h1>
+                <div class="subtitle">One-Pager & Cold Email Templates for Fundraising</div>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span>Date:</span>
+                        <span>Generated: 2025-12-18</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>Type:</span>
+                        <span>Analysis Type: Investor Materials</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>Version:</span>
+                        <span>Version 1.0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SCORE BANNER -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-item">
+                    <div class="score-value">$5M</div>
+                    <div class="score-label">Raising</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">$30K</div>
+                    <div class="score-label">MRR</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">15%</div>
+                    <div class="score-label">MoM Growth</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">7,300</div>
+                    <div class="score-label">Users</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">$260B</div>
+                    <div class="score-label">TAM</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">80</div>
+                    <div class="score-label">Target Investors</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+
+            <!-- Section 1: Executive Summary -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">1. Executive Summary</h2>
+                    <p class="section-description">Investor brief format and distribution strategy</p>
+                </div>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <div class="label">Format</div>
+                        <div class="value">1-Page</div>
+                        <div class="description">Front-only PDF for email attachments</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Audience</div>
+                        <div class="value">Series A</div>
+                        <div class="description">VCs focused on pet tech & consumer IoT</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Distribution</div>
+                        <div class="value">3 Channels</div>
+                        <div class="description">Warm intros, cold outreach, post-meeting</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Key Hook</div>
+                        <div class="value">Traction</div>
+                        <div class="description">Lead with $360K ARR, 85% retention</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: One-Pager Preview -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">2. One-Pager Preview</h2>
+                    <p class="section-description">Scannable investor brief for email attachments</p>
+                </div>
+
+                <div class="onepager-preview">
+                    <div class="onepager-header">
+                        <div class="company-branding">
+                            <h3>PetPulse</h3>
+                            <p class="company-tagline">The health monitoring platform for pet parents</p>
+                        </div>
+                        <div class="contact-info">
+                            hello@petpulse.com<br>
+                            www.petpulse.com<br>
+                            San Francisco, CA
+                        </div>
+                    </div>
+
+                    <div class="onepager-section">
+                        <h4>The Problem</h4>
+                        <p>Pet parents spend $35K+ on pet healthcare over a pet's lifetime but have no visibility into their pet's health between vet visits. 65% of serious conditions are caught too late, leading to expensive treatments, shorter lifespans, and heartbroken families.</p>
+                    </div>
+
+                    <div class="onepager-section">
+                        <h4>Our Solution</h4>
+                        <p>PetPulse is a smart collar + mobile app that continuously monitors your pet's health metrics (heart rate, activity, sleep, temperature) and uses AI to detect health anomalies before they become emergencies. Early detection saves lives and reduces vet bills by 40%.</p>
+                    </div>
+
+                    <div class="onepager-section">
+                        <h4>Market Opportunity</h4>
+                        <p>$260B global pet industry, with pet tech growing at 25% CAGR. 90M U.S. households own pets, spending $136B/year. Our SAM: $4B in pet health monitoring and wearables.</p>
+                    </div>
+
+                    <div class="onepager-section">
+                        <h4>Traction</h4>
+                        <div class="traction-highlight">
+                            <div class="traction-stat">
+                                <div class="value">$360K</div>
+                                <div class="growth">+15% MoM</div>
+                                <div class="label">ARR</div>
+                            </div>
+                            <div class="traction-stat">
+                                <div class="value">7,300</div>
+                                <div class="growth">+12% MoM</div>
+                                <div class="label">Active Users</div>
+                            </div>
+                            <div class="traction-stat">
+                                <div class="value">85%</div>
+                                <div class="growth">Top Decile</div>
+                                <div class="label">D30 Retention</div>
+                            </div>
+                            <div class="traction-stat">
+                                <div class="value">4.8:1</div>
+                                <div class="growth">Healthy</div>
+                                <div class="label">LTV:CAC</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="onepager-section">
+                        <h4>Competitive Advantage</h4>
+                        <p>Unlike FitBark (activity-only) or Whistle (GPS-focused), PetPulse is the only platform with AI-powered health prediction. Our 85% D30 retention proves product-market fit, and our hardware+subscription model creates a defensible moat.</p>
+                    </div>
+
+                    <div class="onepager-section">
+                        <h4>The Ask</h4>
+                        <p>Raising $5M Series A at $15M pre-money to scale from 7,300 to 16,000 users, hit $2M ARR milestone, and expand to multi-pet households and veterinary partnerships.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Traction Highlights -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">3. Traction Highlights</h2>
+                    <p class="section-description">Key metrics that demonstrate momentum</p>
+                </div>
+
+                <div class="traction-highlight">
+                    <div class="traction-stat">
+                        <div class="value">$360K</div>
+                        <div class="growth">+15% MoM</div>
+                        <div class="label">Annual Recurring Revenue</div>
+                    </div>
+                    <div class="traction-stat">
+                        <div class="value">7,300</div>
+                        <div class="growth">+12% MoM</div>
+                        <div class="label">Active Subscribers</div>
+                    </div>
+                    <div class="traction-stat">
+                        <div class="value">85%</div>
+                        <div class="growth">vs. 50% avg</div>
+                        <div class="label">D30 Retention</div>
+                    </div>
+                    <div class="traction-stat">
+                        <div class="value">NPS 42</div>
+                        <div class="growth">52% Promoters</div>
+                        <div class="label">Net Promoter Score</div>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-wrapper">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Team -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">4. Team</h2>
+                    <p class="section-description">Founding team with domain expertise</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">SM</div>
+                    <div class="team-info">
+                        <h4>Sarah Mitchell</h4>
+                        <div class="team-title">CEO & Co-Founder</div>
+                        <div class="team-bio">Former VP Product at Chewy. Led mobile app launch to 10M users. Stanford MBA. Lifelong pet parent with 3 rescue dogs.</div>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">JC</div>
+                    <div class="team-info">
+                        <h4>James Chen</h4>
+                        <div class="team-title">CTO & Co-Founder</div>
+                        <div class="team-bio">Former Engineering Lead at Fitbit. Built health monitoring algorithms processing 1B+ data points/day. MIT Computer Science PhD.</div>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">DR</div>
+                    <div class="team-info">
+                        <h4>Dr. Emily Rodriguez</h4>
+                        <div class="team-title">Chief Veterinary Officer</div>
+                        <div class="team-bio">Board-certified veterinarian with 15 years clinical experience. Former Chief Vet at Banfield Pet Hospital. UC Davis DVM.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Cold Email Template -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">5. Cold Email Template</h2>
+                    <p class="section-description">Traction-focused outreach email (245 words)</p>
+                </div>
+
+                <div class="email-preview">
+                    <div class="email-header">
+                        <div class="email-subject">
+                            <span>Subject:</span>
+                            <span>$360K ARR, 85% D30 retention - PetPulse Series A</span>
+                        </div>
+                    </div>
+                    <div class="email-body">
+                        <p>Hi [Investor Name],</p>
+
+                        <p>I'm reaching out because you've invested in consumer health tech companies like [Portfolio Company], and we're building in an adjacent space - pet health monitoring.</p>
+
+                        <p>We're PetPulse - the smart collar + AI platform that monitors pet health metrics and detects anomalies before they become emergencies. Pet parents spend $35K+ on pet healthcare over a pet's lifetime but have zero visibility between vet visits. We're changing that.</p>
+
+                        <p>We're at $360K ARR with 7,300 active subscribers, growing 15% MoM. Our D30 retention is 85% (top decile for consumer hardware), and LTV:CAC is 4.8:1. We've proven product-market fit in a $260B market that's growing 25% annually.</p>
+
+                        <p>We're raising a $5M Series A to scale from 7,300 to 16,000 users and hit $2M ARR. Our founding team includes former Chewy VP Product, Fitbit engineering lead, and a board-certified veterinarian.</p>
+
+                        <p>Would you have 15 minutes this week or next for a quick intro call? Happy to share our deck if helpful.</p>
+
+                        <div class="email-signature">
+                            <p>Best,<br>
+                            Sarah Mitchell<br>
+                            CEO, PetPulse<br>
+                            sarah@petpulse.com | www.petpulse.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: Email Templates -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">6. Additional Email Templates</h2>
+                    <p class="section-description">Warm intro request and follow-up templates</p>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-name">Warm Intro Request</div>
+                        <div class="feature-description">
+                            <p style="color: #a3a3a3; font-size: 0.85rem; margin-bottom: 1rem;"><strong>Subject:</strong> Intro to [Investor Name] at [Fund]?</p>
+                            <p>Hi [Mutual Connection],</p>
+                            <p style="margin-top: 0.5rem;">Hope you're well! We're raising a $5M Series A for PetPulse and I saw you know [Investor Name] at [Fund].</p>
+                            <p style="margin-top: 0.5rem;">Quick context: We're at $360K ARR, 7,300 users, 85% D30 retention - building the health monitoring platform for pet parents.</p>
+                            <p style="margin-top: 0.5rem;">Would you be comfortable making an intro? One-pager attached.</p>
+                            <p style="margin-top: 0.5rem; color: #a3a3a3;">Thanks,<br>Sarah</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-name">Follow-Up Email (Day 5)</div>
+                        <div class="feature-description">
+                            <p style="color: #a3a3a3; font-size: 0.85rem; margin-bottom: 1rem;"><strong>Subject:</strong> RE: $360K ARR, 85% D30 retention - PetPulse Series A</p>
+                            <p>Hi [Investor Name],</p>
+                            <p style="margin-top: 0.5rem;">Just bumping this up - wanted to share that we just crossed $400K ARR run rate this week.</p>
+                            <p style="margin-top: 0.5rem;">Would love to find 15 minutes to share what we're building. Is there a good time this week?</p>
+                            <p style="margin-top: 0.5rem; color: #a3a3a3;">Best,<br>Sarah</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-name">Post-Meeting Follow-Up</div>
+                        <div class="feature-description">
+                            <p style="color: #a3a3a3; font-size: 0.85rem; margin-bottom: 1rem;"><strong>Subject:</strong> Thanks for the meeting - PetPulse materials</p>
+                            <p>Hi [Investor Name],</p>
+                            <p style="margin-top: 0.5rem;">Thanks for taking the time to meet today. As discussed, here are our materials:</p>
+                            <ul style="margin-top: 0.5rem; margin-left: 1rem;">
+                                <li>One-pager (attached) - quick reference</li>
+                                <li>Pitch deck (attached) - full story</li>
+                                <li>Data room (link) - financials, metrics</li>
+                            </ul>
+                            <p style="margin-top: 0.5rem;">Looking forward to next steps!</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-name">Final Follow-Up (Day 10)</div>
+                        <div class="feature-description">
+                            <p style="color: #a3a3a3; font-size: 0.85rem; margin-bottom: 1rem;"><strong>Subject:</strong> Last note - PetPulse</p>
+                            <p>Hi [Investor Name],</p>
+                            <p style="margin-top: 0.5rem;">Last email from me - I know inboxes get busy!</p>
+                            <p style="margin-top: 0.5rem;">If pet health monitoring isn't a fit for [Fund] right now, totally understand. But if there's interest, I'd love 15 minutes to share our story.</p>
+                            <p style="margin-top: 0.5rem;">Either way, thanks for considering.</p>
+                            <p style="margin-top: 0.5rem; color: #a3a3a3;">Best,<br>Sarah</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 7: Distribution Strategy -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">7. Distribution Strategy</h2>
+                    <p class="section-description">How to use investor brief across channels</p>
+                </div>
+
+                <div class="distribution-channel">
+                    <div class="channel-icon">link</div>
+                    <div class="channel-content">
+                        <h4>Warm Introductions (Priority)</h4>
+                        <p style="color: #d4d4d4;">Request intros from advisors, existing investors, and founder network. Include one-pager as attachment. Target: 40 warm intro requests with 55% expected response rate.</p>
+                    </div>
+                </div>
+
+                <div class="distribution-channel">
+                    <div class="channel-icon">mail</div>
+                    <div class="channel-content">
+                        <h4>Cold Outreach</h4>
+                        <p style="color: #d4d4d4;">Direct email to Tier 2/3 investors. Use email brief in body (no attachment on first email). 3-email sequence spaced 5-7 days apart. Target: 40 cold emails with 12% expected response rate.</p>
+                    </div>
+                </div>
+
+                <div class="distribution-channel">
+                    <div class="channel-icon">doc</div>
+                    <div class="channel-content">
+                        <h4>Post-Meeting Follow-Up</h4>
+                        <p style="color: #d4d4d4;">Send one-pager + pitch deck + data room link within 24 hours of every intro meeting. Reinforce key points discussed. Makes it easy for investor to share internally.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 8: Target Investor List -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">8. Target Investor List</h2>
+                    <p class="section-description">Priority investors for Series A outreach</p>
+                </div>
+
+                <table class="investor-table">
+                    <thead>
+                        <tr>
+                            <th>Investor</th>
+                            <th>Fund</th>
+                            <th>Stage Focus</th>
+                            <th>Tier</th>
+                            <th>Intro Path</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Partner A</td>
+                            <td>Maveron</td>
+                            <td>Seed-A</td>
+                            <td><span class="tier-badge tier-1">Tier 1</span></td>
+                            <td><span class="intro-path warm">Warm - Advisor</span></td>
+                        </tr>
+                        <tr>
+                            <td>Partner B</td>
+                            <td>Arena VC</td>
+                            <td>Seed-A</td>
+                            <td><span class="tier-badge tier-1">Tier 1</span></td>
+                            <td><span class="intro-path warm">Warm - Founder</span></td>
+                        </tr>
+                        <tr>
+                            <td>Partner C</td>
+                            <td>Lerer Hippeau</td>
+                            <td>Seed-A</td>
+                            <td><span class="tier-badge tier-1">Tier 1</span></td>
+                            <td><span class="intro-path warm">Warm - Seed VC</span></td>
+                        </tr>
+                        <tr>
+                            <td>Partner D</td>
+                            <td>First Round</td>
+                            <td>Seed-A</td>
+                            <td><span class="tier-badge tier-2">Tier 2</span></td>
+                            <td><span class="intro-path cold">Cold - LinkedIn</span></td>
+                        </tr>
+                        <tr>
+                            <td>Partner E</td>
+                            <td>Forerunner</td>
+                            <td>Seed-B</td>
+                            <td><span class="tier-badge tier-2">Tier 2</span></td>
+                            <td><span class="intro-path warm">Warm - Founder</span></td>
+                        </tr>
+                        <tr>
+                            <td>Partner F</td>
+                            <td>Sequoia Scout</td>
+                            <td>Seed</td>
+                            <td><span class="tier-badge tier-1">Tier 1</span></td>
+                            <td><span class="intro-path cold">Cold - Portfolio</span></td>
+                        </tr>
+                        <tr>
+                            <td>Partner G</td>
+                            <td>Lightspeed Scout</td>
+                            <td>Seed-A</td>
+                            <td><span class="tier-badge tier-2">Tier 2</span></td>
+                            <td><span class="intro-path cold">Cold - Email</span></td>
+                        </tr>
+                        <tr>
+                            <td>Partner H</td>
+                            <td>Kleiner Perkins</td>
+                            <td>Series A</td>
+                            <td><span class="tier-badge tier-2">Tier 2</span></td>
+                            <td><span class="intro-path warm">Warm - Advisor</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Section 9: Next Steps -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">9. Next Steps</h2>
+                    <p class="section-description">Action items to launch investor outreach</p>
+                </div>
+
+                <div class="next-step-item">
+                    <div class="step-number">1</div>
+                    <div style="color: #d4d4d4;">
+                        <strong style="color: #f5f5f5;">Finalize One-Pager Design</strong> - Export to PDF using Canva or Figma. Ensure brand colors and logo are consistent.
+                    </div>
+                </div>
+
+                <div class="next-step-item">
+                    <div class="step-number">2</div>
+                    <div style="color: #d4d4d4;">
+                        <strong style="color: #f5f5f5;">Get Advisor Feedback</strong> - Send draft to 3 advisors for review. Incorporate feedback before outreach.
+                    </div>
+                </div>
+
+                <div class="next-step-item">
+                    <div class="step-number">3</div>
+                    <div style="color: #d4d4d4;">
+                        <strong style="color: #f5f5f5;">Build Full Target List</strong> - Expand to 80 investors (15 Tier 1, 25 Tier 2, 40 Tier 3) using Crunchbase and AngelList.
+                    </div>
+                </div>
+
+                <div class="next-step-item">
+                    <div class="step-number">4</div>
+                    <div style="color: #d4d4d4;">
+                        <strong style="color: #f5f5f5;">Map Warm Intro Paths</strong> - Cross-reference target investors with network. Request intros from advisors and founders.
+                    </div>
+                </div>
+
+                <div class="next-step-item">
+                    <div class="step-number">5</div>
+                    <div style="color: #d4d4d4;">
+                        <strong style="color: #f5f5f5;">Set Up CRM Tracking</strong> - Create Notion or Airtable database to track every investor, status, and next step.
+                    </div>
+                </div>
+
+                <div class="next-step-item">
+                    <div class="step-number">6</div>
+                    <div style="color: #d4d4d4;">
+                        <strong style="color: #f5f5f5;">Launch Outreach</strong> - Send first batch of warm intro requests next week. Begin cold outreach the following week.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> 2025-12-18 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | investor-brief-writer-v1.0</p>
+                <p style="margin-top: 5px;">Context Signature: PETPULSE-BRIEF-2025-12 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Chart.js Global Configuration
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        // Revenue Growth Chart
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'MRR',
+                    data: [12000, 14000, 16000, 18500, 21000, 24000, 27500, 31500, 36000, 41500, 48000, 55000],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#10b981'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'MRR Growth Trajectory (12 Months)',
+                        color: '#ffffff'
+                    },
+                    tooltip: {
+                        backgroundColor: '#1a1a1a',
+                        titleColor: '#f5f5f5',
+                        bodyColor: '#d4d4d4',
+                        borderColor: '#10b981',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + (context.raw / 1000).toFixed(1) + 'K MRR';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: 'rgba(255,255,255,0.7)',
+                            callback: function(value) {
+                                return '$' + (value / 1000).toFixed(0) + 'K';
+                            }
+                        },
+                        grid: { color: 'rgba(255,255,255,0.1)' }
+                    },
+                    x: {
+                        ticks: { color: 'rgba(255,255,255,0.7)' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Print-friendly
+        window.addEventListener('beforeprint', function() {
+            Chart.defaults.color = '#000000';
+        });
+
+        window.addEventListener('afterprint', function() {
+            Chart.defaults.color = '#a3a3a3';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metrics Dashboard Strategy - PetPulse | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #0a0a0a;
+        }
+
+        /* === HEADER === */
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .header-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* === SCORE BANNER === */
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-main {
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .score-interpretation {
+            border-left: 3px solid #10b981;
+            padding-left: 2rem;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #f5f5f5;
+        }
+
+        .interpretation-text {
+            color: #d4d4d4;
+            line-height: 1.7;
+        }
+
+        .verdict-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        /* === CONTENT === */
+        .content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 4rem;
+            background: #0a0a0a;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: #d4d4d4;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+
+        /* === GRIDS === */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-card .label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .metric-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #10b981;
+            line-height: 1.2;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: #1a1a1a;
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .small-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .small-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        /* === CHART === */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-subtitle {
+            font-size: 0.9rem;
+            color: #a3a3a3;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+        }
+
+        /* === NORTH STAR === */
+        .north-star-container {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .north-star-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .north-star-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+        }
+
+        .north-star-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .north-star-description {
+            color: #888;
+            font-size: 0.95rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .driver-metrics {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .driver-metric {
+            text-align: center;
+        }
+
+        .driver-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .driver-label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        /* === AARRR FUNNEL === */
+        .aarrr-funnel {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin: 2rem 0;
+        }
+
+        .funnel-stage {
+            display: flex;
+            align-items: center;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            padding: 1.25rem 1.5rem;
+        }
+
+        .funnel-stage:first-child {
+            border-radius: 12px 12px 0 0;
+        }
+
+        .funnel-stage:last-child {
+            border-radius: 0 0 12px 12px;
+        }
+
+        .stage-letter {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1.25rem;
+            margin-right: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .stage-info {
+            flex: 1;
+        }
+
+        .stage-name {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .stage-metric {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .stage-value {
+            text-align: right;
+        }
+
+        .stage-current {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .stage-target {
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        /* === DASHBOARD CARDS === */
+        .dashboard-card {
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+            border-left: 4px solid #10b981;
+        }
+
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .dashboard-info {
+            flex: 1;
+        }
+
+        .dashboard-name {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .dashboard-audience {
+            color: #10b981;
+            font-size: 0.8rem;
+        }
+
+        .dashboard-purpose {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .dashboard-metrics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .metric-tag {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+        }
+
+        /* === METRICS TABLE === */
+        .metrics-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .metrics-table th,
+        .metrics-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .metrics-table th {
+            background: #1a1a1a;
+            color: #10b981;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .metrics-table td {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .metrics-table td:first-child {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .category-badge {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .cat-acquisition { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .cat-activation { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .cat-retention { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .cat-referral { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
+        .cat-revenue { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+
+        /* === ALERTS === */
+        .alert-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .alert-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .alert-critical { background: rgba(239, 68, 68, 0.2); }
+        .alert-warning { background: rgba(245, 158, 11, 0.2); }
+        .alert-info { background: rgba(16, 185, 129, 0.2); }
+
+        .alert-info-text {
+            flex: 1;
+        }
+
+        .alert-name {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .alert-threshold {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .alert-channel {
+            background: #0a0a0a;
+            color: #10b981;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* === DATA STACK === */
+        .data-stack-section {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .stack-header {
+            font-weight: 600;
+            color: #10b981;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .stack-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .stack-item {
+            background: #0a0a0a;
+            color: #ccc;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* === INSIGHTS === */
+        .insights-panel {
+            background: #0a0a0a;
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .insight-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .insight-list {
+            list-style: none;
+        }
+
+        .insight-list li {
+            padding: 0.6rem 0;
+            color: #d4d4d4;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .insight-list li:last-child {
+            border-bottom: none;
+        }
+
+        .insight-list li strong {
+            color: #10b981;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content strong {
+            color: #10b981;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 1200px) {
+            .metric-grid { grid-template-columns: repeat(2, 1fr); }
+            .small-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .chart-grid, .feature-grid { grid-template-columns: 1fr; }
+            .metric-grid { grid-template-columns: 1fr; }
+            .score-container { grid-template-columns: 1fr; text-align: center; }
+            .score-interpretation { border-left: none; border-top: 3px solid #10b981; padding-left: 0; padding-top: 1.5rem; }
+            .header-content, .score-container, .content, .footer-content { padding: 2rem; }
+            .funnel-stage { flex-direction: column; text-align: center; gap: 1rem; }
+            .stage-letter { margin-right: 0; }
+            .driver-metrics { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">Metrics Dashboard Strategy</div>
+                <h1>PetPulse Analytics</h1>
+                <div class="subtitle">Data-driven decision making for pet health monitoring growth</div>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span>📅</span>
+                        <span>Generated: December 18, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>📊</span>
+                        <span>Analysis Type: AARRR Pirate Metrics</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🎯</span>
+                        <span>Version 1.0.0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SCORE BANNER -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">5</div>
+                    <div class="score-label">Dashboards</div>
+                </div>
+
+                <div class="score-interpretation">
+                    <div class="interpretation-title">Complete Analytics Architecture</div>
+                    <div class="interpretation-text">
+                        Five role-specific dashboards covering Executive (NSM, MRR), Growth (acquisition funnel),
+                        Product (engagement, feature adoption), Revenue (MRR waterfall, LTV), and Retention
+                        (cohort analysis, churn). 32 metrics tracked with automated alerts.
+                    </div>
+                </div>
+
+                <div class="verdict-badge">
+                    LTV:CAC 4.8:1
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+            <!-- North Star Metric -->
+            <div class="section">
+                <h2 class="section-title">North Star Metric</h2>
+
+                <div class="north-star-container">
+                    <div class="north-star-icon">⭐</div>
+                    <div class="north-star-value">2,500</div>
+                    <div class="north-star-name">Active Pets Monitored</div>
+                    <div class="north-star-description">
+                        The number of pets with active PetPulse subscriptions being continuously monitored.
+                        Represents real value delivery and correlates with revenue, retention, and customer satisfaction.
+                    </div>
+
+                    <div class="driver-metrics">
+                        <div class="driver-metric">
+                            <div class="driver-value">500</div>
+                            <div class="driver-label">New Pets/Month</div>
+                        </div>
+                        <div class="driver-metric">
+                            <div class="driver-value">55%</div>
+                            <div class="driver-label">Activation Rate</div>
+                        </div>
+                        <div class="driver-metric">
+                            <div class="driver-value">85%</div>
+                            <div class="driver-label">D30 Retention</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+                    <div class="metric-card">
+                        <div class="label">Current</div>
+                        <div class="value">0</div>
+                        <div style="color: #888; font-size: 0.85rem;">(pre-launch)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">3-Month Target</div>
+                        <div class="value">2,500</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">12-Month Target</div>
+                        <div class="value">15,000</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AARRR Framework -->
+            <div class="section">
+                <h2 class="section-title">AARRR Pirate Metrics</h2>
+                <p class="section-description">
+                    The full customer journey from first touch to referral, tracked at each stage to identify
+                    optimization opportunities and bottlenecks.
+                </p>
+
+                <div class="aarrr-funnel">
+                    <div class="funnel-stage">
+                        <div class="stage-letter">A</div>
+                        <div class="stage-info">
+                            <div class="stage-name">Acquisition</div>
+                            <div class="stage-metric">Website visitors, signups, trial starts</div>
+                        </div>
+                        <div class="stage-value">
+                            <div class="stage-current">10,000</div>
+                            <div class="stage-target">visitors/month</div>
+                        </div>
+                    </div>
+                    <div class="funnel-stage">
+                        <div class="stage-letter">A</div>
+                        <div class="stage-info">
+                            <div class="stage-name">Activation</div>
+                            <div class="stage-metric">First health insight viewed within 7 days</div>
+                        </div>
+                        <div class="stage-value">
+                            <div class="stage-current">55%</div>
+                            <div class="stage-target">target: 60%</div>
+                        </div>
+                    </div>
+                    <div class="funnel-stage">
+                        <div class="stage-letter">R</div>
+                        <div class="stage-info">
+                            <div class="stage-name">Retention</div>
+                            <div class="stage-metric">D30 retention, monthly active users</div>
+                        </div>
+                        <div class="stage-value">
+                            <div class="stage-current">85%</div>
+                            <div class="stage-target">target: 88%</div>
+                        </div>
+                    </div>
+                    <div class="funnel-stage">
+                        <div class="stage-letter">R</div>
+                        <div class="stage-info">
+                            <div class="stage-name">Referral</div>
+                            <div class="stage-metric">Referral rate, K-factor, invites sent</div>
+                        </div>
+                        <div class="stage-value">
+                            <div class="stage-current">25%</div>
+                            <div class="stage-target">K=1.0</div>
+                        </div>
+                    </div>
+                    <div class="funnel-stage">
+                        <div class="stage-letter">R</div>
+                        <div class="stage-info">
+                            <div class="stage-name">Revenue</div>
+                            <div class="stage-metric">Trial→Paid, MRR, LTV, CAC</div>
+                        </div>
+                        <div class="stage-value">
+                            <div class="stage-current">70%</div>
+                            <div class="stage-target">trial→paid</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">AARRR Funnel Volume</div>
+                        <div class="chart-subtitle">Users at each stage (90-day target)</div>
+                        <div class="chart-wrapper">
+                            <canvas id="funnelChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="insights-panel" style="margin: 0;">
+                            <div class="insight-title">Funnel Insights</div>
+                            <ul class="insight-list">
+                                <li><strong>Bottleneck:</strong> Activation (55%) - Focus on onboarding optimization</li>
+                                <li><strong>Strength:</strong> Retention (85%) - Product-market fit signal</li>
+                                <li><strong>Opportunity:</strong> Referral (25%) - Launch double-sided incentives</li>
+                                <li><strong>Watch:</strong> Trial→Paid (70%) - Above SaaS average (65%)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Architecture -->
+            <div class="section">
+                <h2 class="section-title">Dashboard Architecture</h2>
+                <p class="section-description">
+                    Five role-specific dashboards ensure each team sees the metrics that matter most to their function.
+                </p>
+
+                <div class="feature-grid">
+                    <div class="dashboard-card">
+                        <div class="dashboard-header">
+                            <div class="dashboard-icon">📊</div>
+                            <div class="dashboard-info">
+                                <div class="dashboard-name">Executive Dashboard</div>
+                                <div class="dashboard-audience">CEO, Leadership Team</div>
+                            </div>
+                        </div>
+                        <div class="dashboard-purpose">
+                            High-level business health at a glance. North Star Metric trend, MRR/ARR growth,
+                            runway, and key AARRR metrics. Daily or real-time refresh.
+                        </div>
+                        <div class="dashboard-metrics">
+                            <span class="metric-tag">Active Pets (NSM)</span>
+                            <span class="metric-tag">MRR</span>
+                            <span class="metric-tag">LTV:CAC</span>
+                            <span class="metric-tag">Runway</span>
+                            <span class="metric-tag">D30 Retention</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="dashboard-header">
+                            <div class="dashboard-icon">🚀</div>
+                            <div class="dashboard-info">
+                                <div class="dashboard-name">Growth Dashboard</div>
+                                <div class="dashboard-audience">Marketing, Growth Team</div>
+                            </div>
+                        </div>
+                        <div class="dashboard-purpose">
+                            Track acquisition channels, conversion funnel, and CAC by channel. Optimize
+                            marketing spend based on ROI. Daily refresh.
+                        </div>
+                        <div class="dashboard-metrics">
+                            <span class="metric-tag">Traffic by Channel</span>
+                            <span class="metric-tag">Signups</span>
+                            <span class="metric-tag">CAC by Channel</span>
+                            <span class="metric-tag">Conversion Rate</span>
+                            <span class="metric-tag">K-Factor</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="dashboard-header">
+                            <div class="dashboard-icon">📱</div>
+                            <div class="dashboard-info">
+                                <div class="dashboard-name">Product Dashboard</div>
+                                <div class="dashboard-audience">Product, Engineering</div>
+                            </div>
+                        </div>
+                        <div class="dashboard-purpose">
+                            Track engagement, feature adoption, and product health. DAU/MAU stickiness,
+                            session metrics, and performance monitoring. Daily refresh.
+                        </div>
+                        <div class="dashboard-metrics">
+                            <span class="metric-tag">DAU/WAU/MAU</span>
+                            <span class="metric-tag">Feature Adoption</span>
+                            <span class="metric-tag">Session Duration</span>
+                            <span class="metric-tag">Uptime</span>
+                            <span class="metric-tag">Error Rate</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="dashboard-header">
+                            <div class="dashboard-icon">💰</div>
+                            <div class="dashboard-info">
+                                <div class="dashboard-name">Revenue Dashboard</div>
+                                <div class="dashboard-audience">Finance, Sales</div>
+                            </div>
+                        </div>
+                        <div class="dashboard-purpose">
+                            Track MRR movement, expansion, churn, and unit economics. MRR waterfall
+                            showing new + expansion - churn. Daily refresh.
+                        </div>
+                        <div class="dashboard-metrics">
+                            <span class="metric-tag">MRR</span>
+                            <span class="metric-tag">New MRR</span>
+                            <span class="metric-tag">Expansion MRR</span>
+                            <span class="metric-tag">Churned MRR</span>
+                            <span class="metric-tag">ARPU by Plan</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card" style="grid-column: 1 / -1;">
+                        <div class="dashboard-header">
+                            <div class="dashboard-icon">🔄</div>
+                            <div class="dashboard-info">
+                                <div class="dashboard-name">Retention Dashboard</div>
+                                <div class="dashboard-audience">CX, Product, Success</div>
+                            </div>
+                        </div>
+                        <div class="dashboard-purpose">
+                            Track churn drivers, at-risk users, and win-back campaigns. Cohort retention curves, NPS trends, and
+                            engagement score distribution. Weekly refresh with real-time at-risk alerts.
+                        </div>
+                        <div class="dashboard-metrics">
+                            <span class="metric-tag">D1/D7/D30 Retention</span>
+                            <span class="metric-tag">Cohort Curves</span>
+                            <span class="metric-tag">At-Risk Users</span>
+                            <span class="metric-tag">NPS</span>
+                            <span class="metric-tag">CSAT</span>
+                            <span class="metric-tag">Churn Reasons</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metrics Dictionary -->
+            <div class="section">
+                <h2 class="section-title">Metrics Dictionary</h2>
+
+                <table class="metrics-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Category</th>
+                            <th>Current</th>
+                            <th>Target</th>
+                            <th>Owner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Active Pets Monitored (NSM)</td>
+                            <td><span class="category-badge cat-retention">North Star</span></td>
+                            <td>0</td>
+                            <td>2,500</td>
+                            <td>CEO</td>
+                        </tr>
+                        <tr>
+                            <td>Monthly Recurring Revenue</td>
+                            <td><span class="category-badge cat-revenue">Revenue</span></td>
+                            <td>$0</td>
+                            <td>$85K</td>
+                            <td>Finance</td>
+                        </tr>
+                        <tr>
+                            <td>Activation Rate</td>
+                            <td><span class="category-badge cat-activation">Activation</span></td>
+                            <td>45%</td>
+                            <td>55%</td>
+                            <td>Product</td>
+                        </tr>
+                        <tr>
+                            <td>D30 Retention</td>
+                            <td><span class="category-badge cat-retention">Retention</span></td>
+                            <td>85%</td>
+                            <td>88%</td>
+                            <td>CX</td>
+                        </tr>
+                        <tr>
+                            <td>Trial → Paid Conversion</td>
+                            <td><span class="category-badge cat-revenue">Revenue</span></td>
+                            <td>65%</td>
+                            <td>70%</td>
+                            <td>Sales</td>
+                        </tr>
+                        <tr>
+                            <td>K-Factor (Viral Coefficient)</td>
+                            <td><span class="category-badge cat-referral">Referral</span></td>
+                            <td>0.75</td>
+                            <td>1.0</td>
+                            <td>Growth</td>
+                        </tr>
+                        <tr>
+                            <td>Customer Acquisition Cost</td>
+                            <td><span class="category-badge cat-acquisition">Acquisition</span></td>
+                            <td>TBD</td>
+                            <td>&lt;$218</td>
+                            <td>Marketing</td>
+                        </tr>
+                        <tr>
+                            <td>Lifetime Value</td>
+                            <td><span class="category-badge cat-revenue">Revenue</span></td>
+                            <td>$1,047</td>
+                            <td>$1,200</td>
+                            <td>Finance</td>
+                        </tr>
+                        <tr>
+                            <td>LTV:CAC Ratio</td>
+                            <td><span class="category-badge cat-revenue">Revenue</span></td>
+                            <td>4.8:1</td>
+                            <td>&gt;4:1</td>
+                            <td>Finance</td>
+                        </tr>
+                        <tr>
+                            <td>DAU/MAU (Stickiness)</td>
+                            <td><span class="category-badge cat-retention">Engagement</span></td>
+                            <td>TBD</td>
+                            <td>&gt;25%</td>
+                            <td>Product</td>
+                        </tr>
+                        <tr>
+                            <td>NPS Score</td>
+                            <td><span class="category-badge cat-retention">Satisfaction</span></td>
+                            <td>TBD</td>
+                            <td>&gt;50</td>
+                            <td>CX</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Alerts & Monitoring -->
+            <div class="section">
+                <h2 class="section-title">Alerts & Monitoring</h2>
+                <p class="section-description">
+                    Automated alerts ensure critical issues are caught immediately, not during weekly reviews.
+                </p>
+
+                <div class="feature-grid">
+                    <div class="alert-card">
+                        <div class="alert-icon alert-critical">🚨</div>
+                        <div class="alert-info-text">
+                            <div class="alert-name">NSM Growth Stall</div>
+                            <div class="alert-threshold">&lt;5% week-over-week growth</div>
+                        </div>
+                        <span class="alert-channel">Slack #leadership</span>
+                    </div>
+                    <div class="alert-card">
+                        <div class="alert-icon alert-critical">🚨</div>
+                        <div class="alert-info-text">
+                            <div class="alert-name">Churn Spike</div>
+                            <div class="alert-threshold">&gt;5% monthly churn rate</div>
+                        </div>
+                        <span class="alert-channel">Slack #cx</span>
+                    </div>
+                    <div class="alert-card">
+                        <div class="alert-icon alert-warning">⚠️</div>
+                        <div class="alert-info-text">
+                            <div class="alert-name">Activation Drop</div>
+                            <div class="alert-threshold">&lt;50% 7-day activation rate</div>
+                        </div>
+                        <span class="alert-channel">Slack #product</span>
+                    </div>
+                    <div class="alert-card">
+                        <div class="alert-icon alert-warning">⚠️</div>
+                        <div class="alert-info-text">
+                            <div class="alert-name">CAC Increase</div>
+                            <div class="alert-threshold">&gt;$250 blended CAC</div>
+                        </div>
+                        <span class="alert-channel">Slack #marketing</span>
+                    </div>
+                    <div class="alert-card">
+                        <div class="alert-icon alert-critical">🚨</div>
+                        <div class="alert-info-text">
+                            <div class="alert-name">Service Downtime</div>
+                            <div class="alert-threshold">&lt;99.5% uptime (5-min check)</div>
+                        </div>
+                        <span class="alert-channel">PagerDuty</span>
+                    </div>
+                    <div class="alert-card">
+                        <div class="alert-icon alert-info">💡</div>
+                        <div class="alert-info-text">
+                            <div class="alert-name">Weekly MRR Report</div>
+                            <div class="alert-threshold">Every Monday 9am</div>
+                        </div>
+                        <span class="alert-channel">Email + Slack</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Infrastructure -->
+            <div class="section">
+                <h2 class="section-title">Data Infrastructure</h2>
+
+                <div class="small-grid">
+                    <div class="data-stack-section">
+                        <div class="stack-header">Data Sources</div>
+                        <div class="stack-items">
+                            <span class="stack-item">📱 Product DB (PostgreSQL)</span>
+                            <span class="stack-item">📊 Mixpanel (Events)</span>
+                            <span class="stack-item">💳 Stripe (Payments)</span>
+                            <span class="stack-item">📧 Customer.io (Email)</span>
+                            <span class="stack-item">💬 Intercom (Support)</span>
+                        </div>
+                    </div>
+                    <div class="data-stack-section">
+                        <div class="stack-header">Data Warehouse</div>
+                        <div class="stack-items">
+                            <span class="stack-item">❄️ Snowflake</span>
+                            <span class="stack-item">🔄 Fivetran (ETL)</span>
+                            <span class="stack-item">📐 dbt (Transform)</span>
+                        </div>
+                    </div>
+                    <div class="data-stack-section">
+                        <div class="stack-header">Visualization</div>
+                        <div class="stack-items">
+                            <span class="stack-item">📈 Metabase</span>
+                            <span class="stack-item">💰 ChartMogul (SaaS)</span>
+                            <span class="stack-item">🔔 Slack Alerts</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Charts -->
+            <div class="section">
+                <h2 class="section-title">Performance Tracking (Projections)</h2>
+
+                <div class="chart-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">MRR Growth Projection</div>
+                        <div class="chart-subtitle">6-month forecast based on targets</div>
+                        <div class="chart-wrapper">
+                            <canvas id="mrrChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Target Retention Curve</div>
+                        <div class="chart-subtitle">Expected retention by day</div>
+                        <div class="chart-wrapper">
+                            <canvas id="retentionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-grid">
+                    <div class="chart-card full-width">
+                        <div class="chart-title">DAU & WAU Growth Projection</div>
+                        <div class="chart-subtitle">Weekly engagement trajectory</div>
+                        <div class="chart-wrapper">
+                            <canvas id="engagementChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Implementation Roadmap -->
+            <div class="section">
+                <h2 class="section-title">90-Day Implementation Roadmap</h2>
+
+                <div class="small-grid">
+                    <div class="small-card" style="border-top: 3px solid #10b981;">
+                        <div style="font-weight: 700; color: #10b981; margin-bottom: 0.5rem;">Phase 1: Foundation</div>
+                        <div style="font-size: 0.85rem; color: #fff; margin-bottom: 0.75rem;">Weeks 1-3</div>
+                        <ul style="color: #888; font-size: 0.85rem; margin-left: 1rem; line-height: 1.8;">
+                            <li>Audit existing tracking events</li>
+                            <li>Define NSM and AARRR metrics</li>
+                            <li>Build Executive Dashboard</li>
+                            <li>Create Data Dictionary</li>
+                        </ul>
+                    </div>
+                    <div class="small-card" style="border-top: 3px solid #059669;">
+                        <div style="font-weight: 700; color: #059669; margin-bottom: 0.5rem;">Phase 2: Expand</div>
+                        <div style="font-size: 0.85rem; color: #fff; margin-bottom: 0.75rem;">Weeks 4-6</div>
+                        <ul style="color: #888; font-size: 0.85rem; margin-left: 1rem; line-height: 1.8;">
+                            <li>Build Growth Dashboard</li>
+                            <li>Build Product Dashboard</li>
+                            <li>Build Revenue Dashboard</li>
+                            <li>Set up cohort analysis</li>
+                        </ul>
+                    </div>
+                    <div class="small-card" style="border-top: 3px solid #047857;">
+                        <div style="font-weight: 700; color: #047857; margin-bottom: 0.5rem;">Phase 3: Optimize</div>
+                        <div style="font-size: 0.85rem; color: #fff; margin-bottom: 0.75rem;">Weeks 7-12</div>
+                        <ul style="color: #888; font-size: 0.85rem; margin-left: 1rem; line-height: 1.8;">
+                            <li>Configure automated alerts</li>
+                            <li>Implement data quality tests</li>
+                            <li>Build Retention Dashboard</li>
+                            <li>Team training & adoption</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="section">
+                <h2 class="section-title">Next Steps</h2>
+
+                <div class="feature-grid">
+                    <div class="feature-card" style="border-color: #10b981;">
+                        <h4 style="color: #10b981; margin-bottom: 1rem;">This Week</h4>
+                        <ul style="color: #d4d4d4; line-height: 2;">
+                            <li>□ Set up Mixpanel project with core events</li>
+                            <li>□ Define activation event in tracking plan</li>
+                            <li>□ Connect Stripe to ChartMogul</li>
+                            <li>□ Create metric owner assignments</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4 style="color: #10b981; margin-bottom: 1rem;">This Month</h4>
+                        <ul style="color: #d4d4d4; line-height: 2;">
+                            <li>□ Complete Data Dictionary</li>
+                            <li>□ Launch Executive Dashboard</li>
+                            <li>□ Schedule weekly metrics review</li>
+                            <li>□ Set up first Slack alerts</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | metrics-dashboard-designer-v1.0.0</p>
+                <p style="margin-top: 5px;">Context Signature: metrics-dashboard-designer-v1.0.0 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        // AARRR Funnel Chart
+        const funnelCtx = document.getElementById('funnelChart');
+        if (funnelCtx) {
+            new Chart(funnelCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Acquisition', 'Activation', 'Retention', 'Referral', 'Revenue'],
+                    datasets: [{
+                        label: 'Users (90-day target)',
+                        data: [10000, 5500, 4675, 1169, 819],
+                        backgroundColor: ['#10b981', '#059669', '#047857', '#065f46', '#064e3b'],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        y: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // MRR Growth Chart
+        const mrrCtx = document.getElementById('mrrChart');
+        if (mrrCtx) {
+            new Chart(mrrCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                    datasets: [{
+                        label: 'MRR ($)',
+                        data: [17000, 34000, 51000, 68000, 85000, 102000],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#888',
+                                callback: function(value) { return '$' + value.toLocaleString(); }
+                            },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Retention Chart
+        const retentionCtx = document.getElementById('retentionChart');
+        if (retentionCtx) {
+            new Chart(retentionCtx, {
+                type: 'line',
+                data: {
+                    labels: ['D0', 'D1', 'D7', 'D14', 'D30', 'D60', 'D90'],
+                    datasets: [{
+                        label: 'Retention %',
+                        data: [100, 75, 65, 58, 50, 45, 42],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                color: '#888',
+                                callback: function(value) { return value + '%'; }
+                            },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Engagement Chart
+        const engagementCtx = document.getElementById('engagementChart');
+        if (engagementCtx) {
+            new Chart(engagementCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12'],
+                    datasets: [{
+                        label: 'DAU',
+                        data: [100, 180, 280, 400, 550, 720, 900, 1100, 1300, 1520, 1750, 2000],
+                        borderColor: '#10b981',
+                        backgroundColor: 'transparent',
+                        tension: 0.4
+                    }, {
+                        label: 'WAU',
+                        data: [300, 520, 780, 1100, 1450, 1850, 2300, 2800, 3350, 3950, 4600, 5300],
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'transparent',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { labels: { color: '#ccc' } }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

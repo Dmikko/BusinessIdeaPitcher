@@ -1,0 +1,858 @@
+<!-- ═══ SKILL CSS START ═══ -->
+<style>
+    /* Customer Feedback Framework Specific Styles */
+    .survey-card {
+        background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+        border-radius: 16px;
+        padding: 1.5rem;
+        border: 1px solid #2a2a2a;
+        border-left: 4px solid #10b981;
+    }
+
+    .survey-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+
+    .survey-type {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #ffffff;
+    }
+
+    .survey-score {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #10b981;
+    }
+
+    .survey-score-label {
+        font-size: 0.7rem;
+        color: #888;
+        text-transform: uppercase;
+    }
+
+    .survey-question {
+        background: #0a0a0a;
+        border-radius: 8px;
+        padding: 1rem;
+        border-left: 3px solid #10b981;
+        margin-bottom: 1rem;
+    }
+
+    .question-text {
+        color: #ccc;
+        font-style: italic;
+        font-size: 0.95rem;
+    }
+
+    .survey-scale {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+    }
+
+    .scale-point {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        font-weight: 600;
+    }
+
+    .scale-detractor {
+        background: rgba(239, 68, 68, 0.2);
+        color: #ef4444;
+    }
+
+    .scale-passive {
+        background: rgba(245, 158, 11, 0.2);
+        color: #f59e0b;
+    }
+
+    .scale-promoter {
+        background: rgba(16, 185, 129, 0.2);
+        color: #10b981;
+    }
+
+    .respondent-group {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .group-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .group-badge {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1rem;
+    }
+
+    .badge-promoter {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: #ffffff;
+    }
+
+    .badge-passive {
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+        color: #ffffff;
+    }
+
+    .badge-detractor {
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+        color: #ffffff;
+    }
+
+    .group-info {
+        flex: 1;
+    }
+
+    .group-name {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 1rem;
+    }
+
+    .group-range {
+        font-size: 0.8rem;
+        color: #888;
+    }
+
+    .group-percent {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #10b981;
+    }
+
+    .followup-question {
+        background: #0a0a0a;
+        border-radius: 8px;
+        padding: 0.75rem;
+        color: #ccc;
+        font-size: 0.85rem;
+        margin-top: 0.75rem;
+    }
+
+    .loop-process {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+        margin-bottom: 0.75rem;
+    }
+
+    .loop-timing {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: #ffffff;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        min-width: 100px;
+        text-align: center;
+    }
+
+    .loop-action {
+        flex: 1;
+        color: #ccc;
+        font-size: 0.9rem;
+    }
+
+    .loop-owner {
+        color: #888;
+        font-size: 0.8rem;
+        background: #0a0a0a;
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+    }
+
+    .churn-reason-row {
+        display: flex;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .churn-reason-row:last-child {
+        border-bottom: none;
+    }
+
+    .reason-name {
+        flex: 1;
+        color: #ffffff;
+        font-weight: 500;
+    }
+
+    .reason-percent {
+        width: 80px;
+        text-align: center;
+        font-weight: 700;
+        color: #10b981;
+    }
+
+    .reason-addressable {
+        width: 100px;
+        text-align: center;
+    }
+
+    .addressable-badge {
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        font-weight: 600;
+    }
+
+    .addressable-yes {
+        background: rgba(16, 185, 129, 0.2);
+        color: #10b981;
+    }
+
+    .addressable-maybe {
+        background: rgba(245, 158, 11, 0.2);
+        color: #f59e0b;
+    }
+
+    .addressable-no {
+        background: rgba(107, 114, 128, 0.2);
+        color: #9ca3af;
+    }
+
+    .reason-action {
+        flex: 1;
+        color: #888;
+        font-size: 0.85rem;
+        text-align: right;
+    }
+
+    .rice-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+    }
+
+    .rice-table th,
+    .rice-table td {
+        padding: 0.75rem;
+        text-align: center;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .rice-table th {
+        background: #1a1a1a;
+        color: #10b981;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .rice-table td {
+        color: #ccc;
+        font-size: 0.9rem;
+    }
+
+    .rice-table td:first-child {
+        text-align: left;
+        color: #ffffff;
+        font-weight: 500;
+    }
+
+    .rice-score {
+        font-weight: 700;
+        color: #10b981;
+    }
+
+    .interview-card {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .interview-type {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .interview-count {
+        color: #10b981;
+        font-size: 0.85rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .interview-questions {
+        background: #0a0a0a;
+        border-radius: 8px;
+        padding: 0.75rem;
+    }
+
+    .interview-question {
+        color: #888;
+        font-size: 0.85rem;
+        padding: 0.25rem 0;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .interview-question:last-child {
+        border-bottom: none;
+    }
+
+    .theme-card {
+        background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .theme-name {
+        font-weight: 700;
+        color: #ffffff;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .theme-metrics {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .theme-metric {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .theme-metric-value {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #10b981;
+    }
+
+    .theme-metric-label {
+        font-size: 0.7rem;
+        color: #888;
+        text-transform: uppercase;
+    }
+
+    .theme-trend {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    .trend-up {
+        color: #10b981;
+    }
+
+    .trend-down {
+        color: #ef4444;
+    }
+
+    .trend-stable {
+        color: #888;
+    }
+
+    .theme-action {
+        background: #0a0a0a;
+        border-radius: 6px;
+        padding: 0.5rem 0.75rem;
+        color: #ccc;
+        font-size: 0.8rem;
+        margin-top: 0.75rem;
+    }
+
+    @media (max-width: 768px) {
+        .churn-reason-row {
+            flex-direction: column;
+            gap: 0.5rem;
+            text-align: center;
+        }
+
+        .reason-name,
+        .reason-action {
+            text-align: center;
+        }
+
+        .rice-table {
+            font-size: 0.8rem;
+        }
+
+        .rice-table th,
+        .rice-table td {
+            padding: 0.5rem;
+        }
+    }
+</style>
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<div class="report-container">
+    <!-- Header Section -->
+    <header class="report-header">
+        <div class="header-content">
+            <div class="header-badge">VOICE OF CUSTOMER</div>
+            <h1 class="report-title">{{COMPANY_NAME}}</h1>
+            <p class="report-subtitle">{{FEEDBACK_MISSION}}</p>
+        </div>
+        <div class="header-meta">
+            <div class="meta-item">
+                <span class="meta-label">Generated</span>
+                <span class="meta-value">{{GENERATION_DATE}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">NPS Score</span>
+                <span class="meta-value">{{NPS_SCORE}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">CSAT Score</span>
+                <span class="meta-value">{{CSAT_SCORE}}</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Executive Summary Section -->
+    <section class="content-section">
+        <h2 class="section-title">Feedback Strategy Overview</h2>
+
+        <p class="section-description">{{STRATEGY_OVERVIEW}}</p>
+
+        <div class="grid-4">
+            <div class="metric-card">
+                <div class="metric-label">NPS Score</div>
+                <div class="metric-value">{{NPS_SCORE}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">CSAT Score</div>
+                <div class="metric-value">{{CSAT_SCORE}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">CES Score</div>
+                <div class="metric-value">{{CES_SCORE}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Monthly Interviews</div>
+                <div class="metric-value">{{INTERVIEW_COUNT}}</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NPS Section -->
+    <section class="content-section">
+        <h2 class="section-title">Net Promoter Score (NPS)</h2>
+
+        <div class="survey-card">
+            <div class="survey-header">
+                <div class="survey-type">NPS Survey</div>
+                <div>
+                    <div class="survey-score">{{NPS_SCORE}}</div>
+                    <div class="survey-score-label">Current NPS</div>
+                </div>
+            </div>
+
+            <div class="survey-question">
+                <div class="question-text">"On a scale of 0-10, how likely are you to recommend {{COMPANY_NAME}} to a friend or colleague?"</div>
+                <div class="survey-scale">
+                    <div class="scale-point scale-detractor">0</div>
+                    <div class="scale-point scale-detractor">1</div>
+                    <div class="scale-point scale-detractor">2</div>
+                    <div class="scale-point scale-detractor">3</div>
+                    <div class="scale-point scale-detractor">4</div>
+                    <div class="scale-point scale-detractor">5</div>
+                    <div class="scale-point scale-detractor">6</div>
+                    <div class="scale-point scale-passive">7</div>
+                    <div class="scale-point scale-passive">8</div>
+                    <div class="scale-point scale-promoter">9</div>
+                    <div class="scale-point scale-promoter">10</div>
+                </div>
+            </div>
+
+            <p style="color: #888; font-size: 0.85rem;">Cadence: {{NPS_CADENCE}}</p>
+        </div>
+
+        <!-- NPS Breakdown -->
+        <h3 class="subsection-title">NPS Distribution & Follow-ups</h3>
+        <div class="grid-3">
+            {{NPS_GROUPS}}
+        </div>
+
+        <!-- NPS Chart -->
+        <div class="chart-container">
+            <canvas id="npsChart"></canvas>
+        </div>
+    </section>
+
+    <!-- CSAT & CES Section -->
+    <section class="content-section">
+        <h2 class="section-title">CSAT & CES Surveys</h2>
+
+        <div class="grid-2">
+            <div class="survey-card">
+                <div class="survey-header">
+                    <div class="survey-type">CSAT Survey</div>
+                    <div>
+                        <div class="survey-score">{{CSAT_SCORE}}</div>
+                        <div class="survey-score-label">Satisfaction</div>
+                    </div>
+                </div>
+                <div class="survey-question">
+                    <div class="question-text">"How satisfied are you with {{CSAT_TOUCHPOINT}}?"</div>
+                </div>
+                <p style="color: #888; font-size: 0.85rem;">Touchpoints: {{CSAT_TOUCHPOINTS}}</p>
+            </div>
+
+            <div class="survey-card">
+                <div class="survey-header">
+                    <div class="survey-type">CES Survey</div>
+                    <div>
+                        <div class="survey-score">{{CES_SCORE}}</div>
+                        <div class="survey-score-label">Effort Score</div>
+                    </div>
+                </div>
+                <div class="survey-question">
+                    <div class="question-text">"How easy was it to {{CES_TOUCHPOINT}}?"</div>
+                </div>
+                <p style="color: #888; font-size: 0.85rem;">Touchpoints: {{CES_TOUCHPOINTS}}</p>
+            </div>
+        </div>
+
+        <!-- CSAT/CES Trends Chart -->
+        <div class="chart-container">
+            <canvas id="trendsChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Exit Surveys Section -->
+    <section class="content-section">
+        <h2 class="section-title">Exit Survey Analysis</h2>
+
+        <p class="section-description">{{EXIT_OVERVIEW}}</p>
+
+        <!-- Churn Reasons -->
+        <h3 class="subsection-title">Churn Reasons Breakdown</h3>
+        <div class="info-card">
+            <div class="churn-reason-row" style="font-weight: 600; color: #888; font-size: 0.8rem;">
+                <span class="reason-name">Reason</span>
+                <span class="reason-percent">%</span>
+                <span class="reason-addressable">Addressable</span>
+                <span class="reason-action">Action Plan</span>
+            </div>
+            {{CHURN_REASON_ROWS}}
+        </div>
+
+        <!-- Churn Reasons Chart -->
+        <div class="chart-container">
+            <canvas id="churnChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Close the Loop Section -->
+    <section class="content-section">
+        <h2 class="section-title">Close the Loop Process</h2>
+
+        <p class="section-description">{{LOOP_OVERVIEW}}</p>
+
+        <h3 class="subsection-title">Detractor Response Process</h3>
+        {{DETRACTOR_PROCESS}}
+
+        <h3 class="subsection-title">Passive Response Process</h3>
+        {{PASSIVE_PROCESS}}
+
+        <h3 class="subsection-title">Promoter Response Process</h3>
+        {{PROMOTER_PROCESS}}
+    </section>
+
+    <!-- User Interviews Section -->
+    <section class="content-section">
+        <h2 class="section-title">User Interview Program</h2>
+
+        <p class="section-description">{{INTERVIEW_OVERVIEW}}</p>
+
+        <div class="grid-3">
+            {{INTERVIEW_CARDS}}
+        </div>
+    </section>
+
+    <!-- Feature Requests Section -->
+    <section class="content-section">
+        <h2 class="section-title">Feature Request Management</h2>
+
+        <h3 class="subsection-title">Collection Channels</h3>
+        <div class="grid-2">
+            {{FEATURE_CHANNELS}}
+        </div>
+
+        <h3 class="subsection-title">RICE Prioritization</h3>
+        <table class="rice-table">
+            <thead>
+                <tr>
+                    <th>Feature Request</th>
+                    <th>Reach</th>
+                    <th>Impact</th>
+                    <th>Confidence</th>
+                    <th>Effort</th>
+                    <th>RICE Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{RICE_TABLE_ROWS}}
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Feedback Themes Section -->
+    <section class="content-section">
+        <h2 class="section-title">Feedback Themes Analysis</h2>
+
+        <div class="grid-3">
+            {{THEME_CARDS}}
+        </div>
+
+        <!-- Themes Chart -->
+        <div class="chart-container">
+            <canvas id="themesChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Implementation Roadmap -->
+    <section class="content-section">
+        <h2 class="section-title">90-Day Implementation Roadmap</h2>
+
+        <div class="timeline">
+            {{IMPLEMENTATION_TIMELINE}}
+        </div>
+    </section>
+
+    <!-- Report Footer -->
+    <footer class="report-footer">
+        <div class="footer-content">
+            <p class="footer-brand">Generated by StratArts Customer Feedback Framework</p>
+            <p class="footer-disclaimer">This framework provides systematic guidance for Voice of Customer programs. Adjust survey cadence and questions based on response rates and business needs.</p>
+        </div>
+    </footer>
+</div>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // NPS Distribution Chart
+    const npsCtx = document.getElementById('npsChart');
+    if (npsCtx) {
+        new Chart(npsCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Promoters (9-10)', 'Passives (7-8)', 'Detractors (0-6)'],
+                datasets: [{
+                    data: [45, 35, 20],
+                    backgroundColor: [
+                        '#10b981',
+                        '#f59e0b',
+                        '#ef4444'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'NPS Distribution',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        position: 'right',
+                        labels: { color: '#ccc', padding: 15 }
+                    }
+                }
+            }
+        });
+    }
+
+    // CSAT/CES Trends Chart
+    const trendsCtx = document.getElementById('trendsChart');
+    if (trendsCtx) {
+        new Chart(trendsCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'CSAT %',
+                    data: [82, 84, 85, 87, 86, 89],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    yAxisID: 'y'
+                }, {
+                    label: 'CES (1-5)',
+                    data: [3.8, 3.9, 4.0, 4.1, 4.0, 4.2],
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'transparent',
+                    tension: 0.4,
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        min: 0,
+                        max: 100,
+                        ticks: {
+                            color: '#888',
+                            callback: function(value) { return value + '%'; }
+                        },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        min: 1,
+                        max: 5,
+                        ticks: { color: '#888' },
+                        grid: { drawOnChartArea: false }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'CSAT & CES Trends',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+
+    // Churn Reasons Chart
+    const churnCtx = document.getElementById('churnChart');
+    if (churnCtx) {
+        new Chart(churnCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Low Usage', 'Too Expensive', 'Missing Features', 'Found Alternative', 'Too Complicated', 'Poor Support'],
+                datasets: [{
+                    label: 'Churn Reasons %',
+                    data: [28, 22, 18, 14, 10, 8],
+                    backgroundColor: function(context) {
+                        const value = context.raw;
+                        if (value >= 20) return '#ef4444';
+                        if (value >= 15) return '#f59e0b';
+                        return '#10b981';
+                    },
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 35,
+                        ticks: {
+                            color: '#888',
+                            callback: function(value) { return value + '%'; }
+                        },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    y: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Churn Reasons Distribution',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // Feedback Themes Chart
+    const themesCtx = document.getElementById('themesChart');
+    if (themesCtx) {
+        new Chart(themesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Feature Requests', 'Usability', 'Performance', 'Pricing', 'Support', 'Onboarding'],
+                datasets: [{
+                    label: 'Mentions',
+                    data: [145, 98, 76, 64, 52, 38],
+                    backgroundColor: '#10b981',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Feedback Themes by Mention Count',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+});
+</script>
+<!-- ═══ SKILL JS END ═══ -->

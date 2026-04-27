@@ -1,0 +1,798 @@
+<!-- ═══ SKILL CSS START ═══ -->
+<style>
+    /* Content Marketing Strategist Specific Styles */
+    .content-pillar {
+        background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+        border-radius: 16px;
+        padding: 1.5rem;
+        border: 1px solid #2a2a2a;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .content-pillar::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #10b981, #059669);
+    }
+
+    .pillar-icon {
+        width: 48px;
+        height: 48px;
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .pillar-title {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+    }
+
+    .pillar-description {
+        color: #888;
+        font-size: 0.875rem;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+    }
+
+    .pillar-topics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .topic-tag {
+        background: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.5rem;
+        margin: 1.5rem 0;
+    }
+
+    .calendar-header {
+        text-align: center;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #888;
+        text-transform: uppercase;
+        padding: 0.5rem;
+    }
+
+    .calendar-day {
+        aspect-ratio: 1;
+        background: #1a1a1a;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        color: #666;
+        border: 1px solid #2a2a2a;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .calendar-day:hover {
+        border-color: #10b981;
+    }
+
+    .calendar-day.has-content {
+        background: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.3);
+        color: #ccc;
+    }
+
+    .calendar-day.has-content::after {
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        width: 6px;
+        height: 6px;
+        background: #10b981;
+        border-radius: 50%;
+    }
+
+    .calendar-day.highlight {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: #ffffff;
+        border-color: transparent;
+    }
+
+    .content-type-card {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .type-icon {
+        width: 40px;
+        height: 40px;
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+    }
+
+    .type-info {
+        flex: 1;
+    }
+
+    .type-name {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .type-frequency {
+        color: #10b981;
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+
+    .type-description {
+        color: #888;
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+
+    .distribution-channel {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        border: 1px solid #2a2a2a;
+        margin-bottom: 0.75rem;
+    }
+
+    .channel-icon {
+        font-size: 1.5rem;
+        width: 40px;
+        text-align: center;
+    }
+
+    .channel-info {
+        flex: 1;
+    }
+
+    .channel-name {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 0.95rem;
+    }
+
+    .channel-purpose {
+        color: #888;
+        font-size: 0.8rem;
+    }
+
+    .channel-priority {
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .priority-high {
+        background: rgba(16, 185, 129, 0.2);
+        color: #10b981;
+    }
+
+    .priority-medium {
+        background: rgba(245, 158, 11, 0.2);
+        color: #f59e0b;
+    }
+
+    .priority-low {
+        background: rgba(107, 114, 128, 0.2);
+        color: #9ca3af;
+    }
+
+    .content-ideas-list {
+        background: #1a1a1a;
+        border-radius: 12px;
+        border: 1px solid #2a2a2a;
+        overflow: hidden;
+    }
+
+    .idea-item {
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid #2a2a2a;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .idea-item:last-child {
+        border-bottom: none;
+    }
+
+    .idea-number {
+        width: 28px;
+        height: 28px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 0.8rem;
+        flex-shrink: 0;
+    }
+
+    .idea-content {
+        flex: 1;
+    }
+
+    .idea-title {
+        color: #ffffff;
+        font-weight: 500;
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .idea-meta {
+        display: flex;
+        gap: 1rem;
+        font-size: 0.75rem;
+        color: #888;
+    }
+
+    .funnel-stage {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+        text-align: center;
+    }
+
+    .stage-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #888;
+        margin-bottom: 0.5rem;
+    }
+
+    .stage-name {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #10b981;
+        margin-bottom: 0.5rem;
+    }
+
+    .stage-content-types {
+        font-size: 0.85rem;
+        color: #ccc;
+    }
+
+    .kpi-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 0;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .kpi-row:last-child {
+        border-bottom: none;
+    }
+
+    .kpi-label {
+        color: #ccc;
+        font-size: 0.95rem;
+    }
+
+    .kpi-value {
+        font-weight: 700;
+        color: #10b981;
+        font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+        .calendar-grid {
+            display: none;
+        }
+
+        .content-type-card {
+            flex-direction: column;
+        }
+
+        .distribution-channel {
+            flex-wrap: wrap;
+        }
+    }
+</style>
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<div class="report-container">
+    <!-- Header Section -->
+    <header class="report-header">
+        <div class="header-content">
+            <div class="header-badge">CONTENT STRATEGY</div>
+            <h1 class="report-title">{{COMPANY_NAME}}</h1>
+            <p class="report-subtitle">{{CONTENT_MISSION_STATEMENT}}</p>
+        </div>
+        <div class="header-meta">
+            <div class="meta-item">
+                <span class="meta-label">Generated</span>
+                <span class="meta-value">{{GENERATION_DATE}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Planning Horizon</span>
+                <span class="meta-value">{{PLANNING_HORIZON}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Primary Goal</span>
+                <span class="meta-value">{{PRIMARY_GOAL}}</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content Strategy Overview -->
+    <section class="content-section">
+        <h2 class="section-title">Content Strategy Overview</h2>
+
+        <p class="section-description">{{STRATEGY_OVERVIEW}}</p>
+
+        <!-- Audience Alignment -->
+        <div class="grid-3">
+            <div class="metric-card">
+                <div class="metric-label">Primary Audience</div>
+                <div class="metric-value">{{PRIMARY_AUDIENCE}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Content Goal</div>
+                <div class="metric-value">{{CONTENT_GOAL}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Publishing Cadence</div>
+                <div class="metric-value">{{PUBLISHING_CADENCE}}</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Pillars Section -->
+    <section class="content-section">
+        <h2 class="section-title">Content Pillars</h2>
+
+        <p class="section-description">{{PILLARS_DESCRIPTION}}</p>
+
+        <div class="grid-2">
+            {{CONTENT_PILLARS}}
+        </div>
+
+        <!-- Pillar Distribution Chart -->
+        <div class="chart-container">
+            <canvas id="pillarDistributionChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Content Types & Formats -->
+    <section class="content-section">
+        <h2 class="section-title">Content Types & Formats</h2>
+
+        <div class="grid-2">
+            {{CONTENT_TYPE_CARDS}}
+        </div>
+
+        <!-- Content Mix Chart -->
+        <div class="chart-container">
+            <canvas id="contentMixChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Editorial Calendar -->
+    <section class="content-section">
+        <h2 class="section-title">Editorial Calendar</h2>
+
+        <p class="section-description">{{CALENDAR_DESCRIPTION}}</p>
+
+        <!-- Monthly View -->
+        <h3 class="subsection-title">{{CALENDAR_MONTH}} Overview</h3>
+        <div class="calendar-grid">
+            <div class="calendar-header">Sun</div>
+            <div class="calendar-header">Mon</div>
+            <div class="calendar-header">Tue</div>
+            <div class="calendar-header">Wed</div>
+            <div class="calendar-header">Thu</div>
+            <div class="calendar-header">Fri</div>
+            <div class="calendar-header">Sat</div>
+            {{CALENDAR_DAYS}}
+        </div>
+
+        <!-- Weekly Publishing Schedule -->
+        <h3 class="subsection-title">Weekly Publishing Schedule</h3>
+        <div class="highlight-box">
+            {{WEEKLY_SCHEDULE}}
+        </div>
+    </section>
+
+    <!-- Content Ideas Bank -->
+    <section class="content-section">
+        <h2 class="section-title">Content Ideas Bank</h2>
+
+        <h3 class="subsection-title">Top Priority Content Ideas</h3>
+        <div class="content-ideas-list">
+            {{CONTENT_IDEAS}}
+        </div>
+    </section>
+
+    <!-- Content Funnel Mapping -->
+    <section class="content-section">
+        <h2 class="section-title">Content Funnel Mapping</h2>
+
+        <p class="section-description">{{FUNNEL_DESCRIPTION}}</p>
+
+        <div class="grid-4">
+            <div class="funnel-stage">
+                <div class="stage-label">Top of Funnel</div>
+                <div class="stage-name">Awareness</div>
+                <div class="stage-content-types">{{TOFU_CONTENT}}</div>
+            </div>
+            <div class="funnel-stage">
+                <div class="stage-label">Middle of Funnel</div>
+                <div class="stage-name">Consideration</div>
+                <div class="stage-content-types">{{MOFU_CONTENT}}</div>
+            </div>
+            <div class="funnel-stage">
+                <div class="stage-label">Bottom of Funnel</div>
+                <div class="stage-name">Decision</div>
+                <div class="stage-content-types">{{BOFU_CONTENT}}</div>
+            </div>
+            <div class="funnel-stage">
+                <div class="stage-label">Post-Purchase</div>
+                <div class="stage-name">Retention</div>
+                <div class="stage-content-types">{{RETENTION_CONTENT}}</div>
+            </div>
+        </div>
+
+        <!-- Funnel Content Distribution Chart -->
+        <div class="chart-container">
+            <canvas id="funnelChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Distribution Strategy -->
+    <section class="content-section">
+        <h2 class="section-title">Distribution Strategy</h2>
+
+        <h3 class="subsection-title">Primary Channels</h3>
+        {{DISTRIBUTION_CHANNELS}}
+
+        <!-- Channel Performance Chart -->
+        <div class="chart-container">
+            <canvas id="channelChart"></canvas>
+        </div>
+    </section>
+
+    <!-- KPIs & Measurement -->
+    <section class="content-section">
+        <h2 class="section-title">KPIs & Measurement</h2>
+
+        <div class="grid-2">
+            <div class="info-card">
+                <h4>Traffic Metrics</h4>
+                <div class="kpi-row">
+                    <span class="kpi-label">Monthly Organic Traffic Goal</span>
+                    <span class="kpi-value">{{TRAFFIC_GOAL}}</span>
+                </div>
+                <div class="kpi-row">
+                    <span class="kpi-label">Avg. Time on Page</span>
+                    <span class="kpi-value">{{TIME_ON_PAGE_GOAL}}</span>
+                </div>
+                <div class="kpi-row">
+                    <span class="kpi-label">Bounce Rate Target</span>
+                    <span class="kpi-value">{{BOUNCE_RATE_TARGET}}</span>
+                </div>
+            </div>
+            <div class="info-card">
+                <h4>Engagement Metrics</h4>
+                <div class="kpi-row">
+                    <span class="kpi-label">Email Subscribers Goal</span>
+                    <span class="kpi-value">{{EMAIL_GOAL}}</span>
+                </div>
+                <div class="kpi-row">
+                    <span class="kpi-label">Social Engagement Rate</span>
+                    <span class="kpi-value">{{SOCIAL_ENGAGEMENT_GOAL}}</span>
+                </div>
+                <div class="kpi-row">
+                    <span class="kpi-label">Content Shares Target</span>
+                    <span class="kpi-value">{{SHARES_TARGET}}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Tracking Chart -->
+        <div class="chart-container">
+            <canvas id="performanceChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Implementation Timeline -->
+    <section class="content-section">
+        <h2 class="section-title">Implementation Timeline</h2>
+
+        <div class="timeline">
+            {{IMPLEMENTATION_TIMELINE}}
+        </div>
+    </section>
+
+    <!-- Report Footer -->
+    <footer class="report-footer">
+        <div class="footer-content">
+            <p class="footer-brand">Generated by StratArts Content Marketing Strategist</p>
+            <p class="footer-disclaimer">This content strategy provides a framework for content planning. Adjust based on performance data and audience feedback.</p>
+        </div>
+    </footer>
+</div>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Pillar Distribution Chart
+    const pillarCtx = document.getElementById('pillarDistributionChart');
+    if (pillarCtx) {
+        new Chart(pillarCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Educational', 'Thought Leadership', 'Product/Solutions', 'Community/Culture'],
+                datasets: [{
+                    data: [35, 25, 25, 15],
+                    backgroundColor: [
+                        '#10b981',
+                        '#059669',
+                        '#047857',
+                        '#065f46'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Content Pillar Distribution',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        position: 'right',
+                        labels: { color: '#ccc', padding: 15 }
+                    }
+                }
+            }
+        });
+    }
+
+    // Content Mix Chart
+    const mixCtx = document.getElementById('contentMixChart');
+    if (mixCtx) {
+        new Chart(mixCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Blog Posts', 'Videos', 'Newsletters', 'Social Posts', 'Podcasts', 'Guides/eBooks'],
+                datasets: [{
+                    label: 'Monthly Volume',
+                    data: [8, 4, 4, 20, 2, 1],
+                    backgroundColor: '#10b981',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Monthly Content Mix by Type',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // Funnel Chart
+    const funnelCtx = document.getElementById('funnelChart');
+    if (funnelCtx) {
+        new Chart(funnelCtx, {
+            type: 'bar',
+            data: {
+                labels: ['TOFU - Awareness', 'MOFU - Consideration', 'BOFU - Decision', 'Retention'],
+                datasets: [{
+                    label: 'Content Allocation %',
+                    data: [40, 30, 20, 10],
+                    backgroundColor: [
+                        '#10b981',
+                        '#059669',
+                        '#047857',
+                        '#065f46'
+                    ],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 50,
+                        ticks: {
+                            color: '#888',
+                            callback: function(value) { return value + '%'; }
+                        },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    y: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Content Distribution by Funnel Stage',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // Channel Chart
+    const channelCtx = document.getElementById('channelChart');
+    if (channelCtx) {
+        new Chart(channelCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Website/Blog', 'Email', 'LinkedIn', 'Twitter', 'YouTube', 'Community'],
+                datasets: [{
+                    label: 'Effort Investment',
+                    data: [9, 8, 7, 6, 5, 4],
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                    borderColor: '#10b981',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#10b981'
+                }, {
+                    label: 'Expected ROI',
+                    data: [8, 9, 7, 5, 6, 7],
+                    backgroundColor: 'rgba(5, 150, 105, 0.2)',
+                    borderColor: '#059669',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#059669'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: { color: '#888', stepSize: 2 },
+                        grid: { color: '#2a2a2a' },
+                        pointLabels: { color: '#ccc', font: { size: 11 } }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Channel Investment vs Expected ROI',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+
+    // Performance Tracking Chart
+    const perfCtx = document.getElementById('performanceChart');
+    if (perfCtx) {
+        new Chart(perfCtx, {
+            type: 'line',
+            data: {
+                labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                datasets: [{
+                    label: 'Organic Traffic',
+                    data: [1000, 1500, 2200, 3000, 4200, 5500],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: 'Email Subscribers',
+                    data: [100, 180, 290, 420, 580, 800],
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'transparent',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Projected Growth Trajectory',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+<!-- ═══ SKILL JS END ═══ -->

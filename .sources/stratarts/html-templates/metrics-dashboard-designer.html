@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{BUSINESS_NAME}} - Metrics Dashboard Strategy</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        /* === CANONICAL HEADER === */
+        header {
+            background: #0a0a0a;
+            padding: 0;
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .header-text h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-text .subtitle {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .header-meta {
+            text-align: right;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .header-meta .date { font-size: 1rem; margin-bottom: 0.25rem; }
+        .header-meta .version { font-size: 0.875rem; opacity: 0.8; }
+
+        /* === CANONICAL SCORE BANNER === */
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            padding: 2rem 4rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .primary-score {
+            text-align: center;
+            padding-right: 3rem;
+            border-right: 1px solid #333;
+        }
+
+        .primary-score .score-value {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #10b981;
+            line-height: 1;
+        }
+
+        .primary-score .score-label {
+            font-size: 0.875rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
+        }
+
+        .score-details {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-item .value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .score-item .label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .verdict-box {
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .verdict-box .verdict-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 0.25rem;
+        }
+
+        .verdict-box .verdict-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* === MAIN CONTENT === */
+        main {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        section h2 {
+            font-size: 1.5rem;
+            color: #10b981;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #10b981;
+        }
+
+        section h3 {
+            font-size: 1.125rem;
+            color: #e0e0e0;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        /* === EXECUTIVE SUMMARY === */
+        .summary-text {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid #10b981;
+            margin-bottom: 2rem;
+        }
+
+        .summary-text p {
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+
+        .summary-text p:last-child { margin-bottom: 0; }
+
+        /* === NORTH STAR METRIC === */
+        .nsm-container {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #10b981;
+        }
+
+        .nsm-value {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #10b981;
+        }
+
+        .nsm-label {
+            font-size: 1.25rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .nsm-description {
+            color: #888;
+            font-size: 0.9rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .nsm-drivers {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #333;
+        }
+
+        .driver-item {
+            text-align: center;
+        }
+
+        .driver-item .driver-value {
+            font-size: 1.5rem;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .driver-item .driver-label {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* === AARRR FUNNEL === */
+        .aarrr-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+        }
+
+        .aarrr-stage {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border-top: 4px solid #10b981;
+        }
+
+        .stage-letter {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+        }
+
+        .stage-name {
+            font-size: 0.9rem;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .stage-metric {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .stage-target {
+            font-size: 0.75rem;
+            color: #888;
+            margin-top: 0.25rem;
+        }
+
+        .stage-details {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #333;
+            text-align: left;
+        }
+
+        .stage-details li {
+            font-size: 0.8rem;
+            color: #ccc;
+            padding: 0.25rem 0;
+        }
+
+        /* === DASHBOARD CARDS === */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .dashboard-card {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #10b981;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-name {
+            font-size: 1.125rem;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .dashboard-audience {
+            font-size: 0.75rem;
+            background: #0f0f0f;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            color: #888;
+        }
+
+        .dashboard-purpose {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-metrics {
+            list-style: none;
+        }
+
+        .dashboard-metrics li {
+            font-size: 0.85rem;
+            color: #888;
+            padding: 0.25rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dashboard-metrics li::before {
+            content: '📊';
+            font-size: 0.75rem;
+        }
+
+        /* === METRICS TABLE === */
+        .metrics-table-container {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+        }
+
+        .metrics-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .metrics-table th {
+            background: #0f0f0f;
+            color: #10b981;
+            padding: 1rem;
+            text-align: left;
+            font-size: 0.875rem;
+        }
+
+        .metrics-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #333;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .metrics-table .metric-name {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .metrics-table .current-value {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .metrics-table .target-value {
+            color: #888;
+        }
+
+        .category-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .category-badge.acquisition { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .category-badge.activation { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .category-badge.retention { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .category-badge.referral { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
+        .category-badge.revenue { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+
+        /* === ALERTS TABLE === */
+        .alerts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .alert-card {
+            background: #1a1a1a;
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .alert-info {
+            flex: 1;
+        }
+
+        .alert-metric {
+            color: #fff;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .alert-threshold {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .alert-channel {
+            font-size: 0.75rem;
+            background: #0f0f0f;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            color: #10b981;
+        }
+
+        /* === DATA STACK === */
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .stack-section {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .stack-section h4 {
+            color: #10b981;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .stack-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #333;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .stack-item:last-child { border-bottom: none; }
+
+        .stack-primary {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        /* === CHARTS === */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-container {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .chart-container h4 {
+            color: #10b981;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+        }
+
+        /* === ROADMAP === */
+        .roadmap-phases {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .phase-card {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 12px;
+            border-top: 4px solid #10b981;
+        }
+
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .phase-name {
+            font-size: 1.125rem;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .phase-timing {
+            font-size: 0.8rem;
+            color: #888;
+            background: #0f0f0f;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+        }
+
+        .phase-goal {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .phase-tasks {
+            list-style: none;
+        }
+
+        .phase-tasks li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #333;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .phase-tasks li:last-child { border-bottom: none; }
+
+        .phase-tasks li::before {
+            content: '☐';
+            color: #10b981;
+            margin-right: 0.5rem;
+        }
+
+        /* === CANONICAL FOOTER === */
+        footer {
+            background: #0a0a0a;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem 4rem;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .footer-meta {
+            color: #666;
+            font-size: 0.875rem;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 1200px) {
+            .aarrr-grid { grid-template-columns: repeat(3, 1fr); }
+            .roadmap-phases { grid-template-columns: 1fr; }
+            .stack-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; padding: 2rem; }
+            .header-meta { text-align: left; margin-top: 1rem; }
+            .score-container { grid-template-columns: 1fr; text-align: center; }
+            .primary-score { border-right: none; padding-right: 0; padding-bottom: 1rem; border-bottom: 1px solid #333; }
+            .score-details { flex-wrap: wrap; }
+            main { padding: 2rem; }
+            .aarrr-grid { grid-template-columns: 1fr; }
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .nsm-drivers { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-text">
+                <h1>{{BUSINESS_NAME}}</h1>
+                <div class="subtitle">Metrics Dashboard Strategy</div>
+            </div>
+            <div class="header-meta">
+                <div class="date">{{DATE}}</div>
+                <div class="version">StratArts v1.0</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="score-banner">
+        <div class="score-container">
+            <div class="primary-score">
+                <div class="score-value">{{DASHBOARD_COUNT}}</div>
+                <div class="score-label">Dashboards</div>
+            </div>
+            <div class="score-details">
+                <div class="score-item">
+                    <div class="value">{{METRIC_COUNT}}</div>
+                    <div class="label">Metrics</div>
+                </div>
+                <div class="score-item">
+                    <div class="value">{{ALERT_COUNT}}</div>
+                    <div class="label">Alerts</div>
+                </div>
+                <div class="score-item">
+                    <div class="value">{{MRR_VALUE}}</div>
+                    <div class="label">MRR</div>
+                </div>
+                <div class="score-item">
+                    <div class="value">{{LTV_CAC}}</div>
+                    <div class="label">LTV:CAC</div>
+                </div>
+            </div>
+            <div class="verdict-box">
+                <div class="verdict-label">Framework</div>
+                <div class="verdict-text">{{FRAMEWORK_TYPE}}</div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <!-- Executive Summary -->
+        <section id="executive-summary">
+            <h2>Executive Summary</h2>
+            <div class="summary-text">
+                {{EXECUTIVE_SUMMARY}}
+            </div>
+        </section>
+
+        <!-- North Star Metric -->
+        <section id="north-star">
+            <h2>North Star Metric</h2>
+            <div class="nsm-container">
+                <div class="nsm-value">{{NSM_VALUE}}</div>
+                <div class="nsm-label">{{NSM_NAME}}</div>
+                <div class="nsm-description">{{NSM_DESCRIPTION}}</div>
+                <div class="nsm-drivers">
+                    {{NSM_DRIVERS}}
+                </div>
+            </div>
+        </section>
+
+        <!-- AARRR Framework -->
+        <section id="aarrr">
+            <h2>AARRR Pirate Metrics</h2>
+            <div class="aarrr-grid">
+                {{AARRR_STAGES}}
+            </div>
+        </section>
+
+        <!-- Dashboard Architecture -->
+        <section id="dashboards">
+            <h2>Dashboard Architecture</h2>
+            <div class="dashboard-grid">
+                {{DASHBOARD_CARDS}}
+            </div>
+        </section>
+
+        <!-- Metrics Dictionary -->
+        <section id="metrics">
+            <h2>Key Metrics Dictionary</h2>
+            <div class="metrics-table-container">
+                <table class="metrics-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Category</th>
+                            <th>Current</th>
+                            <th>Target</th>
+                            <th>Owner</th>
+                            <th>Source</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{METRICS_TABLE_ROWS}}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Alerts & Monitoring -->
+        <section id="alerts">
+            <h2>Alerts & Monitoring</h2>
+            <div class="alerts-grid">
+                {{ALERT_CARDS}}
+            </div>
+        </section>
+
+        <!-- Data Infrastructure -->
+        <section id="data-stack">
+            <h2>Data Infrastructure</h2>
+            <div class="stack-grid">
+                {{DATA_STACK_SECTIONS}}
+            </div>
+        </section>
+
+        <!-- Charts -->
+        <section id="charts">
+            <h2>Performance Visualization</h2>
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <h4>AARRR Funnel</h4>
+                    <div class="chart-wrapper">
+                        <canvas id="funnelChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h4>MRR Growth</h4>
+                    <div class="chart-wrapper">
+                        <canvas id="mrrChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h4>Retention Curve</h4>
+                    <div class="chart-wrapper">
+                        <canvas id="retentionChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h4>Engagement Metrics</h4>
+                    <div class="chart-wrapper">
+                        <canvas id="engagementChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Implementation Roadmap -->
+        <section id="roadmap">
+            <h2>90-Day Implementation Roadmap</h2>
+            <div class="roadmap-phases">
+                {{ROADMAP_PHASES}}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">StratArts - Business Strategy Skills Library</div>
+            <div class="footer-meta">Metrics Dashboard Designer &bull; {{DATE}}</div>
+        </div>
+    </footer>
+
+    <script>
+        // Chart.js defaults for dark theme
+        Chart.defaults.color = '#888';
+        Chart.defaults.borderColor = '#333';
+
+        // AARRR Funnel Chart
+        new Chart(document.getElementById('funnelChart'), {
+            type: 'bar',
+            data: {
+                labels: {{FUNNEL_LABELS}},
+                datasets: [{
+                    label: 'Users',
+                    data: {{FUNNEL_DATA}},
+                    backgroundColor: ['#10b981', '#14b8a6', '#2dd4bf', '#5eead4', '#99f6e4'],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: { beginAtZero: true, grid: { color: '#333' } },
+                    y: { grid: { display: false } }
+                }
+            }
+        });
+
+        // MRR Growth Chart
+        new Chart(document.getElementById('mrrChart'), {
+            type: 'line',
+            data: {
+                labels: {{MRR_LABELS}},
+                datasets: [{
+                    label: 'MRR',
+                    data: {{MRR_DATA}},
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#333' }, ticks: { callback: value => '$' + value.toLocaleString() } },
+                    x: { grid: { color: '#333' } }
+                }
+            }
+        });
+
+        // Retention Curve Chart
+        new Chart(document.getElementById('retentionChart'), {
+            type: 'line',
+            data: {
+                labels: {{RETENTION_LABELS}},
+                datasets: [{
+                    label: 'Retention %',
+                    data: {{RETENTION_DATA}},
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true, max: 100, grid: { color: '#333' }, ticks: { callback: value => value + '%' } },
+                    x: { grid: { color: '#333' } }
+                }
+            }
+        });
+
+        // Engagement Chart
+        new Chart(document.getElementById('engagementChart'), {
+            type: 'line',
+            data: {
+                labels: {{ENGAGEMENT_LABELS}},
+                datasets: [{
+                    label: 'DAU',
+                    data: {{DAU_DATA}},
+                    borderColor: '#10b981',
+                    backgroundColor: 'transparent',
+                    tension: 0.4
+                }, {
+                    label: 'WAU',
+                    data: {{WAU_DATA}},
+                    borderColor: '#14b8a6',
+                    backgroundColor: 'transparent',
+                    borderDash: [5, 5],
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#333' } },
+                    x: { grid: { color: '#333' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

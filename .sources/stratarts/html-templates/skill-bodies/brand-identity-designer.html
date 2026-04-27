@@ -1,0 +1,776 @@
+<!-- ═══ SKILL CSS START ═══ -->
+<style>
+    /* Brand Identity Designer Specific Styles */
+    .brand-pyramid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        margin: 2rem 0;
+    }
+
+    .pyramid-level {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 1.25rem 2rem;
+        color: #ffffff;
+        font-weight: 600;
+        position: relative;
+        clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+    }
+
+    .pyramid-level:nth-child(1) {
+        width: 50%;
+        background: linear-gradient(135deg, #10b981, #059669);
+    }
+
+    .pyramid-level:nth-child(2) {
+        width: 65%;
+        background: linear-gradient(135deg, #059669, #047857);
+        margin-top: -2px;
+    }
+
+    .pyramid-level:nth-child(3) {
+        width: 80%;
+        background: linear-gradient(135deg, #047857, #065f46);
+        margin-top: -2px;
+    }
+
+    .pyramid-level:nth-child(4) {
+        width: 95%;
+        background: linear-gradient(135deg, #065f46, #064e3b);
+        margin-top: -2px;
+    }
+
+    .pyramid-level:nth-child(5) {
+        width: 100%;
+        background: linear-gradient(135deg, #064e3b, #022c22);
+        margin-top: -2px;
+        clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+    }
+
+    .pyramid-label {
+        font-size: 0.75rem;
+        color: rgba(255,255,255,0.7);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: block;
+        margin-bottom: 0.25rem;
+    }
+
+    .pyramid-value {
+        font-size: 1rem;
+    }
+
+    .color-palette {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 1rem;
+        margin: 1.5rem 0;
+    }
+
+    .color-swatch {
+        border-radius: 12px;
+        overflow: hidden;
+        background: #1a1a1a;
+        border: 1px solid #2a2a2a;
+    }
+
+    .swatch-color {
+        height: 80px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding-bottom: 0.5rem;
+    }
+
+    .swatch-info {
+        padding: 0.75rem;
+        text-align: center;
+    }
+
+    .swatch-name {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 0.875rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .swatch-hex {
+        font-family: monospace;
+        color: #888;
+        font-size: 0.75rem;
+    }
+
+    .typography-showcase {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        border: 1px solid #2a2a2a;
+    }
+
+    .font-sample {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .font-sample:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .font-label {
+        font-size: 0.75rem;
+        color: #10b981;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+    }
+
+    .font-name {
+        color: #888;
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .font-display {
+        color: #ffffff;
+    }
+
+    .font-display.heading {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    .font-display.subheading {
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+
+    .font-display.body {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .voice-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin: 1.5rem 0;
+    }
+
+    .voice-card {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .voice-trait {
+        font-weight: 600;
+        color: #10b981;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .voice-description {
+        color: #888;
+        font-size: 0.875rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .voice-example {
+        background: #0a0a0a;
+        border-radius: 8px;
+        padding: 0.75rem;
+        font-style: italic;
+        color: #ccc;
+        font-size: 0.875rem;
+        border-left: 3px solid #10b981;
+    }
+
+    .archetype-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: #ffffff;
+        padding: 0.75rem 1.5rem;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.125rem;
+        margin: 1rem 0;
+    }
+
+    .archetype-icon {
+        font-size: 1.25rem;
+    }
+
+    .brand-values {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin: 1rem 0;
+    }
+
+    .brand-value {
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        color: #10b981;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+
+    .messaging-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+    }
+
+    .messaging-table th,
+    .messaging-table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .messaging-table th {
+        background: #1a1a1a;
+        color: #10b981;
+        font-weight: 600;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .messaging-table td {
+        color: #ccc;
+    }
+
+    .messaging-table tr:hover td {
+        background: rgba(16, 185, 129, 0.05);
+    }
+
+    .do-dont-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+    }
+
+    .do-column, .dont-column {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .do-column {
+        border-top: 3px solid #10b981;
+    }
+
+    .dont-column {
+        border-top: 3px solid #ef4444;
+    }
+
+    .column-header {
+        font-weight: 700;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .do-column .column-header {
+        color: #10b981;
+    }
+
+    .dont-column .column-header {
+        color: #ef4444;
+    }
+
+    .column-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .column-list li {
+        padding: 0.5rem 0;
+        color: #ccc;
+        font-size: 0.875rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .column-list li::before {
+        content: "•";
+        color: #888;
+    }
+
+    @media (max-width: 768px) {
+        .voice-grid,
+        .do-dont-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .pyramid-level {
+            width: 100% !important;
+            clip-path: none;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+    }
+</style>
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<div class="report-container">
+    <!-- Header Section -->
+    <header class="report-header">
+        <div class="header-content">
+            <div class="header-badge">BRAND IDENTITY</div>
+            <h1 class="report-title">{{COMPANY_NAME}}</h1>
+            <p class="report-subtitle">{{TAGLINE}}</p>
+        </div>
+        <div class="header-meta">
+            <div class="meta-item">
+                <span class="meta-label">Generated</span>
+                <span class="meta-value">{{GENERATION_DATE}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Industry</span>
+                <span class="meta-value">{{INDUSTRY}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Target</span>
+                <span class="meta-value">{{TARGET_AUDIENCE}}</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Brand Essence Section -->
+    <section class="content-section">
+        <h2 class="section-title">Brand Essence</h2>
+
+        <div class="archetype-badge">
+            <span class="archetype-icon">{{ARCHETYPE_ICON}}</span>
+            <span>{{BRAND_ARCHETYPE}}</span>
+        </div>
+
+        <p class="section-description">{{BRAND_ESSENCE_DESCRIPTION}}</p>
+
+        <!-- Brand Pyramid -->
+        <h3 class="subsection-title">Brand Pyramid</h3>
+        <div class="brand-pyramid">
+            <div class="pyramid-level">
+                <div>
+                    <span class="pyramid-label">Purpose</span>
+                    <span class="pyramid-value">{{BRAND_PURPOSE}}</span>
+                </div>
+            </div>
+            <div class="pyramid-level">
+                <div>
+                    <span class="pyramid-label">Vision</span>
+                    <span class="pyramid-value">{{BRAND_VISION}}</span>
+                </div>
+            </div>
+            <div class="pyramid-level">
+                <div>
+                    <span class="pyramid-label">Mission</span>
+                    <span class="pyramid-value">{{BRAND_MISSION}}</span>
+                </div>
+            </div>
+            <div class="pyramid-level">
+                <div>
+                    <span class="pyramid-label">Values</span>
+                    <span class="pyramid-value">{{BRAND_VALUES_SHORT}}</span>
+                </div>
+            </div>
+            <div class="pyramid-level">
+                <div>
+                    <span class="pyramid-label">Personality</span>
+                    <span class="pyramid-value">{{BRAND_PERSONALITY}}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Core Values -->
+        <h3 class="subsection-title">Core Values</h3>
+        <div class="brand-values">
+            {{BRAND_VALUES_BADGES}}
+        </div>
+    </section>
+
+    <!-- Visual Identity Section -->
+    <section class="content-section">
+        <h2 class="section-title">Visual Identity</h2>
+
+        <!-- Color Palette -->
+        <h3 class="subsection-title">Color Palette</h3>
+        <div class="color-palette">
+            {{COLOR_SWATCHES}}
+        </div>
+
+        <!-- Color Distribution Chart -->
+        <div class="chart-container">
+            <canvas id="colorUsageChart"></canvas>
+        </div>
+
+        <!-- Typography -->
+        <h3 class="subsection-title">Typography System</h3>
+        <div class="typography-showcase">
+            <div class="font-sample">
+                <div class="font-label">Primary / Headlines</div>
+                <div class="font-name">{{PRIMARY_FONT}}</div>
+                <div class="font-display heading">{{TYPOGRAPHY_SAMPLE_HEADING}}</div>
+            </div>
+            <div class="font-sample">
+                <div class="font-label">Secondary / Subheadings</div>
+                <div class="font-name">{{SECONDARY_FONT}}</div>
+                <div class="font-display subheading">{{TYPOGRAPHY_SAMPLE_SUBHEADING}}</div>
+            </div>
+            <div class="font-sample">
+                <div class="font-label">Body / Content</div>
+                <div class="font-name">{{BODY_FONT}}</div>
+                <div class="font-display body">{{TYPOGRAPHY_SAMPLE_BODY}}</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Voice & Tone Section -->
+    <section class="content-section">
+        <h2 class="section-title">Voice & Tone</h2>
+
+        <p class="section-description">{{VOICE_OVERVIEW}}</p>
+
+        <!-- Voice Attributes -->
+        <h3 class="subsection-title">Voice Attributes</h3>
+        <div class="voice-grid">
+            {{VOICE_CARDS}}
+        </div>
+
+        <!-- Voice Spectrum Chart -->
+        <div class="chart-container">
+            <canvas id="voiceRadarChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Messaging Framework Section -->
+    <section class="content-section">
+        <h2 class="section-title">Messaging Framework</h2>
+
+        <!-- Key Messages Table -->
+        <h3 class="subsection-title">Key Messages by Audience</h3>
+        <table class="messaging-table">
+            <thead>
+                <tr>
+                    <th>Audience</th>
+                    <th>Primary Message</th>
+                    <th>Supporting Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{MESSAGING_ROWS}}
+            </tbody>
+        </table>
+
+        <!-- Elevator Pitch -->
+        <h3 class="subsection-title">Elevator Pitch</h3>
+        <div class="highlight-box">
+            <p>{{ELEVATOR_PITCH}}</p>
+        </div>
+
+        <!-- Tagline Options -->
+        <h3 class="subsection-title">Tagline Options</h3>
+        <div class="grid-2">
+            {{TAGLINE_OPTIONS}}
+        </div>
+    </section>
+
+    <!-- Brand Guidelines Section -->
+    <section class="content-section">
+        <h2 class="section-title">Brand Guidelines</h2>
+
+        <!-- Do's and Don'ts -->
+        <h3 class="subsection-title">Voice Do's & Don'ts</h3>
+        <div class="do-dont-grid">
+            <div class="do-column">
+                <div class="column-header">
+                    <span>✓</span> Do
+                </div>
+                <ul class="column-list">
+                    {{DOS_LIST}}
+                </ul>
+            </div>
+            <div class="dont-column">
+                <div class="column-header">
+                    <span>✗</span> Don't
+                </div>
+                <ul class="column-list">
+                    {{DONTS_LIST}}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Brand Consistency Score -->
+        <h3 class="subsection-title">Brand Consistency Metrics</h3>
+        <div class="chart-container">
+            <canvas id="consistencyChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Competitive Positioning Section -->
+    <section class="content-section">
+        <h2 class="section-title">Competitive Brand Positioning</h2>
+
+        <p class="section-description">{{POSITIONING_OVERVIEW}}</p>
+
+        <!-- Positioning Map -->
+        <div class="chart-container">
+            <canvas id="positioningChart"></canvas>
+        </div>
+
+        <!-- Differentiation Points -->
+        <h3 class="subsection-title">Key Differentiators</h3>
+        <div class="grid-3">
+            {{DIFFERENTIATOR_CARDS}}
+        </div>
+    </section>
+
+    <!-- Implementation Roadmap -->
+    <section class="content-section">
+        <h2 class="section-title">Implementation Roadmap</h2>
+
+        <div class="timeline">
+            {{IMPLEMENTATION_TIMELINE}}
+        </div>
+    </section>
+
+    <!-- Report Footer -->
+    <footer class="report-footer">
+        <div class="footer-content">
+            <p class="footer-brand">Generated by StratArts Brand Identity Designer</p>
+            <p class="footer-disclaimer">This brand identity framework provides strategic guidance for brand development. Recommend review by brand specialists for final implementation.</p>
+        </div>
+    </footer>
+</div>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Color Usage Chart
+    const colorCtx = document.getElementById('colorUsageChart');
+    if (colorCtx) {
+        new Chart(colorCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Primary', 'Secondary', 'Accent', 'Neutral', 'Background'],
+                datasets: [{
+                    data: [40, 25, 15, 12, 8],
+                    backgroundColor: [
+                        '#10b981',
+                        '#059669',
+                        '#f59e0b',
+                        '#6b7280',
+                        '#1f2937'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Recommended Color Usage Distribution',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        position: 'right',
+                        labels: { color: '#ccc', padding: 15 }
+                    }
+                }
+            }
+        });
+    }
+
+    // Voice Radar Chart
+    const voiceCtx = document.getElementById('voiceRadarChart');
+    if (voiceCtx) {
+        new Chart(voiceCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Professional', 'Friendly', 'Innovative', 'Trustworthy', 'Bold', 'Empathetic'],
+                datasets: [{
+                    label: 'Brand Voice Profile',
+                    data: [8, 7, 9, 8, 6, 7],
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                    borderColor: '#10b981',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#10b981'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: { color: '#888', stepSize: 2 },
+                        grid: { color: '#2a2a2a' },
+                        pointLabels: { color: '#ccc', font: { size: 11 } }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Voice Attribute Spectrum',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // Brand Consistency Chart
+    const consistencyCtx = document.getElementById('consistencyChart');
+    if (consistencyCtx) {
+        new Chart(consistencyCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Visual Identity', 'Messaging', 'Tone of Voice', 'Digital Presence', 'Customer Experience'],
+                datasets: [{
+                    label: 'Current State',
+                    data: [75, 60, 55, 70, 65],
+                    backgroundColor: 'rgba(107, 114, 128, 0.6)',
+                    borderRadius: 4
+                }, {
+                    label: 'Target State',
+                    data: [95, 90, 90, 95, 90],
+                    backgroundColor: 'rgba(16, 185, 129, 0.6)',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    y: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Brand Consistency Score by Touchpoint',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+
+    // Competitive Positioning Chart
+    const positioningCtx = document.getElementById('positioningChart');
+    if (positioningCtx) {
+        new Chart(positioningCtx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Your Brand',
+                    data: [{ x: 7.5, y: 8 }],
+                    backgroundColor: '#10b981',
+                    pointRadius: 15,
+                    pointHoverRadius: 18
+                }, {
+                    label: 'Competitor A',
+                    data: [{ x: 8, y: 5 }],
+                    backgroundColor: 'rgba(107, 114, 128, 0.6)',
+                    pointRadius: 12,
+                    pointHoverRadius: 14
+                }, {
+                    label: 'Competitor B',
+                    data: [{ x: 4, y: 7 }],
+                    backgroundColor: 'rgba(107, 114, 128, 0.6)',
+                    pointRadius: 12,
+                    pointHoverRadius: 14
+                }, {
+                    label: 'Competitor C',
+                    data: [{ x: 6, y: 4 }],
+                    backgroundColor: 'rgba(107, 114, 128, 0.6)',
+                    pointRadius: 12,
+                    pointHoverRadius: 14
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        min: 0,
+                        max: 10,
+                        title: {
+                            display: true,
+                            text: 'Innovation →',
+                            color: '#ccc'
+                        },
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    y: {
+                        min: 0,
+                        max: 10,
+                        title: {
+                            display: true,
+                            text: 'Premium →',
+                            color: '#ccc'
+                        },
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Brand Positioning Map',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+<!-- ═══ SKILL JS END ═══ -->

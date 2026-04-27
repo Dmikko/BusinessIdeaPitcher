@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitive Intelligence | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* BASE STYLES */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; background: #0a0a0a; color: #f5f5f5; line-height: 1.6; }
+        .container { margin: 0 auto; background: #0a0a0a; }
+
+        header { background: #0a0a0a; padding: 0; color: white; display: flex; justify-content: center; }
+        .header-content { position: relative; z-index: 1; max-width: 1600px; width: 100%; background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%); padding: 4rem 4rem 3rem 4rem; border-bottom: 1px solid rgba(16, 185, 129, 0.3); }
+        .header-content::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>'); opacity: 0.3; z-index: -1; }
+        .kicker { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; opacity: 0.9; margin-bottom: 0.5rem; }
+        h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
+        .subtitle { font-size: 1.3rem; opacity: 0.95; font-weight: 400; margin-bottom: 2rem; }
+        .meta-info { display: flex; gap: 2rem; font-size: 0.9rem; opacity: 0.9; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.2); }
+        .meta-item { display: flex; align-items: center; gap: 0.5rem; }
+
+        .score-banner { background: #0a0a0a; padding: 0; display: flex; justify-content: center; }
+        .score-container { display: grid; grid-template-columns: auto 1fr auto; gap: 3rem; align-items: center; max-width: 1600px; width: 100%; margin: 0 auto; padding: 3rem 4rem; background: #1a1a1a; border-bottom: 1px solid rgba(16, 185, 129, 0.2); }
+        .score-main { text-align: center; }
+        .score-number { font-size: 5rem; font-weight: 700; background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+        .score-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; color: #a3a3a3; margin-top: 0.5rem; font-weight: 600; }
+        .score-interpretation { border-left: 3px solid #10b981; padding-left: 2rem; }
+        .interpretation-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; color: #f5f5f5; }
+        .interpretation-text { color: #d4d4d4; line-height: 1.7; }
+        .verdict-badge { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 1rem 2rem; border-radius: 50px; font-weight: 700; font-size: 1.1rem; white-space: nowrap; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+
+        .content { max-width: 1600px; margin: 0 auto; padding: 4rem 4rem; background: #0a0a0a; }
+        .section { margin-bottom: 4rem; }
+        .section:last-child { margin-bottom: 2rem; }
+        .section-header { margin-bottom: 2rem; }
+        .section-title { font-size: 2rem; font-weight: 700; color: #f5f5f5; margin-bottom: 0.5rem; }
+        .section-description { font-size: 1.05rem; color: #d4d4d4; max-width: 800px; }
+
+        .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        .chart-card { background: #1a1a1a; border-radius: 12px; padding: 2rem; border: 1px solid rgba(16, 185, 129, 0.2); }
+        .chart-card.full-width { grid-column: 1 / -1; }
+        .chart-title { font-weight: 700; font-size: 1.1rem; color: #f5f5f5; margin-bottom: 0.5rem; }
+        .chart-subtitle { font-size: 0.9rem; color: #a3a3a3; margin-bottom: 1.5rem; }
+        .chart-wrapper { position: relative; height: 350px; margin-bottom: 1.5rem; }
+        .insights-panel { background: #0a0a0a; border-left: 4px solid #10b981; padding: 1.5rem; margin-top: 1rem; border-radius: 0 8px 8px 0; }
+        .insight-title { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: #10b981; margin-bottom: 1rem; }
+        .insight-list { list-style: none; }
+        .insight-list li { padding: 0.6rem 0; color: #d4d4d4; font-size: 0.95rem; border-bottom: 1px solid rgba(16, 185, 129, 0.1); }
+        .insight-list li:last-child { border-bottom: none; }
+        .insight-list li strong { color: #10b981; font-weight: 600; }
+
+        footer { background: #0a0a0a; display: flex; justify-content: center; }
+        .footer-content { max-width: 1600px; width: 100%; background: #1a1a1a; color: #a3a3a3; padding: 2rem 4rem; font-size: 0.85rem; text-align: center; border-top: 1px solid rgba(16, 185, 129, 0.2); }
+        .footer-content p { margin: 0.3rem 0; }
+        .footer-content strong { color: #10b981; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .score-container { grid-template-columns: 1fr; text-align: center; }
+            .score-interpretation { border-left: none; border-top: 3px solid #10b981; padding-left: 0; padding-top: 1.5rem; }
+            .header-content, .score-container, .content, .footer-content { padding: 2rem; }
+        }
+
+        /* SKILL CSS - COMPETITIVE INTELLIGENCE */
+        .competitor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .competitor-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; }
+        .competitor-card.direct { border-left: 4px solid #f97316; }
+        .competitor-card.indirect { border-left: 4px solid #3b82f6; }
+        .competitor-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+        .competitor-name { font-weight: 700; color: #f5f5f5; font-size: 1.1rem; }
+        .competitor-type { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 600; }
+        .competitor-type.direct { background: rgba(249, 115, 22, 0.2); color: #f97316; }
+        .competitor-type.indirect { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .competitor-description { color: rgba(245, 245, 245, 0.7); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem; }
+        .competitor-meta { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; font-size: 0.8rem; padding-top: 1rem; border-top: 1px solid rgba(16, 185, 129, 0.1); }
+        .competitor-meta-item { display: flex; gap: 0.5rem; }
+        .competitor-meta-label { color: rgba(245, 245, 245, 0.5); }
+        .competitor-meta-value { color: #10b981; font-weight: 600; }
+        .threat-level { display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem; }
+        .threat-bar { flex: 1; height: 8px; background: rgba(16, 185, 129, 0.1); border-radius: 4px; overflow: hidden; }
+        .threat-fill { height: 100%; border-radius: 4px; }
+        .threat-fill.high { background: #ef4444; }
+        .threat-fill.medium { background: #f97316; }
+        .threat-fill.low { background: #10b981; }
+        .threat-score { font-weight: 700; font-size: 0.9rem; }
+
+        .forces-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .force-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; }
+        .force-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(16, 185, 129, 0.1); }
+        .force-name { font-weight: 700; color: #f5f5f5; font-size: 1rem; }
+        .force-level { font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.75rem; border-radius: 12px; text-transform: uppercase; }
+        .force-level.high { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        .force-level.medium { background: rgba(249, 115, 22, 0.2); color: #f97316; }
+        .force-level.low { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .force-description { font-size: 0.9rem; color: #d4d4d4; line-height: 1.5; margin-bottom: 1rem; }
+        .force-factors { list-style: none; padding: 0; margin: 0; }
+        .force-factors li { font-size: 0.85rem; color: #a3a3a3; padding: 0.3rem 0; display: flex; align-items: flex-start; gap: 0.5rem; }
+        .force-factors li::before { content: '•'; color: #10b981; }
+
+        .swot-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem; }
+        .swot-card { background: #1a1a1a; border-radius: 12px; padding: 1.5rem; }
+        .swot-card.strengths { border: 2px solid #10b981; }
+        .swot-card.weaknesses { border: 2px solid #f97316; }
+        .swot-card.opportunities { border: 2px solid #3b82f6; }
+        .swot-card.threats { border: 2px solid #ef4444; }
+        .swot-title { font-weight: 700; font-size: 1rem; margin-bottom: 1rem; }
+        .swot-card.strengths .swot-title { color: #10b981; }
+        .swot-card.weaknesses .swot-title { color: #f97316; }
+        .swot-card.opportunities .swot-title { color: #3b82f6; }
+        .swot-card.threats .swot-title { color: #ef4444; }
+        .swot-list { list-style: none; padding: 0; margin: 0; }
+        .swot-list li { font-size: 0.9rem; color: #d4d4d4; padding: 0.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: flex; gap: 0.5rem; }
+        .swot-list li:last-child { border-bottom: none; }
+        .swot-list li::before { content: '→'; font-weight: bold; }
+        .swot-card.strengths .swot-list li::before { color: #10b981; }
+        .swot-card.weaknesses .swot-list li::before { color: #f97316; }
+        .swot-card.opportunities .swot-list li::before { color: #3b82f6; }
+        .swot-card.threats .swot-list li::before { color: #ef4444; }
+
+        .battlecard { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; }
+        .battlecard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(16, 185, 129, 0.2); }
+        .battlecard-name { font-weight: 700; color: #f5f5f5; font-size: 1.25rem; }
+        .battlecard-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .battlecard-title { font-weight: 700; color: #10b981; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+        .battlecard-list { list-style: none; padding: 0; margin: 0; }
+        .battlecard-list li { font-size: 0.85rem; color: #d4d4d4; padding: 0.4rem 0; display: flex; gap: 0.5rem; }
+        .battlecard-list li::before { content: '•'; color: #10b981; }
+        .battlecard-list.weaknesses li::before { color: #fc8181; }
+
+        @media (max-width: 1024px) { .swot-grid { grid-template-columns: 1fr; } .battlecard-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .forces-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="kicker">StratArts Business Analysis</div>
+                <h1>Competitive Intelligence</h1>
+                <div class="subtitle">PetPulse - Smart Pet Health Monitoring Platform</div>
+                <div class="meta-info">
+                    <div class="meta-item"><span>📅</span><span>Generated: December 18, 2025</span></div>
+                    <div class="meta-item"><span>📊</span><span>Analysis Type: Porter's Five Forces + SWOT</span></div>
+                    <div class="meta-item"><span>🎯</span><span>Version 1.0.0</span></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">7.8/10</div>
+                    <div class="score-label">Competitive Favorability</div>
+                </div>
+                <div class="score-interpretation">
+                    <div class="interpretation-title">What This Score Means</div>
+                    <div class="interpretation-text">
+                        PetPulse operates in a favorable competitive landscape (7.8/10). Low direct competition in the health-focused pet wearable space, moderate industry forces, and clear differentiation opportunities. Main threats are indirect (GPS trackers pivoting) and potential big tech entry.
+                    </div>
+                </div>
+                <div class="verdict-badge">✓ FAVORABLE LANDSCAPE</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Section 1: Competitive Landscape -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Competitive Landscape</h2>
+                    <p class="section-description">Direct and indirect competitors with threat assessment.</p>
+                </div>
+                <div class="competitor-grid">
+                    <div class="competitor-card direct">
+                        <div class="competitor-header">
+                            <span class="competitor-name">Fi Collar</span>
+                            <span class="competitor-type direct">Direct</span>
+                        </div>
+                        <div class="competitor-description">GPS-focused smart collar with escape alerts and location tracking. Strong brand presence in dog tracking space. Could expand into health monitoring.</div>
+                        <div class="competitor-meta">
+                            <div class="competitor-meta-item"><span class="competitor-meta-label">Funding:</span><span class="competitor-meta-value">$40M+</span></div>
+                            <div class="competitor-meta-item"><span class="competitor-meta-label">Price:</span><span class="competitor-meta-value">$8-15/mo</span></div>
+                            <div class="competitor-meta-item"><span class="competitor-meta-label">Focus:</span><span class="competitor-meta-value">Location</span></div>
+                            <div class="competitor-meta-item"><span class="competitor-meta-label">Users:</span><span class="competitor-meta-value">500K+</span></div>
+                        </div>
+                        <div class="threat-level">
+                            <span style="color: #a3a3a3; font-size: 0.8rem;">Threat</span>
+                            <div class="threat-bar"><div class="threat-fill medium" style="width: 60%;"></div></div>
+                            <span class="threat-score" style="color: #f97316;">6/10</span>
+                        </div>
+                    </div>
+                    <div class="competitor-card direct">
+                        <div class="competitor-header">
+                            <span class="competitor-name">Whistle</span>
+                            <span class="competitor-type direct">Direct</span>
+                        </div>
+                        <div class="competitor-description">GPS + basic activity tracking. Owned by Mars Petcare. Closest to health positioning but still primarily location-focused. Has vet partnerships.</div>
+                        <div class="competitor-meta">
+                            <div class="competitor-meta-item"><span class="competitor-meta-label">Funding:</span><span class="competitor-meta-value">Acquired</span></div>
+                            <div class="competitor-meta-item"><span class="competitor-meta-label">Price:</span><span class="competitor-meta-value">$8-12/mo</span></div>
+                            <div class="competitor-meta-item"><span class="competitor-meta-label">Focus:</span><span class="competitor-meta-value">Location + Activity</span></div>
+                            <div class="competitor-meta-item"><span class="competitor-meta-label">Users:</span><span class="competitor-meta-value">1M+</span></div>
+                        </div>
+                        <div class="threat-level">
+                            <span style="color: #a3a3a3; font-size: 0.8rem;">Threat</span>
+                            <div class="threat-bar"><div class="threat-fill high" style="width: 70%;"></div></div>
+                            <span class="threat-score" style="color: #ef4444;">7/10</span>
+                        </div>
+                    </div>
+                    <div class="competitor-card direct">
+                        <div class="competitor-header">
+                            <span class="competitor-name">Fuzzy</span>
+                            <span class="competitor-type direct">Direct</span>
+                        </div>
+                        <div class="competitor-description">Pet telehealth platform with on-demand vet consultations. No hardware or monitoring component. Pure telehealth play.</div>
+                        <div class="competitor-meta">
+                            <div class="competitor-meta-item"><span class="competitor-meta-label">Funding:</span><span class="competitor-meta-value">$75M+</span></div>
+                            <div class="competitor-meta-item"><span class="competitor-meta-label">Price:</span><span class="competitor-meta-value">$20-40/mo</span></div>
+                            <div class="competitor-meta-item"><span class="competitor-meta-label">Focus:</span><span class="competitor-meta-value">Telehealth</span></div>
+                            <div class="competitor-meta-item"><span class="competitor-meta-label">Users:</span><span class="competitor-meta-value">200K+</span></div>
+                        </div>
+                        <div class="threat-level">
+                            <span style="color: #a3a3a3; font-size: 0.8rem;">Threat</span>
+                            <div class="threat-bar"><div class="threat-fill medium" style="width: 50%;"></div></div>
+                            <span class="threat-score" style="color: #f97316;">5/10</span>
+                        </div>
+                    </div>
+                    <div class="competitor-card indirect">
+                        <div class="competitor-header">
+                            <span class="competitor-name">Traditional Veterinarian</span>
+                            <span class="competitor-type indirect">Indirect</span>
+                        </div>
+                        <div class="competitor-description">Annual checkups, reactive treatment model. 2-3 week appointment wait times. Status quo alternative for most pet parents.</div>
+                        <div class="competitor-meta">
+                            <div class="competitor-meta-item"><span class="competitor-meta-label">Model:</span><span class="competitor-meta-value">Per-visit</span></div>
+                            <div class="competitor-meta-item"><span class="competitor-meta-label">Price:</span><span class="competitor-meta-value">$50-200/visit</span></div>
+                            <div class="competitor-meta-item"><span class="competitor-meta-label">Focus:</span><span class="competitor-meta-value">Treatment</span></div>
+                            <div class="competitor-meta-item"><span class="competitor-meta-label">Wait:</span><span class="competitor-meta-value">2-3 weeks</span></div>
+                        </div>
+                        <div class="threat-level">
+                            <span style="color: #a3a3a3; font-size: 0.8rem;">Threat</span>
+                            <div class="threat-bar"><div class="threat-fill low" style="width: 30%;"></div></div>
+                            <span class="threat-score" style="color: #10b981;">3/10</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Porter's Five Forces -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Porter's Five Forces</h2>
+                    <p class="section-description">Industry structure analysis revealing competitive dynamics.</p>
+                </div>
+                <div class="forces-grid">
+                    <div class="force-card">
+                        <div class="force-header">
+                            <span class="force-name">Threat of New Entrants</span>
+                            <span class="force-level medium">Medium</span>
+                        </div>
+                        <div class="force-description">Moderate barriers due to hardware + software + vet network complexity. Pure software plays are easier, but full solution is harder.</div>
+                        <ul class="force-factors">
+                            <li>Hardware R&D requires significant capital</li>
+                            <li>Vet network takes time to build</li>
+                            <li>AI/ML training data creates advantage</li>
+                            <li>Brand trust critical for pet health decisions</li>
+                        </ul>
+                    </div>
+                    <div class="force-card">
+                        <div class="force-header">
+                            <span class="force-name">Supplier Power</span>
+                            <span class="force-level low">Low</span>
+                        </div>
+                        <div class="force-description">Multiple options for all key inputs. No single-source dependencies that could squeeze margins.</div>
+                        <ul class="force-factors">
+                            <li>Multiple hardware manufacturers available</li>
+                            <li>Cloud providers commoditized (AWS, GCP, Azure)</li>
+                            <li>Veterinarian supply growing (telehealth acceptance)</li>
+                            <li>Sensor tech increasingly affordable</li>
+                        </ul>
+                    </div>
+                    <div class="force-card">
+                        <div class="force-header">
+                            <span class="force-name">Buyer Power</span>
+                            <span class="force-level medium">Medium</span>
+                        </div>
+                        <div class="force-description">Pet parents are price-conscious but willing to pay for pet health. Low switching costs initially, but data lock-in grows over time.</div>
+                        <ul class="force-factors">
+                            <li>Many alternatives (GPS trackers, telehealth, nothing)</li>
+                            <li>Premium segment less price-sensitive</li>
+                            <li>Health data creates switching costs over time</li>
+                            <li>Emotional attachment drives retention</li>
+                        </ul>
+                    </div>
+                    <div class="force-card">
+                        <div class="force-header">
+                            <span class="force-name">Threat of Substitutes</span>
+                            <span class="force-level medium">Medium</span>
+                        </div>
+                        <div class="force-description">GPS trackers and telehealth apps are partial substitutes but don't combine both. Traditional vet care is status quo substitute.</div>
+                        <ul class="force-factors">
+                            <li>GPS trackers (Fi, Whistle) could add health</li>
+                            <li>Telehealth apps (Fuzzy) could add monitoring</li>
+                            <li>DIY activity monitoring (FitBark)</li>
+                            <li>Status quo: annual vet visits + Google</li>
+                        </ul>
+                    </div>
+                    <div class="force-card">
+                        <div class="force-header">
+                            <span class="force-name">Competitive Rivalry</span>
+                            <span class="force-level low">Low</span>
+                        </div>
+                        <div class="force-description">No direct competitor combines AI health monitoring + telehealth. Market is fragmented with players in adjacent spaces.</div>
+                        <ul class="force-factors">
+                            <li>No direct health monitoring + telehealth competitor</li>
+                            <li>GPS trackers compete on location, not health</li>
+                            <li>Fast-growing market (not zero-sum)</li>
+                            <li>Differentiation opportunities abundant</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: SWOT Analysis -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">SWOT Analysis</h2>
+                    <p class="section-description">Internal strengths/weaknesses and external opportunities/threats.</p>
+                </div>
+                <div class="swot-grid">
+                    <div class="swot-card strengths">
+                        <div class="swot-title">Strengths</div>
+                        <ul class="swot-list">
+                            <li>Unique AI-powered early detection (proprietary algorithms)</li>
+                            <li>Only player combining monitoring + telehealth</li>
+                            <li>Health-first positioning vs GPS-focused competitors</li>
+                            <li>Strong unit economics (LTV:CAC 6:1)</li>
+                            <li>15,000 early detections in beta (proven technology)</li>
+                        </ul>
+                    </div>
+                    <div class="swot-card weaknesses">
+                        <div class="swot-title">Weaknesses</div>
+                        <ul class="swot-list">
+                            <li>New brand with limited awareness</li>
+                            <li>Premium price point ($25/mo) vs GPS trackers</li>
+                            <li>Hardware dependency (manufacturing complexity)</li>
+                            <li>Vet network still scaling (need more coverage)</li>
+                            <li>No cats-only solution yet (dogs primary focus)</li>
+                        </ul>
+                    </div>
+                    <div class="swot-card opportunities">
+                        <div class="swot-title">Opportunities</div>
+                        <ul class="swot-list">
+                            <li>Pet wearable market growing 14% annually ($4.6B by 2028)</li>
+                            <li>Telehealth adoption accelerating post-pandemic</li>
+                            <li>Aging pet demographic (senior pets need more monitoring)</li>
+                            <li>Pet insurance partnerships for distribution</li>
+                            <li>B2B2C via vet clinics and pet retailers</li>
+                        </ul>
+                    </div>
+                    <div class="swot-card threats">
+                        <div class="swot-title">Threats</div>
+                        <ul class="swot-list">
+                            <li>Big tech entry (Apple/Google with health wearables expertise)</li>
+                            <li>Whistle/Mars Petcare expanding into health monitoring</li>
+                            <li>Economic downturn reducing discretionary pet spend</li>
+                            <li>Veterinarian resistance to telehealth disruption</li>
+                            <li>Regulatory changes to vet telehealth laws</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Visual Analysis -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Visual Analysis</h2>
+                    <p class="section-description">Competitive positioning and market dynamics visualization.</p>
+                </div>
+                <div class="chart-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">Porter's Five Forces Radar</div>
+                        <div class="chart-subtitle">Industry force intensity assessment</div>
+                        <div class="chart-wrapper"><canvas id="porterRadar"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Force Analysis</div>
+                            <ul class="insight-list">
+                                <li><strong>Low rivalry</strong> — No direct competitor in health + telehealth space</li>
+                                <li><strong>Medium substitutes</strong> — GPS trackers could pivot to health</li>
+                                <li><strong>Low supplier power</strong> — Commoditized inputs advantage</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Competitive Positioning Map</div>
+                        <div class="chart-subtitle">Health Intelligence vs. Vet Access Speed</div>
+                        <div class="chart-wrapper"><canvas id="positioningMap"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Position Insights</div>
+                            <ul class="insight-list">
+                                <li><strong>White space owned</strong> — Upper-right quadrant uncontested</li>
+                                <li><strong>GPS trackers clustered</strong> — Location focus, not health</li>
+                                <li><strong>Fuzzy telehealth</strong> — Fast vet access but no monitoring</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Threat Level by Competitor</div>
+                        <div class="chart-subtitle">Competitive threat assessment</div>
+                        <div class="chart-wrapper"><canvas id="threatChart"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Threat Analysis</div>
+                            <ul class="insight-list">
+                                <li><strong>Whistle highest threat (7/10)</strong> — Mars resources + health pivot potential</li>
+                                <li><strong>Fi moderate (6/10)</strong> — Strong brand but location-focused</li>
+                                <li><strong>Traditional vet lowest (3/10)</strong> — Complement, not competitor</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Feature Comparison Radar</div>
+                        <div class="chart-subtitle">Capability benchmarking vs. average competitor</div>
+                        <div class="chart-wrapper"><canvas id="featureRadar"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Feature Gaps</div>
+                            <ul class="insight-list">
+                                <li><strong>Health monitoring lead</strong> — 9.5 vs 3.0 avg competitor</li>
+                                <li><strong>Telehealth advantage</strong> — 9.0 vs 4.0 (Fuzzy only)</li>
+                                <li><strong>GPS acceptable</strong> — 6.0 vs 8.5 (not priority)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Competitor Battlecards -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Competitor Battlecards</h2>
+                    <p class="section-description">Quick-reference cards for sales and positioning.</p>
+                </div>
+                <div class="battlecard">
+                    <div class="battlecard-header">
+                        <span class="battlecard-name">vs. Whistle (Highest Threat)</span>
+                        <span style="color: #ef4444; font-weight: 700;">7/10</span>
+                    </div>
+                    <div class="battlecard-grid">
+                        <div>
+                            <div class="battlecard-title">Their Strengths</div>
+                            <ul class="battlecard-list">
+                                <li>Mars Petcare backing (resources)</li>
+                                <li>1M+ user base</li>
+                                <li>Existing vet partnerships</li>
+                                <li>Activity tracking features</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="battlecard-title">Their Weaknesses</div>
+                            <ul class="battlecard-list weaknesses">
+                                <li>Location-first, health-second positioning</li>
+                                <li>No AI-powered early detection</li>
+                                <li>No integrated telehealth</li>
+                                <li>Generic activity tracking (not health)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="battlecard-title">How to Win</div>
+                            <ul class="battlecard-list">
+                                <li>"We monitor HEALTH, they track LOCATION"</li>
+                                <li>Emphasize 40% ER visit reduction</li>
+                                <li>Show early detection case studies</li>
+                                <li>Demo instant vet consultation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="battlecard">
+                    <div class="battlecard-header">
+                        <span class="battlecard-name">vs. Fi Collar</span>
+                        <span style="color: #f97316; font-weight: 700;">6/10</span>
+                    </div>
+                    <div class="battlecard-grid">
+                        <div>
+                            <div class="battlecard-title">Their Strengths</div>
+                            <ul class="battlecard-list">
+                                <li>Strong brand in dog community</li>
+                                <li>Excellent GPS accuracy</li>
+                                <li>Lower price ($8-15/mo)</li>
+                                <li>Great hardware design</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="battlecard-title">Their Weaknesses</div>
+                            <ul class="battlecard-list weaknesses">
+                                <li>Zero health monitoring</li>
+                                <li>No vet access</li>
+                                <li>Purely location-focused</li>
+                                <li>Can't detect illness</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="battlecard-title">How to Win</div>
+                            <ul class="battlecard-list">
+                                <li>"Location tells you WHERE, we tell you HOW"</li>
+                                <li>Health anxiety messaging</li>
+                                <li>Cost-of-ER-visit comparison</li>
+                                <li>Complementary positioning (use both)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | competitive-intelligence-v1.0.0</p>
+                <p style="margin-top: 5px;">Context Signature: competitive-intelligence-v1.0.0 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+        const tooltipConfig = { backgroundColor: '#1a1a1a', titleColor: '#f5f5f5', bodyColor: '#d4d4d4', borderColor: '#10b981', borderWidth: 1 };
+        const COLORS = { primary: '#10b981', backgrounds: ['rgba(16, 185, 129, 0.4)', 'rgba(16, 185, 129, 0.6)', 'rgba(16, 185, 129, 0.8)'] };
+
+        const data = {
+            porter: { labels: ['New Entrants', 'Supplier Power', 'Buyer Power', 'Substitutes', 'Rivalry'], values: [6, 3, 5, 5, 4] },
+            positioning: { you: { x: 8.5, y: 8.8 }, competitors: [{ x: 7.0, y: 3.0 }, { x: 6.5, y: 2.5 }, { x: 3.0, y: 8.0 }, { x: 2.0, y: 2.0 }] },
+            threats: { labels: ['Whistle', 'Fi Collar', 'Fuzzy', 'Traditional Vet'], values: [7, 6, 5, 3] },
+            features: { labels: ['Health Monitoring', 'Vet Access', 'Early Detection', 'GPS Tracking', 'Mobile App', 'Integration'], you: [9.5, 9.0, 9.2, 6.0, 8.5, 8.8], competitors: [3.0, 4.0, 2.0, 8.5, 7.0, 3.5] }
+        };
+
+        new Chart(document.getElementById('porterRadar'), {
+            type: 'radar',
+            data: { labels: data.porter.labels, datasets: [{ label: 'Force Intensity', data: data.porter.values, backgroundColor: 'rgba(16, 185, 129, 0.2)', borderColor: '#10b981', borderWidth: 3, pointBackgroundColor: '#10b981', pointRadius: 6 }] },
+            options: { responsive: true, maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 10, ticks: { color: '#a3a3a3', stepSize: 2 }, grid: { color: 'rgba(16, 185, 129, 0.1)' }, pointLabels: { color: '#f5f5f5', font: { size: 11 } } } }, plugins: { legend: { display: false }, tooltip: tooltipConfig } }
+        });
+
+        new Chart(document.getElementById('positioningMap'), {
+            type: 'scatter',
+            data: { datasets: [
+                { label: 'PetPulse', data: [{ x: data.positioning.you.x, y: data.positioning.you.y }], backgroundColor: '#10b981', borderColor: '#14b8a6', borderWidth: 3, pointRadius: 16 },
+                { label: 'Competitors', data: data.positioning.competitors, backgroundColor: 'rgba(163, 163, 163, 0.6)', borderColor: '#a3a3a3', pointRadius: 10 }
+            ] },
+            options: { responsive: true, maintainAspectRatio: false, scales: { x: { title: { display: true, text: 'Health Intelligence', color: '#a3a3a3' }, min: 0, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' } }, y: { title: { display: true, text: 'Vet Access Speed', color: '#a3a3a3' }, min: 0, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' } } }, plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig } }
+        });
+
+        new Chart(document.getElementById('threatChart'), {
+            type: 'bar',
+            data: { labels: data.threats.labels, datasets: [{ data: data.threats.values, backgroundColor: data.threats.values.map(v => v >= 7 ? '#ef4444' : v >= 5 ? '#f97316' : '#10b981'), borderRadius: 6 }] },
+            options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { beginAtZero: true, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' } }, y: { grid: { display: false }, ticks: { color: '#f5f5f5' } } }, plugins: { legend: { display: false }, tooltip: tooltipConfig } }
+        });
+
+        new Chart(document.getElementById('featureRadar'), {
+            type: 'radar',
+            data: { labels: data.features.labels, datasets: [
+                { label: 'PetPulse', data: data.features.you, backgroundColor: 'rgba(16, 185, 129, 0.2)', borderColor: '#10b981', borderWidth: 3, pointBackgroundColor: '#10b981', pointRadius: 5 },
+                { label: 'Avg Competitor', data: data.features.competitors, backgroundColor: 'rgba(163, 163, 163, 0.1)', borderColor: '#a3a3a3', borderWidth: 2, borderDash: [5, 5], pointRadius: 4 }
+            ] },
+            options: { responsive: true, maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 10, ticks: { color: '#a3a3a3', stepSize: 2 }, grid: { color: 'rgba(16, 185, 129, 0.1)' }, pointLabels: { color: '#f5f5f5', font: { size: 11 } } } }, plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig } }
+        });
+    </script>
+
+    <!-- STRATARTS_CONTEXT_SIGNATURE
+    skill: competitive-intelligence
+    version: 1.0.0
+    date: 2025-12-18
+    project_dir: D:\AI\projects\stratarts\examples\petpulse
+    business_name: PetPulse
+    key_outputs:
+      - Direct Competitors: Fi Collar (6/10), Whistle (7/10), Fuzzy (5/10)
+      - Indirect Competitors: Traditional Veterinarian (3/10)
+      - Porter's Five Forces: New Entrants (6), Supplier Power (3), Buyer Power (5), Substitutes (5), Rivalry (4)
+      - SWOT Analysis Complete
+      - Competitive Positioning: Health Intelligence x Vet Access Speed
+      - Strategic Recommendation: Niche Specialist (Health-First Positioning)
+      - Top Threat: Whistle/Mars Petcare pivot to health monitoring
+    END_STRATARTS_CONTEXT -->
+</body>
+</html>

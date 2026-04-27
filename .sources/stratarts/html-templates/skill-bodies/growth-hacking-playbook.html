@@ -1,0 +1,860 @@
+<!-- ═══ SKILL CSS START ═══ -->
+<style>
+    /* Growth Hacking Playbook Specific Styles */
+    .bullseye-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+        margin: 2rem 0;
+    }
+
+    .bullseye {
+        position: relative;
+        width: 320px;
+        height: 320px;
+    }
+
+    .bullseye-ring {
+        position: absolute;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-weight: 600;
+        transition: transform 0.3s ease;
+    }
+
+    .bullseye-ring:hover {
+        transform: scale(1.02);
+    }
+
+    .ring-outer {
+        width: 320px;
+        height: 320px;
+        background: rgba(16, 185, 129, 0.15);
+        border: 2px solid rgba(16, 185, 129, 0.3);
+        top: 0;
+        left: 0;
+    }
+
+    .ring-middle {
+        width: 220px;
+        height: 220px;
+        background: rgba(16, 185, 129, 0.3);
+        border: 2px solid rgba(16, 185, 129, 0.5);
+        top: 50px;
+        left: 50px;
+    }
+
+    .ring-inner {
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        top: 100px;
+        left: 100px;
+        color: #ffffff;
+        font-size: 0.9rem;
+    }
+
+    .ring-label {
+        position: absolute;
+        font-size: 0.75rem;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .ring-label.outer-label {
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: rgba(16, 185, 129, 0.8);
+    }
+
+    .ring-label.middle-label {
+        top: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: rgba(16, 185, 129, 0.9);
+    }
+
+    .experiment-card {
+        background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+        border-radius: 16px;
+        padding: 1.5rem;
+        border: 1px solid #2a2a2a;
+        position: relative;
+    }
+
+    .experiment-status {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .status-active {
+        background: rgba(16, 185, 129, 0.2);
+        color: #10b981;
+    }
+
+    .status-planned {
+        background: rgba(245, 158, 11, 0.2);
+        color: #f59e0b;
+    }
+
+    .status-completed {
+        background: rgba(59, 130, 246, 0.2);
+        color: #3b82f6;
+    }
+
+    .experiment-header {
+        margin-bottom: 1rem;
+        padding-right: 80px;
+    }
+
+    .experiment-name {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 0.25rem;
+    }
+
+    .experiment-channel {
+        font-size: 0.8rem;
+        color: #10b981;
+    }
+
+    .experiment-hypothesis {
+        background: #0a0a0a;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-left: 3px solid #10b981;
+    }
+
+    .hypothesis-label {
+        font-size: 0.7rem;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+    }
+
+    .hypothesis-text {
+        color: #ccc;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .experiment-metrics {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+    }
+
+    .exp-metric {
+        background: #0a0a0a;
+        border-radius: 8px;
+        padding: 0.75rem;
+        text-align: center;
+    }
+
+    .exp-metric-label {
+        font-size: 0.7rem;
+        color: #888;
+        text-transform: uppercase;
+        margin-bottom: 0.25rem;
+    }
+
+    .exp-metric-value {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #10b981;
+    }
+
+    .channel-ranking {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin: 1.5rem 0;
+    }
+
+    .channel-rank-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .rank-number {
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .rank-info {
+        flex: 1;
+    }
+
+    .rank-channel {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .rank-rationale {
+        font-size: 0.8rem;
+        color: #888;
+    }
+
+    .rank-score {
+        text-align: right;
+    }
+
+    .score-value {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #10b981;
+    }
+
+    .score-label {
+        font-size: 0.7rem;
+        color: #888;
+        text-transform: uppercase;
+    }
+
+    .viral-loop-diagram {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin: 2rem 0;
+        padding: 2rem;
+        background: #1a1a1a;
+        border-radius: 16px;
+        border: 1px solid #2a2a2a;
+    }
+
+    .loop-step {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: #ffffff;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        text-align: center;
+        font-weight: 600;
+        min-width: 140px;
+    }
+
+    .loop-arrow {
+        font-size: 1.5rem;
+        color: #10b981;
+    }
+
+    .north-star-card {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
+        border: 2px solid rgba(16, 185, 129, 0.3);
+        border-radius: 16px;
+        padding: 2rem;
+        text-align: center;
+        margin: 1.5rem 0;
+    }
+
+    .north-star-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .north-star-metric {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #10b981;
+        margin-bottom: 0.5rem;
+    }
+
+    .north-star-description {
+        color: #ccc;
+        font-size: 0.95rem;
+    }
+
+    .growth-lever {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+        margin-bottom: 0.75rem;
+    }
+
+    .lever-icon {
+        width: 48px;
+        height: 48px;
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+    }
+
+    .lever-info {
+        flex: 1;
+    }
+
+    .lever-name {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .lever-description {
+        color: #888;
+        font-size: 0.85rem;
+    }
+
+    .lever-impact {
+        text-align: right;
+    }
+
+    .impact-bar {
+        display: flex;
+        gap: 3px;
+    }
+
+    .impact-segment {
+        width: 8px;
+        height: 24px;
+        background: #2a2a2a;
+        border-radius: 2px;
+    }
+
+    .impact-segment.filled {
+        background: linear-gradient(to top, #10b981, #059669);
+    }
+
+    @media (max-width: 768px) {
+        .bullseye {
+            width: 280px;
+            height: 280px;
+        }
+
+        .ring-outer {
+            width: 280px;
+            height: 280px;
+        }
+
+        .ring-middle {
+            width: 180px;
+            height: 180px;
+            top: 50px;
+            left: 50px;
+        }
+
+        .ring-inner {
+            width: 100px;
+            height: 100px;
+            top: 90px;
+            left: 90px;
+            font-size: 0.8rem;
+        }
+
+        .experiment-metrics {
+            grid-template-columns: 1fr;
+        }
+
+        .viral-loop-diagram {
+            flex-direction: column;
+        }
+
+        .loop-arrow {
+            transform: rotate(90deg);
+        }
+    }
+</style>
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<div class="report-container">
+    <!-- Header Section -->
+    <header class="report-header">
+        <div class="header-content">
+            <div class="header-badge">GROWTH PLAYBOOK</div>
+            <h1 class="report-title">{{COMPANY_NAME}}</h1>
+            <p class="report-subtitle">{{GROWTH_MISSION}}</p>
+        </div>
+        <div class="header-meta">
+            <div class="meta-item">
+                <span class="meta-label">Generated</span>
+                <span class="meta-value">{{GENERATION_DATE}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Growth Stage</span>
+                <span class="meta-value">{{GROWTH_STAGE}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Primary Goal</span>
+                <span class="meta-value">{{PRIMARY_GOAL}}</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- North Star Metric Section -->
+    <section class="content-section">
+        <h2 class="section-title">North Star Metric</h2>
+
+        <div class="north-star-card">
+            <div class="north-star-icon">⭐</div>
+            <div class="north-star-metric">{{NORTH_STAR_METRIC}}</div>
+            <div class="north-star-description">{{NORTH_STAR_DESCRIPTION}}</div>
+        </div>
+
+        <div class="grid-3">
+            <div class="metric-card">
+                <div class="metric-label">Current Value</div>
+                <div class="metric-value">{{CURRENT_NSM}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">30-Day Target</div>
+                <div class="metric-value">{{TARGET_30_NSM}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">90-Day Target</div>
+                <div class="metric-value">{{TARGET_90_NSM}}</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Traction Bullseye Section -->
+    <section class="content-section">
+        <h2 class="section-title">Traction Bullseye Framework</h2>
+
+        <p class="section-description">{{BULLSEYE_DESCRIPTION}}</p>
+
+        <div class="bullseye-container">
+            <div class="bullseye">
+                <div class="bullseye-ring ring-outer">
+                    <span class="ring-label outer-label">Testing</span>
+                </div>
+                <div class="bullseye-ring ring-middle">
+                    <span class="ring-label middle-label">Promising</span>
+                </div>
+                <div class="bullseye-ring ring-inner">
+                    Core<br>Focus
+                </div>
+            </div>
+        </div>
+
+        <!-- Channel Ranking -->
+        <h3 class="subsection-title">Channel Priority Ranking</h3>
+        <div class="channel-ranking">
+            {{CHANNEL_RANKINGS}}
+        </div>
+
+        <!-- Bullseye Distribution Chart -->
+        <div class="chart-container">
+            <canvas id="bullseyeChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Growth Experiments Section -->
+    <section class="content-section">
+        <h2 class="section-title">Growth Experiments</h2>
+
+        <p class="section-description">{{EXPERIMENTS_OVERVIEW}}</p>
+
+        <div class="grid-2">
+            {{EXPERIMENT_CARDS}}
+        </div>
+
+        <!-- Experiment Performance Chart -->
+        <div class="chart-container">
+            <canvas id="experimentChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Viral Loops Section -->
+    <section class="content-section">
+        <h2 class="section-title">Viral Loop Design</h2>
+
+        <p class="section-description">{{VIRAL_OVERVIEW}}</p>
+
+        <!-- Viral Loop Diagram -->
+        <div class="viral-loop-diagram">
+            {{VIRAL_LOOP_STEPS}}
+        </div>
+
+        <!-- Viral Coefficient Metrics -->
+        <div class="grid-3">
+            <div class="metric-card">
+                <div class="metric-label">Viral Coefficient (K)</div>
+                <div class="metric-value">{{K_FACTOR}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Cycle Time</div>
+                <div class="metric-value">{{CYCLE_TIME}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Referral Rate</div>
+                <div class="metric-value">{{REFERRAL_RATE}}</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Growth Levers Section -->
+    <section class="content-section">
+        <h2 class="section-title">Growth Levers</h2>
+
+        <p class="section-description">{{LEVERS_DESCRIPTION}}</p>
+
+        {{GROWTH_LEVERS}}
+
+        <!-- Growth Levers Impact Chart -->
+        <div class="chart-container">
+            <canvas id="leversChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Pirate Metrics (AARRR) Section -->
+    <section class="content-section">
+        <h2 class="section-title">Pirate Metrics (AARRR)</h2>
+
+        <div class="grid-5">
+            <div class="funnel-stage">
+                <div class="stage-label">Stage 1</div>
+                <div class="stage-name">Acquisition</div>
+                <div class="stage-content-types">{{ACQUISITION_RATE}}</div>
+            </div>
+            <div class="funnel-stage">
+                <div class="stage-label">Stage 2</div>
+                <div class="stage-name">Activation</div>
+                <div class="stage-content-types">{{ACTIVATION_RATE}}</div>
+            </div>
+            <div class="funnel-stage">
+                <div class="stage-label">Stage 3</div>
+                <div class="stage-name">Retention</div>
+                <div class="stage-content-types">{{RETENTION_RATE}}</div>
+            </div>
+            <div class="funnel-stage">
+                <div class="stage-label">Stage 4</div>
+                <div class="stage-name">Referral</div>
+                <div class="stage-content-types">{{REFERRAL_RATE_AARRR}}</div>
+            </div>
+            <div class="funnel-stage">
+                <div class="stage-label">Stage 5</div>
+                <div class="stage-name">Revenue</div>
+                <div class="stage-content-types">{{REVENUE_RATE}}</div>
+            </div>
+        </div>
+
+        <!-- AARRR Funnel Chart -->
+        <div class="chart-container">
+            <canvas id="aarrrChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Growth Budget Section -->
+    <section class="content-section">
+        <h2 class="section-title">Growth Investment</h2>
+
+        <div class="grid-2">
+            <div class="info-card">
+                <h4>Budget Allocation</h4>
+                {{BUDGET_BREAKDOWN}}
+            </div>
+            <div class="chart-container" style="min-height: 250px;">
+                <canvas id="budgetChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- 90-Day Sprint Plan -->
+    <section class="content-section">
+        <h2 class="section-title">90-Day Growth Sprint</h2>
+
+        <div class="timeline">
+            {{GROWTH_SPRINT_TIMELINE}}
+        </div>
+    </section>
+
+    <!-- Report Footer -->
+    <footer class="report-footer">
+        <div class="footer-content">
+            <p class="footer-brand">Generated by StratArts Growth Hacking Playbook</p>
+            <p class="footer-disclaimer">This playbook provides a framework for growth experimentation. Validate hypotheses with data and iterate based on results.</p>
+        </div>
+    </footer>
+</div>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Bullseye Chart
+    const bullseyeCtx = document.getElementById('bullseyeChart');
+    if (bullseyeCtx) {
+        new Chart(bullseyeCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Content Marketing', 'SEO', 'Social Media', 'Email', 'Paid Ads', 'Partnerships', 'PR', 'Community'],
+                datasets: [{
+                    label: 'Channel Score',
+                    data: [9, 8, 7, 7, 5, 6, 4, 8],
+                    backgroundColor: function(context) {
+                        const value = context.raw;
+                        if (value >= 8) return '#10b981';
+                        if (value >= 6) return '#059669';
+                        return '#047857';
+                    },
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    y: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Traction Channel Scoring',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // Experiment Performance Chart
+    const expCtx = document.getElementById('experimentChart');
+    if (expCtx) {
+        new Chart(expCtx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Experiments',
+                    data: [
+                        { x: 3, y: 8, r: 15 },
+                        { x: 7, y: 6, r: 12 },
+                        { x: 5, y: 7, r: 18 },
+                        { x: 8, y: 4, r: 10 },
+                        { x: 2, y: 9, r: 14 }
+                    ],
+                    backgroundColor: 'rgba(16, 185, 129, 0.6)',
+                    borderColor: '#10b981'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        min: 0,
+                        max: 10,
+                        title: {
+                            display: true,
+                            text: 'Effort →',
+                            color: '#ccc'
+                        },
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    y: {
+                        min: 0,
+                        max: 10,
+                        title: {
+                            display: true,
+                            text: 'Expected Impact →',
+                            color: '#ccc'
+                        },
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Experiment Prioritization Matrix',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // Growth Levers Chart
+    const leversCtx = document.getElementById('leversChart');
+    if (leversCtx) {
+        new Chart(leversCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Traffic', 'Conversion', 'Retention', 'Referral', 'Pricing', 'Expansion'],
+                datasets: [{
+                    label: 'Current Performance',
+                    data: [6, 5, 4, 3, 5, 4],
+                    backgroundColor: 'rgba(107, 114, 128, 0.3)',
+                    borderColor: '#6b7280',
+                    borderWidth: 2
+                }, {
+                    label: 'Target Performance',
+                    data: [8, 8, 7, 6, 7, 6],
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                    borderColor: '#10b981',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#10b981'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: { color: '#888', stepSize: 2 },
+                        grid: { color: '#2a2a2a' },
+                        pointLabels: { color: '#ccc', font: { size: 11 } }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Growth Lever Performance',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+
+    // AARRR Funnel Chart
+    const aarrrCtx = document.getElementById('aarrrChart');
+    if (aarrrCtx) {
+        new Chart(aarrrCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Acquisition', 'Activation', 'Retention', 'Referral', 'Revenue'],
+                datasets: [{
+                    label: 'Conversion Rate %',
+                    data: [100, 45, 25, 12, 8],
+                    backgroundColor: [
+                        '#10b981',
+                        '#059669',
+                        '#047857',
+                        '#065f46',
+                        '#064e3b'
+                    ],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#888',
+                            callback: function(value) { return value + '%'; }
+                        },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'AARRR Funnel Conversion',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // Budget Chart
+    const budgetCtx = document.getElementById('budgetChart');
+    if (budgetCtx) {
+        new Chart(budgetCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Content', 'Paid Acquisition', 'Tools/Software', 'Experiments', 'Community'],
+                datasets: [{
+                    data: [30, 35, 15, 15, 5],
+                    backgroundColor: [
+                        '#10b981',
+                        '#059669',
+                        '#047857',
+                        '#065f46',
+                        '#064e3b'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Growth Budget Allocation',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        position: 'right',
+                        labels: { color: '#ccc', padding: 12 }
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+<!-- ═══ SKILL JS END ═══ -->

@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Personas | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif; background: #0a0a0a; color: #f5f5f5; line-height: 1.6; }
+        .container { margin: 0 auto; background: #0a0a0a; }
+
+        /* === HEADER === */
+        header { background: #0a0a0a; padding: 0; color: white; display: flex; justify-content: center; }
+        .header-content { position: relative; z-index: 1; max-width: 1600px; width: 100%; background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%); padding: 4rem 4rem 3rem 4rem; border-bottom: 1px solid rgba(16, 185, 129, 0.3); }
+        .header-content::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>'); opacity: 0.3; z-index: -1; }
+        .kicker { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; opacity: 0.9; margin-bottom: 0.5rem; }
+        h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
+        .subtitle { font-size: 1.3rem; opacity: 0.95; font-weight: 400; margin-bottom: 2rem; }
+        .meta-info { display: flex; gap: 2rem; font-size: 0.9rem; opacity: 0.9; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.2); }
+        .meta-item { display: flex; align-items: center; gap: 0.5rem; }
+
+        /* === SCORE BANNER === */
+        .score-banner { background: #0a0a0a; padding: 0; display: flex; justify-content: center; }
+        .score-container { display: grid; grid-template-columns: auto 1fr auto; gap: 3rem; align-items: center; max-width: 1600px; width: 100%; margin: 0 auto; padding: 3rem 4rem; background: #1a1a1a; border-bottom: 1px solid rgba(16, 185, 129, 0.2); }
+        .score-main { text-align: center; }
+        .score-number { font-size: 5rem; font-weight: 700; background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+        .score-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; color: #a3a3a3; margin-top: 0.5rem; font-weight: 600; }
+        .score-interpretation { border-left: 3px solid #10b981; padding-left: 2rem; }
+        .interpretation-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; color: #f5f5f5; }
+        .interpretation-text { color: #d4d4d4; line-height: 1.7; }
+        .verdict-badge { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 1rem 2rem; border-radius: 50px; font-weight: 700; font-size: 1.1rem; white-space: nowrap; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+
+        /* === CONTENT === */
+        .content { max-width: 1600px; margin: 0 auto; padding: 4rem 4rem; background: #0a0a0a; }
+        .section { margin-bottom: 4rem; }
+        .section:last-child { margin-bottom: 2rem; }
+        .section-header { margin-bottom: 2rem; }
+        .section-title { font-size: 2rem; font-weight: 700; color: #f5f5f5; margin-bottom: 0.5rem; }
+        .section-description { font-size: 1.05rem; color: #d4d4d4; max-width: 800px; }
+
+        /* === CHART LAYOUTS === */
+        .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        .chart-card { background: #1a1a1a; border-radius: 12px; padding: 2rem; border: 1px solid rgba(16, 185, 129, 0.2); }
+        .chart-title { font-weight: 700; font-size: 1.1rem; color: #f5f5f5; margin-bottom: 0.5rem; }
+        .chart-subtitle { font-size: 0.9rem; color: #a3a3a3; margin-bottom: 1.5rem; }
+        .chart-wrapper { position: relative; height: 350px; margin-bottom: 1.5rem; }
+
+        /* === INSIGHTS PANEL === */
+        .insights-panel { background: #0a0a0a; border-left: 4px solid #10b981; padding: 1.5rem; margin-top: 1rem; border-radius: 0 8px 8px 0; }
+        .insight-title { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: #10b981; margin-bottom: 1rem; }
+        .insight-list { list-style: none; }
+        .insight-list li { padding: 0.6rem 0; color: #d4d4d4; font-size: 0.95rem; border-bottom: 1px solid rgba(16, 185, 129, 0.1); }
+        .insight-list li:last-child { border-bottom: none; }
+        .insight-list li strong { color: #10b981; font-weight: 600; }
+
+        /* === PERSONA CARDS === */
+        .persona-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .persona-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+        .persona-card:hover { transform: translateY(-2px); border-color: rgba(16, 185, 129, 0.4); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1); }
+        .persona-card.primary { border: 2px solid #10b981; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15); }
+        .persona-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(16, 185, 129, 0.2); }
+        .persona-name { font-weight: 700; color: #f5f5f5; font-size: 1.25rem; line-height: 1.2; }
+        .persona-role { font-size: 0.9rem; color: #10b981; margin-top: 0.25rem; }
+        .persona-score { font-size: 1.4rem; font-weight: 700; color: #10b981; }
+        .persona-score-label { font-size: 0.7rem; color: #a3a3a3; text-transform: uppercase; letter-spacing: 0.05em; }
+        .persona-overview { font-size: 0.95rem; color: #d4d4d4; line-height: 1.6; margin-bottom: 1rem; }
+        .persona-demographics { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+        .demo-item { font-size: 0.85rem; }
+        .demo-label { color: #a3a3a3; }
+        .demo-value { color: #f5f5f5; font-weight: 500; }
+
+        /* === JTBD BOX === */
+        .jtbd-box { background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 1rem; margin: 1rem 0; }
+        .jtbd-label { font-size: 0.75rem; color: #10b981; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; font-weight: 600; }
+        .jtbd-statement { font-size: 0.9rem; color: #f5f5f5; line-height: 1.5; font-style: italic; }
+
+        /* === PAIN LIST === */
+        .pain-list { list-style: none; padding: 0; margin: 0.5rem 0; }
+        .pain-list li { font-size: 0.85rem; color: #fc8181; padding: 0.4rem 0; display: flex; align-items: flex-start; gap: 0.5rem; }
+        .pain-list li::before { content: '!'; font-weight: bold; color: #fc8181; background: rgba(245, 101, 101, 0.2); padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.7rem; }
+
+        /* === PRIORITY MATRIX === */
+        .priority-matrix { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+        .matrix-table { width: 100%; border-collapse: collapse; }
+        .matrix-table th { background: rgba(16, 185, 129, 0.1); color: #10b981; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid rgba(16, 185, 129, 0.2); }
+        .matrix-table td { padding: 0.75rem 1rem; color: #d4d4d4; font-size: 0.9rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .matrix-table tr:hover td { background: rgba(16, 185, 129, 0.05); }
+        .matrix-score { font-weight: 700; color: #10b981; }
+        .matrix-rank { display: inline-block; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #0a0a0a; padding: 0.25rem 0.75rem; border-radius: 20px; font-weight: 700; font-size: 0.8rem; }
+
+        /* === JOURNEY TIMELINE === */
+        .journey-timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2rem; }
+        .journey-stage { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1.25rem; position: relative; }
+        .journey-stage::after { content: ''; position: absolute; right: -0.75rem; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 8px solid rgba(16, 185, 129, 0.4); }
+        .journey-stage:last-child::after { display: none; }
+        .stage-name { font-weight: 700; color: #10b981; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+        .stage-duration { font-size: 0.75rem; color: #a3a3a3; margin-bottom: 0.5rem; }
+        .stage-activities { font-size: 0.85rem; color: #d4d4d4; line-height: 1.5; }
+
+        /* === GTM PHASES === */
+        .gtm-phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .gtm-phase { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; position: relative; overflow: hidden; }
+        .gtm-phase::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #10b981 0%, #14b8a6 100%); }
+        .phase-number { font-size: 3rem; font-weight: 900; color: rgba(16, 185, 129, 0.15); position: absolute; top: 0.5rem; right: 1rem; line-height: 1; }
+        .phase-title { font-weight: 700; color: #10b981; font-size: 1rem; margin-bottom: 0.25rem; }
+        .phase-timeline { font-size: 0.85rem; color: #a3a3a3; margin-bottom: 1rem; }
+        .phase-persona { font-weight: 600; color: #f5f5f5; margin-bottom: 0.5rem; }
+        .phase-tactics { list-style: none; padding: 0; margin: 0; }
+        .phase-tactics li { font-size: 0.85rem; color: #d4d4d4; padding: 0.3rem 0; display: flex; align-items: flex-start; gap: 0.5rem; }
+        .phase-tactics li::before { content: '→'; color: #10b981; font-weight: bold; }
+
+        /* === OBJECTION GRID === */
+        .objection-grid { display: grid; gap: 1rem; margin-top: 1.5rem; }
+        .objection-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; overflow: hidden; }
+        .objection-header { background: rgba(245, 101, 101, 0.1); padding: 1rem 1.25rem; border-bottom: 1px solid rgba(245, 101, 101, 0.2); }
+        .objection-text { font-size: 1rem; color: #fc8181; font-style: italic; }
+        .objection-response { padding: 1rem 1.25rem; }
+        .response-label { font-size: 0.75rem; font-weight: 700; color: #10b981; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .response-content { font-size: 0.9rem; color: #d4d4d4; line-height: 1.5; }
+
+        /* === COMPARISON TABLE === */
+        .comparison-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+        .comparison-table th { background: rgba(16, 185, 129, 0.1); color: #f5f5f5; font-weight: 600; font-size: 0.9rem; padding: 1rem; text-align: center; border-bottom: 2px solid rgba(16, 185, 129, 0.3); }
+        .comparison-table th:first-child { text-align: left; color: #10b981; }
+        .comparison-table td { padding: 0.75rem 1rem; color: #d4d4d4; font-size: 0.9rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); text-align: center; }
+        .comparison-table td:first-child { text-align: left; font-weight: 500; color: #f5f5f5; }
+        .comparison-table tr:hover td { background: rgba(16, 185, 129, 0.05); }
+
+        /* === FOOTER === */
+        footer { background: #0a0a0a; display: flex; justify-content: center; }
+        .footer-content { max-width: 1600px; width: 100%; background: #1a1a1a; color: #a3a3a3; padding: 2rem 4rem; font-size: 0.85rem; text-align: center; border-top: 1px solid rgba(16, 185, 129, 0.2); }
+        .footer-content p { margin: 0.3rem 0; }
+        .footer-content strong { color: #10b981; }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 1200px) { .persona-grid { grid-template-columns: repeat(2, 1fr); } .journey-timeline { grid-template-columns: repeat(2, 1fr); } .journey-stage:nth-child(2)::after { display: none; } }
+        @media (max-width: 768px) { h1 { font-size: 2.5rem; } .chart-grid, .persona-grid, .journey-timeline, .gtm-phases { grid-template-columns: 1fr; } .journey-stage::after { display: none; } .score-container { grid-template-columns: 1fr; text-align: center; } .score-interpretation { border-left: none; border-top: 3px solid #10b981; padding-left: 0; padding-top: 1.5rem; } .header-content, .score-container, .content, .footer-content { padding: 2rem; } }
+
+        /* === PRINT === */
+        @media print { body { background: white; color: #000000; } .container, header, .score-banner, .content, footer { background: white; } .header-content { background: white; color: #000000; border: 2px solid #10b981; } .header-content::before { display: none; } h1, .interpretation-title { color: #000000; } .persona-card, .priority-matrix, .journey-stage, .objection-card, .gtm-phase, .chart-card { background: white; border: 2px solid #10b981; page-break-inside: avoid; } .footer-content { background: white; color: #666666; border-top: 2px solid #10b981; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">StratArts Customer Research</div>
+                <h1>Customer Personas</h1>
+                <div class="subtitle">PetPulse - Jobs-to-be-Done Buyer Personas</div>
+                <div class="meta-info">
+                    <div class="meta-item"><span>📅</span><span>Generated: December 18, 2025</span></div>
+                    <div class="meta-item"><span>📊</span><span>Analysis Type: JTBD + Priority Matrix</span></div>
+                    <div class="meta-item"><span>🎯</span><span>Version 1.0.0</span></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SCORE BANNER -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">8.7</div>
+                    <div class="score-label">Persona Strength</div>
+                </div>
+                <div class="score-interpretation">
+                    <div class="interpretation-title">What This Score Means</div>
+                    <div class="interpretation-text">
+                        PetPulse has well-defined, actionable customer personas with clear Jobs-to-be-Done. The primary persona (Premium Pet Parent) scores exceptionally high on willingness to pay and market size, providing a strong beachhead market for launch.
+                    </div>
+                </div>
+                <div class="verdict-badge">✓ STRONG PERSONAS</div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+            <!-- Section 1: Persona Overview Cards -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Customer Personas</h2>
+                    <p class="section-description">Detailed buyer personas built on Jobs-to-be-Done principles.</p>
+                </div>
+                <div class="persona-grid">
+                    <!-- Persona 1: Premium Pet Parent -->
+                    <div class="persona-card primary">
+                        <div class="persona-header">
+                            <div>
+                                <div class="persona-name">Premium Priya</div>
+                                <div class="persona-role">Premium Pet Parent</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div class="persona-score">36/40</div>
+                                <div class="persona-score-label">Priority Score</div>
+                            </div>
+                        </div>
+                        <p class="persona-overview">Mid-30s urban professional who treats her dog Max like family. Spends $300+/month on premium pet products and services. Works from home, anxious about Max's health between vet visits.</p>
+                        <div class="persona-demographics">
+                            <div class="demo-item"><span class="demo-label">Age:</span> <span class="demo-value">32-45</span></div>
+                            <div class="demo-item"><span class="demo-label">Income:</span> <span class="demo-value">$120K+</span></div>
+                            <div class="demo-item"><span class="demo-label">Location:</span> <span class="demo-value">Urban/Suburban</span></div>
+                            <div class="demo-item"><span class="demo-label">Tech:</span> <span class="demo-value">Early Adopter</span></div>
+                        </div>
+                        <div class="jtbd-box">
+                            <div class="jtbd-label">Jobs-to-be-Done</div>
+                            <div class="jtbd-statement">"When my dog is acting differently, I want to know if something is wrong immediately, so I can get him help before it becomes an emergency."</div>
+                        </div>
+                        <ul class="pain-list">
+                            <li>2-3 week wait for vet appointments</li>
+                            <li>$1,500+ emergency vet bills from late detection</li>
+                            <li>Constant anxiety about pet's health</li>
+                        </ul>
+                    </div>
+
+                    <!-- Persona 2: Health-Conscious Hannah -->
+                    <div class="persona-card">
+                        <div class="persona-header">
+                            <div>
+                                <div class="persona-name">Health-Conscious Hannah</div>
+                                <div class="persona-role">Preventive Care Seeker</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div class="persona-score">31/40</div>
+                                <div class="persona-score-label">Priority Score</div>
+                            </div>
+                        </div>
+                        <p class="persona-overview">Late-40s suburban mom with an aging golden retriever. Focused on preventive health for herself and her pets. Uses Fitbit, tracks nutrition, wants data-driven pet care.</p>
+                        <div class="persona-demographics">
+                            <div class="demo-item"><span class="demo-label">Age:</span> <span class="demo-value">40-55</span></div>
+                            <div class="demo-item"><span class="demo-label">Income:</span> <span class="demo-value">$80-150K</span></div>
+                            <div class="demo-item"><span class="demo-label">Location:</span> <span class="demo-value">Suburban</span></div>
+                            <div class="demo-item"><span class="demo-label">Tech:</span> <span class="demo-value">Pragmatist</span></div>
+                        </div>
+                        <div class="jtbd-box">
+                            <div class="jtbd-label">Jobs-to-be-Done</div>
+                            <div class="jtbd-statement">"When my senior dog is slowing down, I want to track her health metrics over time, so I can catch age-related issues early and extend her quality of life."</div>
+                        </div>
+                        <ul class="pain-list">
+                            <li>No visibility into pet health between vet visits</li>
+                            <li>Senior pet anxiety (age-related decline)</li>
+                            <li>Missed early warning signs</li>
+                        </ul>
+                    </div>
+
+                    <!-- Persona 3: Tech-Forward Tyler -->
+                    <div class="persona-card">
+                        <div class="persona-header">
+                            <div>
+                                <div class="persona-name">Tech-Forward Tyler</div>
+                                <div class="persona-role">Connected Home Enthusiast</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div class="persona-score">26/40</div>
+                                <div class="persona-score-label">Priority Score</div>
+                            </div>
+                        </div>
+                        <p class="persona-overview">Late-20s tech worker, first-time dog owner. Has smart home with Ring, Nest, smart feeders. Wants pet care that integrates with his connected lifestyle.</p>
+                        <div class="persona-demographics">
+                            <div class="demo-item"><span class="demo-label">Age:</span> <span class="demo-value">25-35</span></div>
+                            <div class="demo-item"><span class="demo-label">Income:</span> <span class="demo-value">$90-130K</span></div>
+                            <div class="demo-item"><span class="demo-label">Location:</span> <span class="demo-value">Urban</span></div>
+                            <div class="demo-item"><span class="demo-label">Tech:</span> <span class="demo-value">Innovator</span></div>
+                        </div>
+                        <div class="jtbd-box">
+                            <div class="jtbd-label">Jobs-to-be-Done</div>
+                            <div class="jtbd-statement">"When I'm at work, I want to check on my puppy's activity and health, so I know he's okay and can show my friends how smart my pet tech setup is."</div>
+                        </div>
+                        <ul class="pain-list">
+                            <li>Fragmented pet tech ecosystem</li>
+                            <li>First-time pet owner uncertainty</li>
+                            <li>FOMO on new pet technology</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Priority Matrix -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Persona Priority Matrix</h2>
+                    <p class="section-description">Ranking by market size, accessibility, willingness to pay, and fit.</p>
+                </div>
+                <div class="priority-matrix">
+                    <table class="matrix-table">
+                        <thead>
+                            <tr>
+                                <th>Persona</th>
+                                <th>Market Size</th>
+                                <th>Accessibility</th>
+                                <th>WTP</th>
+                                <th>Fit</th>
+                                <th>Total</th>
+                                <th>Rank</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Premium Priya</strong></td>
+                                <td class="matrix-score">9</td>
+                                <td class="matrix-score">8</td>
+                                <td class="matrix-score">10</td>
+                                <td class="matrix-score">9</td>
+                                <td class="matrix-score">36/40</td>
+                                <td><span class="matrix-rank">#1</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Health-Conscious Hannah</strong></td>
+                                <td class="matrix-score">8</td>
+                                <td class="matrix-score">7</td>
+                                <td class="matrix-score">8</td>
+                                <td class="matrix-score">8</td>
+                                <td class="matrix-score">31/40</td>
+                                <td><span class="matrix-rank">#2</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tech-Forward Tyler</strong></td>
+                                <td class="matrix-score">7</td>
+                                <td class="matrix-score">9</td>
+                                <td class="matrix-score">5</td>
+                                <td class="matrix-score">5</td>
+                                <td class="matrix-score">26/40</td>
+                                <td><span class="matrix-rank">#3</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 3: Visual Analysis -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Visual Analysis</h2>
+                    <p class="section-description">Patterns in persona profiles, priority scoring, and behavioral characteristics.</p>
+                </div>
+                <div class="chart-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">Persona Profile Comparison</div>
+                        <div class="chart-subtitle">Multi-dimensional comparison across key attributes</div>
+                        <div class="chart-wrapper"><canvas id="personaRadar"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Key Observations</div>
+                            <ul class="insight-list">
+                                <li><strong>Premium Priya:</strong> Highest WTP and urgency - ideal launch target</li>
+                                <li><strong>Hannah:</strong> Balanced profile, strong retention potential</li>
+                                <li><strong>Tyler:</strong> Easy to reach but lower WTP, secondary target</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Priority Matrix Visualization</div>
+                        <div class="chart-subtitle">Market size vs. willingness to pay (bubble = fit)</div>
+                        <div class="chart-wrapper"><canvas id="priorityScatter"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Prioritization Insights</div>
+                            <ul class="insight-list">
+                                <li><strong>Top-right quadrant:</strong> Premium Priya dominates</li>
+                                <li><strong>Sweet spot:</strong> High WTP + Large market = beachhead</li>
+                                <li><strong>Tyler caveat:</strong> Accessible but price-sensitive</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Pain Point Intensity by Persona</div>
+                        <div class="chart-subtitle">Comparing pain severity to identify universal vs. specific pains</div>
+                        <div class="chart-wrapper"><canvas id="painChart"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Pain Analysis</div>
+                            <ul class="insight-list">
+                                <li><strong>Universal:</strong> Vet access frustration affects all personas</li>
+                                <li><strong>Premium-specific:</strong> Health anxiety highest for Priya</li>
+                                <li><strong>Hannah-specific:</strong> Senior pet concerns dominate</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Decision Criteria Importance</div>
+                        <div class="chart-subtitle">Factors influencing purchase decisions</div>
+                        <div class="chart-wrapper"><canvas id="criteriaChart"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Decision Drivers</div>
+                            <ul class="insight-list">
+                                <li><strong>#1 Ease of use:</strong> Must be simple to set up</li>
+                                <li><strong>#2 Accuracy:</strong> Health data must be trustworthy</li>
+                                <li><strong>#3 Vet access:</strong> Instant consultation is key differentiator</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Buying Journey -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Buying Journey Map</h2>
+                    <p class="section-description">Stages from problem awareness to purchase decision.</p>
+                </div>
+                <div class="journey-timeline">
+                    <div class="journey-stage">
+                        <div class="stage-name">Awareness</div>
+                        <div class="stage-duration">1-2 weeks</div>
+                        <div class="stage-activities">Pet health scare, vet wait frustration, or friend recommendation triggers search. Discovers via Instagram ads, Google search, or vet office.</div>
+                    </div>
+                    <div class="journey-stage">
+                        <div class="stage-name">Consideration</div>
+                        <div class="stage-duration">2-4 weeks</div>
+                        <div class="stage-activities">Compares options (Whistle, Fi, Vetster). Reads reviews on Amazon/Chewy. Watches product videos. Asks pet parent friends.</div>
+                    </div>
+                    <div class="journey-stage">
+                        <div class="stage-name">Decision</div>
+                        <div class="stage-duration">1-2 weeks</div>
+                        <div class="stage-activities">Free trial or return policy reduces risk. Partner recommendation or sale event triggers purchase. Price comparison final step.</div>
+                    </div>
+                    <div class="journey-stage">
+                        <div class="stage-name">Purchase</div>
+                        <div class="stage-duration">Same day</div>
+                        <div class="stage-activities">D2C website purchase (primary), Amazon (secondary). Expects quick shipping. Onboarding email sequence begins.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Persona Comparison -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Persona Comparison Matrix</h2>
+                    <p class="section-description">Side-by-side comparison of key attributes.</p>
+                </div>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Premium Priya</th>
+                            <th>Health-Conscious Hannah</th>
+                            <th>Tech-Forward Tyler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Primary Goal</td><td>Peace of mind</td><td>Extend pet lifespan</td><td>Connected pet care</td></tr>
+                        <tr><td>Top Pain Point</td><td>Health anxiety</td><td>Senior pet decline</td><td>Fragmented ecosystem</td></tr>
+                        <tr><td>Decision Authority</td><td>Solo (quick)</td><td>Family discussion</td><td>Solo (impulsive)</td></tr>
+                        <tr><td>Sales Cycle</td><td>2-4 weeks</td><td>4-6 weeks</td><td>1-2 weeks</td></tr>
+                        <tr><td>Price Sensitivity</td><td>Low</td><td>Medium</td><td>Medium-High</td></tr>
+                        <tr><td>Best Channel</td><td>Instagram + Vet</td><td>Facebook + Google</td><td>TikTok + Reddit</td></tr>
+                        <tr><td>Key Objection</td><td>"Does it really work?"</td><td>"Is it worth the cost?"</td><td>"Can I return it?"</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Section 6: GTM Prioritization -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Go-to-Market Persona Prioritization</h2>
+                    <p class="section-description">Phased targeting based on strategic value and readiness.</p>
+                </div>
+                <div class="gtm-phases">
+                    <div class="gtm-phase">
+                        <div class="phase-number">1</div>
+                        <div class="phase-title">Phase 1: Launch</div>
+                        <div class="phase-timeline">Months 1-6</div>
+                        <div class="phase-persona">Target: Premium Priya</div>
+                        <ul class="phase-tactics">
+                            <li>Instagram/Facebook ads to affluent pet owners</li>
+                            <li>Vet clinic partnerships for referrals</li>
+                            <li>Pet influencer campaigns (10K+ followers)</li>
+                            <li>PR: "Peace of mind for pet parents"</li>
+                        </ul>
+                    </div>
+                    <div class="gtm-phase">
+                        <div class="phase-number">2</div>
+                        <div class="phase-title">Phase 2: Expansion</div>
+                        <div class="phase-timeline">Months 7-12</div>
+                        <div class="phase-persona">Target: Health-Conscious Hannah</div>
+                        <ul class="phase-tactics">
+                            <li>Google search ads: "senior dog health"</li>
+                            <li>Facebook groups for aging pet parents</li>
+                            <li>Content: "Early detection success stories"</li>
+                            <li>Pet insurance partnership pilots</li>
+                        </ul>
+                    </div>
+                    <div class="gtm-phase">
+                        <div class="phase-number">3</div>
+                        <div class="phase-title">Phase 3: Scale</div>
+                        <div class="phase-timeline">Year 2+</div>
+                        <div class="phase-persona">Target: Tech-Forward Tyler</div>
+                        <ul class="phase-tactics">
+                            <li>TikTok product videos / unboxings</li>
+                            <li>Smart home integrations (Alexa, HomeKit)</li>
+                            <li>Reddit r/dogs, r/smarthome presence</li>
+                            <li>Price-conscious tier for tech enthusiasts</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Objections -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Common Objections & Responses</h2>
+                    <p class="section-description">Anticipated objections with strategic response frameworks.</p>
+                </div>
+                <div class="objection-grid">
+                    <div class="objection-card">
+                        <div class="objection-header">
+                            <div class="objection-text">"My pet is healthy, I don't need this."</div>
+                        </div>
+                        <div class="objection-response">
+                            <div class="response-label">Response Strategy</div>
+                            <div class="response-content">Share statistics: 67% of pet health issues are detected late. PetPulse caught early signs of heart disease in 23% of "healthy" dogs during beta. Prevention saves $3,000+ in emergency vet costs. Frame as insurance, not treatment.</div>
+                        </div>
+                    </div>
+                    <div class="objection-card">
+                        <div class="objection-header">
+                            <div class="objection-text">"I already have a GPS tracker / fitness collar."</div>
+                        </div>
+                        <div class="objection-response">
+                            <div class="response-label">Response Strategy</div>
+                            <div class="response-content">Acknowledge: GPS trackers are great for location. PetPulse is different - it's a health monitor + instant vet access. Whistle/Fi track activity; we monitor vital signs (heart rate, temperature, respiratory) AND connect you to vets in 60 seconds.</div>
+                        </div>
+                    </div>
+                    <div class="objection-card">
+                        <div class="objection-header">
+                            <div class="objection-text">"What if my dog won't wear it?"</div>
+                        </div>
+                        <div class="objection-response">
+                            <div class="response-label">Response Strategy</div>
+                            <div class="response-content">30-day happiness guarantee - full refund if your dog doesn't love it. 94% of dogs adjust within 3 days. Collar weighs only 28g (lighter than a treat). Share video testimonials of dogs wearing collar comfortably.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | customer-persona-builder-v1.0.0</p>
+                <p style="margin-top: 5px;">Context Signature: customer-persona-builder-v1.0.0 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Chart.js Global Configuration
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+        const tooltipConfig = { backgroundColor: '#1a1a1a', titleColor: '#f5f5f5', bodyColor: '#d4d4d4', borderColor: '#10b981', borderWidth: 1 };
+
+        // Data
+        const data = {
+            personas: {
+                labels: ['Market Size', 'Accessibility', 'WTP', 'Fit', 'Urgency'],
+                persona1: [9, 8, 10, 9, 9],
+                persona2: [8, 7, 8, 8, 7],
+                persona3: [7, 9, 5, 5, 6]
+            },
+            priority: {
+                persona1: { x: 9, y: 10, r: 18, label: 'Premium Priya' },
+                persona2: { x: 8, y: 8, r: 16, label: 'Health-Conscious Hannah' },
+                persona3: { x: 7, y: 5, r: 10, label: 'Tech-Forward Tyler' }
+            },
+            pains: {
+                categories: ['Health Anxiety', 'Vet Access', 'Cost Concerns', 'Data Visibility'],
+                persona1: [10, 9, 3, 7],
+                persona2: [7, 8, 6, 9],
+                persona3: [4, 5, 8, 6]
+            },
+            criteria: {
+                labels: ['Ease of Use', 'Data Accuracy', 'Vet Access', 'Price/Value', 'Integration', 'Brand Trust'],
+                values: [9.5, 9, 8.5, 7, 6, 7.5]
+            }
+        };
+
+        // Chart 1: Persona Radar
+        new Chart(document.getElementById('personaRadar'), {
+            type: 'radar',
+            data: {
+                labels: data.personas.labels,
+                datasets: [
+                    { label: 'Premium Priya', data: data.personas.persona1, backgroundColor: 'rgba(16, 185, 129, 0.2)', borderColor: '#10b981', borderWidth: 2, pointBackgroundColor: '#10b981', pointRadius: 4 },
+                    { label: 'Health-Conscious Hannah', data: data.personas.persona2, backgroundColor: 'rgba(20, 184, 166, 0.2)', borderColor: '#14b8a6', borderWidth: 2, pointBackgroundColor: '#14b8a6', pointRadius: 4 },
+                    { label: 'Tech-Forward Tyler', data: data.personas.persona3, backgroundColor: 'rgba(5, 150, 105, 0.2)', borderColor: '#059669', borderWidth: 2, pointBackgroundColor: '#059669', pointRadius: 4 }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 10, ticks: { color: '#a3a3a3', stepSize: 2 }, grid: { color: 'rgba(16, 185, 129, 0.1)' }, pointLabels: { color: '#f5f5f5', font: { size: 11, weight: '600' } } } }, plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5', padding: 15 } }, tooltip: tooltipConfig } }
+        });
+
+        // Chart 2: Priority Scatter (Bubble)
+        new Chart(document.getElementById('priorityScatter'), {
+            type: 'bubble',
+            data: {
+                datasets: [
+                    { label: data.priority.persona1.label, data: [{ x: data.priority.persona1.x, y: data.priority.persona1.y, r: data.priority.persona1.r }], backgroundColor: 'rgba(16, 185, 129, 0.6)', borderColor: '#10b981', borderWidth: 2 },
+                    { label: data.priority.persona2.label, data: [{ x: data.priority.persona2.x, y: data.priority.persona2.y, r: data.priority.persona2.r }], backgroundColor: 'rgba(20, 184, 166, 0.6)', borderColor: '#14b8a6', borderWidth: 2 },
+                    { label: data.priority.persona3.label, data: [{ x: data.priority.persona3.x, y: data.priority.persona3.y, r: data.priority.persona3.r }], backgroundColor: 'rgba(5, 150, 105, 0.6)', borderColor: '#059669', borderWidth: 2 }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { x: { title: { display: true, text: 'Market Size', color: '#a3a3a3' }, min: 0, max: 10, ticks: { color: '#a3a3a3' }, grid: { color: 'rgba(16, 185, 129, 0.1)' } }, y: { title: { display: true, text: 'Willingness to Pay', color: '#a3a3a3' }, min: 0, max: 10, ticks: { color: '#a3a3a3' }, grid: { color: 'rgba(16, 185, 129, 0.1)' } } }, plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig } }
+        });
+
+        // Chart 3: Pain Chart
+        new Chart(document.getElementById('painChart'), {
+            type: 'bar',
+            data: {
+                labels: data.pains.categories,
+                datasets: [
+                    { label: 'Premium Priya', data: data.pains.persona1, backgroundColor: '#10b981', borderRadius: 4 },
+                    { label: 'Health-Conscious Hannah', data: data.pains.persona2, backgroundColor: '#14b8a6', borderRadius: 4 },
+                    { label: 'Tech-Forward Tyler', data: data.pains.persona3, backgroundColor: '#059669', borderRadius: 4 }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3' }, title: { display: true, text: 'Pain Intensity', color: '#a3a3a3' } }, x: { grid: { display: false }, ticks: { color: '#f5f5f5' } } }, plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig } }
+        });
+
+        // Chart 4: Criteria Chart
+        new Chart(document.getElementById('criteriaChart'), {
+            type: 'bar',
+            data: {
+                labels: data.criteria.labels,
+                datasets: [{ label: 'Importance', data: data.criteria.values, backgroundColor: '#10b981', borderRadius: 6 }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { beginAtZero: true, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3' } }, y: { grid: { display: false }, ticks: { color: '#f5f5f5', font: { weight: '500' } } } }, plugins: { legend: { display: false }, tooltip: tooltipConfig } }
+        });
+
+        // Print-friendly
+        window.addEventListener('beforeprint', () => Chart.defaults.color = '#000000');
+        window.addEventListener('afterprint', () => Chart.defaults.color = '#a3a3a3');
+    </script>
+</body>
+</html>

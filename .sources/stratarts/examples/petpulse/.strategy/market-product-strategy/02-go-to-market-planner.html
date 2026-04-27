@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go-to-Market Planner | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container { margin: 0 auto; background: #0a0a0a; }
+
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .header-content::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
+
+        .subtitle { font-size: 1.3rem; opacity: 0.95; font-weight: 400; margin-bottom: 2rem; }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item { display: flex; align-items: center; gap: 0.5rem; }
+
+        .score-banner { background: #0a0a0a; padding: 0; display: flex; justify-content: center; }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-main { text-align: center; }
+
+        .score-number {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .score-interpretation { border-left: 3px solid #10b981; padding-left: 2rem; }
+
+        .interpretation-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; color: #f5f5f5; }
+
+        .interpretation-text { color: #d4d4d4; line-height: 1.7; }
+
+        .verdict-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .content { max-width: 1600px; margin: 0 auto; padding: 4rem 4rem; background: #0a0a0a; }
+
+        .section { margin-bottom: 4rem; }
+        .section:last-child { margin-bottom: 2rem; }
+
+        .section-header { margin-bottom: 2rem; }
+
+        .section-title { font-size: 2rem; font-weight: 700; color: #f5f5f5; margin-bottom: 0.5rem; }
+
+        .section-description { font-size: 1.05rem; color: #d4d4d4; max-width: 800px; }
+
+        .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+
+        .chart-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .chart-card.full-width { grid-column: 1 / -1; }
+
+        .chart-title { font-weight: 700; font-size: 1.1rem; color: #f5f5f5; margin-bottom: 0.5rem; }
+
+        .chart-subtitle { font-size: 0.9rem; color: #a3a3a3; margin-bottom: 1.5rem; }
+
+        .chart-wrapper { position: relative; height: 350px; margin-bottom: 1.5rem; }
+
+        .insights-panel {
+            background: #0a0a0a;
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .insight-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .insight-list { list-style: none; }
+
+        .insight-list li {
+            padding: 0.6rem 0;
+            color: #d4d4d4;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .insight-list li:last-child { border-bottom: none; }
+        .insight-list li strong { color: #10b981; font-weight: 600; }
+
+        /* Goals Grid */
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .goal-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .goal-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .goal-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+
+        .goal-metric { font-size: 2.5rem; font-weight: 700; color: #10b981; margin-bottom: 0.5rem; }
+
+        .goal-label { font-size: 0.9rem; color: #d4d4d4; font-weight: 600; }
+
+        .goal-baseline { font-size: 0.8rem; color: #a3a3a3; margin-top: 0.25rem; }
+
+        /* Channel Cards */
+        .channel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .channel-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .channel-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+
+        .channel-card.primary { border-color: rgba(16, 185, 129, 0.5); border-width: 2px; }
+
+        .channel-header {
+            background: rgba(16, 185, 129, 0.1);
+            padding: 1rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .channel-name { font-weight: 700; color: #f5f5f5; font-size: 1.1rem; }
+
+        .channel-type {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .channel-type.primary { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .channel-type.secondary { background: rgba(246, 173, 85, 0.2); color: #f6ad55; }
+
+        .channel-body { padding: 1.25rem; }
+
+        .channel-description { font-size: 0.9rem; color: #d4d4d4; line-height: 1.5; margin-bottom: 1rem; }
+
+        .channel-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+
+        .channel-metric {
+            text-align: center;
+            padding: 0.75rem;
+            background: rgba(16, 185, 129, 0.05);
+            border-radius: 4px;
+        }
+
+        .channel-metric-value { font-size: 1.25rem; font-weight: 700; color: #10b981; }
+
+        .channel-metric-label {
+            font-size: 0.7rem;
+            color: #a3a3a3;
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+
+        .channel-tactics {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .channel-tactics-title { font-size: 0.8rem; color: #a3a3a3; text-transform: uppercase; margin-bottom: 0.5rem; }
+
+        .channel-tactics-list { list-style: none; padding: 0; margin: 0; }
+
+        .channel-tactics-list li {
+            font-size: 0.85rem;
+            color: #d4d4d4;
+            padding: 0.25rem 0;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .channel-tactics-list li::before { content: "→"; position: absolute; left: 0; color: #10b981; }
+
+        /* Budget Table */
+        .budget-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+
+        .budget-table th, .budget-table td {
+            padding: 0.85rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .budget-table th {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .budget-table td { color: #d4d4d4; font-size: 0.9rem; }
+
+        .budget-table tr:hover { background: rgba(16, 185, 129, 0.05); }
+
+        .budget-table .total-row { background: rgba(16, 185, 129, 0.1); font-weight: 700; }
+        .budget-table .total-row td { color: #10b981; }
+
+        /* Roadmap Timeline */
+        .roadmap-timeline { margin-top: 2rem; }
+
+        .month-block {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .month-header {
+            background: rgba(16, 185, 129, 0.1);
+            padding: 1rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .month-name { font-weight: 700; color: #10b981; font-size: 1.1rem; }
+        .month-theme { font-size: 0.85rem; color: #d4d4d4; }
+        .month-goal { font-size: 0.9rem; color: #a3a3a3; }
+
+        .month-body { padding: 1.25rem; }
+
+        .week-section { margin-bottom: 1rem; }
+
+        .week-label {
+            font-size: 0.8rem;
+            color: #10b981;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .week-tasks { list-style: none; padding: 0; margin: 0; }
+
+        .week-tasks li {
+            font-size: 0.9rem;
+            color: #d4d4d4;
+            padding: 0.4rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .week-tasks li::before { content: "☐"; position: absolute; left: 0; color: #a3a3a3; }
+
+        /* Risk Cards */
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .risk-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(252, 129, 129, 0.3);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .risk-name { font-weight: 700; color: #fc8181; font-size: 1rem; margin-bottom: 0.75rem; }
+
+        .risk-description { font-size: 0.9rem; color: #d4d4d4; margin-bottom: 0.75rem; }
+
+        .risk-mitigation {
+            font-size: 0.85rem;
+            color: #a3a3a3;
+            padding-left: 1rem;
+            border-left: 2px solid #10b981;
+        }
+
+        /* Footer */
+        footer { background: #0a0a0a; display: flex; justify-content: center; }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content p { margin: 0.3rem 0; }
+        .footer-content strong { color: #10b981; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .goals-grid { grid-template-columns: repeat(2, 1fr); }
+            .channel-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .goals-grid { grid-template-columns: 1fr; }
+            .channel-metrics { grid-template-columns: 1fr; }
+            .score-container { grid-template-columns: 1fr; text-align: center; }
+            .score-interpretation { border-left: none; border-top: 3px solid #10b981; padding-left: 0; padding-top: 1.5rem; }
+            .header-content { padding: 2rem; }
+            .score-container { padding: 2rem; }
+            .content { padding: 2rem 2rem; }
+            .footer-content { padding: 2rem; }
+        }
+
+        @media print {
+            body { background: white; color: #000000; }
+            .header-content { background: white; color: #000000; border: 2px solid #10b981; }
+            .score-container { background: white; border: 2px solid #10b981; }
+            .score-number { background: none; -webkit-text-fill-color: #10b981; }
+            .content { background: white; }
+            .chart-card, .goal-card, .channel-card, .month-block, .risk-card {
+                background: white; border: 2px solid #10b981; page-break-inside: avoid;
+            }
+            footer { background: white; }
+            .footer-content { background: white; color: #666666; border-top: 2px solid #10b981; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">StratArts Go-to-Market Strategy</div>
+                <h1>90-Day Launch Plan</h1>
+                <div class="subtitle">PetPulse - Smart Pet Health Monitoring Platform</div>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span>📅</span>
+                        <span>Generated: December 18, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>📊</span>
+                        <span>Analysis Type: GTM Strategy</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🎯</span>
+                        <span>Version v1.0.0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SCORE BANNER -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">8.6</div>
+                    <div class="score-label">GTM Readiness</div>
+                </div>
+
+                <div class="score-interpretation">
+                    <div class="interpretation-title">What This Score Means</div>
+                    <div class="interpretation-text">
+                        PetPulse has strong GTM readiness with clear positioning, defined channels, and realistic growth targets.
+                        The premium pet parent segment is highly targetable through social media and influencer channels.
+                        A focused 90-day plan with $75K budget can achieve 2,500 new subscribers.
+                    </div>
+                </div>
+
+                <div class="verdict-badge">
+                    ✓ LAUNCH READY
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+            <!-- Section 1: 90-Day Goals -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">90-Day Goals</h2>
+                    <p class="section-description">
+                        Clear, measurable objectives for the GTM launch period. These targets drive all channel
+                        selection, budget allocation, and tactical planning decisions.
+                    </p>
+                </div>
+
+                <div class="goals-grid">
+                    <div class="goal-card">
+                        <div class="goal-icon">👥</div>
+                        <div class="goal-metric">2,500</div>
+                        <div class="goal-label">New Subscribers</div>
+                        <div class="goal-baseline">Current: 500 (beta)</div>
+                    </div>
+                    <div class="goal-card">
+                        <div class="goal-icon">💰</div>
+                        <div class="goal-metric">$75K</div>
+                        <div class="goal-label">Monthly Recurring Revenue</div>
+                        <div class="goal-baseline">Current: $12.5K MRR</div>
+                    </div>
+                    <div class="goal-card">
+                        <div class="goal-icon">🎯</div>
+                        <div class="goal-metric">Cat Launch</div>
+                        <div class="goal-label">Key Milestone</div>
+                        <div class="goal-baseline">Expand to feline market</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Channel Strategy -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Channel Strategy</h2>
+                    <p class="section-description">
+                        Primary and secondary channels selected based on customer fit, budget, and expected CAC.
+                        Focus 70% of effort on primary channels before expanding.
+                    </p>
+                </div>
+
+                <div class="channel-grid">
+                    <div class="channel-card primary">
+                        <div class="channel-header">
+                            <div class="channel-name">Facebook/Instagram Ads</div>
+                            <span class="channel-type primary">Primary</span>
+                        </div>
+                        <div class="channel-body">
+                            <div class="channel-description">Highly targeted ads to pet parents based on interests, behaviors, and demographics. Premium pet parent audiences available through detailed targeting.</div>
+                            <div class="channel-metrics">
+                                <div class="channel-metric">
+                                    <div class="channel-metric-value">$25K</div>
+                                    <div class="channel-metric-label">Monthly Budget</div>
+                                </div>
+                                <div class="channel-metric">
+                                    <div class="channel-metric-value">750</div>
+                                    <div class="channel-metric-label">Expected Customers</div>
+                                </div>
+                                <div class="channel-metric">
+                                    <div class="channel-metric-value">$33</div>
+                                    <div class="channel-metric-label">Target CAC</div>
+                                </div>
+                            </div>
+                            <div class="channel-tactics">
+                                <div class="channel-tactics-title">Key Tactics</div>
+                                <ul class="channel-tactics-list">
+                                    <li>Video ads showing health alert in action</li>
+                                    <li>Carousel ads with pet health testimonials</li>
+                                    <li>Lookalike audiences from beta users</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="channel-card primary">
+                        <div class="channel-header">
+                            <div class="channel-name">Pet Influencer Marketing</div>
+                            <span class="channel-type primary">Primary</span>
+                        </div>
+                        <div class="channel-body">
+                            <div class="channel-description">Partner with pet influencers, veterinary tech reviewers, and "pet mom/dad" content creators for authentic product demonstrations and reviews.</div>
+                            <div class="channel-metrics">
+                                <div class="channel-metric">
+                                    <div class="channel-metric-value">$15K</div>
+                                    <div class="channel-metric-label">Monthly Budget</div>
+                                </div>
+                                <div class="channel-metric">
+                                    <div class="channel-metric-value">600</div>
+                                    <div class="channel-metric-label">Expected Customers</div>
+                                </div>
+                                <div class="channel-metric">
+                                    <div class="channel-metric-value">$25</div>
+                                    <div class="channel-metric-label">Target CAC</div>
+                                </div>
+                            </div>
+                            <div class="channel-tactics">
+                                <div class="channel-tactics-title">Key Tactics</div>
+                                <ul class="channel-tactics-list">
+                                    <li>10 micro-influencers (50K-200K followers)</li>
+                                    <li>2 macro-influencers (500K+ followers)</li>
+                                    <li>Long-term ambassador program</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="channel-card">
+                        <div class="channel-header">
+                            <div class="channel-name">Content Marketing / SEO</div>
+                            <span class="channel-type secondary">Secondary</span>
+                        </div>
+                        <div class="channel-body">
+                            <div class="channel-description">Organic pet health content to capture search intent: "signs my dog is sick", "pet health monitoring", "early detection pet illness".</div>
+                            <div class="channel-metrics">
+                                <div class="channel-metric">
+                                    <div class="channel-metric-value">$8K</div>
+                                    <div class="channel-metric-label">Monthly Budget</div>
+                                </div>
+                                <div class="channel-metric">
+                                    <div class="channel-metric-value">300</div>
+                                    <div class="channel-metric-label">Expected Customers</div>
+                                </div>
+                                <div class="channel-metric">
+                                    <div class="channel-metric-value">$27</div>
+                                    <div class="channel-metric-label">Target CAC</div>
+                                </div>
+                            </div>
+                            <div class="channel-tactics">
+                                <div class="channel-tactics-title">Key Tactics</div>
+                                <ul class="channel-tactics-list">
+                                    <li>12 SEO articles/month targeting pet health keywords</li>
+                                    <li>Pet health symptom checker tool (lead gen)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="channel-card">
+                        <div class="channel-header">
+                            <div class="channel-name">Referral Program</div>
+                            <span class="channel-type secondary">Secondary</span>
+                        </div>
+                        <div class="channel-body">
+                            <div class="channel-description">Word-of-mouth from satisfied users. Pet parents frequently share health tools with other pet parents in their networks.</div>
+                            <div class="channel-metrics">
+                                <div class="channel-metric">
+                                    <div class="channel-metric-value">$2K</div>
+                                    <div class="channel-metric-label">Monthly Budget</div>
+                                </div>
+                                <div class="channel-metric">
+                                    <div class="channel-metric-value">200</div>
+                                    <div class="channel-metric-label">Expected Customers</div>
+                                </div>
+                                <div class="channel-metric">
+                                    <div class="channel-metric-value">$10</div>
+                                    <div class="channel-metric-label">Target CAC</div>
+                                </div>
+                            </div>
+                            <div class="channel-tactics">
+                                <div class="channel-tactics-title">Key Tactics</div>
+                                <ul class="channel-tactics-list">
+                                    <li>$25 credit for referrer + $25 off for referee</li>
+                                    <li>Referral dashboard in app</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Visual Analysis -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Visual Analysis</h2>
+                    <p class="section-description">
+                        Data visualizations showing budget allocation, channel performance projections,
+                        and growth trajectory over the 90-day period.
+                    </p>
+                </div>
+
+                <div class="chart-grid">
+                    <!-- Chart 1: Budget Allocation -->
+                    <div class="chart-card">
+                        <div class="chart-title">Budget Allocation</div>
+                        <div class="chart-subtitle">
+                            Distribution of $75K monthly marketing spend across channels
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="budgetChart"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Allocation Strategy</div>
+                            <ul class="insight-list">
+                                <li><strong>Primary Channels:</strong> 53% of total budget</li>
+                                <li><strong>Largest Investment:</strong> Facebook/Instagram at $25K</li>
+                                <li><strong>Blended CAC:</strong> $27 target</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Chart 2: Customer Growth Projection -->
+                    <div class="chart-card">
+                        <div class="chart-title">Customer Growth Projection</div>
+                        <div class="chart-subtitle">
+                            Cumulative subscriber acquisition over 90 days
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="growthChart"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Growth Milestones</div>
+                            <ul class="insight-list">
+                                <li><strong>Month 1:</strong> 650 new subscribers</li>
+                                <li><strong>Month 2:</strong> 1,500 cumulative</li>
+                                <li><strong>Month 3:</strong> 2,500 cumulative</li>
+                                <li><strong>MoM Growth:</strong> 35% average</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Chart 3: Channel Performance -->
+                    <div class="chart-card">
+                        <div class="chart-title">Channel Performance Radar</div>
+                        <div class="chart-subtitle">
+                            Multi-dimensional comparison of channel effectiveness
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="channelRadar"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Channel Strengths</div>
+                            <ul class="insight-list">
+                                <li><strong>Facebook/Instagram:</strong> High scalability, fast results</li>
+                                <li><strong>Influencer Marketing:</strong> Best conversion rate</li>
+                                <li><strong>Content/SEO:</strong> Best long-term cost efficiency</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Chart 4: Revenue Projection -->
+                    <div class="chart-card">
+                        <div class="chart-title">Revenue Projection</div>
+                        <div class="chart-subtitle">
+                            MRR growth trajectory with customer acquisition
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Revenue Milestones</div>
+                            <ul class="insight-list">
+                                <li><strong>Month 1:</strong> $29K MRR</li>
+                                <li><strong>Month 2:</strong> $50K MRR</li>
+                                <li><strong>Month 3:</strong> $75K MRR</li>
+                                <li><strong>ARPU:</strong> $30/customer</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: 90-Day Tactical Roadmap -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">90-Day Tactical Roadmap</h2>
+                    <p class="section-description">
+                        Week-by-week execution plan with specific tasks, milestones, and success metrics.
+                        Each month has a theme that guides tactical priorities.
+                    </p>
+                </div>
+
+                <div class="roadmap-timeline">
+                    <div class="month-block">
+                        <div class="month-header">
+                            <div>
+                                <div class="month-name">Month 1: Foundation & Launch</div>
+                                <div class="month-goal">Goal: 650 new subscribers, $29K MRR</div>
+                            </div>
+                        </div>
+                        <div class="month-body">
+                            <div class="week-section">
+                                <div class="week-label">Week 1-2</div>
+                                <ul class="week-tasks">
+                                    <li>Launch Facebook/Instagram ad campaigns (5 creative variants)</li>
+                                    <li>Onboard first 5 pet influencers with product samples</li>
+                                    <li>Set up analytics tracking (Meta Pixel, Google Analytics)</li>
+                                </ul>
+                            </div>
+                            <div class="week-section">
+                                <div class="week-label">Week 3-4</div>
+                                <ul class="week-tasks">
+                                    <li>Optimize ad campaigns based on first week data</li>
+                                    <li>Publish first 6 SEO blog posts</li>
+                                    <li>Launch referral program with $25/$25 incentive</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="month-block">
+                        <div class="month-header">
+                            <div>
+                                <div class="month-name">Month 2: Optimization & Scale</div>
+                                <div class="month-goal">Goal: 850 new subscribers, $50K MRR</div>
+                            </div>
+                        </div>
+                        <div class="month-body">
+                            <div class="week-section">
+                                <div class="week-label">Key Tactics</div>
+                                <ul class="week-tasks">
+                                    <li>Scale winning ad creatives, pause underperformers</li>
+                                    <li>Launch Cat Support product line with dedicated campaigns</li>
+                                    <li>Onboard 5 additional micro-influencers</li>
+                                    <li>Launch pet health symptom checker (lead gen tool)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="month-block">
+                        <div class="month-header">
+                            <div>
+                                <div class="month-name">Month 3: Acceleration & Expansion</div>
+                                <div class="month-goal">Goal: 1,000 new subscribers, $75K MRR</div>
+                            </div>
+                        </div>
+                        <div class="month-body">
+                            <div class="week-section">
+                                <div class="week-label">Key Tactics</div>
+                                <ul class="week-tasks">
+                                    <li>Increase ad budget to $30K (winning channels)</li>
+                                    <li>Launch first macro-influencer campaign (500K+ followers)</li>
+                                    <li>Begin insurance partnership outreach</li>
+                                    <li>PR push: Target pet industry publications</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Budget Breakdown -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Budget Breakdown</h2>
+                    <p class="section-description">
+                        Detailed allocation of the 90-day marketing budget across channels and categories.
+                    </p>
+                </div>
+
+                <table class="budget-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Monthly Budget</th>
+                            <th>90-Day Total</th>
+                            <th>% of Total</th>
+                            <th>Expected CAC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Facebook/Instagram Ads</td>
+                            <td>$25,000</td>
+                            <td>$75,000</td>
+                            <td>33%</td>
+                            <td>$33</td>
+                        </tr>
+                        <tr>
+                            <td>Pet Influencer Marketing</td>
+                            <td>$15,000</td>
+                            <td>$45,000</td>
+                            <td>20%</td>
+                            <td>$25</td>
+                        </tr>
+                        <tr>
+                            <td>Content Marketing / SEO</td>
+                            <td>$8,000</td>
+                            <td>$24,000</td>
+                            <td>11%</td>
+                            <td>$27</td>
+                        </tr>
+                        <tr>
+                            <td>Referral Program</td>
+                            <td>$2,000</td>
+                            <td>$6,000</td>
+                            <td>3%</td>
+                            <td>$10</td>
+                        </tr>
+                        <tr>
+                            <td>Tools & Software</td>
+                            <td>$3,000</td>
+                            <td>$9,000</td>
+                            <td>4%</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Creative Production</td>
+                            <td>$5,000</td>
+                            <td>$15,000</td>
+                            <td>7%</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Contingency / Testing</td>
+                            <td>$5,000</td>
+                            <td>$15,000</td>
+                            <td>7%</td>
+                            <td>-</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td><strong>Total</strong></td>
+                            <td><strong>$63,000</strong></td>
+                            <td><strong>$189,000</strong></td>
+                            <td><strong>100%</strong></td>
+                            <td><strong>$27 blended</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Section 6: Risks & Mitigation -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Risks & Mitigation</h2>
+                    <p class="section-description">
+                        Key risks that could derail the GTM plan with specific mitigation strategies.
+                    </p>
+                </div>
+
+                <div class="risk-grid">
+                    <div class="risk-card">
+                        <div class="risk-name">High CAC on Paid Ads</div>
+                        <div class="risk-description">Facebook/Instagram CAC could exceed $50 due to competitive pet market.</div>
+                        <div class="risk-mitigation"><strong>Mitigation:</strong> Test 10 creative variants in week 1, shift budget to influencer channel if CAC >$40 by week 3.</div>
+                    </div>
+                    <div class="risk-card">
+                        <div class="risk-name">Influencer Underperformance</div>
+                        <div class="risk-description">Influencer partnerships may not drive expected conversions.</div>
+                        <div class="risk-mitigation"><strong>Mitigation:</strong> Use micro-influencers first (lower cost, higher engagement), track with unique codes, pause non-performers quickly.</div>
+                    </div>
+                    <div class="risk-card">
+                        <div class="risk-name">Supply Chain Delays</div>
+                        <div class="risk-description">Hardware collar inventory could run out during scale-up.</div>
+                        <div class="risk-mitigation"><strong>Mitigation:</strong> Pre-order 5,000 units, establish waitlist system if demand exceeds supply.</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | go-to-market-planner-v1.0.0</p>
+                <p style="margin-top: 5px;">Context Signature: go-to-market-planner-v1.0.0 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Chart.js Global Configuration
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        const tooltipConfig = {
+            backgroundColor: '#1a1a1a',
+            titleColor: '#f5f5f5',
+            bodyColor: '#d4d4d4',
+            borderColor: '#10b981',
+            borderWidth: 1
+        };
+
+        // GTM Data
+        const gtmData = {
+            budget: {
+                labels: ['Facebook/Instagram', 'Influencer Marketing', 'Content/SEO', 'Referral Program', 'Tools/Creative'],
+                values: [25000, 15000, 8000, 2000, 13000]
+            },
+            growth: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12'],
+                customers: [100, 220, 380, 650, 850, 1050, 1300, 1500, 1750, 2000, 2250, 2500]
+            },
+            channels: {
+                labels: ['Reach', 'Cost Efficiency', 'Conversion', 'Scalability', 'Time to Results'],
+                channel1: [9, 6, 7, 9, 9],
+                channel2: [7, 8, 9, 6, 7],
+                channel3: [6, 9, 6, 7, 4]
+            },
+            revenue: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12'],
+                mrr: [15500, 19100, 24000, 29000, 34000, 40000, 47000, 52500, 60000, 67500, 71000, 75000]
+            }
+        };
+
+        // Chart 1: Budget Allocation (Doughnut)
+        const budgetCtx = document.getElementById('budgetChart').getContext('2d');
+        new Chart(budgetCtx, {
+            type: 'doughnut',
+            data: {
+                labels: gtmData.budget.labels,
+                datasets: [{
+                    data: gtmData.budget.values,
+                    backgroundColor: ['#10b981', '#14b8a6', '#34d399', '#6ee7b7', '#a7f3d0'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '60%',
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: { color: '#d4d4d4', font: { size: 11 }, padding: 15 }
+                    },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        // Chart 2: Customer Growth (Line)
+        const growthCtx = document.getElementById('growthChart').getContext('2d');
+        new Chart(growthCtx, {
+            type: 'line',
+            data: {
+                labels: gtmData.growth.labels,
+                datasets: [{
+                    label: 'Cumulative Subscribers',
+                    data: gtmData.growth.customers,
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    borderWidth: 3,
+                    pointBackgroundColor: '#10b981',
+                    pointBorderColor: '#1a1a1a',
+                    pointBorderWidth: 2,
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        ticks: { color: '#a3a3a3', font: { size: 10 } }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        ticks: { color: '#a3a3a3', font: { size: 11 } }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        // Chart 3: Channel Performance Radar
+        const channelRadarCtx = document.getElementById('channelRadar').getContext('2d');
+        new Chart(channelRadarCtx, {
+            type: 'radar',
+            data: {
+                labels: gtmData.channels.labels,
+                datasets: [
+                    {
+                        label: 'Facebook/Instagram',
+                        data: gtmData.channels.channel1,
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        borderColor: '#10b981',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#10b981'
+                    },
+                    {
+                        label: 'Influencer Marketing',
+                        data: gtmData.channels.channel2,
+                        backgroundColor: 'rgba(20, 184, 166, 0.2)',
+                        borderColor: '#14b8a6',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#14b8a6'
+                    },
+                    {
+                        label: 'Content/SEO',
+                        data: gtmData.channels.channel3,
+                        backgroundColor: 'rgba(52, 211, 153, 0.2)',
+                        borderColor: '#34d399',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#34d399'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: { color: '#a3a3a3', stepSize: 2, font: { size: 10 } },
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        pointLabels: { color: '#f5f5f5', font: { size: 10, weight: '600' } }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: { color: '#d4d4d4', font: { size: 10 }, padding: 15 }
+                    },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        // Chart 4: Revenue Projection (Bar)
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'bar',
+            data: {
+                labels: gtmData.revenue.labels,
+                datasets: [{
+                    label: 'MRR',
+                    data: gtmData.revenue.mrr,
+                    backgroundColor: 'rgba(16, 185, 129, 0.6)',
+                    borderColor: '#10b981',
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#a3a3a3', font: { size: 10 } }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        ticks: {
+                            color: '#a3a3a3',
+                            font: { size: 11 },
+                            callback: function(value) { return '$' + value.toLocaleString(); }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        ...tooltipConfig,
+                        callbacks: {
+                            label: function(context) {
+                                return 'MRR: $' + context.parsed.y.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        window.addEventListener('beforeprint', function() { Chart.defaults.color = '#000000'; });
+        window.addEventListener('afterprint', function() { Chart.defaults.color = '#a3a3a3'; });
+    </script>
+</body>
+</html>

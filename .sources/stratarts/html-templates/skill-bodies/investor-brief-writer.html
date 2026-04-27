@@ -1,0 +1,488 @@
+<!-- ═══ SKILL CSS START ═══ -->
+<style>
+    /* Investor Brief Writer Specific Styles */
+    .onepager-preview {
+        padding: 24px;
+        background: #1a1a1a;
+        border: 2px solid var(--accent);
+        border-radius: 16px;
+        margin: 20px 0;
+    }
+
+    .onepager-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .company-branding h3 {
+        font-size: 1.8rem;
+        color: var(--accent);
+        margin-bottom: 8px;
+    }
+
+    .company-tagline {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-style: italic;
+    }
+
+    .contact-info {
+        text-align: right;
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .onepager-section {
+        margin-bottom: 20px;
+    }
+
+    .onepager-section h4 {
+        color: var(--accent);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .traction-highlight {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin: 16px 0;
+    }
+
+    .traction-stat {
+        padding: 16px;
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .traction-stat .value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--accent);
+    }
+
+    .traction-stat .growth {
+        font-size: 0.8rem;
+        color: #10b981;
+    }
+
+    .traction-stat .label {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: 4px;
+    }
+
+    .email-preview {
+        background: #1a1a1a;
+        border-radius: 12px;
+        overflow: hidden;
+        margin: 20px 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .email-header {
+        padding: 16px 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .email-subject {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .email-subject span:first-child {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .email-subject span:last-child {
+        color: var(--accent);
+        font-weight: 600;
+    }
+
+    .email-body {
+        padding: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    .email-body p {
+        margin-bottom: 16px;
+    }
+
+    .email-signature {
+        margin-top: 24px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .email-template-tabs {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    .template-tab {
+        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .template-tab.active {
+        background: var(--accent);
+        color: #0a0a0a;
+        border-color: var(--accent);
+    }
+
+    .distribution-channel {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        margin-bottom: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .channel-icon {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(16, 185, 129, 0.15);
+        border-radius: 12px;
+        font-size: 1.5rem;
+    }
+
+    .channel-content h4 {
+        color: var(--accent);
+        margin-bottom: 8px;
+    }
+
+    .investor-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .investor-table th,
+    .investor-table td {
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .investor-table th {
+        background: rgba(16, 185, 129, 0.1);
+        font-weight: 600;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+    }
+
+    .investor-table tr:hover {
+        background: rgba(255, 255, 255, 0.03);
+    }
+
+    .intro-path {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+    }
+
+    .intro-path.warm { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+    .intro-path.cold { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+
+    .team-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        margin-bottom: 12px;
+    }
+
+    .team-avatar {
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(135deg, var(--accent), #059669);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #0a0a0a;
+    }
+
+    .team-info h4 {
+        color: #ffffff;
+        margin-bottom: 4px;
+    }
+
+    .team-title {
+        color: var(--accent);
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+    }
+
+    .team-bio {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .format-card {
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .format-card.selected {
+        border-color: var(--accent);
+        background: rgba(16, 185, 129, 0.05);
+    }
+
+    .format-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .format-icon {
+        font-size: 1.5rem;
+    }
+
+    .word-count {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.5);
+        padding: 4px 8px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+    }
+</style>
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<div class="report-container">
+    <header class="report-header">
+        <div class="header-content">
+            <div class="brand">
+                <div class="brand-icon">📝</div>
+                <span class="brand-text">StratArts</span>
+            </div>
+            <div class="report-title">
+                <h1>Investor Brief Writer</h1>
+                <p class="subtitle">{{COMPANY_NAME}} {{ROUND_NAME}} Investor Materials</p>
+            </div>
+            <div class="timestamp">{{TIMESTAMP}}</div>
+        </div>
+    </header>
+
+    <div class="score-banner">
+        <div class="score-item">
+            <div class="score-value">{{RAISE_AMOUNT}}</div>
+            <div class="score-label">Raising</div>
+        </div>
+        <div class="score-item">
+            <div class="score-value">{{MRR}}</div>
+            <div class="score-label">MRR</div>
+        </div>
+        <div class="score-item">
+            <div class="score-value">{{GROWTH_RATE}}</div>
+            <div class="score-label">MoM Growth</div>
+        </div>
+        <div class="score-item">
+            <div class="score-value">{{CUSTOMERS}}</div>
+            <div class="score-label">Customers</div>
+        </div>
+        <div class="score-item">
+            <div class="score-value">{{TAM}}</div>
+            <div class="score-label">TAM</div>
+        </div>
+        <div class="score-item">
+            <div class="score-value">{{TARGET_INVESTORS}}</div>
+            <div class="score-label">Target Investors</div>
+        </div>
+    </div>
+
+    <section class="content-section">
+        <h2>1. Executive Summary</h2>
+        <div class="card-grid">
+            {{EXEC_SUMMARY_CARDS}}
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>2. One-Pager Preview</h2>
+        <div class="onepager-preview">
+            <div class="onepager-header">
+                <div class="company-branding">
+                    <h3>{{COMPANY_NAME}}</h3>
+                    <p class="company-tagline">{{TAGLINE}}</p>
+                </div>
+                <div class="contact-info">
+                    {{CONTACT_INFO}}
+                </div>
+            </div>
+            {{ONEPAGER_SECTIONS}}
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>3. Traction Highlights</h2>
+        <div class="traction-highlight">
+            {{TRACTION_CARDS}}
+        </div>
+        <div class="chart-container">
+            <canvas id="revenueChart"></canvas>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>4. Team</h2>
+        {{TEAM_CARDS}}
+    </section>
+
+    <section class="content-section">
+        <h2>5. Cold Email Template</h2>
+        <div class="email-preview">
+            <div class="email-header">
+                <div class="email-subject">
+                    <span>Subject:</span>
+                    <span>{{EMAIL_SUBJECT}}</span>
+                </div>
+            </div>
+            <div class="email-body">
+                {{EMAIL_BODY}}
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>6. Email Templates</h2>
+        {{EMAIL_TEMPLATES}}
+    </section>
+
+    <section class="content-section">
+        <h2>7. Distribution Strategy</h2>
+        {{DISTRIBUTION_CARDS}}
+    </section>
+
+    <section class="content-section">
+        <h2>8. Target Investor List</h2>
+        <table class="investor-table">
+            <thead>
+                <tr>
+                    <th>Investor</th>
+                    <th>Fund</th>
+                    <th>Stage Focus</th>
+                    <th>Tier</th>
+                    <th>Intro Path</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{INVESTOR_ROWS}}
+            </tbody>
+        </table>
+    </section>
+
+    <section class="content-section">
+        <h2>9. Next Steps</h2>
+        <div class="next-steps">
+            {{NEXT_STEPS}}
+        </div>
+    </section>
+
+    <footer class="report-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="brand-icon">📝</span>
+                <span>StratArts Investor Brief Writer</span>
+            </div>
+            <p>Customize email templates for each investor. Lead with traction, personalize the first line, and always request a meeting—not an investment decision.</p>
+        </div>
+    </footer>
+</div>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Revenue Growth Chart
+    const revenueCtx = document.getElementById('revenueChart');
+    if (revenueCtx) {
+        new Chart(revenueCtx, {
+            type: 'line',
+            data: {
+                labels: {{REVENUE_LABELS}},
+                datasets: [{
+                    label: 'MRR',
+                    data: {{REVENUE_DATA}},
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#10b981'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'MRR Growth (12 Months)', color: '#ffffff' }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: 'rgba(255,255,255,0.7)',
+                            callback: function(value) {
+                                return '$' + (value/1000).toFixed(0) + 'K';
+                            }
+                        },
+                        grid: { color: 'rgba(255,255,255,0.1)' }
+                    },
+                    x: {
+                        ticks: { color: 'rgba(255,255,255,0.7)' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    }
+
+    // Email template tab switching
+    const templateTabs = document.querySelectorAll('.template-tab');
+    templateTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            templateTabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+});
+</script>
+<!-- ═══ SKILL JS END ═══ -->

@@ -1,0 +1,856 @@
+<!--
+═══════════════════════════════════════════════════════════════════════════════
+STRATARTS HTML SKELETON TEMPLATE
+Skill: market-opportunity-analyzer
+Version: 1.0.0
+
+INSTRUCTIONS:
+1. Read base-template.html first for shared CSS/JS structure
+2. Replace all {{PLACEHOLDER}} markers with actual data
+3. This template defines skill-specific content sections and charts
+═══════════════════════════════════════════════════════════════════════════════
+-->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     TEMPLATE VARIABLES (Replace with actual data)
+     ════════════════════════════════════════════════════════════════════════════
+
+     HEADER:
+     {{PAGE_TITLE}}          = "Market Opportunity Analysis"
+     {{KICKER}}              = "StratArts Market Analysis"
+     {{TITLE}}               = "Market Opportunity Analysis"
+     {{SUBTITLE}}            = "{BUSINESS_NAME} - {BUSINESS_DESCRIPTION}"
+     {{DATE}}                = "November 27, 2025"
+     {{ANALYSIS_TYPE}}       = "Foundation Strategy"
+     {{VERSION}}             = "1.0"
+
+     SCORE BANNER:
+     {{PRIMARY_SCORE}}       = "7.8" (market attractiveness score 0-10)
+     {{SCORE_LABEL}}         = "Market Attractiveness"
+     {{SCORE_INTERPRETATION}}= "This market attractiveness score indicates..."
+     {{VERDICT}}             = "✓ PROCEED" | "✓ PROCEED WITH PHASED EXPANSION" | "⚠️ PROCEED WITH CAUTION" | "✗ RECONSIDER"
+
+     MARKET SIZE:
+     {{TAM_VALUE}}           = "$3.5B"
+     {{TAM_RANGE}}           = "Range: $2B - $5B"
+     {{TAM_DESCRIPTION}}     = "Total addressable market..."
+     {{SAM_VALUE}}           = "$1.25B"
+     {{SAM_RANGE}}           = "Range: $500M - $2B"
+     {{SAM_DESCRIPTION}}     = "Serviceable addressable market..."
+     {{SOM_VALUE}}           = "$10M"
+     {{SOM_RANGE}}           = "Range: $5M - $15M"
+     {{SOM_DESCRIPTION}}     = "Serviceable obtainable market..."
+
+     FOOTER:
+     {{PROJECT_NAME}}        = "{PROJECT_FOLDER_NAME}"
+     {{SKILL_NAME}}          = "market-opportunity-analyzer"
+     {{CONTEXT_SIGNATURE}}   = "market-opportunity-analyzer-v1.0.0"
+     {{ITERATIONS}}          = "1"
+     {{ITERATIONS_PLURAL}}   = "" or "s"
+
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     SKILL-SPECIFIC CSS (Add to {{SKILL_SPECIFIC_CSS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+<style>
+/* Market Size Cards (3-column) */
+.market-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.market-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.market-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(16, 185, 129, 0.4);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+}
+
+.market-card .label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #a3a3a3;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.market-card .value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #10b981;
+    line-height: 1.2;
+}
+
+.market-card .range {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    margin-top: 0.5rem;
+}
+
+.market-card .description {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    margin-top: 0.75rem;
+    line-height: 1.5;
+}
+
+/* Beachhead Cards (2-column) */
+.beachhead-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.beachhead-card {
+    background: #1a1a1a;
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.beachhead-card.primary {
+    border-color: #10b981;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15);
+}
+
+.beachhead-card:hover {
+    transform: translateY(-2px);
+    border-color: #10b981;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.2);
+}
+
+.beachhead-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.beachhead-name {
+    font-weight: 700;
+    color: #f5f5f5;
+    font-size: 1.1rem;
+}
+
+.beachhead-score {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.beachhead-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+}
+
+.beachhead-description {
+    font-size: 0.95rem;
+    color: #d4d4d4;
+    line-height: 1.6;
+}
+
+/* Platform Cards (4-column) */
+.platform-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.platform-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 1.25rem;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.platform-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(16, 185, 129, 0.4);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+}
+
+.platform-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.platform-name {
+    font-weight: 700;
+    color: #f5f5f5;
+    font-size: 0.95rem;
+}
+
+.platform-revenue {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.platform-description {
+    font-size: 0.85rem;
+    color: #d4d4d4;
+    line-height: 1.5;
+}
+
+.platform-percent {
+    font-size: 0.75rem;
+    color: #a3a3a3;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+    .platform-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 1024px) {
+    .market-grid {
+        grid-template-columns: 1fr;
+    }
+    .beachhead-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .platform-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Print */
+@media print {
+    .market-card, .beachhead-card, .platform-card {
+        background: white;
+        border: 2px solid #10b981;
+        page-break-inside: avoid;
+    }
+    .market-card .label, .beachhead-name, .platform-name {
+        color: #000000;
+        font-weight: 900;
+    }
+}
+</style>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CONTENT SECTIONS (Replace {{CONTENT_SECTIONS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- Section 1: Market Size Analysis -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Market Size Analysis</h2>
+        <p class="section-description">
+            Total Addressable Market (TAM), Serviceable Addressable Market (SAM), and Serviceable
+            Obtainable Market (SOM) calculated using top-down industry analysis and bottom-up
+            unit economics.
+        </p>
+    </div>
+
+    <div class="market-grid">
+        <div class="market-card">
+            <div class="label">TAM</div>
+            <div class="value">{{TAM_VALUE}}</div>
+            <div class="range">{{TAM_RANGE}}</div>
+            <div class="description">
+                {{TAM_DESCRIPTION}}
+            </div>
+        </div>
+
+        <div class="market-card">
+            <div class="label">SAM</div>
+            <div class="value">{{SAM_VALUE}}</div>
+            <div class="range">{{SAM_RANGE}}</div>
+            <div class="description">
+                {{SAM_DESCRIPTION}}
+            </div>
+        </div>
+
+        <div class="market-card">
+            <div class="label">SOM (Year 3)</div>
+            <div class="value">{{SOM_VALUE}}</div>
+            <div class="range">{{SOM_RANGE}}</div>
+            <div class="description">
+                {{SOM_DESCRIPTION}}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 2: Visual Analysis -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Visual Analysis</h2>
+        <p class="section-description">
+            Data visualizations revealing market size distribution, growth projections,
+            competitive positioning, and beachhead evaluation across key metrics.
+        </p>
+    </div>
+
+    <div class="chart-grid">
+        <!-- Chart 1: TAM/SAM/SOM Funnel -->
+        <div class="chart-card">
+            <div class="chart-title">TAM/SAM/SOM Funnel</div>
+            <div class="chart-subtitle">
+                Market narrowing from total addressable to realistically obtainable
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="funnelChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Key Observations</div>
+                <ul class="insight-list">
+                    <li><strong>TAM Expansion:</strong> {{TAM_INSIGHT}}</li>
+                    <li><strong>SAM Constraint:</strong> {{SAM_INSIGHT}}</li>
+                    <li><strong>SOM Target:</strong> {{SOM_INSIGHT}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 2: Revenue Projection -->
+        <div class="chart-card">
+            <div class="chart-title">5-Year Revenue Projection</div>
+            <div class="chart-subtitle">
+                Conservative, most likely, and aggressive growth scenarios
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="growthChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Growth Assumptions</div>
+                <ul class="insight-list">
+                    <li><strong>Year 1:</strong> {{YEAR1_PROJECTION}}</li>
+                    <li><strong>Year 3:</strong> {{YEAR3_PROJECTION}}</li>
+                    <li><strong>Year 5:</strong> {{YEAR5_PROJECTION}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 3: Beachhead Evaluation Radar -->
+        <div class="chart-card">
+            <div class="chart-title">Beachhead Evaluation Radar</div>
+            <div class="chart-subtitle">
+                Multi-dimensional assessment of target market segments
+            </div>
+            <div class="chart-wrapper tall">
+                <canvas id="beachheadRadar"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Segment Analysis</div>
+                <ul class="insight-list">
+                    <li><strong>{{BEACHHEAD_1_NAME}}:</strong> Score {{BEACHHEAD_1_TOTAL}} - {{BEACHHEAD_1_INSIGHT}}</li>
+                    <li><strong>{{BEACHHEAD_2_NAME}}:</strong> Score {{BEACHHEAD_2_TOTAL}} - {{BEACHHEAD_2_INSIGHT}}</li>
+                    <li><strong>Strategy:</strong> {{BEACHHEAD_STRATEGY}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 4: Competitive Positioning -->
+        <div class="chart-card">
+            <div class="chart-title">Competitive Positioning</div>
+            <div class="chart-subtitle">
+                {{POSITIONING_AXES_DESCRIPTION}}
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="positioningChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Strategic Position</div>
+                <ul class="insight-list">
+                    <li><strong>{{PROJECT_NAME}} Position:</strong> {{POSITION_X_NAME}} ({{POSITION_X_SCORE}}/10) + {{POSITION_Y_NAME}} ({{POSITION_Y_SCORE}}/10)</li>
+                    <li><strong>Unique Advantage:</strong> {{UNIQUE_ADVANTAGE}}</li>
+                    <li><strong>Competitive Gap:</strong> {{COMPETITIVE_GAP}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 5: Porter's Five Forces (Full Width) -->
+        <div class="chart-card full-width">
+            <div class="chart-title">Porter's Five Forces Analysis</div>
+            <div class="chart-subtitle">
+                Industry structure assessment revealing competitive dynamics and market attractiveness
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="porterChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Force Assessment</div>
+                <ul class="insight-list">
+                    <li><strong>Threat of New Entrants:</strong> {{PORTER_ENTRANTS}} ({{PORTER_ENTRANTS_SCORE}}/10) - {{PORTER_ENTRANTS_INSIGHT}}</li>
+                    <li><strong>Supplier Power:</strong> {{PORTER_SUPPLIERS}} ({{PORTER_SUPPLIERS_SCORE}}/10) - {{PORTER_SUPPLIERS_INSIGHT}}</li>
+                    <li><strong>Buyer Power:</strong> {{PORTER_BUYERS}} ({{PORTER_BUYERS_SCORE}}/10) - {{PORTER_BUYERS_INSIGHT}}</li>
+                    <li><strong>Threat of Substitutes:</strong> {{PORTER_SUBSTITUTES}} ({{PORTER_SUBSTITUTES_SCORE}}/10) - {{PORTER_SUBSTITUTES_INSIGHT}}</li>
+                    <li><strong>Competitive Rivalry:</strong> {{PORTER_RIVALRY}} ({{PORTER_RIVALRY_SCORE}}/10) - {{PORTER_RIVALRY_INSIGHT}}</li>
+                    <li><strong>Overall:</strong> {{PORTER_OVERALL}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: Beachhead Selection -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">{{BEACHHEAD_SECTION_TITLE}}</h2>
+        <p class="section-description">
+            {{BEACHHEAD_SECTION_DESCRIPTION}}
+        </p>
+    </div>
+
+    <div class="beachhead-grid">
+        <div class="beachhead-card primary">
+            <div class="beachhead-badge">{{BEACHHEAD_1_BADGE}}</div>
+            <div class="beachhead-header">
+                <div class="beachhead-name">{{BEACHHEAD_1_NAME}}</div>
+                <div class="beachhead-score">{{BEACHHEAD_1_TOTAL}}</div>
+            </div>
+            <div class="beachhead-description">
+                {{BEACHHEAD_1_DESCRIPTION}}
+            </div>
+        </div>
+
+        <div class="beachhead-card primary">
+            <div class="beachhead-badge">{{BEACHHEAD_2_BADGE}}</div>
+            <div class="beachhead-header">
+                <div class="beachhead-name">{{BEACHHEAD_2_NAME}}</div>
+                <div class="beachhead-score">{{BEACHHEAD_2_TOTAL}}</div>
+            </div>
+            <div class="beachhead-description">
+                {{BEACHHEAD_2_DESCRIPTION}}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 4: Platform/Channel Distribution (Optional) -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">{{DISTRIBUTION_SECTION_TITLE}}</h2>
+        <p class="section-description">
+            {{DISTRIBUTION_SECTION_DESCRIPTION}}
+        </p>
+    </div>
+
+    <div class="platform-grid">
+        <div class="platform-card">
+            <div class="platform-header">
+                <div class="platform-name">{{PLATFORM_1_NAME}}</div>
+                <div class="platform-revenue">{{PLATFORM_1_VALUE}}</div>
+            </div>
+            <div class="platform-description">
+                {{PLATFORM_1_DESCRIPTION}}
+            </div>
+            <div class="platform-percent">{{PLATFORM_1_PERCENT}}</div>
+        </div>
+
+        <div class="platform-card">
+            <div class="platform-header">
+                <div class="platform-name">{{PLATFORM_2_NAME}}</div>
+                <div class="platform-revenue">{{PLATFORM_2_VALUE}}</div>
+            </div>
+            <div class="platform-description">
+                {{PLATFORM_2_DESCRIPTION}}
+            </div>
+            <div class="platform-percent">{{PLATFORM_2_PERCENT}}</div>
+        </div>
+
+        <div class="platform-card">
+            <div class="platform-header">
+                <div class="platform-name">{{PLATFORM_3_NAME}}</div>
+                <div class="platform-revenue">{{PLATFORM_3_VALUE}}</div>
+            </div>
+            <div class="platform-description">
+                {{PLATFORM_3_DESCRIPTION}}
+            </div>
+            <div class="platform-percent">{{PLATFORM_3_PERCENT}}</div>
+        </div>
+
+        <div class="platform-card">
+            <div class="platform-header">
+                <div class="platform-name">{{PLATFORM_4_NAME}}</div>
+                <div class="platform-revenue">{{PLATFORM_4_VALUE}}</div>
+            </div>
+            <div class="platform-description">
+                {{PLATFORM_4_DESCRIPTION}}
+            </div>
+            <div class="platform-percent">{{PLATFORM_4_PERCENT}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CHART SCRIPTS (Replace {{CHART_SCRIPTS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+<script>
+// Data object (populated from analysis)
+const data = {
+    market: {
+        tam: {{TAM_NUMBER}},  // in millions
+        sam: {{SAM_NUMBER}},
+        som: {{SOM_NUMBER}}
+    },
+    growth: {
+        conservative: [{{GROWTH_CONSERVATIVE_Y1}}, {{GROWTH_CONSERVATIVE_Y2}}, {{GROWTH_CONSERVATIVE_Y3}}, {{GROWTH_CONSERVATIVE_Y4}}, {{GROWTH_CONSERVATIVE_Y5}}],
+        mostLikely: [{{GROWTH_LIKELY_Y1}}, {{GROWTH_LIKELY_Y2}}, {{GROWTH_LIKELY_Y3}}, {{GROWTH_LIKELY_Y4}}, {{GROWTH_LIKELY_Y5}}],
+        aggressive: [{{GROWTH_AGGRESSIVE_Y1}}, {{GROWTH_AGGRESSIVE_Y2}}, {{GROWTH_AGGRESSIVE_Y3}}, {{GROWTH_AGGRESSIVE_Y4}}, {{GROWTH_AGGRESSIVE_Y5}}]
+    },
+    beachheads: {
+        labels: ['Accessibility', 'Pain Severity', 'Low Competition', 'Market Size', 'Strategic Value'],
+        segment1: [{{BEACHHEAD_1_ACCESS}}, {{BEACHHEAD_1_PAIN}}, {{BEACHHEAD_1_COMPETITION}}, {{BEACHHEAD_1_SIZE}}, {{BEACHHEAD_1_STRATEGIC}}],
+        segment2: [{{BEACHHEAD_2_ACCESS}}, {{BEACHHEAD_2_PAIN}}, {{BEACHHEAD_2_COMPETITION}}, {{BEACHHEAD_2_SIZE}}, {{BEACHHEAD_2_STRATEGIC}}],
+        segment3: [{{BEACHHEAD_3_ACCESS}}, {{BEACHHEAD_3_PAIN}}, {{BEACHHEAD_3_COMPETITION}}, {{BEACHHEAD_3_SIZE}}, {{BEACHHEAD_3_STRATEGIC}}]
+    },
+    porter: {
+        labels: ['Threat of New Entrants', 'Supplier Power', 'Buyer Power', 'Threat of Substitutes', 'Competitive Rivalry'],
+        values: [{{PORTER_ENTRANTS_SCORE}}, {{PORTER_SUPPLIERS_SCORE}}, {{PORTER_BUYERS_SCORE}}, {{PORTER_SUBSTITUTES_SCORE}}, {{PORTER_RIVALRY_SCORE}}]
+    },
+    competitors: [
+        { label: '{{PROJECT_NAME}}', x: {{POSITION_X_SCORE}}, y: {{POSITION_Y_SCORE}}, primary: true },
+        { label: '{{COMPETITOR_1_NAME}}', x: {{COMPETITOR_1_X}}, y: {{COMPETITOR_1_Y}}, primary: false },
+        { label: '{{COMPETITOR_2_NAME}}', x: {{COMPETITOR_2_X}}, y: {{COMPETITOR_2_Y}}, primary: false },
+        { label: '{{COMPETITOR_3_NAME}}', x: {{COMPETITOR_3_X}}, y: {{COMPETITOR_3_Y}}, primary: false },
+        { label: '{{COMPETITOR_4_NAME}}', x: {{COMPETITOR_4_X}}, y: {{COMPETITOR_4_Y}}, primary: false }
+    ]
+};
+
+// Chart 1: TAM/SAM/SOM Funnel (Horizontal Bar with Log Scale)
+const funnelCtx = document.getElementById('funnelChart').getContext('2d');
+new Chart(funnelCtx, {
+    type: 'bar',
+    data: {
+        labels: ['TAM\n($' + (data.market.tam >= 1000 ? (data.market.tam/1000).toFixed(1) + 'B' : data.market.tam + 'M') + ')',
+                 'SAM\n($' + (data.market.sam >= 1000 ? (data.market.sam/1000).toFixed(1) + 'B' : data.market.sam + 'M') + ')',
+                 'SOM Year 3\n($' + data.market.som + 'M)'],
+        datasets: [{
+            label: 'Market Size',
+            data: [data.market.tam, data.market.sam, data.market.som],
+            backgroundColor: [
+                'rgba(16, 185, 129, 0.4)',
+                'rgba(16, 185, 129, 0.6)',
+                'rgba(16, 185, 129, 0.9)'
+            ],
+            borderColor: '#10b981',
+            borderWidth: 2,
+            borderRadius: 6
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: 'y',
+        scales: {
+            x: {
+                type: 'logarithmic',
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: {
+                    color: '#a3a3a3',
+                    callback: function(value) {
+                        if (value >= 1000) return '$' + (value/1000) + 'B';
+                        return '$' + value + 'M';
+                    }
+                }
+            },
+            y: {
+                grid: { display: false },
+                ticks: { color: '#f5f5f5', font: { size: 12, weight: '600' } }
+            }
+        },
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                ...tooltipConfig,
+                callbacks: {
+                    label: function(context) {
+                        const value = context.parsed.x;
+                        if (value >= 1000) return '$' + (value/1000).toFixed(1) + 'B';
+                        return '$' + value + 'M';
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Chart 2: 5-Year Revenue Projection (Line Chart)
+const growthCtx = document.getElementById('growthChart').getContext('2d');
+new Chart(growthCtx, {
+    type: 'line',
+    data: {
+        labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+        datasets: [
+            {
+                label: 'Conservative',
+                data: data.growth.conservative,
+                borderColor: 'rgba(16, 185, 129, 0.4)',
+                backgroundColor: 'transparent',
+                borderWidth: 2,
+                borderDash: [5, 5],
+                tension: 0.3,
+                pointRadius: 4
+            },
+            {
+                label: 'Most Likely',
+                data: data.growth.mostLikely,
+                borderColor: '#10b981',
+                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.3,
+                pointRadius: 5
+            },
+            {
+                label: 'Aggressive',
+                data: data.growth.aggressive,
+                borderColor: '#14b8a6',
+                backgroundColor: 'transparent',
+                borderWidth: 2,
+                borderDash: [5, 5],
+                tension: 0.3,
+                pointRadius: 4
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { color: '#f5f5f5' }
+            },
+            tooltip: {
+                ...tooltipConfig,
+                callbacks: {
+                    label: function(context) {
+                        return context.dataset.label + ': $' + context.parsed.y + 'M';
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: { color: '#a3a3a3' }
+            },
+            y: {
+                beginAtZero: true,
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: {
+                    color: '#a3a3a3',
+                    callback: function(value) { return '$' + value + 'M'; }
+                }
+            }
+        }
+    }
+});
+
+// Chart 3: Beachhead Evaluation Radar
+const beachheadCtx = document.getElementById('beachheadRadar').getContext('2d');
+new Chart(beachheadCtx, {
+    type: 'radar',
+    data: {
+        labels: data.beachheads.labels,
+        datasets: [
+            {
+                label: '{{BEACHHEAD_1_NAME}}',
+                data: data.beachheads.segment1,
+                backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                borderColor: '#10b981',
+                borderWidth: 3,
+                pointBackgroundColor: '#10b981',
+                pointBorderColor: '#1a1a1a',
+                pointRadius: 6,
+                pointBorderWidth: 2
+            },
+            {
+                label: '{{BEACHHEAD_2_NAME}}',
+                data: data.beachheads.segment2,
+                backgroundColor: 'rgba(20, 184, 166, 0.2)',
+                borderColor: '#14b8a6',
+                borderWidth: 3,
+                pointBackgroundColor: '#14b8a6',
+                pointBorderColor: '#1a1a1a',
+                pointRadius: 6,
+                pointBorderWidth: 2
+            },
+            {
+                label: '{{BEACHHEAD_3_NAME}}',
+                data: data.beachheads.segment3,
+                backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                borderColor: '#059669',
+                borderWidth: 2,
+                pointBackgroundColor: '#059669',
+                pointBorderColor: '#1a1a1a',
+                pointRadius: 4,
+                pointBorderWidth: 2
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            r: {
+                beginAtZero: true,
+                max: 10,
+                ticks: { color: '#a3a3a3', stepSize: 2, font: { size: 11 } },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                pointLabels: { color: '#f5f5f5', font: { size: 12, weight: '600' } }
+            }
+        },
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { color: '#f5f5f5', padding: 20 }
+            },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Chart 4: Competitive Positioning Scatter
+const positioningCtx = document.getElementById('positioningChart').getContext('2d');
+new Chart(positioningCtx, {
+    type: 'scatter',
+    data: {
+        datasets: data.competitors.map(comp => ({
+            label: comp.label,
+            data: [{ x: comp.x, y: comp.y }],
+            backgroundColor: comp.primary ? '#10b981' : '#a3a3a3',
+            borderColor: comp.primary ? '#14b8a6' : '#a3a3a3',
+            borderWidth: comp.primary ? 3 : 1,
+            pointRadius: comp.primary ? 16 : 10,
+            pointHoverRadius: comp.primary ? 20 : 12
+        }))
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                title: { display: true, text: '{{POSITION_X_NAME}} →', color: '#a3a3a3', font: { size: 12, weight: '600' } },
+                min: 0,
+                max: 10,
+                ticks: { color: '#a3a3a3' },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' }
+            },
+            y: {
+                title: { display: true, text: '{{POSITION_Y_NAME}} →', color: '#a3a3a3', font: { size: 12, weight: '600' } },
+                min: 0,
+                max: 10,
+                ticks: { color: '#a3a3a3' },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' }
+            }
+        },
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { color: '#f5f5f5' }
+            },
+            tooltip: {
+                ...tooltipConfig,
+                callbacks: {
+                    label: function(context) {
+                        return context.dataset.label + ': {{POSITION_X_NAME}}=' + context.parsed.x + ', {{POSITION_Y_NAME}}=' + context.parsed.y;
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Chart 5: Porter's Five Forces Radar
+const porterCtx = document.getElementById('porterChart').getContext('2d');
+new Chart(porterCtx, {
+    type: 'radar',
+    data: {
+        labels: data.porter.labels,
+        datasets: [{
+            label: 'Force Intensity (10 = High Threat)',
+            data: data.porter.values,
+            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+            borderColor: '#10b981',
+            borderWidth: 3,
+            pointBackgroundColor: '#10b981',
+            pointBorderColor: '#1a1a1a',
+            pointRadius: 6,
+            pointBorderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            r: {
+                beginAtZero: true,
+                max: 10,
+                ticks: { color: '#a3a3a3', stepSize: 2, font: { size: 11 } },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                pointLabels: { color: '#f5f5f5', font: { size: 11, weight: '600' } }
+            }
+        },
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { color: '#f5f5f5' }
+            },
+            tooltip: tooltipConfig
+        }
+    }
+});
+</script>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     REQUIRED CHARTS SUMMARY
+     ════════════════════════════════════════════════════════════════════════════
+
+     1. funnelChart (Bar, horizontal, log scale)
+        - TAM/SAM/SOM market size funnel
+        - Shows market narrowing
+
+     2. growthChart (Line)
+        - 5-year revenue projection
+        - Three scenarios: conservative, most likely, aggressive
+
+     3. beachheadRadar (Radar)
+        - Beachhead evaluation across 5 dimensions
+        - Multiple segments compared
+
+     4. positioningChart (Scatter)
+        - Competitive positioning map
+        - Primary business + competitors
+
+     5. porterChart (Radar, full-width)
+        - Porter's Five Forces analysis
+        - Industry structure assessment
+
+     ════════════════════════════════════════════════════════════════════════════ -->

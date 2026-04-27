@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundraising Strategy Planner | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #10b981;
+            --accent-light: #14b8a6;
+            --accent-dark: #059669;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #0a0a0a;
+        }
+
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .header-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1.5rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2.5rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .score-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #a3a3a3;
+            margin-top: 0.25rem;
+        }
+
+        .content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 4rem;
+            background: #0a0a0a;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section:last-child {
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: #d4d4d4;
+            max-width: 800px;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-subtitle {
+            font-size: 0.9rem;
+            color: #a3a3a3;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+            margin-bottom: 1.5rem;
+        }
+
+        .insights-panel {
+            background: #0a0a0a;
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .insight-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .insight-list {
+            list-style: none;
+        }
+
+        .insight-list li {
+            padding: 0.6rem 0;
+            color: #d4d4d4;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .insight-list li:last-child {
+            border-bottom: none;
+        }
+
+        .insight-list li strong {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+
+        .metric-card .label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .metric-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #10b981;
+            line-height: 1.2;
+        }
+
+        .metric-card .description {
+            font-size: 0.85rem;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: #1a1a1a;
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .feature-card.primary {
+            border-color: #10b981;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            border-color: #10b981;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.2);
+        }
+
+        .feature-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .feature-name {
+            font-weight: 700;
+            color: #f5f5f5;
+            font-size: 1.1rem;
+        }
+
+        .feature-score {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .feature-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            color: #d4d4d4;
+            line-height: 1.6;
+        }
+
+        /* Fundraising Strategy Planner Specific Styles */
+        .timeline-phase {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .phase-number {
+            min-width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent);
+            color: #0a0a0a;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .phase-content h4 {
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .phase-duration {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 12px;
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .tier-1 { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .tier-2 { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .tier-3 { background: rgba(156, 163, 175, 0.2); color: #9ca3af; }
+
+        .investor-funnel {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin: 24px 0;
+        }
+
+        .funnel-stage {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            background: rgba(16, 185, 129, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .funnel-stage:first-child { border-radius: 12px 12px 0 0; }
+        .funnel-stage:last-child { border-radius: 0 0 12px 12px; }
+
+        .funnel-stage:nth-child(1) { background: rgba(16, 185, 129, 0.2); }
+        .funnel-stage:nth-child(2) { background: rgba(16, 185, 129, 0.18); margin: 0 20px; }
+        .funnel-stage:nth-child(3) { background: rgba(16, 185, 129, 0.15); margin: 0 40px; }
+        .funnel-stage:nth-child(4) { background: rgba(16, 185, 129, 0.12); margin: 0 60px; }
+        .funnel-stage:nth-child(5) { background: rgba(16, 185, 129, 0.1); margin: 0 80px; }
+        .funnel-stage:nth-child(6) { background: var(--accent); margin: 0 100px; color: #0a0a0a; }
+
+        .funnel-count {
+            font-size: 1.5rem;
+            font-weight: 700;
+            min-width: 60px;
+        }
+
+        .funnel-conversion {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-left: auto;
+        }
+
+        .meeting-stage {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .stage-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(16, 185, 129, 0.15);
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
+
+        .dataroom-category {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+
+        .dataroom-category h4 {
+            color: var(--accent);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dataroom-checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .dataroom-checklist li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #d4d4d4;
+        }
+
+        .dataroom-checklist li::before {
+            content: '[ ]';
+            color: var(--accent);
+            font-family: monospace;
+        }
+
+        .term-sheet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .term-card {
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .term-card h5 {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .term-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f5f5f5;
+        }
+
+        .term-description {
+            font-size: 0.85rem;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+        }
+
+        .closing-week {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+        }
+
+        .week-label {
+            min-width: 80px;
+            padding: 8px 12px;
+            background: var(--accent);
+            color: #0a0a0a;
+            border-radius: 4px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .discipline-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .discipline-card {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .discipline-card .icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .discipline-card .discipline-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .discipline-card .discipline-label {
+            font-size: 0.85rem;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+        }
+
+        .outreach-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .outreach-type {
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .outreach-type.warm { border-color: #10b981; }
+        .outreach-type.cold { border-color: #3b82f6; }
+
+        .outreach-type h4 {
+            margin-bottom: 1rem;
+            color: #f5f5f5;
+        }
+
+        .response-rate {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 16px;
+            padding: 12px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 8px;
+        }
+
+        .rate-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .tier-card {
+            background: #1a1a1a;
+            border: 2px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .tier-card.tier-1 { border-color: #10b981; }
+        .tier-card.tier-2 { border-color: #f59e0b; }
+        .tier-card.tier-3 { border-color: #9ca3af; }
+
+        .tier-count {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .tier-card.tier-1 .tier-count { color: #10b981; }
+        .tier-card.tier-2 .tier-count { color: #f59e0b; }
+        .tier-card.tier-3 .tier-count { color: #9ca3af; }
+
+        footer {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content p {
+            margin: 0.3rem 0;
+        }
+
+        .footer-content strong {
+            color: #10b981;
+        }
+
+        @media (max-width: 1400px) {
+            .score-container { grid-template-columns: repeat(3, 1fr); }
+            .metric-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .metric-grid { grid-template-columns: 1fr; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .score-container { grid-template-columns: repeat(2, 1fr); }
+            .header-content { padding: 2rem; }
+            .score-container { padding: 2rem; }
+            .content { padding: 2rem 2rem; }
+            .footer-content { padding: 2rem; }
+        }
+
+        @media print {
+            body { background: white; color: #000000; }
+            .container { background: white; }
+            header { background: white; }
+            .header-content { background: white; color: #000000; border: 2px solid #10b981; }
+            .header-content::before { display: none; }
+            .score-banner { background: white; }
+            .score-container { background: white; border: 2px solid #10b981; }
+            .score-value { background: none; -webkit-text-fill-color: #10b981; color: #10b981; }
+            .content { background: white; }
+            .section-title { color: #000000; }
+            .chart-card, .metric-card, .feature-card, .tier-card, .term-card, .dataroom-category, .meeting-stage, .closing-week, .discipline-card, .outreach-type {
+                background: white;
+                border: 2px solid #10b981;
+                page-break-inside: avoid;
+            }
+            footer { background: white; }
+            .footer-content { background: white; color: #666666; border-top: 2px solid #10b981; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">PetPulse Series A Fundraising</div>
+                <h1>Fundraising Strategy Planner</h1>
+                <div class="subtitle">Comprehensive Series A Fundraising Playbook</div>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span>Date:</span>
+                        <span>Generated: 2025-12-18</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>Type:</span>
+                        <span>Analysis Type: Series A Strategy</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>Version:</span>
+                        <span>Version 1.0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SCORE BANNER -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-item">
+                    <div class="score-value">$5M</div>
+                    <div class="score-label">Raise Target</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">$20M</div>
+                    <div class="score-label">Post-Money</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">5 mo</div>
+                    <div class="score-label">Timeline</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">80</div>
+                    <div class="score-label">Target Investors</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">2-3</div>
+                    <div class="score-label">Term Sheets</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">18 mo</div>
+                    <div class="score-label">Current Runway</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+
+            <!-- Section 1: Executive Summary -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">1. Executive Summary</h2>
+                    <p class="section-description">Series A fundraising goals and strategic approach</p>
+                </div>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <div class="label">Raise Goals</div>
+                        <div class="value">$5M</div>
+                        <div class="description">Series A at $15M pre-money / $20M post-money valuation</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Current Traction</div>
+                        <div class="value">$360K</div>
+                        <div class="description">ARR with 7,300 users, 85% D30 retention, 4.8:1 LTV:CAC</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Investor Profile</div>
+                        <div class="value">Pet Tech</div>
+                        <div class="description">Seed/Series A VCs focused on consumer IoT & pet wellness</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Expected Outcome</div>
+                        <div class="value">2-3</div>
+                        <div class="description">Term sheets from 80 investor outreach targeting close by Q4 2026</div>
+                    </div>
+                </div>
+
+                <div class="insights-panel">
+                    <div class="insight-title">Fundraising Thesis</div>
+                    <ul class="insight-list">
+                        <li><strong>Why Now:</strong> Pet tech market expanding to $260B by 2027, post-pandemic pet adoption creating sustained demand</li>
+                        <li><strong>Why PetPulse:</strong> Proven unit economics (4.8:1 LTV:CAC), hardware+subscription moat, 85% retention</li>
+                        <li><strong>Use of Funds:</strong> Scale to 16K subscribers, hit $2M ARR milestone for Series B positioning</li>
+                        <li><strong>Trigger Metrics:</strong> $2M ARR, 8,000 subscribers, 88% D30 retention</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 2: Fundraising Timeline -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">2. Fundraising Timeline</h2>
+                    <p class="section-description">5-month structured fundraising process</p>
+                </div>
+
+                <div class="timeline-phase">
+                    <div class="phase-number">1</div>
+                    <div class="phase-content">
+                        <h4>Preparation Phase</h4>
+                        <div class="phase-duration">Weeks 1-4 | July 2026</div>
+                        <ul style="color: #d4d4d4; margin-left: 1rem;">
+                            <li>Finalize Series A pitch deck (15 slides)</li>
+                            <li>Update financial model with $2M ARR projections</li>
+                            <li>Build investor target list (80 investors)</li>
+                            <li>Secure 15-20 warm intro commitments from network</li>
+                            <li>Prepare data room (financials, metrics, legal)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-phase">
+                    <div class="phase-number">2</div>
+                    <div class="phase-content">
+                        <h4>Outreach Phase</h4>
+                        <div class="phase-duration">Weeks 5-8 | August 2026</div>
+                        <ul style="color: #d4d4d4; margin-left: 1rem;">
+                            <li>Send 15 warm intro requests per week</li>
+                            <li>Cold outreach to Tier 2/3 investors (10/week)</li>
+                            <li>Hold 25-30 intro meetings (15-30 min)</li>
+                            <li>Identify 8-10 interested investors for partner meetings</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-phase">
+                    <div class="phase-number">3</div>
+                    <div class="phase-content">
+                        <h4>Partner Meetings & Due Diligence</h4>
+                        <div class="phase-duration">Weeks 9-14 | September-October 2026</div>
+                        <ul style="color: #d4d4d4; margin-left: 1rem;">
+                            <li>Hold 8-10 partner meetings (full partnership)</li>
+                            <li>Share data room with top 5 interested investors</li>
+                            <li>Investor customer reference calls (5 customers)</li>
+                            <li>Technical due diligence (hardware, app, AI)</li>
+                            <li>Back-channel reference checks</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-phase">
+                    <div class="phase-number">4</div>
+                    <div class="phase-content">
+                        <h4>Term Sheet & Closing</h4>
+                        <div class="phase-duration">Weeks 15-20 | November-December 2026</div>
+                        <ul style="color: #d4d4d4; margin-left: 1rem;">
+                            <li>Receive 2-3 term sheets, evaluate and negotiate</li>
+                            <li>Select lead investor (prioritize value-add)</li>
+                            <li>Legal due diligence and document drafting</li>
+                            <li>Wire transfer and close round</li>
+                            <li>Announce fundraise (press, social media)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="chart-card full-width" style="margin-top: 2rem;">
+                    <div class="chart-title">Fundraising Timeline</div>
+                    <div class="chart-subtitle">Phase duration in weeks</div>
+                    <div class="chart-wrapper">
+                        <canvas id="timelineChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Investor Targeting -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">3. Investor Targeting</h2>
+                    <p class="section-description">80 investors prioritized by fit and engagement strategy</p>
+                </div>
+
+                <div class="feature-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="tier-card tier-1">
+                        <span class="tier-badge tier-1">Tier 1 - Best Fit</span>
+                        <div class="tier-count">15</div>
+                        <div style="color: #d4d4d4; margin-top: 1rem;">
+                            <p><strong>Pet Tech / Consumer IoT specialists</strong></p>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Sequoia Scout, a16z Bio, Maveron, Arena VC, Lerer Hippeau</p>
+                            <p style="font-size: 0.85rem; color: #a3a3a3; margin-top: 0.5rem;">Strategy: Warm intros only</p>
+                        </div>
+                    </div>
+
+                    <div class="tier-card tier-2">
+                        <span class="tier-badge tier-2">Tier 2 - Good Fit</span>
+                        <div class="tier-count">25</div>
+                        <div style="color: #d4d4d4; margin-top: 1rem;">
+                            <p><strong>Consumer SaaS / Hardware investors</strong></p>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem;">First Round, Forerunner, Lightspeed Scout, Kleiner Perkins</p>
+                            <p style="font-size: 0.85rem; color: #a3a3a3; margin-top: 0.5rem;">Strategy: Warm intros + targeted cold</p>
+                        </div>
+                    </div>
+
+                    <div class="tier-card tier-3">
+                        <span class="tier-badge tier-3">Tier 3 - Possible</span>
+                        <div class="tier-count">40</div>
+                        <div style="color: #d4d4d4; margin-top: 1rem;">
+                            <p><strong>Generalist Seed/A funds</strong></p>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Regional VCs, emerging managers, angels with pet industry connections</p>
+                            <p style="font-size: 0.85rem; color: #a3a3a3; margin-top: 0.5rem;">Strategy: Cold outreach + LinkedIn</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-grid" style="margin-top: 2rem;">
+                    <div class="chart-card">
+                        <div class="chart-title">Investor Tier Distribution</div>
+                        <div class="chart-subtitle">80 total investors across 3 tiers</div>
+                        <div class="chart-wrapper">
+                            <canvas id="tierChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="insights-panel" style="margin-top: 0;">
+                            <div class="insight-title">Investor Selection Criteria</div>
+                            <ul class="insight-list">
+                                <li><strong>Stage Fit:</strong> Series A checks $3-10M</li>
+                                <li><strong>Sector Focus:</strong> Pet tech, consumer IoT, subscription</li>
+                                <li><strong>Geography:</strong> US nationwide, preference Bay Area</li>
+                                <li><strong>Portfolio:</strong> No direct competitors (FitBark, Whistle)</li>
+                                <li><strong>Value-Add:</strong> Consumer brand building, hardware ops</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Outreach Strategy -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">4. Outreach Strategy</h2>
+                    <p class="section-description">Warm intros prioritized, cold outreach for coverage</p>
+                </div>
+
+                <div class="outreach-comparison">
+                    <div class="outreach-type warm">
+                        <h4 style="color: #10b981;">Warm Introductions</h4>
+                        <p style="color: #d4d4d4; margin-bottom: 1rem;">Request intros from advisors, existing investors, founder network</p>
+                        <ul style="color: #d4d4d4; margin-left: 1rem; font-size: 0.9rem;">
+                            <li>Target: 40 warm intro requests</li>
+                            <li>Seed investors: Intro to Series A friends</li>
+                            <li>Advisor network: 5 advisors with VC connections</li>
+                            <li>Founder peers: 10 founders in pet/consumer</li>
+                        </ul>
+                        <div class="response-rate">
+                            <span class="rate-value">55%</span>
+                            <span style="color: #d4d4d4;">Expected response rate</span>
+                        </div>
+                    </div>
+
+                    <div class="outreach-type cold">
+                        <h4 style="color: #3b82f6;">Cold Outreach</h4>
+                        <p style="color: #d4d4d4; margin-bottom: 1rem;">Direct email to Tier 2/3 investors with personalization</p>
+                        <ul style="color: #d4d4d4; margin-left: 1rem; font-size: 0.9rem;">
+                            <li>Target: 40 cold emails (10/week x 4 weeks)</li>
+                            <li>3-email sequence (Day 0, Day 5, Day 10)</li>
+                            <li>Lead with strongest metric: $360K ARR</li>
+                            <li>Reference their portfolio (pet tech angle)</li>
+                        </ul>
+                        <div class="response-rate" style="background: rgba(59, 130, 246, 0.1);">
+                            <span class="rate-value" style="color: #3b82f6;">12%</span>
+                            <span style="color: #d4d4d4;">Expected response rate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Fundraising Funnel -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">5. Fundraising Funnel</h2>
+                    <p class="section-description">Expected conversion at each stage</p>
+                </div>
+
+                <div class="investor-funnel">
+                    <div class="funnel-stage">
+                        <span class="funnel-count">80</span>
+                        <span>Outreach Sent</span>
+                        <span class="funnel-conversion">100%</span>
+                    </div>
+                    <div class="funnel-stage">
+                        <span class="funnel-count">28</span>
+                        <span>Intro Meetings Booked</span>
+                        <span class="funnel-conversion">35% response rate</span>
+                    </div>
+                    <div class="funnel-stage">
+                        <span class="funnel-count">10</span>
+                        <span>Partner Meetings</span>
+                        <span class="funnel-conversion">36% conversion</span>
+                    </div>
+                    <div class="funnel-stage">
+                        <span class="funnel-count">5</span>
+                        <span>Due Diligence</span>
+                        <span class="funnel-conversion">50% conversion</span>
+                    </div>
+                    <div class="funnel-stage">
+                        <span class="funnel-count">3</span>
+                        <span>Term Sheets</span>
+                        <span class="funnel-conversion">60% conversion</span>
+                    </div>
+                    <div class="funnel-stage">
+                        <span class="funnel-count">2</span>
+                        <span>Closed (Lead + Follow-on)</span>
+                        <span class="funnel-conversion" style="color: #0a0a0a;">67% close rate</span>
+                    </div>
+                </div>
+
+                <div class="chart-card full-width">
+                    <div class="chart-title">Investor Funnel Visualization</div>
+                    <div class="chart-subtitle">Conversion from outreach to close</div>
+                    <div class="chart-wrapper">
+                        <canvas id="funnelChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: Meeting Progression -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">6. Meeting Progression</h2>
+                    <p class="section-description">What happens at each stage of the investor relationship</p>
+                </div>
+
+                <div class="meeting-stage">
+                    <div class="stage-icon">1</div>
+                    <div>
+                        <h4 style="color: #f5f5f5; margin-bottom: 0.5rem;">Intro Meeting (15-30 min)</h4>
+                        <p style="color: #d4d4d4; font-size: 0.9rem;">Condensed pitch (10 slides), gauge interest, get to partner meeting. Key questions: market size, traction, team background.</p>
+                    </div>
+                </div>
+
+                <div class="meeting-stage">
+                    <div class="stage-icon">2</div>
+                    <div>
+                        <h4 style="color: #f5f5f5; margin-bottom: 0.5rem;">Partner Meeting (45-60 min)</h4>
+                        <p style="color: #d4d4d4; font-size: 0.9rem;">Full pitch deck + deep Q&A with entire partnership. Unit economics deep dive, competitive moat, product roadmap, fundraising history.</p>
+                    </div>
+                </div>
+
+                <div class="meeting-stage">
+                    <div class="stage-icon">3</div>
+                    <div>
+                        <h4 style="color: #f5f5f5; margin-bottom: 0.5rem;">Due Diligence (1-2 weeks)</h4>
+                        <p style="color: #d4d4d4; font-size: 0.9rem;">Data room access, customer reference calls (5 customers), technical DD (hardware manufacturing, app architecture), back-channel references.</p>
+                    </div>
+                </div>
+
+                <div class="meeting-stage">
+                    <div class="stage-icon">4</div>
+                    <div>
+                        <h4 style="color: #f5f5f5; margin-bottom: 0.5rem;">Term Sheet (1 week)</h4>
+                        <p style="color: #d4d4d4; font-size: 0.9rem;">Negotiate valuation, board seat, pro-rata rights, liquidation preference. Target: 2-3 term sheets for leverage.</p>
+                    </div>
+                </div>
+
+                <div class="meeting-stage">
+                    <div class="stage-icon">5</div>
+                    <div>
+                        <h4 style="color: #f5f5f5; margin-bottom: 0.5rem;">Closing (2-4 weeks)</h4>
+                        <p style="color: #d4d4d4; font-size: 0.9rem;">Legal DD, document drafting (SPA, IRA, Voting Agreement), final signatures, wire transfer, cap table update, announcement.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 7: Due Diligence Preparation -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">7. Due Diligence Preparation</h2>
+                    <p class="section-description">Data room contents and customer reference preparation</p>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="dataroom-category">
+                        <h4>Financial Documents</h4>
+                        <ul class="dataroom-checklist">
+                            <li>5-Year Financial Model (revenue, costs, headcount)</li>
+                            <li>Historical P&L, Cash Flow, Balance Sheet (2024-2025)</li>
+                            <li>Current Cap Table with SAFE conversions</li>
+                            <li>Monthly Budget vs Actual</li>
+                            <li>Bank Statements (last 6 months)</li>
+                        </ul>
+                    </div>
+
+                    <div class="dataroom-category">
+                        <h4>Metrics & KPIs</h4>
+                        <ul class="dataroom-checklist">
+                            <li>MRR/ARR Dashboard (Stripe + internal)</li>
+                            <li>Cohort Analysis (retention by month)</li>
+                            <li>Unit Economics (CAC $185, LTV $892, LTV:CAC 4.8:1)</li>
+                            <li>NPS Score (42) and CSAT (87%)</li>
+                            <li>Funnel Metrics (AARRR framework)</li>
+                        </ul>
+                    </div>
+
+                    <div class="dataroom-category">
+                        <h4>Customer & Product</h4>
+                        <ul class="dataroom-checklist">
+                            <li>Top 20 Customers by LTV</li>
+                            <li>10 Referenceable Customers (prepped)</li>
+                            <li>18-Month Product Roadmap</li>
+                            <li>Product Demo Video (5 min)</li>
+                            <li>Hardware Manufacturing Partner Info</li>
+                        </ul>
+                    </div>
+
+                    <div class="dataroom-category">
+                        <h4>Legal & Team</h4>
+                        <ul class="dataroom-checklist">
+                            <li>Certificate of Incorporation, Bylaws</li>
+                            <li>All Employee Agreements + IP Assignments</li>
+                            <li>Key Customer/Vendor Contracts</li>
+                            <li>Org Chart + Extended Team Bios</li>
+                            <li>12-Month Hiring Plan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 8: Term Sheet Terms -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">8. Term Sheet Terms</h2>
+                    <p class="section-description">Key terms to negotiate for Series A</p>
+                </div>
+
+                <div class="term-sheet-grid">
+                    <div class="term-card">
+                        <h5>Valuation</h5>
+                        <div class="term-value">$15M Pre / $20M Post</div>
+                        <div class="term-description">$5M investment for 25% ownership. Range: $12-18M pre depending on competitive dynamics.</div>
+                    </div>
+
+                    <div class="term-card">
+                        <h5>Board Composition</h5>
+                        <div class="term-value">3 Seats</div>
+                        <div class="term-description">1 Founder (CEO), 1 Investor (Lead), 1 Independent. Negotiate for founder-friendly independent selection.</div>
+                    </div>
+
+                    <div class="term-card">
+                        <h5>Liquidation Preference</h5>
+                        <div class="term-value">1x Non-Participating</div>
+                        <div class="term-description">Standard, founder-friendly. Reject 2x or participating preferred.</div>
+                    </div>
+
+                    <div class="term-card">
+                        <h5>Option Pool</h5>
+                        <div class="term-value">15% Post-Money</div>
+                        <div class="term-description">Standard for Series A. Sufficient for 2-year hiring plan (12 roles).</div>
+                    </div>
+
+                    <div class="term-card">
+                        <h5>Pro-Rata Rights</h5>
+                        <div class="term-value">Major Investors Only</div>
+                        <div class="term-description">Pro-rata for investors with >5% ownership. Helps ensure follow-on support.</div>
+                    </div>
+
+                    <div class="term-card">
+                        <h5>Vesting</h5>
+                        <div class="term-value">4yr / 1yr Cliff</div>
+                        <div class="term-description">Standard vesting. Credit existing time served if negotiated well.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 9: Closing Process -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">9. Closing Process</h2>
+                    <p class="section-description">4-week timeline from term sheet to wire</p>
+                </div>
+
+                <div class="closing-week">
+                    <div class="week-label">Week 1</div>
+                    <div style="color: #d4d4d4;">
+                        <strong style="color: #f5f5f5;">Sign Term Sheet</strong>
+                        <p style="font-size: 0.9rem;">Select lead investor, negotiate final terms, sign binding term sheet. Announce to other interested investors (create urgency for follow-on).</p>
+                    </div>
+                </div>
+
+                <div class="closing-week">
+                    <div class="week-label">Week 2</div>
+                    <div style="color: #d4d4d4;">
+                        <strong style="color: #f5f5f5;">Legal Due Diligence</strong>
+                        <p style="font-size: 0.9rem;">Investor lawyers review contracts, IP assignments, employment agreements. Address any issues (cap table cleanup, contract amendments).</p>
+                    </div>
+                </div>
+
+                <div class="closing-week">
+                    <div class="week-label">Week 3</div>
+                    <div style="color: #d4d4d4;">
+                        <strong style="color: #f5f5f5;">Document Drafting</strong>
+                        <p style="font-size: 0.9rem;">Draft Stock Purchase Agreement (SPA), Investor Rights Agreement (IRA), Voting Agreement, ROFR/Co-Sale Agreement.</p>
+                    </div>
+                </div>
+
+                <div class="closing-week">
+                    <div class="week-label">Week 4</div>
+                    <div style="color: #d4d4d4;">
+                        <strong style="color: #f5f5f5;">Signatures & Wire</strong>
+                        <p style="font-size: 0.9rem;">All parties sign final documents. Investor wires $5M. Issue stock certificates, update cap table. Board meeting to ratify.</p>
+                    </div>
+                </div>
+
+                <div class="closing-week">
+                    <div class="week-label" style="background: #059669;">Post-Close</div>
+                    <div style="color: #d4d4d4;">
+                        <strong style="color: #f5f5f5;">Announce & Thank</strong>
+                        <p style="font-size: 0.9rem;">Press release, blog post, social media announcement. Thank all investors who participated. Send update to investors who passed (maintain relationships).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 10: Fundraising Discipline -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">10. Fundraising Discipline</h2>
+                    <p class="section-description">Principles to maintain focus and maximize outcomes</p>
+                </div>
+
+                <div class="discipline-metrics">
+                    <div class="discipline-card">
+                        <div class="icon">clock</div>
+                        <div class="discipline-value">Dec 31</div>
+                        <div class="discipline-label">Hard Deadline - Close by end of 2026 or pivot to Plan B</div>
+                    </div>
+
+                    <div class="discipline-card">
+                        <div class="icon">person</div>
+                        <div class="discipline-value">50%</div>
+                        <div class="discipline-label">CEO Time Limit - Max half of CEO time on fundraising</div>
+                    </div>
+
+                    <div class="discipline-card">
+                        <div class="icon">calendar</div>
+                        <div class="discipline-value">6 wks</div>
+                        <div class="discipline-label">Meeting Window - Compress all meetings to create FOMO</div>
+                    </div>
+
+                    <div class="discipline-card">
+                        <div class="icon">arrow</div>
+                        <div class="discipline-value">Plan B</div>
+                        <div class="discipline-label">Fallback: Cut burn 30%, extend runway to 24mo, try again Q2 2027</div>
+                    </div>
+                </div>
+
+                <div class="insights-panel" style="margin-top: 2rem;">
+                    <div class="insight-title">Discipline Principles</div>
+                    <ul class="insight-list">
+                        <li><strong>Track Everything:</strong> Use Notion/Airtable CRM to track every investor, meeting, status, next step</li>
+                        <li><strong>Weekly Reviews:</strong> Review funnel every Friday - how many moved forward this week?</li>
+                        <li><strong>Batch Meetings:</strong> Don't take meetings one-by-one over 6 months - compress for urgency</li>
+                        <li><strong>Value-Add > Valuation:</strong> Pick investor for network and expertise, not just highest price</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 11: Next Steps -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">11. Next Steps</h2>
+                    <p class="section-description">Immediate actions to launch fundraising process</p>
+                </div>
+
+                <div class="feature-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="feature-card">
+                        <div class="feature-badge">This Week</div>
+                        <div class="feature-name">Finalize Materials</div>
+                        <div class="feature-description">
+                            <ul style="margin-left: 1rem; color: #d4d4d4;">
+                                <li>Update pitch deck with latest metrics</li>
+                                <li>Refresh financial model projections</li>
+                                <li>Prepare one-pager for intros</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-badge">Week 2</div>
+                        <div class="feature-name">Build Target List</div>
+                        <div class="feature-description">
+                            <ul style="margin-left: 1rem; color: #d4d4d4;">
+                                <li>Research 80 investors (Crunchbase, AngelList)</li>
+                                <li>Prioritize into Tier 1/2/3</li>
+                                <li>Map warm intro paths</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="feature-card primary">
+                        <div class="feature-badge">Week 3</div>
+                        <div class="feature-name">Request Intros</div>
+                        <div class="feature-description">
+                            <ul style="margin-left: 1rem; color: #d4d4d4;">
+                                <li>Email advisors for intro requests</li>
+                                <li>Ask seed investors for Series A intros</li>
+                                <li>Prep data room (DocSend)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-badge">Week 4</div>
+                        <div class="feature-name">Customer References</div>
+                        <div class="feature-description">
+                            <ul style="margin-left: 1rem; color: #d4d4d4;">
+                                <li>Identify 10 referenceable customers</li>
+                                <li>Request permission for investor calls</li>
+                                <li>Brief on common investor questions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-badge">Week 5</div>
+                        <div class="feature-name">Launch Outreach</div>
+                        <div class="feature-description">
+                            <ul style="margin-left: 1rem; color: #d4d4d4;">
+                                <li>Send first batch of warm intros</li>
+                                <li>Begin cold outreach to Tier 2/3</li>
+                                <li>Schedule first intro meetings</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-badge">Ongoing</div>
+                        <div class="feature-name">Track & Iterate</div>
+                        <div class="feature-description">
+                            <ul style="margin-left: 1rem; color: #d4d4d4;">
+                                <li>Weekly funnel review (Friday)</li>
+                                <li>Adjust messaging based on feedback</li>
+                                <li>Maintain 50% CEO time limit</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> 2025-12-18 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | fundraising-strategy-planner-v1.0</p>
+                <p style="margin-top: 5px;">Context Signature: PETPULSE-FUND-2025-12 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Chart.js Global Configuration
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        const tooltipConfig = {
+            backgroundColor: '#1a1a1a',
+            titleColor: '#f5f5f5',
+            bodyColor: '#d4d4d4',
+            borderColor: '#10b981',
+            borderWidth: 1
+        };
+
+        // Timeline Chart
+        const timelineCtx = document.getElementById('timelineChart').getContext('2d');
+        new Chart(timelineCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Preparation', 'Outreach', 'Partner Meetings & DD', 'Term Sheet & Closing'],
+                datasets: [{
+                    label: 'Duration (weeks)',
+                    data: [4, 4, 6, 6],
+                    backgroundColor: [
+                        'rgba(16, 185, 129, 0.8)',
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(245, 158, 11, 0.8)',
+                        'rgba(139, 92, 246, 0.8)'
+                    ],
+                    borderWidth: 0,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: { color: 'rgba(255,255,255,0.7)' },
+                        grid: { color: 'rgba(255,255,255,0.1)' }
+                    },
+                    y: {
+                        ticks: { color: 'rgba(255,255,255,0.7)' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Tier Chart
+        const tierCtx = document.getElementById('tierChart').getContext('2d');
+        new Chart(tierCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Tier 1 (Best Fit)', 'Tier 2 (Good Fit)', 'Tier 3 (Possible)'],
+                datasets: [{
+                    data: [15, 25, 40],
+                    backgroundColor: [
+                        'rgba(16, 185, 129, 0.8)',
+                        'rgba(245, 158, 11, 0.8)',
+                        'rgba(156, 163, 175, 0.8)'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#ffffff' }
+                    },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        // Funnel Chart
+        const funnelCtx = document.getElementById('funnelChart').getContext('2d');
+        new Chart(funnelCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Outreach', 'Intro Meetings', 'Partner Meetings', 'Due Diligence', 'Term Sheets', 'Closed'],
+                datasets: [{
+                    label: 'Count',
+                    data: [80, 28, 10, 5, 3, 2],
+                    backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                    borderColor: '#10b981',
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: 'rgba(255,255,255,0.7)' },
+                        grid: { color: 'rgba(255,255,255,0.1)' }
+                    },
+                    x: {
+                        ticks: { color: 'rgba(255,255,255,0.7)' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Print-friendly
+        window.addEventListener('beforeprint', function() {
+            Chart.defaults.color = '#000000';
+        });
+
+        window.addEventListener('afterprint', function() {
+            Chart.defaults.color = '#a3a3a3';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1247 @@
+<!--
+═══════════════════════════════════════════════════════════════════════════════
+STRATARTS HTML SKELETON TEMPLATE
+Skill: go-to-market-planner
+Version: 1.0.0
+
+INSTRUCTIONS:
+1. Read VERIFICATION-CHECKLIST.md FIRST for canonical patterns
+2. Read base-template.html for shared CSS/JS structure
+3. Replace all {{PLACEHOLDER}} markers with actual data
+4. This template defines skill-specific content sections and charts
+═══════════════════════════════════════════════════════════════════════════════
+-->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     TEMPLATE VARIABLES (Replace with actual data)
+     ════════════════════════════════════════════════════════════════════════════
+
+     HEADER:
+     {{PAGE_TITLE}}          = "Go-to-Market Plan"
+     {{KICKER}}              = "StratArts Business Analysis"
+     {{TITLE}}               = "Go-to-Market Planner"
+     {{SUBTITLE}}            = "{PRODUCT_NAME} - {PRODUCT_DESCRIPTION}"
+     {{DATE}}                = "November 28, 2025"
+     {{ANALYSIS_TYPE}}       = "Market & Product Strategy"
+     {{VERSION}}             = "1.0.0"
+
+     SCORE BANNER:
+     {{PRIMARY_SCORE}}       = "90" (GTM readiness score or days)
+     {{SCORE_LABEL}}         = "Day Launch Plan"
+     {{SCORE_INTERPRETATION}}= "This plan covers..."
+     {{VERDICT}}             = "LAUNCH READY" | "NEEDS REFINEMENT" | "CRITICAL GAPS"
+
+     FOOTER:
+     {{PROJECT_NAME}}        = "{PROJECT_FOLDER_NAME}"
+     {{SKILL_NAME}}          = "go-to-market-planner"
+     {{CONTEXT_SIGNATURE}}   = "go-to-market-planner-v1.0.0"
+     {{ITERATIONS}}          = "1"
+     {{ITERATIONS_PLURAL}}   = "" or "s"
+
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     SKILL-SPECIFIC CSS (Add to {{SKILL_SPECIFIC_CSS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+<style>
+/* GTM Goals Cards */
+.goals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.goal-card {
+    background: #1a1a1a;
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.goal-card:hover {
+    transform: translateY(-2px);
+    border-color: #10b981;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.2);
+}
+
+.goal-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.goal-target {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #10b981;
+    line-height: 1.2;
+}
+
+.goal-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #a3a3a3;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+.goal-description {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    margin-top: 0.75rem;
+}
+
+/* Channel Cards */
+.channel-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.channel-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.channel-card.primary {
+    border: 2px solid #10b981;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15);
+}
+
+.channel-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(16, 185, 129, 0.4);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+}
+
+.channel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.channel-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.channel-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.channel-name {
+    font-weight: 700;
+    color: #f5f5f5;
+    font-size: 1.1rem;
+}
+
+.channel-type {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #a3a3a3;
+}
+
+.channel-priority {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.channel-priority.primary {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.channel-priority.secondary {
+    background: rgba(246, 173, 85, 0.2);
+    color: #f6ad55;
+}
+
+.channel-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.channel-metric {
+    text-align: center;
+    padding: 0.75rem;
+    background: rgba(16, 185, 129, 0.05);
+    border-radius: 6px;
+}
+
+.cm-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.cm-label {
+    font-size: 0.7rem;
+    color: #a3a3a3;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.channel-tactics {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    line-height: 1.6;
+}
+
+/* Timeline/Roadmap */
+.roadmap-container {
+    margin-top: 2rem;
+}
+
+.month-block {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.month-block::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 100%;
+    width: 2px;
+    height: 1.5rem;
+    background: rgba(16, 185, 129, 0.3);
+}
+
+.month-block:last-child::before {
+    display: none;
+}
+
+.month-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.month-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.month-number {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #0a0a0a;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.month-title {
+    font-weight: 700;
+    color: #f5f5f5;
+    font-size: 1.1rem;
+}
+
+.month-theme {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    font-style: italic;
+}
+
+.month-goals {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.month-goal {
+    text-align: right;
+}
+
+.mg-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.mg-label {
+    font-size: 0.7rem;
+    color: #a3a3a3;
+    text-transform: uppercase;
+}
+
+.week-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.week-card {
+    background: rgba(16, 185, 129, 0.05);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.week-label {
+    font-weight: 600;
+    color: #10b981;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.week-tasks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.week-task {
+    font-size: 0.85rem;
+    color: #d4d4d4;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.week-task:last-child {
+    border-bottom: none;
+}
+
+/* Budget Table */
+.budget-table-container {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    overflow-x: auto;
+}
+
+.budget-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.budget-table th {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 2px solid rgba(16, 185, 129, 0.3);
+}
+
+.budget-table td {
+    padding: 0.75rem 1rem;
+    color: #d4d4d4;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.budget-table tr:hover td {
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.budget-table tr.total td {
+    font-weight: 700;
+    color: #10b981;
+    border-top: 2px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Risk Cards */
+.risk-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.risk-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(252, 129, 129, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.risk-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(252, 129, 129, 0.2);
+}
+
+.risk-icon {
+    color: #fc8181;
+    font-size: 1.25rem;
+}
+
+.risk-title {
+    font-weight: 700;
+    color: #fc8181;
+    font-size: 1rem;
+}
+
+.risk-description {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    margin-bottom: 1rem;
+}
+
+.mitigation-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #10b981;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.mitigation-text {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    padding-left: 1rem;
+    border-left: 2px solid #10b981;
+}
+
+/* Metrics Dashboard */
+.metrics-dashboard {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.dashboard-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.dash-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.dash-label {
+    font-size: 0.8rem;
+    color: #a3a3a3;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+}
+
+.dash-target {
+    font-size: 0.8rem;
+    color: #d4d4d4;
+    margin-top: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .goals-grid { grid-template-columns: 1fr; }
+    .channel-grid { grid-template-columns: 1fr; }
+    .week-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .risk-grid { grid-template-columns: 1fr; }
+    .metrics-dashboard { grid-template-columns: repeat(2, 1fr); }
+    .channel-metrics { grid-template-columns: 1fr; }
+    .month-goals { flex-direction: column; gap: 0.5rem; }
+    .month-goal { text-align: left; }
+}
+
+/* Print */
+@media print {
+    .goal-card, .channel-card, .month-block, .risk-card, .dashboard-card {
+        background: white;
+        border: 2px solid #10b981;
+        page-break-inside: avoid;
+    }
+    .budget-table th { background: #f5f5f5; color: #000000; }
+    .month-title, .channel-name, .risk-title { color: #000000; }
+}
+</style>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CONTENT SECTIONS (Replace {{CONTENT_SECTIONS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- Section 1: 90-Day Goals -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">90-Day Goals</h2>
+        <p class="section-description">
+            Primary growth targets and key milestones for the go-to-market launch period.
+        </p>
+    </div>
+
+    <div class="goals-grid">
+        <div class="goal-card">
+            <div class="goal-icon">👥</div>
+            <div class="goal-target">{{CUSTOMER_TARGET}}</div>
+            <div class="goal-label">New Customers</div>
+            <div class="goal-description">{{CUSTOMER_GOAL_DESCRIPTION}}</div>
+        </div>
+        <div class="goal-card">
+            <div class="goal-icon">💰</div>
+            <div class="goal-target">{{REVENUE_TARGET}}</div>
+            <div class="goal-label">Monthly Revenue</div>
+            <div class="goal-description">{{REVENUE_GOAL_DESCRIPTION}}</div>
+        </div>
+        <div class="goal-card">
+            <div class="goal-icon">🎯</div>
+            <div class="goal-target">{{MILESTONE_TARGET}}</div>
+            <div class="goal-label">Key Milestone</div>
+            <div class="goal-description">{{MILESTONE_DESCRIPTION}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 2: Target Customer & Beachhead -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Target Customer & Beachhead Market</h2>
+        <p class="section-description">
+            Primary customer persona and initial market segment for focused GTM execution.
+        </p>
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-card primary">
+            <div class="feature-badge">Primary Persona</div>
+            <div class="feature-name">{{PERSONA_NAME}}</div>
+            <div class="feature-description">{{PERSONA_DESCRIPTION}}</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-badge">Beachhead Market</div>
+            <div class="feature-name">{{BEACHHEAD_SEGMENT}}</div>
+            <div class="feature-description">{{BEACHHEAD_RATIONALE}}</div>
+        </div>
+    </div>
+
+    <div class="metric-grid" style="margin-top: 1.5rem;">
+        <div class="metric-card">
+            <div class="label">Market Size</div>
+            <div class="value">{{MARKET_SIZE}}</div>
+            <div class="description">Total addressable market</div>
+        </div>
+        <div class="metric-card">
+            <div class="label">Buying Cycle</div>
+            <div class="value">{{BUYING_CYCLE}}</div>
+            <div class="description">Average decision timeline</div>
+        </div>
+        <div class="metric-card">
+            <div class="label">ACV Target</div>
+            <div class="value">{{ACV_TARGET}}</div>
+            <div class="description">Annual contract value</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: Channel Strategy -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Channel Strategy</h2>
+        <p class="section-description">
+            Primary and secondary acquisition channels with budget allocation and expected performance.
+        </p>
+    </div>
+
+    <div class="channel-grid">
+        <!-- Primary Channel 1 -->
+        <div class="channel-card primary">
+            <div class="channel-header">
+                <div class="channel-info">
+                    <div class="channel-icon">{{CHANNEL_1_ICON}}</div>
+                    <div>
+                        <div class="channel-name">{{CHANNEL_1_NAME}}</div>
+                        <div class="channel-type">{{CHANNEL_1_TYPE}}</div>
+                    </div>
+                </div>
+                <div class="channel-priority primary">Primary</div>
+            </div>
+            <div class="channel-metrics">
+                <div class="channel-metric">
+                    <div class="cm-value">{{CHANNEL_1_BUDGET}}</div>
+                    <div class="cm-label">Budget/Mo</div>
+                </div>
+                <div class="channel-metric">
+                    <div class="cm-value">{{CHANNEL_1_CUSTOMERS}}</div>
+                    <div class="cm-label">Exp. Customers</div>
+                </div>
+                <div class="channel-metric">
+                    <div class="cm-value">{{CHANNEL_1_CAC}}</div>
+                    <div class="cm-label">Target CAC</div>
+                </div>
+            </div>
+            <div class="channel-tactics">{{CHANNEL_1_TACTICS}}</div>
+        </div>
+
+        <!-- Primary Channel 2 -->
+        <div class="channel-card primary">
+            <div class="channel-header">
+                <div class="channel-info">
+                    <div class="channel-icon">{{CHANNEL_2_ICON}}</div>
+                    <div>
+                        <div class="channel-name">{{CHANNEL_2_NAME}}</div>
+                        <div class="channel-type">{{CHANNEL_2_TYPE}}</div>
+                    </div>
+                </div>
+                <div class="channel-priority primary">Primary</div>
+            </div>
+            <div class="channel-metrics">
+                <div class="channel-metric">
+                    <div class="cm-value">{{CHANNEL_2_BUDGET}}</div>
+                    <div class="cm-label">Budget/Mo</div>
+                </div>
+                <div class="channel-metric">
+                    <div class="cm-value">{{CHANNEL_2_CUSTOMERS}}</div>
+                    <div class="cm-label">Exp. Customers</div>
+                </div>
+                <div class="channel-metric">
+                    <div class="cm-value">{{CHANNEL_2_CAC}}</div>
+                    <div class="cm-label">Target CAC</div>
+                </div>
+            </div>
+            <div class="channel-tactics">{{CHANNEL_2_TACTICS}}</div>
+        </div>
+
+        <!-- Secondary Channel -->
+        <div class="channel-card">
+            <div class="channel-header">
+                <div class="channel-info">
+                    <div class="channel-icon">{{CHANNEL_3_ICON}}</div>
+                    <div>
+                        <div class="channel-name">{{CHANNEL_3_NAME}}</div>
+                        <div class="channel-type">{{CHANNEL_3_TYPE}}</div>
+                    </div>
+                </div>
+                <div class="channel-priority secondary">Secondary</div>
+            </div>
+            <div class="channel-metrics">
+                <div class="channel-metric">
+                    <div class="cm-value">{{CHANNEL_3_BUDGET}}</div>
+                    <div class="cm-label">Budget/Mo</div>
+                </div>
+                <div class="channel-metric">
+                    <div class="cm-value">{{CHANNEL_3_CUSTOMERS}}</div>
+                    <div class="cm-label">Exp. Customers</div>
+                </div>
+                <div class="channel-metric">
+                    <div class="cm-value">{{CHANNEL_3_CAC}}</div>
+                    <div class="cm-label">Target CAC</div>
+                </div>
+            </div>
+            <div class="channel-tactics">{{CHANNEL_3_TACTICS}}</div>
+        </div>
+
+        <!-- Secondary Channel 2 -->
+        <div class="channel-card">
+            <div class="channel-header">
+                <div class="channel-info">
+                    <div class="channel-icon">{{CHANNEL_4_ICON}}</div>
+                    <div>
+                        <div class="channel-name">{{CHANNEL_4_NAME}}</div>
+                        <div class="channel-type">{{CHANNEL_4_TYPE}}</div>
+                    </div>
+                </div>
+                <div class="channel-priority secondary">Secondary</div>
+            </div>
+            <div class="channel-metrics">
+                <div class="channel-metric">
+                    <div class="cm-value">{{CHANNEL_4_BUDGET}}</div>
+                    <div class="cm-label">Budget/Mo</div>
+                </div>
+                <div class="channel-metric">
+                    <div class="cm-value">{{CHANNEL_4_CUSTOMERS}}</div>
+                    <div class="cm-label">Exp. Customers</div>
+                </div>
+                <div class="channel-metric">
+                    <div class="cm-value">{{CHANNEL_4_CAC}}</div>
+                    <div class="cm-label">Target CAC</div>
+                </div>
+            </div>
+            <div class="channel-tactics">{{CHANNEL_4_TACTICS}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 4: Visual Analysis -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Visual Analysis</h2>
+        <p class="section-description">
+            Channel budget allocation, expected customer acquisition, and growth trajectory visualizations.
+        </p>
+    </div>
+
+    <div class="chart-grid">
+        <!-- Chart 1: Budget Allocation -->
+        <div class="chart-card">
+            <div class="chart-title">Budget Allocation by Channel</div>
+            <div class="chart-subtitle">Monthly marketing spend distribution</div>
+            <div class="chart-wrapper">
+                <canvas id="budgetPieChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Allocation Strategy</div>
+                <ul class="insight-list">
+                    <li><strong>Primary Channels:</strong> {{PRIMARY_BUDGET_PCT}}% of total budget</li>
+                    <li><strong>Secondary Channels:</strong> {{SECONDARY_BUDGET_PCT}}% of total budget</li>
+                    <li><strong>Focus:</strong> {{BUDGET_FOCUS_INSIGHT}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 2: Customer Growth -->
+        <div class="chart-card">
+            <div class="chart-title">Projected Customer Growth</div>
+            <div class="chart-subtitle">Monthly cumulative customer acquisition</div>
+            <div class="chart-wrapper">
+                <canvas id="growthLineChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Growth Trajectory</div>
+                <ul class="insight-list">
+                    <li><strong>Month 1:</strong> {{MONTH_1_CUSTOMERS}} customers</li>
+                    <li><strong>Month 3:</strong> {{MONTH_3_CUSTOMERS}} customers</li>
+                    <li><strong>Growth Rate:</strong> {{GROWTH_RATE}} MoM</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 3: CAC by Channel -->
+        <div class="chart-card">
+            <div class="chart-title">Customer Acquisition Cost by Channel</div>
+            <div class="chart-subtitle">Efficiency comparison across channels</div>
+            <div class="chart-wrapper">
+                <canvas id="cacBarChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">CAC Analysis</div>
+                <ul class="insight-list">
+                    <li><strong>Lowest CAC:</strong> {{LOWEST_CAC_CHANNEL}}</li>
+                    <li><strong>Blended CAC:</strong> {{BLENDED_CAC}}</li>
+                    <li><strong>LTV:CAC Ratio:</strong> {{LTV_CAC_RATIO}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 4: Funnel Metrics -->
+        <div class="chart-card">
+            <div class="chart-title">Conversion Funnel</div>
+            <div class="chart-subtitle">Expected conversion rates by stage</div>
+            <div class="chart-wrapper">
+                <canvas id="funnelChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Funnel Performance</div>
+                <ul class="insight-list">
+                    <li><strong>Visit → Trial:</strong> {{VISIT_TRIAL_RATE}}</li>
+                    <li><strong>Trial → Paid:</strong> {{TRIAL_PAID_RATE}}</li>
+                    <li><strong>Overall:</strong> {{OVERALL_CONVERSION}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 5: 90-Day Tactical Roadmap -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">90-Day Tactical Roadmap</h2>
+        <p class="section-description">
+            Week-by-week execution plan with specific tactics, owners, and success metrics.
+        </p>
+    </div>
+
+    <div class="roadmap-container">
+        <!-- Month 1 -->
+        <div class="month-block">
+            <div class="month-header">
+                <div class="month-info">
+                    <div class="month-number">M1</div>
+                    <div>
+                        <div class="month-title">{{MONTH_1_TITLE}}</div>
+                        <div class="month-theme">{{MONTH_1_THEME}}</div>
+                    </div>
+                </div>
+                <div class="month-goals">
+                    <div class="month-goal">
+                        <div class="mg-value">{{M1_CUSTOMER_GOAL}}</div>
+                        <div class="mg-label">Customers</div>
+                    </div>
+                    <div class="month-goal">
+                        <div class="mg-value">{{M1_REVENUE_GOAL}}</div>
+                        <div class="mg-label">MRR</div>
+                    </div>
+                </div>
+            </div>
+            <div class="week-grid">
+                <div class="week-card">
+                    <div class="week-label">Week 1</div>
+                    <ul class="week-tasks">
+                        <li class="week-task">{{M1_W1_TASK_1}}</li>
+                        <li class="week-task">{{M1_W1_TASK_2}}</li>
+                        <li class="week-task">{{M1_W1_TASK_3}}</li>
+                    </ul>
+                </div>
+                <div class="week-card">
+                    <div class="week-label">Week 2</div>
+                    <ul class="week-tasks">
+                        <li class="week-task">{{M1_W2_TASK_1}}</li>
+                        <li class="week-task">{{M1_W2_TASK_2}}</li>
+                        <li class="week-task">{{M1_W2_TASK_3}}</li>
+                    </ul>
+                </div>
+                <div class="week-card">
+                    <div class="week-label">Week 3</div>
+                    <ul class="week-tasks">
+                        <li class="week-task">{{M1_W3_TASK_1}}</li>
+                        <li class="week-task">{{M1_W3_TASK_2}}</li>
+                        <li class="week-task">{{M1_W3_TASK_3}}</li>
+                    </ul>
+                </div>
+                <div class="week-card">
+                    <div class="week-label">Week 4</div>
+                    <ul class="week-tasks">
+                        <li class="week-task">{{M1_W4_TASK_1}}</li>
+                        <li class="week-task">{{M1_W4_TASK_2}}</li>
+                        <li class="week-task">{{M1_W4_TASK_3}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Month 2 -->
+        <div class="month-block">
+            <div class="month-header">
+                <div class="month-info">
+                    <div class="month-number">M2</div>
+                    <div>
+                        <div class="month-title">{{MONTH_2_TITLE}}</div>
+                        <div class="month-theme">{{MONTH_2_THEME}}</div>
+                    </div>
+                </div>
+                <div class="month-goals">
+                    <div class="month-goal">
+                        <div class="mg-value">{{M2_CUSTOMER_GOAL}}</div>
+                        <div class="mg-label">Customers</div>
+                    </div>
+                    <div class="month-goal">
+                        <div class="mg-value">{{M2_REVENUE_GOAL}}</div>
+                        <div class="mg-label">MRR</div>
+                    </div>
+                </div>
+            </div>
+            <div class="week-grid">
+                <div class="week-card">
+                    <div class="week-label">Week 5-6</div>
+                    <ul class="week-tasks">
+                        <li class="week-task">{{M2_W1_TASK_1}}</li>
+                        <li class="week-task">{{M2_W1_TASK_2}}</li>
+                    </ul>
+                </div>
+                <div class="week-card">
+                    <div class="week-label">Week 7-8</div>
+                    <ul class="week-tasks">
+                        <li class="week-task">{{M2_W2_TASK_1}}</li>
+                        <li class="week-task">{{M2_W2_TASK_2}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Month 3 -->
+        <div class="month-block">
+            <div class="month-header">
+                <div class="month-info">
+                    <div class="month-number">M3</div>
+                    <div>
+                        <div class="month-title">{{MONTH_3_TITLE}}</div>
+                        <div class="month-theme">{{MONTH_3_THEME}}</div>
+                    </div>
+                </div>
+                <div class="month-goals">
+                    <div class="month-goal">
+                        <div class="mg-value">{{M3_CUSTOMER_GOAL}}</div>
+                        <div class="mg-label">Customers</div>
+                    </div>
+                    <div class="month-goal">
+                        <div class="mg-value">{{M3_REVENUE_GOAL}}</div>
+                        <div class="mg-label">MRR</div>
+                    </div>
+                </div>
+            </div>
+            <div class="week-grid">
+                <div class="week-card">
+                    <div class="week-label">Week 9-10</div>
+                    <ul class="week-tasks">
+                        <li class="week-task">{{M3_W1_TASK_1}}</li>
+                        <li class="week-task">{{M3_W1_TASK_2}}</li>
+                    </ul>
+                </div>
+                <div class="week-card">
+                    <div class="week-label">Week 11-12</div>
+                    <ul class="week-tasks">
+                        <li class="week-task">{{M3_W2_TASK_1}}</li>
+                        <li class="week-task">{{M3_W2_TASK_2}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 6: Budget & Resource Allocation -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Budget & Resource Allocation</h2>
+        <p class="section-description">
+            Total 90-day marketing budget breakdown by category and expected ROI.
+        </p>
+    </div>
+
+    <div class="budget-table-container">
+        <table class="budget-table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Monthly Budget</th>
+                    <th>90-Day Total</th>
+                    <th>% of Total</th>
+                    <th>Expected Outcome</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{BUDGET_CAT_1}}</td>
+                    <td>{{BUDGET_1_MONTHLY}}</td>
+                    <td>{{BUDGET_1_TOTAL}}</td>
+                    <td>{{BUDGET_1_PCT}}</td>
+                    <td>{{BUDGET_1_OUTCOME}}</td>
+                </tr>
+                <tr>
+                    <td>{{BUDGET_CAT_2}}</td>
+                    <td>{{BUDGET_2_MONTHLY}}</td>
+                    <td>{{BUDGET_2_TOTAL}}</td>
+                    <td>{{BUDGET_2_PCT}}</td>
+                    <td>{{BUDGET_2_OUTCOME}}</td>
+                </tr>
+                <tr>
+                    <td>{{BUDGET_CAT_3}}</td>
+                    <td>{{BUDGET_3_MONTHLY}}</td>
+                    <td>{{BUDGET_3_TOTAL}}</td>
+                    <td>{{BUDGET_3_PCT}}</td>
+                    <td>{{BUDGET_3_OUTCOME}}</td>
+                </tr>
+                <tr>
+                    <td>{{BUDGET_CAT_4}}</td>
+                    <td>{{BUDGET_4_MONTHLY}}</td>
+                    <td>{{BUDGET_4_TOTAL}}</td>
+                    <td>{{BUDGET_4_PCT}}</td>
+                    <td>{{BUDGET_4_OUTCOME}}</td>
+                </tr>
+                <tr class="total">
+                    <td>Total</td>
+                    <td>{{BUDGET_MONTHLY_TOTAL}}</td>
+                    <td>{{BUDGET_90_DAY_TOTAL}}</td>
+                    <td>100%</td>
+                    <td>{{BUDGET_TOTAL_OUTCOME}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- Section 7: Risks & Mitigation -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Risks & Mitigation</h2>
+        <p class="section-description">
+            Key GTM execution risks with proactive mitigation strategies.
+        </p>
+    </div>
+
+    <div class="risk-grid">
+        <div class="risk-card">
+            <div class="risk-header">
+                <div class="risk-icon">⚠️</div>
+                <div class="risk-title">{{RISK_1_TITLE}}</div>
+            </div>
+            <div class="risk-description">{{RISK_1_DESCRIPTION}}</div>
+            <div class="mitigation-label">Mitigation Plan</div>
+            <div class="mitigation-text">{{RISK_1_MITIGATION}}</div>
+        </div>
+
+        <div class="risk-card">
+            <div class="risk-header">
+                <div class="risk-icon">⚠️</div>
+                <div class="risk-title">{{RISK_2_TITLE}}</div>
+            </div>
+            <div class="risk-description">{{RISK_2_DESCRIPTION}}</div>
+            <div class="mitigation-label">Mitigation Plan</div>
+            <div class="mitigation-text">{{RISK_2_MITIGATION}}</div>
+        </div>
+
+        <div class="risk-card">
+            <div class="risk-header">
+                <div class="risk-icon">⚠️</div>
+                <div class="risk-title">{{RISK_3_TITLE}}</div>
+            </div>
+            <div class="risk-description">{{RISK_3_DESCRIPTION}}</div>
+            <div class="mitigation-label">Mitigation Plan</div>
+            <div class="mitigation-text">{{RISK_3_MITIGATION}}</div>
+        </div>
+
+        <div class="risk-card">
+            <div class="risk-header">
+                <div class="risk-icon">⚠️</div>
+                <div class="risk-title">{{RISK_4_TITLE}}</div>
+            </div>
+            <div class="risk-description">{{RISK_4_DESCRIPTION}}</div>
+            <div class="mitigation-label">Mitigation Plan</div>
+            <div class="mitigation-text">{{RISK_4_MITIGATION}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 8: Success Metrics Dashboard -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Success Metrics Dashboard</h2>
+        <p class="section-description">
+            Key performance indicators to track weekly and monthly throughout the GTM period.
+        </p>
+    </div>
+
+    <div class="metrics-dashboard">
+        <div class="dashboard-card">
+            <div class="dash-value">{{METRIC_1_VALUE}}</div>
+            <div class="dash-label">{{METRIC_1_LABEL}}</div>
+            <div class="dash-target">Target: {{METRIC_1_TARGET}}</div>
+        </div>
+        <div class="dashboard-card">
+            <div class="dash-value">{{METRIC_2_VALUE}}</div>
+            <div class="dash-label">{{METRIC_2_LABEL}}</div>
+            <div class="dash-target">Target: {{METRIC_2_TARGET}}</div>
+        </div>
+        <div class="dashboard-card">
+            <div class="dash-value">{{METRIC_3_VALUE}}</div>
+            <div class="dash-label">{{METRIC_3_LABEL}}</div>
+            <div class="dash-target">Target: {{METRIC_3_TARGET}}</div>
+        </div>
+        <div class="dashboard-card">
+            <div class="dash-value">{{METRIC_4_VALUE}}</div>
+            <div class="dash-label">{{METRIC_4_LABEL}}</div>
+            <div class="dash-target">Target: {{METRIC_4_TARGET}}</div>
+        </div>
+        <div class="dashboard-card">
+            <div class="dash-value">{{METRIC_5_VALUE}}</div>
+            <div class="dash-label">{{METRIC_5_LABEL}}</div>
+            <div class="dash-target">Target: {{METRIC_5_TARGET}}</div>
+        </div>
+        <div class="dashboard-card">
+            <div class="dash-value">{{METRIC_6_VALUE}}</div>
+            <div class="dash-label">{{METRIC_6_LABEL}}</div>
+            <div class="dash-target">Target: {{METRIC_6_TARGET}}</div>
+        </div>
+        <div class="dashboard-card">
+            <div class="dash-value">{{METRIC_7_VALUE}}</div>
+            <div class="dash-label">{{METRIC_7_LABEL}}</div>
+            <div class="dash-target">Target: {{METRIC_7_TARGET}}</div>
+        </div>
+        <div class="dashboard-card">
+            <div class="dash-value">{{METRIC_8_VALUE}}</div>
+            <div class="dash-label">{{METRIC_8_LABEL}}</div>
+            <div class="dash-target">Target: {{METRIC_8_TARGET}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CHART SCRIPTS (Replace {{CHART_SCRIPTS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+<script>
+// Data object
+const data = {
+    channels: [
+        { name: '{{CHANNEL_1_NAME}}', budget: {{CHANNEL_1_BUDGET_NUM}}, customers: {{CHANNEL_1_CUSTOMERS_NUM}}, cac: {{CHANNEL_1_CAC_NUM}} },
+        { name: '{{CHANNEL_2_NAME}}', budget: {{CHANNEL_2_BUDGET_NUM}}, customers: {{CHANNEL_2_CUSTOMERS_NUM}}, cac: {{CHANNEL_2_CAC_NUM}} },
+        { name: '{{CHANNEL_3_NAME}}', budget: {{CHANNEL_3_BUDGET_NUM}}, customers: {{CHANNEL_3_CUSTOMERS_NUM}}, cac: {{CHANNEL_3_CAC_NUM}} },
+        { name: '{{CHANNEL_4_NAME}}', budget: {{CHANNEL_4_BUDGET_NUM}}, customers: {{CHANNEL_4_CUSTOMERS_NUM}}, cac: {{CHANNEL_4_CAC_NUM}} }
+    ],
+    growth: {
+        month1: {{GROWTH_MONTH_1}},
+        month2: {{GROWTH_MONTH_2}},
+        month3: {{GROWTH_MONTH_3}}
+    },
+    funnel: {
+        visitors: {{FUNNEL_VISITORS}},
+        trials: {{FUNNEL_TRIALS}},
+        paid: {{FUNNEL_PAID}}
+    }
+};
+
+// Chart 1: Budget Allocation Pie Chart
+const budgetPieCtx = document.getElementById('budgetPieChart').getContext('2d');
+new Chart(budgetPieCtx, {
+    type: 'doughnut',
+    data: {
+        labels: data.channels.map(c => c.name),
+        datasets: [{
+            data: data.channels.map(c => c.budget),
+            backgroundColor: ['#10b981', '#14b8a6', '#059669', '#047857'],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '60%',
+        plugins: {
+            legend: { position: 'bottom', labels: { color: '#f5f5f5', font: { size: 11 }, padding: 15 } },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Chart 2: Customer Growth Line Chart
+const growthLineCtx = document.getElementById('growthLineChart').getContext('2d');
+new Chart(growthLineCtx, {
+    type: 'line',
+    data: {
+        labels: ['Month 1', 'Month 2', 'Month 3'],
+        datasets: [{
+            label: 'Cumulative Customers',
+            data: [data.growth.month1, data.growth.month1 + data.growth.month2, data.growth.month1 + data.growth.month2 + data.growth.month3],
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            fill: true,
+            tension: 0.4,
+            pointRadius: 6,
+            pointBackgroundColor: '#10b981'
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: { grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3' } },
+            y: { beginAtZero: true, grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3' } }
+        },
+        plugins: { legend: { display: false }, tooltip: tooltipConfig }
+    }
+});
+
+// Chart 3: CAC by Channel Bar Chart
+const cacBarCtx = document.getElementById('cacBarChart').getContext('2d');
+new Chart(cacBarCtx, {
+    type: 'bar',
+    data: {
+        labels: data.channels.map(c => c.name),
+        datasets: [{
+            label: 'CAC',
+            data: data.channels.map(c => c.cac),
+            backgroundColor: ['#10b981', '#14b8a6', '#059669', '#047857'],
+            borderRadius: 6
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: { grid: { display: false }, ticks: { color: '#a3a3a3', font: { size: 10 } } },
+            y: { grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3', callback: v => '$' + v } }
+        },
+        plugins: { legend: { display: false }, tooltip: tooltipConfig }
+    }
+});
+
+// Chart 4: Funnel Chart (horizontal bar)
+const funnelCtx = document.getElementById('funnelChart').getContext('2d');
+new Chart(funnelCtx, {
+    type: 'bar',
+    data: {
+        labels: ['Visitors', 'Trials', 'Paid'],
+        datasets: [{
+            label: 'Funnel',
+            data: [data.funnel.visitors, data.funnel.trials, data.funnel.paid],
+            backgroundColor: ['#10b981', '#14b8a6', '#059669'],
+            borderRadius: 6
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: 'y',
+        scales: {
+            x: { grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3' } },
+            y: { grid: { display: false }, ticks: { color: '#f5f5f5', font: { weight: '600' } } }
+        },
+        plugins: { legend: { display: false }, tooltip: tooltipConfig }
+    }
+});
+</script>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     REQUIRED CHARTS SUMMARY
+     ════════════════════════════════════════════════════════════════════════════
+
+     1. budgetPieChart (Doughnut)
+        - Shows budget allocation across channels
+        - Color-coded by channel
+
+     2. growthLineChart (Line)
+        - Shows cumulative customer growth over 3 months
+        - Area fill for visual impact
+
+     3. cacBarChart (Bar)
+        - Shows CAC comparison across channels
+        - Vertical bars with dollar values
+
+     4. funnelChart (Horizontal Bar)
+        - Shows conversion funnel stages
+        - Visitors → Trials → Paid
+
+     ════════════════════════════════════════════════════════════════════════════ -->

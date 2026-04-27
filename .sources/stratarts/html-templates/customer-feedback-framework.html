@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{BUSINESS_NAME}} - Customer Feedback Framework</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        /* === CANONICAL HEADER === */
+        header {
+            background: #0a0a0a;
+            padding: 0;
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .header-text h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-text .subtitle {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .header-meta {
+            text-align: right;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .header-meta .date { font-size: 1rem; margin-bottom: 0.25rem; }
+        .header-meta .version { font-size: 0.875rem; opacity: 0.8; }
+
+        /* === CANONICAL SCORE BANNER === */
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            padding: 2rem 4rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .primary-score {
+            text-align: center;
+            padding-right: 3rem;
+            border-right: 1px solid #333;
+        }
+
+        .primary-score .score-value {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #10b981;
+            line-height: 1;
+        }
+
+        .primary-score .score-label {
+            font-size: 0.875rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
+        }
+
+        .score-details {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-item .value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .score-item .label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .verdict-box {
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .verdict-box .verdict-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 0.25rem;
+        }
+
+        .verdict-box .verdict-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* === MAIN CONTENT === */
+        main {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        section h2 {
+            font-size: 1.5rem;
+            color: #10b981;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #10b981;
+        }
+
+        section h3 {
+            font-size: 1.125rem;
+            color: #e0e0e0;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        /* === EXECUTIVE SUMMARY === */
+        .summary-text {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid #10b981;
+            margin-bottom: 2rem;
+        }
+
+        .summary-text p {
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+
+        .summary-text p:last-child { margin-bottom: 0; }
+
+        /* === METRICS OVERVIEW === */
+        .metrics-overview {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .metric-card .metric-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-card .metric-name {
+            font-size: 0.875rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-card .metric-current {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .metric-card .metric-target {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 0.25rem;
+        }
+
+        .metric-card .metric-target span {
+            color: #10b981;
+        }
+
+        /* === SURVEY SECTIONS === */
+        .survey-section {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .survey-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .survey-title {
+            font-size: 1.25rem;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .survey-badge {
+            background: #10b981;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .survey-question {
+            background: #0f0f0f;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid #10b981;
+        }
+
+        .survey-question .question-text {
+            font-size: 1rem;
+            color: #fff;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .survey-question .question-scale {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .followup-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .followup-card {
+            background: #0f0f0f;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .followup-card .segment-name {
+            font-size: 0.875rem;
+            color: #10b981;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .followup-card .segment-range {
+            font-size: 0.75rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .followup-card .followup-question {
+            font-size: 0.85rem;
+            color: #ccc;
+            font-style: italic;
+        }
+
+        /* === TOUCHPOINTS === */
+        .touchpoints-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .touchpoint-badge {
+            background: #0f0f0f;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            color: #ccc;
+            font-size: 0.9rem;
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        .touchpoint-badge.active {
+            border-color: #10b981;
+            color: #10b981;
+        }
+
+        /* === EXIT SURVEY === */
+        .churn-reasons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .churn-reason {
+            background: #0f0f0f;
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .churn-reason .reason-text {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .churn-reason .reason-percent {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .churn-reason .addressable {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+        }
+
+        .churn-reason .addressable.yes {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .churn-reason .addressable.maybe {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        /* === CLOSE THE LOOP === */
+        .loop-process {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .loop-card {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-top: 3px solid #10b981;
+        }
+
+        .loop-card .segment-type {
+            font-size: 1rem;
+            color: #10b981;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .loop-steps {
+            list-style: none;
+        }
+
+        .loop-steps li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #333;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .loop-steps li:last-child { border-bottom: none; }
+
+        .loop-steps .step-timing {
+            font-size: 0.75rem;
+            color: #10b981;
+            display: block;
+            margin-top: 0.25rem;
+        }
+
+        /* === USER INTERVIEWS === */
+        .interview-strategy {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .interview-types {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .interview-type {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .interview-type:last-child { border-bottom: none; }
+
+        .interview-type .type-name {
+            color: #ccc;
+        }
+
+        .interview-type .type-count {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .interview-script {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .script-section {
+            margin-bottom: 1rem;
+        }
+
+        .script-section:last-child { margin-bottom: 0; }
+
+        .script-section .section-title {
+            font-size: 0.875rem;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+        }
+
+        .script-section .section-time {
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        .script-questions {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .script-questions li {
+            font-size: 0.85rem;
+            color: #ccc;
+            padding: 0.25rem 0;
+            font-style: italic;
+        }
+
+        /* === FEATURE REQUESTS === */
+        .feature-management {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+
+        .channels-list {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .channel-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #333;
+            color: #ccc;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .channel-item:last-child { border-bottom: none; }
+
+        .channel-item .channel-icon {
+            color: #10b981;
+        }
+
+        .rice-table {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+        }
+
+        .rice-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .rice-table th {
+            background: #0f0f0f;
+            color: #10b981;
+            padding: 1rem;
+            text-align: left;
+            font-size: 0.875rem;
+        }
+
+        .rice-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #333;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .rice-score {
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .priority-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .priority-badge.high {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .priority-badge.medium {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .priority-badge.low {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        /* === FEEDBACK THEMES === */
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .theme-card {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #10b981;
+        }
+
+        .theme-card .theme-name {
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .theme-card .theme-stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .theme-card .stat {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .theme-card .stat span {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .theme-card .theme-trend {
+            font-size: 0.85rem;
+        }
+
+        .theme-card .theme-trend.up { color: #ef4444; }
+        .theme-card .theme-trend.down { color: #10b981; }
+        .theme-card .theme-trend.stable { color: #888; }
+
+        .theme-card .theme-action {
+            font-size: 0.85rem;
+            color: #ccc;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #333;
+        }
+
+        /* === CHARTS === */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-container {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .chart-container h4 {
+            color: #10b981;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+        }
+
+        /* === ROADMAP === */
+        .roadmap-phases {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .phase-card {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 12px;
+            border-top: 4px solid #10b981;
+        }
+
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .phase-name {
+            font-size: 1.125rem;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .phase-timing {
+            font-size: 0.8rem;
+            color: #888;
+            background: #0f0f0f;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+        }
+
+        .phase-goal {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .phase-tasks {
+            list-style: none;
+        }
+
+        .phase-tasks li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #333;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .phase-tasks li:last-child { border-bottom: none; }
+
+        .phase-tasks li::before {
+            content: '☐';
+            color: #10b981;
+            margin-right: 0.5rem;
+        }
+
+        /* === CANONICAL FOOTER === */
+        footer {
+            background: #0a0a0a;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem 4rem;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .footer-meta {
+            color: #666;
+            font-size: 0.875rem;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 1200px) {
+            .roadmap-phases { grid-template-columns: 1fr; }
+            .feature-management { grid-template-columns: 1fr; }
+            .interview-strategy { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; padding: 2rem; }
+            .header-meta { text-align: left; margin-top: 1rem; }
+            .score-container { grid-template-columns: 1fr; text-align: center; }
+            .primary-score { border-right: none; padding-right: 0; padding-bottom: 1rem; border-bottom: 1px solid #333; }
+            .score-details { flex-wrap: wrap; }
+            main { padding: 2rem; }
+            .metrics-overview { grid-template-columns: repeat(2, 1fr); }
+            .followup-grid { grid-template-columns: 1fr; }
+            .churn-reasons { grid-template-columns: 1fr; }
+            .loop-process { grid-template-columns: 1fr; }
+            .chart-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-text">
+                <h1>{{BUSINESS_NAME}}</h1>
+                <div class="subtitle">Customer Feedback Framework</div>
+            </div>
+            <div class="header-meta">
+                <div class="date">{{DATE}}</div>
+                <div class="version">StratArts v1.0</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="score-banner">
+        <div class="score-container">
+            <div class="primary-score">
+                <div class="score-value">{{NPS_SCORE}}</div>
+                <div class="score-label">NPS Score</div>
+            </div>
+            <div class="score-details">
+                <div class="score-item">
+                    <div class="value">{{CSAT_SCORE}}</div>
+                    <div class="label">CSAT</div>
+                </div>
+                <div class="score-item">
+                    <div class="value">{{CES_SCORE}}</div>
+                    <div class="label">CES</div>
+                </div>
+                <div class="score-item">
+                    <div class="value">{{SURVEY_COUNT}}</div>
+                    <div class="label">Surveys</div>
+                </div>
+                <div class="score-item">
+                    <div class="value">{{INTERVIEW_COUNT}}</div>
+                    <div class="label">Interviews/Mo</div>
+                </div>
+            </div>
+            <div class="verdict-box">
+                <div class="verdict-label">Framework Status</div>
+                <div class="verdict-text">{{FRAMEWORK_STATUS}}</div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <!-- Executive Summary -->
+        <section id="executive-summary">
+            <h2>Executive Summary</h2>
+            <div class="summary-text">
+                {{EXECUTIVE_SUMMARY}}
+            </div>
+            <div class="metrics-overview">
+                {{METRICS_OVERVIEW}}
+            </div>
+        </section>
+
+        <!-- NPS Section -->
+        <section id="nps">
+            <h2>Net Promoter Score (NPS)</h2>
+            <div class="survey-section">
+                <div class="survey-header">
+                    <div class="survey-title">NPS Survey</div>
+                    <div class="survey-badge">{{NPS_CADENCE}}</div>
+                </div>
+                <div class="survey-question">
+                    <div class="question-text">"On a scale of 0-10, how likely are you to recommend {{BUSINESS_NAME}} to a friend or colleague?"</div>
+                    <div class="question-scale">0 = Not at all likely | 10 = Extremely likely</div>
+                </div>
+                <h3>Follow-Up Questions</h3>
+                <div class="followup-grid">
+                    {{NPS_FOLLOWUPS}}
+                </div>
+            </div>
+        </section>
+
+        <!-- CSAT Section -->
+        <section id="csat">
+            <h2>Customer Satisfaction (CSAT)</h2>
+            <div class="survey-section">
+                <div class="survey-header">
+                    <div class="survey-title">CSAT Surveys</div>
+                    <div class="survey-badge">Transactional</div>
+                </div>
+                <div class="survey-question">
+                    <div class="question-text">"How satisfied are you with [specific experience]?"</div>
+                    <div class="question-scale">1 = Very Dissatisfied | 5 = Very Satisfied</div>
+                </div>
+                <h3>Survey Touchpoints</h3>
+                <div class="touchpoints-grid">
+                    {{CSAT_TOUCHPOINTS}}
+                </div>
+            </div>
+        </section>
+
+        <!-- CES Section -->
+        <section id="ces">
+            <h2>Customer Effort Score (CES)</h2>
+            <div class="survey-section">
+                <div class="survey-header">
+                    <div class="survey-title">CES Surveys</div>
+                    <div class="survey-badge">Post-Task</div>
+                </div>
+                <div class="survey-question">
+                    <div class="question-text">"How easy was it to [complete task]?"</div>
+                    <div class="question-scale">1 = Very Difficult | 5 = Very Easy</div>
+                </div>
+                <h3>Survey Touchpoints</h3>
+                <div class="touchpoints-grid">
+                    {{CES_TOUCHPOINTS}}
+                </div>
+            </div>
+        </section>
+
+        <!-- Exit Surveys -->
+        <section id="exit-surveys">
+            <h2>Exit Surveys (Churn Analysis)</h2>
+            <div class="survey-section">
+                <div class="survey-header">
+                    <div class="survey-title">Churn Reasons</div>
+                    <div class="survey-badge">{{EXIT_RESPONSE_RATE}} Response Rate</div>
+                </div>
+                <div class="churn-reasons">
+                    {{CHURN_REASONS}}
+                </div>
+            </div>
+        </section>
+
+        <!-- Close the Loop -->
+        <section id="close-loop">
+            <h2>Close the Loop Process</h2>
+            <div class="loop-process">
+                {{LOOP_PROCESS}}
+            </div>
+        </section>
+
+        <!-- User Interviews -->
+        <section id="user-interviews">
+            <h2>User Interviews</h2>
+            <div class="interview-strategy">
+                <div class="interview-types">
+                    <h3>Interview Types</h3>
+                    {{INTERVIEW_TYPES}}
+                </div>
+                <div class="interview-script">
+                    <h3>Interview Script ({{INTERVIEW_DURATION}})</h3>
+                    {{INTERVIEW_SCRIPT}}
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Requests -->
+        <section id="feature-requests">
+            <h2>Feature Request Management</h2>
+            <div class="feature-management">
+                <div class="channels-list">
+                    <h3>Collection Channels</h3>
+                    {{FEATURE_CHANNELS}}
+                </div>
+                <div class="rice-table">
+                    <h3>RICE Prioritization</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature Request</th>
+                                <th>Reach</th>
+                                <th>Impact</th>
+                                <th>Confidence</th>
+                                <th>Effort</th>
+                                <th>RICE</th>
+                                <th>Priority</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{RICE_TABLE_ROWS}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feedback Themes -->
+        <section id="feedback-themes">
+            <h2>Feedback Themes & Analysis</h2>
+            <div class="themes-grid">
+                {{FEEDBACK_THEMES}}
+            </div>
+
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <h4>NPS Distribution</h4>
+                    <div class="chart-wrapper">
+                        <canvas id="npsChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h4>Feedback Themes</h4>
+                    <div class="chart-wrapper">
+                        <canvas id="themesChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h4>CSAT/CES Trends</h4>
+                    <div class="chart-wrapper">
+                        <canvas id="trendsChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h4>Survey Response Volume</h4>
+                    <div class="chart-wrapper">
+                        <canvas id="volumeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Implementation Roadmap -->
+        <section id="roadmap">
+            <h2>90-Day Implementation Roadmap</h2>
+            <div class="roadmap-phases">
+                {{ROADMAP_PHASES}}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">StratArts - Business Strategy Skills Library</div>
+            <div class="footer-meta">Customer Feedback Framework &bull; {{DATE}}</div>
+        </div>
+    </footer>
+
+    <script>
+        // Chart.js defaults for dark theme
+        Chart.defaults.color = '#888';
+        Chart.defaults.borderColor = '#333';
+
+        // NPS Distribution Chart
+        new Chart(document.getElementById('npsChart'), {
+            type: 'doughnut',
+            data: {
+                labels: {{NPS_LABELS}},
+                datasets: [{
+                    data: {{NPS_DATA}},
+                    backgroundColor: ['#10b981', '#f59e0b', '#ef4444'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        // Feedback Themes Chart
+        new Chart(document.getElementById('themesChart'), {
+            type: 'bar',
+            data: {
+                labels: {{THEMES_LABELS}},
+                datasets: [{
+                    label: 'Mentions',
+                    data: {{THEMES_DATA}},
+                    backgroundColor: '#10b981',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: { beginAtZero: true, grid: { color: '#333' } },
+                    y: { grid: { display: false } }
+                }
+            }
+        });
+
+        // CSAT/CES Trends Chart
+        new Chart(document.getElementById('trendsChart'), {
+            type: 'line',
+            data: {
+                labels: {{TRENDS_LABELS}},
+                datasets: [{
+                    label: 'CSAT %',
+                    data: {{CSAT_TREND_DATA}},
+                    borderColor: '#10b981',
+                    backgroundColor: 'transparent',
+                    tension: 0.4
+                }, {
+                    label: 'CES',
+                    data: {{CES_TREND_DATA}},
+                    borderColor: '#14b8a6',
+                    backgroundColor: 'transparent',
+                    borderDash: [5, 5],
+                    tension: 0.4,
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' }
+                },
+                scales: {
+                    y: { beginAtZero: false, min: 70, max: 100, grid: { color: '#333' }, title: { display: true, text: 'CSAT %' } },
+                    y1: { beginAtZero: false, min: 3, max: 5, position: 'right', grid: { display: false }, title: { display: true, text: 'CES' } },
+                    x: { grid: { color: '#333' } }
+                }
+            }
+        });
+
+        // Survey Volume Chart
+        new Chart(document.getElementById('volumeChart'), {
+            type: 'bar',
+            data: {
+                labels: {{VOLUME_LABELS}},
+                datasets: [{
+                    label: 'NPS',
+                    data: {{NPS_VOLUME_DATA}},
+                    backgroundColor: '#10b981',
+                    borderRadius: 4
+                }, {
+                    label: 'CSAT',
+                    data: {{CSAT_VOLUME_DATA}},
+                    backgroundColor: '#14b8a6',
+                    borderRadius: 4
+                }, {
+                    label: 'Exit',
+                    data: {{EXIT_VOLUME_DATA}},
+                    backgroundColor: '#5eead4',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' }
+                },
+                scales: {
+                    y: { beginAtZero: true, stacked: true, grid: { color: '#333' } },
+                    x: { stacked: true, grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

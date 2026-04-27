@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Identity Designer - PetPulse | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        /* === RESET & BASE === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #0a0a0a;
+        }
+
+        /* === HEADER === */
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .header-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* === SCORE BANNER === */
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-main {
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .score-interpretation {
+            border-left: 3px solid #10b981;
+            padding-left: 2rem;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #f5f5f5;
+        }
+
+        .interpretation-text {
+            color: #d4d4d4;
+            line-height: 1.7;
+        }
+
+        .verdict-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        /* === CONTENT SECTIONS === */
+        .content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 4rem;
+            background: #0a0a0a;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section:last-child {
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: #d4d4d4;
+            max-width: 800px;
+        }
+
+        /* === CHART LAYOUTS === */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-subtitle {
+            font-size: 0.9rem;
+            color: #a3a3a3;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-wrapper.tall {
+            height: 450px;
+        }
+
+        /* === INSIGHTS PANEL === */
+        .insights-panel {
+            background: #0a0a0a;
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .insight-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .insight-list {
+            list-style: none;
+        }
+
+        .insight-list li {
+            padding: 0.6rem 0;
+            color: #d4d4d4;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .insight-list li:last-child {
+            border-bottom: none;
+        }
+
+        .insight-list li strong {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        /* === METRIC CARDS === */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+
+        .metric-card .label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .metric-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #10b981;
+            line-height: 1.2;
+        }
+
+        .metric-card .description {
+            font-size: 0.85rem;
+            color: #a3a3a3;
+            margin-top: 0.75rem;
+            line-height: 1.5;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content p {
+            margin: 0.3rem 0;
+        }
+
+        .footer-content strong {
+            color: #10b981;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           BRAND IDENTITY DESIGNER SPECIFIC STYLES
+           ═══════════════════════════════════════════════════════════════════════════ */
+        .brand-pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            margin: 2rem 0;
+        }
+
+        .pyramid-level {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1.25rem 2rem;
+            color: #ffffff;
+            font-weight: 600;
+            position: relative;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+        }
+
+        .pyramid-level:nth-child(1) {
+            width: 50%;
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .pyramid-level:nth-child(2) {
+            width: 65%;
+            background: linear-gradient(135deg, #059669, #047857);
+            margin-top: -2px;
+        }
+
+        .pyramid-level:nth-child(3) {
+            width: 80%;
+            background: linear-gradient(135deg, #047857, #065f46);
+            margin-top: -2px;
+        }
+
+        .pyramid-level:nth-child(4) {
+            width: 95%;
+            background: linear-gradient(135deg, #065f46, #064e3b);
+            margin-top: -2px;
+        }
+
+        .pyramid-level:nth-child(5) {
+            width: 100%;
+            background: linear-gradient(135deg, #064e3b, #022c22);
+            margin-top: -2px;
+            clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+        }
+
+        .pyramid-label {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .pyramid-value {
+            font-size: 1rem;
+        }
+
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .color-swatch {
+            border-radius: 12px;
+            overflow: hidden;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+        }
+
+        .swatch-color {
+            height: 80px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 0.5rem;
+        }
+
+        .swatch-info {
+            padding: 0.75rem;
+            text-align: center;
+        }
+
+        .swatch-name {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .swatch-hex {
+            font-family: monospace;
+            color: #888;
+            font-size: 0.75rem;
+        }
+
+        .typography-showcase {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid #2a2a2a;
+        }
+
+        .font-sample {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .font-sample:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .font-label {
+            font-size: 0.75rem;
+            color: #10b981;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .font-name {
+            color: #888;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .font-display {
+            color: #ffffff;
+        }
+
+        .font-display.heading {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .font-display.subheading {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .font-display.body {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .voice-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .voice-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .voice-trait {
+            font-weight: 600;
+            color: #10b981;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .voice-description {
+            color: #888;
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .voice-example {
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-style: italic;
+            color: #ccc;
+            font-size: 0.875rem;
+            border-left: 3px solid #10b981;
+        }
+
+        .archetype-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin: 1rem 0;
+        }
+
+        .archetype-icon {
+            font-size: 1.25rem;
+        }
+
+        .brand-values {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+
+        .brand-value {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10b981;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .messaging-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .messaging-table th,
+        .messaging-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .messaging-table th {
+            background: #1a1a1a;
+            color: #10b981;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .messaging-table td {
+            color: #ccc;
+        }
+
+        .messaging-table tr:hover td {
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .do-dont-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .do-column, .dont-column {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .do-column {
+            border-top: 3px solid #10b981;
+        }
+
+        .dont-column {
+            border-top: 3px solid #ef4444;
+        }
+
+        .column-header {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .do-column .column-header {
+            color: #10b981;
+        }
+
+        .dont-column .column-header {
+            color: #ef4444;
+        }
+
+        .column-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .column-list li {
+            padding: 0.5rem 0;
+            color: #ccc;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .column-list li::before {
+            content: "•";
+            color: #888;
+        }
+
+        .highlight-box {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .highlight-box p {
+            color: #f5f5f5;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .tagline-card {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .tagline-card.primary {
+            border-color: #10b981;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+        }
+
+        .tagline-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline-label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .differentiator-card {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .differentiator-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .differentiator-title {
+            font-weight: 600;
+            color: #f5f5f5;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .differentiator-desc {
+            color: #888;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-marker {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            color: #f5f5f5;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-desc {
+            color: #888;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .timeline-tasks {
+            margin-top: 1rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline-tasks li {
+            padding: 0.4rem 0;
+            color: #ccc;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-tasks li::before {
+            content: "□";
+            color: #10b981;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        /* === PRINT STYLES === */
+        @media print {
+            body { background: white; color: #000000; }
+            .container { background: white; }
+            header { background: white; }
+            .header-content {
+                background: white;
+                color: #000000;
+                border: 2px solid #10b981;
+            }
+            .header-content::before { display: none; }
+            .kicker { color: #666666; }
+            h1 { color: #000000; }
+            .subtitle { color: #333333; }
+            .score-banner { background: white; }
+            .score-container {
+                background: white;
+                border: 2px solid #10b981;
+            }
+            .score-number {
+                background: none;
+                -webkit-text-fill-color: #10b981;
+                color: #10b981;
+            }
+            .score-label { color: #666666; }
+            .interpretation-title { color: #000000; }
+            .interpretation-text { color: #333333; }
+            .content { background: white; }
+            .section-title { color: #000000; }
+            .section-description { color: #333333; }
+            .chart-card, .metric-card, .voice-card, .tagline-card, .differentiator-card, .timeline-content {
+                background: white;
+                border: 2px solid #10b981;
+                page-break-inside: avoid;
+            }
+            footer { background: white; }
+            .footer-content {
+                background: white;
+                color: #666666;
+                border-top: 2px solid #10b981;
+            }
+            canvas {
+                max-width: 100%;
+                height: auto !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 1024px) {
+            .metric-grid { grid-template-columns: 1fr; }
+            .grid-3 { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .voice-grid { grid-template-columns: 1fr; }
+            .do-dont-grid { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .score-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .score-interpretation {
+                border-left: none;
+                border-top: 3px solid #10b981;
+                padding-left: 0;
+                padding-top: 1.5rem;
+            }
+            .header-content { padding: 2rem; }
+            .score-container { padding: 2rem; }
+            .content { padding: 2rem 2rem; }
+            .footer-content { padding: 2rem; }
+            .pyramid-level {
+                width: 100% !important;
+                clip-path: none;
+                border-radius: 8px;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">Brand Identity Designer</div>
+                <h1>PetPulse</h1>
+                <div class="subtitle">Comprehensive brand identity system for AI-powered pet health monitoring</div>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span>📅</span>
+                        <span>Generated: December 18, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>📊</span>
+                        <span>Analysis Type: Brand Strategy</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🎯</span>
+                        <span>Version 1.0.0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SCORE BANNER -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">8.8</div>
+                    <div class="score-label">Brand Identity Score</div>
+                </div>
+
+                <div class="score-interpretation">
+                    <div class="interpretation-title">What This Score Means</div>
+                    <div class="interpretation-text">
+                        PetPulse has a strong brand foundation combining care-focused positioning with innovative technology.
+                        The Caregiver archetype aligns perfectly with pet parent emotions. Visual identity and messaging
+                        architecture are well-differentiated from competitors in the pet tech space.
+                    </div>
+                </div>
+
+                <div class="verdict-badge">
+                    BRAND READY
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+            <!-- Brand Essence Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Brand Essence</h2>
+                    <p class="section-description">
+                        The foundational elements that define who PetPulse is, what it stands for, and how it connects emotionally with pet parents.
+                    </p>
+                </div>
+
+                <div class="archetype-badge">
+                    <span class="archetype-icon">🛡️</span>
+                    <span>The Caregiver Archetype</span>
+                </div>
+
+                <p style="color: #d4d4d4; margin: 1rem 0; font-size: 1.05rem;">
+                    PetPulse embodies the Caregiver archetype—protecting, nurturing, and providing peace of mind.
+                    We transform worry into confidence by giving pet parents the tools to understand and protect
+                    their furry family members through intelligent health monitoring.
+                </p>
+
+                <!-- Brand Pyramid -->
+                <h3 style="color: #f5f5f5; font-size: 1.3rem; margin: 2rem 0 1rem;">Brand Pyramid</h3>
+                <div class="brand-pyramid">
+                    <div class="pyramid-level">
+                        <div>
+                            <span class="pyramid-label">Purpose</span>
+                            <span class="pyramid-value">Extend the healthy years pets share with their families</span>
+                        </div>
+                    </div>
+                    <div class="pyramid-level">
+                        <div>
+                            <span class="pyramid-label">Vision</span>
+                            <span class="pyramid-value">Leading pet health intelligence platform, monitoring 1M+ pets</span>
+                        </div>
+                    </div>
+                    <div class="pyramid-level">
+                        <div>
+                            <span class="pyramid-label">Mission</span>
+                            <span class="pyramid-value">Detect health issues early through AI, enabling preventive care</span>
+                        </div>
+                    </div>
+                    <div class="pyramid-level">
+                        <div>
+                            <span class="pyramid-label">Values</span>
+                            <span class="pyramid-value">Care First • Innovation • Trust • Accessibility • Empowerment</span>
+                        </div>
+                    </div>
+                    <div class="pyramid-level">
+                        <div>
+                            <span class="pyramid-label">Personality</span>
+                            <span class="pyramid-value">Caring • Innovative • Trustworthy • Approachable • Confident</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Core Values -->
+                <h3 style="color: #f5f5f5; font-size: 1.3rem; margin: 2rem 0 1rem;">Core Values</h3>
+                <div class="brand-values">
+                    <span class="brand-value">🩺 Care First</span>
+                    <span class="brand-value">💡 Innovation</span>
+                    <span class="brand-value">🔒 Trust</span>
+                    <span class="brand-value">🌐 Accessibility</span>
+                    <span class="brand-value">💪 Empowerment</span>
+                </div>
+            </section>
+
+            <!-- Visual Identity Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Visual Identity</h2>
+                    <p class="section-description">
+                        The visual system that brings PetPulse to life across all touchpoints—colors that convey health and trust, typography that balances warmth with technology.
+                    </p>
+                </div>
+
+                <!-- Color Palette -->
+                <h3 style="color: #f5f5f5; font-size: 1.3rem; margin: 2rem 0 1rem;">Color Palette</h3>
+                <div class="color-palette">
+                    <div class="color-swatch">
+                        <div class="swatch-color" style="background: #10b981;">
+                            <span style="color: white; font-size: 0.75rem;">Primary</span>
+                        </div>
+                        <div class="swatch-info">
+                            <div class="swatch-name">Vital Emerald</div>
+                            <div class="swatch-hex">#10B981</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="swatch-color" style="background: #14b8a6;">
+                            <span style="color: white; font-size: 0.75rem;">Secondary</span>
+                        </div>
+                        <div class="swatch-info">
+                            <div class="swatch-name">Pulse Teal</div>
+                            <div class="swatch-hex">#14B8A6</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="swatch-color" style="background: #f59e0b;">
+                            <span style="color: white; font-size: 0.75rem;">Accent</span>
+                        </div>
+                        <div class="swatch-info">
+                            <div class="swatch-name">Alert Amber</div>
+                            <div class="swatch-hex">#F59E0B</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="swatch-color" style="background: #1a1a1a;">
+                            <span style="color: white; font-size: 0.75rem;">Dark</span>
+                        </div>
+                        <div class="swatch-info">
+                            <div class="swatch-name">Night Gray</div>
+                            <div class="swatch-hex">#1A1A1A</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="swatch-color" style="background: #f5f5f5;">
+                            <span style="color: #1a1a1a; font-size: 0.75rem;">Light</span>
+                        </div>
+                        <div class="swatch-info">
+                            <div class="swatch-name">Clean White</div>
+                            <div class="swatch-hex">#F5F5F5</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="swatch-color" style="background: #ef4444;">
+                            <span style="color: white; font-size: 0.75rem;">Alert</span>
+                        </div>
+                        <div class="swatch-info">
+                            <div class="swatch-name">Urgent Red</div>
+                            <div class="swatch-hex">#EF4444</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Color Distribution Chart -->
+                <div class="chart-card">
+                    <div class="chart-title">Recommended Color Usage Distribution</div>
+                    <div class="chart-subtitle">How to balance colors across brand touchpoints</div>
+                    <div class="chart-wrapper">
+                        <canvas id="colorUsageChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Typography -->
+                <h3 style="color: #f5f5f5; font-size: 1.3rem; margin: 2rem 0 1rem;">Typography System</h3>
+                <div class="typography-showcase">
+                    <div class="font-sample">
+                        <div class="font-label">Primary / Headlines</div>
+                        <div class="font-name">Inter Bold (700) • Clean, modern, highly legible</div>
+                        <div class="font-display heading">Healthy pets, happy families</div>
+                    </div>
+                    <div class="font-sample">
+                        <div class="font-label">Secondary / Subheadings</div>
+                        <div class="font-name">Inter Semibold (600) • Professional hierarchy</div>
+                        <div class="font-display subheading">AI-powered health monitoring for your furry family</div>
+                    </div>
+                    <div class="font-sample">
+                        <div class="font-label">Body / Content</div>
+                        <div class="font-name">Inter Regular (400) • Readable at any size</div>
+                        <div class="font-display body">PetPulse monitors your pet's vital signs 24/7, using advanced AI to detect early warning signs of health issues before they become serious problems.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Voice & Tone Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Voice & Tone</h2>
+                    <p class="section-description">
+                        How PetPulse sounds across all communications—warm yet professional, caring yet confident, innovative yet accessible.
+                    </p>
+                </div>
+
+                <!-- Voice Attributes -->
+                <h3 style="color: #f5f5f5; font-size: 1.3rem; margin: 2rem 0 1rem;">Voice Attributes</h3>
+                <div class="voice-grid">
+                    <div class="voice-card">
+                        <div class="voice-trait">Caring</div>
+                        <div class="voice-description">We speak as fellow pet parents who understand the worry and joy of pet ownership.</div>
+                        <div class="voice-example">"We know how much you worry when something seems off. That's why PetPulse watches over your pet 24/7."</div>
+                    </div>
+                    <div class="voice-card">
+                        <div class="voice-trait">Confident</div>
+                        <div class="voice-description">We back claims with data and speak with authority on pet health technology.</div>
+                        <div class="voice-example">"Our AI detected early health issues in 78% of cases—weeks before visible symptoms appeared."</div>
+                    </div>
+                    <div class="voice-card">
+                        <div class="voice-trait">Approachable</div>
+                        <div class="voice-description">Complex technology explained simply. No jargon, no condescension.</div>
+                        <div class="voice-example">"Think of PetPulse as a smart health assistant for your pet. It learns what's normal and alerts you when something changes."</div>
+                    </div>
+                    <div class="voice-card">
+                        <div class="voice-trait">Empowering</div>
+                        <div class="voice-description">We give pet parents tools and knowledge to take action, not anxiety.</div>
+                        <div class="voice-example">"You'll have everything you need to have an informed conversation with your vet."</div>
+                    </div>
+                </div>
+
+                <!-- Voice Spectrum Chart -->
+                <div class="chart-card">
+                    <div class="chart-title">Voice Attribute Spectrum</div>
+                    <div class="chart-subtitle">Brand personality dimensions on a 1-10 scale</div>
+                    <div class="chart-wrapper">
+                        <canvas id="voiceRadarChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Messaging Framework Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Messaging Framework</h2>
+                    <p class="section-description">
+                        Key messages tailored for each audience segment, ensuring consistent yet personalized communication.
+                    </p>
+                </div>
+
+                <!-- Elevator Pitch -->
+                <h3 style="color: #f5f5f5; font-size: 1.3rem; margin: 2rem 0 1rem;">Elevator Pitch</h3>
+                <div class="highlight-box">
+                    <p>PetPulse is an AI-powered pet health monitoring system that gives pet parents peace of mind.
+                    Our smart collar tracks vital signs 24/7 and detects early warning signs of health issues weeks
+                    before symptoms appear—so you can take action before small problems become big ones. It's like
+                    having a vet keeping watch over your pet at all times.</p>
+                </div>
+
+                <!-- Tagline Options -->
+                <h3 style="color: #f5f5f5; font-size: 1.3rem; margin: 2rem 0 1rem;">Tagline Options</h3>
+                <div class="grid-2">
+                    <div class="tagline-card primary">
+                        <div class="tagline-text">"Peace of mind for pet parents"</div>
+                        <div class="tagline-label">Recommended • Emotional benefit</div>
+                    </div>
+                    <div class="tagline-card">
+                        <div class="tagline-text">"See health issues before they see you"</div>
+                        <div class="tagline-label">Alternative • Prevention focus</div>
+                    </div>
+                    <div class="tagline-card">
+                        <div class="tagline-text">"Smart health. Happy pets."</div>
+                        <div class="tagline-label">Alternative • Simple and memorable</div>
+                    </div>
+                    <div class="tagline-card">
+                        <div class="tagline-text">"Less than $1/day for 24/7 health monitoring"</div>
+                        <div class="tagline-label">Value-focused • Conversion ads</div>
+                    </div>
+                </div>
+
+                <!-- Key Messages by Audience -->
+                <h3 style="color: #f5f5f5; font-size: 1.3rem; margin: 2rem 0 1rem;">Key Messages by Audience</h3>
+                <table class="messaging-table">
+                    <thead>
+                        <tr>
+                            <th>Audience</th>
+                            <th>Primary Message</th>
+                            <th>Supporting Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Premium Pet Parents</strong></td>
+                            <td>The most advanced pet health technology available—because your pet deserves the best care</td>
+                            <td>AI early detection • Vet-integrated telehealth • 24/7 monitoring</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Health-Anxious Owners</strong></td>
+                            <td>Stop worrying and start knowing—real-time health insights delivered to your phone</td>
+                            <td>Instant alerts • Expert consultations • Peace of mind guarantee</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Multi-Pet Households</strong></td>
+                            <td>One plan, up to 3 pets—comprehensive health monitoring for your whole furry family</td>
+                            <td>Premium Plus tier • Individual profiles • Family health dashboard</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Veterinary Partners</strong></td>
+                            <td>Better data for better care—continuous health insights between visits</td>
+                            <td>Clinical-grade data • API integration • Referral partnership</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Brand Guidelines Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Brand Guidelines</h2>
+                    <p class="section-description">
+                        Rules for maintaining brand consistency across all touchpoints and communications.
+                    </p>
+                </div>
+
+                <!-- Do's and Don'ts -->
+                <h3 style="color: #f5f5f5; font-size: 1.3rem; margin: 2rem 0 1rem;">Voice Do's & Don'ts</h3>
+                <div class="do-dont-grid">
+                    <div class="do-column">
+                        <div class="column-header">
+                            <span>✓</span> Do
+                        </div>
+                        <ul class="column-list">
+                            <li>Use "pet parent" instead of "owner"</li>
+                            <li>Lead with benefits, support with features</li>
+                            <li>Acknowledge pet parent anxiety with empathy</li>
+                            <li>Use contractions (we're, you'll) for warmth</li>
+                            <li>Back claims with specific data</li>
+                            <li>Celebrate the pet-human bond</li>
+                        </ul>
+                    </div>
+                    <div class="dont-column">
+                        <div class="column-header">
+                            <span>✗</span> Don't
+                        </div>
+                        <ul class="column-list">
+                            <li>Use fear-based messaging or alarmist language</li>
+                            <li>Make medical diagnoses or replace vet advice</li>
+                            <li>Use cold, clinical, or overly technical language</li>
+                            <li>Dismiss concerns as overreaction</li>
+                            <li>Claim "the only" or "the first" without proof</li>
+                            <li>Use jargon (AI, ML, IoT) without explanation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Brand Consistency Chart -->
+                <div class="chart-card">
+                    <div class="chart-title">Brand Consistency Score by Touchpoint</div>
+                    <div class="chart-subtitle">Current vs. target brand consistency across channels</div>
+                    <div class="chart-wrapper">
+                        <canvas id="consistencyChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Competitive Positioning Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Competitive Brand Positioning</h2>
+                    <p class="section-description">
+                        How PetPulse differentiates in the pet tech market through unique brand positioning on innovation and premium axes.
+                    </p>
+                </div>
+
+                <!-- Positioning Map -->
+                <div class="chart-card">
+                    <div class="chart-title">Brand Positioning Map</div>
+                    <div class="chart-subtitle">PetPulse vs. competitors on Innovation and Premium positioning</div>
+                    <div class="chart-wrapper">
+                        <canvas id="positioningChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Differentiation Points -->
+                <h3 style="color: #f5f5f5; font-size: 1.3rem; margin: 2rem 0 1rem;">Key Brand Differentiators</h3>
+                <div class="grid-3">
+                    <div class="differentiator-card">
+                        <div class="differentiator-icon">🧠</div>
+                        <div class="differentiator-title">AI-First Health Intelligence</div>
+                        <div class="differentiator-desc">Only pet tech brand leading with predictive AI health detection vs. reactive tracking</div>
+                    </div>
+                    <div class="differentiator-card">
+                        <div class="differentiator-icon">🏥</div>
+                        <div class="differentiator-title">Integrated Care Ecosystem</div>
+                        <div class="differentiator-desc">Only solution combining hardware monitoring + AI + on-demand telehealth</div>
+                    </div>
+                    <div class="differentiator-card">
+                        <div class="differentiator-icon">❤️</div>
+                        <div class="differentiator-title">Caregiver Brand Personality</div>
+                        <div class="differentiator-desc">Warm, empathetic voice vs. competitors' tech-forward/cold positioning</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Implementation Roadmap Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Implementation Roadmap</h2>
+                    <p class="section-description">
+                        Phased approach to rolling out brand identity across all touchpoints.
+                    </p>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">1</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Phase 1: Core Assets</div>
+                            <div class="timeline-desc">Establish foundational brand elements</div>
+                            <ul class="timeline-tasks">
+                                <li>Finalize logo with professional designer</li>
+                                <li>Lock color palette (hex codes confirmed)</li>
+                                <li>Purchase Inter font license</li>
+                                <li>Create brand guidelines document</li>
+                                <li>Write tagline and boilerplate copy</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Phase 2: Digital Presence</div>
+                            <div class="timeline-desc">Apply brand to customer-facing touchpoints</div>
+                            <ul class="timeline-tasks">
+                                <li>Update website with new brand</li>
+                                <li>Refresh app UI with brand colors/typography</li>
+                                <li>Update social media profiles and covers</li>
+                                <li>Create email signature templates</li>
+                                <li>Update email marketing templates</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">3</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Phase 3: Marketing Collateral</div>
+                            <div class="timeline-desc">Extend brand to marketing materials</div>
+                            <ul class="timeline-tasks">
+                                <li>Design pitch deck template</li>
+                                <li>Create social media post templates</li>
+                                <li>Design packaging for PetPulse Collar</li>
+                                <li>Create one-pager for vet partnerships</li>
+                                <li>Develop video brand guidelines</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">4</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Phase 4: Team Alignment</div>
+                            <div class="timeline-desc">Ensure internal brand consistency</div>
+                            <ul class="timeline-tasks">
+                                <li>Share brand guidelines with all team members</li>
+                                <li>Train customer support on brand voice</li>
+                                <li>Set up brand asset library (Notion/Dropbox)</li>
+                                <li>Designate brand guardian for consistency</li>
+                                <li>Schedule quarterly brand reviews</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | brand-identity-designer-v1.0.0</p>
+                <p style="margin-top: 5px;">Context Signature: brand-identity-designer-petpulse-2025-12-18 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Chart.js Configuration
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        const tooltipConfig = {
+            backgroundColor: '#1a1a1a',
+            titleColor: '#f5f5f5',
+            bodyColor: '#d4d4d4',
+            borderColor: '#10b981',
+            borderWidth: 1
+        };
+
+        // Color Usage Chart
+        const colorCtx = document.getElementById('colorUsageChart');
+        if (colorCtx) {
+            new Chart(colorCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Vital Emerald (Primary)', 'Pulse Teal (Secondary)', 'Alert Amber (Accent)', 'Night Gray (Neutral)', 'Clean White (Background)'],
+                    datasets: [{
+                        data: [40, 20, 10, 15, 15],
+                        backgroundColor: [
+                            '#10b981',
+                            '#14b8a6',
+                            '#f59e0b',
+                            '#1a1a1a',
+                            '#f5f5f5'
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#0a0a0a'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: tooltipConfig,
+                        legend: {
+                            position: 'right',
+                            labels: { color: '#ccc', padding: 15, font: { size: 11 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Voice Radar Chart
+        const voiceCtx = document.getElementById('voiceRadarChart');
+        if (voiceCtx) {
+            new Chart(voiceCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Caring', 'Confident', 'Approachable', 'Innovative', 'Trustworthy', 'Empowering'],
+                    datasets: [{
+                        label: 'PetPulse Voice Profile',
+                        data: [9, 8, 8, 9, 9, 8],
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        borderColor: '#10b981',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#10b981',
+                        pointBorderColor: '#10b981',
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 10,
+                            ticks: { color: '#888', stepSize: 2, backdropColor: 'transparent' },
+                            grid: { color: '#2a2a2a' },
+                            pointLabels: { color: '#ccc', font: { size: 12 } },
+                            angleLines: { color: '#2a2a2a' }
+                        }
+                    },
+                    plugins: {
+                        tooltip: tooltipConfig,
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Brand Consistency Chart
+        const consistencyCtx = document.getElementById('consistencyChart');
+        if (consistencyCtx) {
+            new Chart(consistencyCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Website', 'App UI', 'Social Media', 'Email', 'Customer Support', 'Packaging'],
+                    datasets: [{
+                        label: 'Current State',
+                        data: [65, 70, 55, 60, 50, 40],
+                        backgroundColor: 'rgba(107, 114, 128, 0.6)',
+                        borderRadius: 4
+                    }, {
+                        label: 'Target State',
+                        data: [95, 95, 90, 90, 85, 90],
+                        backgroundColor: 'rgba(16, 185, 129, 0.6)',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        y: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        tooltip: tooltipConfig,
+                        legend: {
+                            labels: { color: '#ccc' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Competitive Positioning Chart
+        const positioningCtx = document.getElementById('positioningChart');
+        if (positioningCtx) {
+            new Chart(positioningCtx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'PetPulse',
+                        data: [{ x: 9, y: 8.5 }],
+                        backgroundColor: '#10b981',
+                        pointRadius: 18,
+                        pointHoverRadius: 22
+                    }, {
+                        label: 'Fi Collar',
+                        data: [{ x: 7, y: 6 }],
+                        backgroundColor: 'rgba(107, 114, 128, 0.6)',
+                        pointRadius: 14,
+                        pointHoverRadius: 16
+                    }, {
+                        label: 'Whistle Health',
+                        data: [{ x: 6, y: 5 }],
+                        backgroundColor: 'rgba(107, 114, 128, 0.6)',
+                        pointRadius: 14,
+                        pointHoverRadius: 16
+                    }, {
+                        label: 'Fuzzy',
+                        data: [{ x: 4, y: 7 }],
+                        backgroundColor: 'rgba(107, 114, 128, 0.6)',
+                        pointRadius: 14,
+                        pointHoverRadius: 16
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            min: 0,
+                            max: 10,
+                            title: {
+                                display: true,
+                                text: 'Innovation →',
+                                color: '#ccc',
+                                font: { size: 12 }
+                            },
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        y: {
+                            min: 0,
+                            max: 10,
+                            title: {
+                                display: true,
+                                text: 'Premium →',
+                                color: '#ccc',
+                                font: { size: 12 }
+                            },
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' }
+                        }
+                    },
+                    plugins: {
+                        tooltip: tooltipConfig,
+                        legend: {
+                            labels: { color: '#ccc' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Print-friendly
+        window.addEventListener('beforeprint', function() {
+            Chart.defaults.color = '#000000';
+        });
+
+        window.addEventListener('afterprint', function() {
+            Chart.defaults.color = '#a3a3a3';
+        });
+    </script>
+</body>
+</html>

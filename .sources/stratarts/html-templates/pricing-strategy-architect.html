@@ -1,0 +1,1014 @@
+<!--
+═══════════════════════════════════════════════════════════════════════════════
+STRATARTS HTML SKELETON TEMPLATE
+Skill: pricing-strategy-architect
+Version: 1.0.0
+
+INSTRUCTIONS:
+1. Read VERIFICATION-CHECKLIST.md FIRST for canonical patterns
+2. Read base-template.html for shared CSS/JS structure
+3. Replace all {{PLACEHOLDER}} markers with actual data
+4. This template defines skill-specific content sections and charts
+═══════════════════════════════════════════════════════════════════════════════
+-->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     TEMPLATE VARIABLES (Replace with actual data)
+     ════════════════════════════════════════════════════════════════════════════
+
+     HEADER:
+     {{PAGE_TITLE}}          = "Pricing Strategy"
+     {{KICKER}}              = "StratArts Business Analysis"
+     {{TITLE}}               = "Pricing Strategy Architect"
+     {{SUBTITLE}}            = "{PRODUCT_NAME} - {PRODUCT_DESCRIPTION}"
+     {{DATE}}                = "November 28, 2025"
+     {{ANALYSIS_TYPE}}       = "Market & Product Strategy"
+     {{VERSION}}             = "1.0.0"
+
+     SCORE BANNER:
+     {{PRIMARY_SCORE}}       = "$49" (recommended price) or "3:1" (LTV:CAC)
+     {{SCORE_LABEL}}         = "Recommended Price" or "LTV:CAC Ratio"
+     {{SCORE_INTERPRETATION}}= "This pricing strategy..."
+     {{VERDICT}}             = "OPTIMAL PRICING" | "NEEDS TESTING" | "UNIT ECONOMICS RISK"
+
+     FOOTER:
+     {{PROJECT_NAME}}        = "{PROJECT_FOLDER_NAME}"
+     {{SKILL_NAME}}          = "pricing-strategy-architect"
+     {{CONTEXT_SIGNATURE}}   = "pricing-strategy-architect-v1.0.0"
+     {{ITERATIONS}}          = "1"
+     {{ITERATIONS_PLURAL}}   = "" or "s"
+
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     SKILL-SPECIFIC CSS (Add to {{SKILL_SPECIFIC_CSS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+<style>
+/* Pricing Tier Cards */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.pricing-card {
+    background: #1a1a1a;
+    border: 2px solid rgba(16, 185, 129, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    position: relative;
+}
+
+.pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15);
+}
+
+.pricing-card.recommended {
+    border: 3px solid #10b981;
+    transform: scale(1.05);
+}
+
+.pricing-card.recommended:hover {
+    transform: scale(1.08);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tier-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    margin-bottom: 0.5rem;
+}
+
+.tier-description {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    margin-bottom: 1.5rem;
+}
+
+.tier-price {
+    margin-bottom: 1.5rem;
+}
+
+.price-amount {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #10b981;
+    line-height: 1;
+}
+
+.price-period {
+    font-size: 1rem;
+    color: #a3a3a3;
+}
+
+.tier-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+    text-align: left;
+}
+
+.tier-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.tier-feature:last-child {
+    border-bottom: none;
+}
+
+.feature-check {
+    color: #10b981;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.feature-text {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+}
+
+.tier-cta {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    width: 100%;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tier-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.tier-target {
+    font-size: 0.8rem;
+    color: #a3a3a3;
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+/* Unit Economics Table */
+.economics-table-container {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    overflow-x: auto;
+}
+
+.economics-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.economics-table th {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 2px solid rgba(16, 185, 129, 0.3);
+}
+
+.economics-table td {
+    padding: 0.75rem 1rem;
+    color: #d4d4d4;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.economics-table tr:hover td {
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.status-badge.healthy {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.status-badge.warning {
+    background: rgba(246, 173, 85, 0.2);
+    color: #f6ad55;
+}
+
+.status-badge.critical {
+    background: rgba(252, 129, 129, 0.2);
+    color: #fc8181;
+}
+
+/* Van Westendorp Price Sensitivity */
+.price-sensitivity-container {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.price-range-visual {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: rgba(16, 185, 129, 0.05);
+    border-radius: 8px;
+}
+
+.price-point {
+    text-align: center;
+    flex: 1;
+}
+
+.pp-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.pp-label {
+    font-size: 0.75rem;
+    color: #a3a3a3;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+}
+
+.price-arrow {
+    color: #10b981;
+    font-size: 1.5rem;
+}
+
+.optimal-price-callout {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.05) 100%);
+    border: 2px solid #10b981;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.optimal-label {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+.optimal-value {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.optimal-rationale {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    margin-top: 0.5rem;
+}
+
+/* Competitive Positioning */
+.competitor-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.competitor-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.competitor-card.you {
+    border: 2px solid #10b981;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.15);
+}
+
+.comp-name {
+    font-weight: 700;
+    color: #f5f5f5;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.comp-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.comp-model {
+    font-size: 0.75rem;
+    color: #a3a3a3;
+    text-transform: uppercase;
+}
+
+.comp-position {
+    font-size: 0.8rem;
+    color: #d4d4d4;
+    margin-top: 0.5rem;
+}
+
+/* Tier Distribution */
+.distribution-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.distribution-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.dist-tier {
+    font-weight: 600;
+    color: #f5f5f5;
+    margin-bottom: 0.5rem;
+}
+
+.dist-percentage {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.dist-target {
+    font-size: 0.8rem;
+    color: #a3a3a3;
+}
+
+/* Pricing Psychology Cards */
+.psychology-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.psychology-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.psych-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.psych-icon {
+    font-size: 1.5rem;
+}
+
+.psych-name {
+    font-weight: 700;
+    color: #f5f5f5;
+}
+
+.psych-description {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    margin-bottom: 1rem;
+}
+
+.psych-implementation {
+    background: rgba(16, 185, 129, 0.05);
+    border-left: 3px solid #10b981;
+    padding: 0.75rem;
+    font-size: 0.85rem;
+    color: #a3a3a3;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .pricing-grid { grid-template-columns: 1fr; }
+    .pricing-card.recommended { transform: none; }
+    .pricing-card.recommended:hover { transform: translateY(-4px); }
+    .competitor-grid { grid-template-columns: repeat(2, 1fr); }
+    .distribution-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .psychology-grid { grid-template-columns: 1fr; }
+    .price-range-visual { flex-direction: column; }
+    .price-arrow { transform: rotate(90deg); }
+}
+
+/* Print */
+@media print {
+    .pricing-card, .economics-table-container, .price-sensitivity-container,
+    .competitor-card, .distribution-card, .psychology-card {
+        background: white;
+        border: 2px solid #10b981;
+        page-break-inside: avoid;
+    }
+    .tier-name, .comp-name, .psych-name { color: #000000; }
+    .economics-table th { background: #f5f5f5; color: #000000; }
+}
+</style>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CONTENT SECTIONS (Replace {{CONTENT_SECTIONS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- Section 1: Pricing Strategy Summary -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Pricing Strategy Summary</h2>
+        <p class="section-description">
+            Recommended pricing model, positioning, and key metrics for {{PRODUCT_NAME}}.
+        </p>
+    </div>
+
+    <div class="metric-grid">
+        <div class="metric-card">
+            <div class="label">Pricing Model</div>
+            <div class="value" style="font-size: 1.5rem;">{{PRICING_MODEL}}</div>
+            <div class="description">{{MODEL_DESCRIPTION}}</div>
+        </div>
+        <div class="metric-card">
+            <div class="label">Price Range</div>
+            <div class="value">{{PRICE_RANGE}}</div>
+            <div class="description">Per {{VALUE_METRIC}}</div>
+        </div>
+        <div class="metric-card">
+            <div class="label">Positioning</div>
+            <div class="value" style="font-size: 1.5rem;">{{POSITIONING}}</div>
+            <div class="description">{{POSITIONING_RATIONALE}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 2: Pricing Tiers -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Pricing Tiers</h2>
+        <p class="section-description">
+            Good-Better-Best tier structure designed to drive 60-70% of customers to the recommended tier.
+        </p>
+    </div>
+
+    <div class="pricing-grid">
+        <!-- Tier 1 -->
+        <div class="pricing-card">
+            <div class="tier-name">{{TIER_1_NAME}}</div>
+            <div class="tier-description">{{TIER_1_DESCRIPTION}}</div>
+            <div class="tier-price">
+                <span class="price-amount">{{TIER_1_PRICE}}</span>
+                <span class="price-period">/{{BILLING_PERIOD}}</span>
+            </div>
+            <ul class="tier-features">
+                <li class="tier-feature"><span class="feature-check">✓</span><span class="feature-text">{{TIER_1_FEATURE_1}}</span></li>
+                <li class="tier-feature"><span class="feature-check">✓</span><span class="feature-text">{{TIER_1_FEATURE_2}}</span></li>
+                <li class="tier-feature"><span class="feature-check">✓</span><span class="feature-text">{{TIER_1_FEATURE_3}}</span></li>
+                <li class="tier-feature"><span class="feature-check">✓</span><span class="feature-text">{{TIER_1_FEATURE_4}}</span></li>
+            </ul>
+            <button class="tier-cta" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">Get Started</button>
+            <div class="tier-target">Target: {{TIER_1_TARGET}}</div>
+        </div>
+
+        <!-- Tier 2 (Recommended) -->
+        <div class="pricing-card recommended">
+            <div class="popular-badge">Most Popular</div>
+            <div class="tier-name">{{TIER_2_NAME}}</div>
+            <div class="tier-description">{{TIER_2_DESCRIPTION}}</div>
+            <div class="tier-price">
+                <span class="price-amount">{{TIER_2_PRICE}}</span>
+                <span class="price-period">/{{BILLING_PERIOD}}</span>
+            </div>
+            <ul class="tier-features">
+                <li class="tier-feature"><span class="feature-check">✓</span><span class="feature-text">{{TIER_2_FEATURE_1}}</span></li>
+                <li class="tier-feature"><span class="feature-check">✓</span><span class="feature-text">{{TIER_2_FEATURE_2}}</span></li>
+                <li class="tier-feature"><span class="feature-check">✓</span><span class="feature-text">{{TIER_2_FEATURE_3}}</span></li>
+                <li class="tier-feature"><span class="feature-check">✓</span><span class="feature-text">{{TIER_2_FEATURE_4}}</span></li>
+                <li class="tier-feature"><span class="feature-check">✓</span><span class="feature-text">{{TIER_2_FEATURE_5}}</span></li>
+            </ul>
+            <button class="tier-cta">Start Free Trial</button>
+            <div class="tier-target">Target: {{TIER_2_TARGET}}</div>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="pricing-card">
+            <div class="tier-name">{{TIER_3_NAME}}</div>
+            <div class="tier-description">{{TIER_3_DESCRIPTION}}</div>
+            <div class="tier-price">
+                <span class="price-amount">{{TIER_3_PRICE}}</span>
+                <span class="price-period">/{{BILLING_PERIOD}}</span>
+            </div>
+            <ul class="tier-features">
+                <li class="tier-feature"><span class="feature-check">✓</span><span class="feature-text">{{TIER_3_FEATURE_1}}</span></li>
+                <li class="tier-feature"><span class="feature-check">✓</span><span class="feature-text">{{TIER_3_FEATURE_2}}</span></li>
+                <li class="tier-feature"><span class="feature-check">✓</span><span class="feature-text">{{TIER_3_FEATURE_3}}</span></li>
+                <li class="tier-feature"><span class="feature-check">✓</span><span class="feature-text">{{TIER_3_FEATURE_4}}</span></li>
+                <li class="tier-feature"><span class="feature-check">✓</span><span class="feature-text">{{TIER_3_FEATURE_5}}</span></li>
+                <li class="tier-feature"><span class="feature-check">✓</span><span class="feature-text">{{TIER_3_FEATURE_6}}</span></li>
+            </ul>
+            <button class="tier-cta">Contact Sales</button>
+            <div class="tier-target">Target: {{TIER_3_TARGET}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: Unit Economics -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Unit Economics</h2>
+        <p class="section-description">
+            Cost structure, lifetime value, and key financial metrics driving pricing decisions.
+        </p>
+    </div>
+
+    <div class="economics-table-container">
+        <table class="economics-table">
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Target</th>
+                    <th>Projected</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Average Revenue Per User (ARPU)</td>
+                    <td>{{ARPU_TARGET}}</td>
+                    <td>{{ARPU_PROJECTED}}</td>
+                    <td><span class="status-badge {{ARPU_STATUS_CLASS}}">{{ARPU_STATUS}}</span></td>
+                </tr>
+                <tr>
+                    <td>Customer Acquisition Cost (CAC)</td>
+                    <td>{{CAC_TARGET}}</td>
+                    <td>{{CAC_PROJECTED}}</td>
+                    <td><span class="status-badge {{CAC_STATUS_CLASS}}">{{CAC_STATUS}}</span></td>
+                </tr>
+                <tr>
+                    <td>Lifetime Value (LTV)</td>
+                    <td>{{LTV_TARGET}}</td>
+                    <td>{{LTV_PROJECTED}}</td>
+                    <td><span class="status-badge {{LTV_STATUS_CLASS}}">{{LTV_STATUS}}</span></td>
+                </tr>
+                <tr>
+                    <td>LTV:CAC Ratio</td>
+                    <td>{{LTV_CAC_TARGET}}</td>
+                    <td>{{LTV_CAC_PROJECTED}}</td>
+                    <td><span class="status-badge {{LTV_CAC_STATUS_CLASS}}">{{LTV_CAC_STATUS}}</span></td>
+                </tr>
+                <tr>
+                    <td>CAC Payback Period</td>
+                    <td>{{PAYBACK_TARGET}}</td>
+                    <td>{{PAYBACK_PROJECTED}}</td>
+                    <td><span class="status-badge {{PAYBACK_STATUS_CLASS}}">{{PAYBACK_STATUS}}</span></td>
+                </tr>
+                <tr>
+                    <td>Gross Margin</td>
+                    <td>{{MARGIN_TARGET}}</td>
+                    <td>{{MARGIN_PROJECTED}}</td>
+                    <td><span class="status-badge {{MARGIN_STATUS_CLASS}}">{{MARGIN_STATUS}}</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- Section 4: Visual Analysis -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Visual Analysis</h2>
+        <p class="section-description">
+            Price sensitivity, competitive positioning, and revenue projections.
+        </p>
+    </div>
+
+    <div class="chart-grid">
+        <!-- Chart 1: Price Sensitivity -->
+        <div class="chart-card">
+            <div class="chart-title">Van Westendorp Price Sensitivity</div>
+            <div class="chart-subtitle">Optimal price point based on customer willingness to pay</div>
+            <div class="chart-wrapper">
+                <canvas id="priceSensitivityChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Price Boundaries</div>
+                <ul class="insight-list">
+                    <li><strong>Too Cheap:</strong> {{TOO_CHEAP}}</li>
+                    <li><strong>Optimal Point:</strong> {{OPTIMAL_PRICE}}</li>
+                    <li><strong>Too Expensive:</strong> {{TOO_EXPENSIVE}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 2: Competitive Positioning -->
+        <div class="chart-card">
+            <div class="chart-title">Competitive Price Positioning</div>
+            <div class="chart-subtitle">Your pricing relative to competitors</div>
+            <div class="chart-wrapper">
+                <canvas id="competitorChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Positioning</div>
+                <ul class="insight-list">
+                    <li><strong>Position:</strong> {{POSITION_DESCRIPTION}}</li>
+                    <li><strong>Differentiation:</strong> {{DIFFERENTIATION}}</li>
+                    <li><strong>Price Gap:</strong> {{PRICE_GAP}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 3: Tier Distribution -->
+        <div class="chart-card">
+            <div class="chart-title">Expected Tier Distribution</div>
+            <div class="chart-subtitle">Projected customer distribution across tiers</div>
+            <div class="chart-wrapper">
+                <canvas id="tierDistributionChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Distribution Goals</div>
+                <ul class="insight-list">
+                    <li><strong>Sweet Spot:</strong> {{SWEET_SPOT_TIER}} ({{SWEET_SPOT_PCT}})</li>
+                    <li><strong>Entry:</strong> {{ENTRY_TIER}} ({{ENTRY_PCT}})</li>
+                    <li><strong>Premium:</strong> {{PREMIUM_TIER}} ({{PREMIUM_PCT}})</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 4: Revenue Projection -->
+        <div class="chart-card">
+            <div class="chart-title">Revenue Projection by Tier</div>
+            <div class="chart-subtitle">12-month revenue forecast</div>
+            <div class="chart-wrapper">
+                <canvas id="revenueProjectionChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Revenue Targets</div>
+                <ul class="insight-list">
+                    <li><strong>Month 3:</strong> {{MONTH_3_MRR}}</li>
+                    <li><strong>Month 6:</strong> {{MONTH_6_MRR}}</li>
+                    <li><strong>Month 12:</strong> {{MONTH_12_MRR}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 5: Value Metrics -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Value Metrics & Customer Outcomes</h2>
+        <p class="section-description">
+            Quantified customer value that justifies your pricing.
+        </p>
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-card primary">
+            <div class="feature-badge">Value Metric</div>
+            <div class="feature-name">{{VALUE_METRIC_NAME}}</div>
+            <div class="feature-description">{{VALUE_METRIC_RATIONALE}}</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-badge">Value-to-Price Ratio</div>
+            <div class="feature-name">{{VALUE_PRICE_RATIO}}</div>
+            <div class="feature-description">Customers receive {{VALUE_DELIVERED}} in value for {{PRICE_PAID}} investment</div>
+        </div>
+    </div>
+
+    <div class="metric-grid" style="margin-top: 1.5rem;">
+        <div class="metric-card">
+            <div class="label">Financial Outcome</div>
+            <div class="value" style="font-size: 1.5rem;">{{FINANCIAL_OUTCOME}}</div>
+            <div class="description">{{FINANCIAL_DESCRIPTION}}</div>
+        </div>
+        <div class="metric-card">
+            <div class="label">Time Savings</div>
+            <div class="value" style="font-size: 1.5rem;">{{TIME_OUTCOME}}</div>
+            <div class="description">{{TIME_DESCRIPTION}}</div>
+        </div>
+        <div class="metric-card">
+            <div class="label">Risk Reduction</div>
+            <div class="value" style="font-size: 1.5rem;">{{RISK_OUTCOME}}</div>
+            <div class="description">{{RISK_DESCRIPTION}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 6: Competitive Landscape -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Competitive Pricing Landscape</h2>
+        <p class="section-description">
+            How your pricing compares to key competitors in the market.
+        </p>
+    </div>
+
+    <div class="competitor-grid">
+        <div class="competitor-card">
+            <div class="comp-name">{{COMPETITOR_1_NAME}}</div>
+            <div class="comp-price">{{COMPETITOR_1_PRICE}}</div>
+            <div class="comp-model">{{COMPETITOR_1_MODEL}}</div>
+            <div class="comp-position">{{COMPETITOR_1_POSITION}}</div>
+        </div>
+        <div class="competitor-card you">
+            <div class="comp-name">{{YOUR_PRODUCT_NAME}}</div>
+            <div class="comp-price">{{YOUR_PRICE}}</div>
+            <div class="comp-model">{{YOUR_MODEL}}</div>
+            <div class="comp-position">{{YOUR_POSITION}}</div>
+        </div>
+        <div class="competitor-card">
+            <div class="comp-name">{{COMPETITOR_2_NAME}}</div>
+            <div class="comp-price">{{COMPETITOR_2_PRICE}}</div>
+            <div class="comp-model">{{COMPETITOR_2_MODEL}}</div>
+            <div class="comp-position">{{COMPETITOR_2_POSITION}}</div>
+        </div>
+        <div class="competitor-card">
+            <div class="comp-name">{{COMPETITOR_3_NAME}}</div>
+            <div class="comp-price">{{COMPETITOR_3_PRICE}}</div>
+            <div class="comp-model">{{COMPETITOR_3_MODEL}}</div>
+            <div class="comp-position">{{COMPETITOR_3_POSITION}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 7: Pricing Psychology -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Pricing Psychology & Optimization</h2>
+        <p class="section-description">
+            Psychological tactics applied to maximize conversion and revenue.
+        </p>
+    </div>
+
+    <div class="psychology-grid">
+        <div class="psychology-card">
+            <div class="psych-header">
+                <div class="psych-icon">🎯</div>
+                <div class="psych-name">{{PSYCH_1_NAME}}</div>
+            </div>
+            <div class="psych-description">{{PSYCH_1_DESCRIPTION}}</div>
+            <div class="psych-implementation">{{PSYCH_1_IMPLEMENTATION}}</div>
+        </div>
+
+        <div class="psychology-card">
+            <div class="psych-header">
+                <div class="psych-icon">⚓</div>
+                <div class="psych-name">{{PSYCH_2_NAME}}</div>
+            </div>
+            <div class="psych-description">{{PSYCH_2_DESCRIPTION}}</div>
+            <div class="psych-implementation">{{PSYCH_2_IMPLEMENTATION}}</div>
+        </div>
+
+        <div class="psychology-card">
+            <div class="psych-header">
+                <div class="psych-icon">📅</div>
+                <div class="psych-name">{{PSYCH_3_NAME}}</div>
+            </div>
+            <div class="psych-description">{{PSYCH_3_DESCRIPTION}}</div>
+            <div class="psych-implementation">{{PSYCH_3_IMPLEMENTATION}}</div>
+        </div>
+
+        <div class="psychology-card">
+            <div class="psych-header">
+                <div class="psych-icon">🔢</div>
+                <div class="psych-name">{{PSYCH_4_NAME}}</div>
+            </div>
+            <div class="psych-description">{{PSYCH_4_DESCRIPTION}}</div>
+            <div class="psych-implementation">{{PSYCH_4_IMPLEMENTATION}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 8: Implementation Roadmap -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Implementation Roadmap</h2>
+        <p class="section-description">
+            Phased approach to rolling out and optimizing your pricing strategy.
+        </p>
+    </div>
+
+    <div class="metric-grid">
+        <div class="metric-card">
+            <div class="label">Phase 1</div>
+            <div class="value" style="font-size: 1.25rem; color: #f5f5f5;">{{PHASE_1_NAME}}</div>
+            <div class="description">{{PHASE_1_DESCRIPTION}}</div>
+        </div>
+        <div class="metric-card">
+            <div class="label">Phase 2</div>
+            <div class="value" style="font-size: 1.25rem; color: #f5f5f5;">{{PHASE_2_NAME}}</div>
+            <div class="description">{{PHASE_2_DESCRIPTION}}</div>
+        </div>
+        <div class="metric-card">
+            <div class="label">Phase 3</div>
+            <div class="value" style="font-size: 1.25rem; color: #f5f5f5;">{{PHASE_3_NAME}}</div>
+            <div class="description">{{PHASE_3_DESCRIPTION}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CHART SCRIPTS (Replace {{CHART_SCRIPTS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+<script>
+// Data object
+const data = {
+    pricePoints: {
+        tooCheap: {{TOO_CHEAP_NUM}},
+        bargain: {{BARGAIN_NUM}},
+        optimal: {{OPTIMAL_NUM}},
+        expensive: {{EXPENSIVE_NUM}},
+        tooExpensive: {{TOO_EXPENSIVE_NUM}}
+    },
+    competitors: [
+        { name: '{{COMPETITOR_1_NAME}}', price: {{COMPETITOR_1_PRICE_NUM}} },
+        { name: '{{YOUR_PRODUCT_NAME}}', price: {{YOUR_PRICE_NUM}} },
+        { name: '{{COMPETITOR_2_NAME}}', price: {{COMPETITOR_2_PRICE_NUM}} },
+        { name: '{{COMPETITOR_3_NAME}}', price: {{COMPETITOR_3_PRICE_NUM}} }
+    ],
+    tierDistribution: {
+        tier1: {{TIER_1_PCT_NUM}},
+        tier2: {{TIER_2_PCT_NUM}},
+        tier3: {{TIER_3_PCT_NUM}},
+        enterprise: {{ENTERPRISE_PCT_NUM}}
+    },
+    revenue: {
+        month3: {{MONTH_3_MRR_NUM}},
+        month6: {{MONTH_6_MRR_NUM}},
+        month12: {{MONTH_12_MRR_NUM}}
+    }
+};
+
+// Chart 1: Price Sensitivity (Van Westendorp visualization)
+const priceSensitivityCtx = document.getElementById('priceSensitivityChart').getContext('2d');
+new Chart(priceSensitivityCtx, {
+    type: 'bar',
+    data: {
+        labels: ['Too Cheap', 'Bargain', 'Optimal', 'Expensive', 'Too Expensive'],
+        datasets: [{
+            label: 'Price Point',
+            data: [data.pricePoints.tooCheap, data.pricePoints.bargain, data.pricePoints.optimal, data.pricePoints.expensive, data.pricePoints.tooExpensive],
+            backgroundColor: ['#fc8181', '#f6ad55', '#10b981', '#f6ad55', '#fc8181'],
+            borderRadius: 6
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: { grid: { display: false }, ticks: { color: '#a3a3a3' } },
+            y: { grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3', callback: v => '$' + v } }
+        },
+        plugins: { legend: { display: false }, tooltip: tooltipConfig }
+    }
+});
+
+// Chart 2: Competitor Pricing
+const competitorCtx = document.getElementById('competitorChart').getContext('2d');
+new Chart(competitorCtx, {
+    type: 'bar',
+    data: {
+        labels: data.competitors.map(c => c.name),
+        datasets: [{
+            label: 'Price',
+            data: data.competitors.map(c => c.price),
+            backgroundColor: data.competitors.map((c, i) => i === 1 ? '#10b981' : '#047857'),
+            borderRadius: 6
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: 'y',
+        scales: {
+            x: { grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3', callback: v => '$' + v } },
+            y: { grid: { display: false }, ticks: { color: '#f5f5f5' } }
+        },
+        plugins: { legend: { display: false }, tooltip: tooltipConfig }
+    }
+});
+
+// Chart 3: Tier Distribution
+const tierDistributionCtx = document.getElementById('tierDistributionChart').getContext('2d');
+new Chart(tierDistributionCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Starter', 'Professional', 'Business', 'Enterprise'],
+        datasets: [{
+            data: [data.tierDistribution.tier1, data.tierDistribution.tier2, data.tierDistribution.tier3, data.tierDistribution.enterprise],
+            backgroundColor: ['#047857', '#10b981', '#14b8a6', '#059669'],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '60%',
+        plugins: {
+            legend: { position: 'bottom', labels: { color: '#f5f5f5', font: { size: 11 }, padding: 15 } },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Chart 4: Revenue Projection
+const revenueProjectionCtx = document.getElementById('revenueProjectionChart').getContext('2d');
+new Chart(revenueProjectionCtx, {
+    type: 'line',
+    data: {
+        labels: ['Month 3', 'Month 6', 'Month 12'],
+        datasets: [{
+            label: 'MRR',
+            data: [data.revenue.month3, data.revenue.month6, data.revenue.month12],
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            fill: true,
+            tension: 0.4,
+            pointRadius: 6,
+            pointBackgroundColor: '#10b981'
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: { grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3' } },
+            y: { beginAtZero: true, grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3', callback: v => '$' + (v/1000) + 'K' } }
+        },
+        plugins: { legend: { display: false }, tooltip: tooltipConfig }
+    }
+});
+</script>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     REQUIRED CHARTS SUMMARY
+     ════════════════════════════════════════════════════════════════════════════
+
+     1. priceSensitivityChart (Bar)
+        - Van Westendorp price sensitivity visualization
+        - Shows optimal price range
+
+     2. competitorChart (Horizontal Bar)
+        - Competitor pricing comparison
+        - Highlights your position
+
+     3. tierDistributionChart (Doughnut)
+        - Expected customer distribution by tier
+        - Shows sweet spot tier dominance
+
+     4. revenueProjectionChart (Line)
+        - MRR projection over 12 months
+        - Area fill for visual impact
+
+     ════════════════════════════════════════════════════════════════════════════ -->

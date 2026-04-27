@@ -1,0 +1,840 @@
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     SKILL BODY: feature-prioritization-framework
+     Contains: CSS, HTML sections, and Chart.js code
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
+<!-- ═══ SKILL CSS START ═══ -->
+/* Feature Cards Grid */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+}
+
+.feature-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.feature-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(16, 185, 129, 0.4);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+}
+
+.feature-card.priority-high {
+    border-left: 4px solid #10b981;
+}
+
+.feature-card.priority-medium {
+    border-left: 4px solid #f6ad55;
+}
+
+.feature-card.priority-low {
+    border-left: 4px solid #fc8181;
+}
+
+.feature-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.feature-name {
+    font-weight: 700;
+    color: #f5f5f5;
+    font-size: 1.1rem;
+    flex: 1;
+}
+
+.feature-rice-score {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    font-weight: 700;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.feature-description {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.rice-breakdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.rice-item {
+    text-align: center;
+    padding: 0.5rem;
+    background: rgba(16, 185, 129, 0.05);
+    border-radius: 4px;
+}
+
+.rice-label {
+    font-size: 0.7rem;
+    color: #a3a3a3;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.rice-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.feature-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.feature-quarter {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+}
+
+.priority-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.priority-badge.high {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.priority-badge.medium {
+    background: rgba(246, 173, 85, 0.2);
+    color: #f6ad55;
+}
+
+.priority-badge.low {
+    background: rgba(252, 129, 129, 0.2);
+    color: #fc8181;
+}
+
+/* RICE Scoring Table */
+.rice-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+
+.rice-table th,
+.rice-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rice-table th {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.rice-table td {
+    color: #d4d4d4;
+    font-size: 0.9rem;
+}
+
+.rice-table tr:hover {
+    background: rgba(16, 185, 129, 0.05);
+}
+
+/* Quarterly Roadmap */
+.quarterly-roadmap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.quarter-column {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.quarter-header {
+    background: rgba(16, 185, 129, 0.1);
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.quarter-name {
+    font-weight: 700;
+    color: #10b981;
+    font-size: 1rem;
+}
+
+.quarter-theme {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    margin-top: 0.25rem;
+}
+
+.quarter-features {
+    padding: 1rem;
+}
+
+.quarter-feature-item {
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid #10b981;
+}
+
+.quarter-feature-name {
+    font-weight: 600;
+    color: #f5f5f5;
+    font-size: 0.9rem;
+}
+
+.quarter-feature-outcome {
+    font-size: 0.8rem;
+    color: #a3a3a3;
+    margin-top: 0.25rem;
+}
+
+/* Deferred & Killed Features */
+.deferred-section,
+.killed-section {
+    margin-top: 2rem;
+}
+
+.deferred-card,
+.killed-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(246, 173, 85, 0.3);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.killed-card {
+    border-color: rgba(252, 129, 129, 0.3);
+}
+
+.defer-reason,
+.kill-reason {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    margin-top: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .quarterly-roadmap {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+    .quarterly-roadmap {
+        grid-template-columns: 1fr;
+    }
+    .rice-breakdown {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Print */
+@media print {
+    .feature-card {
+        background: white;
+        border: 2px solid #10b981;
+        page-break-inside: avoid;
+    }
+    .feature-name {
+        color: #000000;
+    }
+    .feature-description {
+        color: #333333;
+    }
+    .quarter-column {
+        background: white;
+        border: 2px solid #10b981;
+    }
+}
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<!-- Section 1: Top Priority Features -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Top Priority Features</h2>
+        <p class="section-description">
+            Features ranked by RICE score (Reach × Impact × Confidence ÷ Effort). Higher scores indicate
+            greater value-to-effort ratio and should be built first.
+        </p>
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-card priority-high">
+            <div class="feature-header">
+                <div class="feature-name">{{FEATURE_1_NAME}}</div>
+                <div class="feature-rice-score">RICE: {{FEATURE_1_RICE}}</div>
+            </div>
+            <div class="feature-description">{{FEATURE_1_DESCRIPTION}}</div>
+            <div class="rice-breakdown">
+                <div class="rice-item">
+                    <div class="rice-label">Reach</div>
+                    <div class="rice-value">{{FEATURE_1_REACH}}</div>
+                </div>
+                <div class="rice-item">
+                    <div class="rice-label">Impact</div>
+                    <div class="rice-value">{{FEATURE_1_IMPACT}}</div>
+                </div>
+                <div class="rice-item">
+                    <div class="rice-label">Confidence</div>
+                    <div class="rice-value">{{FEATURE_1_CONFIDENCE}}</div>
+                </div>
+                <div class="rice-item">
+                    <div class="rice-label">Effort</div>
+                    <div class="rice-value">{{FEATURE_1_EFFORT}}</div>
+                </div>
+            </div>
+            <div class="feature-meta">
+                <span class="feature-quarter">{{FEATURE_1_QUARTER}}</span>
+                <span class="priority-badge high">High Priority</span>
+            </div>
+        </div>
+
+        <div class="feature-card priority-high">
+            <div class="feature-header">
+                <div class="feature-name">{{FEATURE_2_NAME}}</div>
+                <div class="feature-rice-score">RICE: {{FEATURE_2_RICE}}</div>
+            </div>
+            <div class="feature-description">{{FEATURE_2_DESCRIPTION}}</div>
+            <div class="rice-breakdown">
+                <div class="rice-item">
+                    <div class="rice-label">Reach</div>
+                    <div class="rice-value">{{FEATURE_2_REACH}}</div>
+                </div>
+                <div class="rice-item">
+                    <div class="rice-label">Impact</div>
+                    <div class="rice-value">{{FEATURE_2_IMPACT}}</div>
+                </div>
+                <div class="rice-item">
+                    <div class="rice-label">Confidence</div>
+                    <div class="rice-value">{{FEATURE_2_CONFIDENCE}}</div>
+                </div>
+                <div class="rice-item">
+                    <div class="rice-label">Effort</div>
+                    <div class="rice-value">{{FEATURE_2_EFFORT}}</div>
+                </div>
+            </div>
+            <div class="feature-meta">
+                <span class="feature-quarter">{{FEATURE_2_QUARTER}}</span>
+                <span class="priority-badge high">High Priority</span>
+            </div>
+        </div>
+
+        <div class="feature-card priority-medium">
+            <div class="feature-header">
+                <div class="feature-name">{{FEATURE_3_NAME}}</div>
+                <div class="feature-rice-score">RICE: {{FEATURE_3_RICE}}</div>
+            </div>
+            <div class="feature-description">{{FEATURE_3_DESCRIPTION}}</div>
+            <div class="rice-breakdown">
+                <div class="rice-item">
+                    <div class="rice-label">Reach</div>
+                    <div class="rice-value">{{FEATURE_3_REACH}}</div>
+                </div>
+                <div class="rice-item">
+                    <div class="rice-label">Impact</div>
+                    <div class="rice-value">{{FEATURE_3_IMPACT}}</div>
+                </div>
+                <div class="rice-item">
+                    <div class="rice-label">Confidence</div>
+                    <div class="rice-value">{{FEATURE_3_CONFIDENCE}}</div>
+                </div>
+                <div class="rice-item">
+                    <div class="rice-label">Effort</div>
+                    <div class="rice-value">{{FEATURE_3_EFFORT}}</div>
+                </div>
+            </div>
+            <div class="feature-meta">
+                <span class="feature-quarter">{{FEATURE_3_QUARTER}}</span>
+                <span class="priority-badge medium">Medium Priority</span>
+            </div>
+        </div>
+
+        <div class="feature-card priority-medium">
+            <div class="feature-header">
+                <div class="feature-name">{{FEATURE_4_NAME}}</div>
+                <div class="feature-rice-score">RICE: {{FEATURE_4_RICE}}</div>
+            </div>
+            <div class="feature-description">{{FEATURE_4_DESCRIPTION}}</div>
+            <div class="rice-breakdown">
+                <div class="rice-item">
+                    <div class="rice-label">Reach</div>
+                    <div class="rice-value">{{FEATURE_4_REACH}}</div>
+                </div>
+                <div class="rice-item">
+                    <div class="rice-label">Impact</div>
+                    <div class="rice-value">{{FEATURE_4_IMPACT}}</div>
+                </div>
+                <div class="rice-item">
+                    <div class="rice-label">Confidence</div>
+                    <div class="rice-value">{{FEATURE_4_CONFIDENCE}}</div>
+                </div>
+                <div class="rice-item">
+                    <div class="rice-label">Effort</div>
+                    <div class="rice-value">{{FEATURE_4_EFFORT}}</div>
+                </div>
+            </div>
+            <div class="feature-meta">
+                <span class="feature-quarter">{{FEATURE_4_QUARTER}}</span>
+                <span class="priority-badge medium">Medium Priority</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 2: Visual Analysis -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Visual Analysis</h2>
+        <p class="section-description">
+            Data visualizations showing feature prioritization patterns, value-effort positioning,
+            and strategic alignment across the product roadmap.
+        </p>
+    </div>
+
+    <div class="chart-grid">
+        <!-- Chart 1: RICE Score Comparison -->
+        <div class="chart-card">
+            <div class="chart-title">RICE Score Ranking</div>
+            <div class="chart-subtitle">
+                Features ordered by composite RICE score showing relative priority
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="riceScoreChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Key Observations</div>
+                <ul class="insight-list">
+                    <li><strong>Top Performer:</strong> {{TOP_FEATURE_NAME}} leads with RICE score of {{TOP_FEATURE_RICE}}</li>
+                    <li><strong>Quick Wins:</strong> {{QUICK_WIN_COUNT}} features have high impact with low effort</li>
+                    <li><strong>Strategic Gap:</strong> {{STRATEGIC_GAP_INSIGHT}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 2: Value vs Effort Matrix -->
+        <div class="chart-card">
+            <div class="chart-title">Value vs Effort Matrix</div>
+            <div class="chart-subtitle">
+                Quadrant analysis: Top-left = Quick Wins, Top-right = Strategic Bets, Bottom = Avoid
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="valueEffortChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Quadrant Distribution</div>
+                <ul class="insight-list">
+                    <li><strong>Quick Wins (Top-Left):</strong> {{QUICK_WINS_LIST}}</li>
+                    <li><strong>Strategic Bets (Top-Right):</strong> {{STRATEGIC_BETS_LIST}}</li>
+                    <li><strong>Fill-Ins (Bottom-Left):</strong> {{FILL_INS_LIST}}</li>
+                    <li><strong>Money Pits (Bottom-Right):</strong> {{MONEY_PITS_LIST}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 3: Strategic Alignment Radar -->
+        <div class="chart-card">
+            <div class="chart-title">Strategic Alignment</div>
+            <div class="chart-subtitle">
+                How top features align with strategic objectives and customer needs
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="alignmentRadar"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Alignment Analysis</div>
+                <ul class="insight-list">
+                    <li><strong>{{OBJECTIVE_1_NAME}}:</strong> {{OBJECTIVE_1_ALIGNMENT}}% coverage</li>
+                    <li><strong>{{OBJECTIVE_2_NAME}}:</strong> {{OBJECTIVE_2_ALIGNMENT}}% coverage</li>
+                    <li><strong>{{OBJECTIVE_3_NAME}}:</strong> {{OBJECTIVE_3_ALIGNMENT}}% coverage</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 4: Quarterly Distribution -->
+        <div class="chart-card">
+            <div class="chart-title">Quarterly Distribution</div>
+            <div class="chart-subtitle">
+                Feature allocation across Q1-Q4 showing capacity planning
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="quarterlyChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Capacity Planning</div>
+                <ul class="insight-list">
+                    <li><strong>Q1:</strong> {{Q1_FEATURES}} features ({{Q1_EFFORT}} effort points)</li>
+                    <li><strong>Q2:</strong> {{Q2_FEATURES}} features ({{Q2_EFFORT}} effort points)</li>
+                    <li><strong>Q3:</strong> {{Q3_FEATURES}} features ({{Q3_EFFORT}} effort points)</li>
+                    <li><strong>Q4:</strong> {{Q4_FEATURES}} features ({{Q4_EFFORT}} effort points)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: Quarterly Roadmap -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Quarterly Roadmap</h2>
+        <p class="section-description">
+            Features organized by quarter with themes and expected outcomes. Each quarter balances
+            quick wins, strategic initiatives, and technical investments.
+        </p>
+    </div>
+
+    <div class="quarterly-roadmap">
+        <div class="quarter-column">
+            <div class="quarter-header">
+                <div class="quarter-name">Q1</div>
+                <div class="quarter-theme">{{Q1_THEME}}</div>
+            </div>
+            <div class="quarter-features">
+                <div class="quarter-feature-item">
+                    <div class="quarter-feature-name">{{Q1_FEATURE_1}}</div>
+                    <div class="quarter-feature-outcome">{{Q1_FEATURE_1_OUTCOME}}</div>
+                </div>
+                <div class="quarter-feature-item">
+                    <div class="quarter-feature-name">{{Q1_FEATURE_2}}</div>
+                    <div class="quarter-feature-outcome">{{Q1_FEATURE_2_OUTCOME}}</div>
+                </div>
+                <div class="quarter-feature-item">
+                    <div class="quarter-feature-name">{{Q1_FEATURE_3}}</div>
+                    <div class="quarter-feature-outcome">{{Q1_FEATURE_3_OUTCOME}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quarter-column">
+            <div class="quarter-header">
+                <div class="quarter-name">Q2</div>
+                <div class="quarter-theme">{{Q2_THEME}}</div>
+            </div>
+            <div class="quarter-features">
+                <div class="quarter-feature-item">
+                    <div class="quarter-feature-name">{{Q2_FEATURE_1}}</div>
+                    <div class="quarter-feature-outcome">{{Q2_FEATURE_1_OUTCOME}}</div>
+                </div>
+                <div class="quarter-feature-item">
+                    <div class="quarter-feature-name">{{Q2_FEATURE_2}}</div>
+                    <div class="quarter-feature-outcome">{{Q2_FEATURE_2_OUTCOME}}</div>
+                </div>
+                <div class="quarter-feature-item">
+                    <div class="quarter-feature-name">{{Q2_FEATURE_3}}</div>
+                    <div class="quarter-feature-outcome">{{Q2_FEATURE_3_OUTCOME}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quarter-column">
+            <div class="quarter-header">
+                <div class="quarter-name">Q3</div>
+                <div class="quarter-theme">{{Q3_THEME}}</div>
+            </div>
+            <div class="quarter-features">
+                <div class="quarter-feature-item">
+                    <div class="quarter-feature-name">{{Q3_FEATURE_1}}</div>
+                    <div class="quarter-feature-outcome">{{Q3_FEATURE_1_OUTCOME}}</div>
+                </div>
+                <div class="quarter-feature-item">
+                    <div class="quarter-feature-name">{{Q3_FEATURE_2}}</div>
+                    <div class="quarter-feature-outcome">{{Q3_FEATURE_2_OUTCOME}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quarter-column">
+            <div class="quarter-header">
+                <div class="quarter-name">Q4</div>
+                <div class="quarter-theme">{{Q4_THEME}}</div>
+            </div>
+            <div class="quarter-features">
+                <div class="quarter-feature-item">
+                    <div class="quarter-feature-name">{{Q4_FEATURE_1}}</div>
+                    <div class="quarter-feature-outcome">{{Q4_FEATURE_1_OUTCOME}}</div>
+                </div>
+                <div class="quarter-feature-item">
+                    <div class="quarter-feature-name">{{Q4_FEATURE_2}}</div>
+                    <div class="quarter-feature-outcome">{{Q4_FEATURE_2_OUTCOME}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 4: Deferred & Killed Features -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Deferred & Killed Features</h2>
+        <p class="section-description">
+            Features deprioritized or removed from the roadmap with clear rationale. Being ruthless
+            about what NOT to build is as important as choosing what to build.
+        </p>
+    </div>
+
+    <div class="deferred-section">
+        <h3 style="color: #f6ad55; margin-bottom: 1rem;">⏸️ Deferred Features</h3>
+        <div class="deferred-card">
+            <div class="feature-name">{{DEFERRED_1_NAME}}</div>
+            <div class="defer-reason"><strong>Why Deferred:</strong> {{DEFERRED_1_REASON}}</div>
+            <div class="defer-reason"><strong>Revisit:</strong> {{DEFERRED_1_REVISIT}}</div>
+        </div>
+        <div class="deferred-card">
+            <div class="feature-name">{{DEFERRED_2_NAME}}</div>
+            <div class="defer-reason"><strong>Why Deferred:</strong> {{DEFERRED_2_REASON}}</div>
+            <div class="defer-reason"><strong>Revisit:</strong> {{DEFERRED_2_REVISIT}}</div>
+        </div>
+    </div>
+
+    <div class="killed-section">
+        <h3 style="color: #fc8181; margin-bottom: 1rem;">❌ Killed Features</h3>
+        <div class="killed-card">
+            <div class="feature-name">{{KILLED_1_NAME}}</div>
+            <div class="kill-reason"><strong>Why Killed:</strong> {{KILLED_1_REASON}}</div>
+        </div>
+    </div>
+</section>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+// Feature Prioritization Data
+const featureData = {
+    features: [
+        { name: '{{FEATURE_1_NAME_SHORT}}', rice: {{FEATURE_1_RICE}}, value: {{FEATURE_1_VALUE}}, effort: {{FEATURE_1_EFFORT}} },
+        { name: '{{FEATURE_2_NAME_SHORT}}', rice: {{FEATURE_2_RICE}}, value: {{FEATURE_2_VALUE}}, effort: {{FEATURE_2_EFFORT}} },
+        { name: '{{FEATURE_3_NAME_SHORT}}', rice: {{FEATURE_3_RICE}}, value: {{FEATURE_3_VALUE}}, effort: {{FEATURE_3_EFFORT}} },
+        { name: '{{FEATURE_4_NAME_SHORT}}', rice: {{FEATURE_4_RICE}}, value: {{FEATURE_4_VALUE}}, effort: {{FEATURE_4_EFFORT}} },
+        { name: '{{FEATURE_5_NAME_SHORT}}', rice: {{FEATURE_5_RICE}}, value: {{FEATURE_5_VALUE}}, effort: {{FEATURE_5_EFFORT}} },
+        { name: '{{FEATURE_6_NAME_SHORT}}', rice: {{FEATURE_6_RICE}}, value: {{FEATURE_6_VALUE}}, effort: {{FEATURE_6_EFFORT}} }
+    ],
+    alignment: {
+        labels: ['{{OBJECTIVE_1_NAME}}', '{{OBJECTIVE_2_NAME}}', '{{OBJECTIVE_3_NAME}}', 'Customer Value', 'Competitive Edge'],
+        values: [{{OBJECTIVE_1_ALIGNMENT}}, {{OBJECTIVE_2_ALIGNMENT}}, {{OBJECTIVE_3_ALIGNMENT}}, {{CUSTOMER_VALUE_ALIGNMENT}}, {{COMPETITIVE_ALIGNMENT}}]
+    },
+    quarterly: {
+        labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+        features: [{{Q1_FEATURES}}, {{Q2_FEATURES}}, {{Q3_FEATURES}}, {{Q4_FEATURES}}],
+        effort: [{{Q1_EFFORT}}, {{Q2_EFFORT}}, {{Q3_EFFORT}}, {{Q4_EFFORT}}]
+    }
+};
+
+// Chart 1: RICE Score Ranking (Horizontal Bar)
+const riceCtx = document.getElementById('riceScoreChart').getContext('2d');
+new Chart(riceCtx, {
+    type: 'bar',
+    data: {
+        labels: featureData.features.map(f => f.name),
+        datasets: [{
+            label: 'RICE Score',
+            data: featureData.features.map(f => f.rice),
+            backgroundColor: featureData.features.map((f, i) =>
+                i < 2 ? '#10b981' : i < 4 ? '#f6ad55' : '#fc8181'
+            ),
+            borderRadius: 6,
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: 'y',
+        scales: {
+            x: {
+                beginAtZero: true,
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: { color: '#a3a3a3', font: { size: 11 } }
+            },
+            y: {
+                grid: { display: false },
+                ticks: { color: '#f5f5f5', font: { size: 11, weight: '600' } }
+            }
+        },
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                ...tooltipConfig,
+                callbacks: {
+                    label: function(context) {
+                        return 'RICE Score: ' + context.parsed.x;
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Chart 2: Value vs Effort Matrix (Scatter)
+const valueEffortCtx = document.getElementById('valueEffortChart').getContext('2d');
+new Chart(valueEffortCtx, {
+    type: 'scatter',
+    data: {
+        datasets: [{
+            label: 'Features',
+            data: featureData.features.map(f => ({ x: f.effort, y: f.value, name: f.name })),
+            backgroundColor: featureData.features.map((f, i) =>
+                i < 2 ? '#10b981' : i < 4 ? '#f6ad55' : '#fc8181'
+            ),
+            borderColor: '#1a1a1a',
+            borderWidth: 2,
+            pointRadius: 12,
+            pointHoverRadius: 16
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                title: { display: true, text: 'Effort →', color: '#a3a3a3', font: { size: 12, weight: '600' } },
+                min: 0,
+                max: 10,
+                ticks: { color: '#a3a3a3', font: { size: 11 } },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' }
+            },
+            y: {
+                title: { display: true, text: 'Value →', color: '#a3a3a3', font: { size: 12, weight: '600' } },
+                min: 0,
+                max: 10,
+                ticks: { color: '#a3a3a3', font: { size: 11 } },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' }
+            }
+        },
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                ...tooltipConfig,
+                callbacks: {
+                    label: function(context) {
+                        return `${context.raw.name}: Value ${context.parsed.y}, Effort ${context.parsed.x}`;
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Chart 3: Strategic Alignment Radar
+const alignmentCtx = document.getElementById('alignmentRadar').getContext('2d');
+new Chart(alignmentCtx, {
+    type: 'radar',
+    data: {
+        labels: featureData.alignment.labels,
+        datasets: [{
+            label: 'Alignment %',
+            data: featureData.alignment.values,
+            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+            borderColor: '#10b981',
+            borderWidth: 3,
+            pointBackgroundColor: '#10b981',
+            pointBorderColor: '#1a1a1a',
+            pointRadius: 6,
+            pointBorderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            r: {
+                beginAtZero: true,
+                max: 100,
+                ticks: { color: '#a3a3a3', stepSize: 20, font: { size: 10 } },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                pointLabels: { color: '#f5f5f5', font: { size: 11, weight: '600' } }
+            }
+        },
+        plugins: {
+            legend: { display: false },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Chart 4: Quarterly Distribution (Stacked Bar)
+const quarterlyCtx = document.getElementById('quarterlyChart').getContext('2d');
+new Chart(quarterlyCtx, {
+    type: 'bar',
+    data: {
+        labels: featureData.quarterly.labels,
+        datasets: [
+            {
+                label: 'Features',
+                data: featureData.quarterly.features,
+                backgroundColor: '#10b981',
+                borderRadius: 4,
+                borderWidth: 0
+            },
+            {
+                label: 'Effort Points',
+                data: featureData.quarterly.effort,
+                backgroundColor: 'rgba(16, 185, 129, 0.4)',
+                borderRadius: 4,
+                borderWidth: 0
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                grid: { display: false },
+                ticks: { color: '#f5f5f5', font: { size: 12, weight: '600' } }
+            },
+            y: {
+                beginAtZero: true,
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: { color: '#a3a3a3', font: { size: 11 } }
+            }
+        },
+        plugins: {
+            legend: {
+                display: true,
+                position: 'bottom',
+                labels: { color: '#d4d4d4', font: { size: 11 }, padding: 20 }
+            },
+            tooltip: tooltipConfig
+        }
+    }
+});
+<!-- ═══ SKILL JS END ═══ -->

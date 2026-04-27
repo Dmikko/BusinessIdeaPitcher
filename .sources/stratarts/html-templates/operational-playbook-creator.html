@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{COMPANY_NAME}} - Operational Playbook | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --bg-card: #1a1a1a;
+            --border-primary: #2a2a2a;
+            --border-accent: #10b981;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --text-muted: #6b7280;
+            --accent-primary: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+
+        .header { text-align: center; padding: 3rem 2rem; background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%); border-bottom: 1px solid var(--border-primary); margin-bottom: 2rem; }
+        .header-label { display: inline-block; padding: 0.5rem 1rem; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--border-accent); border-radius: 2rem; color: var(--accent-primary); font-size: 0.875rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; }
+        .header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .header-company { font-size: 1.25rem; color: var(--accent-primary); margin-bottom: 1rem; }
+        .header-meta { font-size: 0.875rem; color: var(--text-muted); }
+
+        .score-banner { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; padding: 1.5rem; background: var(--bg-tertiary); border: 1px solid var(--border-primary); border-radius: 1rem; margin-bottom: 2rem; }
+        .score-item { text-align: center; padding: 1rem; }
+        .score-item:not(:last-child) { border-right: 1px solid var(--border-primary); }
+        .score-value { font-size: 1.75rem; font-weight: 700; color: var(--accent-primary); }
+        .score-label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; }
+
+        .section { background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: 1rem; padding: 2rem; margin-bottom: 2rem; }
+        .section-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-primary); }
+        .section-number { width: 2rem; height: 2rem; background: var(--accent-primary); color: var(--bg-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .section-title { font-size: 1.25rem; font-weight: 600; }
+
+        .content-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin: 1.5rem 0; }
+        .content-card { padding: 1.5rem; background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 0.75rem; }
+        .content-card h4 { font-size: 0.875rem; color: var(--accent-primary); margin-bottom: 0.75rem; }
+        .content-card p { font-size: 0.875rem; color: var(--text-secondary); }
+
+        .value-card { padding: 1.5rem; background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 0.75rem; margin-bottom: 1rem; }
+        .value-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; }
+        .value-icon { font-size: 1.25rem; }
+        .value-name { font-size: 1rem; font-weight: 600; color: var(--accent-primary); }
+        .value-desc { font-size: 0.875rem; color: var(--text-secondary); }
+
+        .org-tree { background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 0.75rem; padding: 1.5rem; margin: 1.5rem 0; }
+        .org-level { margin-left: 1.5rem; padding-left: 1rem; border-left: 2px solid var(--border-primary); }
+        .org-role { padding: 0.5rem 0; font-size: 0.875rem; color: var(--text-secondary); }
+        .org-role strong { color: var(--text-primary); }
+        .org-role.highlight { color: var(--accent-primary); font-weight: 600; }
+
+        .process-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin: 1.5rem 0; }
+        .process-card { padding: 1.5rem; background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 0.75rem; }
+        .process-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-primary); }
+        .process-icon { font-size: 1.5rem; }
+        .process-name { font-size: 1rem; font-weight: 600; color: var(--text-primary); }
+        .process-list { list-style: none; }
+        .process-list li { padding: 0.35rem 0; font-size: 0.8rem; color: var(--text-secondary); display: flex; gap: 0.5rem; }
+        .process-list li strong { color: var(--accent-primary); min-width: 100px; }
+
+        .meeting-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.5rem 0; }
+        .meeting-card { padding: 1.25rem; background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 0.75rem; text-align: center; }
+        .meeting-cadence { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.5rem; }
+        .meeting-name { font-size: 0.875rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem; }
+        .meeting-time { font-size: 0.75rem; color: var(--accent-primary); margin-bottom: 0.5rem; }
+        .meeting-who { font-size: 0.7rem; color: var(--text-muted); }
+
+        .channel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0; }
+        .channel-card { padding: 1rem; background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 0.5rem; }
+        .channel-name { font-size: 0.875rem; font-weight: 600; color: var(--accent-primary); margin-bottom: 0.25rem; }
+        .channel-desc { font-size: 0.75rem; color: var(--text-secondary); }
+
+        .sla-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0; }
+        .sla-card { padding: 1.25rem; background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 0.75rem; text-align: center; }
+        .sla-indicator { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .sla-label { font-size: 0.875rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem; }
+        .sla-time { font-size: 1.25rem; font-weight: 700; color: var(--accent-primary); }
+
+        .okr-card { padding: 1.5rem; background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 0.75rem; margin-bottom: 1rem; }
+        .okr-objective { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem; }
+        .okr-results { list-style: none; }
+        .okr-results li { padding: 0.35rem 0; font-size: 0.875rem; color: var(--text-secondary); display: flex; gap: 0.5rem; }
+        .okr-results li::before { content: 'KR'; color: var(--accent-primary); font-weight: 600; font-size: 0.75rem; }
+
+        .tool-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.5rem 0; }
+        .tool-card { padding: 1rem; background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 0.5rem; text-align: center; }
+        .tool-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .tool-name { font-size: 0.875rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem; }
+        .tool-use { font-size: 0.7rem; color: var(--text-muted); }
+
+        .onboarding-timeline { display: flex; flex-direction: column; gap: 0.5rem; margin: 1.5rem 0; }
+        .onboarding-item { display: grid; grid-template-columns: 100px 1fr; gap: 1rem; padding: 1rem 1.25rem; background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 0.5rem; }
+        .onboarding-when { font-size: 0.875rem; font-weight: 600; color: var(--accent-primary); }
+        .onboarding-tasks { font-size: 0.875rem; color: var(--text-secondary); }
+
+        .ritual-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
+        .ritual-card { padding: 1.25rem; background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 0.75rem; }
+        .ritual-cadence { font-size: 0.65rem; color: var(--accent-primary); text-transform: uppercase; margin-bottom: 0.5rem; }
+        .ritual-name { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem; }
+        .ritual-desc { font-size: 0.8rem; color: var(--text-secondary); }
+
+        .chart-container { background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 0.75rem; padding: 1.5rem; margin: 1.5rem 0; }
+        .chart-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 1rem; }
+        .chart-wrapper { position: relative; height: 250px; }
+
+        .next-steps { display: flex; flex-direction: column; gap: 0.75rem; }
+        .next-step { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 0.5rem; }
+        .step-priority { padding: 0.25rem 0.5rem; background: rgba(16, 185, 129, 0.2); color: var(--accent-primary); border-radius: 0.25rem; font-size: 0.75rem; font-weight: 600; }
+        .step-text { flex: 1; font-size: 0.875rem; }
+        .step-timing { font-size: 0.75rem; color: var(--text-muted); }
+
+        .footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border-primary); margin-top: 2rem; }
+        .footer-brand { font-size: 1.25rem; font-weight: 700; color: var(--accent-primary); }
+        .footer-tagline { font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1rem; }
+        .footer-note { font-size: 0.75rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+        @media (max-width: 1024px) { .score-banner { grid-template-columns: repeat(3, 1fr); } .content-grid, .process-grid, .ritual-grid { grid-template-columns: 1fr; } .meeting-grid, .tool-grid { grid-template-columns: repeat(2, 1fr); } .channel-grid, .sla-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 640px) { .score-banner { grid-template-columns: repeat(2, 1fr); } .score-item:not(:last-child) { border-right: none; } .meeting-grid, .tool-grid { grid-template-columns: 1fr; } .onboarding-item { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-label">Operational Playbook</div>
+        <h1>{{COMPANY_NAME}} Operational Playbook</h1>
+        <div class="header-company">The Operating System for {{COMPANY_NAME}}</div>
+        <div class="header-meta">Generated {{TIMESTAMP}} | StratArts operational-playbook-creator v1.0</div>
+    </header>
+
+    <div class="container">
+        <div class="score-banner">
+            <div class="score-item"><div class="score-value">{{HEADCOUNT}}</div><div class="score-label">Headcount</div></div>
+            <div class="score-item"><div class="score-value">{{DEPARTMENTS}}</div><div class="score-label">Departments</div></div>
+            <div class="score-item"><div class="score-value">{{PROCESSES}}</div><div class="score-label">Core Processes</div></div>
+            <div class="score-item"><div class="score-value">{{MEETINGS}}</div><div class="score-label">Meeting Types</div></div>
+            <div class="score-item"><div class="score-value">{{TOOLS}}</div><div class="score-label">Tools</div></div>
+            <div class="score-item"><div class="score-value">{{Y1_HEADCOUNT}}</div><div class="score-label">Year 1 Target</div></div>
+        </div>
+
+        <!-- Section 1: Company Foundation -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="section-title">Company Foundation</h2>
+            </div>
+            <div class="content-grid">
+                {{FOUNDATION_CARDS}}
+            </div>
+            {{VALUES_CARDS}}
+        </section>
+
+        <!-- Section 2: Organizational Structure -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="section-title">Organizational Structure</h2>
+            </div>
+            <div class="org-tree">
+                {{ORG_CHART}}
+            </div>
+            <div class="chart-container">
+                <div class="chart-title">Headcount Growth Plan</div>
+                <div class="chart-wrapper"><canvas id="headcountChart"></canvas></div>
+            </div>
+        </section>
+
+        <!-- Section 3: Core Processes -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="section-title">Core Processes</h2>
+            </div>
+            <div class="process-grid">
+                {{PROCESS_CARDS}}
+            </div>
+        </section>
+
+        <!-- Section 4: Meeting Rhythms -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="section-title">Meeting Rhythms</h2>
+            </div>
+            <div class="meeting-grid">
+                {{MEETING_CARDS}}
+            </div>
+        </section>
+
+        <!-- Section 5: Communication Protocols -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <h2 class="section-title">Communication Protocols</h2>
+            </div>
+            <div class="channel-grid">
+                {{CHANNEL_CARDS}}
+            </div>
+            <div class="sla-grid">
+                {{SLA_CARDS}}
+            </div>
+        </section>
+
+        <!-- Section 6: OKRs & Goals -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">6</div>
+                <h2 class="section-title">OKRs & Goals</h2>
+            </div>
+            {{OKR_CARDS}}
+        </section>
+
+        <!-- Section 7: Tools & Systems -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">7</div>
+                <h2 class="section-title">Tools & Systems</h2>
+            </div>
+            <div class="tool-grid">
+                {{TOOL_CARDS}}
+            </div>
+        </section>
+
+        <!-- Section 8: Onboarding Playbook -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">8</div>
+                <h2 class="section-title">Onboarding Playbook</h2>
+            </div>
+            <div class="onboarding-timeline">
+                {{ONBOARDING_ITEMS}}
+            </div>
+        </section>
+
+        <!-- Section 9: Company Culture -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">9</div>
+                <h2 class="section-title">Company Culture & Rituals</h2>
+            </div>
+            <div class="ritual-grid">
+                {{RITUAL_CARDS}}
+            </div>
+        </section>
+
+        <!-- Section 10: Next Steps -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">10</div>
+                <h2 class="section-title">Next Steps</h2>
+            </div>
+            <div class="next-steps">
+                {{NEXT_STEPS}}
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-brand">StratArts</div>
+        <div class="footer-tagline">AI-Powered Business Strategy</div>
+        <p class="footer-note">This operational playbook was generated using the operational-playbook-creator skill. Keep this document updated as your company scales. Review and refresh quarterly.</p>
+    </footer>
+
+    <script>
+        Chart.defaults.color = '#a0a0a0';
+        Chart.defaults.borderColor = '#2a2a2a';
+
+        new Chart(document.getElementById('headcountChart'), {
+            type: 'bar',
+            data: {
+                labels: {{HEADCOUNT_LABELS}},
+                datasets: [{
+                    label: 'Headcount',
+                    data: {{HEADCOUNT_DATA}},
+                    backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { x: { grid: { display: false } }, y: { grid: { color: '#2a2a2a' } } }
+            }
+        });
+    </script>
+</body>
+</html>

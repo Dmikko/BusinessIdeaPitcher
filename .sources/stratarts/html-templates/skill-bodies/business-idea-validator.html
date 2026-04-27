@@ -1,0 +1,485 @@
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     SKILL BODY: business-idea-validator
+     Contains: CSS, HTML sections, and Chart.js code
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
+<!-- ═══ SKILL CSS START ═══ -->
+/* Dimension Cards (5-column grid for validation dimensions) */
+.dimension-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.dimension-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 1.25rem;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.dimension-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(16, 185, 129, 0.4);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+}
+
+.dimension-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.dimension-name {
+    font-weight: 700;
+    color: #f5f5f5;
+    font-size: 0.95rem;
+}
+
+.dimension-score {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.dimension-description {
+    font-size: 0.85rem;
+    color: #d4d4d4;
+    line-height: 1.5;
+}
+
+.dimension-weight {
+    font-size: 0.75rem;
+    color: #a3a3a3;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Verdict Badge Colors */
+.verdict-badge.strong-go {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.verdict-badge.conditional-go {
+    background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+    box-shadow: 0 4px 15px rgba(237, 137, 54, 0.3);
+}
+
+.verdict-badge.pivot-required {
+    background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
+    box-shadow: 0 4px 15px rgba(245, 101, 101, 0.3);
+}
+
+.verdict-badge.no-go {
+    background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+    box-shadow: 0 4px 15px rgba(229, 62, 62, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+    .dimension-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 1024px) {
+    .dimension-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .dimension-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Print */
+@media print {
+    .dimension-card {
+        background: white;
+        border: 2px solid #10b981;
+        page-break-inside: avoid;
+    }
+    .dimension-name {
+        color: #000000;
+        font-weight: 900;
+    }
+    .dimension-score {
+        color: #10b981;
+        font-weight: 900;
+    }
+    .dimension-description {
+        color: #333333;
+    }
+    .dimension-weight {
+        color: #666666;
+    }
+}
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<!-- Section 1: Five Core Validation Dimensions -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Five Core Validation Dimensions</h2>
+        <p class="section-description">
+            Each business idea is evaluated across five critical dimensions, weighted by importance.
+            These scores combine to create the composite validation score shown above.
+        </p>
+    </div>
+
+    <div class="dimension-grid">
+        <div class="dimension-card">
+            <div class="dimension-header">
+                <div class="dimension-name">Problem-Solution Fit</div>
+                <div class="dimension-score">{{DIMENSION_1_SCORE}}</div>
+            </div>
+            <div class="dimension-description">
+                {{DIMENSION_1_DESCRIPTION}}
+            </div>
+            <div class="dimension-weight">Weight: 25% of total score</div>
+        </div>
+
+        <div class="dimension-card">
+            <div class="dimension-header">
+                <div class="dimension-name">Market Opportunity</div>
+                <div class="dimension-score">{{DIMENSION_2_SCORE}}</div>
+            </div>
+            <div class="dimension-description">
+                {{DIMENSION_2_DESCRIPTION}}
+            </div>
+            <div class="dimension-weight">Weight: 25% of total score</div>
+        </div>
+
+        <div class="dimension-card">
+            <div class="dimension-header">
+                <div class="dimension-name">Competitive Advantage</div>
+                <div class="dimension-score">{{DIMENSION_3_SCORE}}</div>
+            </div>
+            <div class="dimension-description">
+                {{DIMENSION_3_DESCRIPTION}}
+            </div>
+            <div class="dimension-weight">Weight: 15% of total score</div>
+        </div>
+
+        <div class="dimension-card">
+            <div class="dimension-header">
+                <div class="dimension-name">Founder-Market Fit</div>
+                <div class="dimension-score">{{DIMENSION_4_SCORE}}</div>
+            </div>
+            <div class="dimension-description">
+                {{DIMENSION_4_DESCRIPTION}}
+            </div>
+            <div class="dimension-weight">Weight: 15% of total score</div>
+        </div>
+
+        <div class="dimension-card">
+            <div class="dimension-header">
+                <div class="dimension-name">Execution Feasibility</div>
+                <div class="dimension-score">{{DIMENSION_5_SCORE}}</div>
+            </div>
+            <div class="dimension-description">
+                {{DIMENSION_5_DESCRIPTION}}
+            </div>
+            <div class="dimension-weight">Weight: 20% of total score</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 2: Visual Analysis -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Visual Analysis</h2>
+        <p class="section-description">
+            Data visualizations revealing patterns, positioning, and comparative strengths
+            across key business metrics.
+        </p>
+    </div>
+
+    <div class="chart-grid">
+        <!-- Chart 1: Weighted Dimension Breakdown (Bar Chart) -->
+        <div class="chart-card">
+            <div class="chart-title">Weighted Dimension Breakdown</div>
+            <div class="chart-subtitle">
+                Each dimension contributes to the final score based on its strategic importance
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="dimensionChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Key Observations</div>
+                <ul class="insight-list">
+                    <li><strong>Highest:</strong> {{DIMENSION_HIGHEST_NAME}} at {{DIMENSION_HIGHEST_SCORE}}/10 {{DIMENSION_HIGHEST_INSIGHT}}</li>
+                    <li><strong>Lowest:</strong> {{DIMENSION_LOWEST_NAME}} at {{DIMENSION_LOWEST_SCORE}}/10 {{DIMENSION_LOWEST_INSIGHT}}</li>
+                    <li><strong>Weighted Impact:</strong> Top two dimensions account for 50% of total score</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 2: Score Distribution (Gauge Chart) -->
+        <div class="chart-card">
+            <div class="chart-title">Score Distribution</div>
+            <div class="chart-subtitle">
+                Visual representation of overall validation score against decision thresholds
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="gaugeChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Score Interpretation Guide</div>
+                <ul class="insight-list">
+                    <li><strong>8.0-10.0:</strong> Strong Go - Pursue aggressively with confidence</li>
+                    <li><strong>6.0-7.9:</strong> Conditional Go - Validate assumptions first</li>
+                    <li><strong>4.0-5.9:</strong> Pivot Required - Fundamental changes needed</li>
+                    <li><strong>Below 4.0:</strong> No Go - Consider alternative opportunities</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 3: Risk vs. Opportunity Positioning (Scatter Chart) -->
+        <div class="chart-card">
+            <div class="chart-title">Risk vs. Opportunity Positioning</div>
+            <div class="chart-subtitle">
+                Strategic positioning showing the relationship between market opportunity and execution risk
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="scatterChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Strategic Position</div>
+                <ul class="insight-list">
+                    <li><strong>Position:</strong> {{POSITION_QUADRANT}}</li>
+                    <li><strong>Opportunity Level:</strong> {{OPPORTUNITY_SCORE}}/10 - {{OPPORTUNITY_INTERPRETATION}}</li>
+                    <li><strong>Risk Level:</strong> {{RISK_SCORE}}/10 - {{RISK_INTERPRETATION}}</li>
+                    <li><strong>Recommendation:</strong> {{POSITION_RECOMMENDATION}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 4: Competitive Advantage Analysis (Radar Chart) -->
+        <div class="chart-card">
+            <div class="chart-title">Competitive Advantage Analysis</div>
+            <div class="chart-subtitle">
+                Multi-dimensional assessment of sustainable competitive positioning across key factors
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="radarChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Advantage Breakdown</div>
+                <ul class="insight-list">
+                    <li><strong>{{COMPETITIVE_1_NAME}}:</strong> {{COMPETITIVE_1_SCORE}}/10 - {{COMPETITIVE_1_INSIGHT}}</li>
+                    <li><strong>{{COMPETITIVE_2_NAME}}:</strong> {{COMPETITIVE_2_SCORE}}/10 - {{COMPETITIVE_2_INSIGHT}}</li>
+                    <li><strong>{{COMPETITIVE_3_NAME}}:</strong> {{COMPETITIVE_3_SCORE}}/10 - {{COMPETITIVE_3_INSIGHT}}</li>
+                    <li><strong>{{COMPETITIVE_4_NAME}}:</strong> {{COMPETITIVE_4_SCORE}}/10 - {{COMPETITIVE_4_INSIGHT}}</li>
+                    <li><strong>{{COMPETITIVE_5_NAME}}:</strong> {{COMPETITIVE_5_SCORE}}/10 - {{COMPETITIVE_5_INSIGHT}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+// Data object (populated from analysis)
+const data = {
+    dimensions: {
+        labels: ['Problem-Solution\nFit', 'Market\nOpportunity', 'Competitive\nAdvantage', 'Founder-Market\nFit', 'Execution\nFeasibility'],
+        values: [{{DIMENSION_1_SCORE}}, {{DIMENSION_2_SCORE}}, {{DIMENSION_3_SCORE}}, {{DIMENSION_4_SCORE}}, {{DIMENSION_5_SCORE}}]
+    },
+    competitive: {
+        labels: ['{{COMPETITIVE_1_NAME}}', '{{COMPETITIVE_2_NAME}}', '{{COMPETITIVE_3_NAME}}', '{{COMPETITIVE_4_NAME}}', '{{COMPETITIVE_5_NAME}}'],
+        values: [{{COMPETITIVE_1_SCORE}}, {{COMPETITIVE_2_SCORE}}, {{COMPETITIVE_3_SCORE}}, {{COMPETITIVE_4_SCORE}}, {{COMPETITIVE_5_SCORE}}]
+    },
+    composite: {{PRIMARY_SCORE}},
+    riskOpportunity: {
+        x: {{RISK_SCORE}},
+        y: {{OPPORTUNITY_SCORE}}
+    }
+};
+
+// Chart 1: Dimension Scores (Horizontal Bar)
+const dimensionCtx = document.getElementById('dimensionChart').getContext('2d');
+new Chart(dimensionCtx, {
+    type: 'bar',
+    data: {
+        labels: data.dimensions.labels,
+        datasets: [{
+            label: 'Score',
+            data: data.dimensions.values,
+            backgroundColor: '#10b981',
+            borderRadius: 6,
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: 'y',
+        scales: {
+            x: {
+                beginAtZero: true,
+                max: 10,
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: { color: '#a3a3a3', font: { size: 12 } }
+            },
+            y: {
+                grid: { display: false },
+                ticks: { color: '#f5f5f5', font: { size: 12, weight: '600' } }
+            }
+        },
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                ...tooltipConfig,
+                callbacks: {
+                    label: function(context) {
+                        return 'Score: ' + context.parsed.x.toFixed(1) + '/10';
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Chart 2: Composite Score Gauge (Half Doughnut)
+const gaugeCtx = document.getElementById('gaugeChart').getContext('2d');
+new Chart(gaugeCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Score', 'Remaining'],
+        datasets: [{
+            data: [data.composite, 10 - data.composite],
+            backgroundColor: [
+                data.composite >= 8 ? '#10b981' :
+                data.composite >= 6 ? '#f6ad55' :
+                data.composite >= 4 ? '#fc8181' :
+                '#e53e3e',
+                'rgba(255, 255, 255, 0.1)'
+            ],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        circumference: 180,
+        rotation: 270,
+        cutout: '75%',
+        plugins: {
+            legend: { display: false },
+            tooltip: { enabled: false }
+        }
+    },
+    plugins: [{
+        id: 'gaugeText',
+        afterDatasetsDraw(chart) {
+            const { ctx, chartArea: { width, height } } = chart;
+            ctx.save();
+            ctx.font = 'bold 56px -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif';
+            ctx.fillStyle = '#10b981';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(data.composite.toFixed(1) + '/10', width / 2, height / 2 + 20);
+
+            ctx.font = 'bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif';
+            ctx.fillStyle = '#a3a3a3';
+            const verdict = data.composite >= 8 ? 'STRONG GO' :
+                           data.composite >= 6 ? 'CONDITIONAL GO' :
+                           data.composite >= 4 ? 'PIVOT REQUIRED' : 'NO GO';
+            ctx.fillText(verdict, width / 2, height / 2 + 60);
+            ctx.restore();
+        }
+    }]
+});
+
+// Chart 3: Risk vs. Opportunity Scatter
+const scatterCtx = document.getElementById('scatterChart').getContext('2d');
+new Chart(scatterCtx, {
+    type: 'scatter',
+    data: {
+        datasets: [{
+            label: '{{SUBTITLE}}',
+            data: [{ x: data.riskOpportunity.x, y: data.riskOpportunity.y }],
+            backgroundColor: '#10b981',
+            borderColor: '#14b8a6',
+            borderWidth: 3,
+            pointRadius: 16,
+            pointHoverRadius: 20
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                title: { display: true, text: 'Risk Level →', color: '#a3a3a3', font: { size: 12, weight: '600' } },
+                min: 0,
+                max: 10,
+                ticks: { color: '#a3a3a3', font: { size: 11 } },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' }
+            },
+            y: {
+                title: { display: true, text: 'Opportunity Level →', color: '#a3a3a3', font: { size: 12, weight: '600' } },
+                min: 0,
+                max: 10,
+                ticks: { color: '#a3a3a3', font: { size: 11 } },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' }
+            }
+        },
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                ...tooltipConfig,
+                callbacks: {
+                    label: function(context) {
+                        return `Risk: ${context.parsed.x.toFixed(1)}, Opportunity: ${context.parsed.y.toFixed(1)}`;
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Chart 4: Competitive Advantage Radar
+const radarCtx = document.getElementById('radarChart').getContext('2d');
+new Chart(radarCtx, {
+    type: 'radar',
+    data: {
+        labels: data.competitive.labels,
+        datasets: [{
+            label: 'Score',
+            data: data.competitive.values,
+            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+            borderColor: '#10b981',
+            borderWidth: 3,
+            pointBackgroundColor: '#10b981',
+            pointBorderColor: '#1a1a1a',
+            pointRadius: 6,
+            pointBorderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            r: {
+                beginAtZero: true,
+                max: 10,
+                ticks: { color: '#a3a3a3', stepSize: 2, font: { size: 11 } },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                pointLabels: { color: '#f5f5f5', font: { size: 12, weight: '600' } }
+            }
+        },
+        plugins: {
+            legend: { display: false },
+            tooltip: tooltipConfig
+        }
+    }
+});
+<!-- ═══ SKILL JS END ═══ -->

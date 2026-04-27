@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feature Prioritization Framework | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        /* === RESET & BASE === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #0a0a0a;
+        }
+
+        /* === HEADER === */
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .header-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* === SCORE BANNER === */
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-main {
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .score-interpretation {
+            border-left: 3px solid #10b981;
+            padding-left: 2rem;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #f5f5f5;
+        }
+
+        .interpretation-text {
+            color: #d4d4d4;
+            line-height: 1.7;
+        }
+
+        .verdict-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        /* === CONTENT SECTIONS === */
+        .content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 4rem;
+            background: #0a0a0a;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section:last-child {
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: #d4d4d4;
+            max-width: 800px;
+        }
+
+        /* === CHART LAYOUTS === */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-subtitle {
+            font-size: 0.9rem;
+            color: #a3a3a3;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-wrapper.tall {
+            height: 450px;
+        }
+
+        /* === INSIGHTS PANEL === */
+        .insights-panel {
+            background: #0a0a0a;
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .insight-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .insight-list {
+            list-style: none;
+        }
+
+        .insight-list li {
+            padding: 0.6rem 0;
+            color: #d4d4d4;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .insight-list li:last-child {
+            border-bottom: none;
+        }
+
+        .insight-list li strong {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        /* === FEATURE CARDS === */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+
+        .feature-card.priority-high {
+            border-left: 4px solid #10b981;
+        }
+
+        .feature-card.priority-medium {
+            border-left: 4px solid #f6ad55;
+        }
+
+        .feature-card.priority-low {
+            border-left: 4px solid #fc8181;
+        }
+
+        .feature-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+
+        .feature-name {
+            font-weight: 700;
+            color: #f5f5f5;
+            font-size: 1.1rem;
+            flex: 1;
+        }
+
+        .feature-rice-score {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            font-weight: 700;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .feature-description {
+            font-size: 0.9rem;
+            color: #d4d4d4;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .rice-breakdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .rice-item {
+            text-align: center;
+            padding: 0.5rem;
+            background: rgba(16, 185, 129, 0.05);
+            border-radius: 4px;
+        }
+
+        .rice-label {
+            font-size: 0.7rem;
+            color: #a3a3a3;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .rice-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .feature-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-quarter {
+            font-size: 0.85rem;
+            color: #a3a3a3;
+        }
+
+        .priority-badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .priority-badge.high {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .priority-badge.medium {
+            background: rgba(246, 173, 85, 0.2);
+            color: #f6ad55;
+        }
+
+        .priority-badge.low {
+            background: rgba(252, 129, 129, 0.2);
+            color: #fc8181;
+        }
+
+        /* === RICE SCORING TABLE === */
+        .rice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+
+        .rice-table th,
+        .rice-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .rice-table th {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .rice-table td {
+            color: #d4d4d4;
+            font-size: 0.9rem;
+        }
+
+        .rice-table tr:hover {
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        /* === QUARTERLY ROADMAP === */
+        .quarterly-roadmap {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .quarter-column {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .quarter-header {
+            background: rgba(16, 185, 129, 0.1);
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .quarter-name {
+            font-weight: 700;
+            color: #10b981;
+            font-size: 1rem;
+        }
+
+        .quarter-theme {
+            font-size: 0.85rem;
+            color: #a3a3a3;
+            margin-top: 0.25rem;
+        }
+
+        .quarter-features {
+            padding: 1rem;
+        }
+
+        .quarter-feature-item {
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            border-left: 3px solid #10b981;
+        }
+
+        .quarter-feature-name {
+            font-weight: 600;
+            color: #f5f5f5;
+            font-size: 0.9rem;
+        }
+
+        .quarter-feature-outcome {
+            font-size: 0.8rem;
+            color: #a3a3a3;
+            margin-top: 0.25rem;
+        }
+
+        /* === DEFERRED & KILLED === */
+        .deferred-section,
+        .killed-section {
+            margin-top: 2rem;
+        }
+
+        .deferred-card,
+        .killed-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(246, 173, 85, 0.3);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .killed-card {
+            border-color: rgba(252, 129, 129, 0.3);
+        }
+
+        .defer-reason,
+        .kill-reason {
+            font-size: 0.9rem;
+            color: #d4d4d4;
+            margin-top: 0.5rem;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content p {
+            margin: 0.3rem 0;
+        }
+
+        .footer-content strong {
+            color: #10b981;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 1200px) {
+            .quarterly-roadmap {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .quarterly-roadmap { grid-template-columns: 1fr; }
+            .rice-breakdown { grid-template-columns: repeat(2, 1fr); }
+            .score-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .score-interpretation {
+                border-left: none;
+                border-top: 3px solid #10b981;
+                padding-left: 0;
+                padding-top: 1.5rem;
+            }
+            .header-content { padding: 2rem; }
+            .score-container { padding: 2rem; }
+            .content { padding: 2rem 2rem; }
+            .footer-content { padding: 2rem; }
+        }
+
+        /* === PRINT === */
+        @media print {
+            body { background: white; color: #000000; }
+            .container { background: white; }
+            .header-content { background: white; color: #000000; border: 2px solid #10b981; }
+            .header-content::before { display: none; }
+            .score-container { background: white; border: 2px solid #10b981; }
+            .score-number { background: none; -webkit-text-fill-color: #10b981; color: #10b981; }
+            .content { background: white; }
+            .chart-card, .feature-card, .quarter-column { background: white; border: 2px solid #10b981; page-break-inside: avoid; }
+            .insights-panel { background: #f5f5f5; border: 2px solid #10b981; }
+            footer { background: white; }
+            .footer-content { background: white; color: #666666; border-top: 2px solid #10b981; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">StratArts Feature Prioritization</div>
+                <h1>Product Roadmap Priorities</h1>
+                <div class="subtitle">PetPulse - Smart Pet Health Monitoring Platform</div>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span>📅</span>
+                        <span>Generated: December 18, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>📊</span>
+                        <span>Analysis Type: RICE Scoring Framework</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🎯</span>
+                        <span>Version v1.0.0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SCORE BANNER -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">8.4</div>
+                    <div class="score-label">Roadmap Clarity</div>
+                </div>
+
+                <div class="score-interpretation">
+                    <div class="interpretation-title">What This Score Means</div>
+                    <div class="interpretation-text">
+                        PetPulse has a well-defined product roadmap with clear prioritization.
+                        The top features directly support the core value proposition (AI health detection + telehealth)
+                        and address premium pet parent needs. Quick wins are identified with strong RICE scores.
+                    </div>
+                </div>
+
+                <div class="verdict-badge">
+                    ✓ STRONG ROADMAP
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+            <!-- Section 1: Top Priority Features -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Top Priority Features</h2>
+                    <p class="section-description">
+                        Features ranked by RICE score (Reach × Impact × Confidence ÷ Effort). Higher scores indicate
+                        greater value-to-effort ratio and should be built first.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card priority-high">
+                        <div class="feature-header">
+                            <div class="feature-name">AI Health Alert System v2</div>
+                            <div class="feature-rice-score">RICE: 216</div>
+                        </div>
+                        <div class="feature-description">Enhanced AI algorithm with expanded disease detection patterns, earlier warning thresholds, and personalized baseline learning per pet.</div>
+                        <div class="rice-breakdown">
+                            <div class="rice-item">
+                                <div class="rice-label">Reach</div>
+                                <div class="rice-value">9</div>
+                            </div>
+                            <div class="rice-item">
+                                <div class="rice-label">Impact</div>
+                                <div class="rice-value">9</div>
+                            </div>
+                            <div class="rice-item">
+                                <div class="rice-label">Confidence</div>
+                                <div class="rice-value">8</div>
+                            </div>
+                            <div class="rice-item">
+                                <div class="rice-label">Effort</div>
+                                <div class="rice-value">3</div>
+                            </div>
+                        </div>
+                        <div class="feature-meta">
+                            <span class="feature-quarter">Q1 2026</span>
+                            <span class="priority-badge high">High Priority</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card priority-high">
+                        <div class="feature-header">
+                            <div class="feature-name">Multi-Pet Dashboard</div>
+                            <div class="feature-rice-score">RICE: 180</div>
+                        </div>
+                        <div class="feature-description">Unified dashboard for households with multiple pets, with comparative health metrics and family health scores.</div>
+                        <div class="rice-breakdown">
+                            <div class="rice-item">
+                                <div class="rice-label">Reach</div>
+                                <div class="rice-value">8</div>
+                            </div>
+                            <div class="rice-item">
+                                <div class="rice-label">Impact</div>
+                                <div class="rice-value">9</div>
+                            </div>
+                            <div class="rice-item">
+                                <div class="rice-label">Confidence</div>
+                                <div class="rice-value">9</div>
+                            </div>
+                            <div class="rice-item">
+                                <div class="rice-label">Effort</div>
+                                <div class="rice-value">3.5</div>
+                            </div>
+                        </div>
+                        <div class="feature-meta">
+                            <span class="feature-quarter">Q1 2026</span>
+                            <span class="priority-badge high">High Priority</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card priority-high">
+                        <div class="feature-header">
+                            <div class="feature-name">Cat Support</div>
+                            <div class="feature-rice-score">RICE: 168</div>
+                        </div>
+                        <div class="feature-description">Expand from dogs-only to cats with feline-specific health baselines, behavior patterns, and veterinary protocols.</div>
+                        <div class="rice-breakdown">
+                            <div class="rice-item">
+                                <div class="rice-label">Reach</div>
+                                <div class="rice-value">7</div>
+                            </div>
+                            <div class="rice-item">
+                                <div class="rice-label">Impact</div>
+                                <div class="rice-value">8</div>
+                            </div>
+                            <div class="rice-item">
+                                <div class="rice-label">Confidence</div>
+                                <div class="rice-value">9</div>
+                            </div>
+                            <div class="rice-item">
+                                <div class="rice-label">Effort</div>
+                                <div class="rice-value">3</div>
+                            </div>
+                        </div>
+                        <div class="feature-meta">
+                            <span class="feature-quarter">Q1 2026</span>
+                            <span class="priority-badge high">High Priority</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card priority-medium">
+                        <div class="feature-header">
+                            <div class="feature-name">Pet Insurance Integration</div>
+                            <div class="feature-rice-score">RICE: 126</div>
+                        </div>
+                        <div class="feature-description">Partner with pet insurance providers to share health data for lower premiums and faster claims processing.</div>
+                        <div class="rice-breakdown">
+                            <div class="rice-item">
+                                <div class="rice-label">Reach</div>
+                                <div class="rice-value">6</div>
+                            </div>
+                            <div class="rice-item">
+                                <div class="rice-label">Impact</div>
+                                <div class="rice-value">7</div>
+                            </div>
+                            <div class="rice-item">
+                                <div class="rice-label">Confidence</div>
+                                <div class="rice-value">8</div>
+                            </div>
+                            <div class="rice-item">
+                                <div class="rice-label">Effort</div>
+                                <div class="rice-value">3</div>
+                            </div>
+                        </div>
+                        <div class="feature-meta">
+                            <span class="feature-quarter">Q2 2026</span>
+                            <span class="priority-badge medium">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Visual Analysis -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Visual Analysis</h2>
+                    <p class="section-description">
+                        Data visualizations showing feature prioritization patterns, value-effort positioning,
+                        and strategic alignment across the product roadmap.
+                    </p>
+                </div>
+
+                <div class="chart-grid">
+                    <!-- Chart 1: RICE Score Comparison -->
+                    <div class="chart-card">
+                        <div class="chart-title">RICE Score Ranking</div>
+                        <div class="chart-subtitle">
+                            Features ordered by composite RICE score showing relative priority
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="riceScoreChart"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Key Observations</div>
+                            <ul class="insight-list">
+                                <li><strong>Top Performer:</strong> AI Health Alert v2 leads with RICE score of 216</li>
+                                <li><strong>Quick Wins:</strong> 3 features have high impact with low effort</li>
+                                <li><strong>Strategic Gap:</strong> B2B features (Vet Clinic Portal) deferred for consumer focus</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Chart 2: Value vs Effort Matrix -->
+                    <div class="chart-card">
+                        <div class="chart-title">Value vs Effort Matrix</div>
+                        <div class="chart-subtitle">
+                            Quadrant analysis: Top-left = Quick Wins, Top-right = Strategic Bets
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="valueEffortChart"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Quadrant Distribution</div>
+                            <ul class="insight-list">
+                                <li><strong>Quick Wins (Top-Left):</strong> AI Alert v2, Multi-Pet, Cat Support</li>
+                                <li><strong>Strategic Bets (Top-Right):</strong> Vet Clinic Portal, International</li>
+                                <li><strong>Fill-Ins (Bottom-Left):</strong> Medication Reminders</li>
+                                <li><strong>Money Pits (Bottom-Right):</strong> Social Features, Gamification</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Chart 3: Strategic Alignment Radar -->
+                    <div class="chart-card">
+                        <div class="chart-title">Strategic Alignment</div>
+                        <div class="chart-subtitle">
+                            How top features align with strategic objectives and customer needs
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="alignmentRadar"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Alignment Analysis</div>
+                            <ul class="insight-list">
+                                <li><strong>Early Detection:</strong> 95% coverage</li>
+                                <li><strong>Vet Access:</strong> 88% coverage</li>
+                                <li><strong>Premium Experience:</strong> 82% coverage</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Chart 4: Quarterly Distribution -->
+                    <div class="chart-card">
+                        <div class="chart-title">Quarterly Distribution</div>
+                        <div class="chart-subtitle">
+                            Feature allocation across Q1-Q4 showing capacity planning
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="quarterlyChart"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Capacity Planning</div>
+                            <ul class="insight-list">
+                                <li><strong>Q1:</strong> 3 features (10 effort points)</li>
+                                <li><strong>Q2:</strong> 3 features (12 effort points)</li>
+                                <li><strong>Q3:</strong> 2 features (8 effort points)</li>
+                                <li><strong>Q4:</strong> 2 features (10 effort points)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Quarterly Roadmap -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Quarterly Roadmap</h2>
+                    <p class="section-description">
+                        Features organized by quarter with themes and expected outcomes. Each quarter balances
+                        quick wins, strategic initiatives, and technical investments.
+                    </p>
+                </div>
+
+                <div class="quarterly-roadmap">
+                    <div class="quarter-column">
+                        <div class="quarter-header">
+                            <div class="quarter-name">Q1 2026</div>
+                            <div class="quarter-theme">Core Platform Excellence</div>
+                        </div>
+                        <div class="quarter-features">
+                            <div class="quarter-feature-item">
+                                <div class="quarter-feature-name">AI Health Alert v2</div>
+                                <div class="quarter-feature-outcome">50% improvement in early detection accuracy</div>
+                            </div>
+                            <div class="quarter-feature-item">
+                                <div class="quarter-feature-name">Multi-Pet Dashboard</div>
+                                <div class="quarter-feature-outcome">Increase ARPU by 40% for multi-pet households</div>
+                            </div>
+                            <div class="quarter-feature-item">
+                                <div class="quarter-feature-name">Cat Support Launch</div>
+                                <div class="quarter-feature-outcome">Expand TAM by 50M cat-owning households</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quarter-column">
+                        <div class="quarter-header">
+                            <div class="quarter-name">Q2 2026</div>
+                            <div class="quarter-theme">Partner Ecosystem</div>
+                        </div>
+                        <div class="quarter-features">
+                            <div class="quarter-feature-item">
+                                <div class="quarter-feature-name">Pet Insurance Integration</div>
+                                <div class="quarter-feature-outcome">3 insurance partners, 10% premium discounts</div>
+                            </div>
+                            <div class="quarter-feature-item">
+                                <div class="quarter-feature-name">Vet Records Export</div>
+                                <div class="quarter-feature-outcome">Seamless data sharing with vet clinics</div>
+                            </div>
+                            <div class="quarter-feature-item">
+                                <div class="quarter-feature-name">Breed-Specific Baselines</div>
+                                <div class="quarter-feature-outcome">Custom health norms for 100+ breeds</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quarter-column">
+                        <div class="quarter-header">
+                            <div class="quarter-name">Q3 2026</div>
+                            <div class="quarter-theme">Retention & Engagement</div>
+                        </div>
+                        <div class="quarter-features">
+                            <div class="quarter-feature-item">
+                                <div class="quarter-feature-name">Senior Pet Health Mode</div>
+                                <div class="quarter-feature-outcome">Specialized monitoring for pets 7+ years</div>
+                            </div>
+                            <div class="quarter-feature-item">
+                                <div class="quarter-feature-name">Medication Reminders</div>
+                                <div class="quarter-feature-outcome">95% medication adherence rate</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quarter-column">
+                        <div class="quarter-header">
+                            <div class="quarter-name">Q4 2026</div>
+                            <div class="quarter-theme">Scale & Expansion</div>
+                        </div>
+                        <div class="quarter-features">
+                            <div class="quarter-feature-item">
+                                <div class="quarter-feature-name">Vet Clinic Portal (B2B)</div>
+                                <div class="quarter-feature-outcome">100 clinic partnerships, B2B revenue stream</div>
+                            </div>
+                            <div class="quarter-feature-item">
+                                <div class="quarter-feature-name">Emergency Vet Locator</div>
+                                <div class="quarter-feature-outcome">24/7 nearby ER finder with wait times</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Deferred & Killed Features -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Deferred & Killed Features</h2>
+                    <p class="section-description">
+                        Features deprioritized or removed from the roadmap with clear rationale. Being ruthless
+                        about what NOT to build is as important as choosing what to build.
+                    </p>
+                </div>
+
+                <div class="deferred-section">
+                    <h3 style="color: #f6ad55; margin-bottom: 1rem;">⏸️ Deferred Features</h3>
+                    <div class="deferred-card">
+                        <div class="feature-name">International Expansion (UK/Canada)</div>
+                        <div class="defer-reason"><strong>Why Deferred:</strong> Requires regulatory compliance for vet telehealth in each country, different vet licensing requirements. Focus on US market first to prove model.</div>
+                        <div class="defer-reason"><strong>Revisit:</strong> Q1 2027 after reaching 50K US subscribers</div>
+                    </div>
+                    <div class="deferred-card">
+                        <div class="feature-name">Apple Watch Companion App</div>
+                        <div class="defer-reason"><strong>Why Deferred:</strong> Limited user demand (only 12% of target market). Pet parents prefer phone-based alerts. Low confidence in ROI.</div>
+                        <div class="defer-reason"><strong>Revisit:</strong> Q3 2027 if wearable adoption increases</div>
+                    </div>
+                </div>
+
+                <div class="killed-section">
+                    <h3 style="color: #fc8181; margin-bottom: 1rem;">❌ Killed Features</h3>
+                    <div class="killed-card">
+                        <div class="feature-name">Pet Social Network / Community Features</div>
+                        <div class="kill-reason"><strong>Why Killed:</strong> Distracts from core health value proposition. Pet parents want health tools, not another social network. Would require significant moderation resources. Competitors like BarkHappy already failed in this space.</div>
+                    </div>
+                    <div class="killed-card">
+                        <div class="feature-name">Gamification / Achievement Badges</div>
+                        <div class="kill-reason"><strong>Why Killed:</strong> Premium pet parents view health monitoring as serious, not a game. Gamification trivializes the value proposition. Beta feedback was negative (3.2/10 interest score).</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Complete RICE Matrix -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Complete Feature Scoring Matrix</h2>
+                    <p class="section-description">
+                        All evaluated features with RICE scores and priority classifications.
+                    </p>
+                </div>
+
+                <table class="rice-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Feature</th>
+                            <th>Reach</th>
+                            <th>Impact</th>
+                            <th>Confidence</th>
+                            <th>Effort</th>
+                            <th>RICE Score</th>
+                            <th>Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>AI Health Alert v2</td>
+                            <td>9</td>
+                            <td>9</td>
+                            <td>8</td>
+                            <td>3</td>
+                            <td><strong>216</strong></td>
+                            <td><span class="priority-badge high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Multi-Pet Dashboard</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>9</td>
+                            <td>3.5</td>
+                            <td><strong>185</strong></td>
+                            <td><span class="priority-badge high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Cat Support</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>3</td>
+                            <td><strong>168</strong></td>
+                            <td><span class="priority-badge high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Pet Insurance Integration</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>3</td>
+                            <td><strong>112</strong></td>
+                            <td><span class="priority-badge medium">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Breed-Specific Baselines</td>
+                            <td>8</td>
+                            <td>6</td>
+                            <td>9</td>
+                            <td>4</td>
+                            <td><strong>108</strong></td>
+                            <td><span class="priority-badge medium">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Senior Pet Mode</td>
+                            <td>5</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>3</td>
+                            <td><strong>107</strong></td>
+                            <td><span class="priority-badge medium">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Vet Records Export</td>
+                            <td>7</td>
+                            <td>6</td>
+                            <td>9</td>
+                            <td>4</td>
+                            <td><strong>95</strong></td>
+                            <td><span class="priority-badge medium">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>Medication Reminders</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>9</td>
+                            <td>2</td>
+                            <td><strong>90</strong></td>
+                            <td><span class="priority-badge medium">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>Emergency Vet Locator</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>7</td>
+                            <td>4</td>
+                            <td><strong>74</strong></td>
+                            <td><span class="priority-badge medium">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>Vet Clinic Portal (B2B)</td>
+                            <td>3</td>
+                            <td>8</td>
+                            <td>7</td>
+                            <td>6</td>
+                            <td><strong>28</strong></td>
+                            <td><span class="priority-badge low">Low</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | feature-prioritization-framework-v1.0.0</p>
+                <p style="margin-top: 5px;">Context Signature: feature-prioritization-framework-v1.0.0 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Chart.js Global Configuration
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        const tooltipConfig = {
+            backgroundColor: '#1a1a1a',
+            titleColor: '#f5f5f5',
+            bodyColor: '#d4d4d4',
+            borderColor: '#10b981',
+            borderWidth: 1
+        };
+
+        // Feature Prioritization Data
+        const featureData = {
+            features: [
+                { name: 'AI Alert v2', rice: 216, value: 9, effort: 3 },
+                { name: 'Multi-Pet', rice: 185, value: 9, effort: 3.5 },
+                { name: 'Cat Support', rice: 168, value: 8, effort: 3 },
+                { name: 'Insurance', rice: 112, value: 7, effort: 3 },
+                { name: 'Breed Baselines', rice: 108, value: 6, effort: 4 },
+                { name: 'Senior Mode', rice: 107, value: 8, effort: 3 }
+            ],
+            alignment: {
+                labels: ['Early Detection', 'Vet Access', 'Premium Experience', 'Customer Value', 'Competitive Edge'],
+                values: [95, 88, 82, 90, 85]
+            },
+            quarterly: {
+                labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                features: [3, 3, 2, 2],
+                effort: [10, 12, 8, 10]
+            }
+        };
+
+        // Chart 1: RICE Score Ranking (Horizontal Bar)
+        const riceCtx = document.getElementById('riceScoreChart').getContext('2d');
+        new Chart(riceCtx, {
+            type: 'bar',
+            data: {
+                labels: featureData.features.map(f => f.name),
+                datasets: [{
+                    label: 'RICE Score',
+                    data: featureData.features.map(f => f.rice),
+                    backgroundColor: featureData.features.map((f, i) =>
+                        i < 2 ? '#10b981' : i < 4 ? '#f6ad55' : '#fc8181'
+                    ),
+                    borderRadius: 6,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        ticks: { color: '#a3a3a3', font: { size: 11 } }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { color: '#f5f5f5', font: { size: 11, weight: '600' } }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        ...tooltipConfig,
+                        callbacks: {
+                            label: function(context) {
+                                return 'RICE Score: ' + context.parsed.x;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Value vs Effort Matrix (Scatter)
+        const valueEffortCtx = document.getElementById('valueEffortChart').getContext('2d');
+        new Chart(valueEffortCtx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Features',
+                    data: featureData.features.map(f => ({ x: f.effort, y: f.value, name: f.name })),
+                    backgroundColor: featureData.features.map((f, i) =>
+                        i < 2 ? '#10b981' : i < 4 ? '#f6ad55' : '#fc8181'
+                    ),
+                    borderColor: '#1a1a1a',
+                    borderWidth: 2,
+                    pointRadius: 12,
+                    pointHoverRadius: 16
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Effort →', color: '#a3a3a3', font: { size: 12, weight: '600' } },
+                        min: 0,
+                        max: 10,
+                        ticks: { color: '#a3a3a3', font: { size: 11 } },
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' }
+                    },
+                    y: {
+                        title: { display: true, text: 'Value →', color: '#a3a3a3', font: { size: 12, weight: '600' } },
+                        min: 0,
+                        max: 10,
+                        ticks: { color: '#a3a3a3', font: { size: 11 } },
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        ...tooltipConfig,
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.raw.name}: Value ${context.parsed.y}, Effort ${context.parsed.x}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 3: Strategic Alignment Radar
+        const alignmentCtx = document.getElementById('alignmentRadar').getContext('2d');
+        new Chart(alignmentCtx, {
+            type: 'radar',
+            data: {
+                labels: featureData.alignment.labels,
+                datasets: [{
+                    label: 'Alignment %',
+                    data: featureData.alignment.values,
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                    borderColor: '#10b981',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#10b981',
+                    pointBorderColor: '#1a1a1a',
+                    pointRadius: 6,
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: { color: '#a3a3a3', stepSize: 20, font: { size: 10 } },
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        pointLabels: { color: '#f5f5f5', font: { size: 11, weight: '600' } }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        // Chart 4: Quarterly Distribution (Stacked Bar)
+        const quarterlyCtx = document.getElementById('quarterlyChart').getContext('2d');
+        new Chart(quarterlyCtx, {
+            type: 'bar',
+            data: {
+                labels: featureData.quarterly.labels,
+                datasets: [
+                    {
+                        label: 'Features',
+                        data: featureData.quarterly.features,
+                        backgroundColor: '#10b981',
+                        borderRadius: 4,
+                        borderWidth: 0
+                    },
+                    {
+                        label: 'Effort Points',
+                        data: featureData.quarterly.effort,
+                        backgroundColor: 'rgba(16, 185, 129, 0.4)',
+                        borderRadius: 4,
+                        borderWidth: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#f5f5f5', font: { size: 12, weight: '600' } }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        ticks: { color: '#a3a3a3', font: { size: 11 } }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: { color: '#d4d4d4', font: { size: 11 }, padding: 20 }
+                    },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        // Print-friendly chart colors
+        window.addEventListener('beforeprint', function() {
+            Chart.defaults.color = '#000000';
+        });
+
+        window.addEventListener('afterprint', function() {
+            Chart.defaults.color = '#a3a3a3';
+        });
+    </script>
+</body>
+</html>

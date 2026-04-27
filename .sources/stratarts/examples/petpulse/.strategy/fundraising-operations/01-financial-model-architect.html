@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Model Architect | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #0a0a0a;
+        }
+
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .header-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-main {
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .score-interpretation {
+            border-left: 3px solid #10b981;
+            padding-left: 2rem;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #f5f5f5;
+        }
+
+        .interpretation-text {
+            color: #d4d4d4;
+            line-height: 1.7;
+        }
+
+        .verdict-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 4rem;
+            background: #0a0a0a;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section:last-child {
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: #d4d4d4;
+            max-width: 800px;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-subtitle {
+            font-size: 0.9rem;
+            color: #a3a3a3;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-wrapper.tall {
+            height: 450px;
+        }
+
+        .insights-panel {
+            background: #0a0a0a;
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .insight-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .insight-list {
+            list-style: none;
+        }
+
+        .insight-list li {
+            padding: 0.6rem 0;
+            color: #d4d4d4;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .insight-list li:last-child {
+            border-bottom: none;
+        }
+
+        .insight-list li strong {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+
+        .metric-card .label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .metric-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #10b981;
+            line-height: 1.2;
+        }
+
+        .metric-card .range {
+            font-size: 0.9rem;
+            color: #d4d4d4;
+            margin-top: 0.5rem;
+        }
+
+        .metric-card .description {
+            font-size: 0.85rem;
+            color: #a3a3a3;
+            margin-top: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: #1a1a1a;
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .feature-card.primary {
+            border-color: #10b981;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            border-color: #10b981;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.2);
+        }
+
+        .feature-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .feature-name {
+            font-weight: 700;
+            color: #f5f5f5;
+            font-size: 1.1rem;
+        }
+
+        .feature-score {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .feature-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            color: #d4d4d4;
+            line-height: 1.6;
+        }
+
+        .small-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .small-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.25rem;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .small-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+
+        .small-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .small-name {
+            font-weight: 700;
+            color: #f5f5f5;
+            font-size: 0.95rem;
+        }
+
+        .small-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .small-description {
+            font-size: 0.85rem;
+            color: #d4d4d4;
+            line-height: 1.5;
+        }
+
+        .small-meta {
+            font-size: 0.75rem;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        footer {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content p {
+            margin: 0.3rem 0;
+        }
+
+        .footer-content strong {
+            color: #10b981;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           FINANCIAL MODEL ARCHITECT - SKILL-SPECIFIC CSS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .projection-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .projection-table th,
+        .projection-table td {
+            padding: 1rem;
+            text-align: right;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .projection-table th:first-child,
+        .projection-table td:first-child {
+            text-align: left;
+        }
+
+        .projection-table th {
+            background: rgba(16, 185, 129, 0.1);
+            color: #f5f5f5;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+        }
+
+        .projection-table tr:hover {
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .projection-table td {
+            color: #d4d4d4;
+        }
+
+        .projection-table .row-label {
+            color: #f5f5f5;
+            font-weight: 600;
+        }
+
+        .projection-table .subtotal {
+            background: rgba(16, 185, 129, 0.05);
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .projection-table .highlight {
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .projection-table .negative {
+            color: #ef4444;
+        }
+
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .scenario-card {
+            background: #1a1a1a;
+            border: 2px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .scenario-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .scenario-card.base {
+            border-color: #10b981;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+        }
+
+        .scenario-card.upside {
+            border-color: #3b82f6;
+        }
+
+        .scenario-card.downside {
+            border-color: #ef4444;
+        }
+
+        .scenario-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .scenario-card.base .scenario-name {
+            color: #10b981;
+        }
+
+        .scenario-card.upside .scenario-name {
+            color: #3b82f6;
+        }
+
+        .scenario-card.downside .scenario-name {
+            color: #ef4444;
+        }
+
+        .scenario-probability {
+            font-size: 0.85rem;
+            color: #a3a3a3;
+            margin-bottom: 1.5rem;
+        }
+
+        .scenario-arr {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .scenario-card.base .scenario-arr {
+            color: #10b981;
+        }
+
+        .scenario-card.upside .scenario-arr {
+            color: #3b82f6;
+        }
+
+        .scenario-card.downside .scenario-arr {
+            color: #ef4444;
+        }
+
+        .scenario-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #a3a3a3;
+            margin-bottom: 1.5rem;
+        }
+
+        .scenario-metrics {
+            text-align: left;
+            border-top: 1px solid rgba(16, 185, 129, 0.1);
+            padding-top: 1.5rem;
+        }
+
+        .scenario-metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .scenario-metric span:first-child {
+            color: #a3a3a3;
+        }
+
+        .scenario-metric span:last-child {
+            color: #f5f5f5;
+            font-weight: 600;
+        }
+
+        .profitability-timeline {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #f5f5f5;
+        }
+
+        .timeline-target {
+            font-size: 0.9rem;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .timeline-track {
+            display: flex;
+            gap: 0;
+            position: relative;
+        }
+
+        .timeline-milestone {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            padding-top: 2rem;
+        }
+
+        .timeline-milestone::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(16, 185, 129, 0.2);
+        }
+
+        .timeline-milestone.achieved::before {
+            background: #10b981;
+        }
+
+        .timeline-milestone.current::before {
+            background: linear-gradient(90deg, #10b981 50%, rgba(16, 185, 129, 0.2) 50%);
+        }
+
+        .milestone-dot {
+            width: 16px;
+            height: 16px;
+            background: #0a0a0a;
+            border: 3px solid rgba(16, 185, 129, 0.3);
+            border-radius: 50%;
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-milestone.achieved .milestone-dot {
+            background: #10b981;
+            border-color: #10b981;
+        }
+
+        .timeline-milestone.current .milestone-dot {
+            border-color: #10b981;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+        }
+
+        .milestone-label {
+            font-weight: 600;
+            color: #f5f5f5;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+        }
+
+        .milestone-value {
+            font-size: 0.8rem;
+            color: #a3a3a3;
+        }
+
+        .rule-40-container {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .rule-40-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .rule-40-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #f5f5f5;
+        }
+
+        .rule-40-score {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .rule-40-indicator {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 1.5rem;
+            background: rgba(16, 185, 129, 0.05);
+            border-radius: 8px;
+        }
+
+        .rule-40-gauge {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #10b981 0deg,
+                #10b981 calc(var(--rule40-value) * 3.6deg),
+                rgba(16, 185, 129, 0.2) calc(var(--rule40-value) * 3.6deg)
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .rule-40-gauge::after {
+            content: '';
+            width: 90px;
+            height: 90px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .rule-40-gauge span {
+            position: relative;
+            z-index: 1;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .rule-40-breakdown {
+            flex: 1;
+        }
+
+        .rule-40-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .rule-40-item:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .rule-40-item span:first-child {
+            color: #a3a3a3;
+        }
+
+        .rule-40-item span:last-child {
+            color: #f5f5f5;
+            font-weight: 600;
+        }
+
+        .burn-rate-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .burn-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .burn-card .burn-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #a3a3a3;
+            margin-bottom: 0.5rem;
+        }
+
+        .burn-card .burn-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .burn-card .burn-trend {
+            font-size: 0.85rem;
+            color: #d4d4d4;
+            margin-top: 0.5rem;
+        }
+
+        .burn-card.warning .burn-value {
+            color: #f59e0b;
+        }
+
+        .burn-card.danger .burn-value {
+            color: #ef4444;
+        }
+
+        @media (max-width: 1400px) {
+            .scenario-grid {
+                grid-template-columns: 1fr;
+            }
+            .burn-rate-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .small-grid { grid-template-columns: 1fr; }
+            .metric-grid { grid-template-columns: 1fr; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .burn-rate-cards { grid-template-columns: 1fr; }
+            .timeline-track { flex-direction: column; gap: 2rem; }
+            .timeline-milestone { padding-top: 0; padding-left: 2rem; text-align: left; }
+            .timeline-milestone::before { width: 4px; height: 100%; top: 0; left: 0; right: auto; }
+            .milestone-dot { top: 50%; left: -6px; transform: translateY(-50%); }
+            .score-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .score-interpretation {
+                border-left: none;
+                border-top: 3px solid #10b981;
+                padding-left: 0;
+                padding-top: 1.5rem;
+            }
+            .header-content { padding: 2rem; }
+            .score-container { padding: 2rem; }
+            .content { padding: 2rem 2rem; }
+            .footer-content { padding: 2rem; }
+        }
+
+        @media print {
+            body { background: white; color: #000000; }
+            .container { background: white; }
+            header { background: white; }
+            .header-content { background: white; color: #000000; border: 2px solid #10b981; }
+            .header-content::before { display: none; }
+            .kicker { color: #666666; }
+            h1 { color: #000000; }
+            .subtitle { color: #333333; }
+            .score-banner { background: white; }
+            .score-container { background: white; border: 2px solid #10b981; }
+            .score-number { background: none; -webkit-text-fill-color: #10b981; color: #10b981; }
+            .content { background: white; }
+            .section-title { color: #000000; }
+            .chart-card, .metric-card, .feature-card, .small-card, .scenario-card, .burn-card {
+                background: white;
+                border: 2px solid #10b981;
+                page-break-inside: avoid;
+            }
+            .projection-table th { background: #f5f5f5; color: #000000; }
+            .projection-table td { color: #333333; }
+            footer { background: white; }
+            .footer-content { background: white; color: #666666; border-top: 2px solid #10b981; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">PetPulse Financial Analysis</div>
+                <h1>Financial Model Architect</h1>
+                <div class="subtitle">5-Year Financial Projections & Unit Economics</div>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span>Date:</span>
+                        <span>Generated: 2025-12-18</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>Type:</span>
+                        <span>Analysis Type: SaaS Financial Model</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>Version:</span>
+                        <span>Version 1.0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SCORE BANNER -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">$12M</div>
+                    <div class="score-label">Year 5 ARR Target</div>
+                </div>
+
+                <div class="score-interpretation">
+                    <div class="interpretation-title">Financial Outlook</div>
+                    <div class="interpretation-text">
+                        PetPulse shows strong unit economics with 4.8:1 LTV:CAC ratio and 85% D30 retention.
+                        Path to profitability achievable by Month 36 with disciplined growth investment.
+                        Hardware+subscription model creates predictable recurring revenue with healthy margins.
+                    </div>
+                </div>
+
+                <div class="verdict-badge">
+                    INVESTOR READY
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+
+            <!-- Section 1: Executive Summary -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Executive Summary</h2>
+                    <p class="section-description">Key financial metrics and projections for investor review</p>
+                </div>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <div class="label">Year 5 ARR</div>
+                        <div class="value">$12M</div>
+                        <div class="range">Conservative | $18M Upside</div>
+                        <div class="description">33% CAGR from Year 1</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">LTV:CAC Ratio</div>
+                        <div class="value">4.8:1</div>
+                        <div class="range">Target: >3:1</div>
+                        <div class="description">Healthy acquisition efficiency</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Gross Margin</div>
+                        <div class="value">72%</div>
+                        <div class="range">Blended (HW + Sub)</div>
+                        <div class="description">Above SaaS benchmark</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">CAC Payback</div>
+                        <div class="value">8 mo</div>
+                        <div class="range">Target: <12 months</div>
+                        <div class="description">Rapid payback cycle</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Monthly Burn</div>
+                        <div class="value">$85K</div>
+                        <div class="range">Current Rate</div>
+                        <div class="description">18 months runway</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Break-Even</div>
+                        <div class="value">M36</div>
+                        <div class="range">Month 36</div>
+                        <div class="description">Cash flow positive</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Revenue Model -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Revenue Model</h2>
+                    <p class="section-description">Hardware sales + monthly recurring subscription revenue</p>
+                </div>
+
+                <div class="chart-card full-width">
+                    <div class="chart-title">5-Year Revenue Projection</div>
+                    <div class="chart-subtitle">Combined hardware + subscription revenue growth trajectory</div>
+                    <div class="chart-wrapper tall">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+
+                <table class="projection-table">
+                    <thead>
+                        <tr>
+                            <th>Revenue Stream</th>
+                            <th>Year 1</th>
+                            <th>Year 2</th>
+                            <th>Year 3</th>
+                            <th>Year 4</th>
+                            <th>Year 5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="row-label">Hardware Sales ($149)</td>
+                            <td>$245K</td>
+                            <td>$596K</td>
+                            <td>$1.19M</td>
+                            <td>$1.79M</td>
+                            <td>$2.38M</td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Subscription Revenue (Avg $34/mo)</td>
+                            <td>$365K</td>
+                            <td>$1.22M</td>
+                            <td>$3.06M</td>
+                            <td>$6.12M</td>
+                            <td>$9.79M</td>
+                        </tr>
+                        <tr class="subtotal">
+                            <td class="row-label">Total Revenue</td>
+                            <td class="highlight">$610K</td>
+                            <td class="highlight">$1.82M</td>
+                            <td class="highlight">$4.25M</td>
+                            <td class="highlight">$7.91M</td>
+                            <td class="highlight">$12.17M</td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">YoY Growth</td>
+                            <td>-</td>
+                            <td>198%</td>
+                            <td>134%</td>
+                            <td>86%</td>
+                            <td>54%</td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Active Subscribers (EOY)</td>
+                            <td>1,650</td>
+                            <td>4,000</td>
+                            <td>8,000</td>
+                            <td>12,000</td>
+                            <td>16,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="insights-panel">
+                    <div class="insight-title">Revenue Model Insights</div>
+                    <ul class="insight-list">
+                        <li><strong>Hardware:</strong> $149 one-time purchase at 35% gross margin</li>
+                        <li><strong>Subscription Tiers:</strong> Basic $19/mo (26%), Standard $29/mo (46%), Premium $49/mo (28%)</li>
+                        <li><strong>Blended ARPU:</strong> $34/month weighted average</li>
+                        <li><strong>Subscription Mix:</strong> 80% of Year 5 revenue from recurring subscriptions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 3: Cost Structure -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Cost Structure</h2>
+                    <p class="section-description">COGS, operating expenses, and margin analysis</p>
+                </div>
+
+                <div class="chart-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">Expense Breakdown (Year 3)</div>
+                        <div class="chart-subtitle">Operating expense distribution at scale</div>
+                        <div class="chart-wrapper">
+                            <canvas id="expenseChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-title">Margin Trajectory</div>
+                        <div class="chart-subtitle">Gross and operating margin improvement</div>
+                        <div class="chart-wrapper">
+                            <canvas id="marginChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="projection-table">
+                    <thead>
+                        <tr>
+                            <th>Expense Category</th>
+                            <th>Year 1</th>
+                            <th>Year 2</th>
+                            <th>Year 3</th>
+                            <th>Year 4</th>
+                            <th>Year 5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="row-label">COGS (Hardware)</td>
+                            <td>$159K</td>
+                            <td>$387K</td>
+                            <td>$774K</td>
+                            <td>$1.16M</td>
+                            <td>$1.55M</td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">COGS (Cloud/Infra)</td>
+                            <td>$55K</td>
+                            <td>$122K</td>
+                            <td>$255K</td>
+                            <td>$475K</td>
+                            <td>$730K</td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Engineering</td>
+                            <td>$420K</td>
+                            <td>$756K</td>
+                            <td>$1.26M</td>
+                            <td>$1.89M</td>
+                            <td>$2.52M</td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Sales & Marketing</td>
+                            <td>$305K</td>
+                            <td>$546K</td>
+                            <td>$1.02M</td>
+                            <td>$1.58M</td>
+                            <td>$2.19M</td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">G&A</td>
+                            <td>$180K</td>
+                            <td>$273K</td>
+                            <td>$425K</td>
+                            <td>$634K</td>
+                            <td>$852K</td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Customer Success</td>
+                            <td>$90K</td>
+                            <td>$182K</td>
+                            <td>$340K</td>
+                            <td>$554K</td>
+                            <td>$791K</td>
+                        </tr>
+                        <tr class="subtotal">
+                            <td class="row-label">Total Expenses</td>
+                            <td>$1.21M</td>
+                            <td>$2.27M</td>
+                            <td>$4.07M</td>
+                            <td>$6.29M</td>
+                            <td>$8.63M</td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Gross Margin</td>
+                            <td>65%</td>
+                            <td>68%</td>
+                            <td>72%</td>
+                            <td>75%</td>
+                            <td>77%</td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Operating Margin</td>
+                            <td class="negative">-98%</td>
+                            <td class="negative">-25%</td>
+                            <td>4%</td>
+                            <td>20%</td>
+                            <td class="highlight">29%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Section 4: Headcount Plan -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Headcount Plan</h2>
+                    <p class="section-description">Team growth aligned with revenue milestones</p>
+                </div>
+
+                <div class="chart-card full-width">
+                    <div class="chart-title">Team Growth Trajectory</div>
+                    <div class="chart-subtitle">Headcount by department over 5 years</div>
+                    <div class="chart-wrapper">
+                        <canvas id="headcountChart"></canvas>
+                    </div>
+                </div>
+
+                <table class="projection-table">
+                    <thead>
+                        <tr>
+                            <th>Department</th>
+                            <th>Year 1</th>
+                            <th>Year 2</th>
+                            <th>Year 3</th>
+                            <th>Year 4</th>
+                            <th>Year 5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="row-label">Engineering</td>
+                            <td>3</td>
+                            <td>5</td>
+                            <td>8</td>
+                            <td>12</td>
+                            <td>16</td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Product</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Sales & Marketing</td>
+                            <td>2</td>
+                            <td>4</td>
+                            <td>7</td>
+                            <td>11</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Customer Success</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>4</td>
+                            <td>6</td>
+                            <td>9</td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Operations/G&A</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>6</td>
+                            <td>8</td>
+                        </tr>
+                        <tr class="subtotal">
+                            <td class="row-label">Total Headcount</td>
+                            <td class="highlight">9</td>
+                            <td class="highlight">16</td>
+                            <td class="highlight">26</td>
+                            <td class="highlight">39</td>
+                            <td class="highlight">53</td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Revenue per Employee</td>
+                            <td>$68K</td>
+                            <td>$114K</td>
+                            <td>$163K</td>
+                            <td>$203K</td>
+                            <td class="highlight">$230K</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="insights-panel">
+                    <div class="insight-title">Hiring Strategy</div>
+                    <ul class="insight-list">
+                        <li><strong>Eng:Revenue:</strong> Engineering scales at 30% of new ARR</li>
+                        <li><strong>CS Ratio:</strong> 1 CSM per 2,000 active subscribers (tech-touch model)</li>
+                        <li><strong>Sales Efficiency:</strong> Each AE targets $600K quota by Year 3</li>
+                        <li><strong>Revenue/Employee:</strong> Growing from $68K to $230K (industry top quartile)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 5: Unit Economics -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Unit Economics</h2>
+                    <p class="section-description">Customer acquisition cost, lifetime value, and efficiency metrics</p>
+                </div>
+
+                <div class="small-grid">
+                    <div class="small-card">
+                        <div class="small-header">
+                            <span class="small-name">CAC</span>
+                            <span class="small-value">$185</span>
+                        </div>
+                        <div class="small-description">Blended customer acquisition cost including all marketing and sales spend</div>
+                        <div class="small-meta">Benchmark: $150-$300</div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-header">
+                            <span class="small-name">LTV</span>
+                            <span class="small-value">$892</span>
+                        </div>
+                        <div class="small-description">Lifetime value based on 26-month average customer lifespan</div>
+                        <div class="small-meta">At $34/mo ARPU</div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-header">
+                            <span class="small-name">LTV:CAC</span>
+                            <span class="small-value">4.8:1</span>
+                        </div>
+                        <div class="small-description">Strong unit economics indicating efficient growth</div>
+                        <div class="small-meta">Target: >3:1</div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-header">
+                            <span class="small-name">Payback</span>
+                            <span class="small-value">8 mo</span>
+                        </div>
+                        <div class="small-description">Months to recover customer acquisition cost</div>
+                        <div class="small-meta">Target: <12 months</div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-header">
+                            <span class="small-name">Magic Number</span>
+                            <span class="small-value">0.72</span>
+                        </div>
+                        <div class="small-description">Sales efficiency: net new ARR / S&M spend</div>
+                        <div class="small-meta">Target: >0.75</div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-header">
+                            <span class="small-name">Net $ Retention</span>
+                            <span class="small-value">108%</span>
+                        </div>
+                        <div class="small-description">Expansion revenue from upgrades offsets churn</div>
+                        <div class="small-meta">Target: >100%</div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-header">
+                            <span class="small-name">Gross Retention</span>
+                            <span class="small-value">85%</span>
+                        </div>
+                        <div class="small-description">Annual retention excluding expansion</div>
+                        <div class="small-meta">D30: 85%, D365: 65%</div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-header">
+                            <span class="small-name">Burn Multiple</span>
+                            <span class="small-value">1.8x</span>
+                        </div>
+                        <div class="small-description">Net burn / net new ARR efficiency</div>
+                        <div class="small-meta">Target: <2x</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: Cash Flow & Runway -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Cash Flow & Runway</h2>
+                    <p class="section-description">Monthly burn rate, cash position, and funding requirements</p>
+                </div>
+
+                <div class="burn-rate-cards">
+                    <div class="burn-card">
+                        <div class="burn-label">Monthly Burn</div>
+                        <div class="burn-value">$85K</div>
+                        <div class="burn-trend">Down from $110K</div>
+                    </div>
+                    <div class="burn-card">
+                        <div class="burn-label">Cash Position</div>
+                        <div class="burn-value">$1.5M</div>
+                        <div class="burn-trend">Post-Seed</div>
+                    </div>
+                    <div class="burn-card">
+                        <div class="burn-label">Runway</div>
+                        <div class="burn-value">18 mo</div>
+                        <div class="burn-trend">Through Q2 2027</div>
+                    </div>
+                    <div class="burn-card warning">
+                        <div class="burn-label">Next Raise</div>
+                        <div class="burn-value">$5M</div>
+                        <div class="burn-trend">Series A @ Q4 2026</div>
+                    </div>
+                </div>
+
+                <div class="chart-card full-width" style="margin-top: 2rem;">
+                    <div class="chart-title">Cash Flow Projection</div>
+                    <div class="chart-subtitle">Monthly cash position with funding milestones</div>
+                    <div class="chart-wrapper tall">
+                        <canvas id="cashFlowChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="insights-panel">
+                    <div class="insight-title">Funding Strategy</div>
+                    <ul class="insight-list">
+                        <li><strong>Seed (Completed):</strong> $1.5M at $6M pre-money (Dec 2024)</li>
+                        <li><strong>Series A Target:</strong> $5M at $20M pre-money (Q4 2026)</li>
+                        <li><strong>Trigger Metrics:</strong> $2M ARR, 8,000 subscribers, 85%+ retention</li>
+                        <li><strong>Cash Efficiency:</strong> Targeting <2x burn multiple at Series A</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 7: Scenarios -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Scenario Analysis</h2>
+                    <p class="section-description">Base, upside, and downside financial outcomes</p>
+                </div>
+
+                <div class="scenario-grid">
+                    <div class="scenario-card downside">
+                        <div class="scenario-name">Downside</div>
+                        <div class="scenario-probability">20% Probability</div>
+                        <div class="scenario-arr">$6.8M</div>
+                        <div class="scenario-label">Year 5 ARR</div>
+                        <div class="scenario-metrics">
+                            <div class="scenario-metric">
+                                <span>Subscribers</span>
+                                <span>10,000</span>
+                            </div>
+                            <div class="scenario-metric">
+                                <span>Retention</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="scenario-metric">
+                                <span>Growth CAGR</span>
+                                <span>62%</span>
+                            </div>
+                            <div class="scenario-metric">
+                                <span>Break-Even</span>
+                                <span>Month 48</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card base">
+                        <div class="scenario-name">Base Case</div>
+                        <div class="scenario-probability">60% Probability</div>
+                        <div class="scenario-arr">$12M</div>
+                        <div class="scenario-label">Year 5 ARR</div>
+                        <div class="scenario-metrics">
+                            <div class="scenario-metric">
+                                <span>Subscribers</span>
+                                <span>16,000</span>
+                            </div>
+                            <div class="scenario-metric">
+                                <span>Retention</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="scenario-metric">
+                                <span>Growth CAGR</span>
+                                <span>82%</span>
+                            </div>
+                            <div class="scenario-metric">
+                                <span>Break-Even</span>
+                                <span>Month 36</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card upside">
+                        <div class="scenario-name">Upside</div>
+                        <div class="scenario-probability">20% Probability</div>
+                        <div class="scenario-arr">$18M</div>
+                        <div class="scenario-label">Year 5 ARR</div>
+                        <div class="scenario-metrics">
+                            <div class="scenario-metric">
+                                <span>Subscribers</span>
+                                <span>24,000</span>
+                            </div>
+                            <div class="scenario-metric">
+                                <span>Retention</span>
+                                <span>92%</span>
+                            </div>
+                            <div class="scenario-metric">
+                                <span>Growth CAGR</span>
+                                <span>98%</span>
+                            </div>
+                            <div class="scenario-metric">
+                                <span>Break-Even</span>
+                                <span>Month 28</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="insights-panel">
+                    <div class="insight-title">Scenario Assumptions</div>
+                    <ul class="insight-list">
+                        <li><strong>Downside:</strong> Retention drops to 75%, CAC increases 30%, slower market adoption</li>
+                        <li><strong>Base:</strong> Current trajectory maintained, 85% retention, steady growth</li>
+                        <li><strong>Upside:</strong> Viral growth accelerates, retention hits 92%, enterprise expansion</li>
+                        <li><strong>Weighted ARR:</strong> $11.6M expected value (probability-weighted)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 8: Path to Profitability -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Path to Profitability</h2>
+                    <p class="section-description">Key milestones on the journey to sustainable profitability</p>
+                </div>
+
+                <div class="profitability-timeline">
+                    <div class="timeline-header">
+                        <div class="timeline-title">Profitability Milestones</div>
+                        <div class="timeline-target">Target: Month 36 Cash Flow Positive</div>
+                    </div>
+                    <div class="timeline-track">
+                        <div class="timeline-milestone achieved">
+                            <div class="milestone-dot"></div>
+                            <div class="milestone-label">Seed Funded</div>
+                            <div class="milestone-value">$1.5M | Dec 2024</div>
+                        </div>
+                        <div class="timeline-milestone current">
+                            <div class="milestone-dot"></div>
+                            <div class="milestone-label">Product-Market Fit</div>
+                            <div class="milestone-value">$500K ARR | Q2 2025</div>
+                        </div>
+                        <div class="timeline-milestone">
+                            <div class="milestone-dot"></div>
+                            <div class="milestone-label">Series A</div>
+                            <div class="milestone-value">$2M ARR | Q4 2026</div>
+                        </div>
+                        <div class="timeline-milestone">
+                            <div class="milestone-dot"></div>
+                            <div class="milestone-label">Break-Even</div>
+                            <div class="milestone-value">$4M ARR | Q4 2027</div>
+                        </div>
+                        <div class="timeline-milestone">
+                            <div class="milestone-dot"></div>
+                            <div class="milestone-label">Profitable</div>
+                            <div class="milestone-value">$12M ARR | Q4 2029</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rule-40-container">
+                    <div class="rule-40-header">
+                        <div class="rule-40-title">Rule of 40 Analysis</div>
+                        <div class="rule-40-score">Score: 57</div>
+                    </div>
+                    <div class="rule-40-indicator" style="--rule40-value: 57;">
+                        <div class="rule-40-gauge">
+                            <span>57</span>
+                        </div>
+                        <div class="rule-40-breakdown">
+                            <div class="rule-40-item">
+                                <span>Revenue Growth Rate (YoY)</span>
+                                <span>+86%</span>
+                            </div>
+                            <div class="rule-40-item">
+                                <span>EBITDA Margin</span>
+                                <span>-29%</span>
+                            </div>
+                            <div class="rule-40-item">
+                                <span>Rule of 40 Score</span>
+                                <span style="color: #10b981;">57 (Excellent)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 9: Implementation Roadmap -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Implementation Roadmap</h2>
+                    <p class="section-description">90-day action plan for financial model execution</p>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card primary">
+                        <div class="feature-badge">Month 1</div>
+                        <div class="feature-header">
+                            <span class="feature-name">Foundation Setup</span>
+                        </div>
+                        <div class="feature-description">
+                            <ul style="margin-left: 1rem; color: #d4d4d4;">
+                                <li>Implement financial reporting dashboard (Stripe + QuickBooks)</li>
+                                <li>Set up cohort tracking for LTV/CAC analysis</li>
+                                <li>Establish monthly board reporting cadence</li>
+                                <li>Create cash flow forecasting model in Google Sheets</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-badge">Month 2</div>
+                        <div class="feature-header">
+                            <span class="feature-name">Optimization</span>
+                        </div>
+                        <div class="feature-description">
+                            <ul style="margin-left: 1rem; color: #d4d4d4;">
+                                <li>Launch CAC reduction experiments (content marketing)</li>
+                                <li>Implement automated revenue recognition</li>
+                                <li>Begin Series A investor outreach prep</li>
+                                <li>Set up burn rate alerts and runway monitoring</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-badge">Month 3</div>
+                        <div class="feature-header">
+                            <span class="feature-name">Scaling Infrastructure</span>
+                        </div>
+                        <div class="feature-description">
+                            <ul style="margin-left: 1rem; color: #d4d4d4;">
+                                <li>Finalize 5-year financial model for fundraising</li>
+                                <li>Create investor data room</li>
+                                <li>Implement unit economics tracking dashboard</li>
+                                <li>Establish quarterly financial review process</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-badge">Ongoing</div>
+                        <div class="feature-header">
+                            <span class="feature-name">Continuous Improvement</span>
+                        </div>
+                        <div class="feature-description">
+                            <ul style="margin-left: 1rem; color: #d4d4d4;">
+                                <li>Monthly cohort analysis and LTV recalculation</li>
+                                <li>Quarterly scenario planning updates</li>
+                                <li>Weekly cash flow monitoring</li>
+                                <li>Annual budget vs. actual variance analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 10: Next Steps -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Recommended Next Steps</h2>
+                    <p class="section-description">Priority actions based on financial model analysis</p>
+                </div>
+
+                <div class="small-grid">
+                    <div class="small-card">
+                        <div class="small-header">
+                            <span class="small-name">1. Unit Economics</span>
+                        </div>
+                        <div class="small-description">Focus on reducing CAC through content marketing and referrals to improve magic number to >0.75</div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-header">
+                            <span class="small-name">2. Retention</span>
+                        </div>
+                        <div class="small-description">Implement win-back campaigns to increase annual retention from 65% to 75%, adding $180K ARR</div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-header">
+                            <span class="small-name">3. Revenue Mix</span>
+                        </div>
+                        <div class="small-description">Increase Premium tier adoption from 28% to 35% to boost ARPU from $34 to $38/month</div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-header">
+                            <span class="small-name">4. Series A Prep</span>
+                        </div>
+                        <div class="small-description">Build investor pipeline and data room 6 months ahead of target close date</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> 2025-12-18 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | financial-model-architect-v1.0</p>
+                <p style="margin-top: 5px;">Context Signature: PETPULSE-FIN-2025-12 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Chart.js Global Configuration
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        const tooltipConfig = {
+            backgroundColor: '#1a1a1a',
+            titleColor: '#f5f5f5',
+            bodyColor: '#d4d4d4',
+            borderColor: '#10b981',
+            borderWidth: 1
+        };
+
+        const COLORS = {
+            primary: '#10b981',
+            primaryLight: '#14b8a6',
+            primaryDark: '#059669',
+            gray: '#a3a3a3'
+        };
+
+        // Revenue Chart
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [
+                    {
+                        label: 'Hardware Revenue',
+                        data: [245, 596, 1190, 1790, 2380],
+                        backgroundColor: 'rgba(16, 185, 129, 0.4)',
+                        borderColor: '#10b981',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Subscription Revenue',
+                        data: [365, 1220, 3060, 6120, 9790],
+                        backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                        borderColor: '#059669',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: tooltipConfig,
+                    legend: {
+                        position: 'top',
+                        labels: { color: '#a3a3a3' }
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        ticks: { color: '#a3a3a3' }
+                    },
+                    y: {
+                        stacked: true,
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        ticks: {
+                            color: '#a3a3a3',
+                            callback: function(value) {
+                                return '$' + (value >= 1000 ? (value / 1000).toFixed(1) + 'M' : value + 'K');
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Expense Chart
+        const expenseCtx = document.getElementById('expenseChart').getContext('2d');
+        new Chart(expenseCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Engineering', 'Sales & Marketing', 'COGS', 'G&A', 'Customer Success'],
+                datasets: [{
+                    data: [1260, 1020, 1029, 425, 340],
+                    backgroundColor: [
+                        'rgba(16, 185, 129, 0.9)',
+                        'rgba(16, 185, 129, 0.7)',
+                        'rgba(16, 185, 129, 0.5)',
+                        'rgba(16, 185, 129, 0.3)',
+                        'rgba(16, 185, 129, 0.2)'
+                    ],
+                    borderColor: '#0a0a0a',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: tooltipConfig,
+                    legend: {
+                        position: 'right',
+                        labels: { color: '#a3a3a3' }
+                    }
+                }
+            }
+        });
+
+        // Margin Chart
+        const marginCtx = document.getElementById('marginChart').getContext('2d');
+        new Chart(marginCtx, {
+            type: 'line',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [
+                    {
+                        label: 'Gross Margin',
+                        data: [65, 68, 72, 75, 77],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Operating Margin',
+                        data: [-98, -25, 4, 20, 29],
+                        borderColor: '#14b8a6',
+                        backgroundColor: 'rgba(20, 184, 166, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: tooltipConfig,
+                    legend: {
+                        position: 'top',
+                        labels: { color: '#a3a3a3' }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        ticks: { color: '#a3a3a3' }
+                    },
+                    y: {
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        ticks: {
+                            color: '#a3a3a3',
+                            callback: function(value) { return value + '%'; }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Headcount Chart
+        const headcountCtx = document.getElementById('headcountChart').getContext('2d');
+        new Chart(headcountCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [
+                    {
+                        label: 'Engineering',
+                        data: [3, 5, 8, 12, 16],
+                        backgroundColor: 'rgba(16, 185, 129, 0.9)'
+                    },
+                    {
+                        label: 'Sales & Marketing',
+                        data: [2, 4, 7, 11, 15],
+                        backgroundColor: 'rgba(16, 185, 129, 0.7)'
+                    },
+                    {
+                        label: 'Customer Success',
+                        data: [1, 2, 4, 6, 9],
+                        backgroundColor: 'rgba(16, 185, 129, 0.5)'
+                    },
+                    {
+                        label: 'Product',
+                        data: [1, 2, 3, 4, 5],
+                        backgroundColor: 'rgba(16, 185, 129, 0.3)'
+                    },
+                    {
+                        label: 'Operations/G&A',
+                        data: [2, 3, 4, 6, 8],
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: tooltipConfig,
+                    legend: {
+                        position: 'top',
+                        labels: { color: '#a3a3a3' }
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        ticks: { color: '#a3a3a3' }
+                    },
+                    y: {
+                        stacked: true,
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        ticks: { color: '#a3a3a3' }
+                    }
+                }
+            }
+        });
+
+        // Cash Flow Chart
+        const cashFlowCtx = document.getElementById('cashFlowChart').getContext('2d');
+        new Chart(cashFlowCtx, {
+            type: 'line',
+            data: {
+                labels: ['Q1 Y1', 'Q2 Y1', 'Q3 Y1', 'Q4 Y1', 'Q1 Y2', 'Q2 Y2', 'Q3 Y2', 'Q4 Y2', 'Q1 Y3', 'Q2 Y3', 'Q3 Y3', 'Q4 Y3'],
+                datasets: [{
+                    label: 'Cash Position ($K)',
+                    data: [1500, 1250, 1050, 850, 750, 650, 5500, 5100, 4700, 4500, 4400, 4500],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 6,
+                    pointBackgroundColor: function(context) {
+                        const index = context.dataIndex;
+                        return index === 6 ? '#3b82f6' : '#10b981';
+                    }
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: tooltipConfig,
+                    legend: { display: false },
+                    annotation: {
+                        annotations: {
+                            seriesA: {
+                                type: 'line',
+                                xMin: 6,
+                                xMax: 6,
+                                borderColor: '#3b82f6',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                label: {
+                                    content: 'Series A',
+                                    enabled: true
+                                }
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        ticks: { color: '#a3a3a3' }
+                    },
+                    y: {
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        ticks: {
+                            color: '#a3a3a3',
+                            callback: function(value) { return '$' + value + 'K'; }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Print-friendly
+        window.addEventListener('beforeprint', function() {
+            Chart.defaults.color = '#000000';
+        });
+
+        window.addEventListener('afterprint', function() {
+            Chart.defaults.color = '#a3a3a3';
+        });
+    </script>
+</body>
+</html>

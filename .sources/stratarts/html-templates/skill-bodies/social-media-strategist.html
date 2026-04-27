@@ -1,0 +1,863 @@
+<!-- ═══ SKILL CSS START ═══ -->
+<style>
+    /* Social Media Strategist Specific Styles */
+    .platform-card {
+        background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+        border-radius: 16px;
+        padding: 1.5rem;
+        border: 1px solid #2a2a2a;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .platform-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .platform-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .platform-linkedin { background: linear-gradient(135deg, #0077b5, #005885); }
+    .platform-twitter { background: linear-gradient(135deg, #1da1f2, #0d8bd9); }
+    .platform-instagram { background: linear-gradient(135deg, #e1306c, #c13584); }
+    .platform-tiktok { background: linear-gradient(135deg, #000000, #25f4ee); }
+    .platform-youtube { background: linear-gradient(135deg, #ff0000, #cc0000); }
+    .platform-facebook { background: linear-gradient(135deg, #1877f2, #0d65d9); }
+
+    .platform-name {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #ffffff;
+    }
+
+    .platform-priority {
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-left: auto;
+    }
+
+    .priority-primary {
+        background: rgba(16, 185, 129, 0.2);
+        color: #10b981;
+    }
+
+    .priority-secondary {
+        background: rgba(245, 158, 11, 0.2);
+        color: #f59e0b;
+    }
+
+    .priority-tertiary {
+        background: rgba(107, 114, 128, 0.2);
+        color: #9ca3af;
+    }
+
+    .platform-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .platform-stat {
+        background: #0a0a0a;
+        border-radius: 8px;
+        padding: 0.75rem;
+        text-align: center;
+    }
+
+    .stat-value {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #10b981;
+    }
+
+    .stat-label {
+        font-size: 0.7rem;
+        color: #888;
+        text-transform: uppercase;
+    }
+
+    .platform-strategy {
+        background: #0a0a0a;
+        border-radius: 8px;
+        padding: 1rem;
+        border-left: 3px solid #10b981;
+    }
+
+    .strategy-label {
+        font-size: 0.7rem;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+    }
+
+    .strategy-text {
+        color: #ccc;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .content-calendar-week {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.5rem;
+        margin: 1.5rem 0;
+    }
+
+    .day-column {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 0.75rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .day-header {
+        text-align: center;
+        font-weight: 600;
+        color: #10b981;
+        font-size: 0.8rem;
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .day-posts {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .post-slot {
+        background: #0a0a0a;
+        border-radius: 6px;
+        padding: 0.5rem;
+        font-size: 0.7rem;
+    }
+
+    .post-time {
+        color: #10b981;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+
+    .post-type {
+        color: #888;
+    }
+
+    .content-pillar-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.65rem;
+        font-weight: 500;
+        margin-top: 0.25rem;
+    }
+
+    .pillar-educational { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+    .pillar-promotional { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+    .pillar-engagement { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
+    .pillar-community { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+
+    .hashtag-strategy {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .hashtag-category {
+        margin-bottom: 1rem;
+    }
+
+    .hashtag-category:last-child {
+        margin-bottom: 0;
+    }
+
+    .category-label {
+        font-size: 0.75rem;
+        color: #10b981;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .hashtag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .hashtag {
+        background: rgba(16, 185, 129, 0.1);
+        color: #ccc;
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+        font-size: 0.8rem;
+    }
+
+    .engagement-tactic {
+        display: flex;
+        gap: 1rem;
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+        margin-bottom: 0.75rem;
+    }
+
+    .tactic-icon {
+        width: 44px;
+        height: 44px;
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+    }
+
+    .tactic-info {
+        flex: 1;
+    }
+
+    .tactic-name {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .tactic-description {
+        color: #888;
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .tactic-frequency {
+        font-size: 0.75rem;
+        color: #10b981;
+        font-weight: 500;
+    }
+
+    .posting-time-grid {
+        display: grid;
+        grid-template-columns: repeat(24, 1fr);
+        gap: 2px;
+        margin: 1rem 0;
+    }
+
+    .time-slot {
+        height: 40px;
+        background: #1a1a1a;
+        border-radius: 2px;
+        position: relative;
+    }
+
+    .time-slot.optimal {
+        background: linear-gradient(to top, #10b981, #059669);
+    }
+
+    .time-slot.good {
+        background: rgba(16, 185, 129, 0.5);
+    }
+
+    .time-slot.moderate {
+        background: rgba(16, 185, 129, 0.25);
+    }
+
+    .time-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.7rem;
+        color: #888;
+        margin-top: 0.5rem;
+    }
+
+    .competitor-row {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .competitor-row:last-child {
+        border-bottom: none;
+    }
+
+    .competitor-name {
+        flex: 1;
+        font-weight: 500;
+        color: #ffffff;
+    }
+
+    .competitor-followers {
+        color: #888;
+        font-size: 0.9rem;
+        min-width: 100px;
+        text-align: right;
+    }
+
+    .competitor-engagement {
+        color: #10b981;
+        font-weight: 600;
+        min-width: 60px;
+        text-align: right;
+    }
+
+    @media (max-width: 768px) {
+        .content-calendar-week {
+            grid-template-columns: 1fr;
+        }
+
+        .day-column {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .day-header {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+            min-width: 60px;
+        }
+
+        .day-posts {
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .platform-stats {
+            grid-template-columns: 1fr;
+        }
+
+        .posting-time-grid {
+            display: none;
+        }
+    }
+</style>
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<div class="report-container">
+    <!-- Header Section -->
+    <header class="report-header">
+        <div class="header-content">
+            <div class="header-badge">SOCIAL MEDIA STRATEGY</div>
+            <h1 class="report-title">{{COMPANY_NAME}}</h1>
+            <p class="report-subtitle">{{SOCIAL_MISSION}}</p>
+        </div>
+        <div class="header-meta">
+            <div class="meta-item">
+                <span class="meta-label">Generated</span>
+                <span class="meta-value">{{GENERATION_DATE}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Planning Period</span>
+                <span class="meta-value">{{PLANNING_PERIOD}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Primary Platform</span>
+                <span class="meta-value">{{PRIMARY_PLATFORM}}</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Strategy Overview Section -->
+    <section class="content-section">
+        <h2 class="section-title">Strategy Overview</h2>
+
+        <p class="section-description">{{STRATEGY_OVERVIEW}}</p>
+
+        <div class="grid-4">
+            <div class="metric-card">
+                <div class="metric-label">Target Followers</div>
+                <div class="metric-value">{{FOLLOWER_GOAL}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Engagement Rate</div>
+                <div class="metric-value">{{ENGAGEMENT_GOAL}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Weekly Posts</div>
+                <div class="metric-value">{{WEEKLY_POSTS}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Active Platforms</div>
+                <div class="metric-value">{{PLATFORM_COUNT}}</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Strategy Section -->
+    <section class="content-section">
+        <h2 class="section-title">Platform Strategy</h2>
+
+        <div class="grid-2">
+            {{PLATFORM_CARDS}}
+        </div>
+
+        <!-- Platform Distribution Chart -->
+        <div class="chart-container">
+            <canvas id="platformDistributionChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Content Pillars Section -->
+    <section class="content-section">
+        <h2 class="section-title">Content Pillars</h2>
+
+        <p class="section-description">{{PILLARS_OVERVIEW}}</p>
+
+        <div class="grid-4">
+            <div class="info-card">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                    <span class="content-pillar-tag pillar-educational">Educational</span>
+                </div>
+                <p style="color: #ccc; font-size: 0.9rem;">{{EDUCATIONAL_CONTENT}}</p>
+                <p style="color: #10b981; font-size: 0.8rem; margin-top: 0.5rem;">{{EDUCATIONAL_PERCENT}}% of content</p>
+            </div>
+            <div class="info-card">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                    <span class="content-pillar-tag pillar-promotional">Promotional</span>
+                </div>
+                <p style="color: #ccc; font-size: 0.9rem;">{{PROMOTIONAL_CONTENT}}</p>
+                <p style="color: #f59e0b; font-size: 0.8rem; margin-top: 0.5rem;">{{PROMOTIONAL_PERCENT}}% of content</p>
+            </div>
+            <div class="info-card">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                    <span class="content-pillar-tag pillar-engagement">Engagement</span>
+                </div>
+                <p style="color: #ccc; font-size: 0.9rem;">{{ENGAGEMENT_CONTENT}}</p>
+                <p style="color: #a855f7; font-size: 0.8rem; margin-top: 0.5rem;">{{ENGAGEMENT_PERCENT}}% of content</p>
+            </div>
+            <div class="info-card">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                    <span class="content-pillar-tag pillar-community">Community</span>
+                </div>
+                <p style="color: #ccc; font-size: 0.9rem;">{{COMMUNITY_CONTENT}}</p>
+                <p style="color: #10b981; font-size: 0.8rem; margin-top: 0.5rem;">{{COMMUNITY_PERCENT}}% of content</p>
+            </div>
+        </div>
+
+        <!-- Content Mix Chart -->
+        <div class="chart-container">
+            <canvas id="contentMixChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Weekly Content Calendar -->
+    <section class="content-section">
+        <h2 class="section-title">Weekly Content Calendar</h2>
+
+        <div class="content-calendar-week">
+            {{WEEKLY_CALENDAR}}
+        </div>
+    </section>
+
+    <!-- Optimal Posting Times -->
+    <section class="content-section">
+        <h2 class="section-title">Optimal Posting Times</h2>
+
+        <p class="section-description">{{POSTING_TIMES_OVERVIEW}}</p>
+
+        <div class="posting-time-grid">
+            {{POSTING_TIME_SLOTS}}
+        </div>
+        <div class="time-labels">
+            <span>12am</span>
+            <span>6am</span>
+            <span>12pm</span>
+            <span>6pm</span>
+            <span>12am</span>
+        </div>
+
+        <!-- Best Times by Platform -->
+        <div class="grid-2" style="margin-top: 1.5rem;">
+            {{BEST_TIMES_CARDS}}
+        </div>
+    </section>
+
+    <!-- Hashtag Strategy -->
+    <section class="content-section">
+        <h2 class="section-title">Hashtag Strategy</h2>
+
+        <div class="grid-2">
+            <div class="hashtag-strategy">
+                <h4 style="color: #ffffff; margin-bottom: 1rem;">Brand Hashtags</h4>
+                {{BRAND_HASHTAGS}}
+            </div>
+            <div class="hashtag-strategy">
+                <h4 style="color: #ffffff; margin-bottom: 1rem;">Industry Hashtags</h4>
+                {{INDUSTRY_HASHTAGS}}
+            </div>
+        </div>
+    </section>
+
+    <!-- Engagement Tactics -->
+    <section class="content-section">
+        <h2 class="section-title">Engagement Tactics</h2>
+
+        {{ENGAGEMENT_TACTICS}}
+
+        <!-- Engagement Performance Chart -->
+        <div class="chart-container">
+            <canvas id="engagementChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Competitor Analysis -->
+    <section class="content-section">
+        <h2 class="section-title">Competitor Analysis</h2>
+
+        <div class="info-card">
+            <div class="competitor-row" style="font-weight: 600; color: #888; font-size: 0.8rem;">
+                <span class="competitor-name">Account</span>
+                <span class="competitor-followers">Followers</span>
+                <span class="competitor-engagement">Eng. Rate</span>
+            </div>
+            {{COMPETITOR_ROWS}}
+        </div>
+
+        <!-- Competitive Positioning Chart -->
+        <div class="chart-container">
+            <canvas id="competitorChart"></canvas>
+        </div>
+    </section>
+
+    <!-- KPIs & Tracking -->
+    <section class="content-section">
+        <h2 class="section-title">KPIs & Tracking</h2>
+
+        <div class="grid-2">
+            <div class="info-card">
+                <h4>Growth Metrics</h4>
+                {{GROWTH_KPIS}}
+            </div>
+            <div class="info-card">
+                <h4>Engagement Metrics</h4>
+                {{ENGAGEMENT_KPIS}}
+            </div>
+        </div>
+
+        <!-- Performance Projection Chart -->
+        <div class="chart-container">
+            <canvas id="projectionChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Implementation Timeline -->
+    <section class="content-section">
+        <h2 class="section-title">Implementation Timeline</h2>
+
+        <div class="timeline">
+            {{IMPLEMENTATION_TIMELINE}}
+        </div>
+    </section>
+
+    <!-- Report Footer -->
+    <footer class="report-footer">
+        <div class="footer-content">
+            <p class="footer-brand">Generated by StratArts Social Media Strategist</p>
+            <p class="footer-disclaimer">This strategy provides a framework for social media presence. Adjust posting times and content based on platform analytics and audience engagement data.</p>
+        </div>
+    </footer>
+</div>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Platform Distribution Chart
+    const platformCtx = document.getElementById('platformDistributionChart');
+    if (platformCtx) {
+        new Chart(platformCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['LinkedIn', 'Twitter', 'Instagram', 'YouTube', 'TikTok'],
+                datasets: [{
+                    data: [35, 25, 20, 15, 5],
+                    backgroundColor: [
+                        '#0077b5',
+                        '#1da1f2',
+                        '#e1306c',
+                        '#ff0000',
+                        '#25f4ee'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Content Distribution by Platform',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        position: 'right',
+                        labels: { color: '#ccc', padding: 15 }
+                    }
+                }
+            }
+        });
+    }
+
+    // Content Mix Chart
+    const mixCtx = document.getElementById('contentMixChart');
+    if (mixCtx) {
+        new Chart(mixCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Educational', 'Promotional', 'Engagement', 'Community'],
+                datasets: [{
+                    label: 'Content Mix %',
+                    data: [40, 20, 25, 15],
+                    backgroundColor: [
+                        '#3b82f6',
+                        '#f59e0b',
+                        '#a855f7',
+                        '#10b981'
+                    ],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 50,
+                        ticks: {
+                            color: '#888',
+                            callback: function(value) { return value + '%'; }
+                        },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Content Pillar Distribution',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // Engagement Chart
+    const engagementCtx = document.getElementById('engagementChart');
+    if (engagementCtx) {
+        new Chart(engagementCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Replies', 'Shares', 'Saves', 'Comments', 'DMs', 'Mentions'],
+                datasets: [{
+                    label: 'Current',
+                    data: [6, 5, 4, 7, 3, 4],
+                    backgroundColor: 'rgba(107, 114, 128, 0.3)',
+                    borderColor: '#6b7280',
+                    borderWidth: 2
+                }, {
+                    label: 'Target',
+                    data: [8, 7, 7, 9, 6, 7],
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                    borderColor: '#10b981',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#10b981'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: { color: '#888', stepSize: 2 },
+                        grid: { color: '#2a2a2a' },
+                        pointLabels: { color: '#ccc', font: { size: 11 } }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Engagement Performance by Type',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+
+    // Competitor Chart
+    const competitorCtx = document.getElementById('competitorChart');
+    if (competitorCtx) {
+        new Chart(competitorCtx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Your Brand',
+                    data: [{ x: 5000, y: 4.5 }],
+                    backgroundColor: '#10b981',
+                    pointRadius: 15,
+                    pointHoverRadius: 18
+                }, {
+                    label: 'Competitor A',
+                    data: [{ x: 15000, y: 2.8 }],
+                    backgroundColor: 'rgba(107, 114, 128, 0.6)',
+                    pointRadius: 12
+                }, {
+                    label: 'Competitor B',
+                    data: [{ x: 8000, y: 3.5 }],
+                    backgroundColor: 'rgba(107, 114, 128, 0.6)',
+                    pointRadius: 12
+                }, {
+                    label: 'Competitor C',
+                    data: [{ x: 25000, y: 1.8 }],
+                    backgroundColor: 'rgba(107, 114, 128, 0.6)',
+                    pointRadius: 12
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Followers →',
+                            color: '#ccc'
+                        },
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Engagement Rate % →',
+                            color: '#ccc'
+                        },
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Competitive Positioning (Followers vs Engagement)',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+
+    // Projection Chart
+    const projectionCtx = document.getElementById('projectionChart');
+    if (projectionCtx) {
+        new Chart(projectionCtx, {
+            type: 'line',
+            data: {
+                labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                datasets: [{
+                    label: 'Followers',
+                    data: [1000, 1500, 2300, 3500, 5000, 7500],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    yAxisID: 'y'
+                }, {
+                    label: 'Engagement Rate %',
+                    data: [2.5, 3.0, 3.5, 4.0, 4.2, 4.5],
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'transparent',
+                    tension: 0.4,
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        beginAtZero: true,
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: {
+                            color: '#888',
+                            callback: function(value) { return value + '%'; }
+                        },
+                        grid: { drawOnChartArea: false }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '6-Month Growth Projection',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+<!-- ═══ SKILL JS END ═══ -->

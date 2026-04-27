@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Feedback Framework - PetPulse | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #0a0a0a;
+        }
+
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-main {
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .score-interpretation {
+            border-left: 3px solid #10b981;
+            padding-left: 2rem;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #f5f5f5;
+        }
+
+        .interpretation-text {
+            color: #d4d4d4;
+            line-height: 1.7;
+        }
+
+        .verdict-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 4rem;
+            background: #0a0a0a;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: #d4d4d4;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+
+        .subsection-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #10b981;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-card .label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .metric-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #10b981;
+            line-height: 1.2;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        footer {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content strong {
+            color: #10b981;
+        }
+
+        /* Customer Feedback Framework Specific Styles */
+        .survey-card {
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+            border-left: 4px solid #10b981;
+        }
+
+        .survey-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .survey-type {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .survey-score {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .survey-score-label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .survey-question {
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 1rem;
+            border-left: 3px solid #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .question-text {
+            color: #ccc;
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        .survey-scale {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .scale-point {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .scale-detractor {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .scale-passive {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .scale-promoter {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .respondent-group {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .group-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .group-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .badge-promoter {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+        }
+
+        .badge-passive {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #ffffff;
+        }
+
+        .badge-detractor {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: #ffffff;
+        }
+
+        .group-info { flex: 1; }
+
+        .group-name {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        .group-range {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .group-percent {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .followup-question {
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 0.75rem;
+            color: #ccc;
+            font-size: 0.85rem;
+            margin-top: 0.75rem;
+        }
+
+        .loop-process {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+            margin-bottom: 0.75rem;
+        }
+
+        .loop-timing {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .loop-action {
+            flex: 1;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .loop-owner {
+            color: #888;
+            font-size: 0.8rem;
+            background: #0a0a0a;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+        }
+
+        .churn-reason-row {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .churn-reason-row:last-child { border-bottom: none; }
+
+        .reason-name {
+            flex: 1;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .reason-percent {
+            width: 80px;
+            text-align: center;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .reason-addressable {
+            width: 100px;
+            text-align: center;
+        }
+
+        .addressable-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .addressable-yes {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .addressable-maybe {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .addressable-no {
+            background: rgba(107, 114, 128, 0.2);
+            color: #9ca3af;
+        }
+
+        .reason-action {
+            flex: 1;
+            color: #888;
+            font-size: 0.85rem;
+            text-align: right;
+        }
+
+        .rice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .rice-table th, .rice-table td {
+            padding: 0.75rem;
+            text-align: center;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .rice-table th {
+            background: #1a1a1a;
+            color: #10b981;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .rice-table td {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .rice-table td:first-child {
+            text-align: left;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .rice-score {
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .interview-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .interview-type {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .interview-count {
+            color: #10b981;
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .interview-questions {
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 0.75rem;
+        }
+
+        .interview-question {
+            color: #888;
+            font-size: 0.85rem;
+            padding: 0.25rem 0;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .interview-question:last-child { border-bottom: none; }
+
+        .theme-card {
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .theme-name {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .theme-metrics {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .theme-metric { display: flex; flex-direction: column; }
+
+        .theme-metric-value {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .theme-metric-label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .theme-trend {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .trend-up { color: #10b981; }
+        .trend-down { color: #ef4444; }
+        .trend-stable { color: #888; }
+
+        .theme-action {
+            background: #0a0a0a;
+            border-radius: 6px;
+            padding: 0.5rem 0.75rem;
+            color: #ccc;
+            font-size: 0.8rem;
+            margin-top: 0.75rem;
+        }
+
+        .roadmap-phase {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+            margin-bottom: 1.5rem;
+        }
+
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .phase-name {
+            font-weight: 700;
+            color: #10b981;
+            font-size: 1.1rem;
+        }
+
+        .phase-timing {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .phase-goal {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .phase-tasks {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .phase-task {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .phase-task::before {
+            content: '□';
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .channel-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+        }
+
+        .channel-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+        .channel-name { font-weight: 600; color: #fff; margin-bottom: 0.25rem; }
+        .channel-desc { color: #888; font-size: 0.85rem; }
+
+        @media (max-width: 768px) {
+            .metric-grid { grid-template-columns: repeat(2, 1fr); }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            .score-container { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">VOICE OF CUSTOMER</div>
+                <h1>PetPulse</h1>
+                <div class="subtitle">Systematic framework for gathering, analyzing, and acting on customer feedback through surveys, interviews, and feedback loops</div>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span>📅</span>
+                        <span>Generated: December 18, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>📊</span>
+                        <span>NPS Score: 42</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🎯</span>
+                        <span>CSAT Score: 87%</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Score Banner -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">42</div>
+                    <div class="score-label">NPS Score</div>
+                </div>
+
+                <div class="score-interpretation">
+                    <div class="interpretation-title">What This Score Means</div>
+                    <div class="interpretation-text">
+                        PetPulse's NPS of 42 is above the SaaS benchmark (30-40) and indicates strong customer loyalty. With 52% Promoters and only 10% Detractors, the focus should be on converting Passives to Promoters through enhanced value delivery and capturing testimonials from the loyal base.
+                    </div>
+                </div>
+
+                <div class="verdict-badge">
+                    Target: NPS 55
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Executive Summary -->
+            <div class="section">
+                <h2 class="section-title">Feedback Strategy Overview</h2>
+                <p class="section-description">Comprehensive Voice of Customer program combining quantitative surveys (NPS, CSAT, CES) with qualitative research (exit interviews, user interviews) and systematic feature request management. Goal: Turn customer insights into product improvements and reduce churn by addressing feedback-identified pain points.</p>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <div class="label">NPS Score</div>
+                        <div class="value">42</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">CSAT Score</div>
+                        <div class="value">87%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">CES Score</div>
+                        <div class="value">4.1</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Monthly Interviews</div>
+                        <div class="value">12</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NPS Section -->
+            <div class="section">
+                <h2 class="section-title">Net Promoter Score (NPS)</h2>
+
+                <div class="survey-card">
+                    <div class="survey-header">
+                        <div class="survey-type">NPS Survey</div>
+                        <div>
+                            <div class="survey-score">42</div>
+                            <div class="survey-score-label">Current NPS</div>
+                        </div>
+                    </div>
+
+                    <div class="survey-question">
+                        <div class="question-text">"On a scale of 0-10, how likely are you to recommend PetPulse to a friend or fellow pet parent?"</div>
+                        <div class="survey-scale">
+                            <div class="scale-point scale-detractor">0</div>
+                            <div class="scale-point scale-detractor">1</div>
+                            <div class="scale-point scale-detractor">2</div>
+                            <div class="scale-point scale-detractor">3</div>
+                            <div class="scale-point scale-detractor">4</div>
+                            <div class="scale-point scale-detractor">5</div>
+                            <div class="scale-point scale-detractor">6</div>
+                            <div class="scale-point scale-passive">7</div>
+                            <div class="scale-point scale-passive">8</div>
+                            <div class="scale-point scale-promoter">9</div>
+                            <div class="scale-point scale-promoter">10</div>
+                        </div>
+                    </div>
+
+                    <p style="color: #888; font-size: 0.85rem;">Cadence: Quarterly relationship NPS + transactional NPS after support interactions</p>
+                </div>
+
+                <h3 class="subsection-title">NPS Distribution & Follow-ups</h3>
+                <div class="grid-3">
+                    <div class="respondent-group">
+                        <div class="group-header">
+                            <div class="group-badge badge-promoter">😊</div>
+                            <div class="group-info">
+                                <div class="group-name">Promoters</div>
+                                <div class="group-range">Score 9-10</div>
+                            </div>
+                            <div class="group-percent">52%</div>
+                        </div>
+                        <div class="followup-question">"What do you love most about PetPulse? Would you share your experience in a review or refer a fellow pet parent?"</div>
+                    </div>
+
+                    <div class="respondent-group">
+                        <div class="group-header">
+                            <div class="group-badge badge-passive">😐</div>
+                            <div class="group-info">
+                                <div class="group-name">Passives</div>
+                                <div class="group-range">Score 7-8</div>
+                            </div>
+                            <div class="group-percent">38%</div>
+                        </div>
+                        <div class="followup-question">"What would make PetPulse a 10 for you? What features or improvements would delight you?"</div>
+                    </div>
+
+                    <div class="respondent-group">
+                        <div class="group-header">
+                            <div class="group-badge badge-detractor">😔</div>
+                            <div class="group-info">
+                                <div class="group-name">Detractors</div>
+                                <div class="group-range">Score 0-6</div>
+                            </div>
+                            <div class="group-percent">10%</div>
+                        </div>
+                        <div class="followup-question">"We're sorry to hear that. What went wrong? How can we make things right for you and your pet?"</div>
+                    </div>
+                </div>
+
+                <div class="chart-card" style="margin-top: 2rem;">
+                    <div class="chart-wrapper">
+                        <canvas id="npsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CSAT & CES Section -->
+            <div class="section">
+                <h2 class="section-title">CSAT & CES Surveys</h2>
+
+                <div class="grid-2">
+                    <div class="survey-card">
+                        <div class="survey-header">
+                            <div class="survey-type">CSAT Survey</div>
+                            <div>
+                                <div class="survey-score">87%</div>
+                                <div class="survey-score-label">Satisfaction</div>
+                            </div>
+                        </div>
+                        <div class="survey-question">
+                            <div class="question-text">"How satisfied are you with your PetPulse support experience?"</div>
+                        </div>
+                        <p style="color: #888; font-size: 0.85rem;">Touchpoints: Post-support, Post-onboarding (Day 30), After first health alert</p>
+                    </div>
+
+                    <div class="survey-card">
+                        <div class="survey-header">
+                            <div class="survey-type">CES Survey</div>
+                            <div>
+                                <div class="survey-score">4.1</div>
+                                <div class="survey-score-label">Effort Score</div>
+                            </div>
+                        </div>
+                        <div class="survey-question">
+                            <div class="question-text">"How easy was it to sync your PetPulse collar?"</div>
+                        </div>
+                        <p style="color: #888; font-size: 0.85rem;">Touchpoints: After collar sync, After onboarding, After support resolution</p>
+                    </div>
+                </div>
+
+                <div class="chart-card" style="margin-top: 2rem;">
+                    <div class="chart-wrapper">
+                        <canvas id="trendsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exit Surveys Section -->
+            <div class="section">
+                <h2 class="section-title">Exit Survey Analysis</h2>
+                <p class="section-description">Exit survey response rate: 35%. Incentive: 3 months free if returning within 6 months. 65% of churn reasons are addressable through product and pricing improvements.</p>
+
+                <h3 class="subsection-title">Churn Reasons Breakdown</h3>
+                <div class="info-card">
+                    <div class="churn-reason-row" style="font-weight: 600; color: #888; font-size: 0.8rem;">
+                        <span class="reason-name">Reason</span>
+                        <span class="reason-percent">%</span>
+                        <span class="reason-addressable">Addressable</span>
+                        <span class="reason-action">Action Plan</span>
+                    </div>
+                    <div class="churn-reason-row">
+                        <span class="reason-name">Low Usage / Forgot About It</span>
+                        <span class="reason-percent">28%</span>
+                        <span class="reason-addressable"><span class="addressable-badge addressable-yes">YES</span></span>
+                        <span class="reason-action">Improve engagement campaigns & retention loops</span>
+                    </div>
+                    <div class="churn-reason-row">
+                        <span class="reason-name">Too Expensive</span>
+                        <span class="reason-percent">22%</span>
+                        <span class="reason-addressable"><span class="addressable-badge addressable-yes">YES</span></span>
+                        <span class="reason-action">Introduce $19/mo Basic tier + annual discount</span>
+                    </div>
+                    <div class="churn-reason-row">
+                        <span class="reason-name">Pet is Healthy / Don't Need It</span>
+                        <span class="reason-percent">18%</span>
+                        <span class="reason-addressable"><span class="addressable-badge addressable-maybe">MAYBE</span></span>
+                        <span class="reason-action">Emphasize preventive monitoring value</span>
+                    </div>
+                    <div class="churn-reason-row">
+                        <span class="reason-name">Technical Issues (Collar/App)</span>
+                        <span class="reason-percent">15%</span>
+                        <span class="reason-addressable"><span class="addressable-badge addressable-yes">YES</span></span>
+                        <span class="reason-action">Improve collar reliability & app performance</span>
+                    </div>
+                    <div class="churn-reason-row">
+                        <span class="reason-name">Found Alternative</span>
+                        <span class="reason-percent">10%</span>
+                        <span class="reason-addressable"><span class="addressable-badge addressable-maybe">MAYBE</span></span>
+                        <span class="reason-action">Competitive analysis & differentiation</span>
+                    </div>
+                    <div class="churn-reason-row">
+                        <span class="reason-name">Pet Passed Away</span>
+                        <span class="reason-percent">7%</span>
+                        <span class="reason-addressable"><span class="addressable-badge addressable-no">NO</span></span>
+                        <span class="reason-action">Compassionate offboarding + pause option</span>
+                    </div>
+                </div>
+
+                <div class="chart-card" style="margin-top: 2rem;">
+                    <div class="chart-wrapper">
+                        <canvas id="churnChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Close the Loop Section -->
+            <div class="section">
+                <h2 class="section-title">Close the Loop Process</h2>
+                <p class="section-description">Systematic response framework ensuring every feedback response triggers appropriate action. Detractors receive personal outreach within 24 hours.</p>
+
+                <h3 class="subsection-title">Detractor Response Process</h3>
+                <div class="loop-process">
+                    <div class="loop-timing">Within 1 Hour</div>
+                    <div class="loop-action">Slack alert to CSM with full NPS response and user context</div>
+                    <div class="loop-owner">Automated</div>
+                </div>
+                <div class="loop-process">
+                    <div class="loop-timing">Within 24 Hours</div>
+                    <div class="loop-action">Personal email or call from CSM: "I'd love to understand what went wrong and how we can fix it"</div>
+                    <div class="loop-owner">CSM Team</div>
+                </div>
+                <div class="loop-process">
+                    <div class="loop-timing">Within 1 Week</div>
+                    <div class="loop-action">Offer solution: Free month, replacement collar, dedicated support session</div>
+                    <div class="loop-owner">CSM Lead</div>
+                </div>
+                <div class="loop-process">
+                    <div class="loop-timing">After 30 Days</div>
+                    <div class="loop-action">Re-survey detractor to measure improvement and close the loop</div>
+                    <div class="loop-owner">Automated</div>
+                </div>
+
+                <h3 class="subsection-title">Passive Response Process</h3>
+                <div class="loop-process">
+                    <div class="loop-timing">Immediate</div>
+                    <div class="loop-action">Thank you email with upcoming feature preview based on their feedback</div>
+                    <div class="loop-owner">Automated</div>
+                </div>
+                <div class="loop-process">
+                    <div class="loop-timing">When Relevant</div>
+                    <div class="loop-action">Personal email when requested feature ships: "You asked, we built it!"</div>
+                    <div class="loop-owner">Product Team</div>
+                </div>
+
+                <h3 class="subsection-title">Promoter Response Process</h3>
+                <div class="loop-process">
+                    <div class="loop-timing">Immediate</div>
+                    <div class="loop-action">"We're thrilled you love PetPulse! Would you share your experience?"</div>
+                    <div class="loop-owner">Automated</div>
+                </div>
+                <div class="loop-process">
+                    <div class="loop-timing">Day 3</div>
+                    <div class="loop-action">Request testimonial or case study: G2, App Store, video testimonial</div>
+                    <div class="loop-owner">Marketing</div>
+                </div>
+                <div class="loop-process">
+                    <div class="loop-timing">Day 7</div>
+                    <div class="loop-action">Referral program invitation: "Give friends 1 month free, get 1 month free"</div>
+                    <div class="loop-owner">Growth Team</div>
+                </div>
+            </div>
+
+            <!-- User Interviews Section -->
+            <div class="section">
+                <h2 class="section-title">User Interview Program</h2>
+                <p class="section-description">12 user interviews per month across segments. Incentive: $50 Amazon gift card. Duration: 30-45 minutes. All interviews recorded and transcribed for theme analysis.</p>
+
+                <div class="grid-3">
+                    <div class="interview-card">
+                        <div class="interview-type">🆕 Onboarding Feedback</div>
+                        <div class="interview-count">4 interviews/month (new users, Day 14-30)</div>
+                        <div class="interview-questions">
+                            <div class="interview-question">"Walk me through your collar setup experience"</div>
+                            <div class="interview-question">"What was confusing or frustrating?"</div>
+                            <div class="interview-question">"What made you say 'this is worth it'?"</div>
+                        </div>
+                    </div>
+
+                    <div class="interview-card">
+                        <div class="interview-type">⭐ Power User Insights</div>
+                        <div class="interview-count">4 interviews/month (top 10% by engagement)</div>
+                        <div class="interview-questions">
+                            <div class="interview-question">"How do you use PetPulse in a typical week?"</div>
+                            <div class="interview-question">"What features do you wish we had?"</div>
+                            <div class="interview-question">"What would make you switch to a competitor?"</div>
+                        </div>
+                    </div>
+
+                    <div class="interview-card">
+                        <div class="interview-type">🚪 Churn Interviews</div>
+                        <div class="interview-count">4 interviews/month (recent churns)</div>
+                        <div class="interview-questions">
+                            <div class="interview-question">"What made you decide to cancel?"</div>
+                            <div class="interview-question">"What would have kept you as a customer?"</div>
+                            <div class="interview-question">"Would you consider returning? Under what conditions?"</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Requests Section -->
+            <div class="section">
+                <h2 class="section-title">Feature Request Management</h2>
+
+                <h3 class="subsection-title">Collection Channels</h3>
+                <div class="grid-4">
+                    <div class="channel-card">
+                        <div class="channel-icon">📱</div>
+                        <div class="channel-name">In-App Widget</div>
+                        <div class="channel-desc">"Request a Feature" button in app menu</div>
+                    </div>
+                    <div class="channel-card">
+                        <div class="channel-icon">🎫</div>
+                        <div class="channel-name">Support Tickets</div>
+                        <div class="channel-desc">Tagged as "Feature Request" in Zendesk</div>
+                    </div>
+                    <div class="channel-card">
+                        <div class="channel-icon">💬</div>
+                        <div class="channel-name">Discord Community</div>
+                        <div class="channel-desc">#feature-requests channel with upvotes</div>
+                    </div>
+                    <div class="channel-card">
+                        <div class="channel-icon">📊</div>
+                        <div class="channel-name">Canny Board</div>
+                        <div class="channel-desc">Public roadmap with voting</div>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">RICE Prioritization</h3>
+                <table class="rice-table">
+                    <thead>
+                        <tr>
+                            <th>Feature Request</th>
+                            <th>Reach</th>
+                            <th>Impact</th>
+                            <th>Confidence</th>
+                            <th>Effort</th>
+                            <th>RICE Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Multi-pet household dashboard</td>
+                            <td>500</td>
+                            <td>3</td>
+                            <td>80%</td>
+                            <td>2</td>
+                            <td class="rice-score">600</td>
+                        </tr>
+                        <tr>
+                            <td>Vet integration (share reports)</td>
+                            <td>800</td>
+                            <td>2</td>
+                            <td>70%</td>
+                            <td>3</td>
+                            <td class="rice-score">373</td>
+                        </tr>
+                        <tr>
+                            <td>GPS tracking add-on</td>
+                            <td>400</td>
+                            <td>3</td>
+                            <td>60%</td>
+                            <td>4</td>
+                            <td class="rice-score">180</td>
+                        </tr>
+                        <tr>
+                            <td>Apple Watch companion app</td>
+                            <td>300</td>
+                            <td>2</td>
+                            <td>80%</td>
+                            <td>3</td>
+                            <td class="rice-score">160</td>
+                        </tr>
+                        <tr>
+                            <td>Food/nutrition tracking</td>
+                            <td>250</td>
+                            <td>2</td>
+                            <td>50%</td>
+                            <td>2</td>
+                            <td class="rice-score">125</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Feedback Themes Section -->
+            <div class="section">
+                <h2 class="section-title">Feedback Themes Analysis</h2>
+
+                <div class="grid-3">
+                    <div class="theme-card">
+                        <div class="theme-name">Multi-Pet Support</div>
+                        <div class="theme-metrics">
+                            <div class="theme-metric">
+                                <div class="theme-metric-value">145</div>
+                                <div class="theme-metric-label">Mentions</div>
+                            </div>
+                            <div class="theme-metric">
+                                <div class="theme-metric-value">24%</div>
+                                <div class="theme-metric-label">of Feedback</div>
+                            </div>
+                        </div>
+                        <div class="theme-trend trend-up">↑ Increasing (top request)</div>
+                        <div class="theme-action">Building multi-pet dashboard for Q1 2026</div>
+                    </div>
+
+                    <div class="theme-card">
+                        <div class="theme-name">Collar Battery Life</div>
+                        <div class="theme-metrics">
+                            <div class="theme-metric">
+                                <div class="theme-metric-value">98</div>
+                                <div class="theme-metric-label">Mentions</div>
+                            </div>
+                            <div class="theme-metric">
+                                <div class="theme-metric-value">16%</div>
+                                <div class="theme-metric-label">of Feedback</div>
+                            </div>
+                        </div>
+                        <div class="theme-trend trend-down">↓ Decreasing (after firmware update)</div>
+                        <div class="theme-action">Continue monitoring; Gen 2 collar in development</div>
+                    </div>
+
+                    <div class="theme-card">
+                        <div class="theme-name">Vet Report Sharing</div>
+                        <div class="theme-metrics">
+                            <div class="theme-metric">
+                                <div class="theme-metric-value">76</div>
+                                <div class="theme-metric-label">Mentions</div>
+                            </div>
+                            <div class="theme-metric">
+                                <div class="theme-metric-value">12%</div>
+                                <div class="theme-metric-label">of Feedback</div>
+                            </div>
+                        </div>
+                        <div class="theme-trend trend-up">↑ Increasing</div>
+                        <div class="theme-action">PDF export launching Dec 2025</div>
+                    </div>
+
+                    <div class="theme-card">
+                        <div class="theme-name">App Performance</div>
+                        <div class="theme-metrics">
+                            <div class="theme-metric">
+                                <div class="theme-metric-value">64</div>
+                                <div class="theme-metric-label">Mentions</div>
+                            </div>
+                            <div class="theme-metric">
+                                <div class="theme-metric-value">11%</div>
+                                <div class="theme-metric-label">of Feedback</div>
+                            </div>
+                        </div>
+                        <div class="theme-trend trend-down">↓ Decreasing (recent optimizations)</div>
+                        <div class="theme-action">Performance monitoring in place</div>
+                    </div>
+
+                    <div class="theme-card">
+                        <div class="theme-name">Price Concerns</div>
+                        <div class="theme-metrics">
+                            <div class="theme-metric">
+                                <div class="theme-metric-value">52</div>
+                                <div class="theme-metric-label">Mentions</div>
+                            </div>
+                            <div class="theme-metric">
+                                <div class="theme-metric-value">9%</div>
+                                <div class="theme-metric-label">of Feedback</div>
+                            </div>
+                        </div>
+                        <div class="theme-trend trend-stable">→ Stable</div>
+                        <div class="theme-action">Basic tier launching Q1 2026</div>
+                    </div>
+
+                    <div class="theme-card">
+                        <div class="theme-name">Onboarding Complexity</div>
+                        <div class="theme-metrics">
+                            <div class="theme-metric">
+                                <div class="theme-metric-value">38</div>
+                                <div class="theme-metric-label">Mentions</div>
+                            </div>
+                            <div class="theme-metric">
+                                <div class="theme-metric-value">6%</div>
+                                <div class="theme-metric-label">of Feedback</div>
+                            </div>
+                        </div>
+                        <div class="theme-trend trend-down">↓ Decreasing (onboarding redesign)</div>
+                        <div class="theme-action">Continue iterating on onboarding flow</div>
+                    </div>
+                </div>
+
+                <div class="chart-card" style="margin-top: 2rem;">
+                    <div class="chart-wrapper">
+                        <canvas id="themesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Implementation Roadmap -->
+            <div class="section">
+                <h2 class="section-title">90-Day Implementation Roadmap</h2>
+
+                <div class="roadmap-phase">
+                    <div class="phase-header">
+                        <div class="phase-name">Phase 1: Survey Setup</div>
+                        <div class="phase-timing">Weeks 1-3</div>
+                    </div>
+                    <div class="phase-goal">Goal: Deploy all surveys and begin collecting baseline data</div>
+                    <div class="phase-tasks">
+                        <div class="phase-task">Set up NPS survey in Delighted with quarterly trigger</div>
+                        <div class="phase-task">Deploy CSAT survey post-support via Zendesk</div>
+                        <div class="phase-task">Add CES survey to onboarding completion flow</div>
+                        <div class="phase-task">Create exit survey with churn reason multi-select</div>
+                        <div class="phase-task">Configure Slack alerts for Detractor responses</div>
+                    </div>
+                </div>
+
+                <div class="roadmap-phase">
+                    <div class="phase-header">
+                        <div class="phase-name">Phase 2: Close-the-Loop Process</div>
+                        <div class="phase-timing">Weeks 4-6</div>
+                    </div>
+                    <div class="phase-goal">Goal: Implement response workflows and feature request system</div>
+                    <div class="phase-tasks">
+                        <div class="phase-task">Train CSM team on Detractor response protocol</div>
+                        <div class="phase-task">Set up Canny for public feature request voting</div>
+                        <div class="phase-task">Create RICE scoring template for PM prioritization</div>
+                        <div class="phase-task">Build automated Promoter testimonial request flow</div>
+                        <div class="phase-task">Document feedback response playbook</div>
+                    </div>
+                </div>
+
+                <div class="roadmap-phase">
+                    <div class="phase-header">
+                        <div class="phase-name">Phase 3: Qualitative Research</div>
+                        <div class="phase-timing">Weeks 7-12</div>
+                    </div>
+                    <div class="phase-goal">Goal: Conduct user interviews and establish monthly reporting</div>
+                    <div class="phase-tasks">
+                        <div class="phase-task">Recruit 12 users for first month of interviews</div>
+                        <div class="phase-task">Conduct interviews (4 onboarding, 4 power user, 4 churn)</div>
+                        <div class="phase-task">Create first monthly feedback themes report</div>
+                        <div class="phase-task">Share insights with leadership, product, engineering</div>
+                        <div class="phase-task">Prioritize top 3 feedback-driven improvements for Q1</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Metrics -->
+            <div class="section">
+                <h2 class="section-title">Success Metrics & Targets</h2>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <div class="label">NPS Score</div>
+                        <div class="value">42 → 55</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">CSAT Score</div>
+                        <div class="value">87% → 92%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">CES Score</div>
+                        <div class="value">4.1 → 4.5</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Detractor Response</div>
+                        <div class="value">&lt;24 hrs</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | customer-feedback-framework-v1.0</p>
+                <p style="margin-top: 5px;">Context Signature: PETPULSE-VOC-2025-12 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        // NPS Distribution Chart
+        const npsCtx = document.getElementById('npsChart');
+        if (npsCtx) {
+            new Chart(npsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Promoters (9-10)', 'Passives (7-8)', 'Detractors (0-6)'],
+                    datasets: [{
+                        data: [52, 38, 10],
+                        backgroundColor: ['#10b981', '#f59e0b', '#ef4444'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'NPS Distribution (NPS = 52% - 10% = 42)',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: {
+                            position: 'right',
+                            labels: { color: '#ccc', padding: 15 }
+                        }
+                    }
+                }
+            });
+        }
+
+        // CSAT/CES Trends Chart
+        const trendsCtx = document.getElementById('trendsChart');
+        if (trendsCtx) {
+            new Chart(trendsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'CSAT %',
+                        data: [82, 84, 85, 86, 85, 87],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        yAxisID: 'y'
+                    }, {
+                        label: 'CES (1-5)',
+                        data: [3.8, 3.9, 4.0, 4.0, 4.1, 4.1],
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'transparent',
+                        tension: 0.4,
+                        yAxisID: 'y1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            min: 70,
+                            max: 100,
+                            ticks: {
+                                color: '#888',
+                                callback: function(value) { return value + '%'; }
+                            },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            min: 3,
+                            max: 5,
+                            ticks: { color: '#888' },
+                            grid: { drawOnChartArea: false }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'CSAT & CES Trends (6 Months)',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: {
+                            labels: { color: '#ccc' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Churn Reasons Chart
+        const churnCtx = document.getElementById('churnChart');
+        if (churnCtx) {
+            new Chart(churnCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Low Usage', 'Too Expensive', 'Pet Healthy', 'Tech Issues', 'Alternative', 'Pet Passed'],
+                    datasets: [{
+                        label: 'Churn Reasons %',
+                        data: [28, 22, 18, 15, 10, 7],
+                        backgroundColor: function(context) {
+                            const value = context.raw;
+                            if (value >= 20) return '#ef4444';
+                            if (value >= 15) return '#f59e0b';
+                            return '#10b981';
+                        },
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 35,
+                            ticks: {
+                                color: '#888',
+                                callback: function(value) { return value + '%'; }
+                            },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        y: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Churn Reasons Distribution',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Feedback Themes Chart
+        const themesCtx = document.getElementById('themesChart');
+        if (themesCtx) {
+            new Chart(themesCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Multi-Pet', 'Battery Life', 'Vet Reports', 'App Performance', 'Pricing', 'Onboarding'],
+                    datasets: [{
+                        label: 'Mentions',
+                        data: [145, 98, 76, 64, 52, 38],
+                        backgroundColor: '#10b981',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Feedback Themes by Mention Count',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

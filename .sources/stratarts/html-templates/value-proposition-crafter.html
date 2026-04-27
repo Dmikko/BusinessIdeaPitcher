@@ -1,0 +1,1223 @@
+<!--
+═══════════════════════════════════════════════════════════════════════════════
+STRATARTS HTML SKELETON TEMPLATE
+Skill: value-proposition-crafter
+Version: 1.0.0
+
+INSTRUCTIONS:
+1. Read base-template.html first for shared CSS/JS structure
+2. Replace all {{PLACEHOLDER}} markers with actual data
+3. This template defines skill-specific content sections and charts
+═══════════════════════════════════════════════════════════════════════════════
+-->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     TEMPLATE VARIABLES (Replace with actual data)
+     ════════════════════════════════════════════════════════════════════════════
+
+     HEADER:
+     {{PAGE_TITLE}}          = "Value Proposition Analysis"
+     {{KICKER}}              = "StratArts Business Analysis"
+     {{TITLE}}               = "Value Proposition Crafter"
+     {{SUBTITLE}}            = "{BUSINESS_NAME} - {BUSINESS_DESCRIPTION}"
+     {{DATE}}                = "November 28, 2025"
+     {{ANALYSIS_TYPE}}       = "Foundation Strategy"
+     {{VERSION}}             = "1.0"
+
+     SCORE BANNER:
+     {{PRIMARY_SCORE}}       = "7.8" (value proposition strength 0-10)
+     {{SCORE_LABEL}}         = "Value Proposition Strength"
+     {{SCORE_INTERPRETATION}}= "This strength score indicates..."
+     {{VERDICT}}             = "✓ STRONG VALUE PROP" | "⚠️ NEEDS REFINEMENT" | "✗ WEAK - MAJOR REVISION NEEDED"
+
+     FOOTER:
+     {{PROJECT_NAME}}        = "{PROJECT_FOLDER_NAME}"
+     {{SKILL_NAME}}          = "value-proposition-crafter"
+     {{CONTEXT_SIGNATURE}}   = "value-proposition-crafter-v1.0.0"
+     {{ITERATIONS}}          = "1"
+     {{ITERATIONS_PLURAL}}   = "" or "s"
+
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     SKILL-SPECIFIC CSS (Add to {{SKILL_SPECIFIC_CSS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+<style>
+/* JTBD Cards (3-column grid for functional, emotional, social jobs) */
+.jtbd-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.jtbd-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.jtbd-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(16, 185, 129, 0.4);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+}
+
+.jtbd-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.jtbd-type {
+    font-weight: 700;
+    color: #10b981;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.jtbd-score {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #f5f5f5;
+}
+
+.jtbd-statement {
+    font-size: 1rem;
+    color: #f5f5f5;
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.jtbd-example {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    line-height: 1.5;
+}
+
+/* Value Proposition Statement Box */
+.value-prop-box {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.value-prop-statement {
+    font-size: 1.25rem;
+    color: #f5f5f5;
+    line-height: 1.8;
+    font-weight: 500;
+}
+
+.value-prop-label {
+    font-size: 0.8rem;
+    color: #10b981;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* Pain/Gain Cards */
+.pain-gain-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.pain-card, .gain-card {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.pain-card {
+    border: 1px solid rgba(245, 101, 101, 0.3);
+}
+
+.gain-card {
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.pain-gain-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.pain-title {
+    color: #fc8181;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.gain-title {
+    color: #10b981;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.intensity-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.intensity-high {
+    background: rgba(245, 101, 101, 0.2);
+    color: #fc8181;
+}
+
+.intensity-medium {
+    background: rgba(246, 173, 85, 0.2);
+    color: #f6ad55;
+}
+
+.value-high {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.pain-gain-description {
+    font-size: 0.95rem;
+    color: #d4d4d4;
+    line-height: 1.5;
+}
+
+.pain-gain-frequency {
+    font-size: 0.8rem;
+    color: #a3a3a3;
+    margin-top: 0.5rem;
+}
+
+/* Benefit Hierarchy Pyramid */
+.benefit-pyramid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 2rem 0;
+}
+
+.benefit-level {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.benefit-level:hover {
+    transform: scale(1.02);
+}
+
+.benefit-level-3 {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(16, 185, 129, 0.15) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    width: 50%;
+}
+
+.benefit-level-2 {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.1) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    width: 70%;
+}
+
+.benefit-level-1 {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    width: 90%;
+}
+
+.benefit-level-label {
+    font-weight: 700;
+    color: #10b981;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.benefit-level-content {
+    color: #f5f5f5;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Messaging Pillars */
+.pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.pillar-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.pillar-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #10b981 0%, #14b8a6 100%);
+}
+
+.pillar-number {
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(16, 185, 129, 0.15);
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    line-height: 1;
+}
+
+.pillar-name {
+    font-weight: 700;
+    color: #10b981;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.pillar-headline {
+    font-size: 1rem;
+    color: #f5f5f5;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.pillar-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pillar-points li {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.pillar-points li::before {
+    content: '•';
+    color: #10b981;
+    font-weight: bold;
+}
+
+.pillar-points li:last-child {
+    border-bottom: none;
+}
+
+/* Touchpoint Messaging */
+.touchpoint-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.touchpoint-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 1.25rem;
+}
+
+.touchpoint-name {
+    font-weight: 700;
+    color: #10b981;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+}
+
+.touchpoint-headline {
+    font-size: 1.1rem;
+    color: #f5f5f5;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.touchpoint-subheadline {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    line-height: 1.4;
+}
+
+.touchpoint-cta {
+    display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #0a0a0a;
+    font-weight: 600;
+    font-size: 0.85rem;
+    border-radius: 6px;
+}
+
+/* Objection Handling */
+.objection-grid {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.objection-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.objection-header {
+    background: rgba(245, 101, 101, 0.1);
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(245, 101, 101, 0.2);
+}
+
+.objection-text {
+    font-size: 1rem;
+    color: #fc8181;
+    font-style: italic;
+}
+
+.objection-response {
+    padding: 1.25rem;
+}
+
+.response-step {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.response-step:last-child {
+    margin-bottom: 0;
+}
+
+.response-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #10b981;
+    text-transform: uppercase;
+    min-width: 80px;
+}
+
+.response-content {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    line-height: 1.4;
+}
+
+/* Verdict Badge Colors */
+.verdict-badge.strong-vp {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.verdict-badge.needs-refinement {
+    background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+    box-shadow: 0 4px 15px rgba(237, 137, 54, 0.3);
+}
+
+.verdict-badge.weak-vp {
+    background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
+    box-shadow: 0 4px 15px rgba(245, 101, 101, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .jtbd-grid, .pillar-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .jtbd-grid, .pillar-grid, .pain-gain-grid, .touchpoint-grid {
+        grid-template-columns: 1fr;
+    }
+    .benefit-level-1, .benefit-level-2, .benefit-level-3 {
+        width: 100%;
+    }
+}
+
+/* Print */
+@media print {
+    .jtbd-card, .pillar-card, .pain-card, .gain-card, .touchpoint-card, .objection-card {
+        background: white;
+        border: 2px solid #10b981;
+        page-break-inside: avoid;
+    }
+    .jtbd-type, .pillar-name, .touchpoint-name {
+        color: #10b981;
+    }
+    .jtbd-statement, .pillar-headline, .touchpoint-headline {
+        color: #000000;
+    }
+    .value-prop-box {
+        background: white;
+        border: 3px solid #10b981;
+    }
+}
+</style>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CONTENT SECTIONS (Replace {{CONTENT_SECTIONS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- Section 1: Jobs-to-be-Done Analysis -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Jobs-to-be-Done Analysis</h2>
+        <p class="section-description">
+            Understanding the functional, emotional, and social jobs customers are "hiring" your product to accomplish.
+        </p>
+    </div>
+
+    <div class="jtbd-grid">
+        <div class="jtbd-card">
+            <div class="jtbd-header">
+                <div class="jtbd-type">Functional Job</div>
+                <div class="jtbd-score">{{FUNCTIONAL_SCORE}}/10</div>
+            </div>
+            <div class="jtbd-statement">
+                "When {{FUNCTIONAL_SITUATION}}, I want to {{FUNCTIONAL_MOTIVATION}}, so I can {{FUNCTIONAL_OUTCOME}}."
+            </div>
+            <div class="jtbd-example">
+                <strong>Impact:</strong> {{FUNCTIONAL_IMPACT}}
+            </div>
+        </div>
+
+        <div class="jtbd-card">
+            <div class="jtbd-header">
+                <div class="jtbd-type">Emotional Job</div>
+                <div class="jtbd-score">{{EMOTIONAL_SCORE}}/10</div>
+            </div>
+            <div class="jtbd-statement">
+                "I want to feel {{EMOTIONAL_FEELING}} when {{EMOTIONAL_CONTEXT}}."
+            </div>
+            <div class="jtbd-example">
+                <strong>Impact:</strong> {{EMOTIONAL_IMPACT}}
+            </div>
+        </div>
+
+        <div class="jtbd-card">
+            <div class="jtbd-header">
+                <div class="jtbd-type">Social Job</div>
+                <div class="jtbd-score">{{SOCIAL_SCORE}}/10</div>
+            </div>
+            <div class="jtbd-statement">
+                "I want to be perceived as {{SOCIAL_IDENTITY}} by {{SOCIAL_AUDIENCE}}."
+            </div>
+            <div class="jtbd-example">
+                <strong>Impact:</strong> {{SOCIAL_IMPACT}}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 2: Value Proposition Statement -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Core Value Proposition</h2>
+        <p class="section-description">
+            The synthesized positioning statement that captures your unique value for target customers.
+        </p>
+    </div>
+
+    <div class="value-prop-box">
+        <div class="value-prop-label">Primary Value Proposition</div>
+        <div class="value-prop-statement">
+            For <strong>{{TARGET_CUSTOMER}}</strong>,<br>
+            who <strong>{{CUSTOMER_CONTEXT}}</strong>,<br>
+            <strong>{{PRODUCT_NAME}}</strong> is a <strong>{{CATEGORY}}</strong><br>
+            that <strong>{{KEY_BENEFIT}}</strong>.<br><br>
+            Unlike <strong>{{COMPETITION}}</strong>,<br>
+            we <strong>{{UNIQUE_DIFFERENTIATION}}</strong>.
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: Pains & Gains Map -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Customer Pains & Gains</h2>
+        <p class="section-description">
+            High-priority customer pain points your product relieves and desired gains it creates.
+        </p>
+    </div>
+
+    <div class="pain-gain-grid">
+        <div class="pain-card">
+            <div class="pain-gain-header">
+                <div class="pain-title">Pain Point #1</div>
+                <span class="intensity-badge intensity-high">{{PAIN_1_INTENSITY}}/10</span>
+            </div>
+            <div class="pain-gain-description">{{PAIN_1_DESCRIPTION}}</div>
+            <div class="pain-gain-frequency">Frequency: {{PAIN_1_FREQUENCY}}</div>
+        </div>
+
+        <div class="gain-card">
+            <div class="pain-gain-header">
+                <div class="gain-title">Desired Gain #1</div>
+                <span class="intensity-badge value-high">{{GAIN_1_VALUE}}/10</span>
+            </div>
+            <div class="pain-gain-description">{{GAIN_1_DESCRIPTION}}</div>
+            <div class="pain-gain-frequency">Frequency: {{GAIN_1_FREQUENCY}}</div>
+        </div>
+
+        <div class="pain-card">
+            <div class="pain-gain-header">
+                <div class="pain-title">Pain Point #2</div>
+                <span class="intensity-badge intensity-high">{{PAIN_2_INTENSITY}}/10</span>
+            </div>
+            <div class="pain-gain-description">{{PAIN_2_DESCRIPTION}}</div>
+            <div class="pain-gain-frequency">Frequency: {{PAIN_2_FREQUENCY}}</div>
+        </div>
+
+        <div class="gain-card">
+            <div class="pain-gain-header">
+                <div class="gain-title">Desired Gain #2</div>
+                <span class="intensity-badge value-high">{{GAIN_2_VALUE}}/10</span>
+            </div>
+            <div class="pain-gain-description">{{GAIN_2_DESCRIPTION}}</div>
+            <div class="pain-gain-frequency">Frequency: {{GAIN_2_FREQUENCY}}</div>
+        </div>
+
+        <div class="pain-card">
+            <div class="pain-gain-header">
+                <div class="pain-title">Pain Point #3</div>
+                <span class="intensity-badge intensity-medium">{{PAIN_3_INTENSITY}}/10</span>
+            </div>
+            <div class="pain-gain-description">{{PAIN_3_DESCRIPTION}}</div>
+            <div class="pain-gain-frequency">Frequency: {{PAIN_3_FREQUENCY}}</div>
+        </div>
+
+        <div class="gain-card">
+            <div class="pain-gain-header">
+                <div class="gain-title">Desired Gain #3</div>
+                <span class="intensity-badge value-high">{{GAIN_3_VALUE}}/10</span>
+            </div>
+            <div class="pain-gain-description">{{GAIN_3_DESCRIPTION}}</div>
+            <div class="pain-gain-frequency">Frequency: {{GAIN_3_FREQUENCY}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 4: Benefit Hierarchy -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Benefit Hierarchy</h2>
+        <p class="section-description">
+            Three levels of benefits from functional features to transformational outcomes.
+        </p>
+    </div>
+
+    <div class="benefit-pyramid">
+        <div class="benefit-level benefit-level-3">
+            <span class="benefit-level-label">Transformational</span>
+            <span class="benefit-level-content">{{TRANSFORMATIONAL_BENEFITS}}</span>
+        </div>
+        <div class="benefit-level benefit-level-2">
+            <span class="benefit-level-label">Emotional</span>
+            <span class="benefit-level-content">{{EMOTIONAL_BENEFITS}}</span>
+        </div>
+        <div class="benefit-level benefit-level-1">
+            <span class="benefit-level-label">Functional</span>
+            <span class="benefit-level-content">{{FUNCTIONAL_BENEFITS}}</span>
+        </div>
+    </div>
+</section>
+
+<!-- Section 5: Visual Analysis -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Visual Analysis</h2>
+        <p class="section-description">
+            Data visualizations revealing patterns in customer jobs, competitive positioning, and messaging effectiveness.
+        </p>
+    </div>
+
+    <div class="chart-grid">
+        <!-- Chart 1: JTBD Radar -->
+        <div class="chart-card">
+            <div class="chart-title">Jobs-to-be-Done Profile</div>
+            <div class="chart-subtitle">
+                Relative strength of functional, emotional, and social job alignment
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="jtbdRadar"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Key Observations</div>
+                <ul class="insight-list">
+                    <li><strong>Strongest:</strong> {{JTBD_STRONGEST}} - {{JTBD_STRONGEST_INSIGHT}}</li>
+                    <li><strong>Weakest:</strong> {{JTBD_WEAKEST}} - {{JTBD_WEAKEST_INSIGHT}}</li>
+                    <li><strong>Overall:</strong> {{JTBD_OVERALL_INSIGHT}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 2: Pain/Gain Chart -->
+        <div class="chart-card">
+            <div class="chart-title">Pain Intensity vs. Gain Value</div>
+            <div class="chart-subtitle">
+                Mapping customer pain points against desired outcomes
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="painGainChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Pain-Gain Analysis</div>
+                <ul class="insight-list">
+                    <li><strong>Highest Pain:</strong> {{HIGHEST_PAIN}} ({{HIGHEST_PAIN_SCORE}}/10)</li>
+                    <li><strong>Highest Gain:</strong> {{HIGHEST_GAIN}} ({{HIGHEST_GAIN_SCORE}}/10)</li>
+                    <li><strong>Opportunity:</strong> {{PAIN_GAIN_OPPORTUNITY}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 3: Benefit Distribution -->
+        <div class="chart-card">
+            <div class="chart-title">Benefit Distribution</div>
+            <div class="chart-subtitle">
+                Balance across functional, emotional, and transformational benefits
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="benefitPyramid"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Benefit Balance</div>
+                <ul class="insight-list">
+                    <li><strong>Functional:</strong> {{FUNCTIONAL_PCT}}% - {{FUNCTIONAL_INSIGHT}}</li>
+                    <li><strong>Emotional:</strong> {{EMOTIONAL_PCT}}% - {{EMOTIONAL_INSIGHT}}</li>
+                    <li><strong>Transformational:</strong> {{TRANSFORMATIONAL_PCT}}% - {{TRANSFORMATIONAL_INSIGHT}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 4: Competitive Positioning -->
+        <div class="chart-card">
+            <div class="chart-title">Competitive Positioning Map</div>
+            <div class="chart-subtitle">
+                Position relative to competitors on key customer decision criteria
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="positioningChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Positioning Strategy</div>
+                <ul class="insight-list">
+                    <li><strong>Category:</strong> {{POSITION_CATEGORY}}</li>
+                    <li><strong>Quadrant:</strong> {{POSITION_QUADRANT}}</li>
+                    <li><strong>Advantage:</strong> {{POSITION_ADVANTAGE}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 5: Messaging Pillar Strength -->
+        <div class="chart-card">
+            <div class="chart-title">Messaging Pillar Effectiveness</div>
+            <div class="chart-subtitle">
+                Strength scores for each core messaging pillar
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="messagingPillarChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Messaging Analysis</div>
+                <ul class="insight-list">
+                    <li><strong>Strongest Pillar:</strong> {{STRONGEST_PILLAR}} ({{STRONGEST_PILLAR_SCORE}}/10)</li>
+                    <li><strong>Weakest Pillar:</strong> {{WEAKEST_PILLAR}} ({{WEAKEST_PILLAR_SCORE}}/10)</li>
+                    <li><strong>Recommendation:</strong> {{PILLAR_RECOMMENDATION}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 6: Messaging Pillars -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Core Messaging Pillars</h2>
+        <p class="section-description">
+            Three to five foundational messages that support your value proposition across all touchpoints.
+        </p>
+    </div>
+
+    <div class="pillar-grid">
+        <div class="pillar-card">
+            <div class="pillar-number">1</div>
+            <div class="pillar-name">{{PILLAR_1_NAME}}</div>
+            <div class="pillar-headline">"{{PILLAR_1_HEADLINE}}"</div>
+            <ul class="pillar-points">
+                <li>{{PILLAR_1_POINT_1}}</li>
+                <li>{{PILLAR_1_POINT_2}}</li>
+                <li>{{PILLAR_1_PROOF}}</li>
+            </ul>
+        </div>
+
+        <div class="pillar-card">
+            <div class="pillar-number">2</div>
+            <div class="pillar-name">{{PILLAR_2_NAME}}</div>
+            <div class="pillar-headline">"{{PILLAR_2_HEADLINE}}"</div>
+            <ul class="pillar-points">
+                <li>{{PILLAR_2_POINT_1}}</li>
+                <li>{{PILLAR_2_POINT_2}}</li>
+                <li>{{PILLAR_2_PROOF}}</li>
+            </ul>
+        </div>
+
+        <div class="pillar-card">
+            <div class="pillar-number">3</div>
+            <div class="pillar-name">{{PILLAR_3_NAME}}</div>
+            <div class="pillar-headline">"{{PILLAR_3_HEADLINE}}"</div>
+            <ul class="pillar-points">
+                <li>{{PILLAR_3_POINT_1}}</li>
+                <li>{{PILLAR_3_POINT_2}}</li>
+                <li>{{PILLAR_3_PROOF}}</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Section 7: Messaging by Touchpoint -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Messaging by Touchpoint</h2>
+        <p class="section-description">
+            Tailored messaging for different channels and stages of the customer journey.
+        </p>
+    </div>
+
+    <div class="touchpoint-grid">
+        <div class="touchpoint-card">
+            <div class="touchpoint-name">Homepage Hero</div>
+            <div class="touchpoint-headline">{{HOMEPAGE_HEADLINE}}</div>
+            <div class="touchpoint-subheadline">{{HOMEPAGE_SUBHEADLINE}}</div>
+            <div class="touchpoint-cta">{{HOMEPAGE_CTA}}</div>
+        </div>
+
+        <div class="touchpoint-card">
+            <div class="touchpoint-name">Google Ads</div>
+            <div class="touchpoint-headline">{{ADS_HEADLINE_1}}</div>
+            <div class="touchpoint-subheadline">{{ADS_HEADLINE_2}}<br>{{ADS_DESCRIPTION}}</div>
+        </div>
+
+        <div class="touchpoint-card">
+            <div class="touchpoint-name">Email Subject</div>
+            <div class="touchpoint-headline">{{EMAIL_SUBJECT}}</div>
+            <div class="touchpoint-subheadline">{{EMAIL_PREVIEW}}</div>
+        </div>
+
+        <div class="touchpoint-card">
+            <div class="touchpoint-name">Social Media</div>
+            <div class="touchpoint-headline">{{SOCIAL_HOOK}}</div>
+            <div class="touchpoint-subheadline">{{SOCIAL_BODY}}</div>
+        </div>
+
+        <div class="touchpoint-card">
+            <div class="touchpoint-name">Elevator Pitch</div>
+            <div class="touchpoint-subheadline">{{ELEVATOR_PITCH}}</div>
+        </div>
+
+        <div class="touchpoint-card">
+            <div class="touchpoint-name">Demo Welcome</div>
+            <div class="touchpoint-headline">{{DEMO_WELCOME}}</div>
+            <div class="touchpoint-subheadline"><strong>First Action:</strong> {{DEMO_FIRST_ACTION}}<br><strong>Aha Moment:</strong> {{DEMO_AHA}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 8: Objection Handling -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Objection Handling Framework</h2>
+        <p class="section-description">
+            Anticipated objections with structured responses using the Acknowledge-Reframe-Evidence-Bridge framework.
+        </p>
+    </div>
+
+    <div class="objection-grid">
+        <div class="objection-card">
+            <div class="objection-header">
+                <div class="objection-text">"{{OBJECTION_1}}"</div>
+            </div>
+            <div class="objection-response">
+                <div class="response-step">
+                    <span class="response-label">Acknowledge</span>
+                    <span class="response-content">{{OBJECTION_1_ACKNOWLEDGE}}</span>
+                </div>
+                <div class="response-step">
+                    <span class="response-label">Reframe</span>
+                    <span class="response-content">{{OBJECTION_1_REFRAME}}</span>
+                </div>
+                <div class="response-step">
+                    <span class="response-label">Evidence</span>
+                    <span class="response-content">{{OBJECTION_1_EVIDENCE}}</span>
+                </div>
+                <div class="response-step">
+                    <span class="response-label">Bridge</span>
+                    <span class="response-content">{{OBJECTION_1_BRIDGE}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="objection-card">
+            <div class="objection-header">
+                <div class="objection-text">"{{OBJECTION_2}}"</div>
+            </div>
+            <div class="objection-response">
+                <div class="response-step">
+                    <span class="response-label">Acknowledge</span>
+                    <span class="response-content">{{OBJECTION_2_ACKNOWLEDGE}}</span>
+                </div>
+                <div class="response-step">
+                    <span class="response-label">Reframe</span>
+                    <span class="response-content">{{OBJECTION_2_REFRAME}}</span>
+                </div>
+                <div class="response-step">
+                    <span class="response-label">Evidence</span>
+                    <span class="response-content">{{OBJECTION_2_EVIDENCE}}</span>
+                </div>
+                <div class="response-step">
+                    <span class="response-label">Bridge</span>
+                    <span class="response-content">{{OBJECTION_2_BRIDGE}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="objection-card">
+            <div class="objection-header">
+                <div class="objection-text">"{{OBJECTION_3}}"</div>
+            </div>
+            <div class="objection-response">
+                <div class="response-step">
+                    <span class="response-label">Acknowledge</span>
+                    <span class="response-content">{{OBJECTION_3_ACKNOWLEDGE}}</span>
+                </div>
+                <div class="response-step">
+                    <span class="response-label">Reframe</span>
+                    <span class="response-content">{{OBJECTION_3_REFRAME}}</span>
+                </div>
+                <div class="response-step">
+                    <span class="response-label">Evidence</span>
+                    <span class="response-content">{{OBJECTION_3_EVIDENCE}}</span>
+                </div>
+                <div class="response-step">
+                    <span class="response-label">Bridge</span>
+                    <span class="response-content">{{OBJECTION_3_BRIDGE}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CHART SCRIPTS (Replace {{CHART_SCRIPTS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+<script>
+// Data object (populated from analysis)
+const data = {
+    jtbd: {
+        labels: ['Functional', 'Emotional', 'Social', 'Urgency', 'Frequency'],
+        values: [{{FUNCTIONAL_SCORE}}, {{EMOTIONAL_SCORE}}, {{SOCIAL_SCORE}}, {{URGENCY_SCORE}}, {{FREQUENCY_SCORE}}]
+    },
+    painGain: {
+        pains: {
+            labels: ['{{PAIN_1_LABEL}}', '{{PAIN_2_LABEL}}', '{{PAIN_3_LABEL}}'],
+            values: [{{PAIN_1_INTENSITY}}, {{PAIN_2_INTENSITY}}, {{PAIN_3_INTENSITY}}]
+        },
+        gains: {
+            labels: ['{{GAIN_1_LABEL}}', '{{GAIN_2_LABEL}}', '{{GAIN_3_LABEL}}'],
+            values: [{{GAIN_1_VALUE}}, {{GAIN_2_VALUE}}, {{GAIN_3_VALUE}}]
+        }
+    },
+    benefits: {
+        labels: ['Functional', 'Emotional', 'Transformational'],
+        values: [{{FUNCTIONAL_PCT}}, {{EMOTIONAL_PCT}}, {{TRANSFORMATIONAL_PCT}}]
+    },
+    positioning: {
+        you: { x: {{YOUR_X}}, y: {{YOUR_Y}}, label: '{{PRODUCT_NAME}}' },
+        competitors: [
+            { x: {{COMP_1_X}}, y: {{COMP_1_Y}}, label: '{{COMP_1_NAME}}' },
+            { x: {{COMP_2_X}}, y: {{COMP_2_Y}}, label: '{{COMP_2_NAME}}' },
+            { x: {{COMP_3_X}}, y: {{COMP_3_Y}}, label: '{{COMP_3_NAME}}' }
+        ]
+    },
+    pillars: {
+        labels: ['{{PILLAR_1_NAME}}', '{{PILLAR_2_NAME}}', '{{PILLAR_3_NAME}}'],
+        values: [{{PILLAR_1_SCORE}}, {{PILLAR_2_SCORE}}, {{PILLAR_3_SCORE}}]
+    },
+    composite: {{PRIMARY_SCORE}}
+};
+
+// Chart 1: JTBD Radar
+const jtbdCtx = document.getElementById('jtbdRadar').getContext('2d');
+new Chart(jtbdCtx, {
+    type: 'radar',
+    data: {
+        labels: data.jtbd.labels,
+        datasets: [{
+            label: 'Job Alignment',
+            data: data.jtbd.values,
+            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+            borderColor: '#10b981',
+            borderWidth: 3,
+            pointBackgroundColor: '#10b981',
+            pointBorderColor: '#1a1a1a',
+            pointRadius: 6,
+            pointBorderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            r: {
+                beginAtZero: true,
+                max: 10,
+                ticks: { color: '#a3a3a3', stepSize: 2, font: { size: 11 } },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                pointLabels: { color: '#f5f5f5', font: { size: 12, weight: '600' } }
+            }
+        },
+        plugins: {
+            legend: { display: false },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Chart 2: Pain/Gain Horizontal Bar
+const painGainCtx = document.getElementById('painGainChart').getContext('2d');
+new Chart(painGainCtx, {
+    type: 'bar',
+    data: {
+        labels: [...data.painGain.pains.labels, ...data.painGain.gains.labels],
+        datasets: [{
+            label: 'Intensity/Value',
+            data: [...data.painGain.pains.values.map(v => -v), ...data.painGain.gains.values],
+            backgroundColor: [
+                '#fc8181', '#fc8181', '#fc8181',
+                '#10b981', '#10b981', '#10b981'
+            ],
+            borderRadius: 6,
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: 'y',
+        scales: {
+            x: {
+                min: -10,
+                max: 10,
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: {
+                    color: '#a3a3a3',
+                    font: { size: 11 },
+                    callback: function(value) { return Math.abs(value); }
+                }
+            },
+            y: {
+                grid: { display: false },
+                ticks: { color: '#f5f5f5', font: { size: 11, weight: '500' } }
+            }
+        },
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                ...tooltipConfig,
+                callbacks: {
+                    label: function(context) {
+                        const value = Math.abs(context.parsed.x);
+                        const type = context.parsed.x < 0 ? 'Pain' : 'Gain';
+                        return `${type} Intensity: ${value.toFixed(1)}/10`;
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Chart 3: Benefit Distribution Doughnut
+const benefitCtx = document.getElementById('benefitPyramid').getContext('2d');
+new Chart(benefitCtx, {
+    type: 'doughnut',
+    data: {
+        labels: data.benefits.labels,
+        datasets: [{
+            data: data.benefits.values,
+            backgroundColor: ['#10b981', '#14b8a6', '#0d9488'],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '60%',
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { color: '#f5f5f5', font: { size: 12 }, padding: 20 }
+            },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Chart 4: Competitive Positioning Scatter
+const positioningCtx = document.getElementById('positioningChart').getContext('2d');
+new Chart(positioningCtx, {
+    type: 'scatter',
+    data: {
+        datasets: [
+            {
+                label: data.positioning.you.label,
+                data: [{ x: data.positioning.you.x, y: data.positioning.you.y }],
+                backgroundColor: '#10b981',
+                borderColor: '#14b8a6',
+                borderWidth: 3,
+                pointRadius: 16,
+                pointHoverRadius: 20
+            },
+            {
+                label: 'Competitors',
+                data: data.positioning.competitors.map(c => ({ x: c.x, y: c.y })),
+                backgroundColor: 'rgba(163, 163, 163, 0.6)',
+                borderColor: '#a3a3a3',
+                borderWidth: 2,
+                pointRadius: 10,
+                pointHoverRadius: 12
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                title: { display: true, text: '{{X_AXIS_LABEL}} →', color: '#a3a3a3', font: { size: 12, weight: '600' } },
+                min: 0,
+                max: 10,
+                ticks: { color: '#a3a3a3', font: { size: 11 } },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' }
+            },
+            y: {
+                title: { display: true, text: '{{Y_AXIS_LABEL}} →', color: '#a3a3a3', font: { size: 12, weight: '600' } },
+                min: 0,
+                max: 10,
+                ticks: { color: '#a3a3a3', font: { size: 11 } },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' }
+            }
+        },
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { color: '#f5f5f5', font: { size: 11 } }
+            },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Chart 5: Messaging Pillar Bar Chart
+const pillarCtx = document.getElementById('messagingPillarChart').getContext('2d');
+new Chart(pillarCtx, {
+    type: 'bar',
+    data: {
+        labels: data.pillars.labels,
+        datasets: [{
+            label: 'Effectiveness Score',
+            data: data.pillars.values,
+            backgroundColor: '#10b981',
+            borderRadius: 6,
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 10,
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: { color: '#a3a3a3', font: { size: 11 } }
+            },
+            x: {
+                grid: { display: false },
+                ticks: { color: '#f5f5f5', font: { size: 12, weight: '600' } }
+            }
+        },
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                ...tooltipConfig,
+                callbacks: {
+                    label: function(context) {
+                        return 'Effectiveness: ' + context.parsed.y.toFixed(1) + '/10';
+                    }
+                }
+            }
+        }
+    }
+});
+</script>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     REQUIRED CHARTS SUMMARY
+     ════════════════════════════════════════════════════════════════════════════
+
+     1. jtbdRadar (Radar)
+        - 5 dimensions: Functional, Emotional, Social, Urgency, Frequency
+        - Shows job alignment profile
+
+     2. painGainChart (Horizontal Bar)
+        - 3 pains (negative direction) + 3 gains (positive direction)
+        - Shows pain intensity vs gain value
+
+     3. benefitPyramid (Doughnut)
+        - 3 segments: Functional, Emotional, Transformational
+        - Shows benefit distribution balance
+
+     4. positioningChart (Scatter)
+        - Your position + 3 competitor positions
+        - Shows competitive positioning on 2 axes
+
+     5. messagingPillarChart (Bar)
+        - 3 messaging pillars with effectiveness scores
+        - Shows relative strength of each pillar
+
+     ════════════════════════════════════════════════════════════════════════════ -->

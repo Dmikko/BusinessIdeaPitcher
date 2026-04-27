@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Value Proposition Crafter | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+
+           Color Palette:
+           - Primary: #10b981 (emerald)
+           - Primary Dark: #059669
+           - Background: #0a0a0a
+           - Container: #1a1a1a
+           - Text Primary: #f5f5f5
+           - Text Secondary: #a3a3a3
+           - Text Muted: #d4d4d4
+           - Border: rgba(16, 185, 129, 0.2)
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        /* === RESET & BASE === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #0a0a0a;
+        }
+
+        /* === HEADER (Edge-to-Edge with Centered Content) === */
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .header-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* === SCORE BANNER === */
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-main {
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .score-interpretation {
+            border-left: 3px solid #10b981;
+            padding-left: 2rem;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #f5f5f5;
+        }
+
+        .interpretation-text {
+            color: #d4d4d4;
+            line-height: 1.7;
+        }
+
+        .verdict-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        /* === CONTENT SECTIONS === */
+        .content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 4rem;
+            background: #0a0a0a;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section:last-child {
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: #d4d4d4;
+            max-width: 800px;
+        }
+
+        /* === CHART LAYOUTS === */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-subtitle {
+            font-size: 0.9rem;
+            color: #a3a3a3;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-wrapper.tall {
+            height: 450px;
+        }
+
+        /* === INSIGHTS PANEL === */
+        .insights-panel {
+            background: #0a0a0a;
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .insight-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .insight-list {
+            list-style: none;
+        }
+
+        .insight-list li {
+            padding: 0.6rem 0;
+            color: #d4d4d4;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .insight-list li:last-child {
+            border-bottom: none;
+        }
+
+        .insight-list li strong {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content p {
+            margin: 0.3rem 0;
+        }
+
+        .footer-content strong {
+            color: #10b981;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .score-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .score-interpretation {
+                border-left: none;
+                border-top: 3px solid #10b981;
+                padding-left: 0;
+                padding-top: 1.5rem;
+            }
+            .header-content { padding: 2rem; }
+            .score-container { padding: 2rem; }
+            .content { padding: 2rem 2rem; }
+            .footer-content { padding: 2rem; }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           SKILL-SPECIFIC CSS - VALUE PROPOSITION CRAFTER
+           ═══════════════════════════════════════════════════════════════════════════ */
+        /* === JTBD CARDS === */
+        .jtbd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .jtbd-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+        .jtbd-card:hover { transform: translateY(-2px); border-color: rgba(16, 185, 129, 0.4); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1); }
+        .jtbd-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(16, 185, 129, 0.2); }
+        .jtbd-type { font-weight: 700; color: #10b981; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .jtbd-score { font-size: 1.4rem; font-weight: 700; color: #f5f5f5; }
+        .jtbd-statement { font-size: 1rem; color: #f5f5f5; line-height: 1.6; font-style: italic; margin-bottom: 1rem; }
+        .jtbd-example { font-size: 0.85rem; color: #a3a3a3; line-height: 1.5; }
+
+        /* === VALUE PROPOSITION BOX === */
+        .value-prop-box { background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; }
+        .value-prop-statement { font-size: 1.25rem; color: #f5f5f5; line-height: 1.8; font-weight: 500; }
+        .value-prop-label { font-size: 0.8rem; color: #10b981; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; font-weight: 600; }
+
+        /* === PAIN/GAIN GRID === */
+        .pain-gain-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
+        .pain-card, .gain-card { background: #1a1a1a; border-radius: 12px; padding: 1.5rem; }
+        .pain-card { border: 1px solid rgba(245, 101, 101, 0.3); }
+        .gain-card { border: 1px solid rgba(16, 185, 129, 0.3); }
+        .pain-gain-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .pain-title { color: #fc8181; font-weight: 700; font-size: 0.9rem; }
+        .gain-title { color: #10b981; font-weight: 700; font-size: 0.9rem; }
+        .intensity-badge { font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 600; }
+        .intensity-high { background: rgba(245, 101, 101, 0.2); color: #fc8181; }
+        .intensity-medium { background: rgba(246, 173, 85, 0.2); color: #f6ad55; }
+        .value-high { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .pain-gain-description { font-size: 0.95rem; color: #d4d4d4; line-height: 1.5; }
+        .pain-gain-frequency { font-size: 0.8rem; color: #a3a3a3; margin-top: 0.5rem; }
+
+        /* === BENEFIT PYRAMID === */
+        .benefit-pyramid { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin: 2rem 0; }
+        .benefit-level { display: flex; align-items: center; gap: 1rem; padding: 1rem 2rem; border-radius: 8px; transition: transform 0.2s; }
+        .benefit-level:hover { transform: scale(1.02); }
+        .benefit-level-3 { background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(16, 185, 129, 0.15) 100%); border: 1px solid rgba(16, 185, 129, 0.4); width: 50%; }
+        .benefit-level-2 { background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.1) 100%); border: 1px solid rgba(16, 185, 129, 0.3); width: 70%; }
+        .benefit-level-1 { background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%); border: 1px solid rgba(16, 185, 129, 0.2); width: 90%; }
+        .benefit-level-label { font-weight: 700; color: #10b981; font-size: 0.85rem; text-transform: uppercase; white-space: nowrap; }
+        .benefit-level-content { color: #f5f5f5; font-size: 0.95rem; line-height: 1.4; }
+
+        /* === PILLAR GRID === */
+        .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .pillar-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; position: relative; overflow: hidden; }
+        .pillar-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #10b981 0%, #14b8a6 100%); }
+        .pillar-number { font-size: 3rem; font-weight: 900; color: rgba(16, 185, 129, 0.15); position: absolute; top: 0.5rem; right: 1rem; line-height: 1; }
+        .pillar-name { font-weight: 700; color: #10b981; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .pillar-headline { font-size: 1rem; color: #f5f5f5; font-weight: 600; margin-bottom: 1rem; line-height: 1.4; }
+        .pillar-points { list-style: none; padding: 0; margin: 0; }
+        .pillar-points li { font-size: 0.9rem; color: #d4d4d4; padding: 0.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: flex-start; gap: 0.5rem; }
+        .pillar-points li::before { content: '→'; color: #10b981; font-weight: bold; }
+        .pillar-points li:last-child { border-bottom: none; }
+
+        /* === TOUCHPOINT GRID === */
+        .touchpoint-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
+        .touchpoint-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1.25rem; }
+        .touchpoint-name { font-weight: 700; color: #10b981; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+        .touchpoint-headline { font-size: 1.1rem; color: #f5f5f5; font-weight: 600; margin-bottom: 0.5rem; line-height: 1.3; }
+        .touchpoint-subheadline { font-size: 0.9rem; color: #d4d4d4; line-height: 1.4; }
+        .touchpoint-cta { display: inline-block; margin-top: 0.75rem; padding: 0.5rem 1rem; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #0a0a0a; font-weight: 600; font-size: 0.85rem; border-radius: 6px; }
+
+        /* === OBJECTION GRID === */
+        .objection-grid { display: grid; gap: 1rem; margin-top: 1.5rem; }
+        .objection-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; overflow: hidden; }
+        .objection-header { background: rgba(245, 101, 101, 0.1); padding: 1rem 1.25rem; border-bottom: 1px solid rgba(245, 101, 101, 0.2); }
+        .objection-text { font-size: 1rem; color: #fc8181; font-style: italic; }
+        .objection-response { padding: 1.25rem; }
+        .response-step { display: flex; gap: 0.75rem; margin-bottom: 0.75rem; }
+        .response-step:last-child { margin-bottom: 0; }
+        .response-label { font-size: 0.75rem; font-weight: 700; color: #10b981; text-transform: uppercase; min-width: 80px; }
+        .response-content { font-size: 0.9rem; color: #d4d4d4; line-height: 1.4; }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 1200px) { .jtbd-grid, .pillar-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { .jtbd-grid, .pillar-grid, .pain-gain-grid, .touchpoint-grid { grid-template-columns: 1fr; } .benefit-level-1, .benefit-level-2, .benefit-level-3 { width: 100%; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ════════════════════════════════════════════════════════════════════════
+             HEADER
+             ════════════════════════════════════════════════════════════════════════ -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">StratArts Business Analysis</div>
+                <h1>Value Proposition Crafter</h1>
+                <div class="subtitle">PetPulse - Smart Pet Health Monitoring Platform</div>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span>📅</span>
+                        <span>Generated: December 18, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>📊</span>
+                        <span>Analysis Type: Jobs-to-be-Done Framework</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🎯</span>
+                        <span>Version 1.0.0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ════════════════════════════════════════════════════════════════════════
+             SCORE BANNER
+             ════════════════════════════════════════════════════════════════════════ -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">8.9/10</div>
+                    <div class="score-label">Value Proposition Strength</div>
+                </div>
+
+                <div class="score-interpretation">
+                    <div class="interpretation-title">What This Score Means</div>
+                    <div class="interpretation-text">
+                        PetPulse's value proposition scores 8.9/10, indicating a strong, differentiated message that resonates deeply with target customers. The JTBD analysis reveals excellent alignment across functional, emotional, and social jobs, with particularly strong emotional resonance (9.2/10) driven by pet parent anxiety relief.
+                    </div>
+                </div>
+
+                <div class="verdict-badge">
+                    ✓ STRONG VALUE PROP
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════════════
+             MAIN CONTENT
+             ════════════════════════════════════════════════════════════════════════ -->
+        <div class="content">
+            <!-- Section 1: Jobs-to-be-Done Analysis -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Jobs-to-be-Done Analysis</h2>
+                    <p class="section-description">Understanding the functional, emotional, and social jobs customers are hiring PetPulse to accomplish.</p>
+                </div>
+                <div class="jtbd-grid">
+                    <div class="jtbd-card">
+                        <div class="jtbd-header">
+                            <span class="jtbd-type">Functional Job</span>
+                            <span class="jtbd-score">8.7</span>
+                        </div>
+                        <div class="jtbd-statement">"When my pet shows subtle behavioral changes, I want to detect potential health issues early, so I can get timely treatment and avoid expensive emergency vet visits."</div>
+                        <div class="jtbd-example"><strong>Key Trigger:</strong> Noticing pet eating less, sleeping more, or acting differently without obvious cause</div>
+                    </div>
+                    <div class="jtbd-card">
+                        <div class="jtbd-header">
+                            <span class="jtbd-type">Emotional Job</span>
+                            <span class="jtbd-score">9.2</span>
+                        </div>
+                        <div class="jtbd-statement">"I want to feel reassured and at peace knowing my pet's health is being monitored 24/7, even when I can't be watching them."</div>
+                        <div class="jtbd-example"><strong>Core Emotion:</strong> Relief from constant worry about missing early warning signs of illness</div>
+                    </div>
+                    <div class="jtbd-card">
+                        <div class="jtbd-header">
+                            <span class="jtbd-type">Social Job</span>
+                            <span class="jtbd-score">8.4</span>
+                        </div>
+                        <div class="jtbd-statement">"I want to be perceived as a caring, responsible pet parent who provides the best possible care for my furry family member."</div>
+                        <div class="jtbd-example"><strong>Identity Signal:</strong> Being the pet parent who catches problems early and takes proactive action</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Value Proposition Statement -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Core Value Proposition</h2>
+                    <p class="section-description">The synthesized positioning statement that captures PetPulse's unique value.</p>
+                </div>
+                <div class="value-prop-box">
+                    <div class="value-prop-label">Primary Value Proposition</div>
+                    <div class="value-prop-statement">For <strong>premium pet parents</strong> who worry about their pet's health and want to catch problems early, <strong>PetPulse</strong> is a <strong>smart pet health monitoring platform</strong> that detects early warning signs and provides instant veterinary access 24/7.<br><br>Unlike reactive vet visits or generic pet trackers, we combine <strong>AI-powered health monitoring</strong> with <strong>on-demand telehealth consultations</strong> — reducing emergency vet visits by 40%.</div>
+                </div>
+            </section>
+
+            <!-- Section 3: Pains & Gains Map -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Customer Pains & Gains</h2>
+                    <p class="section-description">High-priority pain points PetPulse relieves and desired gains it creates.</p>
+                </div>
+                <div class="pain-gain-grid">
+                    <div class="pain-card">
+                        <div class="pain-gain-header">
+                            <span class="pain-title">PAIN #1: Health Anxiety</span>
+                            <span class="intensity-badge intensity-high">9/10 Intensity</span>
+                        </div>
+                        <div class="pain-gain-description">Constant anxiety about missing early warning signs of pet illness. Pets can't verbalize symptoms, leaving owners guessing.</div>
+                        <div class="pain-gain-frequency">Frequency: Daily</div>
+                    </div>
+                    <div class="gain-card">
+                        <div class="pain-gain-header">
+                            <span class="gain-title">GAIN #1: 24/7 Peace of Mind</span>
+                            <span class="intensity-badge value-high">9/10 Value</span>
+                        </div>
+                        <div class="pain-gain-description">Knowing pet's vital signs and activity patterns are monitored around the clock, with AI alerting to any concerning changes.</div>
+                        <div class="pain-gain-frequency">Frequency: Daily</div>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-gain-header">
+                            <span class="pain-title">PAIN #2: Emergency Costs</span>
+                            <span class="intensity-badge intensity-high">8/10 Intensity</span>
+                        </div>
+                        <div class="pain-gain-description">Expensive emergency vet visits ($800-$2,000+) when issues aren't caught early. Late detection means more severe treatment.</div>
+                        <div class="pain-gain-frequency">Frequency: Quarterly</div>
+                    </div>
+                    <div class="gain-card">
+                        <div class="pain-gain-header">
+                            <span class="gain-title">GAIN #2: Cost Savings</span>
+                            <span class="intensity-badge value-high">8/10 Value</span>
+                        </div>
+                        <div class="pain-gain-description">40% reduction in emergency vet visits through early detection. Average savings of $1,200/year on preventable emergency care.</div>
+                        <div class="pain-gain-frequency">Frequency: Monthly</div>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-gain-header">
+                            <span class="pain-title">PAIN #3: Vet Access</span>
+                            <span class="intensity-badge intensity-medium">7/10 Intensity</span>
+                        </div>
+                        <div class="pain-gain-description">Difficulty getting timely vet appointments. 2-3 week wait times for non-emergency visits, leaving concerns unanswered.</div>
+                        <div class="pain-gain-frequency">Frequency: Monthly</div>
+                    </div>
+                    <div class="gain-card">
+                        <div class="pain-gain-header">
+                            <span class="gain-title">GAIN #3: Instant Vet Access</span>
+                            <span class="intensity-badge value-high">8/10 Value</span>
+                        </div>
+                        <div class="pain-gain-description">On-demand telehealth consultations with licensed veterinarians. Answers within minutes, not weeks.</div>
+                        <div class="pain-gain-frequency">Frequency: Weekly</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Benefit Hierarchy -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Benefit Hierarchy</h2>
+                    <p class="section-description">Three levels of benefits from functional features to transformational outcomes.</p>
+                </div>
+                <div class="benefit-pyramid">
+                    <div class="benefit-level benefit-level-3">
+                        <span class="benefit-level-label">Transformational</span>
+                        <span class="benefit-level-content">Become the pet parent who never misses early warning signs • Extend your pet's healthy years • Live worry-free knowing you're providing the best care</span>
+                    </div>
+                    <div class="benefit-level benefit-level-2">
+                        <span class="benefit-level-label">Emotional</span>
+                        <span class="benefit-level-content">Peace of mind from 24/7 monitoring • Confidence in pet's health status • Relief from anxiety about missing symptoms • Trust in professional guidance</span>
+                    </div>
+                    <div class="benefit-level benefit-level-1">
+                        <span class="benefit-level-label">Functional</span>
+                        <span class="benefit-level-content">AI-powered health alerts • Real-time vital sign tracking • Activity & sleep monitoring • On-demand vet consultations • Health trend reports</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Visual Analysis -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Visual Analysis</h2>
+                    <p class="section-description">Patterns in customer jobs, competitive positioning, and messaging effectiveness.</p>
+                </div>
+                <div class="chart-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">Jobs-to-be-Done Profile</div>
+                        <div class="chart-subtitle">Relative strength of functional, emotional, and social job alignment</div>
+                        <div class="chart-wrapper"><canvas id="jtbdRadar"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Key Observations</div>
+                            <ul class="insight-list">
+                                <li><strong>Emotional job strongest (9.2)</strong> — Pet parent anxiety creates high urgency</li>
+                                <li><strong>Functional job well-defined (8.7)</strong> — Clear problem-solution fit</li>
+                                <li><strong>Social job supports positioning</strong> — "Responsible pet parent" identity</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Pain Intensity vs. Gain Value</div>
+                        <div class="chart-subtitle">Mapping customer pain points against desired outcomes</div>
+                        <div class="chart-wrapper"><canvas id="painGainChart"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Pain-Gain Analysis</div>
+                            <ul class="insight-list">
+                                <li><strong>Health anxiety highest pain</strong> — Lead messaging with peace of mind</li>
+                                <li><strong>Gains exceed pains</strong> — Strong value creation opportunity</li>
+                                <li><strong>Cost savings tangible</strong> — Use ROI in conversion messaging</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Benefit Distribution</div>
+                        <div class="chart-subtitle">Balance across functional, emotional, and transformational benefits</div>
+                        <div class="chart-wrapper"><canvas id="benefitPyramid"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Benefit Balance</div>
+                            <ul class="insight-list">
+                                <li><strong>Strong functional foundation</strong> — Credible feature set supports claims</li>
+                                <li><strong>Emotional benefits dominant</strong> — Align with premium positioning</li>
+                                <li><strong>Transformation drives loyalty</strong> — Long-term customer value</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Competitive Positioning Map</div>
+                        <div class="chart-subtitle">Position relative to competitors on key decision criteria</div>
+                        <div class="chart-wrapper"><canvas id="positioningChart"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Positioning Strategy</div>
+                            <ul class="insight-list">
+                                <li><strong>Own upper-right quadrant</strong> — Health intelligence + vet access</li>
+                                <li><strong>Differentiated from trackers</strong> — Not just location, but health</li>
+                                <li><strong>Premium positioning justified</strong> — Unique telehealth integration</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chart-card full-width">
+                        <div class="chart-title">Messaging Pillar Effectiveness</div>
+                        <div class="chart-subtitle">Strength scores for each core messaging pillar</div>
+                        <div class="chart-wrapper"><canvas id="messagingPillarChart"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Messaging Analysis</div>
+                            <ul class="insight-list">
+                                <li><strong>Early Detection strongest (9.1)</strong> — Lead with prevention narrative</li>
+                                <li><strong>24/7 Peace of Mind (8.8)</strong> — Emotional anchor for premium pricing</li>
+                                <li><strong>Instant Vet Access (8.5)</strong> — Key differentiator from competitors</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Messaging Pillars -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Core Messaging Pillars</h2>
+                    <p class="section-description">Three foundational messages supporting PetPulse's value proposition.</p>
+                </div>
+                <div class="pillar-grid">
+                    <div class="pillar-card">
+                        <div class="pillar-number">1</div>
+                        <div class="pillar-name">Early Detection</div>
+                        <div class="pillar-headline">"Catch problems before they become emergencies"</div>
+                        <ul class="pillar-points">
+                            <li>AI detects subtle changes humans miss</li>
+                            <li>40% reduction in emergency vet visits</li>
+                            <li>Alerts within hours, not days</li>
+                            <li>Proof: 15,000 early detections in beta</li>
+                        </ul>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-number">2</div>
+                        <div class="pillar-name">24/7 Peace of Mind</div>
+                        <div class="pillar-headline">"Your pet's health, monitored around the clock"</div>
+                        <ul class="pillar-points">
+                            <li>Continuous vital sign monitoring</li>
+                            <li>Activity & sleep pattern tracking</li>
+                            <li>Instant alerts for anomalies</li>
+                            <li>Proof: 95% of users report reduced anxiety</li>
+                        </ul>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-number">3</div>
+                        <div class="pillar-name">Instant Vet Access</div>
+                        <div class="pillar-headline">"A veterinarian when you need one, without the wait"</div>
+                        <ul class="pillar-points">
+                            <li>On-demand telehealth consultations</li>
+                            <li>Average response time: 4 minutes</li>
+                            <li>Licensed vets across all 50 states</li>
+                            <li>Proof: 4.9★ consultation satisfaction</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Messaging by Touchpoint -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Messaging by Touchpoint</h2>
+                    <p class="section-description">Tailored messaging for different channels and journey stages.</p>
+                </div>
+                <div class="touchpoint-grid">
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-name">Homepage Hero</div>
+                        <div class="touchpoint-headline">Know your pet is healthy. Every day.</div>
+                        <div class="touchpoint-subheadline">PetPulse monitors your pet's health 24/7 and connects you with vets instantly — because early detection saves lives (and money).</div>
+                        <div class="touchpoint-cta">Start Free Trial</div>
+                    </div>
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-name">Google Ads</div>
+                        <div class="touchpoint-headline">Pet Health Monitoring | 24/7</div>
+                        <div class="touchpoint-subheadline">AI-powered alerts + instant vet access. Catch health issues early. Try free for 30 days.</div>
+                    </div>
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-name">Email Subject</div>
+                        <div class="touchpoint-headline">Would you know if your pet was getting sick?</div>
+                        <div class="touchpoint-subheadline">Most pet health issues start with subtle signs that are easy to miss. Here's how PetPulse helps you catch them early...</div>
+                    </div>
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-name">LinkedIn Post</div>
+                        <div class="touchpoint-headline">The average emergency vet visit costs $1,200.</div>
+                        <div class="touchpoint-subheadline">Most are preventable with early detection. PetPulse uses AI to spot subtle health changes in your pet before they become emergencies. 40% fewer ER visits for our users.</div>
+                    </div>
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-name">30-Second Pitch</div>
+                        <div class="touchpoint-headline">"Pet parents worry constantly about their pet's health..."</div>
+                        <div class="touchpoint-subheadline">...and most health issues start with subtle signs that are easy to miss. PetPulse is a smart collar that monitors your pet's health 24/7 and connects you with vets instantly. Unlike GPS trackers, we focus on health — detecting early warning signs and reducing emergency vet visits by 40%.</div>
+                    </div>
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-name">Onboarding</div>
+                        <div class="touchpoint-headline">Welcome to peace of mind.</div>
+                        <div class="touchpoint-subheadline">In the next 2 minutes, you'll set up 24/7 health monitoring for your pet. First, let's get your collar synced and meet your pet's new health dashboard.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 8: Objection Handling -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Objection Handling Framework</h2>
+                    <p class="section-description">Anticipated objections with Acknowledge-Reframe-Evidence-Bridge responses.</p>
+                </div>
+                <div class="objection-grid">
+                    <div class="objection-card">
+                        <div class="objection-header">
+                            <div class="objection-text">"$25/month is too expensive for a pet subscription."</div>
+                        </div>
+                        <div class="objection-response">
+                            <div class="response-step">
+                                <span class="response-label">Acknowledge</span>
+                                <span class="response-content">I understand — there are a lot of pet subscriptions out there.</span>
+                            </div>
+                            <div class="response-step">
+                                <span class="response-label">Reframe</span>
+                                <span class="response-content">How much was your last emergency vet visit? The average is $1,200. PetPulse pays for itself with one prevented emergency.</span>
+                            </div>
+                            <div class="response-step">
+                                <span class="response-label">Evidence</span>
+                                <span class="response-content">Our users see a 40% reduction in emergency visits — that's $1,200+ in annual savings on average.</span>
+                            </div>
+                            <div class="response-step">
+                                <span class="response-label">Bridge</span>
+                                <span class="response-content">Plus, we offer a 30-day free trial so you can experience the peace of mind before paying anything.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="objection-card">
+                        <div class="objection-header">
+                            <div class="objection-text">"I already have a GPS tracker for my pet."</div>
+                        </div>
+                        <div class="objection-response">
+                            <div class="response-step">
+                                <span class="response-label">Acknowledge</span>
+                                <span class="response-content">GPS trackers are great for knowing where your pet is.</span>
+                            </div>
+                            <div class="response-step">
+                                <span class="response-label">Reframe</span>
+                                <span class="response-content">But do they tell you how your pet is? Health issues don't start with location — they start with subtle changes in activity, sleep, and vital signs.</span>
+                            </div>
+                            <div class="response-step">
+                                <span class="response-label">Evidence</span>
+                                <span class="response-content">PetPulse detected health anomalies in 15,000+ pets during beta — none of which would be caught by a GPS tracker.</span>
+                            </div>
+                            <div class="response-step">
+                                <span class="response-label">Bridge</span>
+                                <span class="response-content">Think of PetPulse as the health counterpart to your GPS — location + health = complete peace of mind.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="objection-card">
+                        <div class="objection-header">
+                            <div class="objection-text">"My vet is only 10 minutes away — I don't need telehealth."</div>
+                        </div>
+                        <div class="objection-response">
+                            <div class="response-step">
+                                <span class="response-label">Acknowledge</span>
+                                <span class="response-content">That's great that you have a vet nearby.</span>
+                            </div>
+                            <div class="response-step">
+                                <span class="response-label">Reframe</span>
+                                <span class="response-content">But how long does it take to get an appointment? Most non-emergency visits are 2-3 weeks out. And what about 2am when your pet is acting strange?</span>
+                            </div>
+                            <div class="response-step">
+                                <span class="response-label">Evidence</span>
+                                <span class="response-content">PetPulse telehealth has a 4-minute average response time, 24/7. 68% of consultations are outside normal vet hours.</span>
+                            </div>
+                            <div class="response-step">
+                                <span class="response-label">Bridge</span>
+                                <span class="response-content">We're not replacing your vet — we're giving you expert guidance for those "should I be worried?" moments in between visits.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════════════
+             FOOTER
+             ════════════════════════════════════════════════════════════════════════ -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | value-proposition-crafter-v1.0.0</p>
+                <p style="margin-top: 5px;">Context Signature: value-proposition-crafter-v1.0.0 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // ════════════════════════════════════════════════════════════════════════════
+        // CHART.JS GLOBAL CONFIGURATION
+        // ════════════════════════════════════════════════════════════════════════════
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        // Standard tooltip configuration
+        const tooltipConfig = {
+            backgroundColor: '#1a1a1a',
+            titleColor: '#f5f5f5',
+            bodyColor: '#d4d4d4',
+            borderColor: '#10b981',
+            borderWidth: 1
+        };
+
+        // Color palette
+        const COLORS = {
+            primary: '#10b981',
+            primaryLight: '#14b8a6',
+            primaryDark: '#059669',
+            primaryDarker: '#047857',
+            primaryDarkest: '#065f46',
+            gray: '#a3a3a3',
+            backgrounds: [
+                'rgba(16, 185, 129, 0.4)',
+                'rgba(16, 185, 129, 0.6)',
+                'rgba(16, 185, 129, 0.8)',
+                'rgba(16, 185, 129, 0.9)',
+                'rgba(20, 184, 166, 0.8)',
+                'rgba(5, 150, 105, 0.8)'
+            ],
+            borders: ['#10b981', '#14b8a6', '#059669', '#047857', '#065f46']
+        };
+
+        // ════════════════════════════════════════════════════════════════════════════
+        // SKILL-SPECIFIC CHART CODE - VALUE PROPOSITION CRAFTER
+        // ════════════════════════════════════════════════════════════════════════════
+        const data = {
+            jtbd: {
+                labels: ['Functional', 'Emotional', 'Social', 'Urgency', 'Frequency'],
+                values: [8.7, 9.2, 8.4, 8.8, 8.5]
+            },
+            painGain: {
+                pains: { labels: ['Health Anxiety', 'Emergency Costs', 'Vet Access'], values: [9, 8, 7] },
+                gains: { labels: ['24/7 Peace of Mind', 'Cost Savings', 'Instant Vet Access'], values: [9, 8, 8] }
+            },
+            benefits: { labels: ['Functional', 'Emotional', 'Transformational'], values: [40, 35, 25] },
+            positioning: {
+                you: { x: 8.5, y: 8.8, label: 'PetPulse' },
+                competitors: [
+                    { x: 7.0, y: 3.0, label: 'Fi Collar' },
+                    { x: 6.5, y: 2.5, label: 'Whistle' },
+                    { x: 3.0, y: 6.0, label: 'Fuzzy Telehealth' },
+                    { x: 2.0, y: 2.0, label: 'Traditional Vet' }
+                ]
+            },
+            pillars: { labels: ['Early Detection', '24/7 Peace of Mind', 'Instant Vet Access'], values: [9.1, 8.8, 8.5] }
+        };
+
+        // Chart 1: JTBD Radar
+        new Chart(document.getElementById('jtbdRadar'), {
+            type: 'radar',
+            data: { labels: data.jtbd.labels, datasets: [{ label: 'Job Alignment', data: data.jtbd.values, backgroundColor: 'rgba(16, 185, 129, 0.2)', borderColor: '#10b981', borderWidth: 3, pointBackgroundColor: '#10b981', pointRadius: 6, pointBorderWidth: 2 }] },
+            options: { responsive: true, maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 10, ticks: { color: '#a3a3a3', stepSize: 2 }, grid: { color: 'rgba(16, 185, 129, 0.1)' }, pointLabels: { color: '#f5f5f5', font: { size: 12, weight: '600' } } } }, plugins: { legend: { display: false }, tooltip: tooltipConfig } }
+        });
+
+        // Chart 2: Pain/Gain Horizontal Bar
+        new Chart(document.getElementById('painGainChart'), {
+            type: 'bar',
+            data: { labels: [...data.painGain.pains.labels, ...data.painGain.gains.labels], datasets: [{ data: [...data.painGain.pains.values.map(v => -v), ...data.painGain.gains.values], backgroundColor: ['#fc8181', '#fc8181', '#fc8181', '#10b981', '#10b981', '#10b981'], borderRadius: 6 }] },
+            options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { min: -10, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3', callback: v => Math.abs(v) } }, y: { grid: { display: false }, ticks: { color: '#f5f5f5' } } }, plugins: { legend: { display: false }, tooltip: tooltipConfig } }
+        });
+
+        // Chart 3: Benefit Distribution Doughnut
+        new Chart(document.getElementById('benefitPyramid'), {
+            type: 'doughnut',
+            data: { labels: data.benefits.labels, datasets: [{ data: data.benefits.values, backgroundColor: ['#10b981', '#14b8a6', '#0d9488'], borderWidth: 0 }] },
+            options: { responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5', padding: 20 } }, tooltip: tooltipConfig } }
+        });
+
+        // Chart 4: Competitive Positioning Scatter
+        new Chart(document.getElementById('positioningChart'), {
+            type: 'scatter',
+            data: { datasets: [{ label: data.positioning.you.label, data: [{ x: data.positioning.you.x, y: data.positioning.you.y }], backgroundColor: '#10b981', borderColor: '#14b8a6', borderWidth: 3, pointRadius: 16 }, { label: 'Competitors', data: data.positioning.competitors, backgroundColor: 'rgba(163, 163, 163, 0.6)', borderColor: '#a3a3a3', pointRadius: 10 }] },
+            options: { responsive: true, maintainAspectRatio: false, scales: { x: { title: { display: true, text: 'Health Intelligence', color: '#a3a3a3' }, min: 0, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' } }, y: { title: { display: true, text: 'Vet Access Speed', color: '#a3a3a3' }, min: 0, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' } } }, plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig } }
+        });
+
+        // Chart 5: Messaging Pillar Bar Chart
+        new Chart(document.getElementById('messagingPillarChart'), {
+            type: 'bar',
+            data: { labels: data.pillars.labels, datasets: [{ data: data.pillars.values, backgroundColor: '#10b981', borderRadius: 6 }] },
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' } }, x: { grid: { display: false }, ticks: { color: '#f5f5f5', font: { weight: '600' } } } }, plugins: { legend: { display: false }, tooltip: tooltipConfig } }
+        });
+
+        // Print-friendly chart colors
+        window.addEventListener('beforeprint', function() {
+            Chart.defaults.color = '#000000';
+        });
+
+        window.addEventListener('afterprint', function() {
+            Chart.defaults.color = '#a3a3a3';
+        });
+    </script>
+
+    <!-- STRATARTS_CONTEXT_SIGNATURE
+    skill: value-proposition-crafter
+    version: 1.0.0
+    date: 2025-12-18
+    project_dir: D:\AI\projects\stratarts\examples\petpulse
+    business_name: PetPulse
+    key_outputs:
+      - Value Proposition Statement
+      - JTBD Analysis (functional: 8.7, emotional: 9.2, social: 8.4)
+      - Benefit Hierarchy (3 levels)
+      - 3 Messaging Pillars (Early Detection, 24/7 Peace of Mind, Instant Vet Access)
+      - Competitive Positioning (Health Intelligence x Vet Access Speed)
+      - Objection Handling Framework (3 objections)
+      - Messaging by Touchpoint (6 channels)
+    END_STRATARTS_CONTEXT -->
+</body>
+</html>

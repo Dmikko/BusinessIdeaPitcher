@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Building Strategy - PetPulse | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #0a0a0a;
+        }
+
+        /* === HEADER === */
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .header-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* === SCORE BANNER === */
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-main {
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .score-interpretation {
+            border-left: 3px solid #10b981;
+            padding-left: 2rem;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #f5f5f5;
+        }
+
+        .interpretation-text {
+            color: #d4d4d4;
+            line-height: 1.7;
+        }
+
+        .verdict-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        /* === CONTENT === */
+        .content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 4rem;
+            background: #0a0a0a;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: #d4d4d4;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+
+        /* === GRIDS === */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-card .label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .metric-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #10b981;
+            line-height: 1.2;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: #1a1a1a;
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .feature-card.primary {
+            border-color: #10b981;
+        }
+
+        .feature-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .feature-name {
+            font-weight: 700;
+            color: #f5f5f5;
+            font-size: 1.1rem;
+        }
+
+        .feature-score {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .feature-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            color: #d4d4d4;
+            line-height: 1.6;
+        }
+
+        .small-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .small-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .small-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .small-name {
+            font-weight: 700;
+            color: #f5f5f5;
+            font-size: 0.95rem;
+        }
+
+        .small-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .small-description {
+            font-size: 0.85rem;
+            color: #d4d4d4;
+            line-height: 1.5;
+        }
+
+        /* === CHART === */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-subtitle {
+            font-size: 0.9rem;
+            color: #a3a3a3;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+        }
+
+        /* === ENGAGEMENT LADDER === */
+        .engagement-ladder {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin: 2rem 0;
+        }
+
+        .ladder-rung {
+            display: flex;
+            align-items: center;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            padding: 1.25rem 1.5rem;
+        }
+
+        .ladder-rung:first-child {
+            border-radius: 12px 12px 0 0;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), #1a1a1a);
+        }
+
+        .ladder-rung:last-child {
+            border-radius: 0 0 12px 12px;
+        }
+
+        .rung-level {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1.125rem;
+            margin-right: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .rung-content {
+            flex: 1;
+        }
+
+        .rung-name {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .rung-description {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .rung-percentage {
+            text-align: right;
+        }
+
+        .percentage-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .percentage-label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        /* === RITUALS === */
+        .ritual-card {
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .ritual-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .ritual-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .ritual-info {
+            flex: 1;
+        }
+
+        .ritual-name {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .ritual-frequency {
+            color: #10b981;
+            font-size: 0.8rem;
+        }
+
+        .ritual-description {
+            color: #888;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .ritual-benefits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .benefit-tag {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+        }
+
+        /* === MEMBER ROLES === */
+        .member-persona {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .persona-avatar {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin: 0 auto 1rem;
+        }
+
+        .persona-name {
+            text-align: center;
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .persona-type {
+            text-align: center;
+            color: #10b981;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .persona-traits {
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .trait-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .trait-item:last-child {
+            border-bottom: none;
+        }
+
+        .trait-label {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .trait-value {
+            color: #ccc;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* === MILESTONES === */
+        .growth-milestone {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+            margin-bottom: 0.75rem;
+        }
+
+        .milestone-target {
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .target-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .target-label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .milestone-info {
+            flex: 1;
+            border-left: 1px solid #2a2a2a;
+            padding-left: 1rem;
+        }
+
+        .milestone-name {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .milestone-actions {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .milestone-timeline {
+            color: #10b981;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* === MODERATION === */
+        .moderation-rule {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .moderation-rule:last-child {
+            border-bottom: none;
+        }
+
+        .rule-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .rule-content {
+            flex: 1;
+        }
+
+        .rule-title {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .rule-description {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        /* === HEALTH === */
+        .health-metric {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .health-metric:last-child {
+            border-bottom: none;
+        }
+
+        .metric-name {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .metric-score {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .score-bar {
+            width: 100px;
+            height: 8px;
+            background: #2a2a2a;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .score-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #059669);
+            border-radius: 4px;
+        }
+
+        .score-value {
+            color: #10b981;
+            font-weight: 600;
+            font-size: 0.9rem;
+            min-width: 40px;
+            text-align: right;
+        }
+
+        /* === INSIGHTS === */
+        .insights-panel {
+            background: #0a0a0a;
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .insight-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .insight-list {
+            list-style: none;
+        }
+
+        .insight-list li {
+            padding: 0.6rem 0;
+            color: #d4d4d4;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .insight-list li:last-child {
+            border-bottom: none;
+        }
+
+        .insight-list li strong {
+            color: #10b981;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content strong {
+            color: #10b981;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 1200px) {
+            .metric-grid, .small-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .chart-grid, .feature-grid { grid-template-columns: 1fr; }
+            .metric-grid, .small-grid { grid-template-columns: 1fr; }
+            .score-container { grid-template-columns: 1fr; text-align: center; }
+            .score-interpretation { border-left: none; border-top: 3px solid #10b981; padding-left: 0; padding-top: 1.5rem; }
+            .header-content, .score-container, .content, .footer-content { padding: 2rem; }
+            .ladder-rung { flex-direction: column; text-align: center; gap: 1rem; }
+            .rung-level { margin-right: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">Community Building Strategy</div>
+                <h1>PetPulse Community</h1>
+                <div class="subtitle">Building a thriving community of devoted pet health advocates</div>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span>📅</span>
+                        <span>Generated: December 18, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>📊</span>
+                        <span>Analysis Type: Product Community</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🎯</span>
+                        <span>Version 1.0.0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SCORE BANNER -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">8.5</div>
+                    <div class="score-label">Community Readiness Score</div>
+                </div>
+
+                <div class="score-interpretation">
+                    <div class="interpretation-title">Excellent Community Opportunity</div>
+                    <div class="interpretation-text">
+                        PetPulse has strong community potential with passionate pet parents who naturally share
+                        health tips and stories. The product's continuous data stream creates ongoing engagement
+                        hooks. Premium customers ($19-49/mo) tend to be highly engaged community members.
+                    </div>
+                </div>
+
+                <div class="verdict-badge">
+                    PRODUCT COMMUNITY
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+            <!-- Executive Summary -->
+            <div class="section">
+                <h2 class="section-title">Community Strategy Overview</h2>
+                <p class="section-description">
+                    The PetPulse Pack community will bring together devoted pet parents who want to give their
+                    furry family members the best care possible. By combining peer support, health education,
+                    and exclusive access, we'll build a community that reduces churn, generates referrals, and
+                    creates passionate brand advocates.
+                </p>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <div class="label">6-Month Target</div>
+                        <div class="value">2,000</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">DAU/MAU Goal</div>
+                        <div class="value">25%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Weekly Events</div>
+                        <div class="value">4</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Champion Target</div>
+                        <div class="value">50</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community Value Proposition -->
+            <div class="section">
+                <h2 class="section-title">Community Value Proposition</h2>
+
+                <div class="feature-grid">
+                    <div class="feature-card primary">
+                        <div class="feature-header">
+                            <span class="feature-name">💬 Peer Pet Health Support</span>
+                            <span class="feature-score">#1</span>
+                        </div>
+                        <div class="feature-badge">Core Value</div>
+                        <div class="feature-description">
+                            Get answers to pet health questions from experienced pet parents who've been there.
+                            "Is this reading normal?" "What did you do when..." - community answers in minutes,
+                            not days. Share concerns without judgment.
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <span class="feature-name">🎓 Expert Health Education</span>
+                            <span class="feature-score">#2</span>
+                        </div>
+                        <div class="feature-badge">Emotional Value</div>
+                        <div class="feature-description">
+                            Monthly vet-led Q&As, breed-specific health guides, and early detection tips from
+                            experts. Learn to read your pet's data like a pro. First access to new health
+                            monitoring features and research.
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <span class="feature-name">🏆 Shared Pet Stories</span>
+                            <span class="feature-score">#3</span>
+                        </div>
+                        <div class="feature-badge">Social Value</div>
+                        <div class="feature-description">
+                            Celebrate milestones - successful vet visits, health improvements, catch-early stories.
+                            Share photos, brag about your fur babies, and connect with others who understand
+                            the pet parent life.
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <span class="feature-name">🔮 Product Influence</span>
+                            <span class="feature-score">#4</span>
+                        </div>
+                        <div class="feature-badge">Exclusive Value</div>
+                        <div class="feature-description">
+                            Shape PetPulse's future. Beta test new features, vote on roadmap priorities,
+                            join focus groups with founders. Your feedback directly impacts what we build next.
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; background: #1a1a1a; border-radius: 12px; padding: 2rem; border-left: 4px solid #10b981;">
+                    <h3 style="color: #10b981; margin-bottom: 1rem; font-size: 1.25rem;">Community Tagline</h3>
+                    <p style="font-size: 1.5rem; color: #fff; font-weight: 600;">"Where Pet Parents Help Each Other Give the Best Care"</p>
+                </div>
+            </div>
+
+            <!-- Platform Selection -->
+            <div class="section">
+                <h2 class="section-title">Platform Selection: Discord</h2>
+                <p class="section-description">
+                    Discord provides the perfect blend of real-time chat, organized channels, and community features
+                    for PetPulse's tech-savvy, premium pet parents.
+                </p>
+
+                <div class="chart-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">Platform Comparison</div>
+                        <div class="chart-subtitle">Scoring across key community criteria</div>
+                        <div class="chart-wrapper">
+                            <canvas id="platformChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="insights-panel" style="margin: 0;">
+                            <div class="insight-title">Why Discord Wins</div>
+                            <ul class="insight-list">
+                                <li><strong>Free to scale</strong> - No per-member costs as community grows</li>
+                                <li><strong>Rich engagement</strong> - Voice, video, threads, reactions</li>
+                                <li><strong>Mobile-first</strong> - Pet parents can engage on-the-go</li>
+                                <li><strong>Bot ecosystem</strong> - Automate welcomes, recognition, moderation</li>
+                                <li><strong>Premium audience fit</strong> - Tech-savvy, active community users</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: #f5f5f5;">Channel Structure</h3>
+                <div class="small-grid">
+                    <div class="small-card">
+                        <div class="small-name">📌 START HERE</div>
+                        <div class="small-description" style="margin-top: 0.5rem;">
+                            #welcome<br>
+                            #rules<br>
+                            #announcements
+                        </div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-name">💬 COMMUNITY</div>
+                        <div class="small-description" style="margin-top: 0.5rem;">
+                            #general-chat<br>
+                            #introductions<br>
+                            #pet-photos<br>
+                            #wins-and-milestones
+                        </div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-name">🏥 PET HEALTH</div>
+                        <div class="small-description" style="margin-top: 0.5rem;">
+                            #health-questions<br>
+                            #reading-my-data<br>
+                            #breed-health<br>
+                            #senior-pets
+                        </div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-name">🎯 PETPULSE</div>
+                        <div class="small-description" style="margin-top: 0.5rem;">
+                            #tips-and-tricks<br>
+                            #feature-requests<br>
+                            #bug-reports<br>
+                            #beta-testers
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Member Roles -->
+            <div class="section">
+                <h2 class="section-title">Member Roles</h2>
+
+                <div class="small-grid">
+                    <div class="member-persona">
+                        <div class="persona-avatar">👑</div>
+                        <div class="persona-name">Admins</div>
+                        <div class="persona-type">PetPulse Team</div>
+                        <div class="persona-traits">
+                            <div class="trait-item">
+                                <span class="trait-label">Count</span>
+                                <span class="trait-value">3-4</span>
+                            </div>
+                            <div class="trait-item">
+                                <span class="trait-label">Access</span>
+                                <span class="trait-value">Full</span>
+                            </div>
+                            <div class="trait-item">
+                                <span class="trait-label">Role</span>
+                                <span class="trait-value">Direction & Policy</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-persona">
+                        <div class="persona-avatar">🛡️</div>
+                        <div class="persona-name">Pack Leaders</div>
+                        <div class="persona-type">Moderators</div>
+                        <div class="persona-traits">
+                            <div class="trait-item">
+                                <span class="trait-label">Count</span>
+                                <span class="trait-value">10-15</span>
+                            </div>
+                            <div class="trait-item">
+                                <span class="trait-label">Access</span>
+                                <span class="trait-value">Moderate</span>
+                            </div>
+                            <div class="trait-item">
+                                <span class="trait-label">Role</span>
+                                <span class="trait-value">Guide & Support</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-persona">
+                        <div class="persona-avatar">⭐</div>
+                        <div class="persona-name">Alpha Dogs</div>
+                        <div class="persona-type">Champions</div>
+                        <div class="persona-traits">
+                            <div class="trait-item">
+                                <span class="trait-label">Count</span>
+                                <span class="trait-value">50</span>
+                            </div>
+                            <div class="trait-item">
+                                <span class="trait-label">Access</span>
+                                <span class="trait-value">Early Access</span>
+                            </div>
+                            <div class="trait-item">
+                                <span class="trait-label">Role</span>
+                                <span class="trait-value">Advocate & Help</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-persona">
+                        <div class="persona-avatar">🐕</div>
+                        <div class="persona-name">Pack Members</div>
+                        <div class="persona-type">Standard Members</div>
+                        <div class="persona-traits">
+                            <div class="trait-item">
+                                <span class="trait-label">Count</span>
+                                <span class="trait-value">2,000+</span>
+                            </div>
+                            <div class="trait-item">
+                                <span class="trait-label">Access</span>
+                                <span class="trait-value">Standard</span>
+                            </div>
+                            <div class="trait-item">
+                                <span class="trait-label">Role</span>
+                                <span class="trait-value">Participate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Engagement Ladder -->
+            <div class="section">
+                <h2 class="section-title">Member Journey & Engagement Ladder</h2>
+                <p class="section-description">
+                    Moving members from passive lurkers to passionate champions through intentional design.
+                </p>
+
+                <div class="engagement-ladder">
+                    <div class="ladder-rung">
+                        <div class="rung-level">👑</div>
+                        <div class="rung-content">
+                            <div class="rung-name">Champions (Alpha Dogs)</div>
+                            <div class="rung-description">Answer questions, create content, refer new members, shape product direction</div>
+                        </div>
+                        <div class="rung-percentage">
+                            <div class="percentage-value">2%</div>
+                            <div class="percentage-label">of members</div>
+                        </div>
+                    </div>
+                    <div class="ladder-rung">
+                        <div class="rung-level">✨</div>
+                        <div class="rung-content">
+                            <div class="rung-name">Creators</div>
+                            <div class="rung-description">Share detailed health stories, post tutorials, host discussions</div>
+                        </div>
+                        <div class="rung-percentage">
+                            <div class="percentage-value">8%</div>
+                            <div class="percentage-label">of members</div>
+                        </div>
+                    </div>
+                    <div class="ladder-rung">
+                        <div class="rung-level">💬</div>
+                        <div class="rung-content">
+                            <div class="rung-name">Contributors</div>
+                            <div class="rung-description">Comment, react, answer simple questions, share pet photos</div>
+                        </div>
+                        <div class="rung-percentage">
+                            <div class="percentage-value">30%</div>
+                            <div class="percentage-label">of members</div>
+                        </div>
+                    </div>
+                    <div class="ladder-rung">
+                        <div class="rung-level">👀</div>
+                        <div class="rung-content">
+                            <div class="rung-name">Lurkers</div>
+                            <div class="rung-description">Read content, learn from others, haven't posted yet</div>
+                        </div>
+                        <div class="rung-percentage">
+                            <div class="percentage-value">60%</div>
+                            <div class="percentage-label">of members</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">Engagement Distribution</div>
+                        <div class="chart-subtitle">Target vs actual member participation</div>
+                        <div class="chart-wrapper">
+                            <canvas id="engagementChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="insights-panel" style="margin: 0;">
+                            <div class="insight-title">Engagement Tactics</div>
+                            <ul class="insight-list">
+                                <li><strong>Lurker → Contributor:</strong> Pet photo prompts, easy reaction-based polls, "What's your pet's name?" intro threads</li>
+                                <li><strong>Contributor → Creator:</strong> "Share your story" weekly threads, badge recognition, feature in newsletter</li>
+                                <li><strong>Creator → Champion:</strong> Moderator invitations, exclusive Alpha Dogs channel, direct founder access</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community Programming -->
+            <div class="section">
+                <h2 class="section-title">Community Programming & Rituals</h2>
+                <p class="section-description">
+                    Consistent rituals build habit and give members reasons to return.
+                </p>
+
+                <div class="feature-grid">
+                    <div class="ritual-card">
+                        <div class="ritual-header">
+                            <div class="ritual-icon">🌅</div>
+                            <div class="ritual-info">
+                                <div class="ritual-name">Morning Check-In</div>
+                                <div class="ritual-frequency">Daily, 8am</div>
+                            </div>
+                        </div>
+                        <div class="ritual-description">
+                            "Good morning, Pack! How are your fur babies doing today?" Simple daily
+                            engagement prompt with pet wellness check-in.
+                        </div>
+                        <div class="ritual-benefits">
+                            <span class="benefit-tag">Habit Building</span>
+                            <span class="benefit-tag">Low Barrier</span>
+                        </div>
+                    </div>
+                    <div class="ritual-card">
+                        <div class="ritual-header">
+                            <div class="ritual-icon">🎉</div>
+                            <div class="ritual-info">
+                                <div class="ritual-name">Friday Wins</div>
+                                <div class="ritual-frequency">Weekly, Friday 4pm</div>
+                            </div>
+                        </div>
+                        <div class="ritual-description">
+                            Celebrate the week's pet health wins - good vet visits, resolved concerns,
+                            health improvements detected by PetPulse. Positive reinforcement.
+                        </div>
+                        <div class="ritual-benefits">
+                            <span class="benefit-tag">Celebration</span>
+                            <span class="benefit-tag">Social Proof</span>
+                        </div>
+                    </div>
+                    <div class="ritual-card">
+                        <div class="ritual-header">
+                            <div class="ritual-icon">👩‍⚕️</div>
+                            <div class="ritual-info">
+                                <div class="ritual-name">Ask the Vet AMA</div>
+                                <div class="ritual-frequency">Monthly, 1st Wednesday</div>
+                            </div>
+                        </div>
+                        <div class="ritual-description">
+                            Live Q&A with veterinarian partners. Members submit questions, vet provides
+                            guidance on general pet health topics. High value, exclusive content.
+                        </div>
+                        <div class="ritual-benefits">
+                            <span class="benefit-tag">Expert Value</span>
+                            <span class="benefit-tag">Exclusive</span>
+                        </div>
+                    </div>
+                    <div class="ritual-card">
+                        <div class="ritual-header">
+                            <div class="ritual-icon">🔬</div>
+                            <div class="ritual-info">
+                                <div class="ritual-name">Beta Preview</div>
+                                <div class="ritual-frequency">Monthly, 3rd Wednesday</div>
+                            </div>
+                        </div>
+                        <div class="ritual-description">
+                            Sneak peek at upcoming PetPulse features. Community provides feedback before
+                            launch. Members feel like insiders shaping the product.
+                        </div>
+                        <div class="ritual-benefits">
+                            <span class="benefit-tag">Insider Access</span>
+                            <span class="benefit-tag">Product Influence</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-grid" style="margin-top: 2rem;">
+                    <div class="chart-card full-width">
+                        <div class="chart-title">Weekly Programming Schedule</div>
+                        <div class="chart-subtitle">Activity distribution across the week</div>
+                        <div class="chart-wrapper">
+                            <canvas id="programmingChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moderation & Guidelines -->
+            <div class="section">
+                <h2 class="section-title">Moderation & Community Guidelines</h2>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3 style="color: #10b981; margin-bottom: 1rem;">Community Rules</h3>
+                        <div class="moderation-rule">
+                            <div class="rule-icon">🤝</div>
+                            <div class="rule-content">
+                                <div class="rule-title">1. Be Respectful & Supportive</div>
+                                <div class="rule-description">Pet parenting is emotional. Support each other, no judgment on pet care choices.</div>
+                            </div>
+                        </div>
+                        <div class="moderation-rule">
+                            <div class="rule-icon">🚫</div>
+                            <div class="rule-content">
+                                <div class="rule-title">2. No Medical Diagnosis</div>
+                                <div class="rule-description">Share experiences, not diagnoses. Always recommend consulting a vet for health concerns.</div>
+                            </div>
+                        </div>
+                        <div class="moderation-rule">
+                            <div class="rule-icon">🎯</div>
+                            <div class="rule-content">
+                                <div class="rule-title">3. Stay On Topic</div>
+                                <div class="rule-description">Pet health and PetPulse discussions in main channels. Off-topic in #random.</div>
+                            </div>
+                        </div>
+                        <div class="moderation-rule">
+                            <div class="rule-icon">🚫</div>
+                            <div class="rule-content">
+                                <div class="rule-title">4. No Spam or Self-Promotion</div>
+                                <div class="rule-description">No promoting products or services without explicit permission.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <h3 style="color: #10b981; margin-bottom: 1rem;">Moderation Approach</h3>
+                        <div style="color: #d4d4d4; line-height: 1.8;">
+                            <p><strong style="color: #fff;">Philosophy:</strong> Light touch with rapid response</p>
+                            <p style="margin-top: 1rem;"><strong style="color: #fff;">Team:</strong></p>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>3-4 PetPulse team admins</li>
+                                <li>10-15 Pack Leaders (community mods)</li>
+                                <li>1 mod per 100 active members target</li>
+                            </ul>
+                            <p style="margin-top: 1rem;"><strong style="color: #fff;">Response Times:</strong></p>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>Spam: &lt;1 hour (automod)</li>
+                                <li>Violations: &lt;4 hours</li>
+                                <li>Appeals: &lt;48 hours</li>
+                            </ul>
+                            <p style="margin-top: 1rem;"><strong style="color: #fff;">Escalation:</strong> Warning → 24hr timeout → 7-day ban → Permanent</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Growth Strategy -->
+            <div class="section">
+                <h2 class="section-title">Growth Strategy & Milestones</h2>
+
+                <div class="growth-milestone">
+                    <div class="milestone-target">
+                        <div class="target-number">100</div>
+                        <div class="target-label">Members</div>
+                    </div>
+                    <div class="milestone-info">
+                        <div class="milestone-name">Founding Members (Pre-Launch)</div>
+                        <div class="milestone-actions">Invite power users, beta testers, social media engaged customers</div>
+                    </div>
+                    <div class="milestone-timeline">Month 1</div>
+                </div>
+
+                <div class="growth-milestone">
+                    <div class="milestone-target">
+                        <div class="target-number">500</div>
+                        <div class="target-label">Members</div>
+                    </div>
+                    <div class="milestone-info">
+                        <div class="milestone-name">Public Launch</div>
+                        <div class="milestone-actions">Email all customers, in-app announcement, social media campaign</div>
+                    </div>
+                    <div class="milestone-timeline">Month 2</div>
+                </div>
+
+                <div class="growth-milestone">
+                    <div class="milestone-target">
+                        <div class="target-number">1,000</div>
+                        <div class="target-label">Members</div>
+                    </div>
+                    <div class="milestone-info">
+                        <div class="milestone-name">Critical Mass</div>
+                        <div class="milestone-actions">Referral program live, organic conversations daily, member-led Q&A</div>
+                    </div>
+                    <div class="milestone-timeline">Month 4</div>
+                </div>
+
+                <div class="growth-milestone">
+                    <div class="milestone-target">
+                        <div class="target-number">2,000</div>
+                        <div class="target-label">Members</div>
+                    </div>
+                    <div class="milestone-info">
+                        <div class="milestone-name">Thriving Community</div>
+                        <div class="milestone-actions">Self-sustaining engagement, Champion program mature, viral referrals</div>
+                    </div>
+                    <div class="milestone-timeline">Month 6</div>
+                </div>
+
+                <div class="chart-grid" style="margin-top: 2rem;">
+                    <div class="chart-card">
+                        <div class="chart-title">6-Month Growth Projection</div>
+                        <div class="chart-subtitle">Total members vs active members</div>
+                        <div class="chart-wrapper">
+                            <canvas id="growthChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="insights-panel" style="margin: 0;">
+                            <div class="insight-title">Growth Channels</div>
+                            <ul class="insight-list">
+                                <li><strong>Product-Led (50%):</strong> In-app prompts at key moments, onboarding email drip, community badge in dashboard</li>
+                                <li><strong>Member-Led (30%):</strong> Referral rewards (1 month free), share-your-story social posts, member testimonials</li>
+                                <li><strong>Content-Led (15%):</strong> Community highlights in newsletter, SEO from forum content</li>
+                                <li><strong>Event-Led (5%):</strong> Vet AMA exclusivity, beta access FOMO</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community Health Metrics -->
+            <div class="section">
+                <h2 class="section-title">Success Metrics & Health Indicators</h2>
+
+                <div class="chart-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">Community Health Scorecard</div>
+                        <div class="chart-subtitle">Current vs target health metrics</div>
+                        <div class="chart-wrapper">
+                            <canvas id="healthChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h4 style="color: #10b981; margin-bottom: 1rem;">Key Performance Indicators</h4>
+                        <div class="health-metric">
+                            <span class="metric-name">DAU/MAU Ratio</span>
+                            <div class="metric-score">
+                                <div class="score-bar"><div class="score-fill" style="width: 83%;"></div></div>
+                                <span class="score-value">25%</span>
+                            </div>
+                        </div>
+                        <div class="health-metric">
+                            <span class="metric-name">30-Day Retention</span>
+                            <div class="metric-score">
+                                <div class="score-bar"><div class="score-fill" style="width: 75%;"></div></div>
+                                <span class="score-value">45%</span>
+                            </div>
+                        </div>
+                        <div class="health-metric">
+                            <span class="metric-name">Posts Per Day</span>
+                            <div class="metric-score">
+                                <div class="score-bar"><div class="score-fill" style="width: 80%;"></div></div>
+                                <span class="score-value">50+</span>
+                            </div>
+                        </div>
+                        <div class="health-metric">
+                            <span class="metric-name">Question Response Time</span>
+                            <div class="metric-score">
+                                <div class="score-bar"><div class="score-fill" style="width: 90%;"></div></div>
+                                <span class="score-value">&lt;2hr</span>
+                            </div>
+                        </div>
+                        <div class="health-metric">
+                            <span class="metric-name">Member Satisfaction</span>
+                            <div class="metric-score">
+                                <div class="score-bar"><div class="score-fill" style="width: 85%;"></div></div>
+                                <span class="score-value">4.5/5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-grid" style="margin-top: 2rem;">
+                    <div class="feature-card">
+                        <h4 style="color: #10b981; margin-bottom: 1rem;">✅ Healthy Community Signals</h4>
+                        <ul style="color: #d4d4d4; line-height: 2; list-style: none;">
+                            <li>✓ Members answer each other's questions (not just team)</li>
+                            <li>✓ New members welcomed by existing members</li>
+                            <li>✓ Organic conversations daily without prompting</li>
+                            <li>✓ Diverse contributors (not same 5 people)</li>
+                            <li>✓ Positive sentiment (celebrations > complaints)</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4 style="color: #ef4444; margin-bottom: 1rem;">⚠️ Warning Signs</h4>
+                        <ul style="color: #d4d4d4; line-height: 2; list-style: none;">
+                            <li>⚠ Ghost town - gaps between posts</li>
+                            <li>⚠ Team-only content - no member activity</li>
+                            <li>⚠ High churn - members leave quickly</li>
+                            <li>⚠ Negative sentiment - complaints dominant</li>
+                            <li>⚠ Clique-ish - new members feel excluded</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Implementation Timeline -->
+            <div class="section">
+                <h2 class="section-title">Implementation Roadmap</h2>
+
+                <div class="small-grid">
+                    <div class="small-card" style="border-top: 3px solid #10b981;">
+                        <div class="small-name">Phase 1: Setup</div>
+                        <div class="small-description" style="margin-top: 0.5rem;">
+                            <strong>Weeks 1-2</strong><br>
+                            • Create Discord server<br>
+                            • Configure channels & roles<br>
+                            • Set up bots & automod<br>
+                            • Write guidelines
+                        </div>
+                    </div>
+                    <div class="small-card" style="border-top: 3px solid #059669;">
+                        <div class="small-name">Phase 2: Founding</div>
+                        <div class="small-description" style="margin-top: 0.5rem;">
+                            <strong>Weeks 3-4</strong><br>
+                            • Invite 100 founding members<br>
+                            • Seed content & conversations<br>
+                            • Gather feedback<br>
+                            • Identify future mods
+                        </div>
+                    </div>
+                    <div class="small-card" style="border-top: 3px solid #047857;">
+                        <div class="small-name">Phase 3: Launch</div>
+                        <div class="small-description" style="margin-top: 0.5rem;">
+                            <strong>Week 5</strong><br>
+                            • Email all customers<br>
+                            • In-app announcement<br>
+                            • Social media campaign<br>
+                            • Team all-hands active
+                        </div>
+                    </div>
+                    <div class="small-card" style="border-top: 3px solid #065f46;">
+                        <div class="small-name">Phase 4: Scale</div>
+                        <div class="small-description" style="margin-top: 0.5rem;">
+                            <strong>Weeks 6-12</strong><br>
+                            • Establish rituals<br>
+                            • Launch referral program<br>
+                            • Recruit moderators<br>
+                            • Monthly health reviews
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="section">
+                <h2 class="section-title">Next Steps</h2>
+
+                <div class="feature-grid">
+                    <div class="feature-card primary">
+                        <h4 style="color: #10b981; margin-bottom: 1rem;">This Week</h4>
+                        <ul style="color: #d4d4d4; line-height: 2;">
+                            <li>□ Create Discord server with channel structure</li>
+                            <li>□ Configure roles and permissions</li>
+                            <li>□ Set up welcome bot (MEE6 or Carl-bot)</li>
+                            <li>□ Draft community guidelines post</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4 style="color: #10b981; margin-bottom: 1rem;">This Month</h4>
+                        <ul style="color: #d4d4d4; line-height: 2;">
+                            <li>□ Invite 100 founding members</li>
+                            <li>□ Seed first week of content</li>
+                            <li>□ Host first Vet AMA</li>
+                            <li>□ Prepare launch email campaign</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | community-building-strategist-v1.0.0</p>
+                <p style="margin-top: 5px;">Context Signature: community-building-strategist-v1.0.0 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        // Platform Comparison Chart
+        const platformCtx = document.getElementById('platformChart');
+        if (platformCtx) {
+            new Chart(platformCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Ease of Use', 'Engagement', 'Moderation', 'Analytics', 'Scalability', 'Cost'],
+                    datasets: [{
+                        label: 'Discord',
+                        data: [8, 9, 8, 6, 9, 10],
+                        backgroundColor: 'rgba(88, 101, 242, 0.2)',
+                        borderColor: '#5865f2',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#5865f2'
+                    }, {
+                        label: 'Slack',
+                        data: [9, 7, 7, 7, 6, 5],
+                        backgroundColor: 'rgba(74, 21, 75, 0.2)',
+                        borderColor: '#4a154b',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#4a154b'
+                    }, {
+                        label: 'Circle',
+                        data: [7, 8, 9, 9, 8, 6],
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        borderColor: '#10b981',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#10b981'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 10,
+                            ticks: { color: '#888', stepSize: 2 },
+                            grid: { color: '#2a2a2a' },
+                            pointLabels: { color: '#ccc', font: { size: 11 } }
+                        }
+                    },
+                    plugins: {
+                        legend: { labels: { color: '#ccc' } }
+                    }
+                }
+            });
+        }
+
+        // Engagement Distribution Chart
+        const engagementCtx = document.getElementById('engagementChart');
+        if (engagementCtx) {
+            new Chart(engagementCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Lurkers (60%)', 'Contributors (30%)', 'Creators (8%)', 'Champions (2%)'],
+                    datasets: [{
+                        data: [60, 30, 8, 2],
+                        backgroundColor: ['#065f46', '#047857', '#059669', '#10b981'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: { color: '#ccc', padding: 15 }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Programming Chart
+        const programmingCtx = document.getElementById('programmingChart');
+        if (programmingCtx) {
+            new Chart(programmingCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                    datasets: [{
+                        label: 'Discussions',
+                        data: [2, 1, 2, 1, 3, 1, 1],
+                        backgroundColor: '#10b981',
+                        borderRadius: 4
+                    }, {
+                        label: 'Events',
+                        data: [0, 0, 1, 0, 1, 0, 0],
+                        backgroundColor: '#059669',
+                        borderRadius: 4
+                    }, {
+                        label: 'Content',
+                        data: [1, 1, 1, 1, 1, 0, 0],
+                        backgroundColor: '#047857',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            stacked: true,
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            stacked: true,
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { labels: { color: '#ccc' } }
+                    }
+                }
+            });
+        }
+
+        // Growth Chart
+        const growthCtx = document.getElementById('growthChart');
+        if (growthCtx) {
+            new Chart(growthCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                    datasets: [{
+                        label: 'Total Members',
+                        data: [100, 500, 800, 1200, 1600, 2000],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'Active Members (MAU)',
+                        data: [80, 350, 520, 720, 920, 1100],
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'transparent',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { labels: { color: '#ccc' } }
+                    }
+                }
+            });
+        }
+
+        // Health Chart
+        const healthCtx = document.getElementById('healthChart');
+        if (healthCtx) {
+            new Chart(healthCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Engagement', 'Retention', 'Growth', 'Sentiment', 'Response Time', 'Content Quality'],
+                    datasets: [{
+                        label: 'Target',
+                        data: [9, 8, 9, 9, 9, 9],
+                        backgroundColor: 'rgba(107, 114, 128, 0.1)',
+                        borderColor: '#6b7280',
+                        borderWidth: 2,
+                        borderDash: [5, 5]
+                    }, {
+                        label: '6-Month Goal',
+                        data: [8, 7, 9, 8, 8, 8],
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        borderColor: '#10b981',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#10b981'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 10,
+                            ticks: { color: '#888', stepSize: 2 },
+                            grid: { color: '#2a2a2a' },
+                            pointLabels: { color: '#ccc', font: { size: 11 } }
+                        }
+                    },
+                    plugins: {
+                        legend: { labels: { color: '#ccc' } }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

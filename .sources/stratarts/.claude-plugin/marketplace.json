@@ -1,0 +1,13 @@
+{
+  "name": "maigent",
+  "owner": {
+    "name": "Maigent"
+  },
+  "plugins": [
+    {
+      "name": "stratarts",
+      "source": "./stratarts",
+      "description": "27 professional business strategy skills: idea validation, market analysis, business modeling, marketing, metrics, and fundraising frameworks"
+    }
+  ]
+}

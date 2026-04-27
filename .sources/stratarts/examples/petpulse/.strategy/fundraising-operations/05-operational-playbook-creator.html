@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operational Playbook Creator - PetPulse | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #10b981;
+            --accent-dark: #059669;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #0a0a0a;
+        }
+
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* === SCORE BANNER === */
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .score-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .score-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+        }
+
+        /* === CONTENT SECTIONS === */
+        .content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 4rem;
+            background: #0a0a0a;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(16, 185, 129, 0.3);
+        }
+
+        h3 {
+            color: var(--accent);
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.1rem;
+        }
+
+        /* Operational Playbook Specific Styles */
+        .mission-vision-values {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .mvv-card {
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .mvv-card.mission { border-left-color: #10b981; }
+        .mvv-card.vision { border-left-color: #3b82f6; }
+
+        .mvv-card h4 {
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 12px;
+        }
+
+        .mvv-card p {
+            font-size: 1.1rem;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .value-item {
+            padding: 16px;
+            background: rgba(16, 185, 129, 0.05);
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .value-name {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .value-behavior {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+        }
+
+        .org-chart-container {
+            padding: 24px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .org-level {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .org-node {
+            padding: 16px 24px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            text-align: center;
+            min-width: 140px;
+        }
+
+        .org-node.ceo { background: var(--accent); color: #0a0a0a; }
+        .org-node.ceo .node-title { color: #0a0a0a; }
+
+        .node-title {
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        .node-count {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .process-card {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .process-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .process-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(16, 185, 129, 0.15);
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
+
+        .process-title {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 6px;
+        }
+
+        .step-time {
+            min-width: 100px;
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .meeting-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .meeting-card {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border-top: 3px solid var(--accent);
+        }
+
+        .meeting-name {
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .meeting-cadence {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent);
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .meeting-details {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .meeting-details span {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .channel-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .channel-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+        }
+
+        .channel-name {
+            font-family: monospace;
+            color: var(--accent);
+            min-width: 140px;
+        }
+
+        .channel-purpose {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .sla-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .sla-card {
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .sla-card.urgent { background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .sla-card.high { background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); }
+        .sla-card.normal { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); }
+
+        .sla-time {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .sla-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.5rem;
+        }
+
+        .sla-card.urgent .sla-time { color: #ef4444; }
+        .sla-card.high .sla-time { color: #f59e0b; }
+        .sla-card.normal .sla-time { color: #10b981; }
+
+        .okr-card {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .okr-objective {
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .key-results {
+            padding-left: 16px;
+        }
+
+        .key-result {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .kr-indicator {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent);
+            color: #0a0a0a;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .tool-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+        }
+
+        .tool-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(16, 185, 129, 0.15);
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
+
+        .tool-name {
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .tool-category {
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        .onboarding-timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 24px 0;
+        }
+
+        .onboarding-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--accent);
+        }
+
+        .timeline-stage {
+            position: relative;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+
+        .timeline-stage::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 24px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid #0a0a0a;
+        }
+
+        .stage-label {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--accent);
+            color: #0a0a0a;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .stage-tasks {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .stage-tasks li {
+            margin-bottom: 4px;
+        }
+
+        .ritual-card {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .ritual-cadence {
+            min-width: 80px;
+            padding: 8px 12px;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent);
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .ritual-content {
+            flex: 1;
+        }
+
+        .ritual-name {
+            color: #ffffff;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .ritual-description {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Next Steps */
+        .next-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .next-step-item {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .next-step-item strong {
+            color: var(--accent);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .chart-container canvas {
+            max-height: 350px;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content strong {
+            color: #10b981;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .score-container { grid-template-columns: repeat(3, 1fr); }
+            .sla-grid { grid-template-columns: 1fr; }
+            .header-content { padding: 2rem; }
+            .content { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="kicker">StratArts Operational Playbook Creator</div>
+                <h1>PetPulse Operating System</h1>
+                <div class="subtitle">Comprehensive operational playbook for scaling from 9 to 53 employees</div>
+                <div class="meta-info">
+                    <span>Generated: December 18, 2025</span>
+                    <span>Stage: Series A</span>
+                    <span>Version 1.0</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-item">
+                    <div class="score-value">9</div>
+                    <div class="score-label">Headcount</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">5</div>
+                    <div class="score-label">Departments</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">5</div>
+                    <div class="score-label">Core Processes</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">9</div>
+                    <div class="score-label">Meetings</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">14</div>
+                    <div class="score-label">Tools</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">16</div>
+                    <div class="score-label">Y1 Target</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Section 1: Company Foundation -->
+            <section class="section">
+                <h2 class="section-title">1. Company Foundation</h2>
+                <div class="mission-vision-values">
+                    <div class="mvv-card mission">
+                        <h4>Mission</h4>
+                        <p>Empower pet parents to keep their furry family members healthy and happy through continuous, AI-powered health monitoring that catches issues before they become emergencies.</p>
+                    </div>
+                    <div class="mvv-card vision">
+                        <h4>Vision</h4>
+                        <p>Become the trusted health companion for every pet family worldwide - the platform that veterinarians recommend and pet parents love, reducing preventable pet health crises by 50% within a decade.</p>
+                    </div>
+                </div>
+
+                <h3>Core Values</h3>
+                <div class="value-item">
+                    <div class="value-name">Pet Parents First</div>
+                    <div class="value-behavior">"We talk to 10 pet parents every week. Every feature starts with their pain points, not our assumptions."</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-name">Science-Backed, Vet-Validated</div>
+                    <div class="value-behavior">"No feature ships without veterinary review. We earn trust through clinical accuracy, not marketing claims."</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-name">Move Fast, Care Deeply</div>
+                    <div class="value-behavior">"Ship in days, not months. But never ship something that could harm a pet or mislead a parent."</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-name">Own It</div>
+                    <div class="value-behavior">"No 'that's not my job.' If you see a problem, you own fixing it until someone else explicitly takes over."</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-name">Celebrate the Pack</div>
+                    <div class="value-behavior">"We win as a team. Share credit generously, give feedback kindly, and lift each other up."</div>
+                </div>
+            </section>
+
+            <!-- Section 2: Organizational Structure -->
+            <section class="section">
+                <h2 class="section-title">2. Organizational Structure</h2>
+                <div class="org-chart-container">
+                    <div class="org-level">
+                        <div class="org-node ceo">
+                            <div class="node-title">Sarah Mitchell</div>
+                            <div class="node-count">CEO & Co-Founder</div>
+                        </div>
+                    </div>
+                    <div class="org-level">
+                        <div class="org-node">
+                            <div class="node-title">James Chen</div>
+                            <div class="node-count">CTO (3 engineers)</div>
+                        </div>
+                        <div class="org-node">
+                            <div class="node-title">Dr. Emily Rodriguez</div>
+                            <div class="node-count">CVO (1 vet tech)</div>
+                        </div>
+                        <div class="org-node">
+                            <div class="node-title">TBD</div>
+                            <div class="node-count">VP Sales (2 AEs)</div>
+                        </div>
+                        <div class="org-node">
+                            <div class="node-title">TBD</div>
+                            <div class="node-count">Ops (1 CSM, 1 Ops)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="headcountChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Section 3: Core Processes -->
+            <section class="section">
+                <h2 class="section-title">3. Core Processes</h2>
+
+                <div class="process-card">
+                    <div class="process-header">
+                        <div class="process-icon">Eng</div>
+                        <div class="process-title">Engineering Process</div>
+                    </div>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <span class="step-time">Sprint Cadence</span>
+                            <span>2-week sprints, aligned with product roadmap</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-time">Sprint Planning</span>
+                            <span>Monday 9am, 2 hours - CTO + Engineering + PM</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-time">Daily Standup</span>
+                            <span>10am, 15 minutes - What I did, doing, blockers</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-time">Code Review</span>
+                            <span>All PRs require 1 approval (CTO reviews ML/sensor code)</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-time">Deployment</span>
+                            <span>Continuous deployment to staging, production Friday 4pm</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="process-card">
+                    <div class="process-header">
+                        <div class="process-icon">Prod</div>
+                        <div class="process-title">Product Process</div>
+                    </div>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <span class="step-time">Discovery</span>
+                            <span>10 customer interviews/week, Dovetail for synthesis</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-time">Roadmap</span>
+                            <span>Quarterly planning, prioritized by RICE score</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-time">Feature Spec</span>
+                            <span>PRD template: Problem, Solution, Success Metrics, Mocks</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-time">Launch</span>
+                            <span>Internal beta (1 week) -> External beta (1 week) -> GA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="process-card">
+                    <div class="process-header">
+                        <div class="process-icon">Sales</div>
+                        <div class="process-title">Sales Process</div>
+                    </div>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <span class="step-time">Lead Qual</span>
+                            <span>Website lead scored by: pet owner, engagement, location</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-time">Sales Stages</span>
+                            <span>Lead -> Interested -> Demo Scheduled -> Purchased -> Activated</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-time">Demo</span>
+                            <span>15-minute product tour via Zoom or in-app guided tour</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-time">Follow-up</span>
+                            <span>Day 1, 3, 7 email sequence for unconverted leads</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="process-card">
+                    <div class="process-header">
+                        <div class="process-icon">CS</div>
+                        <div class="process-title">Customer Success Process</div>
+                    </div>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <span class="step-time">Onboarding</span>
+                            <span>Day 0 welcome email, Day 3/7/14/30 check-ins</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-time">Health Score</span>
+                            <span>Weekly review of at-risk customers (engagement < 3 days/week)</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-time">Support</span>
+                            <span>Intercom chat, email - 4-hour response SLA</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-time">Renewal</span>
+                            <span>Outreach 30 days before annual renewal, discount for multi-year</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="process-card">
+                    <div class="process-header">
+                        <div class="process-icon">Mkt</div>
+                        <div class="process-title">Marketing Process</div>
+                    </div>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <span class="step-time">Content</span>
+                            <span>2 blog posts/week, 1 email newsletter/week, 1 case study/month</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-time">Social</span>
+                            <span>Daily posts on Instagram/TikTok, weekly on LinkedIn</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-time">Lead Routing</span>
+                            <span>Inbound leads routed to sales within 5 minutes via HubSpot</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-time">Campaigns</span>
+                            <span>Monthly campaign planning, A/B test all ads</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Meeting Rhythms -->
+            <section class="section">
+                <h2 class="section-title">4. Meeting Rhythms</h2>
+                <div class="meeting-grid">
+                    <div class="meeting-card">
+                        <div class="meeting-cadence">Daily</div>
+                        <div class="meeting-name">Engineering Standup</div>
+                        <div class="meeting-details">
+                            <span>Time: 10am, 15 min</span>
+                            <span>Who: Engineering + Product</span>
+                            <span>Format: Yesterday, today, blockers</span>
+                        </div>
+                    </div>
+                    <div class="meeting-card">
+                        <div class="meeting-cadence">Weekly</div>
+                        <div class="meeting-name">Leadership Sync</div>
+                        <div class="meeting-details">
+                            <span>Time: Monday 9am, 1 hour</span>
+                            <span>Who: CEO, CTO, CVO, Leads</span>
+                            <span>Agenda: Metrics, priorities, blockers</span>
+                        </div>
+                    </div>
+                    <div class="meeting-card">
+                        <div class="meeting-cadence">Weekly</div>
+                        <div class="meeting-name">Friday Wins</div>
+                        <div class="meeting-details">
+                            <span>Time: Friday 4pm, 30 min</span>
+                            <span>Who: Entire company</span>
+                            <span>Format: Each team shares 1-2 wins</span>
+                        </div>
+                    </div>
+                    <div class="meeting-card">
+                        <div class="meeting-cadence">Bi-Weekly</div>
+                        <div class="meeting-name">Sprint Planning</div>
+                        <div class="meeting-details">
+                            <span>Time: Monday 9am, 2 hours</span>
+                            <span>Who: Engineering + Product</span>
+                            <span>Output: Sprint backlog committed</span>
+                        </div>
+                    </div>
+                    <div class="meeting-card">
+                        <div class="meeting-cadence">Bi-Weekly</div>
+                        <div class="meeting-name">Sprint Retro</div>
+                        <div class="meeting-details">
+                            <span>Time: Friday 3pm, 1 hour</span>
+                            <span>Who: Engineering + Product</span>
+                            <span>Format: What worked, what didn't, actions</span>
+                        </div>
+                    </div>
+                    <div class="meeting-card">
+                        <div class="meeting-cadence">Monthly</div>
+                        <div class="meeting-name">All-Hands</div>
+                        <div class="meeting-details">
+                            <span>Time: First Wednesday, 1 hour</span>
+                            <span>Who: Entire company</span>
+                            <span>Agenda: Metrics, updates, Q&A</span>
+                        </div>
+                    </div>
+                    <div class="meeting-card">
+                        <div class="meeting-cadence">Monthly</div>
+                        <div class="meeting-name">Board Update</div>
+                        <div class="meeting-details">
+                            <span>Time: Last Friday, 2 hours</span>
+                            <span>Who: Board + CEO</span>
+                            <span>Materials: Deck sent 48hr prior</span>
+                        </div>
+                    </div>
+                    <div class="meeting-card">
+                        <div class="meeting-cadence">Quarterly</div>
+                        <div class="meeting-name">OKR Planning</div>
+                        <div class="meeting-details">
+                            <span>Time: Last week of quarter, 4 hours</span>
+                            <span>Who: Leadership team</span>
+                            <span>Output: Q+1 OKRs, roadmap, hiring</span>
+                        </div>
+                    </div>
+                    <div class="meeting-card">
+                        <div class="meeting-cadence">Quarterly</div>
+                        <div class="meeting-name">Team Offsite</div>
+                        <div class="meeting-details">
+                            <span>Time: First week of quarter, 1 day</span>
+                            <span>Who: Entire company</span>
+                            <span>Format: Strategy, team building</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Communication Protocols -->
+            <section class="section">
+                <h2 class="section-title">5. Communication Protocols</h2>
+                <h3>Slack Channels</h3>
+                <div class="channel-list">
+                    <div class="channel-item">
+                        <span class="channel-name">#general</span>
+                        <span class="channel-purpose">Company-wide announcements, FYI updates</span>
+                    </div>
+                    <div class="channel-item">
+                        <span class="channel-name">#engineering</span>
+                        <span class="channel-purpose">Engineering discussions, PR reviews, deployment</span>
+                    </div>
+                    <div class="channel-item">
+                        <span class="channel-name">#product</span>
+                        <span class="channel-purpose">Product specs, customer research, roadmap</span>
+                    </div>
+                    <div class="channel-item">
+                        <span class="channel-name">#sales</span>
+                        <span class="channel-purpose">Lead alerts, deal updates, competitive intel</span>
+                    </div>
+                    <div class="channel-item">
+                        <span class="channel-name">#customer-success</span>
+                        <span class="channel-purpose">Support escalations, customer feedback</span>
+                    </div>
+                    <div class="channel-item">
+                        <span class="channel-name">#wins</span>
+                        <span class="channel-purpose">Celebrate closed deals, shipped features, customer love</span>
+                    </div>
+                    <div class="channel-item">
+                        <span class="channel-name">#alerts</span>
+                        <span class="channel-purpose">System alerts, incidents (PagerDuty integration)</span>
+                    </div>
+                    <div class="channel-item">
+                        <span class="channel-name">#random</span>
+                        <span class="channel-purpose">Off-topic, pets of PetPulse, fun stuff</span>
+                    </div>
+                </div>
+
+                <h3>Response Time SLAs</h3>
+                <div class="sla-grid">
+                    <div class="sla-card urgent">
+                        <div class="sla-time">&lt;15 min</div>
+                        <div class="sla-label">Urgent (P0 Incident)</div>
+                    </div>
+                    <div class="sla-card high">
+                        <div class="sla-time">&lt;2 hours</div>
+                        <div class="sla-label">High Priority</div>
+                    </div>
+                    <div class="sla-card normal">
+                        <div class="sla-time">&lt;24 hours</div>
+                        <div class="sla-label">Normal</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: OKRs & Goals -->
+            <section class="section">
+                <h2 class="section-title">6. OKRs & Goals (Q1 2026)</h2>
+
+                <div class="okr-card">
+                    <div class="okr-objective">Objective 1: Accelerate Revenue Growth</div>
+                    <div class="key-results">
+                        <div class="key-result">
+                            <span class="kr-indicator">1</span>
+                            <span>Grow MRR from $30K to $50K (+67%)</span>
+                        </div>
+                        <div class="key-result">
+                            <span class="kr-indicator">2</span>
+                            <span>Achieve 1,000 new subscribers (from 7,300 to 8,300)</span>
+                        </div>
+                        <div class="key-result">
+                            <span class="kr-indicator">3</span>
+                            <span>Improve D30 retention from 85% to 87%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="okr-card">
+                    <div class="okr-objective">Objective 2: Build World-Class Product</div>
+                    <div class="key-results">
+                        <div class="key-result">
+                            <span class="kr-indicator">1</span>
+                            <span>Launch Gen 2 collar prototype (smaller, 2x battery life)</span>
+                        </div>
+                        <div class="key-result">
+                            <span class="kr-indicator">2</span>
+                            <span>Achieve 95% AI accuracy on health anomaly detection</span>
+                        </div>
+                        <div class="key-result">
+                            <span class="kr-indicator">3</span>
+                            <span>Ship 3 major features (vet sharing, family mode, historical trends)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="okr-card">
+                    <div class="okr-objective">Objective 3: Prepare for Series A</div>
+                    <div class="key-results">
+                        <div class="key-result">
+                            <span class="kr-indicator">1</span>
+                            <span>Complete investor pitch deck and data room</span>
+                        </div>
+                        <div class="key-result">
+                            <span class="kr-indicator">2</span>
+                            <span>Secure 10 warm introductions to Tier 1 investors</span>
+                        </div>
+                        <div class="key-result">
+                            <span class="kr-indicator">3</span>
+                            <span>Hire VP Sales and 1 additional engineer</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Tools & Systems -->
+            <section class="section">
+                <h2 class="section-title">7. Tools & Systems</h2>
+                <div class="tool-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon">Chat</div>
+                        <div>
+                            <div class="tool-name">Slack</div>
+                            <div class="tool-category">Communication</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">Video</div>
+                        <div>
+                            <div class="tool-name">Zoom</div>
+                            <div class="tool-category">Meetings</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">Code</div>
+                        <div>
+                            <div class="tool-name">GitHub</div>
+                            <div class="tool-category">Engineering</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">Tasks</div>
+                        <div>
+                            <div class="tool-name">Linear</div>
+                            <div class="tool-category">Project Mgmt</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">Design</div>
+                        <div>
+                            <div class="tool-name">Figma</div>
+                            <div class="tool-category">Product</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">Cloud</div>
+                        <div>
+                            <div class="tool-name">AWS</div>
+                            <div class="tool-category">Infrastructure</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">Alert</div>
+                        <div>
+                            <div class="tool-name">PagerDuty</div>
+                            <div class="tool-category">On-Call</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">CRM</div>
+                        <div>
+                            <div class="tool-name">HubSpot</div>
+                            <div class="tool-category">Sales & Mktg</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">Support</div>
+                        <div>
+                            <div class="tool-name">Intercom</div>
+                            <div class="tool-category">Customer Support</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">Data</div>
+                        <div>
+                            <div class="tool-name">Mixpanel</div>
+                            <div class="tool-category">Analytics</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">Pay</div>
+                        <div>
+                            <div class="tool-name">Stripe</div>
+                            <div class="tool-category">Payments</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">Docs</div>
+                        <div>
+                            <div class="tool-name">Notion</div>
+                            <div class="tool-category">Documentation</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">HR</div>
+                        <div>
+                            <div class="tool-name">Gusto</div>
+                            <div class="tool-category">Payroll</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">Acc</div>
+                        <div>
+                            <div class="tool-name">QuickBooks</div>
+                            <div class="tool-category">Finance</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 8: Onboarding Playbook -->
+            <section class="section">
+                <h2 class="section-title">8. Onboarding Playbook</h2>
+                <div class="onboarding-timeline">
+                    <div class="timeline-stage">
+                        <div class="stage-label">Pre-Day 1</div>
+                        <ul class="stage-tasks">
+                            <li>Send welcome email with Day 1 logistics</li>
+                            <li>Set up Slack, GitHub, email, and tool accounts</li>
+                            <li>Ship laptop and PetPulse collar</li>
+                            <li>Add to org chart and relevant Slack channels</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-stage">
+                        <div class="stage-label">Day 1</div>
+                        <ul class="stage-tasks">
+                            <li>9am: Welcome meeting with manager (tour, intros, expectations)</li>
+                            <li>10am: IT setup (laptop, accounts, 2FA)</li>
+                            <li>11am: HR paperwork (I-9, benefits, equity docs)</li>
+                            <li>12pm: Team lunch (company pays)</li>
+                            <li>2pm: Company overview from CEO (mission, vision, strategy)</li>
+                            <li>3pm: Product deep-dive with CTO (architecture, roadmap)</li>
+                            <li>4pm: Meet your pet buddy (shadow a customer call)</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-stage">
+                        <div class="stage-label">Week 1</div>
+                        <ul class="stage-tasks">
+                            <li>Day 2: 1-on-1s with each department head (15 min each)</li>
+                            <li>Day 3: Read key docs (strategy, product roadmap, OKRs)</li>
+                            <li>Day 4: Set up your own pet on PetPulse (dogfooding)</li>
+                            <li>Day 5: First small project assigned (with mentor pairing)</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-stage">
+                        <div class="stage-label">Week 2-4</div>
+                        <ul class="stage-tasks">
+                            <li>Week 2: Ship first meaningful contribution (code, content, or deal)</li>
+                            <li>Week 3: Talk to 5 customers (understand their pet health journeys)</li>
+                            <li>Week 4: Present learnings to team (what surprised you?)</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-stage">
+                        <div class="stage-label">Day 30</div>
+                        <ul class="stage-tasks">
+                            <li>30-Day review with manager (what's working, what's not)</li>
+                            <li>Feedback survey (how was onboarding? what can we improve?)</li>
+                            <li>Set 90-day goals with manager</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 9: Company Culture & Rituals -->
+            <section class="section">
+                <h2 class="section-title">9. Company Culture & Rituals</h2>
+
+                <div class="ritual-card">
+                    <div class="ritual-cadence">Daily</div>
+                    <div class="ritual-content">
+                        <div class="ritual-name">#wins Channel</div>
+                        <div class="ritual-description">Share customer love, closed deals, shipped features, personal wins</div>
+                    </div>
+                </div>
+
+                <div class="ritual-card">
+                    <div class="ritual-cadence">Weekly</div>
+                    <div class="ritual-content">
+                        <div class="ritual-name">Friday Wins + Pet Photo Share</div>
+                        <div class="ritual-description">30-min all-hands to celebrate the week. Everyone shares a pet photo in Slack.</div>
+                    </div>
+                </div>
+
+                <div class="ritual-card">
+                    <div class="ritual-cadence">Weekly</div>
+                    <div class="ritual-content">
+                        <div class="ritual-name">Donut Coffee Chats</div>
+                        <div class="ritual-description">Slack bot randomly pairs team members for 15-min virtual coffee</div>
+                    </div>
+                </div>
+
+                <div class="ritual-card">
+                    <div class="ritual-cadence">Monthly</div>
+                    <div class="ritual-content">
+                        <div class="ritual-name">Pet Parent of the Month</div>
+                        <div class="ritual-description">Spotlight a customer with amazing PetPulse story. Share in All-Hands.</div>
+                    </div>
+                </div>
+
+                <div class="ritual-card">
+                    <div class="ritual-cadence">Quarterly</div>
+                    <div class="ritual-content">
+                        <div class="ritual-name">Team Offsite + Shelter Volunteer Day</div>
+                        <div class="ritual-description">Strategy session + volunteer at local pet shelter together</div>
+                    </div>
+                </div>
+
+                <div class="ritual-card">
+                    <div class="ritual-cadence">Annual</div>
+                    <div class="ritual-content">
+                        <div class="ritual-name">PetPulse Pack Retreat</div>
+                        <div class="ritual-description">2-3 day company retreat. Pet-friendly venue. Team building + vision setting.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 10: Next Steps -->
+            <section class="section">
+                <h2 class="section-title">10. Next Steps</h2>
+                <div class="next-steps">
+                    <div class="next-step-item">
+                        <strong>This Week</strong><br>
+                        Share playbook with entire team. Get feedback.
+                    </div>
+                    <div class="next-step-item">
+                        <strong>Week 2</strong><br>
+                        Set up all Slack channels and communication norms.
+                    </div>
+                    <div class="next-step-item">
+                        <strong>Week 3</strong><br>
+                        Document remaining processes (finance, legal, HR).
+                    </div>
+                    <div class="next-step-item">
+                        <strong>Week 4</strong><br>
+                        Create onboarding Notion workspace with all resources.
+                    </div>
+                    <div class="next-step-item">
+                        <strong>Monthly</strong><br>
+                        Review playbook with leadership. Update as needed.
+                    </div>
+                    <div class="next-step-item">
+                        <strong>Quarterly</strong><br>
+                        Full playbook review. Add new processes as team scales.
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | operational-playbook-creator-v1.0</p>
+                <p style="margin-top: 5px;">This playbook is a living document. Update quarterly as your company scales from 9 to 53 employees.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        // Headcount Growth Chart
+        const headcountCtx = document.getElementById('headcountChart');
+        if (headcountCtx) {
+            new Chart(headcountCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Current', 'Q1 2026', 'Q2 2026', 'Q3 2026', 'Q4 2026', 'Y2', 'Y3', 'Y4', 'Y5'],
+                    datasets: [{
+                        label: 'Headcount',
+                        data: [9, 12, 14, 16, 16, 26, 39, 53, 53],
+                        backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                        borderColor: '#10b981',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'Headcount Growth Plan (9 → 53 over 5 years)', color: '#ffffff' }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: 'rgba(255,255,255,0.7)' },
+                            grid: { color: 'rgba(255,255,255,0.1)' }
+                        },
+                        x: {
+                            ticks: { color: 'rgba(255,255,255,0.7)' },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

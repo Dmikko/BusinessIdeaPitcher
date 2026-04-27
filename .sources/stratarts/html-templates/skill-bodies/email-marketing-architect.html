@@ -1,0 +1,830 @@
+<!-- ═══ SKILL CSS START ═══ -->
+<style>
+    /* Email Marketing Architect Specific Styles */
+    .email-funnel {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        margin: 2rem 0;
+    }
+
+    .funnel-stage-email {
+        display: flex;
+        align-items: center;
+        background: #1a1a1a;
+        border: 1px solid #2a2a2a;
+        position: relative;
+        padding: 1.25rem 1.5rem;
+    }
+
+    .funnel-stage-email:first-child {
+        border-radius: 12px 12px 0 0;
+    }
+
+    .funnel-stage-email:last-child {
+        border-radius: 0 0 12px 12px;
+    }
+
+    .funnel-stage-email::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(to bottom, #10b981, #059669);
+    }
+
+    .stage-number {
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 0.9rem;
+        margin-right: 1rem;
+        flex-shrink: 0;
+    }
+
+    .stage-content {
+        flex: 1;
+    }
+
+    .stage-name-email {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .stage-emails {
+        color: #888;
+        font-size: 0.85rem;
+    }
+
+    .stage-metrics {
+        display: flex;
+        gap: 1.5rem;
+        text-align: right;
+    }
+
+    .stage-metric {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .metric-value-sm {
+        font-weight: 700;
+        color: #10b981;
+        font-size: 1rem;
+    }
+
+    .metric-label-sm {
+        font-size: 0.7rem;
+        color: #888;
+        text-transform: uppercase;
+    }
+
+    .email-sequence-card {
+        background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+        border-radius: 16px;
+        padding: 1.5rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .sequence-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .sequence-icon {
+        width: 48px;
+        height: 48px;
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .sequence-info {
+        flex: 1;
+    }
+
+    .sequence-name {
+        font-weight: 700;
+        color: #ffffff;
+        font-size: 1.125rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .sequence-trigger {
+        color: #10b981;
+        font-size: 0.8rem;
+    }
+
+    .email-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .email-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: #0a0a0a;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+    }
+
+    .email-day {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: #ffffff;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        min-width: 50px;
+        text-align: center;
+    }
+
+    .email-subject {
+        flex: 1;
+        color: #ccc;
+        font-size: 0.9rem;
+    }
+
+    .email-goal {
+        color: #888;
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 4px;
+    }
+
+    .segment-card {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .segment-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+
+    .segment-name {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 1rem;
+    }
+
+    .segment-size {
+        color: #10b981;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .segment-criteria {
+        background: #0a0a0a;
+        border-radius: 8px;
+        padding: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .criteria-label {
+        font-size: 0.7rem;
+        color: #888;
+        text-transform: uppercase;
+        margin-bottom: 0.25rem;
+    }
+
+    .criteria-value {
+        color: #ccc;
+        font-size: 0.85rem;
+    }
+
+    .segment-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .action-tag {
+        background: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+        font-size: 0.75rem;
+    }
+
+    .automation-flow {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin: 1.5rem 0;
+        padding: 1.5rem;
+        background: #1a1a1a;
+        border-radius: 12px;
+        border: 1px solid #2a2a2a;
+    }
+
+    .flow-step {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: #ffffff;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-align: center;
+    }
+
+    .flow-arrow {
+        color: #10b981;
+        font-size: 1.25rem;
+    }
+
+    .flow-condition {
+        background: rgba(245, 158, 11, 0.2);
+        color: #f59e0b;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .template-preview {
+        background: #0a0a0a;
+        border-radius: 12px;
+        padding: 1.5rem;
+        border: 1px solid #2a2a2a;
+        margin: 1rem 0;
+    }
+
+    .template-header {
+        border-bottom: 1px solid #2a2a2a;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .template-from {
+        font-size: 0.8rem;
+        color: #888;
+        margin-bottom: 0.25rem;
+    }
+
+    .template-subject-line {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #ffffff;
+    }
+
+    .template-body {
+        color: #ccc;
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .template-cta {
+        display: inline-block;
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: #ffffff;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        margin-top: 1rem;
+        text-decoration: none;
+    }
+
+    .kpi-benchmark {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .kpi-benchmark:last-child {
+        border-bottom: none;
+    }
+
+    .benchmark-label {
+        color: #ccc;
+        font-size: 0.9rem;
+    }
+
+    .benchmark-values {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    .benchmark-current {
+        color: #888;
+        font-size: 0.9rem;
+    }
+
+    .benchmark-target {
+        color: #10b981;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+        .funnel-stage-email {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .stage-metrics {
+            width: 100%;
+            justify-content: flex-start;
+        }
+
+        .automation-flow {
+            flex-direction: column;
+        }
+
+        .flow-arrow {
+            transform: rotate(90deg);
+        }
+    }
+</style>
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<div class="report-container">
+    <!-- Header Section -->
+    <header class="report-header">
+        <div class="header-content">
+            <div class="header-badge">EMAIL MARKETING</div>
+            <h1 class="report-title">{{COMPANY_NAME}}</h1>
+            <p class="report-subtitle">{{EMAIL_MISSION}}</p>
+        </div>
+        <div class="header-meta">
+            <div class="meta-item">
+                <span class="meta-label">Generated</span>
+                <span class="meta-value">{{GENERATION_DATE}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">List Size</span>
+                <span class="meta-value">{{LIST_SIZE}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">ESP Platform</span>
+                <span class="meta-value">{{ESP_PLATFORM}}</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Strategy Overview Section -->
+    <section class="content-section">
+        <h2 class="section-title">Email Strategy Overview</h2>
+
+        <p class="section-description">{{STRATEGY_OVERVIEW}}</p>
+
+        <div class="grid-4">
+            <div class="metric-card">
+                <div class="metric-label">Target Open Rate</div>
+                <div class="metric-value">{{OPEN_RATE_TARGET}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Target CTR</div>
+                <div class="metric-value">{{CTR_TARGET}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Weekly Sends</div>
+                <div class="metric-value">{{WEEKLY_SENDS}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Revenue Goal</div>
+                <div class="metric-value">{{REVENUE_GOAL}}</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Funnel Section -->
+    <section class="content-section">
+        <h2 class="section-title">Email Marketing Funnel</h2>
+
+        <div class="email-funnel">
+            {{EMAIL_FUNNEL_STAGES}}
+        </div>
+
+        <!-- Funnel Performance Chart -->
+        <div class="chart-container">
+            <canvas id="funnelChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Automated Sequences Section -->
+    <section class="content-section">
+        <h2 class="section-title">Automated Email Sequences</h2>
+
+        <p class="section-description">{{SEQUENCES_OVERVIEW}}</p>
+
+        <div class="grid-2">
+            {{SEQUENCE_CARDS}}
+        </div>
+
+        <!-- Sequence Performance Chart -->
+        <div class="chart-container">
+            <canvas id="sequenceChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Segmentation Strategy -->
+    <section class="content-section">
+        <h2 class="section-title">Segmentation Strategy</h2>
+
+        <p class="section-description">{{SEGMENTATION_OVERVIEW}}</p>
+
+        <div class="grid-3">
+            {{SEGMENT_CARDS}}
+        </div>
+
+        <!-- Segment Distribution Chart -->
+        <div class="chart-container">
+            <canvas id="segmentChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Automation Workflows -->
+    <section class="content-section">
+        <h2 class="section-title">Automation Workflows</h2>
+
+        <h3 class="subsection-title">Welcome Series Flow</h3>
+        <div class="automation-flow">
+            {{WELCOME_FLOW}}
+        </div>
+
+        <h3 class="subsection-title">Re-engagement Flow</h3>
+        <div class="automation-flow">
+            {{REENGAGEMENT_FLOW}}
+        </div>
+
+        <h3 class="subsection-title">Purchase Follow-up Flow</h3>
+        <div class="automation-flow">
+            {{PURCHASE_FLOW}}
+        </div>
+    </section>
+
+    <!-- Email Templates Section -->
+    <section class="content-section">
+        <h2 class="section-title">Email Template Framework</h2>
+
+        <div class="grid-2">
+            <div>
+                <h3 class="subsection-title">Welcome Email Template</h3>
+                <div class="template-preview">
+                    <div class="template-header">
+                        <div class="template-from">From: {{FROM_NAME}}</div>
+                        <div class="template-subject-line">{{WELCOME_SUBJECT}}</div>
+                    </div>
+                    <div class="template-body">
+                        {{WELCOME_BODY}}
+                    </div>
+                    <a class="template-cta">{{WELCOME_CTA}}</a>
+                </div>
+            </div>
+            <div>
+                <h3 class="subsection-title">Newsletter Template</h3>
+                <div class="template-preview">
+                    <div class="template-header">
+                        <div class="template-from">From: {{FROM_NAME}}</div>
+                        <div class="template-subject-line">{{NEWSLETTER_SUBJECT}}</div>
+                    </div>
+                    <div class="template-body">
+                        {{NEWSLETTER_BODY}}
+                    </div>
+                    <a class="template-cta">{{NEWSLETTER_CTA}}</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- A/B Testing Strategy -->
+    <section class="content-section">
+        <h2 class="section-title">A/B Testing Strategy</h2>
+
+        <div class="grid-2">
+            <div class="info-card">
+                <h4>Subject Line Tests</h4>
+                {{SUBJECT_LINE_TESTS}}
+            </div>
+            <div class="info-card">
+                <h4>Content Tests</h4>
+                {{CONTENT_TESTS}}
+            </div>
+        </div>
+
+        <!-- Testing Results Chart -->
+        <div class="chart-container">
+            <canvas id="testingChart"></canvas>
+        </div>
+    </section>
+
+    <!-- KPIs & Benchmarks -->
+    <section class="content-section">
+        <h2 class="section-title">KPIs & Industry Benchmarks</h2>
+
+        <div class="grid-2">
+            <div class="info-card">
+                <h4>Performance Metrics</h4>
+                {{KPI_BENCHMARKS}}
+            </div>
+            <div class="chart-container" style="min-height: 250px;">
+                <canvas id="benchmarkChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deliverability Section -->
+    <section class="content-section">
+        <h2 class="section-title">Deliverability Best Practices</h2>
+
+        <div class="grid-3">
+            <div class="info-card">
+                <h4>List Hygiene</h4>
+                {{LIST_HYGIENE}}
+            </div>
+            <div class="info-card">
+                <h4>Authentication</h4>
+                {{AUTHENTICATION}}
+            </div>
+            <div class="info-card">
+                <h4>Engagement</h4>
+                {{ENGAGEMENT_PRACTICES}}
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Timeline -->
+    <section class="content-section">
+        <h2 class="section-title">Implementation Timeline</h2>
+
+        <div class="timeline">
+            {{IMPLEMENTATION_TIMELINE}}
+        </div>
+    </section>
+
+    <!-- Report Footer -->
+    <footer class="report-footer">
+        <div class="footer-content">
+            <p class="footer-brand">Generated by StratArts Email Marketing Architect</p>
+            <p class="footer-disclaimer">This email strategy provides a framework for email marketing. Monitor deliverability metrics and adjust based on engagement data.</p>
+        </div>
+    </footer>
+</div>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Funnel Chart
+    const funnelCtx = document.getElementById('funnelChart');
+    if (funnelCtx) {
+        new Chart(funnelCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Subscribers', 'Opens', 'Clicks', 'Conversions'],
+                datasets: [{
+                    label: 'Funnel Performance',
+                    data: [10000, 3500, 700, 140],
+                    backgroundColor: [
+                        '#10b981',
+                        '#059669',
+                        '#047857',
+                        '#065f46'
+                    ],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Email Funnel Conversion',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // Sequence Performance Chart
+    const sequenceCtx = document.getElementById('sequenceChart');
+    if (sequenceCtx) {
+        new Chart(sequenceCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Welcome Series', 'Onboarding', 'Nurture', 'Re-engagement', 'Post-Purchase'],
+                datasets: [{
+                    label: 'Open Rate %',
+                    data: [65, 55, 35, 25, 45],
+                    backgroundColor: '#10b981',
+                    borderRadius: 4
+                }, {
+                    label: 'Click Rate %',
+                    data: [25, 20, 10, 8, 15],
+                    backgroundColor: '#059669',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 80,
+                        ticks: {
+                            color: '#888',
+                            callback: function(value) { return value + '%'; }
+                        },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Sequence Performance Comparison',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+
+    // Segment Distribution Chart
+    const segmentCtx = document.getElementById('segmentChart');
+    if (segmentCtx) {
+        new Chart(segmentCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Active Subscribers', 'New Subscribers', 'Inactive', 'High-Value', 'At-Risk'],
+                datasets: [{
+                    data: [45, 20, 15, 12, 8],
+                    backgroundColor: [
+                        '#10b981',
+                        '#059669',
+                        '#6b7280',
+                        '#047857',
+                        '#ef4444'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Subscriber Segment Distribution',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        position: 'right',
+                        labels: { color: '#ccc', padding: 15 }
+                    }
+                }
+            }
+        });
+    }
+
+    // A/B Testing Chart
+    const testingCtx = document.getElementById('testingChart');
+    if (testingCtx) {
+        new Chart(testingCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Subject Line A', 'Subject Line B', 'CTA Button A', 'CTA Button B', 'Layout A', 'Layout B'],
+                datasets: [{
+                    label: 'Open/Click Rate %',
+                    data: [35, 42, 12, 18, 28, 32],
+                    backgroundColor: function(context) {
+                        const index = context.dataIndex;
+                        // Highlight winners (B variants)
+                        return index % 2 === 1 ? '#10b981' : '#6b7280';
+                    },
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#888',
+                            callback: function(value) { return value + '%'; }
+                        },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'A/B Test Results (Winners in Green)',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // Benchmark Chart
+    const benchmarkCtx = document.getElementById('benchmarkChart');
+    if (benchmarkCtx) {
+        new Chart(benchmarkCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Open Rate', 'Click Rate', 'Conversion', 'Unsubscribe', 'Bounce Rate', 'List Growth'],
+                datasets: [{
+                    label: 'Your Performance',
+                    data: [35, 8, 2, 0.3, 0.5, 5],
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                    borderColor: '#10b981',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#10b981'
+                }, {
+                    label: 'Industry Benchmark',
+                    data: [25, 4, 1.5, 0.5, 1, 3],
+                    backgroundColor: 'rgba(107, 114, 128, 0.2)',
+                    borderColor: '#6b7280',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#6b7280'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        ticks: { color: '#888', stepSize: 10 },
+                        grid: { color: '#2a2a2a' },
+                        pointLabels: { color: '#ccc', font: { size: 11 } }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Performance vs Industry Benchmarks',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+<!-- ═══ SKILL JS END ═══ -->

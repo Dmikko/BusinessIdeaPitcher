@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Model Canvas | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        /* === RESET & BASE === */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif; background: #0a0a0a; color: #f5f5f5; line-height: 1.6; }
+        .container { margin: 0 auto; background: #0a0a0a; }
+
+        /* === HEADER === */
+        header { background: #0a0a0a; padding: 0; color: white; display: flex; justify-content: center; }
+        .header-content { position: relative; z-index: 1; max-width: 1600px; width: 100%; background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%); padding: 4rem 4rem 3rem 4rem; border-bottom: 1px solid rgba(16, 185, 129, 0.3); }
+        .header-content::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>'); opacity: 0.3; z-index: -1; }
+        .kicker { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; opacity: 0.9; margin-bottom: 0.5rem; }
+        h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
+        .subtitle { font-size: 1.3rem; opacity: 0.95; font-weight: 400; margin-bottom: 2rem; }
+        .meta-info { display: flex; gap: 2rem; font-size: 0.9rem; opacity: 0.9; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.2); }
+        .meta-item { display: flex; align-items: center; gap: 0.5rem; }
+
+        /* === SCORE BANNER === */
+        .score-banner { background: #0a0a0a; padding: 0; display: flex; justify-content: center; }
+        .score-container { display: grid; grid-template-columns: auto 1fr auto; gap: 3rem; align-items: center; max-width: 1600px; width: 100%; margin: 0 auto; padding: 3rem 4rem; background: #1a1a1a; border-bottom: 1px solid rgba(16, 185, 129, 0.2); }
+        .score-main { text-align: center; }
+        .score-number { font-size: 5rem; font-weight: 700; background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+        .score-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; color: #a3a3a3; margin-top: 0.5rem; font-weight: 600; }
+        .score-interpretation { border-left: 3px solid #10b981; padding-left: 2rem; }
+        .interpretation-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; color: #f5f5f5; }
+        .interpretation-text { color: #d4d4d4; line-height: 1.7; }
+        .verdict-badge { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 1rem 2rem; border-radius: 50px; font-weight: 700; font-size: 1.1rem; white-space: nowrap; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+
+        /* === CONTENT === */
+        .content { max-width: 1600px; margin: 0 auto; padding: 4rem 4rem; background: #0a0a0a; }
+        .section { margin-bottom: 4rem; }
+        .section:last-child { margin-bottom: 2rem; }
+        .section-header { margin-bottom: 2rem; }
+        .section-title { font-size: 2rem; font-weight: 700; color: #f5f5f5; margin-bottom: 0.5rem; }
+        .section-description { font-size: 1.05rem; color: #d4d4d4; max-width: 800px; }
+
+        /* === CHART LAYOUTS === */
+        .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        .chart-card { background: #1a1a1a; border-radius: 12px; padding: 2rem; border: 1px solid rgba(16, 185, 129, 0.2); }
+        .chart-card.full-width { grid-column: 1 / -1; }
+        .chart-title { font-weight: 700; font-size: 1.1rem; color: #f5f5f5; margin-bottom: 0.5rem; }
+        .chart-subtitle { font-size: 0.9rem; color: #a3a3a3; margin-bottom: 1.5rem; }
+        .chart-wrapper { position: relative; height: 350px; margin-bottom: 1.5rem; }
+
+        /* === INSIGHTS PANEL === */
+        .insights-panel { background: #0a0a0a; border-left: 4px solid #10b981; padding: 1.5rem; margin-top: 1rem; border-radius: 0 8px 8px 0; }
+        .insight-title { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: #10b981; margin-bottom: 1rem; }
+        .insight-list { list-style: none; }
+        .insight-list li { padding: 0.6rem 0; color: #d4d4d4; font-size: 0.95rem; border-bottom: 1px solid rgba(16, 185, 129, 0.1); }
+        .insight-list li:last-child { border-bottom: none; }
+        .insight-list li strong { color: #10b981; font-weight: 600; }
+
+        /* === BMC 9-BLOCK CANVAS === */
+        .bmc-canvas { display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(3, auto); gap: 1rem; margin-top: 2rem; }
+        .bmc-block { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1.25rem; min-height: 180px; }
+        .bmc-block:hover { border-color: rgba(16, 185, 129, 0.4); }
+        .bmc-key-partners { grid-column: 1; grid-row: 1 / 3; }
+        .bmc-key-activities { grid-column: 2; grid-row: 1; }
+        .bmc-key-resources { grid-column: 2; grid-row: 2; }
+        .bmc-value-prop { grid-column: 3; grid-row: 1 / 3; border: 2px solid #10b981; }
+        .bmc-customer-relationships { grid-column: 4; grid-row: 1; }
+        .bmc-channels { grid-column: 4; grid-row: 2; }
+        .bmc-customer-segments { grid-column: 5; grid-row: 1 / 3; }
+        .bmc-cost-structure { grid-column: 1 / 3; grid-row: 3; }
+        .bmc-revenue-streams { grid-column: 3 / 6; grid-row: 3; }
+        .bmc-title { font-weight: 700; color: #10b981; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(16, 185, 129, 0.2); }
+        .bmc-list { list-style: none; padding: 0; margin: 0; }
+        .bmc-list li { font-size: 0.85rem; color: #d4d4d4; padding: 0.4rem 0; display: flex; align-items: flex-start; gap: 0.5rem; }
+        .bmc-list li::before { content: '•'; color: #10b981; font-weight: bold; }
+
+        /* === REVENUE MODEL CARDS === */
+        .revenue-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .revenue-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; transition: transform 0.2s; }
+        .revenue-card:hover { transform: translateY(-2px); border-color: rgba(16, 185, 129, 0.4); }
+        .revenue-card.primary { border: 2px solid #10b981; }
+        .revenue-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .revenue-name { font-weight: 700; color: #f5f5f5; font-size: 1.1rem; }
+        .revenue-percentage { font-size: 1.5rem; font-weight: 700; color: #10b981; }
+        .revenue-description { font-size: 0.9rem; color: #d4d4d4; line-height: 1.5; margin-bottom: 1rem; }
+        .revenue-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; padding-top: 1rem; border-top: 1px solid rgba(16, 185, 129, 0.1); }
+        .metric-item { font-size: 0.8rem; }
+        .metric-label { color: #a3a3a3; }
+        .metric-value { color: #10b981; font-weight: 600; }
+
+        /* === UNIT ECONOMICS TABLE === */
+        .economics-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+        .economics-table th { background: rgba(16, 185, 129, 0.1); color: #10b981; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid rgba(16, 185, 129, 0.2); }
+        .economics-table td { padding: 0.75rem 1rem; color: #d4d4d4; font-size: 0.9rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .economics-table tr:hover td { background: rgba(16, 185, 129, 0.05); }
+        .economics-highlight { font-weight: 700; color: #10b981; }
+
+        /* === FINANCIAL SUMMARY === */
+        .financial-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2rem; }
+        .financial-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1.25rem; text-align: center; }
+        .financial-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a3a3a3; margin-bottom: 0.5rem; }
+        .financial-value { font-size: 1.75rem; font-weight: 700; color: #10b981; }
+        .financial-subtext { font-size: 0.8rem; color: #d4d4d4; margin-top: 0.25rem; }
+
+        /* === FOOTER === */
+        footer { background: #0a0a0a; display: flex; justify-content: center; }
+        .footer-content { max-width: 1600px; width: 100%; background: #1a1a1a; color: #a3a3a3; padding: 2rem 4rem; font-size: 0.85rem; text-align: center; border-top: 1px solid rgba(16, 185, 129, 0.2); }
+        .footer-content p { margin: 0.3rem 0; }
+        .footer-content strong { color: #10b981; }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 1200px) { .bmc-canvas { grid-template-columns: repeat(2, 1fr); } .bmc-key-partners, .bmc-value-prop, .bmc-customer-segments { grid-column: auto; grid-row: auto; } .bmc-key-activities, .bmc-key-resources, .bmc-customer-relationships, .bmc-channels { grid-column: auto; grid-row: auto; } .bmc-cost-structure, .bmc-revenue-streams { grid-column: 1 / -1; } .revenue-grid { grid-template-columns: 1fr; } .financial-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { h1 { font-size: 2.5rem; } .chart-grid { grid-template-columns: 1fr; } .bmc-canvas { grid-template-columns: 1fr; } .financial-grid { grid-template-columns: 1fr; } .score-container { grid-template-columns: 1fr; text-align: center; } .score-interpretation { border-left: none; border-top: 3px solid #10b981; padding-left: 0; padding-top: 1.5rem; } .header-content, .score-container, .content, .footer-content { padding: 2rem; } }
+
+        /* === PRINT === */
+        @media print { body { background: white; color: #000000; } .container, header, .score-banner, .content, footer { background: white; } .header-content { background: white; color: #000000; border: 2px solid #10b981; } .header-content::before { display: none; } h1, .interpretation-title { color: #000000; } .kicker, .meta-item, .score-label { color: #666666; } .subtitle, .interpretation-text { color: #333333; } .score-container { background: white; border: 2px solid #10b981; } .score-number { background: none; -webkit-text-fill-color: #10b981; color: #10b981; } .chart-card, .bmc-block, .revenue-card, .financial-card { background: white; border: 2px solid #10b981; page-break-inside: avoid; } .footer-content { background: white; color: #666666; border-top: 2px solid #10b981; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">StratArts Business Model Design</div>
+                <h1>Business Model Canvas</h1>
+                <div class="subtitle">PetPulse - Smart Pet Health Monitoring Platform</div>
+                <div class="meta-info">
+                    <div class="meta-item"><span>📅</span><span>Generated: December 18, 2025</span></div>
+                    <div class="meta-item"><span>📊</span><span>Analysis Type: Business Model Canvas</span></div>
+                    <div class="meta-item"><span>🎯</span><span>Version 1.0.0</span></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SCORE BANNER -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">8.5</div>
+                    <div class="score-label">Model Viability</div>
+                </div>
+                <div class="score-interpretation">
+                    <div class="interpretation-title">What This Score Means</div>
+                    <div class="interpretation-text">
+                        PetPulse's business model scores 8.5/10 on viability, indicating a strong, well-structured model with clear revenue streams, healthy unit economics, and strategic coherence across all 9 canvas blocks. The hybrid subscription + hardware model creates multiple value capture points with favorable LTV:CAC ratio.
+                    </div>
+                </div>
+                <div class="verdict-badge">✓ VIABLE</div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+            <!-- Section 1: Business Model Canvas -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Business Model Canvas</h2>
+                    <p class="section-description">Osterwalder's 9-block Business Model Canvas framework for PetPulse.</p>
+                </div>
+                <div class="bmc-canvas">
+                    <div class="bmc-block bmc-key-partners">
+                        <div class="bmc-title">Key Partners</div>
+                        <ul class="bmc-list">
+                            <li>Veterinary clinics (telehealth network)</li>
+                            <li>Hardware manufacturers (Shenzhen)</li>
+                            <li>Cloud infrastructure (AWS)</li>
+                            <li>Pet insurance companies</li>
+                            <li>Pet retail chains (Petco, PetSmart)</li>
+                        </ul>
+                    </div>
+                    <div class="bmc-block bmc-key-activities">
+                        <div class="bmc-title">Key Activities</div>
+                        <ul class="bmc-list">
+                            <li>Platform development & maintenance</li>
+                            <li>AI/ML health monitoring algorithms</li>
+                            <li>Veterinarian network recruitment</li>
+                            <li>Hardware quality assurance</li>
+                            <li>Customer support & onboarding</li>
+                        </ul>
+                    </div>
+                    <div class="bmc-block bmc-key-resources">
+                        <div class="bmc-title">Key Resources</div>
+                        <ul class="bmc-list">
+                            <li>Proprietary health monitoring algorithms</li>
+                            <li>Pet health data platform</li>
+                            <li>Engineering team (IoT + ML)</li>
+                            <li>Vet network partnerships</li>
+                            <li>Brand & customer trust</li>
+                        </ul>
+                    </div>
+                    <div class="bmc-block bmc-value-prop">
+                        <div class="bmc-title">Value Propositions</div>
+                        <ul class="bmc-list">
+                            <li>Early illness detection saves lives & money</li>
+                            <li>24/7 peace of mind for pet parents</li>
+                            <li>Instant veterinary access from home</li>
+                            <li>Longitudinal health records & insights</li>
+                            <li>Reduce emergency vet visits by 40%</li>
+                        </ul>
+                    </div>
+                    <div class="bmc-block bmc-customer-relationships">
+                        <div class="bmc-title">Customer Relationships</div>
+                        <ul class="bmc-list">
+                            <li>Self-service app + automated alerts</li>
+                            <li>On-demand vet consultations</li>
+                            <li>Personalized health insights</li>
+                            <li>Community (pet parent forums)</li>
+                            <li>Proactive health check-ins</li>
+                        </ul>
+                    </div>
+                    <div class="bmc-block bmc-channels">
+                        <div class="bmc-title">Channels</div>
+                        <ul class="bmc-list">
+                            <li>D2C website & mobile app</li>
+                            <li>Amazon & pet retail (Chewy)</li>
+                            <li>Veterinary clinic partnerships</li>
+                            <li>Social media (Instagram, TikTok)</li>
+                            <li>Pet influencer marketing</li>
+                        </ul>
+                    </div>
+                    <div class="bmc-block bmc-customer-segments">
+                        <div class="bmc-title">Customer Segments</div>
+                        <ul class="bmc-list">
+                            <li><strong>Primary:</strong> Premium Pet Parents (8.4M households)</li>
+                            <li>Income: $100K+ | Age: 30-55</li>
+                            <li>Urban/suburban dog owners</li>
+                            <li><strong>Secondary:</strong> Health-Conscious Owners (12.6M)</li>
+                            <li><strong>Future:</strong> Pet Insurance Partners (B2B2C)</li>
+                        </ul>
+                    </div>
+                    <div class="bmc-block bmc-cost-structure">
+                        <div class="bmc-title">Cost Structure</div>
+                        <ul class="bmc-list">
+                            <li><strong>Fixed:</strong> Engineering salaries ($400K/mo), Infrastructure ($50K/mo), Office ($15K/mo)</li>
+                            <li><strong>Variable:</strong> Hardware COGS ($45/unit), Vet payouts ($15/consult), Payment processing (2.9%)</li>
+                            <li><strong>CAC:</strong> $80-150 per customer | <strong>Gross Margin:</strong> 65%</li>
+                        </ul>
+                    </div>
+                    <div class="bmc-block bmc-revenue-streams">
+                        <div class="bmc-title">Revenue Streams</div>
+                        <ul class="bmc-list">
+                            <li><strong>Subscription (70%):</strong> $25/mo monitoring + telehealth access</li>
+                            <li><strong>Hardware (20%):</strong> $149 smart collar (one-time)</li>
+                            <li><strong>Premium Services (10%):</strong> Specialist consults, health reports</li>
+                            <li><strong>ARPU:</strong> $300/year | <strong>LTV:</strong> $720 (2.4 year avg)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Revenue Model -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Revenue Model Analysis</h2>
+                    <p class="section-description">Breakdown of revenue streams with projected contribution.</p>
+                </div>
+                <div class="revenue-grid">
+                    <div class="revenue-card primary">
+                        <div class="revenue-header">
+                            <span class="revenue-name">Subscription</span>
+                            <span class="revenue-percentage">70%</span>
+                        </div>
+                        <p class="revenue-description">Monthly recurring revenue from health monitoring and telehealth access. Core value driver with high retention.</p>
+                        <div class="revenue-metrics">
+                            <div class="metric-item"><span class="metric-label">Price</span><span class="metric-value">$25/mo</span></div>
+                            <div class="metric-item"><span class="metric-label">Annual</span><span class="metric-value">$300/yr</span></div>
+                            <div class="metric-item"><span class="metric-label">Churn</span><span class="metric-value">5%/mo</span></div>
+                            <div class="metric-item"><span class="metric-label">LTV</span><span class="metric-value">$504</span></div>
+                        </div>
+                    </div>
+                    <div class="revenue-card">
+                        <div class="revenue-header">
+                            <span class="revenue-name">Hardware</span>
+                            <span class="revenue-percentage">20%</span>
+                        </div>
+                        <p class="revenue-description">One-time smart collar purchase. Gateway to subscription. Sold at near-cost to drive adoption.</p>
+                        <div class="revenue-metrics">
+                            <div class="metric-item"><span class="metric-label">Price</span><span class="metric-value">$149</span></div>
+                            <div class="metric-item"><span class="metric-label">COGS</span><span class="metric-value">$45</span></div>
+                            <div class="metric-item"><span class="metric-label">Margin</span><span class="metric-value">70%</span></div>
+                            <div class="metric-item"><span class="metric-label">Purpose</span><span class="metric-value">Gateway</span></div>
+                        </div>
+                    </div>
+                    <div class="revenue-card">
+                        <div class="revenue-header">
+                            <span class="revenue-name">Premium Services</span>
+                            <span class="revenue-percentage">10%</span>
+                        </div>
+                        <p class="revenue-description">Specialist consultations, comprehensive health reports, and priority support add-ons.</p>
+                        <div class="revenue-metrics">
+                            <div class="metric-item"><span class="metric-label">Specialist</span><span class="metric-value">$75/call</span></div>
+                            <div class="metric-item"><span class="metric-label">Reports</span><span class="metric-value">$29/ea</span></div>
+                            <div class="metric-item"><span class="metric-label">Attach</span><span class="metric-value">15%</span></div>
+                            <div class="metric-item"><span class="metric-label">Margin</span><span class="metric-value">60%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Unit Economics -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Unit Economics</h2>
+                    <p class="section-description">Key metrics for business viability and scalability.</p>
+                </div>
+                <table class="economics-table">
+                    <thead>
+                        <tr><th>Metric</th><th>Value</th><th>Benchmark</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Customer Lifetime Value (LTV)</td><td class="economics-highlight">$720</td><td>$500+</td><td>✓ Exceeds</td></tr>
+                        <tr><td>Customer Acquisition Cost (CAC)</td><td class="economics-highlight">$120</td><td>< $150</td><td>✓ On Target</td></tr>
+                        <tr><td>LTV:CAC Ratio</td><td class="economics-highlight">6.0:1</td><td>3:1+</td><td>✓ Excellent</td></tr>
+                        <tr><td>CAC Payback Period</td><td class="economics-highlight">5 months</td><td>< 12 mo</td><td>✓ Excellent</td></tr>
+                        <tr><td>Gross Margin</td><td class="economics-highlight">65%</td><td>60%+</td><td>✓ Healthy</td></tr>
+                        <tr><td>Monthly Churn Rate</td><td class="economics-highlight">5%</td><td>< 7%</td><td>✓ On Target</td></tr>
+                        <tr><td>Net Revenue Retention</td><td class="economics-highlight">105%</td><td>100%+</td><td>✓ Growing</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Section 4: Financial Summary -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Financial Summary</h2>
+                    <p class="section-description">Key financial projections and targets.</p>
+                </div>
+                <div class="financial-grid">
+                    <div class="financial-card">
+                        <div class="financial-label">Year 1 Revenue</div>
+                        <div class="financial-value">$750K</div>
+                        <div class="financial-subtext">2,500 subscribers</div>
+                    </div>
+                    <div class="financial-card">
+                        <div class="financial-label">Year 3 Revenue</div>
+                        <div class="financial-value">$10.5M</div>
+                        <div class="financial-subtext">35,000 subscribers</div>
+                    </div>
+                    <div class="financial-card">
+                        <div class="financial-label">Year 5 Revenue</div>
+                        <div class="financial-value">$42M</div>
+                        <div class="financial-subtext">140,000 subscribers</div>
+                    </div>
+                    <div class="financial-card">
+                        <div class="financial-label">Break-Even</div>
+                        <div class="financial-value">18 mo</div>
+                        <div class="financial-subtext">~8,000 customers</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Visual Analysis -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Visual Analysis</h2>
+                    <p class="section-description">Revenue mix, growth projections, and unit economics visualization.</p>
+                </div>
+                <div class="chart-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">Revenue Stream Mix</div>
+                        <div class="chart-subtitle">Projected contribution by revenue type</div>
+                        <div class="chart-wrapper"><canvas id="revenueMixChart"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Revenue Insights</div>
+                            <ul class="insight-list">
+                                <li><strong>Subscription dominates (70%):</strong> Predictable recurring revenue</li>
+                                <li><strong>Hardware as gateway:</strong> Near-cost pricing drives adoption</li>
+                                <li><strong>Premium services:</strong> High-margin upsell opportunity</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">5-Year Revenue Projection</div>
+                        <div class="chart-subtitle">Growth trajectory across scenarios</div>
+                        <div class="chart-wrapper"><canvas id="revenueProjectionChart"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Growth Assumptions</div>
+                            <ul class="insight-list">
+                                <li><strong>Years 1-3:</strong> 300% YoY (high-growth phase)</li>
+                                <li><strong>Years 4-5:</strong> 130% YoY (scaling phase)</li>
+                                <li><strong>SOM Target:</strong> 2% of $2.1B SAM by Year 5</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Unit Economics Radar</div>
+                        <div class="chart-subtitle">Performance vs. benchmarks</div>
+                        <div class="chart-wrapper"><canvas id="unitEconomicsRadar"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Economics Analysis</div>
+                            <ul class="insight-list">
+                                <li><strong>LTV:CAC of 6:1:</strong> Well above 3:1 benchmark</li>
+                                <li><strong>5-month payback:</strong> Excellent capital efficiency</li>
+                                <li><strong>105% NRR:</strong> Expansion revenue from upsells</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Cost Structure Breakdown</div>
+                        <div class="chart-subtitle">Fixed vs. variable costs by category</div>
+                        <div class="chart-wrapper"><canvas id="costStructureChart"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Cost Analysis</div>
+                            <ul class="insight-list">
+                                <li><strong>Personnel (55%):</strong> Engineering-heavy early stage</li>
+                                <li><strong>Marketing (25%):</strong> CAC investment for growth</li>
+                                <li><strong>Infrastructure (12%):</strong> Cloud + vet network costs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | business-model-designer-v1.0.0</p>
+                <p style="margin-top: 5px;">Context Signature: business-model-designer-v1.0.0 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Chart.js Global Configuration
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+        const tooltipConfig = { backgroundColor: '#1a1a1a', titleColor: '#f5f5f5', bodyColor: '#d4d4d4', borderColor: '#10b981', borderWidth: 1 };
+        const COLORS = {
+            primary: '#10b981',
+            backgrounds: ['rgba(16, 185, 129, 0.8)', 'rgba(16, 185, 129, 0.6)', 'rgba(16, 185, 129, 0.4)', 'rgba(20, 184, 166, 0.6)', 'rgba(5, 150, 105, 0.6)']
+        };
+
+        // Chart 1: Revenue Mix Doughnut
+        new Chart(document.getElementById('revenueMixChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Subscription', 'Hardware', 'Premium Services'],
+                datasets: [{ data: [70, 20, 10], backgroundColor: COLORS.backgrounds, borderWidth: 0 }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5', padding: 15 } }, tooltip: tooltipConfig } }
+        });
+
+        // Chart 2: Revenue Projection Line
+        new Chart(document.getElementById('revenueProjectionChart'), {
+            type: 'line',
+            data: {
+                labels: ['Y1', 'Y2', 'Y3', 'Y4', 'Y5'],
+                datasets: [
+                    { label: 'Conservative', data: [500, 2400, 7000, 16000, 28000], borderColor: 'rgba(16, 185, 129, 0.4)', borderDash: [5, 5], borderWidth: 2, fill: false, tension: 0.3, pointRadius: 4 },
+                    { label: 'Most Likely', data: [750, 3600, 10500, 24000, 42000], borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.1)', borderWidth: 3, fill: true, tension: 0.3, pointRadius: 5 },
+                    { label: 'Aggressive', data: [1000, 5000, 15000, 35000, 60000], borderColor: '#14b8a6', borderDash: [5, 5], borderWidth: 2, fill: false, tension: 0.3, pointRadius: 4 }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3', callback: v => '$' + v + 'K' } }, x: { grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3' } } }, plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig } }
+        });
+
+        // Chart 3: Unit Economics Radar
+        new Chart(document.getElementById('unitEconomicsRadar'), {
+            type: 'radar',
+            data: {
+                labels: ['LTV/CAC', 'Gross Margin', 'Payback Speed', 'Retention', 'NRR'],
+                datasets: [
+                    { label: 'PetPulse', data: [10, 6.5, 8.5, 7, 8], backgroundColor: 'rgba(16, 185, 129, 0.2)', borderColor: '#10b981', borderWidth: 3, pointBackgroundColor: '#10b981', pointRadius: 5 },
+                    { label: 'Benchmark', data: [5, 6, 5, 7, 7], backgroundColor: 'rgba(163, 163, 163, 0.1)', borderColor: '#a3a3a3', borderWidth: 2, borderDash: [5, 5], pointBackgroundColor: '#a3a3a3', pointRadius: 4 }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 10, ticks: { color: '#a3a3a3', stepSize: 2 }, grid: { color: 'rgba(16, 185, 129, 0.1)' }, pointLabels: { color: '#f5f5f5', font: { size: 11 } } } }, plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig } }
+        });
+
+        // Chart 4: Cost Structure Bar
+        new Chart(document.getElementById('costStructureChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Personnel', 'Marketing', 'Infrastructure', 'Hardware COGS', 'Operations'],
+                datasets: [{ data: [55, 25, 12, 5, 3], backgroundColor: '#10b981', borderRadius: 6 }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { beginAtZero: true, grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3', callback: v => v + '%' } }, y: { grid: { display: false }, ticks: { color: '#f5f5f5' } } }, plugins: { legend: { display: false }, tooltip: tooltipConfig } }
+        });
+
+        // Print-friendly
+        window.addEventListener('beforeprint', () => Chart.defaults.color = '#000000');
+        window.addEventListener('afterprint', () => Chart.defaults.color = '#a3a3a3');
+    </script>
+</body>
+</html>

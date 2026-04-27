@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{BUSINESS_NAME}} - Community Building Strategy</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        /* === CANONICAL HEADER === */
+        header {
+            background: #0a0a0a;
+            padding: 0;
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .header-text h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-text .subtitle {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .header-meta {
+            text-align: right;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .header-meta .date { font-size: 1rem; margin-bottom: 0.25rem; }
+        .header-meta .version { font-size: 0.875rem; opacity: 0.8; }
+
+        /* === CANONICAL SCORE BANNER === */
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            padding: 2rem 4rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .primary-score {
+            text-align: center;
+            padding-right: 3rem;
+            border-right: 1px solid #333;
+        }
+
+        .primary-score .score-value {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #10b981;
+            line-height: 1;
+        }
+
+        .primary-score .score-label {
+            font-size: 0.875rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
+        }
+
+        .score-details {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-item .value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .score-item .label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .verdict-box {
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .verdict-box .verdict-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 0.25rem;
+        }
+
+        .verdict-box .verdict-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* === MAIN CONTENT === */
+        main {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        section h2 {
+            font-size: 1.5rem;
+            color: #10b981;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #10b981;
+        }
+
+        section h3 {
+            font-size: 1.125rem;
+            color: #e0e0e0;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        /* === EXECUTIVE SUMMARY === */
+        .summary-text {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid #10b981;
+            margin-bottom: 2rem;
+        }
+
+        .summary-text p {
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+
+        .summary-text p:last-child { margin-bottom: 0; }
+
+        /* === GOALS GRID === */
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .goal-card {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #10b981;
+        }
+
+        .goal-card .goal-number {
+            font-size: 0.875rem;
+            color: #10b981;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .goal-card h4 {
+            color: #fff;
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .goal-card .goal-metric {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .goal-card .goal-metric span {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        /* === VALUE PROPOSITION === */
+        .value-prop-container {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: #10b981;
+            text-align: center;
+            padding: 1.5rem;
+            background: #0f0f0f;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .value-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .value-column h4 {
+            color: #10b981;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .value-column ul {
+            list-style: none;
+        }
+
+        .value-column li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #333;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .value-column li:last-child { border-bottom: none; }
+
+        /* === PLATFORM SELECTION === */
+        .platform-card {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid #10b981;
+            margin-bottom: 2rem;
+        }
+
+        .platform-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .platform-name {
+            font-size: 1.75rem;
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .platform-cost {
+            background: #0f0f0f;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: #888;
+        }
+
+        .platform-rationale {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #0f0f0f;
+            border-radius: 8px;
+        }
+
+        .platform-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .feature-badge {
+            background: #0f0f0f;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            color: #10b981;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* === CHANNEL STRUCTURE === */
+        .channel-category {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-header {
+            font-size: 1.125rem;
+            color: #10b981;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .channel-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .channel-item {
+            background: #0f0f0f;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #333;
+        }
+
+        .channel-item .channel-name {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .channel-item .channel-purpose {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        /* === MEMBER ROLES === */
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .role-card {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .role-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .role-name {
+            font-size: 1.125rem;
+            color: #10b981;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .role-count {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        .role-permissions {
+            font-size: 0.85rem;
+            color: #ccc;
+            text-align: left;
+        }
+
+        /* === MEMBER JOURNEY === */
+        .journey-stages {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .journey-stage {
+            background: #1a1a1a;
+            padding: 1.5rem 1rem;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+        }
+
+        .journey-stage::after {
+            content: '→';
+            position: absolute;
+            right: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #333;
+            font-size: 1.25rem;
+        }
+
+        .journey-stage:last-child::after { display: none; }
+
+        .stage-number {
+            font-size: 0.75rem;
+            color: #10b981;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .stage-name {
+            font-size: 1rem;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .stage-target {
+            font-size: 1.25rem;
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        /* === ENGAGEMENT PYRAMID === */
+        .pyramid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .pyramid-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .pyramid-level {
+            padding: 1rem 2rem;
+            text-align: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .pyramid-level.champions {
+            background: #10b981;
+            width: 30%;
+            border-radius: 8px 8px 0 0;
+        }
+        .pyramid-level.creators {
+            background: #14b8a6;
+            width: 50%;
+        }
+        .pyramid-level.contributors {
+            background: #2dd4bf;
+            width: 70%;
+        }
+        .pyramid-level.lurkers {
+            background: #5eead4;
+            width: 100%;
+            border-radius: 0 0 8px 8px;
+            color: #0f0f0f;
+        }
+
+        .pyramid-tactics {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .tactic-item {
+            padding: 1rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .tactic-item:last-child { border-bottom: none; }
+
+        .tactic-transition {
+            color: #10b981;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .tactic-actions {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        /* === PROGRAMMING RITUALS === */
+        .rituals-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .ritual-column h4 {
+            color: #10b981;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .ritual-item {
+            background: #1a1a1a;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .ritual-name {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .ritual-time {
+            font-size: 0.8rem;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+        }
+
+        .ritual-desc {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        /* === CALENDAR === */
+        .calendar-container {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 12px;
+            overflow-x: auto;
+        }
+
+        .calendar-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .calendar-table th {
+            background: #0f0f0f;
+            color: #10b981;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #333;
+        }
+
+        .calendar-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #333;
+            vertical-align: top;
+        }
+
+        .calendar-table .week-label {
+            color: #10b981;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .calendar-activity {
+            font-size: 0.85rem;
+            color: #ccc;
+        }
+
+        /* === MODERATION GUIDELINES === */
+        .guidelines-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .guideline-card {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .guideline-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .guideline-icon {
+            font-size: 1.5rem;
+        }
+
+        .guideline-title {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .guideline-desc {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 0.75rem;
+        }
+
+        .guideline-consequence {
+            font-size: 0.8rem;
+            color: #f59e0b;
+            padding: 0.5rem;
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: 4px;
+        }
+
+        /* === LAUNCH PHASES === */
+        .launch-phases {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .phase-card {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 12px;
+            border-top: 4px solid #10b981;
+        }
+
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .phase-name {
+            font-size: 1.125rem;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .phase-timing {
+            font-size: 0.8rem;
+            color: #888;
+            background: #0f0f0f;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+        }
+
+        .phase-tasks {
+            list-style: none;
+        }
+
+        .phase-tasks li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #333;
+            color: #ccc;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .phase-tasks li:last-child { border-bottom: none; }
+
+        .phase-tasks li::before {
+            content: '☐';
+            color: #10b981;
+        }
+
+        /* === GROWTH STRATEGY === */
+        .growth-channels {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .growth-channel {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .channel-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .channel-icon {
+            font-size: 1.5rem;
+        }
+
+        .channel-title {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .channel-priority {
+            font-size: 0.75rem;
+            background: #10b981;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            margin-left: auto;
+        }
+
+        .growth-tactics {
+            list-style: none;
+        }
+
+        .growth-tactics li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #333;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .growth-tactics li:last-child { border-bottom: none; }
+
+        /* === METRICS DASHBOARD === */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .metric-category {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-target {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .metric-target span {
+            color: #10b981;
+        }
+
+        /* === HEALTH INDICATORS === */
+        .health-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .health-column h4 {
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .health-column.healthy h4 { color: #10b981; }
+        .health-column.unhealthy h4 { color: #f59e0b; }
+
+        .health-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: #1a1a1a;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .health-icon {
+            font-size: 1.25rem;
+        }
+
+        .health-text {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        /* === CHARTS === */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-container {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .chart-container h4 {
+            color: #10b981;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+        }
+
+        /* === ROADMAP === */
+        .roadmap-container {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .roadmap-timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .roadmap-phase {
+            padding: 1.5rem;
+            background: #0f0f0f;
+            border-radius: 8px;
+            border-top: 3px solid #10b981;
+        }
+
+        .roadmap-period {
+            font-size: 0.8rem;
+            color: #10b981;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .roadmap-title {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .roadmap-items {
+            list-style: none;
+        }
+
+        .roadmap-items li {
+            font-size: 0.85rem;
+            color: #888;
+            padding: 0.25rem 0;
+        }
+
+        /* === CANONICAL FOOTER === */
+        footer {
+            background: #0a0a0a;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem 4rem;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .footer-meta {
+            color: #666;
+            font-size: 0.875rem;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 1200px) {
+            .journey-stages { grid-template-columns: repeat(3, 1fr); }
+            .journey-stage:nth-child(3)::after { display: none; }
+            .launch-phases { grid-template-columns: 1fr; }
+            .pyramid-container { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; padding: 2rem; }
+            .header-meta { text-align: left; margin-top: 1rem; }
+            .score-container { grid-template-columns: 1fr; text-align: center; }
+            .primary-score { border-right: none; padding-right: 0; padding-bottom: 1rem; border-bottom: 1px solid #333; }
+            .score-details { flex-wrap: wrap; }
+            main { padding: 2rem; }
+            .value-columns { grid-template-columns: 1fr; }
+            .rituals-grid { grid-template-columns: 1fr; }
+            .growth-channels { grid-template-columns: 1fr; }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .chart-grid { grid-template-columns: 1fr; }
+            .roadmap-timeline { grid-template-columns: 1fr; }
+            .journey-stages { grid-template-columns: repeat(2, 1fr); }
+            .journey-stage::after { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-text">
+                <h1>{{BUSINESS_NAME}}</h1>
+                <div class="subtitle">Community Building Strategy</div>
+            </div>
+            <div class="header-meta">
+                <div class="date">{{DATE}}</div>
+                <div class="version">StratArts v1.0</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="score-banner">
+        <div class="score-container">
+            <div class="primary-score">
+                <div class="score-value">{{MEMBER_TARGET}}</div>
+                <div class="score-label">Target Members</div>
+            </div>
+            <div class="score-details">
+                <div class="score-item">
+                    <div class="value">{{CHANNEL_COUNT}}</div>
+                    <div class="label">Channels</div>
+                </div>
+                <div class="score-item">
+                    <div class="value">{{RITUAL_COUNT}}</div>
+                    <div class="label">Rituals</div>
+                </div>
+                <div class="score-item">
+                    <div class="value">{{PLATFORM_NAME}}</div>
+                    <div class="label">Platform</div>
+                </div>
+                <div class="score-item">
+                    <div class="value">{{CRITICAL_MASS}}</div>
+                    <div class="label">Critical Mass</div>
+                </div>
+            </div>
+            <div class="verdict-box">
+                <div class="verdict-label">Community Type</div>
+                <div class="verdict-text">{{COMMUNITY_TYPE}}</div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <!-- Executive Summary -->
+        <section id="executive-summary">
+            <h2>Executive Summary</h2>
+            <div class="summary-text">
+                {{EXECUTIVE_SUMMARY}}
+            </div>
+            <div class="goals-grid">
+                {{GOALS_GRID}}
+            </div>
+        </section>
+
+        <!-- Value Proposition -->
+        <section id="value-proposition">
+            <h2>Community Value Proposition</h2>
+            <div class="value-prop-container">
+                <div class="tagline">"{{COMMUNITY_TAGLINE}}"</div>
+                <div class="value-columns">
+                    <div class="value-column">
+                        <h4>Functional Value</h4>
+                        <ul>
+                            {{FUNCTIONAL_VALUES}}
+                        </ul>
+                    </div>
+                    <div class="value-column">
+                        <h4>Emotional Value</h4>
+                        <ul>
+                            {{EMOTIONAL_VALUES}}
+                        </ul>
+                    </div>
+                    <div class="value-column">
+                        <h4>Exclusive Perks</h4>
+                        <ul>
+                            {{EXCLUSIVE_PERKS}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Platform Selection -->
+        <section id="platform">
+            <h2>Platform & Structure</h2>
+            <div class="platform-card">
+                <div class="platform-header">
+                    <div class="platform-name">{{PLATFORM_NAME}}</div>
+                    <div class="platform-cost">{{PLATFORM_COST}}</div>
+                </div>
+                <div class="platform-rationale">{{PLATFORM_RATIONALE}}</div>
+                <div class="platform-features">
+                    {{PLATFORM_FEATURES}}
+                </div>
+            </div>
+
+            <h3>Channel Structure</h3>
+            {{CHANNEL_CATEGORIES}}
+        </section>
+
+        <!-- Member Roles -->
+        <section id="roles">
+            <h2>Member Roles</h2>
+            <div class="roles-grid">
+                {{MEMBER_ROLES}}
+            </div>
+        </section>
+
+        <!-- Member Journey -->
+        <section id="journey">
+            <h2>Member Journey</h2>
+            <div class="journey-stages">
+                {{JOURNEY_STAGES}}
+            </div>
+
+            <h3>Engagement Ladder</h3>
+            <div class="pyramid-container">
+                <div class="pyramid-visual">
+                    {{ENGAGEMENT_PYRAMID}}
+                </div>
+                <div class="pyramid-tactics">
+                    {{ENGAGEMENT_TACTICS}}
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Programming -->
+        <section id="programming">
+            <h2>Community Programming</h2>
+            <div class="rituals-grid">
+                {{RITUALS_GRID}}
+            </div>
+
+            <h3>30-Day Programming Calendar</h3>
+            <div class="calendar-container">
+                <table class="calendar-table">
+                    <thead>
+                        <tr>
+                            <th>Week</th>
+                            <th>Monday</th>
+                            <th>Wednesday</th>
+                            <th>Friday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{CALENDAR_ROWS}}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Moderation & Guidelines -->
+        <section id="moderation">
+            <h2>Moderation & Guidelines</h2>
+            <div class="guidelines-grid">
+                {{GUIDELINES_GRID}}
+            </div>
+        </section>
+
+        <!-- Launch Plan -->
+        <section id="launch">
+            <h2>Launch Plan</h2>
+            <div class="launch-phases">
+                {{LAUNCH_PHASES}}
+            </div>
+        </section>
+
+        <!-- Growth Strategy -->
+        <section id="growth">
+            <h2>Growth Strategy</h2>
+            <div class="growth-channels">
+                {{GROWTH_CHANNELS}}
+            </div>
+        </section>
+
+        <!-- Success Metrics -->
+        <section id="metrics">
+            <h2>Success Metrics</h2>
+            <div class="metrics-grid">
+                {{METRICS_CARDS}}
+            </div>
+
+            <h3>Community Health Indicators</h3>
+            <div class="health-grid">
+                <div class="health-column healthy">
+                    <h4>Healthy Signals</h4>
+                    {{HEALTHY_INDICATORS}}
+                </div>
+                <div class="health-column unhealthy">
+                    <h4>Warning Signs</h4>
+                    {{UNHEALTHY_INDICATORS}}
+                </div>
+            </div>
+
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <h4>Member Distribution</h4>
+                    <div class="chart-wrapper">
+                        <canvas id="distributionChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h4>Growth Projection</h4>
+                    <div class="chart-wrapper">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h4>Engagement Breakdown</h4>
+                    <div class="chart-wrapper">
+                        <canvas id="engagementChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h4>DAU/MAU Trend</h4>
+                    <div class="chart-wrapper">
+                        <canvas id="dauMauChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Implementation Roadmap -->
+        <section id="roadmap">
+            <h2>Implementation Roadmap</h2>
+            <div class="roadmap-container">
+                <div class="roadmap-timeline">
+                    {{ROADMAP_PHASES}}
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">StratArts - Business Strategy Skills Library</div>
+            <div class="footer-meta">Community Building Strategist &bull; {{DATE}}</div>
+        </div>
+    </footer>
+
+    <script>
+        // Chart.js defaults for dark theme
+        Chart.defaults.color = '#888';
+        Chart.defaults.borderColor = '#333';
+
+        // Distribution Chart - Engagement Pyramid
+        new Chart(document.getElementById('distributionChart'), {
+            type: 'doughnut',
+            data: {
+                labels: {{DISTRIBUTION_LABELS}},
+                datasets: [{
+                    data: {{DISTRIBUTION_DATA}},
+                    backgroundColor: ['#10b981', '#14b8a6', '#2dd4bf', '#5eead4'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        // Growth Chart - Member Growth Projection
+        new Chart(document.getElementById('growthChart'), {
+            type: 'line',
+            data: {
+                labels: {{GROWTH_LABELS}},
+                datasets: [{
+                    label: 'Total Members',
+                    data: {{GROWTH_DATA}},
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: 'Active Members',
+                    data: {{ACTIVE_GROWTH_DATA}},
+                    borderColor: '#14b8a6',
+                    backgroundColor: 'transparent',
+                    borderDash: [5, 5],
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#333' } },
+                    x: { grid: { color: '#333' } }
+                }
+            }
+        });
+
+        // Engagement Chart - Activity Breakdown
+        new Chart(document.getElementById('engagementChart'), {
+            type: 'bar',
+            data: {
+                labels: {{ENGAGEMENT_LABELS}},
+                datasets: [{
+                    label: 'Weekly Activity',
+                    data: {{ENGAGEMENT_DATA}},
+                    backgroundColor: '#10b981',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#333' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // DAU/MAU Chart - Ratio Over Time
+        new Chart(document.getElementById('dauMauChart'), {
+            type: 'line',
+            data: {
+                labels: {{DAUMAU_LABELS}},
+                datasets: [{
+                    label: 'DAU/MAU Ratio',
+                    data: {{DAUMAU_DATA}},
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: { color: '#333' },
+                        ticks: { callback: value => value + '%' }
+                    },
+                    x: { grid: { color: '#333' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

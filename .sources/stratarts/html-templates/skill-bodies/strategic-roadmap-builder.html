@@ -1,0 +1,1207 @@
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     SKILL BODY: strategic-roadmap-builder
+     Contains: CSS, HTML sections, and Chart.js code
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
+<!-- ═══ SKILL CSS START ═══ -->
+/* Vision Card */
+.vision-card {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%);
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.vision-label {
+    font-size: 0.8rem;
+    color: #10b981;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+}
+
+.vision-statement {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    line-height: 1.4;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.vision-timeline {
+    font-size: 0.9rem;
+    color: #a3a3a3;
+    margin-top: 1rem;
+}
+
+/* OKR Cards */
+.okr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.okr-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.okr-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+}
+
+.okr-header {
+    background: rgba(16, 185, 129, 0.1);
+    padding: 1.25rem;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.okr-number {
+    font-size: 0.75rem;
+    color: #10b981;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.okr-objective {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    line-height: 1.4;
+}
+
+.okr-body {
+    padding: 1.25rem;
+}
+
+.kr-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.kr-item:last-child {
+    border-bottom: none;
+}
+
+.kr-label {
+    font-size: 0.75rem;
+    color: #10b981;
+    font-weight: 600;
+}
+
+.kr-text {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    margin-top: 0.25rem;
+}
+
+.kr-metrics {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.kr-metric {
+    font-size: 0.8rem;
+    color: #a3a3a3;
+}
+
+.kr-metric span {
+    color: #10b981;
+    font-weight: 600;
+}
+
+/* Phase Timeline */
+.phase-timeline {
+    margin-top: 2rem;
+}
+
+.phase-block {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.phase-header {
+    background: rgba(16, 185, 129, 0.1);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.phase-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.phase-number {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    font-weight: 700;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.phase-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #f5f5f5;
+}
+
+.phase-dates {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+}
+
+.phase-body {
+    padding: 1.5rem;
+}
+
+.phase-goal {
+    font-size: 0.95rem;
+    color: #d4d4d4;
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+    border-left: 3px solid #10b981;
+}
+
+.phase-sections {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.phase-section {
+    background: rgba(16, 185, 129, 0.02);
+    border-radius: 6px;
+    padding: 1rem;
+}
+
+.phase-section-title {
+    font-size: 0.8rem;
+    color: #10b981;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.phase-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.phase-list li {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    padding: 0.4rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+}
+
+.phase-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #10b981;
+}
+
+/* Resource Allocation */
+.resource-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+
+.resource-table th,
+.resource-table td {
+    padding: 0.85rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.resource-table th {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.resource-table td {
+    color: #d4d4d4;
+    font-size: 0.9rem;
+}
+
+.resource-table tr:hover {
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.resource-table .total-row {
+    background: rgba(16, 185, 129, 0.1);
+    font-weight: 700;
+}
+
+.resource-table .total-row td {
+    color: #10b981;
+}
+
+/* Assumptions Cards */
+.assumptions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.assumption-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 1.25rem;
+}
+
+.assumption-card.high-risk {
+    border-left: 4px solid #fc8181;
+}
+
+.assumption-card.medium-risk {
+    border-left: 4px solid #f6ad55;
+}
+
+.assumption-card.low-risk {
+    border-left: 4px solid #10b981;
+}
+
+.assumption-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+}
+
+.assumption-text {
+    font-weight: 600;
+    color: #f5f5f5;
+    font-size: 0.95rem;
+    flex: 1;
+}
+
+.assumption-risk {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.assumption-risk.high {
+    background: rgba(252, 129, 129, 0.2);
+    color: #fc8181;
+}
+
+.assumption-risk.medium {
+    background: rgba(246, 173, 85, 0.2);
+    color: #f6ad55;
+}
+
+.assumption-risk.low {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.assumption-details {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    margin-top: 0.5rem;
+}
+
+.assumption-test {
+    font-size: 0.85rem;
+    color: #d4d4d4;
+    margin-top: 0.5rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid #10b981;
+}
+
+/* Quarterly Review */
+.quarterly-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.quarterly-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.quarterly-month {
+    font-size: 0.75rem;
+    color: #a3a3a3;
+    text-transform: uppercase;
+}
+
+.quarterly-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #10b981;
+    margin: 0.5rem 0;
+}
+
+.quarterly-focus {
+    font-size: 0.85rem;
+    color: #d4d4d4;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .phase-sections {
+        grid-template-columns: 1fr;
+    }
+    .quarterly-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .okr-grid,
+    .assumptions-grid {
+        grid-template-columns: 1fr;
+    }
+    .quarterly-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Print */
+@media print {
+    .vision-card,
+    .okr-card,
+    .phase-block,
+    .assumption-card {
+        background: white;
+        border: 2px solid #10b981;
+        page-break-inside: avoid;
+    }
+    .vision-statement,
+    .okr-objective,
+    .phase-name {
+        color: #000000;
+    }
+}
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<!-- Section 1: Vision Statement -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Vision & Strategic Objectives</h2>
+        <p class="section-description">
+            The north star guiding all strategic decisions. This vision defines where the business
+            will be in 3-5 years and what success looks like in 18 months.
+        </p>
+    </div>
+
+    <div class="vision-card">
+        <div class="vision-label">Vision Statement</div>
+        <div class="vision-statement">{{VISION_STATEMENT}}</div>
+        <div class="vision-timeline">Horizon: {{VISION_TIMELINE}}</div>
+    </div>
+
+    <div class="okr-grid">
+        <div class="okr-card">
+            <div class="okr-header">
+                <div class="okr-number">Objective 1</div>
+                <div class="okr-objective">{{OBJECTIVE_1}}</div>
+            </div>
+            <div class="okr-body">
+                <div class="kr-item">
+                    <div class="kr-label">KR 1.1</div>
+                    <div class="kr-text">{{KR_1_1}}</div>
+                    <div class="kr-metrics">
+                        <div class="kr-metric">Baseline: <span>{{KR_1_1_BASELINE}}</span></div>
+                        <div class="kr-metric">Target: <span>{{KR_1_1_TARGET}}</span></div>
+                    </div>
+                </div>
+                <div class="kr-item">
+                    <div class="kr-label">KR 1.2</div>
+                    <div class="kr-text">{{KR_1_2}}</div>
+                    <div class="kr-metrics">
+                        <div class="kr-metric">Baseline: <span>{{KR_1_2_BASELINE}}</span></div>
+                        <div class="kr-metric">Target: <span>{{KR_1_2_TARGET}}</span></div>
+                    </div>
+                </div>
+                <div class="kr-item">
+                    <div class="kr-label">KR 1.3</div>
+                    <div class="kr-text">{{KR_1_3}}</div>
+                    <div class="kr-metrics">
+                        <div class="kr-metric">Baseline: <span>{{KR_1_3_BASELINE}}</span></div>
+                        <div class="kr-metric">Target: <span>{{KR_1_3_TARGET}}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="okr-card">
+            <div class="okr-header">
+                <div class="okr-number">Objective 2</div>
+                <div class="okr-objective">{{OBJECTIVE_2}}</div>
+            </div>
+            <div class="okr-body">
+                <div class="kr-item">
+                    <div class="kr-label">KR 2.1</div>
+                    <div class="kr-text">{{KR_2_1}}</div>
+                    <div class="kr-metrics">
+                        <div class="kr-metric">Baseline: <span>{{KR_2_1_BASELINE}}</span></div>
+                        <div class="kr-metric">Target: <span>{{KR_2_1_TARGET}}</span></div>
+                    </div>
+                </div>
+                <div class="kr-item">
+                    <div class="kr-label">KR 2.2</div>
+                    <div class="kr-text">{{KR_2_2}}</div>
+                    <div class="kr-metrics">
+                        <div class="kr-metric">Baseline: <span>{{KR_2_2_BASELINE}}</span></div>
+                        <div class="kr-metric">Target: <span>{{KR_2_2_TARGET}}</span></div>
+                    </div>
+                </div>
+                <div class="kr-item">
+                    <div class="kr-label">KR 2.3</div>
+                    <div class="kr-text">{{KR_2_3}}</div>
+                    <div class="kr-metrics">
+                        <div class="kr-metric">Baseline: <span>{{KR_2_3_BASELINE}}</span></div>
+                        <div class="kr-metric">Target: <span>{{KR_2_3_TARGET}}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="okr-card">
+            <div class="okr-header">
+                <div class="okr-number">Objective 3</div>
+                <div class="okr-objective">{{OBJECTIVE_3}}</div>
+            </div>
+            <div class="okr-body">
+                <div class="kr-item">
+                    <div class="kr-label">KR 3.1</div>
+                    <div class="kr-text">{{KR_3_1}}</div>
+                    <div class="kr-metrics">
+                        <div class="kr-metric">Baseline: <span>{{KR_3_1_BASELINE}}</span></div>
+                        <div class="kr-metric">Target: <span>{{KR_3_1_TARGET}}</span></div>
+                    </div>
+                </div>
+                <div class="kr-item">
+                    <div class="kr-label">KR 3.2</div>
+                    <div class="kr-text">{{KR_3_2}}</div>
+                    <div class="kr-metrics">
+                        <div class="kr-metric">Baseline: <span>{{KR_3_2_BASELINE}}</span></div>
+                        <div class="kr-metric">Target: <span>{{KR_3_2_TARGET}}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 2: Phase-Based Roadmap -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">18-Month Phase Roadmap</h2>
+        <p class="section-description">
+            Execution plan broken into three 6-month phases. Each phase has specific milestones,
+            metrics targets, and success criteria that build toward the strategic objectives.
+        </p>
+    </div>
+
+    <div class="phase-timeline">
+        <div class="phase-block">
+            <div class="phase-header">
+                <div class="phase-title">
+                    <div class="phase-number">1</div>
+                    <div class="phase-name">{{PHASE_1_NAME}}</div>
+                </div>
+                <div class="phase-dates">{{PHASE_1_DATES}}</div>
+            </div>
+            <div class="phase-body">
+                <div class="phase-goal">{{PHASE_1_GOAL}}</div>
+                <div class="phase-sections">
+                    <div class="phase-section">
+                        <div class="phase-section-title">Key Milestones</div>
+                        <ul class="phase-list">
+                            <li>{{PHASE_1_MILESTONE_1}}</li>
+                            <li>{{PHASE_1_MILESTONE_2}}</li>
+                            <li>{{PHASE_1_MILESTONE_3}}</li>
+                        </ul>
+                    </div>
+                    <div class="phase-section">
+                        <div class="phase-section-title">Metrics Targets</div>
+                        <ul class="phase-list">
+                            <li>{{PHASE_1_METRIC_1}}</li>
+                            <li>{{PHASE_1_METRIC_2}}</li>
+                            <li>{{PHASE_1_METRIC_3}}</li>
+                        </ul>
+                    </div>
+                    <div class="phase-section">
+                        <div class="phase-section-title">Major Initiatives</div>
+                        <ul class="phase-list">
+                            <li>{{PHASE_1_INITIATIVE_1}}</li>
+                            <li>{{PHASE_1_INITIATIVE_2}}</li>
+                            <li>{{PHASE_1_INITIATIVE_3}}</li>
+                        </ul>
+                    </div>
+                    <div class="phase-section">
+                        <div class="phase-section-title">Success Criteria</div>
+                        <ul class="phase-list">
+                            <li>{{PHASE_1_SUCCESS_1}}</li>
+                            <li>{{PHASE_1_SUCCESS_2}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="phase-block">
+            <div class="phase-header">
+                <div class="phase-title">
+                    <div class="phase-number">2</div>
+                    <div class="phase-name">{{PHASE_2_NAME}}</div>
+                </div>
+                <div class="phase-dates">{{PHASE_2_DATES}}</div>
+            </div>
+            <div class="phase-body">
+                <div class="phase-goal">{{PHASE_2_GOAL}}</div>
+                <div class="phase-sections">
+                    <div class="phase-section">
+                        <div class="phase-section-title">Key Milestones</div>
+                        <ul class="phase-list">
+                            <li>{{PHASE_2_MILESTONE_1}}</li>
+                            <li>{{PHASE_2_MILESTONE_2}}</li>
+                            <li>{{PHASE_2_MILESTONE_3}}</li>
+                        </ul>
+                    </div>
+                    <div class="phase-section">
+                        <div class="phase-section-title">Metrics Targets</div>
+                        <ul class="phase-list">
+                            <li>{{PHASE_2_METRIC_1}}</li>
+                            <li>{{PHASE_2_METRIC_2}}</li>
+                            <li>{{PHASE_2_METRIC_3}}</li>
+                        </ul>
+                    </div>
+                    <div class="phase-section">
+                        <div class="phase-section-title">Major Initiatives</div>
+                        <ul class="phase-list">
+                            <li>{{PHASE_2_INITIATIVE_1}}</li>
+                            <li>{{PHASE_2_INITIATIVE_2}}</li>
+                            <li>{{PHASE_2_INITIATIVE_3}}</li>
+                        </ul>
+                    </div>
+                    <div class="phase-section">
+                        <div class="phase-section-title">Success Criteria</div>
+                        <ul class="phase-list">
+                            <li>{{PHASE_2_SUCCESS_1}}</li>
+                            <li>{{PHASE_2_SUCCESS_2}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="phase-block">
+            <div class="phase-header">
+                <div class="phase-title">
+                    <div class="phase-number">3</div>
+                    <div class="phase-name">{{PHASE_3_NAME}}</div>
+                </div>
+                <div class="phase-dates">{{PHASE_3_DATES}}</div>
+            </div>
+            <div class="phase-body">
+                <div class="phase-goal">{{PHASE_3_GOAL}}</div>
+                <div class="phase-sections">
+                    <div class="phase-section">
+                        <div class="phase-section-title">Key Milestones</div>
+                        <ul class="phase-list">
+                            <li>{{PHASE_3_MILESTONE_1}}</li>
+                            <li>{{PHASE_3_MILESTONE_2}}</li>
+                            <li>{{PHASE_3_MILESTONE_3}}</li>
+                        </ul>
+                    </div>
+                    <div class="phase-section">
+                        <div class="phase-section-title">Metrics Targets</div>
+                        <ul class="phase-list">
+                            <li>{{PHASE_3_METRIC_1}}</li>
+                            <li>{{PHASE_3_METRIC_2}}</li>
+                            <li>{{PHASE_3_METRIC_3}}</li>
+                        </ul>
+                    </div>
+                    <div class="phase-section">
+                        <div class="phase-section-title">Major Initiatives</div>
+                        <ul class="phase-list">
+                            <li>{{PHASE_3_INITIATIVE_1}}</li>
+                            <li>{{PHASE_3_INITIATIVE_2}}</li>
+                            <li>{{PHASE_3_INITIATIVE_3}}</li>
+                        </ul>
+                    </div>
+                    <div class="phase-section">
+                        <div class="phase-section-title">Success Criteria</div>
+                        <ul class="phase-list">
+                            <li>{{PHASE_3_SUCCESS_1}}</li>
+                            <li>{{PHASE_3_SUCCESS_2}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: Visual Analysis -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Visual Analysis</h2>
+        <p class="section-description">
+            Data visualizations showing milestone timeline, resource allocation,
+            metrics trajectory, and risk assessment across the 18-month horizon.
+        </p>
+    </div>
+
+    <div class="chart-grid">
+        <!-- Chart 1: Milestone Timeline -->
+        <div class="chart-card">
+            <div class="chart-title">Milestone Timeline</div>
+            <div class="chart-subtitle">
+                Key milestones plotted across 18-month roadmap
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="milestoneChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Critical Path</div>
+                <ul class="insight-list">
+                    <li><strong>Phase 1:</strong> {{PHASE_1_CRITICAL_MILESTONE}}</li>
+                    <li><strong>Phase 2:</strong> {{PHASE_2_CRITICAL_MILESTONE}}</li>
+                    <li><strong>Phase 3:</strong> {{PHASE_3_CRITICAL_MILESTONE}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 2: Resource Allocation -->
+        <div class="chart-card">
+            <div class="chart-title">Resource Allocation by Phase</div>
+            <div class="chart-subtitle">
+                Budget distribution across team, infrastructure, marketing, and tools
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="resourceChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Investment Focus</div>
+                <ul class="insight-list">
+                    <li><strong>Phase 1:</strong> ${{PHASE_1_BUDGET}} ({{PHASE_1_FOCUS}})</li>
+                    <li><strong>Phase 2:</strong> ${{PHASE_2_BUDGET}} ({{PHASE_2_FOCUS}})</li>
+                    <li><strong>Phase 3:</strong> ${{PHASE_3_BUDGET}} ({{PHASE_3_FOCUS}})</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 3: Metrics Trajectory -->
+        <div class="chart-card">
+            <div class="chart-title">Metrics Trajectory</div>
+            <div class="chart-subtitle">
+                Projected growth of key metrics over 18 months
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="metricsChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Growth Targets</div>
+                <ul class="insight-list">
+                    <li><strong>Customers:</strong> {{START_CUSTOMERS}} → {{END_CUSTOMERS}}</li>
+                    <li><strong>MRR:</strong> ${{START_MRR}} → ${{END_MRR}}</li>
+                    <li><strong>Retention:</strong> {{START_RETENTION}}% → {{END_RETENTION}}%</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 4: Risk Assessment -->
+        <div class="chart-card">
+            <div class="chart-title">Risk Assessment</div>
+            <div class="chart-subtitle">
+                Critical assumptions mapped by impact and probability
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="riskChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Top Risks</div>
+                <ul class="insight-list">
+                    <li><strong>High:</strong> {{HIGH_RISK_COUNT}} assumptions require testing</li>
+                    <li><strong>Medium:</strong> {{MEDIUM_RISK_COUNT}} assumptions to monitor</li>
+                    <li><strong>Low:</strong> {{LOW_RISK_COUNT}} assumptions validated</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 4: Resource Allocation -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Resource Allocation</h2>
+        <p class="section-description">
+            Team growth plan and capital allocation across the 18-month roadmap.
+            Resources scale with phase objectives and growth targets.
+        </p>
+    </div>
+
+    <table class="resource-table">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Phase 1 (M1-6)</th>
+                <th>Phase 2 (M7-12)</th>
+                <th>Phase 3 (M13-18)</th>
+                <th>Total 18M</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Personnel</td>
+                <td>${{PERSONNEL_P1}}</td>
+                <td>${{PERSONNEL_P2}}</td>
+                <td>${{PERSONNEL_P3}}</td>
+                <td>${{PERSONNEL_TOTAL}}</td>
+            </tr>
+            <tr>
+                <td>Infrastructure</td>
+                <td>${{INFRA_P1}}</td>
+                <td>${{INFRA_P2}}</td>
+                <td>${{INFRA_P3}}</td>
+                <td>${{INFRA_TOTAL}}</td>
+            </tr>
+            <tr>
+                <td>Marketing/Sales</td>
+                <td>${{MARKETING_P1}}</td>
+                <td>${{MARKETING_P2}}</td>
+                <td>${{MARKETING_P3}}</td>
+                <td>${{MARKETING_TOTAL}}</td>
+            </tr>
+            <tr>
+                <td>Tools/Software</td>
+                <td>${{TOOLS_P1}}</td>
+                <td>${{TOOLS_P2}}</td>
+                <td>${{TOOLS_P3}}</td>
+                <td>${{TOOLS_TOTAL}}</td>
+            </tr>
+            <tr class="total-row">
+                <td>Total</td>
+                <td>${{TOTAL_P1}}</td>
+                <td>${{TOTAL_P2}}</td>
+                <td>${{TOTAL_P3}}</td>
+                <td>${{TOTAL_18M}}</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- Section 5: Assumptions & De-Risking -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Assumptions & De-Risking</h2>
+        <p class="section-description">
+            Critical assumptions that must be true for the roadmap to succeed. Each assumption
+            has a test plan, timeline, and pivot trigger if invalidated.
+        </p>
+    </div>
+
+    <div class="assumptions-grid">
+        <div class="assumption-card {{ASSUMPTION_1_RISK_CLASS}}">
+            <div class="assumption-header">
+                <div class="assumption-text">{{ASSUMPTION_1}}</div>
+                <span class="assumption-risk {{ASSUMPTION_1_RISK_CLASS}}">{{ASSUMPTION_1_RISK}}</span>
+            </div>
+            <div class="assumption-details">Impact: {{ASSUMPTION_1_IMPACT}}</div>
+            <div class="assumption-test">Test: {{ASSUMPTION_1_TEST}}</div>
+        </div>
+
+        <div class="assumption-card {{ASSUMPTION_2_RISK_CLASS}}">
+            <div class="assumption-header">
+                <div class="assumption-text">{{ASSUMPTION_2}}</div>
+                <span class="assumption-risk {{ASSUMPTION_2_RISK_CLASS}}">{{ASSUMPTION_2_RISK}}</span>
+            </div>
+            <div class="assumption-details">Impact: {{ASSUMPTION_2_IMPACT}}</div>
+            <div class="assumption-test">Test: {{ASSUMPTION_2_TEST}}</div>
+        </div>
+
+        <div class="assumption-card {{ASSUMPTION_3_RISK_CLASS}}">
+            <div class="assumption-header">
+                <div class="assumption-text">{{ASSUMPTION_3}}</div>
+                <span class="assumption-risk {{ASSUMPTION_3_RISK_CLASS}}">{{ASSUMPTION_3_RISK}}</span>
+            </div>
+            <div class="assumption-details">Impact: {{ASSUMPTION_3_IMPACT}}</div>
+            <div class="assumption-test">Test: {{ASSUMPTION_3_TEST}}</div>
+        </div>
+
+        <div class="assumption-card {{ASSUMPTION_4_RISK_CLASS}}">
+            <div class="assumption-header">
+                <div class="assumption-text">{{ASSUMPTION_4}}</div>
+                <span class="assumption-risk {{ASSUMPTION_4_RISK_CLASS}}">{{ASSUMPTION_4_RISK}}</span>
+            </div>
+            <div class="assumption-details">Impact: {{ASSUMPTION_4_IMPACT}}</div>
+            <div class="assumption-test">Test: {{ASSUMPTION_4_TEST}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 6: Quarterly Reviews -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Quarterly Review Schedule</h2>
+        <p class="section-description">
+            Scheduled checkpoints to review OKR progress, adjust roadmap based on learnings,
+            and re-prioritize initiatives. Adaptive planning ensures the roadmap stays relevant.
+        </p>
+    </div>
+
+    <div class="quarterly-grid">
+        <div class="quarterly-card">
+            <div class="quarterly-month">Month 3</div>
+            <div class="quarterly-name">Q1 Review</div>
+            <div class="quarterly-focus">{{Q1_REVIEW_FOCUS}}</div>
+        </div>
+        <div class="quarterly-card">
+            <div class="quarterly-month">Month 6</div>
+            <div class="quarterly-name">Q2 Review</div>
+            <div class="quarterly-focus">{{Q2_REVIEW_FOCUS}}</div>
+        </div>
+        <div class="quarterly-card">
+            <div class="quarterly-month">Month 9</div>
+            <div class="quarterly-name">Q3 Review</div>
+            <div class="quarterly-focus">{{Q3_REVIEW_FOCUS}}</div>
+        </div>
+        <div class="quarterly-card">
+            <div class="quarterly-month">Month 12</div>
+            <div class="quarterly-name">Q4 Review</div>
+            <div class="quarterly-focus">{{Q4_REVIEW_FOCUS}}</div>
+        </div>
+        <div class="quarterly-card">
+            <div class="quarterly-month">Month 15</div>
+            <div class="quarterly-name">Q5 Review</div>
+            <div class="quarterly-focus">{{Q5_REVIEW_FOCUS}}</div>
+        </div>
+        <div class="quarterly-card">
+            <div class="quarterly-month">Month 18</div>
+            <div class="quarterly-name">Q6 Review</div>
+            <div class="quarterly-focus">{{Q6_REVIEW_FOCUS}}</div>
+        </div>
+    </div>
+</section>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+// Roadmap Data
+const roadmapData = {
+    milestones: {
+        labels: ['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10', 'M11', 'M12', 'M13', 'M14', 'M15', 'M16', 'M17', 'M18'],
+        phase1: [{{PHASE_1_PROGRESS}}],
+        phase2: [{{PHASE_2_PROGRESS}}],
+        phase3: [{{PHASE_3_PROGRESS}}]
+    },
+    resources: {
+        labels: ['Phase 1', 'Phase 2', 'Phase 3'],
+        personnel: [{{PERSONNEL_P1_NUM}}, {{PERSONNEL_P2_NUM}}, {{PERSONNEL_P3_NUM}}],
+        infra: [{{INFRA_P1_NUM}}, {{INFRA_P2_NUM}}, {{INFRA_P3_NUM}}],
+        marketing: [{{MARKETING_P1_NUM}}, {{MARKETING_P2_NUM}}, {{MARKETING_P3_NUM}}],
+        tools: [{{TOOLS_P1_NUM}}, {{TOOLS_P2_NUM}}, {{TOOLS_P3_NUM}}]
+    },
+    metrics: {
+        labels: ['M1', 'M3', 'M6', 'M9', 'M12', 'M15', 'M18'],
+        customers: [{{CUSTOMERS_M1}}, {{CUSTOMERS_M3}}, {{CUSTOMERS_M6}}, {{CUSTOMERS_M9}}, {{CUSTOMERS_M12}}, {{CUSTOMERS_M15}}, {{CUSTOMERS_M18}}],
+        mrr: [{{MRR_M1}}, {{MRR_M3}}, {{MRR_M6}}, {{MRR_M9}}, {{MRR_M12}}, {{MRR_M15}}, {{MRR_M18}}]
+    },
+    risks: {
+        labels: ['{{RISK_1_NAME}}', '{{RISK_2_NAME}}', '{{RISK_3_NAME}}', '{{RISK_4_NAME}}'],
+        impact: [{{RISK_1_IMPACT}}, {{RISK_2_IMPACT}}, {{RISK_3_IMPACT}}, {{RISK_4_IMPACT}}],
+        probability: [{{RISK_1_PROB}}, {{RISK_2_PROB}}, {{RISK_3_PROB}}, {{RISK_4_PROB}}]
+    }
+};
+
+// Chart 1: Milestone Timeline (Stacked Bar)
+const milestoneCtx = document.getElementById('milestoneChart').getContext('2d');
+new Chart(milestoneCtx, {
+    type: 'bar',
+    data: {
+        labels: roadmapData.milestones.labels,
+        datasets: [
+            {
+                label: 'Phase 1',
+                data: roadmapData.milestones.phase1,
+                backgroundColor: '#10b981',
+                borderRadius: 2
+            },
+            {
+                label: 'Phase 2',
+                data: roadmapData.milestones.phase2,
+                backgroundColor: '#14b8a6',
+                borderRadius: 2
+            },
+            {
+                label: 'Phase 3',
+                data: roadmapData.milestones.phase3,
+                backgroundColor: '#34d399',
+                borderRadius: 2
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                stacked: true,
+                grid: { display: false },
+                ticks: { color: '#a3a3a3', font: { size: 10 } }
+            },
+            y: {
+                stacked: true,
+                beginAtZero: true,
+                max: 100,
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: {
+                    color: '#a3a3a3',
+                    font: { size: 11 },
+                    callback: function(value) { return value + '%'; }
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                display: true,
+                position: 'bottom',
+                labels: { color: '#d4d4d4', font: { size: 10 }, padding: 15 }
+            },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Chart 2: Resource Allocation (Stacked Bar)
+const resourceCtx = document.getElementById('resourceChart').getContext('2d');
+new Chart(resourceCtx, {
+    type: 'bar',
+    data: {
+        labels: roadmapData.resources.labels,
+        datasets: [
+            {
+                label: 'Personnel',
+                data: roadmapData.resources.personnel,
+                backgroundColor: '#10b981',
+                borderRadius: 4
+            },
+            {
+                label: 'Infrastructure',
+                data: roadmapData.resources.infra,
+                backgroundColor: '#14b8a6',
+                borderRadius: 4
+            },
+            {
+                label: 'Marketing',
+                data: roadmapData.resources.marketing,
+                backgroundColor: '#34d399',
+                borderRadius: 4
+            },
+            {
+                label: 'Tools',
+                data: roadmapData.resources.tools,
+                backgroundColor: '#6ee7b7',
+                borderRadius: 4
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                stacked: true,
+                grid: { display: false },
+                ticks: { color: '#f5f5f5', font: { size: 12, weight: '600' } }
+            },
+            y: {
+                stacked: true,
+                beginAtZero: true,
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: {
+                    color: '#a3a3a3',
+                    font: { size: 11 },
+                    callback: function(value) { return '$' + (value/1000) + 'K'; }
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                display: true,
+                position: 'bottom',
+                labels: { color: '#d4d4d4', font: { size: 10 }, padding: 15 }
+            },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Chart 3: Metrics Trajectory (Line)
+const metricsCtx = document.getElementById('metricsChart').getContext('2d');
+new Chart(metricsCtx, {
+    type: 'line',
+    data: {
+        labels: roadmapData.metrics.labels,
+        datasets: [
+            {
+                label: 'Customers',
+                data: roadmapData.metrics.customers,
+                borderColor: '#10b981',
+                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                fill: true,
+                tension: 0.3,
+                borderWidth: 3,
+                pointRadius: 5,
+                yAxisID: 'y'
+            },
+            {
+                label: 'MRR ($)',
+                data: roadmapData.metrics.mrr,
+                borderColor: '#14b8a6',
+                backgroundColor: 'transparent',
+                tension: 0.3,
+                borderWidth: 3,
+                pointRadius: 5,
+                borderDash: [5, 5],
+                yAxisID: 'y1'
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+            mode: 'index',
+            intersect: false
+        },
+        scales: {
+            x: {
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: { color: '#a3a3a3', font: { size: 11 } }
+            },
+            y: {
+                type: 'linear',
+                display: true,
+                position: 'left',
+                beginAtZero: true,
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: { color: '#10b981', font: { size: 11 } },
+                title: { display: true, text: 'Customers', color: '#10b981' }
+            },
+            y1: {
+                type: 'linear',
+                display: true,
+                position: 'right',
+                beginAtZero: true,
+                grid: { drawOnChartArea: false },
+                ticks: {
+                    color: '#14b8a6',
+                    font: { size: 11 },
+                    callback: function(value) { return '$' + (value/1000) + 'K'; }
+                },
+                title: { display: true, text: 'MRR', color: '#14b8a6' }
+            }
+        },
+        plugins: {
+            legend: {
+                display: true,
+                position: 'bottom',
+                labels: { color: '#d4d4d4', font: { size: 10 }, padding: 15 }
+            },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Chart 4: Risk Assessment (Scatter)
+const riskCtx = document.getElementById('riskChart').getContext('2d');
+new Chart(riskCtx, {
+    type: 'scatter',
+    data: {
+        datasets: [{
+            label: 'Assumptions',
+            data: roadmapData.risks.labels.map((name, i) => ({
+                x: roadmapData.risks.probability[i],
+                y: roadmapData.risks.impact[i],
+                name: name
+            })),
+            backgroundColor: roadmapData.risks.impact.map((impact, i) => {
+                const prob = roadmapData.risks.probability[i];
+                if (impact >= 7 && prob >= 7) return '#fc8181';
+                if (impact >= 5 || prob >= 5) return '#f6ad55';
+                return '#10b981';
+            }),
+            borderColor: '#1a1a1a',
+            borderWidth: 2,
+            pointRadius: 12,
+            pointHoverRadius: 16
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                title: { display: true, text: 'Probability →', color: '#a3a3a3', font: { size: 12, weight: '600' } },
+                min: 0,
+                max: 10,
+                ticks: { color: '#a3a3a3', font: { size: 11 } },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' }
+            },
+            y: {
+                title: { display: true, text: 'Impact →', color: '#a3a3a3', font: { size: 12, weight: '600' } },
+                min: 0,
+                max: 10,
+                ticks: { color: '#a3a3a3', font: { size: 11 } },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' }
+            }
+        },
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                ...tooltipConfig,
+                callbacks: {
+                    label: function(context) {
+                        return `${context.raw.name}: Impact ${context.parsed.y}, Prob ${context.parsed.x}`;
+                    }
+                }
+            }
+        }
+    }
+});
+<!-- ═══ SKILL JS END ═══ -->

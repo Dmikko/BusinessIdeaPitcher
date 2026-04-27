@@ -1,0 +1,1474 @@
+<!--
+═══════════════════════════════════════════════════════════════════════════════
+STRATARTS HTML SKELETON TEMPLATE
+Skill: customer-persona-builder
+Version: 1.0.0
+
+INSTRUCTIONS:
+1. Read VERIFICATION-CHECKLIST.md FIRST for canonical patterns
+2. Read base-template.html for shared CSS/JS structure
+3. Replace all {{PLACEHOLDER}} markers with actual data
+4. This template defines skill-specific content sections and charts
+═══════════════════════════════════════════════════════════════════════════════
+-->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     TEMPLATE VARIABLES (Replace with actual data)
+     ════════════════════════════════════════════════════════════════════════════
+
+     HEADER:
+     {{PAGE_TITLE}}          = "Customer Persona Analysis"
+     {{KICKER}}              = "StratArts Business Analysis"
+     {{TITLE}}               = "Customer Persona Builder"
+     {{SUBTITLE}}            = "{BUSINESS_NAME} - {BUSINESS_DESCRIPTION}"
+     {{DATE}}                = "November 28, 2025"
+     {{ANALYSIS_TYPE}}       = "Foundation Strategy"
+     {{VERSION}}             = "1.0.0"
+
+     SCORE BANNER:
+     {{PRIMARY_SCORE}}       = "8.2" (persona strength 0-10)
+     {{SCORE_LABEL}}         = "Persona Strength Score"
+     {{SCORE_INTERPRETATION}}= "This score indicates..."
+     {{VERDICT}}             = "STRONG PERSONAS" | "NEEDS REFINEMENT" | "WEAK - REVISIT"
+
+     FOOTER:
+     {{PROJECT_NAME}}        = "{PROJECT_FOLDER_NAME}"
+     {{SKILL_NAME}}          = "customer-persona-builder"
+     {{CONTEXT_SIGNATURE}}   = "customer-persona-builder-v1.0.0"
+     {{ITERATIONS}}          = "1"
+     {{ITERATIONS_PLURAL}}   = "" or "s"
+
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     SKILL-SPECIFIC CSS (Add to {{SKILL_SPECIFIC_CSS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+<style>
+/* Persona Cards (3-column grid for each persona) */
+.persona-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.persona-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.persona-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(16, 185, 129, 0.4);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+}
+
+.persona-card.primary {
+    border: 2px solid #10b981;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15);
+}
+
+.persona-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.persona-name {
+    font-weight: 700;
+    color: #f5f5f5;
+    font-size: 1.25rem;
+    line-height: 1.2;
+}
+
+.persona-role {
+    font-size: 0.9rem;
+    color: #10b981;
+    margin-top: 0.25rem;
+}
+
+.persona-score {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.persona-score-label {
+    font-size: 0.7rem;
+    color: #a3a3a3;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.persona-overview {
+    font-size: 0.95rem;
+    color: #d4d4d4;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.persona-demographics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.demo-item {
+    font-size: 0.85rem;
+}
+
+.demo-label {
+    color: #a3a3a3;
+}
+
+.demo-value {
+    color: #f5f5f5;
+    font-weight: 500;
+}
+
+/* JTBD Statement Box */
+.jtbd-box {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.jtbd-label {
+    font-size: 0.75rem;
+    color: #10b981;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.jtbd-statement {
+    font-size: 0.9rem;
+    color: #f5f5f5;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+/* Pain Points List */
+.pain-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0;
+}
+
+.pain-list li {
+    font-size: 0.85rem;
+    color: #fc8181;
+    padding: 0.4rem 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.pain-list li::before {
+    content: '!';
+    font-weight: bold;
+    color: #fc8181;
+    background: rgba(245, 101, 101, 0.2);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+}
+
+/* Goals List */
+.goals-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0;
+}
+
+.goals-list li {
+    font-size: 0.85rem;
+    color: #10b981;
+    padding: 0.4rem 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.goals-list li::before {
+    content: '>';
+    font-weight: bold;
+    color: #10b981;
+}
+
+/* Priority Matrix */
+.priority-matrix {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.matrix-header {
+    margin-bottom: 1.5rem;
+}
+
+.matrix-title {
+    font-weight: 700;
+    color: #f5f5f5;
+    font-size: 1.1rem;
+}
+
+.matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.matrix-table th {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.matrix-table td {
+    padding: 0.75rem 1rem;
+    color: #d4d4d4;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.matrix-table tr:hover td {
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.matrix-score {
+    font-weight: 700;
+    color: #10b981;
+}
+
+.matrix-rank {
+    display: inline-block;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #0a0a0a;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+/* Buying Journey Timeline */
+.journey-timeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.journey-stage {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 1.25rem;
+    position: relative;
+}
+
+.journey-stage::after {
+    content: '';
+    position: absolute;
+    right: -0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid rgba(16, 185, 129, 0.4);
+}
+
+.journey-stage:last-child::after {
+    display: none;
+}
+
+.stage-name {
+    font-weight: 700;
+    color: #10b981;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+}
+
+.stage-duration {
+    font-size: 0.75rem;
+    color: #a3a3a3;
+    margin-bottom: 0.5rem;
+}
+
+.stage-activities {
+    font-size: 0.85rem;
+    color: #d4d4d4;
+    line-height: 1.5;
+}
+
+/* Decision Criteria */
+.criteria-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.criteria-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.criteria-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.criteria-name {
+    font-weight: 600;
+    color: #f5f5f5;
+    font-size: 0.95rem;
+}
+
+.criteria-rank {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.criteria-importance {
+    height: 6px;
+    background: rgba(16, 185, 129, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.criteria-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981 0%, #14b8a6 100%);
+    border-radius: 3px;
+}
+
+.criteria-description {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    margin-top: 0.75rem;
+}
+
+/* Objections Section */
+.objection-grid {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.objection-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.objection-header {
+    background: rgba(245, 101, 101, 0.1);
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(245, 101, 101, 0.2);
+}
+
+.objection-text {
+    font-size: 1rem;
+    color: #fc8181;
+    font-style: italic;
+}
+
+.objection-response {
+    padding: 1rem 1.25rem;
+}
+
+.response-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #10b981;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.response-content {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    line-height: 1.5;
+}
+
+/* Comparison Matrix */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+
+.comparison-table th {
+    background: rgba(16, 185, 129, 0.1);
+    color: #f5f5f5;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 2px solid rgba(16, 185, 129, 0.3);
+}
+
+.comparison-table th:first-child {
+    text-align: left;
+    color: #10b981;
+}
+
+.comparison-table td {
+    padding: 0.75rem 1rem;
+    color: #d4d4d4;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+}
+
+.comparison-table td:first-child {
+    text-align: left;
+    font-weight: 500;
+    color: #f5f5f5;
+}
+
+.comparison-table tr:hover td {
+    background: rgba(16, 185, 129, 0.05);
+}
+
+/* Go-to-Market Phases */
+.gtm-phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.gtm-phase {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.gtm-phase::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #10b981 0%, #14b8a6 100%);
+}
+
+.phase-number {
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(16, 185, 129, 0.15);
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    line-height: 1;
+}
+
+.phase-title {
+    font-weight: 700;
+    color: #10b981;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.phase-timeline {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    margin-bottom: 1rem;
+}
+
+.phase-persona {
+    font-weight: 600;
+    color: #f5f5f5;
+    margin-bottom: 0.5rem;
+}
+
+.phase-tactics {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.phase-tactics li {
+    font-size: 0.85rem;
+    color: #d4d4d4;
+    padding: 0.3rem 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.phase-tactics li::before {
+    content: '';
+    color: #10b981;
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .persona-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .journey-timeline {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .journey-stage:nth-child(2)::after {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .persona-grid, .journey-timeline, .gtm-phases, .criteria-grid {
+        grid-template-columns: 1fr;
+    }
+    .journey-stage::after {
+        display: none;
+    }
+    .persona-demographics {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Print */
+@media print {
+    .persona-card, .priority-matrix, .journey-stage, .criteria-card, .objection-card, .gtm-phase {
+        background: white;
+        border: 2px solid #10b981;
+        page-break-inside: avoid;
+    }
+    .persona-name, .matrix-title, .stage-name, .criteria-name, .phase-title {
+        color: #000000;
+    }
+    .jtbd-box {
+        background: white;
+        border: 2px solid #10b981;
+    }
+    .matrix-table th {
+        background: #f5f5f5;
+        color: #000000;
+    }
+}
+</style>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CONTENT SECTIONS (Replace {{CONTENT_SECTIONS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- Section 1: Persona Overview Cards -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Customer Personas</h2>
+        <p class="section-description">
+            Detailed buyer personas built on Jobs-to-be-Done principles, focusing on what customers are trying to accomplish.
+        </p>
+    </div>
+
+    <div class="persona-grid">
+        <!-- Persona 1 -->
+        <div class="persona-card primary">
+            <div class="persona-header">
+                <div>
+                    <div class="persona-name">{{PERSONA_1_NAME}}</div>
+                    <div class="persona-role">{{PERSONA_1_ROLE}}</div>
+                </div>
+                <div style="text-align: right;">
+                    <div class="persona-score">{{PERSONA_1_SCORE}}</div>
+                    <div class="persona-score-label">Priority</div>
+                </div>
+            </div>
+            <div class="persona-overview">{{PERSONA_1_OVERVIEW}}</div>
+            <div class="persona-demographics">
+                <div class="demo-item"><span class="demo-label">Age:</span> <span class="demo-value">{{PERSONA_1_AGE}}</span></div>
+                <div class="demo-item"><span class="demo-label">Location:</span> <span class="demo-value">{{PERSONA_1_LOCATION}}</span></div>
+                <div class="demo-item"><span class="demo-label">Income:</span> <span class="demo-value">{{PERSONA_1_INCOME}}</span></div>
+                <div class="demo-item"><span class="demo-label">Industry:</span> <span class="demo-value">{{PERSONA_1_INDUSTRY}}</span></div>
+            </div>
+            <div class="jtbd-box">
+                <div class="jtbd-label">Job-to-be-Done</div>
+                <div class="jtbd-statement">"When {{PERSONA_1_SITUATION}}, I want to {{PERSONA_1_MOTIVATION}}, so I can {{PERSONA_1_OUTCOME}}."</div>
+            </div>
+            <div style="margin-top: 1rem;">
+                <div class="jtbd-label" style="color: #fc8181;">Top Pain Points</div>
+                <ul class="pain-list">
+                    <li>{{PERSONA_1_PAIN_1}}</li>
+                    <li>{{PERSONA_1_PAIN_2}}</li>
+                    <li>{{PERSONA_1_PAIN_3}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Persona 2 -->
+        <div class="persona-card">
+            <div class="persona-header">
+                <div>
+                    <div class="persona-name">{{PERSONA_2_NAME}}</div>
+                    <div class="persona-role">{{PERSONA_2_ROLE}}</div>
+                </div>
+                <div style="text-align: right;">
+                    <div class="persona-score">{{PERSONA_2_SCORE}}</div>
+                    <div class="persona-score-label">Priority</div>
+                </div>
+            </div>
+            <div class="persona-overview">{{PERSONA_2_OVERVIEW}}</div>
+            <div class="persona-demographics">
+                <div class="demo-item"><span class="demo-label">Age:</span> <span class="demo-value">{{PERSONA_2_AGE}}</span></div>
+                <div class="demo-item"><span class="demo-label">Location:</span> <span class="demo-value">{{PERSONA_2_LOCATION}}</span></div>
+                <div class="demo-item"><span class="demo-label">Income:</span> <span class="demo-value">{{PERSONA_2_INCOME}}</span></div>
+                <div class="demo-item"><span class="demo-label">Industry:</span> <span class="demo-value">{{PERSONA_2_INDUSTRY}}</span></div>
+            </div>
+            <div class="jtbd-box">
+                <div class="jtbd-label">Job-to-be-Done</div>
+                <div class="jtbd-statement">"When {{PERSONA_2_SITUATION}}, I want to {{PERSONA_2_MOTIVATION}}, so I can {{PERSONA_2_OUTCOME}}."</div>
+            </div>
+            <div style="margin-top: 1rem;">
+                <div class="jtbd-label" style="color: #fc8181;">Top Pain Points</div>
+                <ul class="pain-list">
+                    <li>{{PERSONA_2_PAIN_1}}</li>
+                    <li>{{PERSONA_2_PAIN_2}}</li>
+                    <li>{{PERSONA_2_PAIN_3}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Persona 3 -->
+        <div class="persona-card">
+            <div class="persona-header">
+                <div>
+                    <div class="persona-name">{{PERSONA_3_NAME}}</div>
+                    <div class="persona-role">{{PERSONA_3_ROLE}}</div>
+                </div>
+                <div style="text-align: right;">
+                    <div class="persona-score">{{PERSONA_3_SCORE}}</div>
+                    <div class="persona-score-label">Priority</div>
+                </div>
+            </div>
+            <div class="persona-overview">{{PERSONA_3_OVERVIEW}}</div>
+            <div class="persona-demographics">
+                <div class="demo-item"><span class="demo-label">Age:</span> <span class="demo-value">{{PERSONA_3_AGE}}</span></div>
+                <div class="demo-item"><span class="demo-label">Location:</span> <span class="demo-value">{{PERSONA_3_LOCATION}}</span></div>
+                <div class="demo-item"><span class="demo-label">Income:</span> <span class="demo-value">{{PERSONA_3_INCOME}}</span></div>
+                <div class="demo-item"><span class="demo-label">Industry:</span> <span class="demo-value">{{PERSONA_3_INDUSTRY}}</span></div>
+            </div>
+            <div class="jtbd-box">
+                <div class="jtbd-label">Job-to-be-Done</div>
+                <div class="jtbd-statement">"When {{PERSONA_3_SITUATION}}, I want to {{PERSONA_3_MOTIVATION}}, so I can {{PERSONA_3_OUTCOME}}."</div>
+            </div>
+            <div style="margin-top: 1rem;">
+                <div class="jtbd-label" style="color: #fc8181;">Top Pain Points</div>
+                <ul class="pain-list">
+                    <li>{{PERSONA_3_PAIN_1}}</li>
+                    <li>{{PERSONA_3_PAIN_2}}</li>
+                    <li>{{PERSONA_3_PAIN_3}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 2: Priority Matrix -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Persona Priority Matrix</h2>
+        <p class="section-description">
+            Ranking personas by market size, accessibility, willingness to pay, and product fit.
+        </p>
+    </div>
+
+    <div class="priority-matrix">
+        <table class="matrix-table">
+            <thead>
+                <tr>
+                    <th>Persona</th>
+                    <th>Market Size</th>
+                    <th>Accessibility</th>
+                    <th>Willingness to Pay</th>
+                    <th>Fit</th>
+                    <th>Total Score</th>
+                    <th>Rank</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{PERSONA_1_NAME}}</td>
+                    <td class="matrix-score">{{P1_MARKET_SIZE}}/10</td>
+                    <td class="matrix-score">{{P1_ACCESSIBILITY}}/10</td>
+                    <td class="matrix-score">{{P1_WTP}}/10</td>
+                    <td class="matrix-score">{{P1_FIT}}/10</td>
+                    <td class="matrix-score">{{P1_TOTAL}}/40</td>
+                    <td><span class="matrix-rank">#1</span></td>
+                </tr>
+                <tr>
+                    <td>{{PERSONA_2_NAME}}</td>
+                    <td class="matrix-score">{{P2_MARKET_SIZE}}/10</td>
+                    <td class="matrix-score">{{P2_ACCESSIBILITY}}/10</td>
+                    <td class="matrix-score">{{P2_WTP}}/10</td>
+                    <td class="matrix-score">{{P2_FIT}}/10</td>
+                    <td class="matrix-score">{{P2_TOTAL}}/40</td>
+                    <td><span class="matrix-rank">#2</span></td>
+                </tr>
+                <tr>
+                    <td>{{PERSONA_3_NAME}}</td>
+                    <td class="matrix-score">{{P3_MARKET_SIZE}}/10</td>
+                    <td class="matrix-score">{{P3_ACCESSIBILITY}}/10</td>
+                    <td class="matrix-score">{{P3_WTP}}/10</td>
+                    <td class="matrix-score">{{P3_FIT}}/10</td>
+                    <td class="matrix-score">{{P3_TOTAL}}/40</td>
+                    <td><span class="matrix-rank">#3</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- Section 3: Visual Analysis -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Visual Analysis</h2>
+        <p class="section-description">
+            Data visualizations revealing patterns in persona profiles, priority scoring, and behavioral characteristics.
+        </p>
+    </div>
+
+    <div class="chart-grid">
+        <!-- Chart 1: Persona Radar Comparison -->
+        <div class="chart-card">
+            <div class="chart-title">Persona Profile Comparison</div>
+            <div class="chart-subtitle">
+                Multi-dimensional comparison of all personas across key attributes
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="personaRadar"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Key Observations</div>
+                <ul class="insight-list">
+                    <li><strong>Strongest Persona:</strong> {{STRONGEST_PERSONA}} - {{STRONGEST_PERSONA_INSIGHT}}</li>
+                    <li><strong>Key Differentiator:</strong> {{KEY_DIFFERENTIATOR}}</li>
+                    <li><strong>Common Need:</strong> {{COMMON_NEED}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 2: Priority Matrix Scatter -->
+        <div class="chart-card">
+            <div class="chart-title">Priority Matrix Visualization</div>
+            <div class="chart-subtitle">
+                Market size vs. willingness to pay with fit indicated by bubble size
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="priorityScatter"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Prioritization Insights</div>
+                <ul class="insight-list">
+                    <li><strong>Beachhead:</strong> {{BEACHHEAD_PERSONA}} ({{BEACHHEAD_RATIONALE}})</li>
+                    <li><strong>Growth Target:</strong> {{GROWTH_PERSONA}}</li>
+                    <li><strong>Long-term:</strong> {{LONGTERM_PERSONA}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 3: Pain Point Intensity -->
+        <div class="chart-card">
+            <div class="chart-title">Pain Point Intensity by Persona</div>
+            <div class="chart-subtitle">
+                Comparing pain severity across personas to identify universal vs. specific pains
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="painChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Pain Analysis</div>
+                <ul class="insight-list">
+                    <li><strong>Universal Pain:</strong> {{UNIVERSAL_PAIN}}</li>
+                    <li><strong>Highest Intensity:</strong> {{HIGHEST_PAIN_PERSONA}} - {{HIGHEST_PAIN_SCORE}}/10</li>
+                    <li><strong>Product Focus:</strong> {{PAIN_PRODUCT_FOCUS}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 4: Decision Criteria -->
+        <div class="chart-card">
+            <div class="chart-title">Decision Criteria Importance</div>
+            <div class="chart-subtitle">
+                Ranking of factors that influence purchase decisions
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="criteriaChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Decision Drivers</div>
+                <ul class="insight-list">
+                    <li><strong>#1 Factor:</strong> {{TOP_CRITERIA}} ({{TOP_CRITERIA_SCORE}}/10)</li>
+                    <li><strong>Must-Have:</strong> {{MUST_HAVE_CRITERIA}}</li>
+                    <li><strong>Differentiator:</strong> {{DIFFERENTIATOR_CRITERIA}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 5: Buying Journey Duration -->
+        <div class="chart-card">
+            <div class="chart-title">Buying Journey Duration</div>
+            <div class="chart-subtitle">
+                Time spent in each stage of the purchase process by persona
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="journeyChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Journey Insights</div>
+                <ul class="insight-list">
+                    <li><strong>Fastest Decision:</strong> {{FASTEST_PERSONA}} ({{FASTEST_DURATION}})</li>
+                    <li><strong>Longest Stage:</strong> {{LONGEST_STAGE}}</li>
+                    <li><strong>Optimization:</strong> {{JOURNEY_OPTIMIZATION}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 4: Buying Journey -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Buying Journey Map</h2>
+        <p class="section-description">
+            Stages customers go through from problem awareness to purchase decision for {{PERSONA_1_NAME}}.
+        </p>
+    </div>
+
+    <div class="journey-timeline">
+        <div class="journey-stage">
+            <div class="stage-name">Awareness</div>
+            <div class="stage-duration">{{AWARENESS_DURATION}}</div>
+            <div class="stage-activities">
+                <strong>Triggers:</strong> {{AWARENESS_TRIGGERS}}<br>
+                <strong>Actions:</strong> {{AWARENESS_ACTIONS}}
+            </div>
+        </div>
+
+        <div class="journey-stage">
+            <div class="stage-name">Consideration</div>
+            <div class="stage-duration">{{CONSIDERATION_DURATION}}</div>
+            <div class="stage-activities">
+                <strong>Research:</strong> {{CONSIDERATION_RESEARCH}}<br>
+                <strong>Channels:</strong> {{CONSIDERATION_CHANNELS}}
+            </div>
+        </div>
+
+        <div class="journey-stage">
+            <div class="stage-name">Decision</div>
+            <div class="stage-duration">{{DECISION_DURATION}}</div>
+            <div class="stage-activities">
+                <strong>Stakeholders:</strong> {{DECISION_STAKEHOLDERS}}<br>
+                <strong>Proof Needed:</strong> {{DECISION_PROOF}}
+            </div>
+        </div>
+
+        <div class="journey-stage">
+            <div class="stage-name">Purchase</div>
+            <div class="stage-duration">{{PURCHASE_DURATION}}</div>
+            <div class="stage-activities">
+                <strong>Process:</strong> {{PURCHASE_PROCESS}}<br>
+                <strong>Friction:</strong> {{PURCHASE_FRICTION}}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 5: Decision Criteria -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Decision Criteria</h2>
+        <p class="section-description">
+            Factors that influence purchase decisions, ranked by importance across all personas.
+        </p>
+    </div>
+
+    <div class="criteria-grid">
+        <div class="criteria-card">
+            <div class="criteria-header">
+                <div class="criteria-name">{{CRITERIA_1_NAME}}</div>
+                <div class="criteria-rank">#1</div>
+            </div>
+            <div class="criteria-importance">
+                <div class="criteria-bar" style="width: {{CRITERIA_1_PCT}}%;"></div>
+            </div>
+            <div class="criteria-description">{{CRITERIA_1_DESC}}</div>
+        </div>
+
+        <div class="criteria-card">
+            <div class="criteria-header">
+                <div class="criteria-name">{{CRITERIA_2_NAME}}</div>
+                <div class="criteria-rank">#2</div>
+            </div>
+            <div class="criteria-importance">
+                <div class="criteria-bar" style="width: {{CRITERIA_2_PCT}}%;"></div>
+            </div>
+            <div class="criteria-description">{{CRITERIA_2_DESC}}</div>
+        </div>
+
+        <div class="criteria-card">
+            <div class="criteria-header">
+                <div class="criteria-name">{{CRITERIA_3_NAME}}</div>
+                <div class="criteria-rank">#3</div>
+            </div>
+            <div class="criteria-importance">
+                <div class="criteria-bar" style="width: {{CRITERIA_3_PCT}}%;"></div>
+            </div>
+            <div class="criteria-description">{{CRITERIA_3_DESC}}</div>
+        </div>
+
+        <div class="criteria-card">
+            <div class="criteria-header">
+                <div class="criteria-name">{{CRITERIA_4_NAME}}</div>
+                <div class="criteria-rank">#4</div>
+            </div>
+            <div class="criteria-importance">
+                <div class="criteria-bar" style="width: {{CRITERIA_4_PCT}}%;"></div>
+            </div>
+            <div class="criteria-description">{{CRITERIA_4_DESC}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 6: Persona Comparison Matrix -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Persona Comparison Matrix</h2>
+        <p class="section-description">
+            Side-by-side comparison of key attributes across all personas.
+        </p>
+    </div>
+
+    <table class="comparison-table">
+        <thead>
+            <tr>
+                <th>Attribute</th>
+                <th>{{PERSONA_1_NAME}}</th>
+                <th>{{PERSONA_2_NAME}}</th>
+                <th>{{PERSONA_3_NAME}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Primary Goal</td>
+                <td>{{P1_PRIMARY_GOAL}}</td>
+                <td>{{P2_PRIMARY_GOAL}}</td>
+                <td>{{P3_PRIMARY_GOAL}}</td>
+            </tr>
+            <tr>
+                <td>Top Pain Point</td>
+                <td>{{P1_TOP_PAIN}}</td>
+                <td>{{P2_TOP_PAIN}}</td>
+                <td>{{P3_TOP_PAIN}}</td>
+            </tr>
+            <tr>
+                <td>Decision Authority</td>
+                <td>{{P1_AUTHORITY}}</td>
+                <td>{{P2_AUTHORITY}}</td>
+                <td>{{P3_AUTHORITY}}</td>
+            </tr>
+            <tr>
+                <td>Sales Cycle</td>
+                <td>{{P1_SALES_CYCLE}}</td>
+                <td>{{P2_SALES_CYCLE}}</td>
+                <td>{{P3_SALES_CYCLE}}</td>
+            </tr>
+            <tr>
+                <td>Price Sensitivity</td>
+                <td>{{P1_PRICE_SENS}}</td>
+                <td>{{P2_PRICE_SENS}}</td>
+                <td>{{P3_PRICE_SENS}}</td>
+            </tr>
+            <tr>
+                <td>Best Channel</td>
+                <td>{{P1_CHANNEL}}</td>
+                <td>{{P2_CHANNEL}}</td>
+                <td>{{P3_CHANNEL}}</td>
+            </tr>
+            <tr>
+                <td>Key Objection</td>
+                <td>{{P1_OBJECTION}}</td>
+                <td>{{P2_OBJECTION}}</td>
+                <td>{{P3_OBJECTION}}</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- Section 7: Go-to-Market Prioritization -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Go-to-Market Persona Prioritization</h2>
+        <p class="section-description">
+            Phased approach to targeting personas based on strategic value and market readiness.
+        </p>
+    </div>
+
+    <div class="gtm-phases">
+        <div class="gtm-phase">
+            <div class="phase-number">1</div>
+            <div class="phase-title">Launch Focus</div>
+            <div class="phase-timeline">{{PHASE_1_TIMELINE}}</div>
+            <div class="phase-persona">{{PHASE_1_PERSONA}}</div>
+            <div class="jtbd-label">Key Tactics</div>
+            <ul class="phase-tactics">
+                <li>{{PHASE_1_TACTIC_1}}</li>
+                <li>{{PHASE_1_TACTIC_2}}</li>
+                <li>{{PHASE_1_TACTIC_3}}</li>
+            </ul>
+        </div>
+
+        <div class="gtm-phase">
+            <div class="phase-number">2</div>
+            <div class="phase-title">Expansion</div>
+            <div class="phase-timeline">{{PHASE_2_TIMELINE}}</div>
+            <div class="phase-persona">{{PHASE_2_PERSONA}}</div>
+            <div class="jtbd-label">Key Tactics</div>
+            <ul class="phase-tactics">
+                <li>{{PHASE_2_TACTIC_1}}</li>
+                <li>{{PHASE_2_TACTIC_2}}</li>
+                <li>{{PHASE_2_TACTIC_3}}</li>
+            </ul>
+        </div>
+
+        <div class="gtm-phase">
+            <div class="phase-number">3</div>
+            <div class="phase-title">Scale</div>
+            <div class="phase-timeline">{{PHASE_3_TIMELINE}}</div>
+            <div class="phase-persona">{{PHASE_3_PERSONA}}</div>
+            <div class="jtbd-label">Key Tactics</div>
+            <ul class="phase-tactics">
+                <li>{{PHASE_3_TACTIC_1}}</li>
+                <li>{{PHASE_3_TACTIC_2}}</li>
+                <li>{{PHASE_3_TACTIC_3}}</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Section 8: Common Objections -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Common Objections & Responses</h2>
+        <p class="section-description">
+            Anticipated objections from personas with strategic response frameworks.
+        </p>
+    </div>
+
+    <div class="objection-grid">
+        <div class="objection-card">
+            <div class="objection-header">
+                <div class="objection-text">"{{OBJECTION_1}}"</div>
+            </div>
+            <div class="objection-response">
+                <div class="response-label">Response Strategy</div>
+                <div class="response-content">{{OBJECTION_1_RESPONSE}}</div>
+            </div>
+        </div>
+
+        <div class="objection-card">
+            <div class="objection-header">
+                <div class="objection-text">"{{OBJECTION_2}}"</div>
+            </div>
+            <div class="objection-response">
+                <div class="response-label">Response Strategy</div>
+                <div class="response-content">{{OBJECTION_2_RESPONSE}}</div>
+            </div>
+        </div>
+
+        <div class="objection-card">
+            <div class="objection-header">
+                <div class="objection-text">"{{OBJECTION_3}}"</div>
+            </div>
+            <div class="objection-response">
+                <div class="response-label">Response Strategy</div>
+                <div class="response-content">{{OBJECTION_3_RESPONSE}}</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CHART SCRIPTS (Replace {{CHART_SCRIPTS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+<script>
+// Data object (populated from analysis)
+const data = {
+    personas: {
+        labels: ['Market Size', 'Accessibility', 'WTP', 'Fit', 'Urgency'],
+        persona1: [{{P1_MARKET_SIZE}}, {{P1_ACCESSIBILITY}}, {{P1_WTP}}, {{P1_FIT}}, {{P1_URGENCY}}],
+        persona2: [{{P2_MARKET_SIZE}}, {{P2_ACCESSIBILITY}}, {{P2_WTP}}, {{P2_FIT}}, {{P2_URGENCY}}],
+        persona3: [{{P3_MARKET_SIZE}}, {{P3_ACCESSIBILITY}}, {{P3_WTP}}, {{P3_FIT}}, {{P3_URGENCY}}]
+    },
+    priority: {
+        persona1: { x: {{P1_MARKET_SIZE}}, y: {{P1_WTP}}, r: {{P1_FIT}} * 3, label: '{{PERSONA_1_NAME}}' },
+        persona2: { x: {{P2_MARKET_SIZE}}, y: {{P2_WTP}}, r: {{P2_FIT}} * 3, label: '{{PERSONA_2_NAME}}' },
+        persona3: { x: {{P3_MARKET_SIZE}}, y: {{P3_WTP}}, r: {{P3_FIT}} * 3, label: '{{PERSONA_3_NAME}}' }
+    },
+    pains: {
+        categories: ['{{PAIN_CAT_1}}', '{{PAIN_CAT_2}}', '{{PAIN_CAT_3}}'],
+        persona1: [{{P1_PAIN_1_SCORE}}, {{P1_PAIN_2_SCORE}}, {{P1_PAIN_3_SCORE}}],
+        persona2: [{{P2_PAIN_1_SCORE}}, {{P2_PAIN_2_SCORE}}, {{P2_PAIN_3_SCORE}}],
+        persona3: [{{P3_PAIN_1_SCORE}}, {{P3_PAIN_2_SCORE}}, {{P3_PAIN_3_SCORE}}]
+    },
+    criteria: {
+        labels: ['{{CRITERIA_1_NAME}}', '{{CRITERIA_2_NAME}}', '{{CRITERIA_3_NAME}}', '{{CRITERIA_4_NAME}}', '{{CRITERIA_5_NAME}}'],
+        values: [{{CRITERIA_1_SCORE}}, {{CRITERIA_2_SCORE}}, {{CRITERIA_3_SCORE}}, {{CRITERIA_4_SCORE}}, {{CRITERIA_5_SCORE}}]
+    },
+    journey: {
+        stages: ['Awareness', 'Consideration', 'Decision', 'Purchase'],
+        persona1: [{{P1_AWARENESS_DAYS}}, {{P1_CONSIDERATION_DAYS}}, {{P1_DECISION_DAYS}}, {{P1_PURCHASE_DAYS}}],
+        persona2: [{{P2_AWARENESS_DAYS}}, {{P2_CONSIDERATION_DAYS}}, {{P2_DECISION_DAYS}}, {{P2_PURCHASE_DAYS}}],
+        persona3: [{{P3_AWARENESS_DAYS}}, {{P3_CONSIDERATION_DAYS}}, {{P3_DECISION_DAYS}}, {{P3_PURCHASE_DAYS}}]
+    },
+    composite: {{PRIMARY_SCORE}}
+};
+
+// Chart 1: Persona Radar Comparison
+const radarCtx = document.getElementById('personaRadar').getContext('2d');
+new Chart(radarCtx, {
+    type: 'radar',
+    data: {
+        labels: data.personas.labels,
+        datasets: [
+            {
+                label: '{{PERSONA_1_NAME}}',
+                data: data.personas.persona1,
+                backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                borderColor: '#10b981',
+                borderWidth: 2,
+                pointBackgroundColor: '#10b981',
+                pointRadius: 4
+            },
+            {
+                label: '{{PERSONA_2_NAME}}',
+                data: data.personas.persona2,
+                backgroundColor: 'rgba(20, 184, 166, 0.2)',
+                borderColor: '#14b8a6',
+                borderWidth: 2,
+                pointBackgroundColor: '#14b8a6',
+                pointRadius: 4
+            },
+            {
+                label: '{{PERSONA_3_NAME}}',
+                data: data.personas.persona3,
+                backgroundColor: 'rgba(5, 150, 105, 0.2)',
+                borderColor: '#059669',
+                borderWidth: 2,
+                pointBackgroundColor: '#059669',
+                pointRadius: 4
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            r: {
+                beginAtZero: true,
+                max: 10,
+                ticks: { color: '#a3a3a3', stepSize: 2, font: { size: 10 } },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                pointLabels: { color: '#f5f5f5', font: { size: 11, weight: '600' } }
+            }
+        },
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { color: '#f5f5f5', font: { size: 11 }, padding: 15 }
+            },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Chart 2: Priority Scatter (Bubble)
+const scatterCtx = document.getElementById('priorityScatter').getContext('2d');
+new Chart(scatterCtx, {
+    type: 'bubble',
+    data: {
+        datasets: [
+            {
+                label: data.priority.persona1.label,
+                data: [{ x: data.priority.persona1.x, y: data.priority.persona1.y, r: data.priority.persona1.r }],
+                backgroundColor: 'rgba(16, 185, 129, 0.6)',
+                borderColor: '#10b981',
+                borderWidth: 2
+            },
+            {
+                label: data.priority.persona2.label,
+                data: [{ x: data.priority.persona2.x, y: data.priority.persona2.y, r: data.priority.persona2.r }],
+                backgroundColor: 'rgba(20, 184, 166, 0.6)',
+                borderColor: '#14b8a6',
+                borderWidth: 2
+            },
+            {
+                label: data.priority.persona3.label,
+                data: [{ x: data.priority.persona3.x, y: data.priority.persona3.y, r: data.priority.persona3.r }],
+                backgroundColor: 'rgba(5, 150, 105, 0.6)',
+                borderColor: '#059669',
+                borderWidth: 2
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                title: { display: true, text: 'Market Size', color: '#a3a3a3', font: { size: 12, weight: '600' } },
+                min: 0,
+                max: 10,
+                ticks: { color: '#a3a3a3', font: { size: 11 } },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' }
+            },
+            y: {
+                title: { display: true, text: 'Willingness to Pay', color: '#a3a3a3', font: { size: 12, weight: '600' } },
+                min: 0,
+                max: 10,
+                ticks: { color: '#a3a3a3', font: { size: 11 } },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' }
+            }
+        },
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { color: '#f5f5f5', font: { size: 11 } }
+            },
+            tooltip: {
+                ...tooltipConfig,
+                callbacks: {
+                    label: function(context) {
+                        return `${context.dataset.label}: Market ${context.parsed.x}, WTP ${context.parsed.y}, Fit ${(context.raw.r / 3).toFixed(0)}`;
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Chart 3: Pain Point Grouped Bar
+const painCtx = document.getElementById('painChart').getContext('2d');
+new Chart(painCtx, {
+    type: 'bar',
+    data: {
+        labels: data.pains.categories,
+        datasets: [
+            {
+                label: '{{PERSONA_1_NAME}}',
+                data: data.pains.persona1,
+                backgroundColor: '#10b981',
+                borderRadius: 4
+            },
+            {
+                label: '{{PERSONA_2_NAME}}',
+                data: data.pains.persona2,
+                backgroundColor: '#14b8a6',
+                borderRadius: 4
+            },
+            {
+                label: '{{PERSONA_3_NAME}}',
+                data: data.pains.persona3,
+                backgroundColor: '#059669',
+                borderRadius: 4
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 10,
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: { color: '#a3a3a3', font: { size: 11 } },
+                title: { display: true, text: 'Pain Intensity', color: '#a3a3a3', font: { size: 11 } }
+            },
+            x: {
+                grid: { display: false },
+                ticks: { color: '#f5f5f5', font: { size: 11 } }
+            }
+        },
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { color: '#f5f5f5', font: { size: 11 } }
+            },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Chart 4: Decision Criteria Horizontal Bar
+const criteriaCtx = document.getElementById('criteriaChart').getContext('2d');
+new Chart(criteriaCtx, {
+    type: 'bar',
+    data: {
+        labels: data.criteria.labels,
+        datasets: [{
+            label: 'Importance',
+            data: data.criteria.values,
+            backgroundColor: '#10b981',
+            borderRadius: 6
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: 'y',
+        scales: {
+            x: {
+                beginAtZero: true,
+                max: 10,
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: { color: '#a3a3a3', font: { size: 11 } }
+            },
+            y: {
+                grid: { display: false },
+                ticks: { color: '#f5f5f5', font: { size: 11, weight: '500' } }
+            }
+        },
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                ...tooltipConfig,
+                callbacks: {
+                    label: function(context) {
+                        return 'Importance: ' + context.parsed.x.toFixed(1) + '/10';
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Chart 5: Journey Duration Stacked Bar
+const journeyCtx = document.getElementById('journeyChart').getContext('2d');
+new Chart(journeyCtx, {
+    type: 'bar',
+    data: {
+        labels: ['{{PERSONA_1_NAME}}', '{{PERSONA_2_NAME}}', '{{PERSONA_3_NAME}}'],
+        datasets: [
+            {
+                label: 'Awareness',
+                data: [data.journey.persona1[0], data.journey.persona2[0], data.journey.persona3[0]],
+                backgroundColor: 'rgba(16, 185, 129, 0.4)',
+                borderRadius: 4
+            },
+            {
+                label: 'Consideration',
+                data: [data.journey.persona1[1], data.journey.persona2[1], data.journey.persona3[1]],
+                backgroundColor: 'rgba(16, 185, 129, 0.6)',
+                borderRadius: 4
+            },
+            {
+                label: 'Decision',
+                data: [data.journey.persona1[2], data.journey.persona2[2], data.journey.persona3[2]],
+                backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                borderRadius: 4
+            },
+            {
+                label: 'Purchase',
+                data: [data.journey.persona1[3], data.journey.persona2[3], data.journey.persona3[3]],
+                backgroundColor: '#10b981',
+                borderRadius: 4
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                stacked: true,
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: { color: '#a3a3a3', font: { size: 11 } },
+                title: { display: true, text: 'Days', color: '#a3a3a3', font: { size: 11 } }
+            },
+            x: {
+                stacked: true,
+                grid: { display: false },
+                ticks: { color: '#f5f5f5', font: { size: 11 } }
+            }
+        },
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { color: '#f5f5f5', font: { size: 11 } }
+            },
+            tooltip: {
+                ...tooltipConfig,
+                callbacks: {
+                    label: function(context) {
+                        return context.dataset.label + ': ' + context.parsed.y + ' days';
+                    }
+                }
+            }
+        }
+    }
+});
+</script>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     REQUIRED CHARTS SUMMARY
+     ════════════════════════════════════════════════════════════════════════════
+
+     1. personaRadar (Radar)
+        - 5 dimensions: Market Size, Accessibility, WTP, Fit, Urgency
+        - 3 datasets (one per persona)
+        - Shows persona profile comparison
+
+     2. priorityScatter (Bubble)
+        - X: Market Size, Y: Willingness to Pay, R: Fit
+        - 3 bubbles (one per persona)
+        - Shows priority matrix visualization
+
+     3. painChart (Grouped Bar)
+        - 3 pain categories
+        - 3 datasets (one per persona)
+        - Shows pain intensity comparison
+
+     4. criteriaChart (Horizontal Bar)
+        - 5 decision criteria
+        - Shows importance ranking
+
+     5. journeyChart (Stacked Bar)
+        - 4 stages: Awareness, Consideration, Decision, Purchase
+        - 3 personas
+        - Shows buying journey duration
+
+     ════════════════════════════════════════════════════════════════════════════ -->

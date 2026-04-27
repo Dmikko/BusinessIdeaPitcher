@@ -1,0 +1,878 @@
+<!--
+═══════════════════════════════════════════════════════════════════════════════
+STRATARTS HTML SKELETON TEMPLATE
+Skill: brand-identity-designer
+Version: 1.0.0
+
+INSTRUCTIONS:
+1. Read VERIFICATION-CHECKLIST.md FIRST for canonical patterns
+2. Read base-template.html for shared CSS/JS structure
+3. Replace all {{PLACEHOLDER}} markers with actual data
+4. This template defines skill-specific content sections and charts
+═══════════════════════════════════════════════════════════════════════════════
+-->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     TEMPLATE VARIABLES (Replace with actual data)
+     ════════════════════════════════════════════════════════════════════════════
+
+     HEADER:
+     {{PAGE_TITLE}}          = "Brand Identity"
+     {{KICKER}}              = "StratArts Business Analysis"
+     {{TITLE}}               = "Brand Identity Designer"
+     {{SUBTITLE}}            = "{PRODUCT_NAME} - {PRODUCT_DESCRIPTION}"
+     {{DATE}}                = "November 29, 2025"
+     {{ANALYSIS_TYPE}}       = "Marketing & Growth"
+     {{VERSION}}             = "1.0.0"
+
+     SCORE BANNER:
+     {{PRIMARY_SCORE}}       = "Complete" or percentage e.g., "95%"
+     {{SCORE_LABEL}}         = "Brand System" or "Identity Coverage"
+     {{SCORE_INTERPRETATION}}= "This brand identity guide covers..."
+     {{VERDICT}}             = "BRAND READY" | "NEEDS REFINEMENT" | "FOUNDATION ONLY"
+
+     FOOTER:
+     {{PROJECT_NAME}}        = "{PROJECT_FOLDER_NAME}"
+     {{SKILL_NAME}}          = "brand-identity-designer"
+     {{CONTEXT_SIGNATURE}}   = "brand-identity-designer-v1.0.0"
+     {{ITERATIONS}}          = "1"
+     {{ITERATIONS_PLURAL}}   = "" or "s"
+
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     SKILL-SPECIFIC CSS (Add to {{SKILL_SPECIFIC_CSS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+<style>
+/* Brand Essence Card */
+.brand-essence {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, #1a1a1a 100%);
+    border: 2px solid #10b981;
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.brand-essence-label {
+    font-size: 0.75rem;
+    color: #10b981;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+}
+
+.brand-essence-text {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    line-height: 1.4;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Brand Strategy Cards (Purpose, Mission, Vision) */
+.strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.strategy-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.strategy-card.primary {
+    border: 2px solid #10b981;
+}
+
+.strategy-label {
+    font-size: 0.75rem;
+    color: #10b981;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.strategy-text {
+    font-size: 1rem;
+    color: #f5f5f5;
+    line-height: 1.6;
+}
+
+/* Brand Values */
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.value-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.value-card:hover {
+    transform: translateY(-2px);
+    border-color: #10b981;
+}
+
+.value-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.value-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    margin-bottom: 0.5rem;
+}
+
+.value-description {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    line-height: 1.5;
+}
+
+/* Color Palette */
+.color-palette {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.color-section {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.color-section-title {
+    font-size: 0.85rem;
+    color: #10b981;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.color-swatches {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.color-swatch {
+    flex: 1;
+    min-width: 120px;
+}
+
+.swatch-preview {
+    height: 80px;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 0;
+}
+
+.swatch-info {
+    background: #0a0a0a;
+    padding: 0.75rem;
+    border-radius: 0 0 8px 8px;
+}
+
+.swatch-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #f5f5f5;
+    margin-bottom: 0.25rem;
+}
+
+.swatch-hex {
+    font-size: 0.8rem;
+    color: #a3a3a3;
+    font-family: monospace;
+}
+
+/* Typography System */
+.typography-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.type-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.type-label {
+    font-size: 0.75rem;
+    color: #10b981;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.type-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    margin-bottom: 0.5rem;
+}
+
+.type-sample {
+    font-size: 2rem;
+    color: #f5f5f5;
+    margin: 1rem 0;
+    line-height: 1.2;
+}
+
+.type-details {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    line-height: 1.6;
+}
+
+/* Typography Scale */
+.type-scale {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.scale-item {
+    display: flex;
+    align-items: baseline;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.scale-item:last-child {
+    border-bottom: none;
+}
+
+.scale-label {
+    width: 100px;
+    font-size: 0.75rem;
+    color: #a3a3a3;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.scale-sample {
+    flex: 1;
+    color: #f5f5f5;
+}
+
+.scale-specs {
+    font-size: 0.75rem;
+    color: #a3a3a3;
+    font-family: monospace;
+    text-align: right;
+}
+
+/* Brand Personality */
+.personality-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.personality-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.personality-trait {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #10b981;
+    margin-bottom: 0.5rem;
+}
+
+.personality-description {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    line-height: 1.6;
+}
+
+/* Tone Spectrum */
+.tone-spectrum {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.spectrum-item {
+    margin-bottom: 1.5rem;
+}
+
+.spectrum-item:last-child {
+    margin-bottom: 0;
+}
+
+.spectrum-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    margin-bottom: 0.5rem;
+}
+
+.spectrum-bar {
+    height: 8px;
+    background: #0a0a0a;
+    border-radius: 4px;
+    position: relative;
+}
+
+.spectrum-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981 0%, #14b8a6 100%);
+    border-radius: 4px;
+}
+
+.spectrum-marker {
+    position: absolute;
+    top: -4px;
+    width: 16px;
+    height: 16px;
+    background: #10b981;
+    border: 2px solid #0a0a0a;
+    border-radius: 50%;
+    transform: translateX(-50%);
+}
+
+/* Messaging Cards */
+.message-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.message-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.message-card.full-width {
+    grid-column: 1 / -1;
+}
+
+.message-label {
+    font-size: 0.75rem;
+    color: #10b981;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.message-content {
+    font-size: 1.1rem;
+    color: #f5f5f5;
+    line-height: 1.6;
+}
+
+.message-rationale {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    margin-top: 0.75rem;
+    font-style: italic;
+}
+
+/* Voice Examples */
+.voice-examples {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.voice-example {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.voice-example:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.voice-scenario {
+    font-size: 0.85rem;
+    color: #10b981;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.voice-wrong, .voice-right {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+}
+
+.voice-wrong {
+    background: rgba(239, 68, 68, 0.1);
+    border-left: 3px solid #ef4444;
+}
+
+.voice-right {
+    background: rgba(16, 185, 129, 0.1);
+    border-left: 3px solid #10b981;
+}
+
+.voice-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.voice-wrong .voice-label {
+    color: #ef4444;
+}
+
+.voice-right .voice-label {
+    color: #10b981;
+}
+
+.voice-text {
+    font-size: 0.95rem;
+    color: #d4d4d4;
+    line-height: 1.6;
+}
+
+/* Implementation Checklist */
+.checklist-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.checklist-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.checklist-phase {
+    font-size: 0.85rem;
+    color: #10b981;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.checklist-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.checklist-items li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+    color: #d4d4d4;
+}
+
+.checklist-items li::before {
+    content: '☐';
+    color: #10b981;
+    font-weight: 700;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .values-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .strategy-grid,
+    .personality-grid {
+        grid-template-columns: 1fr;
+    }
+    .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .color-palette,
+    .typography-grid,
+    .message-grid,
+    .checklist-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CONTENT SECTIONS (Replace {{CONTENT_SECTIONS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- Section 1: Brand Essence -->
+<section class="section">
+    <div class="brand-essence">
+        <div class="brand-essence-label">Brand Essence</div>
+        <div class="brand-essence-text">{{BRAND_ESSENCE}}</div>
+    </div>
+
+    <div class="strategy-grid">
+        <div class="strategy-card primary">
+            <div class="strategy-label">Purpose</div>
+            <div class="strategy-text">{{BRAND_PURPOSE}}</div>
+        </div>
+        <div class="strategy-card">
+            <div class="strategy-label">Mission</div>
+            <div class="strategy-text">{{BRAND_MISSION}}</div>
+        </div>
+        <div class="strategy-card">
+            <div class="strategy-label">Vision</div>
+            <div class="strategy-text">{{BRAND_VISION}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 2: Brand Values -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Brand Values</h2>
+        <p class="section-description">
+            Core principles that guide decisions and define brand character.
+        </p>
+    </div>
+
+    <div class="values-grid">
+        <!-- Repeat for each value -->
+        <div class="value-card">
+            <div class="value-icon">{{VALUE_1_ICON}}</div>
+            <div class="value-name">{{VALUE_1_NAME}}</div>
+            <div class="value-description">{{VALUE_1_DESCRIPTION}}</div>
+        </div>
+        <!-- ... more value cards -->
+    </div>
+</section>
+
+<!-- Section 3: Brand Personality -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Brand Personality</h2>
+        <p class="section-description">
+            How the brand expresses itself across all touchpoints.
+        </p>
+    </div>
+
+    <div class="chart-grid">
+        <div class="chart-card">
+            <div class="chart-title">Personality Traits</div>
+            <div class="chart-subtitle">Brand character attributes scored 1-10</div>
+            <div class="chart-wrapper">
+                <canvas id="personalityRadar"></canvas>
+            </div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">Tone Positioning</div>
+            <div class="chart-subtitle">Where the brand sits on key spectrums</div>
+            <div class="chart-wrapper">
+                <canvas id="toneChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="personality-grid">
+        <div class="personality-card">
+            <div class="personality-trait">{{TRAIT_1_NAME}}</div>
+            <div class="personality-description">{{TRAIT_1_DESCRIPTION}}</div>
+        </div>
+        <!-- ... more personality cards -->
+    </div>
+</section>
+
+<!-- Section 4: Visual Identity - Colors -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Color Palette</h2>
+        <p class="section-description">
+            Brand colors with usage guidelines and accessibility considerations.
+        </p>
+    </div>
+
+    <div class="color-palette">
+        <div class="color-section">
+            <div class="color-section-title">Primary Colors</div>
+            <div class="color-swatches">
+                <div class="color-swatch">
+                    <div class="swatch-preview" style="background: {{PRIMARY_COLOR_HEX}};"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">{{PRIMARY_COLOR_NAME}}</div>
+                        <div class="swatch-hex">{{PRIMARY_COLOR_HEX}}</div>
+                    </div>
+                </div>
+                <!-- ... more swatches -->
+            </div>
+        </div>
+        <div class="color-section">
+            <div class="color-section-title">Accent Colors</div>
+            <div class="color-swatches">
+                <!-- Accent color swatches -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 5: Visual Identity - Typography -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Typography System</h2>
+        <p class="section-description">
+            Font families, weights, and usage guidelines for consistent brand expression.
+        </p>
+    </div>
+
+    <div class="typography-grid">
+        <div class="type-card">
+            <div class="type-label">Primary Typeface</div>
+            <div class="type-name">{{PRIMARY_FONT_NAME}}</div>
+            <div class="type-sample" style="font-family: {{PRIMARY_FONT_FAMILY}};">
+                Aa Bb Cc Dd Ee Ff Gg
+            </div>
+            <div class="type-details">{{PRIMARY_FONT_USAGE}}</div>
+        </div>
+        <div class="type-card">
+            <div class="type-label">Secondary Typeface</div>
+            <div class="type-name">{{SECONDARY_FONT_NAME}}</div>
+            <div class="type-sample" style="font-family: {{SECONDARY_FONT_FAMILY}};">
+                Aa Bb Cc Dd Ee Ff Gg
+            </div>
+            <div class="type-details">{{SECONDARY_FONT_USAGE}}</div>
+        </div>
+    </div>
+
+    <div class="type-scale">
+        <div class="scale-item">
+            <div class="scale-label">H1</div>
+            <div class="scale-sample" style="font-size: 2.5rem; font-weight: 700;">Hero Headline</div>
+            <div class="scale-specs">48px / 56px / Bold</div>
+        </div>
+        <!-- ... more scale items -->
+    </div>
+</section>
+
+<!-- Section 6: Messaging Architecture -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Messaging Architecture</h2>
+        <p class="section-description">
+            Taglines, boilerplates, and key messages that communicate brand value.
+        </p>
+    </div>
+
+    <div class="message-grid">
+        <div class="message-card full-width">
+            <div class="message-label">Primary Tagline</div>
+            <div class="message-content">"{{TAGLINE}}"</div>
+            <div class="message-rationale">{{TAGLINE_RATIONALE}}</div>
+        </div>
+        <div class="message-card">
+            <div class="message-label">Short Boilerplate</div>
+            <div class="message-content">{{BOILERPLATE_SHORT}}</div>
+        </div>
+        <div class="message-card">
+            <div class="message-label">Long Boilerplate</div>
+            <div class="message-content">{{BOILERPLATE_LONG}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 7: Tone of Voice -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Tone of Voice</h2>
+        <p class="section-description">
+            How the brand sounds across channels and contexts.
+        </p>
+    </div>
+
+    <div class="tone-spectrum">
+        <div class="spectrum-item">
+            <div class="spectrum-labels">
+                <span>Formal</span>
+                <span>Casual</span>
+            </div>
+            <div class="spectrum-bar">
+                <div class="spectrum-marker" style="left: {{FORMAL_CASUAL_POSITION}}%;"></div>
+            </div>
+        </div>
+        <!-- ... more spectrum items -->
+    </div>
+
+    <div class="voice-examples">
+        <div class="voice-example">
+            <div class="voice-scenario">Feature Announcement</div>
+            <div class="voice-wrong">
+                <div class="voice-label">OFF-BRAND</div>
+                <div class="voice-text">{{VOICE_EXAMPLE_1_WRONG}}</div>
+            </div>
+            <div class="voice-right">
+                <div class="voice-label">ON-BRAND</div>
+                <div class="voice-text">{{VOICE_EXAMPLE_1_RIGHT}}</div>
+            </div>
+        </div>
+        <!-- ... more voice examples -->
+    </div>
+</section>
+
+<!-- Section 8: Implementation Roadmap -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Implementation Roadmap</h2>
+        <p class="section-description">
+            Phased approach to rolling out the new brand identity.
+        </p>
+    </div>
+
+    <div class="checklist-grid">
+        <div class="checklist-card">
+            <div class="checklist-phase">Phase 1: Core Assets</div>
+            <ul class="checklist-items">
+                <li>{{PHASE_1_ITEM_1}}</li>
+                <li>{{PHASE_1_ITEM_2}}</li>
+                <li>{{PHASE_1_ITEM_3}}</li>
+            </ul>
+        </div>
+        <!-- ... more phases -->
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CHART SCRIPTS (Replace {{CHART_SCRIPTS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+<script>
+// Personality Radar Chart
+const personalityCtx = document.getElementById('personalityRadar').getContext('2d');
+new Chart(personalityCtx, {
+    type: 'radar',
+    data: {
+        labels: [{{PERSONALITY_LABELS}}], // e.g., ['Professional', 'Approachable', 'Innovative', 'Trustworthy', 'Bold']
+        datasets: [{
+            label: 'Brand Personality',
+            data: [{{PERSONALITY_SCORES}}], // e.g., [8, 7, 9, 8, 6]
+            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+            borderColor: '#10b981',
+            borderWidth: 2,
+            pointBackgroundColor: '#10b981',
+            pointBorderColor: '#0a0a0a',
+            pointBorderWidth: 2,
+            pointRadius: 5
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: tooltipConfig
+        },
+        scales: {
+            r: {
+                beginAtZero: true,
+                max: 10,
+                ticks: {
+                    stepSize: 2,
+                    color: '#a3a3a3',
+                    backdropColor: 'transparent'
+                },
+                grid: {
+                    color: 'rgba(16, 185, 129, 0.2)'
+                },
+                angleLines: {
+                    color: 'rgba(16, 185, 129, 0.2)'
+                },
+                pointLabels: {
+                    color: '#f5f5f5',
+                    font: { size: 12, weight: 600 }
+                }
+            }
+        }
+    }
+});
+
+// Tone Positioning Chart
+const toneCtx = document.getElementById('toneChart').getContext('2d');
+new Chart(toneCtx, {
+    type: 'bar',
+    data: {
+        labels: ['Formal-Casual', 'Serious-Playful', 'Respectful-Irreverent', 'Enthusiastic-Matter-of-fact', 'Technical-Simple'],
+        datasets: [{
+            label: 'Tone Position',
+            data: [{{TONE_SCORES}}], // e.g., [3, 2, 2, 4, 4] where 1=left extreme, 5=right extreme
+            backgroundColor: 'rgba(16, 185, 129, 0.6)',
+            borderColor: '#10b981',
+            borderWidth: 1,
+            borderRadius: 4
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: tooltipConfig
+        },
+        scales: {
+            x: {
+                min: 1,
+                max: 5,
+                ticks: {
+                    stepSize: 1,
+                    color: '#a3a3a3'
+                },
+                grid: {
+                    color: 'rgba(16, 185, 129, 0.1)'
+                }
+            },
+            y: {
+                ticks: { color: '#f5f5f5' },
+                grid: { display: false }
+            }
+        }
+    }
+});
+</script>

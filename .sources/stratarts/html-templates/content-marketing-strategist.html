@@ -1,0 +1,983 @@
+<!--
+═══════════════════════════════════════════════════════════════════════════════
+STRATARTS HTML SKELETON TEMPLATE
+Skill: content-marketing-strategist
+Version: 1.0.0
+
+INSTRUCTIONS:
+1. Read VERIFICATION-CHECKLIST.md FIRST for canonical patterns
+2. Read base-template.html for shared CSS/JS structure
+3. Replace all {{PLACEHOLDER}} markers with actual data
+4. This template defines skill-specific content sections and charts
+═══════════════════════════════════════════════════════════════════════════════
+-->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     TEMPLATE VARIABLES (Replace with actual data)
+     ════════════════════════════════════════════════════════════════════════════
+
+     HEADER:
+     {{PAGE_TITLE}}          = "Content Marketing Strategy"
+     {{KICKER}}              = "StratArts Business Analysis"
+     {{TITLE}}               = "Content Marketing Strategist"
+     {{SUBTITLE}}            = "{PRODUCT_NAME} - {PRODUCT_DESCRIPTION}"
+     {{DATE}}                = "November 29, 2025"
+     {{ANALYSIS_TYPE}}       = "Marketing & Growth"
+     {{VERSION}}             = "1.0.0"
+
+     SCORE BANNER:
+     {{PRIMARY_SCORE}}       = "90" (day plan) or "5" (pillars)
+     {{SCORE_LABEL}}         = "Day Content Plan" or "Content Pillars"
+     {{SCORE_INTERPRETATION}}= "This content marketing strategy..."
+     {{VERDICT}}             = "CONTENT READY" | "NEEDS RESOURCES" | "FOUNDATION ONLY"
+
+     FOOTER:
+     {{PROJECT_NAME}}        = "{PROJECT_FOLDER_NAME}"
+     {{SKILL_NAME}}          = "content-marketing-strategist"
+     {{CONTEXT_SIGNATURE}}   = "content-marketing-strategist-v1.0.0"
+     {{ITERATIONS}}          = "1"
+     {{ITERATIONS_PLURAL}}   = "" or "s"
+
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     SKILL-SPECIFIC CSS (Add to {{SKILL_SPECIFIC_CSS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+<style>
+/* Content Mission Card */
+.content-mission {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, #1a1a1a 100%);
+    border: 2px solid #10b981;
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.mission-label {
+    font-size: 0.75rem;
+    color: #10b981;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+}
+
+.mission-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    line-height: 1.4;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Goals Grid */
+.goals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.goal-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.goal-card.primary {
+    border: 2px solid #10b981;
+}
+
+.goal-number {
+    display: inline-block;
+    background: #10b981;
+    color: #0a0a0a;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    margin-bottom: 0.75rem;
+}
+
+.goal-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    margin-bottom: 0.5rem;
+}
+
+.goal-target {
+    font-size: 0.9rem;
+    color: #10b981;
+    margin-bottom: 0.5rem;
+}
+
+.goal-description {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    line-height: 1.5;
+}
+
+/* Content Pillars */
+.pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.pillar-card {
+    background: #1a1a1a;
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.pillar-card:hover {
+    transform: translateY(-2px);
+    border-color: #10b981;
+}
+
+.pillar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.pillar-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f5f5f5;
+}
+
+.pillar-percent {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.pillar-description {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.pillar-topics {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pillar-topics li {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    padding: 0.35rem 0;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.pillar-topics li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #10b981;
+}
+
+/* Editorial Calendar */
+.calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    background: #1a1a1a;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.calendar-table th {
+    background: rgba(16, 185, 129, 0.2);
+    color: #f5f5f5;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1rem;
+    text-align: left;
+}
+
+.calendar-table td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+    font-size: 0.9rem;
+    color: #d4d4d4;
+}
+
+.calendar-table tr:last-child td {
+    border-bottom: none;
+}
+
+.calendar-table .pillar-tag {
+    display: inline-block;
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.calendar-table .format-tag {
+    display: inline-block;
+    background: #0a0a0a;
+    color: #a3a3a3;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+/* Distribution Channels */
+.channel-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.channel-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.channel-card.primary {
+    border: 2px solid #10b981;
+}
+
+.channel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.channel-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f5f5f5;
+}
+
+.channel-type {
+    font-size: 0.75rem;
+    color: #a3a3a3;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.channel-effort {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #10b981;
+}
+
+.channel-details {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    line-height: 1.6;
+}
+
+.channel-tactics {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0 0;
+}
+
+.channel-tactics li {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    padding: 0.35rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+}
+
+.channel-tactics li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #10b981;
+}
+
+/* Repurposing Workflow */
+.workflow-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.workflow-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #10b981;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+}
+
+.workflow-steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.workflow-step {
+    background: #0a0a0a;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    text-align: center;
+}
+
+.workflow-step.input {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.workflow-step .step-label {
+    font-size: 0.7rem;
+    color: #a3a3a3;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.workflow-step .step-content {
+    font-size: 0.9rem;
+    color: #f5f5f5;
+    font-weight: 600;
+}
+
+.workflow-arrow {
+    color: #10b981;
+    font-size: 1.5rem;
+}
+
+/* Metrics Dashboard */
+.metrics-dashboard {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.dashboard-metric {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.dashboard-metric .metric-category {
+    font-size: 0.7rem;
+    color: #10b981;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+.dashboard-metric .metric-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    line-height: 1.2;
+}
+
+.dashboard-metric .metric-label {
+    font-size: 0.8rem;
+    color: #a3a3a3;
+    margin-top: 0.25rem;
+}
+
+.dashboard-metric .metric-target {
+    font-size: 0.75rem;
+    color: #10b981;
+    margin-top: 0.5rem;
+}
+
+/* Timeline/Roadmap */
+.roadmap-timeline {
+    margin-top: 2rem;
+}
+
+.roadmap-phase {
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+.roadmap-phase:last-child {
+    margin-bottom: 0;
+}
+
+.phase-marker {
+    flex: 0 0 60px;
+    text-align: center;
+}
+
+.phase-dot {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    margin: 0 auto;
+}
+
+.phase-line {
+    width: 2px;
+    height: 100%;
+    background: rgba(16, 185, 129, 0.3);
+    margin: 0.5rem auto 0;
+}
+
+.phase-content {
+    flex: 1;
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-left: 1rem;
+}
+
+.phase-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    margin-bottom: 0.5rem;
+}
+
+.phase-timing {
+    font-size: 0.85rem;
+    color: #10b981;
+    margin-bottom: 1rem;
+}
+
+.phase-tasks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.phase-tasks li {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    padding: 0.35rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.phase-tasks li::before {
+    content: '☐';
+    position: absolute;
+    left: 0;
+    color: #10b981;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .metrics-dashboard {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .goals-grid,
+    .pillars-grid,
+    .channel-grid {
+        grid-template-columns: 1fr;
+    }
+    .metrics-dashboard {
+        grid-template-columns: 1fr;
+    }
+    .workflow-steps {
+        flex-direction: column;
+    }
+}
+</style>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CONTENT SECTIONS (Replace {{CONTENT_SECTIONS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- Section 1: Content Mission & Goals -->
+<section class="section">
+    <div class="content-mission">
+        <div class="mission-label">Content Mission</div>
+        <div class="mission-text">{{CONTENT_MISSION}}</div>
+    </div>
+
+    <div class="section-header">
+        <h2 class="section-title">Content Marketing Goals</h2>
+        <p class="section-description">Primary objectives and measurable targets for content success.</p>
+    </div>
+
+    <div class="goals-grid">
+        <div class="goal-card primary">
+            <div class="goal-number">Goal 1</div>
+            <div class="goal-name">{{GOAL_1_NAME}}</div>
+            <div class="goal-target">{{GOAL_1_TARGET}}</div>
+            <div class="goal-description">{{GOAL_1_DESCRIPTION}}</div>
+        </div>
+        <!-- More goal cards -->
+    </div>
+</section>
+
+<!-- Section 2: Content Pillars -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Content Pillars</h2>
+        <p class="section-description">Core themes that organize and focus content creation.</p>
+    </div>
+
+    <div class="chart-grid">
+        <div class="chart-card">
+            <div class="chart-title">Content Mix by Pillar</div>
+            <div class="chart-subtitle">Distribution of content effort across pillars</div>
+            <div class="chart-wrapper">
+                <canvas id="pillarMixChart"></canvas>
+            </div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">Pillar Priority Matrix</div>
+            <div class="chart-subtitle">Importance vs. current strength</div>
+            <div class="chart-wrapper">
+                <canvas id="pillarPriorityChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="pillars-grid">
+        <div class="pillar-card">
+            <div class="pillar-header">
+                <div class="pillar-name">{{PILLAR_1_NAME}}</div>
+                <div class="pillar-percent">{{PILLAR_1_PERCENT}}%</div>
+            </div>
+            <div class="pillar-description">{{PILLAR_1_DESCRIPTION}}</div>
+            <ul class="pillar-topics">
+                <li>{{PILLAR_1_TOPIC_1}}</li>
+                <li>{{PILLAR_1_TOPIC_2}}</li>
+                <li>{{PILLAR_1_TOPIC_3}}</li>
+            </ul>
+        </div>
+        <!-- More pillar cards -->
+    </div>
+</section>
+
+<!-- Section 3: Content Format Mix -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Content Format Strategy</h2>
+        <p class="section-description">Monthly content mix across formats and content types.</p>
+    </div>
+
+    <div class="chart-grid">
+        <div class="chart-card">
+            <div class="chart-title">Content Format Distribution</div>
+            <div class="chart-subtitle">Monthly output by format type</div>
+            <div class="chart-wrapper">
+                <canvas id="formatChart"></canvas>
+            </div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">Content Type Mix</div>
+            <div class="chart-subtitle">10x, Standard, and Short-form balance</div>
+            <div class="chart-wrapper">
+                <canvas id="contentTypeChart"></canvas>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 4: 90-Day Editorial Calendar -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">90-Day Editorial Calendar</h2>
+        <p class="section-description">First quarter content publishing schedule.</p>
+    </div>
+
+    <table class="calendar-table">
+        <thead>
+            <tr>
+                <th>Week</th>
+                <th>Pillar</th>
+                <th>Title</th>
+                <th>Format</th>
+                <th>Keywords</th>
+                <th>Goal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Week 1</td>
+                <td><span class="pillar-tag">{{CAL_1_PILLAR}}</span></td>
+                <td>{{CAL_1_TITLE}}</td>
+                <td><span class="format-tag">{{CAL_1_FORMAT}}</span></td>
+                <td>{{CAL_1_KEYWORDS}}</td>
+                <td>{{CAL_1_GOAL}}</td>
+            </tr>
+            <!-- More calendar rows -->
+        </tbody>
+    </table>
+</section>
+
+<!-- Section 5: Distribution Strategy -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Distribution Strategy</h2>
+        <p class="section-description">Owned, earned, and paid channel distribution plan.</p>
+    </div>
+
+    <div class="chart-grid">
+        <div class="chart-card">
+            <div class="chart-title">Distribution Effort Allocation</div>
+            <div class="chart-subtitle">Percentage of effort by channel type</div>
+            <div class="chart-wrapper">
+                <canvas id="distributionChart"></canvas>
+            </div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">Channel Performance Targets</div>
+            <div class="chart-subtitle">6-month goals by channel</div>
+            <div class="chart-wrapper">
+                <canvas id="channelTargetsChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="channel-grid">
+        <div class="channel-card primary">
+            <div class="channel-header">
+                <div>
+                    <div class="channel-name">{{CHANNEL_1_NAME}}</div>
+                    <div class="channel-type">{{CHANNEL_1_TYPE}}</div>
+                </div>
+                <div class="channel-effort">{{CHANNEL_1_EFFORT}}%</div>
+            </div>
+            <div class="channel-details">{{CHANNEL_1_DESCRIPTION}}</div>
+            <ul class="channel-tactics">
+                <li>{{CHANNEL_1_TACTIC_1}}</li>
+                <li>{{CHANNEL_1_TACTIC_2}}</li>
+            </ul>
+        </div>
+        <!-- More channel cards -->
+    </div>
+</section>
+
+<!-- Section 6: Content Repurposing -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Content Repurposing Playbook</h2>
+        <p class="section-description">Maximize ROI with 1→10 content multiplication strategy.</p>
+    </div>
+
+    <div class="workflow-card">
+        <div class="workflow-title">Workflow: Blog Post → Multi-Platform Assets</div>
+        <div class="workflow-steps">
+            <div class="workflow-step input">
+                <div class="step-label">Input</div>
+                <div class="step-content">Blog Post</div>
+            </div>
+            <div class="workflow-arrow">→</div>
+            <div class="workflow-step">
+                <div class="step-label">Output 1</div>
+                <div class="step-content">LinkedIn Carousel</div>
+            </div>
+            <div class="workflow-arrow">→</div>
+            <div class="workflow-step">
+                <div class="step-label">Output 2</div>
+                <div class="step-content">Twitter Thread</div>
+            </div>
+            <div class="workflow-arrow">→</div>
+            <div class="workflow-step">
+                <div class="step-label">Output 3</div>
+                <div class="step-content">YouTube Video</div>
+            </div>
+            <div class="workflow-arrow">→</div>
+            <div class="workflow-step">
+                <div class="step-label">Output 4</div>
+                <div class="step-content">Email Newsletter</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 7: Metrics Dashboard -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Content Metrics Dashboard</h2>
+        <p class="section-description">Key performance indicators and targets.</p>
+    </div>
+
+    <div class="metrics-dashboard">
+        <div class="dashboard-metric">
+            <div class="metric-category">Traffic</div>
+            <div class="metric-value">{{TRAFFIC_CURRENT}}</div>
+            <div class="metric-label">Organic Visits/mo</div>
+            <div class="metric-target">Target: {{TRAFFIC_TARGET}}</div>
+        </div>
+        <!-- More metrics -->
+    </div>
+</section>
+
+<!-- Section 8: Implementation Roadmap -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Implementation Roadmap</h2>
+        <p class="section-description">Phased rollout plan for content strategy execution.</p>
+    </div>
+
+    <div class="roadmap-timeline">
+        <div class="roadmap-phase">
+            <div class="phase-marker">
+                <div class="phase-dot">1</div>
+                <div class="phase-line"></div>
+            </div>
+            <div class="phase-content">
+                <div class="phase-title">{{PHASE_1_TITLE}}</div>
+                <div class="phase-timing">{{PHASE_1_TIMING}}</div>
+                <ul class="phase-tasks">
+                    <li>{{PHASE_1_TASK_1}}</li>
+                    <li>{{PHASE_1_TASK_2}}</li>
+                    <li>{{PHASE_1_TASK_3}}</li>
+                </ul>
+            </div>
+        </div>
+        <!-- More phases -->
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CHART SCRIPTS (Replace {{CHART_SCRIPTS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+<script>
+// Content Pillar Mix (Doughnut)
+const pillarMixCtx = document.getElementById('pillarMixChart').getContext('2d');
+new Chart(pillarMixCtx, {
+    type: 'doughnut',
+    data: {
+        labels: [{{PILLAR_NAMES}}], // e.g., ['Product Focus', 'Industry Trends', 'How-To Guides']
+        datasets: [{
+            data: [{{PILLAR_PERCENTAGES}}], // e.g., [30, 25, 25, 20]
+            backgroundColor: [
+                'rgba(16, 185, 129, 0.9)',
+                'rgba(16, 185, 129, 0.7)',
+                'rgba(16, 185, 129, 0.5)',
+                'rgba(16, 185, 129, 0.3)'
+            ],
+            borderColor: '#0a0a0a',
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'right',
+                labels: { color: '#f5f5f5', padding: 15 }
+            },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Pillar Priority (Radar)
+const pillarPriorityCtx = document.getElementById('pillarPriorityChart').getContext('2d');
+new Chart(pillarPriorityCtx, {
+    type: 'radar',
+    data: {
+        labels: [{{PILLAR_NAMES}}],
+        datasets: [{
+            label: 'Importance',
+            data: [{{PILLAR_IMPORTANCE}}],
+            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+            borderColor: '#10b981',
+            borderWidth: 2
+        }, {
+            label: 'Current Strength',
+            data: [{{PILLAR_STRENGTH}}],
+            backgroundColor: 'rgba(163, 163, 163, 0.2)',
+            borderColor: '#a3a3a3',
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { color: '#f5f5f5' }
+            },
+            tooltip: tooltipConfig
+        },
+        scales: {
+            r: {
+                beginAtZero: true,
+                max: 10,
+                ticks: { color: '#a3a3a3', backdropColor: 'transparent' },
+                grid: { color: 'rgba(16, 185, 129, 0.2)' },
+                angleLines: { color: 'rgba(16, 185, 129, 0.2)' },
+                pointLabels: { color: '#f5f5f5', font: { size: 11 } }
+            }
+        }
+    }
+});
+
+// Format Distribution (Bar)
+const formatCtx = document.getElementById('formatChart').getContext('2d');
+new Chart(formatCtx, {
+    type: 'bar',
+    data: {
+        labels: [{{FORMAT_LABELS}}], // e.g., ['Blog Posts', 'Videos', 'Case Studies', 'Social']
+        datasets: [{
+            label: 'Monthly Output',
+            data: [{{FORMAT_COUNTS}}], // e.g., [8, 4, 2, 20]
+            backgroundColor: 'rgba(16, 185, 129, 0.6)',
+            borderColor: '#10b981',
+            borderWidth: 1,
+            borderRadius: 4
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: tooltipConfig
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: { color: '#a3a3a3' },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' }
+            },
+            x: {
+                ticks: { color: '#f5f5f5' },
+                grid: { display: false }
+            }
+        }
+    }
+});
+
+// Content Type Mix (Doughnut)
+const contentTypeCtx = document.getElementById('contentTypeChart').getContext('2d');
+new Chart(contentTypeCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['10x Content', 'Standard Posts', 'Short-Form'],
+        datasets: [{
+            data: [{{CONTENT_TYPE_MIX}}], // e.g., [10, 60, 30]
+            backgroundColor: [
+                '#10b981',
+                'rgba(16, 185, 129, 0.6)',
+                'rgba(16, 185, 129, 0.3)'
+            ],
+            borderColor: '#0a0a0a',
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'right',
+                labels: { color: '#f5f5f5', padding: 15 }
+            },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Distribution Allocation (Doughnut)
+const distributionCtx = document.getElementById('distributionChart').getContext('2d');
+new Chart(distributionCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Owned', 'Earned', 'Paid'],
+        datasets: [{
+            data: [{{DISTRIBUTION_MIX}}], // e.g., [70, 20, 10]
+            backgroundColor: ['#10b981', '#14b8a6', '#059669'],
+            borderColor: '#0a0a0a',
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'right',
+                labels: { color: '#f5f5f5', padding: 15 }
+            },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Channel Targets (Horizontal Bar)
+const channelTargetsCtx = document.getElementById('channelTargetsChart').getContext('2d');
+new Chart(channelTargetsCtx, {
+    type: 'bar',
+    data: {
+        labels: [{{CHANNEL_NAMES}}], // e.g., ['Blog', 'LinkedIn', 'Email', 'YouTube']
+        datasets: [{
+            label: 'Current',
+            data: [{{CHANNEL_CURRENT}}],
+            backgroundColor: 'rgba(163, 163, 163, 0.4)',
+            borderRadius: 4
+        }, {
+            label: '6-Mo Target',
+            data: [{{CHANNEL_TARGETS}}],
+            backgroundColor: 'rgba(16, 185, 129, 0.6)',
+            borderRadius: 4
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { color: '#f5f5f5' }
+            },
+            tooltip: tooltipConfig
+        },
+        scales: {
+            x: {
+                beginAtZero: true,
+                ticks: { color: '#a3a3a3' },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' }
+            },
+            y: {
+                ticks: { color: '#f5f5f5' },
+                grid: { display: false }
+            }
+        }
+    }
+});
+</script>

@@ -1,0 +1,276 @@
+<!-- ═══ SKILL CSS START ═══ -->
+/* === JTBD CARDS === */
+.jtbd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+.jtbd-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+.jtbd-card:hover { transform: translateY(-2px); border-color: rgba(16, 185, 129, 0.4); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1); }
+.jtbd-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(16, 185, 129, 0.2); }
+.jtbd-type { font-weight: 700; color: #10b981; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.jtbd-score { font-size: 1.4rem; font-weight: 700; color: #f5f5f5; }
+.jtbd-statement { font-size: 1rem; color: #f5f5f5; line-height: 1.6; font-style: italic; margin-bottom: 1rem; }
+.jtbd-example { font-size: 0.85rem; color: #a3a3a3; line-height: 1.5; }
+
+/* === VALUE PROPOSITION BOX === */
+.value-prop-box { background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; }
+.value-prop-statement { font-size: 1.25rem; color: #f5f5f5; line-height: 1.8; font-weight: 500; }
+.value-prop-label { font-size: 0.8rem; color: #10b981; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; font-weight: 600; }
+
+/* === PAIN/GAIN GRID === */
+.pain-gain-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
+.pain-card, .gain-card { background: #1a1a1a; border-radius: 12px; padding: 1.5rem; }
+.pain-card { border: 1px solid rgba(245, 101, 101, 0.3); }
+.gain-card { border: 1px solid rgba(16, 185, 129, 0.3); }
+.pain-gain-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.pain-title { color: #fc8181; font-weight: 700; font-size: 0.9rem; }
+.gain-title { color: #10b981; font-weight: 700; font-size: 0.9rem; }
+.intensity-badge { font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 600; }
+.intensity-high { background: rgba(245, 101, 101, 0.2); color: #fc8181; }
+.intensity-medium { background: rgba(246, 173, 85, 0.2); color: #f6ad55; }
+.value-high { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+.pain-gain-description { font-size: 0.95rem; color: #d4d4d4; line-height: 1.5; }
+.pain-gain-frequency { font-size: 0.8rem; color: #a3a3a3; margin-top: 0.5rem; }
+
+/* === BENEFIT PYRAMID === */
+.benefit-pyramid { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin: 2rem 0; }
+.benefit-level { display: flex; align-items: center; gap: 1rem; padding: 1rem 2rem; border-radius: 8px; transition: transform 0.2s; }
+.benefit-level:hover { transform: scale(1.02); }
+.benefit-level-3 { background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(16, 185, 129, 0.15) 100%); border: 1px solid rgba(16, 185, 129, 0.4); width: 50%; }
+.benefit-level-2 { background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.1) 100%); border: 1px solid rgba(16, 185, 129, 0.3); width: 70%; }
+.benefit-level-1 { background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%); border: 1px solid rgba(16, 185, 129, 0.2); width: 90%; }
+.benefit-level-label { font-weight: 700; color: #10b981; font-size: 0.85rem; text-transform: uppercase; white-space: nowrap; }
+.benefit-level-content { color: #f5f5f5; font-size: 0.95rem; line-height: 1.4; }
+
+/* === PILLAR GRID === */
+.pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+.pillar-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; position: relative; overflow: hidden; }
+.pillar-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #10b981 0%, #14b8a6 100%); }
+.pillar-number { font-size: 3rem; font-weight: 900; color: rgba(16, 185, 129, 0.15); position: absolute; top: 0.5rem; right: 1rem; line-height: 1; }
+.pillar-name { font-weight: 700; color: #10b981; font-size: 1.1rem; margin-bottom: 0.5rem; }
+.pillar-headline { font-size: 1rem; color: #f5f5f5; font-weight: 600; margin-bottom: 1rem; line-height: 1.4; }
+.pillar-points { list-style: none; padding: 0; margin: 0; }
+.pillar-points li { font-size: 0.9rem; color: #d4d4d4; padding: 0.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: flex-start; gap: 0.5rem; }
+.pillar-points li::before { content: '→'; color: #10b981; font-weight: bold; }
+.pillar-points li:last-child { border-bottom: none; }
+
+/* === TOUCHPOINT GRID === */
+.touchpoint-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
+.touchpoint-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1.25rem; }
+.touchpoint-name { font-weight: 700; color: #10b981; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+.touchpoint-headline { font-size: 1.1rem; color: #f5f5f5; font-weight: 600; margin-bottom: 0.5rem; line-height: 1.3; }
+.touchpoint-subheadline { font-size: 0.9rem; color: #d4d4d4; line-height: 1.4; }
+.touchpoint-cta { display: inline-block; margin-top: 0.75rem; padding: 0.5rem 1rem; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #0a0a0a; font-weight: 600; font-size: 0.85rem; border-radius: 6px; }
+
+/* === OBJECTION GRID === */
+.objection-grid { display: grid; gap: 1rem; margin-top: 1.5rem; }
+.objection-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; overflow: hidden; }
+.objection-header { background: rgba(245, 101, 101, 0.1); padding: 1rem 1.25rem; border-bottom: 1px solid rgba(245, 101, 101, 0.2); }
+.objection-text { font-size: 1rem; color: #fc8181; font-style: italic; }
+.objection-response { padding: 1.25rem; }
+.response-step { display: flex; gap: 0.75rem; margin-bottom: 0.75rem; }
+.response-step:last-child { margin-bottom: 0; }
+.response-label { font-size: 0.75rem; font-weight: 700; color: #10b981; text-transform: uppercase; min-width: 80px; }
+.response-content { font-size: 0.9rem; color: #d4d4d4; line-height: 1.4; }
+
+/* === RESPONSIVE === */
+@media (max-width: 1200px) { .jtbd-grid, .pillar-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .jtbd-grid, .pillar-grid, .pain-gain-grid, .touchpoint-grid { grid-template-columns: 1fr; } .benefit-level-1, .benefit-level-2, .benefit-level-3 { width: 100%; } }
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<!-- Section 1: Jobs-to-be-Done Analysis -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Jobs-to-be-Done Analysis</h2>
+        <p class="section-description">Understanding the functional, emotional, and social jobs customers are hiring your product to accomplish.</p>
+    </div>
+    <div class="jtbd-grid">
+        {{JTBD_CARDS}}
+    </div>
+</section>
+
+<!-- Section 2: Value Proposition Statement -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Core Value Proposition</h2>
+        <p class="section-description">The synthesized positioning statement that captures your unique value.</p>
+    </div>
+    <div class="value-prop-box">
+        <div class="value-prop-label">Primary Value Proposition</div>
+        <div class="value-prop-statement">{{VALUE_PROP_STATEMENT}}</div>
+    </div>
+</section>
+
+<!-- Section 3: Pains & Gains Map -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Customer Pains & Gains</h2>
+        <p class="section-description">High-priority pain points your product relieves and desired gains it creates.</p>
+    </div>
+    <div class="pain-gain-grid">
+        {{PAIN_GAIN_CARDS}}
+    </div>
+</section>
+
+<!-- Section 4: Benefit Hierarchy -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Benefit Hierarchy</h2>
+        <p class="section-description">Three levels of benefits from functional features to transformational outcomes.</p>
+    </div>
+    <div class="benefit-pyramid">
+        <div class="benefit-level benefit-level-3">
+            <span class="benefit-level-label">Transformational</span>
+            <span class="benefit-level-content">{{BENEFIT_TRANSFORMATIONAL}}</span>
+        </div>
+        <div class="benefit-level benefit-level-2">
+            <span class="benefit-level-label">Emotional</span>
+            <span class="benefit-level-content">{{BENEFIT_EMOTIONAL}}</span>
+        </div>
+        <div class="benefit-level benefit-level-1">
+            <span class="benefit-level-label">Functional</span>
+            <span class="benefit-level-content">{{BENEFIT_FUNCTIONAL}}</span>
+        </div>
+    </div>
+</section>
+
+<!-- Section 5: Visual Analysis -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Visual Analysis</h2>
+        <p class="section-description">Patterns in customer jobs, competitive positioning, and messaging effectiveness.</p>
+    </div>
+    <div class="chart-grid">
+        <div class="chart-card">
+            <div class="chart-title">Jobs-to-be-Done Profile</div>
+            <div class="chart-subtitle">Relative strength of functional, emotional, and social job alignment</div>
+            <div class="chart-wrapper"><canvas id="jtbdRadar"></canvas></div>
+            <div class="insights-panel">
+                <div class="insight-title">Key Observations</div>
+                <ul class="insight-list">{{JTBD_INSIGHTS}}</ul>
+            </div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">Pain Intensity vs. Gain Value</div>
+            <div class="chart-subtitle">Mapping customer pain points against desired outcomes</div>
+            <div class="chart-wrapper"><canvas id="painGainChart"></canvas></div>
+            <div class="insights-panel">
+                <div class="insight-title">Pain-Gain Analysis</div>
+                <ul class="insight-list">{{PAIN_GAIN_INSIGHTS}}</ul>
+            </div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">Benefit Distribution</div>
+            <div class="chart-subtitle">Balance across functional, emotional, and transformational benefits</div>
+            <div class="chart-wrapper"><canvas id="benefitPyramid"></canvas></div>
+            <div class="insights-panel">
+                <div class="insight-title">Benefit Balance</div>
+                <ul class="insight-list">{{BENEFIT_INSIGHTS}}</ul>
+            </div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">Competitive Positioning Map</div>
+            <div class="chart-subtitle">Position relative to competitors on key decision criteria</div>
+            <div class="chart-wrapper"><canvas id="positioningChart"></canvas></div>
+            <div class="insights-panel">
+                <div class="insight-title">Positioning Strategy</div>
+                <ul class="insight-list">{{POSITIONING_INSIGHTS}}</ul>
+            </div>
+        </div>
+        <div class="chart-card full-width">
+            <div class="chart-title">Messaging Pillar Effectiveness</div>
+            <div class="chart-subtitle">Strength scores for each core messaging pillar</div>
+            <div class="chart-wrapper"><canvas id="messagingPillarChart"></canvas></div>
+            <div class="insights-panel">
+                <div class="insight-title">Messaging Analysis</div>
+                <ul class="insight-list">{{MESSAGING_INSIGHTS}}</ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 6: Messaging Pillars -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Core Messaging Pillars</h2>
+        <p class="section-description">Three foundational messages supporting your value proposition.</p>
+    </div>
+    <div class="pillar-grid">
+        {{PILLAR_CARDS}}
+    </div>
+</section>
+
+<!-- Section 7: Messaging by Touchpoint -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Messaging by Touchpoint</h2>
+        <p class="section-description">Tailored messaging for different channels and journey stages.</p>
+    </div>
+    <div class="touchpoint-grid">
+        {{TOUCHPOINT_CARDS}}
+    </div>
+</section>
+
+<!-- Section 8: Objection Handling -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Objection Handling Framework</h2>
+        <p class="section-description">Anticipated objections with Acknowledge-Reframe-Evidence-Bridge responses.</p>
+    </div>
+    <div class="objection-grid">
+        {{OBJECTION_CARDS}}
+    </div>
+</section>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+const data = {
+    jtbd: {
+        labels: ['Functional', 'Emotional', 'Social', 'Urgency', 'Frequency'],
+        values: [{{JTBD_FUNCTIONAL}}, {{JTBD_EMOTIONAL}}, {{JTBD_SOCIAL}}, {{JTBD_URGENCY}}, {{JTBD_FREQUENCY}}]
+    },
+    painGain: {
+        pains: { labels: [{{PAIN_LABELS}}], values: [{{PAIN_VALUES}}] },
+        gains: { labels: [{{GAIN_LABELS}}], values: [{{GAIN_VALUES}}] }
+    },
+    benefits: { labels: ['Functional', 'Emotional', 'Transformational'], values: [{{BENEFIT_FUNCTIONAL_PCT}}, {{BENEFIT_EMOTIONAL_PCT}}, {{BENEFIT_TRANSFORM_PCT}}] },
+    positioning: {
+        you: { x: {{POS_YOU_X}}, y: {{POS_YOU_Y}}, label: '{{PROJECT_NAME}}' },
+        competitors: [{{COMPETITOR_POSITIONS}}]
+    },
+    pillars: { labels: [{{PILLAR_LABELS}}], values: [{{PILLAR_VALUES}}] }
+};
+
+// Chart 1: JTBD Radar
+new Chart(document.getElementById('jtbdRadar'), {
+    type: 'radar',
+    data: { labels: data.jtbd.labels, datasets: [{ label: 'Job Alignment', data: data.jtbd.values, backgroundColor: 'rgba(16, 185, 129, 0.2)', borderColor: '#10b981', borderWidth: 3, pointBackgroundColor: '#10b981', pointRadius: 6, pointBorderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 10, ticks: { color: '#a3a3a3', stepSize: 2 }, grid: { color: 'rgba(16, 185, 129, 0.1)' }, pointLabels: { color: '#f5f5f5', font: { size: 12, weight: '600' } } } }, plugins: { legend: { display: false }, tooltip: tooltipConfig } }
+});
+
+// Chart 2: Pain/Gain Horizontal Bar
+new Chart(document.getElementById('painGainChart'), {
+    type: 'bar',
+    data: { labels: [...data.painGain.pains.labels, ...data.painGain.gains.labels], datasets: [{ data: [...data.painGain.pains.values.map(v => -v), ...data.painGain.gains.values], backgroundColor: ['#fc8181', '#fc8181', '#fc8181', '#10b981', '#10b981', '#10b981'], borderRadius: 6 }] },
+    options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { min: -10, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3', callback: v => Math.abs(v) } }, y: { grid: { display: false }, ticks: { color: '#f5f5f5' } } }, plugins: { legend: { display: false }, tooltip: tooltipConfig } }
+});
+
+// Chart 3: Benefit Distribution Doughnut
+new Chart(document.getElementById('benefitPyramid'), {
+    type: 'doughnut',
+    data: { labels: data.benefits.labels, datasets: [{ data: data.benefits.values, backgroundColor: ['#10b981', '#14b8a6', '#0d9488'], borderWidth: 0 }] },
+    options: { responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5', padding: 20 } }, tooltip: tooltipConfig } }
+});
+
+// Chart 4: Competitive Positioning Scatter
+new Chart(document.getElementById('positioningChart'), {
+    type: 'scatter',
+    data: { datasets: [{ label: data.positioning.you.label, data: [{ x: data.positioning.you.x, y: data.positioning.you.y }], backgroundColor: '#10b981', borderColor: '#14b8a6', borderWidth: 3, pointRadius: 16 }, { label: 'Competitors', data: data.positioning.competitors, backgroundColor: 'rgba(163, 163, 163, 0.6)', borderColor: '#a3a3a3', pointRadius: 10 }] },
+    options: { responsive: true, maintainAspectRatio: false, scales: { x: { title: { display: true, text: '{{POS_X_AXIS}}', color: '#a3a3a3' }, min: 0, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' } }, y: { title: { display: true, text: '{{POS_Y_AXIS}}', color: '#a3a3a3' }, min: 0, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' } } }, plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig } }
+});
+
+// Chart 5: Messaging Pillar Bar Chart
+new Chart(document.getElementById('messagingPillarChart'), {
+    type: 'bar',
+    data: { labels: data.pillars.labels, datasets: [{ data: data.pillars.values, backgroundColor: '#10b981', borderRadius: 6 }] },
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' } }, x: { grid: { display: false }, ticks: { color: '#f5f5f5', font: { weight: '600' } } } }, plugins: { legend: { display: false }, tooltip: tooltipConfig } }
+});
+<!-- ═══ SKILL JS END ═══ -->

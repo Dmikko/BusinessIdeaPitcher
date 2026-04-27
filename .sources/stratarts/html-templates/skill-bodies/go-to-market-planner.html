@@ -1,0 +1,903 @@
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     SKILL BODY: go-to-market-planner
+     Contains: CSS, HTML sections, and Chart.js code
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
+<!-- ═══ SKILL CSS START ═══ -->
+/* GTM Goals Cards */
+.goals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.goal-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.goal-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(16, 185, 129, 0.4);
+}
+
+.goal-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.goal-metric {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #10b981;
+    margin-bottom: 0.5rem;
+}
+
+.goal-label {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    font-weight: 600;
+}
+
+.goal-baseline {
+    font-size: 0.8rem;
+    color: #a3a3a3;
+    margin-top: 0.25rem;
+}
+
+/* Channel Cards */
+.channel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.channel-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.channel-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+}
+
+.channel-card.primary {
+    border-color: rgba(16, 185, 129, 0.5);
+    border-width: 2px;
+}
+
+.channel-header {
+    background: rgba(16, 185, 129, 0.1);
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.channel-name {
+    font-weight: 700;
+    color: #f5f5f5;
+    font-size: 1.1rem;
+}
+
+.channel-type {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.channel-type.primary {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.channel-type.secondary {
+    background: rgba(246, 173, 85, 0.2);
+    color: #f6ad55;
+}
+
+.channel-body {
+    padding: 1.25rem;
+}
+
+.channel-description {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.channel-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.channel-metric {
+    text-align: center;
+    padding: 0.75rem;
+    background: rgba(16, 185, 129, 0.05);
+    border-radius: 4px;
+}
+
+.channel-metric-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.channel-metric-label {
+    font-size: 0.7rem;
+    color: #a3a3a3;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+}
+
+.channel-tactics {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.channel-tactics-title {
+    font-size: 0.8rem;
+    color: #a3a3a3;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.channel-tactics-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.channel-tactics-list li {
+    font-size: 0.85rem;
+    color: #d4d4d4;
+    padding: 0.25rem 0;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.channel-tactics-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #10b981;
+}
+
+/* Budget Allocation Table */
+.budget-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+
+.budget-table th,
+.budget-table td {
+    padding: 0.85rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.budget-table th {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.budget-table td {
+    color: #d4d4d4;
+    font-size: 0.9rem;
+}
+
+.budget-table tr:hover {
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.budget-table .total-row {
+    background: rgba(16, 185, 129, 0.1);
+    font-weight: 700;
+}
+
+.budget-table .total-row td {
+    color: #10b981;
+}
+
+/* Roadmap Timeline */
+.roadmap-timeline {
+    margin-top: 2rem;
+}
+
+.month-block {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.month-header {
+    background: rgba(16, 185, 129, 0.1);
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.month-name {
+    font-weight: 700;
+    color: #10b981;
+    font-size: 1.1rem;
+}
+
+.month-theme {
+    font-size: 0.85rem;
+    color: #d4d4d4;
+}
+
+.month-goal {
+    font-size: 0.9rem;
+    color: #a3a3a3;
+}
+
+.month-body {
+    padding: 1.25rem;
+}
+
+.week-section {
+    margin-bottom: 1rem;
+}
+
+.week-label {
+    font-size: 0.8rem;
+    color: #10b981;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.week-tasks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.week-tasks li {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    padding: 0.4rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+}
+
+.week-tasks li::before {
+    content: "☐";
+    position: absolute;
+    left: 0;
+    color: #a3a3a3;
+}
+
+/* Risk Cards */
+.risk-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.risk-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(252, 129, 129, 0.3);
+    border-radius: 8px;
+    padding: 1.25rem;
+}
+
+.risk-name {
+    font-weight: 700;
+    color: #fc8181;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.risk-description {
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    margin-bottom: 0.75rem;
+}
+
+.risk-mitigation {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    padding-left: 1rem;
+    border-left: 2px solid #10b981;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .goals-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .channel-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .goals-grid {
+        grid-template-columns: 1fr;
+    }
+    .channel-metrics {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Print */
+@media print {
+    .goal-card,
+    .channel-card,
+    .month-block,
+    .risk-card {
+        background: white;
+        border: 2px solid #10b981;
+        page-break-inside: avoid;
+    }
+    .goal-metric,
+    .channel-name,
+    .month-name {
+        color: #10b981;
+    }
+}
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<!-- Section 1: 90-Day Goals -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">90-Day Goals</h2>
+        <p class="section-description">
+            Clear, measurable objectives for the GTM launch period. These targets drive all channel
+            selection, budget allocation, and tactical planning decisions.
+        </p>
+    </div>
+
+    <div class="goals-grid">
+        <div class="goal-card">
+            <div class="goal-icon">👥</div>
+            <div class="goal-metric">{{GOAL_CUSTOMERS}}</div>
+            <div class="goal-label">New Customers</div>
+            <div class="goal-baseline">Current: {{CURRENT_CUSTOMERS}}</div>
+        </div>
+        <div class="goal-card">
+            <div class="goal-icon">💰</div>
+            <div class="goal-metric">${{GOAL_MRR}}</div>
+            <div class="goal-label">Monthly Revenue</div>
+            <div class="goal-baseline">Current: ${{CURRENT_MRR}}</div>
+        </div>
+        <div class="goal-card">
+            <div class="goal-icon">🎯</div>
+            <div class="goal-metric">{{GOAL_MILESTONE}}</div>
+            <div class="goal-label">Key Milestone</div>
+            <div class="goal-baseline">{{MILESTONE_DESCRIPTION}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 2: Channel Strategy -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Channel Strategy</h2>
+        <p class="section-description">
+            Primary and secondary channels selected based on customer fit, budget, and expected CAC.
+            Focus 60-80% of effort on primary channels before expanding.
+        </p>
+    </div>
+
+    <div class="channel-grid">
+        <div class="channel-card primary">
+            <div class="channel-header">
+                <div class="channel-name">{{CHANNEL_1_NAME}}</div>
+                <span class="channel-type primary">Primary</span>
+            </div>
+            <div class="channel-body">
+                <div class="channel-description">{{CHANNEL_1_DESCRIPTION}}</div>
+                <div class="channel-metrics">
+                    <div class="channel-metric">
+                        <div class="channel-metric-value">${{CHANNEL_1_BUDGET}}</div>
+                        <div class="channel-metric-label">Monthly Budget</div>
+                    </div>
+                    <div class="channel-metric">
+                        <div class="channel-metric-value">{{CHANNEL_1_CUSTOMERS}}</div>
+                        <div class="channel-metric-label">Expected Customers</div>
+                    </div>
+                    <div class="channel-metric">
+                        <div class="channel-metric-value">${{CHANNEL_1_CAC}}</div>
+                        <div class="channel-metric-label">Target CAC</div>
+                    </div>
+                </div>
+                <div class="channel-tactics">
+                    <div class="channel-tactics-title">Key Tactics</div>
+                    <ul class="channel-tactics-list">
+                        <li>{{CHANNEL_1_TACTIC_1}}</li>
+                        <li>{{CHANNEL_1_TACTIC_2}}</li>
+                        <li>{{CHANNEL_1_TACTIC_3}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="channel-card primary">
+            <div class="channel-header">
+                <div class="channel-name">{{CHANNEL_2_NAME}}</div>
+                <span class="channel-type primary">Primary</span>
+            </div>
+            <div class="channel-body">
+                <div class="channel-description">{{CHANNEL_2_DESCRIPTION}}</div>
+                <div class="channel-metrics">
+                    <div class="channel-metric">
+                        <div class="channel-metric-value">${{CHANNEL_2_BUDGET}}</div>
+                        <div class="channel-metric-label">Monthly Budget</div>
+                    </div>
+                    <div class="channel-metric">
+                        <div class="channel-metric-value">{{CHANNEL_2_CUSTOMERS}}</div>
+                        <div class="channel-metric-label">Expected Customers</div>
+                    </div>
+                    <div class="channel-metric">
+                        <div class="channel-metric-value">${{CHANNEL_2_CAC}}</div>
+                        <div class="channel-metric-label">Target CAC</div>
+                    </div>
+                </div>
+                <div class="channel-tactics">
+                    <div class="channel-tactics-title">Key Tactics</div>
+                    <ul class="channel-tactics-list">
+                        <li>{{CHANNEL_2_TACTIC_1}}</li>
+                        <li>{{CHANNEL_2_TACTIC_2}}</li>
+                        <li>{{CHANNEL_2_TACTIC_3}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="channel-card">
+            <div class="channel-header">
+                <div class="channel-name">{{CHANNEL_3_NAME}}</div>
+                <span class="channel-type secondary">Secondary</span>
+            </div>
+            <div class="channel-body">
+                <div class="channel-description">{{CHANNEL_3_DESCRIPTION}}</div>
+                <div class="channel-metrics">
+                    <div class="channel-metric">
+                        <div class="channel-metric-value">${{CHANNEL_3_BUDGET}}</div>
+                        <div class="channel-metric-label">Monthly Budget</div>
+                    </div>
+                    <div class="channel-metric">
+                        <div class="channel-metric-value">{{CHANNEL_3_CUSTOMERS}}</div>
+                        <div class="channel-metric-label">Expected Customers</div>
+                    </div>
+                    <div class="channel-metric">
+                        <div class="channel-metric-value">${{CHANNEL_3_CAC}}</div>
+                        <div class="channel-metric-label">Target CAC</div>
+                    </div>
+                </div>
+                <div class="channel-tactics">
+                    <div class="channel-tactics-title">Key Tactics</div>
+                    <ul class="channel-tactics-list">
+                        <li>{{CHANNEL_3_TACTIC_1}}</li>
+                        <li>{{CHANNEL_3_TACTIC_2}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: Visual Analysis -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Visual Analysis</h2>
+        <p class="section-description">
+            Data visualizations showing budget allocation, channel performance projections,
+            and growth trajectory over the 90-day period.
+        </p>
+    </div>
+
+    <div class="chart-grid">
+        <!-- Chart 1: Budget Allocation -->
+        <div class="chart-card">
+            <div class="chart-title">Budget Allocation</div>
+            <div class="chart-subtitle">
+                Distribution of marketing spend across channels and categories
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="budgetChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Allocation Strategy</div>
+                <ul class="insight-list">
+                    <li><strong>Primary Channels:</strong> {{PRIMARY_BUDGET_PCT}}% of total budget</li>
+                    <li><strong>Largest Investment:</strong> {{LARGEST_CHANNEL}} at ${{LARGEST_BUDGET}}</li>
+                    <li><strong>CAC Target:</strong> Blended CAC of ${{BLENDED_CAC}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 2: Customer Growth Projection -->
+        <div class="chart-card">
+            <div class="chart-title">Customer Growth Projection</div>
+            <div class="chart-subtitle">
+                Monthly customer acquisition trajectory over 90 days
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="growthChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Growth Milestones</div>
+                <ul class="insight-list">
+                    <li><strong>Month 1:</strong> {{MONTH_1_CUSTOMERS}} customers</li>
+                    <li><strong>Month 2:</strong> {{MONTH_2_CUSTOMERS}} customers</li>
+                    <li><strong>Month 3:</strong> {{MONTH_3_CUSTOMERS}} customers</li>
+                    <li><strong>MoM Growth:</strong> {{MOM_GROWTH}}% average</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 3: Channel Performance -->
+        <div class="chart-card">
+            <div class="chart-title">Channel Performance Radar</div>
+            <div class="chart-subtitle">
+                Multi-dimensional comparison of channel effectiveness
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="channelRadar"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Channel Strengths</div>
+                <ul class="insight-list">
+                    <li><strong>{{CHANNEL_1_NAME}}:</strong> {{CHANNEL_1_STRENGTH}}</li>
+                    <li><strong>{{CHANNEL_2_NAME}}:</strong> {{CHANNEL_2_STRENGTH}}</li>
+                    <li><strong>{{CHANNEL_3_NAME}}:</strong> {{CHANNEL_3_STRENGTH}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 4: Revenue Projection -->
+        <div class="chart-card">
+            <div class="chart-title">Revenue Projection</div>
+            <div class="chart-subtitle">
+                MRR growth trajectory with customer acquisition
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="revenueChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Revenue Milestones</div>
+                <ul class="insight-list">
+                    <li><strong>Month 1:</strong> ${{MONTH_1_MRR}} MRR</li>
+                    <li><strong>Month 2:</strong> ${{MONTH_2_MRR}} MRR</li>
+                    <li><strong>Month 3:</strong> ${{MONTH_3_MRR}} MRR</li>
+                    <li><strong>ARPU:</strong> ${{ARPU}}/customer</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 4: 90-Day Tactical Roadmap -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">90-Day Tactical Roadmap</h2>
+        <p class="section-description">
+            Week-by-week execution plan with specific tasks, milestones, and success metrics.
+            Each month has a theme that guides tactical priorities.
+        </p>
+    </div>
+
+    <div class="roadmap-timeline">
+        <div class="month-block">
+            <div class="month-header">
+                <div>
+                    <div class="month-name">Month 1: {{MONTH_1_THEME}}</div>
+                    <div class="month-goal">Goal: {{MONTH_1_GOAL}}</div>
+                </div>
+            </div>
+            <div class="month-body">
+                <div class="week-section">
+                    <div class="week-label">Week 1-2</div>
+                    <ul class="week-tasks">
+                        <li>{{MONTH_1_WEEK_1_TASK_1}}</li>
+                        <li>{{MONTH_1_WEEK_1_TASK_2}}</li>
+                        <li>{{MONTH_1_WEEK_1_TASK_3}}</li>
+                    </ul>
+                </div>
+                <div class="week-section">
+                    <div class="week-label">Week 3-4</div>
+                    <ul class="week-tasks">
+                        <li>{{MONTH_1_WEEK_3_TASK_1}}</li>
+                        <li>{{MONTH_1_WEEK_3_TASK_2}}</li>
+                        <li>{{MONTH_1_WEEK_3_TASK_3}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="month-block">
+            <div class="month-header">
+                <div>
+                    <div class="month-name">Month 2: {{MONTH_2_THEME}}</div>
+                    <div class="month-goal">Goal: {{MONTH_2_GOAL}}</div>
+                </div>
+            </div>
+            <div class="month-body">
+                <div class="week-section">
+                    <div class="week-label">Key Tactics</div>
+                    <ul class="week-tasks">
+                        <li>{{MONTH_2_TACTIC_1}}</li>
+                        <li>{{MONTH_2_TACTIC_2}}</li>
+                        <li>{{MONTH_2_TACTIC_3}}</li>
+                        <li>{{MONTH_2_TACTIC_4}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="month-block">
+            <div class="month-header">
+                <div>
+                    <div class="month-name">Month 3: {{MONTH_3_THEME}}</div>
+                    <div class="month-goal">Goal: {{MONTH_3_GOAL}}</div>
+                </div>
+            </div>
+            <div class="month-body">
+                <div class="week-section">
+                    <div class="week-label">Key Tactics</div>
+                    <ul class="week-tasks">
+                        <li>{{MONTH_3_TACTIC_1}}</li>
+                        <li>{{MONTH_3_TACTIC_2}}</li>
+                        <li>{{MONTH_3_TACTIC_3}}</li>
+                        <li>{{MONTH_3_TACTIC_4}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 5: Risks & Mitigation -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Risks & Mitigation</h2>
+        <p class="section-description">
+            Key risks that could derail the GTM plan with specific mitigation strategies.
+            Proactive risk management ensures faster course correction.
+        </p>
+    </div>
+
+    <div class="risk-grid">
+        <div class="risk-card">
+            <div class="risk-name">{{RISK_1_NAME}}</div>
+            <div class="risk-description">{{RISK_1_DESCRIPTION}}</div>
+            <div class="risk-mitigation"><strong>Mitigation:</strong> {{RISK_1_MITIGATION}}</div>
+        </div>
+        <div class="risk-card">
+            <div class="risk-name">{{RISK_2_NAME}}</div>
+            <div class="risk-description">{{RISK_2_DESCRIPTION}}</div>
+            <div class="risk-mitigation"><strong>Mitigation:</strong> {{RISK_2_MITIGATION}}</div>
+        </div>
+        <div class="risk-card">
+            <div class="risk-name">{{RISK_3_NAME}}</div>
+            <div class="risk-description">{{RISK_3_DESCRIPTION}}</div>
+            <div class="risk-mitigation"><strong>Mitigation:</strong> {{RISK_3_MITIGATION}}</div>
+        </div>
+    </div>
+</section>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+// GTM Data
+const gtmData = {
+    budget: {
+        labels: ['{{CHANNEL_1_NAME}}', '{{CHANNEL_2_NAME}}', '{{CHANNEL_3_NAME}}', 'Tools/Software', 'Misc'],
+        values: [{{CHANNEL_1_BUDGET}}, {{CHANNEL_2_BUDGET}}, {{CHANNEL_3_BUDGET}}, {{TOOLS_BUDGET}}, {{MISC_BUDGET}}]
+    },
+    growth: {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12'],
+        customers: [{{WEEK_1_CUSTOMERS}}, {{WEEK_2_CUSTOMERS}}, {{WEEK_3_CUSTOMERS}}, {{WEEK_4_CUSTOMERS}}, {{WEEK_5_CUSTOMERS}}, {{WEEK_6_CUSTOMERS}}, {{WEEK_7_CUSTOMERS}}, {{WEEK_8_CUSTOMERS}}, {{WEEK_9_CUSTOMERS}}, {{WEEK_10_CUSTOMERS}}, {{WEEK_11_CUSTOMERS}}, {{WEEK_12_CUSTOMERS}}]
+    },
+    channels: {
+        labels: ['Reach', 'Cost Efficiency', 'Conversion', 'Scalability', 'Time to Results'],
+        channel1: [{{CHANNEL_1_REACH}}, {{CHANNEL_1_COST_EFF}}, {{CHANNEL_1_CONVERSION}}, {{CHANNEL_1_SCALABILITY}}, {{CHANNEL_1_SPEED}}],
+        channel2: [{{CHANNEL_2_REACH}}, {{CHANNEL_2_COST_EFF}}, {{CHANNEL_2_CONVERSION}}, {{CHANNEL_2_SCALABILITY}}, {{CHANNEL_2_SPEED}}],
+        channel3: [{{CHANNEL_3_REACH}}, {{CHANNEL_3_COST_EFF}}, {{CHANNEL_3_CONVERSION}}, {{CHANNEL_3_SCALABILITY}}, {{CHANNEL_3_SPEED}}]
+    },
+    revenue: {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12'],
+        mrr: [{{WEEK_1_MRR}}, {{WEEK_2_MRR}}, {{WEEK_3_MRR}}, {{WEEK_4_MRR}}, {{WEEK_5_MRR}}, {{WEEK_6_MRR}}, {{WEEK_7_MRR}}, {{WEEK_8_MRR}}, {{WEEK_9_MRR}}, {{WEEK_10_MRR}}, {{WEEK_11_MRR}}, {{WEEK_12_MRR}}]
+    }
+};
+
+// Chart 1: Budget Allocation (Doughnut)
+const budgetCtx = document.getElementById('budgetChart').getContext('2d');
+new Chart(budgetCtx, {
+    type: 'doughnut',
+    data: {
+        labels: gtmData.budget.labels,
+        datasets: [{
+            data: gtmData.budget.values,
+            backgroundColor: ['#10b981', '#14b8a6', '#34d399', '#6ee7b7', '#a7f3d0'],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '60%',
+        plugins: {
+            legend: {
+                display: true,
+                position: 'bottom',
+                labels: { color: '#d4d4d4', font: { size: 11 }, padding: 15 }
+            },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Chart 2: Customer Growth (Line)
+const growthCtx = document.getElementById('growthChart').getContext('2d');
+new Chart(growthCtx, {
+    type: 'line',
+    data: {
+        labels: gtmData.growth.labels,
+        datasets: [{
+            label: 'Cumulative Customers',
+            data: gtmData.growth.customers,
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            fill: true,
+            tension: 0.3,
+            borderWidth: 3,
+            pointBackgroundColor: '#10b981',
+            pointBorderColor: '#1a1a1a',
+            pointBorderWidth: 2,
+            pointRadius: 4
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: { color: '#a3a3a3', font: { size: 10 } }
+            },
+            y: {
+                beginAtZero: true,
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: { color: '#a3a3a3', font: { size: 11 } }
+            }
+        },
+        plugins: {
+            legend: { display: false },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Chart 3: Channel Performance Radar
+const channelRadarCtx = document.getElementById('channelRadar').getContext('2d');
+new Chart(channelRadarCtx, {
+    type: 'radar',
+    data: {
+        labels: gtmData.channels.labels,
+        datasets: [
+            {
+                label: '{{CHANNEL_1_NAME}}',
+                data: gtmData.channels.channel1,
+                backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                borderColor: '#10b981',
+                borderWidth: 2,
+                pointBackgroundColor: '#10b981'
+            },
+            {
+                label: '{{CHANNEL_2_NAME}}',
+                data: gtmData.channels.channel2,
+                backgroundColor: 'rgba(20, 184, 166, 0.2)',
+                borderColor: '#14b8a6',
+                borderWidth: 2,
+                pointBackgroundColor: '#14b8a6'
+            },
+            {
+                label: '{{CHANNEL_3_NAME}}',
+                data: gtmData.channels.channel3,
+                backgroundColor: 'rgba(52, 211, 153, 0.2)',
+                borderColor: '#34d399',
+                borderWidth: 2,
+                pointBackgroundColor: '#34d399'
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            r: {
+                beginAtZero: true,
+                max: 10,
+                ticks: { color: '#a3a3a3', stepSize: 2, font: { size: 10 } },
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                pointLabels: { color: '#f5f5f5', font: { size: 10, weight: '600' } }
+            }
+        },
+        plugins: {
+            legend: {
+                display: true,
+                position: 'bottom',
+                labels: { color: '#d4d4d4', font: { size: 10 }, padding: 15 }
+            },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Chart 4: Revenue Projection (Bar + Line)
+const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+new Chart(revenueCtx, {
+    type: 'bar',
+    data: {
+        labels: gtmData.revenue.labels,
+        datasets: [{
+            label: 'MRR',
+            data: gtmData.revenue.mrr,
+            backgroundColor: 'rgba(16, 185, 129, 0.6)',
+            borderColor: '#10b981',
+            borderWidth: 1,
+            borderRadius: 4
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                grid: { display: false },
+                ticks: { color: '#a3a3a3', font: { size: 10 } }
+            },
+            y: {
+                beginAtZero: true,
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: {
+                    color: '#a3a3a3',
+                    font: { size: 11 },
+                    callback: function(value) { return '$' + value.toLocaleString(); }
+                }
+            }
+        },
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                ...tooltipConfig,
+                callbacks: {
+                    label: function(context) {
+                        return 'MRR: $' + context.parsed.y.toLocaleString();
+                    }
+                }
+            }
+        }
+    }
+});
+<!-- ═══ SKILL JS END ═══ -->

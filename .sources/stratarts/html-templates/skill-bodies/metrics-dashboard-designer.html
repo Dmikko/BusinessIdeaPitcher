@@ -1,0 +1,744 @@
+<!-- ═══ SKILL CSS START ═══ -->
+<style>
+    /* Metrics Dashboard Designer Specific Styles */
+    .north-star-container {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
+        border: 2px solid rgba(16, 185, 129, 0.3);
+        border-radius: 20px;
+        padding: 2rem;
+        text-align: center;
+        margin: 2rem 0;
+    }
+
+    .north-star-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .north-star-value {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #10b981;
+        margin-bottom: 0.5rem;
+    }
+
+    .north-star-name {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+    }
+
+    .north-star-description {
+        color: #888;
+        font-size: 0.95rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .driver-metrics {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .driver-metric {
+        text-align: center;
+    }
+
+    .driver-value {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #ffffff;
+    }
+
+    .driver-label {
+        font-size: 0.75rem;
+        color: #888;
+        text-transform: uppercase;
+    }
+
+    .aarrr-funnel {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        margin: 2rem 0;
+    }
+
+    .funnel-stage {
+        display: flex;
+        align-items: center;
+        background: #1a1a1a;
+        border: 1px solid #2a2a2a;
+        padding: 1.25rem 1.5rem;
+        position: relative;
+    }
+
+    .funnel-stage:first-child {
+        border-radius: 12px 12px 0 0;
+    }
+
+    .funnel-stage:last-child {
+        border-radius: 0 0 12px 12px;
+    }
+
+    .stage-letter {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: #ffffff;
+        font-size: 1.25rem;
+        margin-right: 1.25rem;
+        flex-shrink: 0;
+    }
+
+    .stage-info {
+        flex: 1;
+    }
+
+    .stage-name {
+        font-weight: 700;
+        color: #ffffff;
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .stage-metric {
+        color: #888;
+        font-size: 0.85rem;
+    }
+
+    .stage-value {
+        text-align: right;
+    }
+
+    .stage-current {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #10b981;
+    }
+
+    .stage-target {
+        font-size: 0.75rem;
+        color: #888;
+    }
+
+    .dashboard-card {
+        background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+        border-radius: 16px;
+        padding: 1.5rem;
+        border: 1px solid #2a2a2a;
+        border-left: 4px solid #10b981;
+    }
+
+    .dashboard-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .dashboard-icon {
+        width: 48px;
+        height: 48px;
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .dashboard-info {
+        flex: 1;
+    }
+
+    .dashboard-name {
+        font-weight: 700;
+        color: #ffffff;
+        font-size: 1.125rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .dashboard-audience {
+        color: #10b981;
+        font-size: 0.8rem;
+    }
+
+    .dashboard-purpose {
+        color: #888;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+    }
+
+    .dashboard-metrics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .metric-tag {
+        background: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+        font-size: 0.75rem;
+    }
+
+    .metrics-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+    }
+
+    .metrics-table th,
+    .metrics-table td {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .metrics-table th {
+        background: #1a1a1a;
+        color: #10b981;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .metrics-table td {
+        color: #ccc;
+        font-size: 0.9rem;
+    }
+
+    .metrics-table td:first-child {
+        color: #ffffff;
+        font-weight: 500;
+    }
+
+    .category-badge {
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        font-weight: 600;
+    }
+
+    .cat-acquisition { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+    .cat-activation { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+    .cat-retention { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+    .cat-referral { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
+    .cat-revenue { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+
+    .alert-card {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .alert-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+    }
+
+    .alert-critical {
+        background: rgba(239, 68, 68, 0.2);
+    }
+
+    .alert-warning {
+        background: rgba(245, 158, 11, 0.2);
+    }
+
+    .alert-info {
+        background: rgba(16, 185, 129, 0.2);
+    }
+
+    .alert-info-text {
+        flex: 1;
+    }
+
+    .alert-name {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .alert-threshold {
+        color: #888;
+        font-size: 0.85rem;
+    }
+
+    .alert-channel {
+        background: #0a0a0a;
+        color: #10b981;
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .data-stack-section {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .stack-header {
+        font-weight: 600;
+        color: #10b981;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 1rem;
+    }
+
+    .stack-items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .stack-item {
+        background: #0a0a0a;
+        color: #ccc;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .stack-item-icon {
+        font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+        .north-star-value {
+            font-size: 2rem;
+        }
+
+        .driver-metrics {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .funnel-stage {
+            flex-direction: column;
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .stage-letter {
+            margin-right: 0;
+        }
+
+        .stage-value {
+            text-align: center;
+        }
+
+        .metrics-table {
+            font-size: 0.8rem;
+        }
+
+        .metrics-table th,
+        .metrics-table td {
+            padding: 0.5rem;
+        }
+    }
+</style>
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<div class="report-container">
+    <!-- Header Section -->
+    <header class="report-header">
+        <div class="header-content">
+            <div class="header-badge">METRICS DASHBOARD</div>
+            <h1 class="report-title">{{COMPANY_NAME}}</h1>
+            <p class="report-subtitle">{{DASHBOARD_MISSION}}</p>
+        </div>
+        <div class="header-meta">
+            <div class="meta-item">
+                <span class="meta-label">Generated</span>
+                <span class="meta-value">{{GENERATION_DATE}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Dashboards</span>
+                <span class="meta-value">{{DASHBOARD_COUNT}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Metrics Tracked</span>
+                <span class="meta-value">{{METRIC_COUNT}}</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- North Star Metric Section -->
+    <section class="content-section">
+        <h2 class="section-title">North Star Metric</h2>
+
+        <div class="north-star-container">
+            <div class="north-star-icon">⭐</div>
+            <div class="north-star-value">{{NSM_VALUE}}</div>
+            <div class="north-star-name">{{NSM_NAME}}</div>
+            <div class="north-star-description">{{NSM_DESCRIPTION}}</div>
+
+            <div class="driver-metrics">
+                {{NSM_DRIVERS}}
+            </div>
+        </div>
+
+        <div class="grid-3">
+            <div class="metric-card">
+                <div class="metric-label">Current</div>
+                <div class="metric-value">{{NSM_CURRENT}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">3-Month Target</div>
+                <div class="metric-value">{{NSM_TARGET_3M}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">12-Month Target</div>
+                <div class="metric-value">{{NSM_TARGET_12M}}</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AARRR Framework Section -->
+    <section class="content-section">
+        <h2 class="section-title">AARRR Pirate Metrics</h2>
+
+        <p class="section-description">{{AARRR_OVERVIEW}}</p>
+
+        <div class="aarrr-funnel">
+            {{AARRR_STAGES}}
+        </div>
+
+        <!-- AARRR Funnel Chart -->
+        <div class="chart-container">
+            <canvas id="funnelChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Dashboard Architecture Section -->
+    <section class="content-section">
+        <h2 class="section-title">Dashboard Architecture</h2>
+
+        <p class="section-description">{{DASHBOARD_OVERVIEW}}</p>
+
+        <div class="grid-2">
+            {{DASHBOARD_CARDS}}
+        </div>
+    </section>
+
+    <!-- Metrics Dictionary Section -->
+    <section class="content-section">
+        <h2 class="section-title">Metrics Dictionary</h2>
+
+        <table class="metrics-table">
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Category</th>
+                    <th>Current</th>
+                    <th>Target</th>
+                    <th>Owner</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{METRICS_TABLE_ROWS}}
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Alerts & Monitoring Section -->
+    <section class="content-section">
+        <h2 class="section-title">Alerts & Monitoring</h2>
+
+        <p class="section-description">{{ALERTS_OVERVIEW}}</p>
+
+        <div class="grid-2">
+            {{ALERT_CARDS}}
+        </div>
+    </section>
+
+    <!-- Data Infrastructure Section -->
+    <section class="content-section">
+        <h2 class="section-title">Data Infrastructure</h2>
+
+        <div class="grid-3">
+            <div class="data-stack-section">
+                <div class="stack-header">Data Sources</div>
+                <div class="stack-items">
+                    {{DATA_SOURCES}}
+                </div>
+            </div>
+            <div class="data-stack-section">
+                <div class="stack-header">Data Warehouse</div>
+                <div class="stack-items">
+                    {{DATA_WAREHOUSE}}
+                </div>
+            </div>
+            <div class="data-stack-section">
+                <div class="stack-header">Visualization</div>
+                <div class="stack-items">
+                    {{DATA_VISUALIZATION}}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance Charts Section -->
+    <section class="content-section">
+        <h2 class="section-title">Performance Tracking</h2>
+
+        <div class="grid-2">
+            <div class="chart-container">
+                <canvas id="mrrChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="retentionChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="engagementChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Implementation Roadmap -->
+    <section class="content-section">
+        <h2 class="section-title">90-Day Implementation Roadmap</h2>
+
+        <div class="timeline">
+            {{IMPLEMENTATION_TIMELINE}}
+        </div>
+    </section>
+
+    <!-- Report Footer -->
+    <footer class="report-footer">
+        <div class="footer-content">
+            <p class="footer-brand">Generated by StratArts Metrics Dashboard Designer</p>
+            <p class="footer-disclaimer">This dashboard strategy provides a framework for data-driven decision making. Adjust metrics and thresholds based on your specific business stage and industry benchmarks.</p>
+        </div>
+    </footer>
+</div>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // AARRR Funnel Chart
+    const funnelCtx = document.getElementById('funnelChart');
+    if (funnelCtx) {
+        new Chart(funnelCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Acquisition', 'Activation', 'Retention', 'Referral', 'Revenue'],
+                datasets: [{
+                    label: 'Users',
+                    data: [10000, 4200, 2500, 800, 500],
+                    backgroundColor: [
+                        '#10b981',
+                        '#059669',
+                        '#047857',
+                        '#065f46',
+                        '#064e3b'
+                    ],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    y: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'AARRR Funnel (User Volume)',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // MRR Growth Chart
+    const mrrCtx = document.getElementById('mrrChart');
+    if (mrrCtx) {
+        new Chart(mrrCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'MRR ($)',
+                    data: [25000, 32000, 41000, 52000, 68000, 85000],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#888',
+                            callback: function(value) { return '$' + value.toLocaleString(); }
+                        },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'MRR Growth',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // Retention Chart
+    const retentionCtx = document.getElementById('retentionChart');
+    if (retentionCtx) {
+        new Chart(retentionCtx, {
+            type: 'line',
+            data: {
+                labels: ['D0', 'D1', 'D7', 'D14', 'D30', 'D60', 'D90'],
+                datasets: [{
+                    label: 'Retention %',
+                    data: [100, 65, 48, 42, 38, 35, 32],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            color: '#888',
+                            callback: function(value) { return value + '%'; }
+                        },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Retention Curve',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // Engagement Chart
+    const engagementCtx = document.getElementById('engagementChart');
+    if (engagementCtx) {
+        new Chart(engagementCtx, {
+            type: 'line',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8'],
+                datasets: [{
+                    label: 'DAU',
+                    data: [850, 920, 1050, 1200, 1350, 1480, 1620, 1800],
+                    borderColor: '#10b981',
+                    backgroundColor: 'transparent',
+                    tension: 0.4
+                }, {
+                    label: 'WAU',
+                    data: [2400, 2650, 2900, 3200, 3500, 3800, 4100, 4500],
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'transparent',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'DAU & WAU Trends',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+<!-- ═══ SKILL JS END ═══ -->

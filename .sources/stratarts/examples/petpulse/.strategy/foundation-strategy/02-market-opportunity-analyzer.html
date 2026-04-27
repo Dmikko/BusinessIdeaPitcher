@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Opportunity Analysis | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container { margin: 0 auto; background: #0a0a0a; }
+
+        /* === HEADER === */
+        header { background: #0a0a0a; padding: 0; color: white; display: flex; justify-content: center; }
+
+        .header-content {
+            position: relative; z-index: 1; max-width: 1600px; width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .header-content::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>');
+            opacity: 0.3; z-index: -1;
+        }
+
+        .kicker { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; opacity: 0.9; margin-bottom: 0.5rem; }
+        h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
+        .subtitle { font-size: 1.3rem; opacity: 0.95; font-weight: 400; margin-bottom: 2rem; }
+        .meta-info { display: flex; gap: 2rem; font-size: 0.9rem; opacity: 0.9; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.2); }
+        .meta-item { display: flex; align-items: center; gap: 0.5rem; }
+
+        /* === SCORE BANNER === */
+        .score-banner { background: #0a0a0a; padding: 0; display: flex; justify-content: center; }
+
+        .score-container {
+            display: grid; grid-template-columns: auto 1fr auto; gap: 3rem; align-items: center;
+            max-width: 1600px; width: 100%; margin: 0 auto; padding: 3rem 4rem;
+            background: #1a1a1a; border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-main { text-align: center; }
+        .score-number {
+            font-size: 5rem; font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1;
+        }
+        .score-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; color: #a3a3a3; margin-top: 0.5rem; font-weight: 600; }
+        .score-interpretation { border-left: 3px solid #10b981; padding-left: 2rem; }
+        .interpretation-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; color: #f5f5f5; }
+        .interpretation-text { color: #d4d4d4; line-height: 1.7; }
+
+        .verdict-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white; padding: 1rem 2rem; border-radius: 50px; font-weight: 700; font-size: 1.1rem;
+            white-space: nowrap; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        /* === CONTENT === */
+        .content { max-width: 1600px; margin: 0 auto; padding: 4rem 4rem; background: #0a0a0a; }
+        .section { margin-bottom: 4rem; }
+        .section:last-child { margin-bottom: 2rem; }
+        .section-header { margin-bottom: 2rem; }
+        .section-title { font-size: 2rem; font-weight: 700; color: #f5f5f5; margin-bottom: 0.5rem; }
+        .section-description { font-size: 1.05rem; color: #d4d4d4; max-width: 800px; }
+
+        /* === CHART LAYOUTS === */
+        .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        .chart-card { background: #1a1a1a; border-radius: 12px; padding: 2rem; border: 1px solid rgba(16, 185, 129, 0.2); }
+        .chart-card.full-width { grid-column: 1 / -1; }
+        .chart-title { font-weight: 700; font-size: 1.1rem; color: #f5f5f5; margin-bottom: 0.5rem; }
+        .chart-subtitle { font-size: 0.9rem; color: #a3a3a3; margin-bottom: 1.5rem; }
+        .chart-wrapper { position: relative; height: 350px; margin-bottom: 1.5rem; }
+        .chart-wrapper.tall { height: 450px; }
+
+        /* === INSIGHTS PANEL === */
+        .insights-panel { background: #0a0a0a; border-left: 4px solid #10b981; padding: 1.5rem; margin-top: 1rem; border-radius: 0 8px 8px 0; }
+        .insight-title { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: #10b981; margin-bottom: 1rem; }
+        .insight-list { list-style: none; }
+        .insight-list li { padding: 0.6rem 0; color: #d4d4d4; font-size: 0.95rem; border-bottom: 1px solid rgba(16, 185, 129, 0.1); }
+        .insight-list li:last-child { border-bottom: none; }
+        .insight-list li strong { color: #10b981; font-weight: 600; }
+
+        /* === MARKET GRID === */
+        .market-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .market-card {
+            background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px;
+            padding: 1.5rem; text-align: center; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+        .market-card:hover { transform: translateY(-2px); border-color: rgba(16, 185, 129, 0.4); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1); }
+        .market-card .label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; color: #a3a3a3; margin-bottom: 0.5rem; font-weight: 600; }
+        .market-card .value { font-size: 2.5rem; font-weight: 700; color: #10b981; line-height: 1.2; }
+        .market-card .range { font-size: 0.9rem; color: #d4d4d4; margin-top: 0.5rem; }
+        .market-card .description { font-size: 0.85rem; color: #a3a3a3; margin-top: 0.75rem; line-height: 1.5; }
+
+        /* === BEACHHEAD GRID === */
+        .beachhead-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .beachhead-card { background: #1a1a1a; border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 2rem; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+        .beachhead-card.primary { border-color: #10b981; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15); }
+        .beachhead-card:hover { transform: translateY(-2px); border-color: #10b981; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.2); }
+        .beachhead-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .beachhead-name { font-weight: 700; color: #f5f5f5; font-size: 1.1rem; }
+        .beachhead-score { font-size: 1.5rem; font-weight: 700; color: #10b981; }
+        .beachhead-badge { display: inline-block; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem; }
+        .beachhead-description { font-size: 0.95rem; color: #d4d4d4; line-height: 1.6; }
+
+        /* === FOOTER === */
+        footer { background: #0a0a0a; display: flex; justify-content: center; }
+        .footer-content { max-width: 1600px; width: 100%; background: #1a1a1a; color: #a3a3a3; padding: 2rem 4rem; font-size: 0.85rem; text-align: center; border-top: 1px solid rgba(16, 185, 129, 0.2); }
+        .footer-content p { margin: 0.3rem 0; }
+        .footer-content strong { color: #10b981; }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 1024px) { .market-grid { grid-template-columns: 1fr; } .beachhead-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2.5rem; } .chart-grid { grid-template-columns: 1fr; } .score-container { grid-template-columns: 1fr; text-align: center; } .header-content { padding: 2rem; } .content { padding: 2rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="kicker">StratArts Market Analysis</div>
+                <h1>Market Opportunity Analysis</h1>
+                <div class="subtitle">PetPulse - Smart Pet Health Monitoring Platform</div>
+                <div class="meta-info">
+                    <div class="meta-item"><span>📅</span><span>Generated: December 18, 2025</span></div>
+                    <div class="meta-item"><span>📊</span><span>Analysis Type: Foundation Strategy</span></div>
+                    <div class="meta-item"><span>🎯</span><span>Version 1.0.0</span></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">8.2</div>
+                    <div class="score-label">Market Attractiveness</div>
+                </div>
+                <div class="score-interpretation">
+                    <div class="interpretation-title">What This Score Means</div>
+                    <div class="interpretation-text">
+                        The pet health technology market represents a highly attractive opportunity with a $10.4B TAM growing at 14.3% CAGR. Strong tailwinds from pet humanization, telehealth normalization, and vet shortage crisis create favorable timing. PetPulse is positioned at the intersection of three converging markets with no integrated competitor.
+                    </div>
+                </div>
+                <div class="verdict-badge">✓ PROCEED</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Section 1: Market Size Analysis -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Market Size Analysis</h2>
+                    <p class="section-description">
+                        Total Addressable Market (TAM), Serviceable Addressable Market (SAM), and Serviceable Obtainable Market (SOM) calculated using top-down industry analysis and bottom-up unit economics.
+                    </p>
+                </div>
+
+                <div class="market-grid">
+                    <div class="market-card">
+                        <div class="label">TAM</div>
+                        <div class="value">$10.4B</div>
+                        <div class="range">Range: $8.5B - $12.5B</div>
+                        <div class="description">Global pet wearables + telehealth + preventive care technology market</div>
+                    </div>
+                    <div class="market-card">
+                        <div class="label">SAM</div>
+                        <div class="value">$2.1B</div>
+                        <div class="range">Range: $1.8B - $2.5B</div>
+                        <div class="description">U.S. premium pet owners willing to pay for connected health technology</div>
+                    </div>
+                    <div class="market-card">
+                        <div class="label">SOM (Year 5)</div>
+                        <div class="value">$42M</div>
+                        <div class="range">Range: $28M - $65M</div>
+                        <div class="description">2% market share with 140K subscribers at $300 ARPU</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Visual Analysis -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Visual Analysis</h2>
+                    <p class="section-description">
+                        Data visualizations revealing market size distribution, growth projections, competitive positioning, and beachhead evaluation.
+                    </p>
+                </div>
+
+                <div class="chart-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">TAM/SAM/SOM Funnel</div>
+                        <div class="chart-subtitle">Market narrowing from total addressable to realistically obtainable</div>
+                        <div class="chart-wrapper"><canvas id="funnelChart"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Key Observations</div>
+                            <ul class="insight-list">
+                                <li><strong>TAM to SAM:</strong> 20% serviceable (geographic + segment constraints)</li>
+                                <li><strong>SAM to SOM:</strong> 2% target market share by Year 5</li>
+                                <li><strong>Growth Path:</strong> 300% YoY growth Years 1-3, 130% Years 4-5</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-title">5-Year Revenue Projection</div>
+                        <div class="chart-subtitle">Conservative, most likely, and aggressive growth scenarios</div>
+                        <div class="chart-wrapper"><canvas id="growthChart"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Growth Assumptions</div>
+                            <ul class="insight-list">
+                                <li><strong>Year 1:</strong> $0.75M - Seed customers, validate product-market fit</li>
+                                <li><strong>Year 3:</strong> $10.5M - Scale acquisition, expand telehealth network</li>
+                                <li><strong>Year 5:</strong> $42M - Market leader in integrated pet health</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-title">Beachhead Evaluation Radar</div>
+                        <div class="chart-subtitle">Multi-dimensional assessment of target market segments</div>
+                        <div class="chart-wrapper tall"><canvas id="beachheadRadar"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Segment Analysis</div>
+                            <ul class="insight-list">
+                                <li><strong>Premium Pet Parents:</strong> Highest pain severity and willingness to pay</li>
+                                <li><strong>Health-Anxious Owners:</strong> Strong accessibility, moderate competition</li>
+                                <li><strong>Strategy:</strong> Start with Premium segment, expand to Health-Anxious</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-title">Competitive Positioning</div>
+                        <div class="chart-subtitle">Feature Completeness vs. Price Positioning mapping</div>
+                        <div class="chart-wrapper"><canvas id="positioningChart"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Strategic Position</div>
+                            <ul class="insight-list">
+                                <li><strong>PetPulse Position:</strong> High features, premium price - differentiated leader</li>
+                                <li><strong>Unique Advantage:</strong> Only integrated monitoring + telehealth solution</li>
+                                <li><strong>Competitive Gap:</strong> No competitor offers real-time health alerts + instant vet access</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="chart-card full-width">
+                        <div class="chart-title">Porter's Five Forces Analysis</div>
+                        <div class="chart-subtitle">Industry structure assessment revealing competitive dynamics and market attractiveness</div>
+                        <div class="chart-wrapper"><canvas id="porterChart"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Force Assessment</div>
+                            <ul class="insight-list">
+                                <li><strong>Threat of New Entrants:</strong> Medium (6/10) - Hardware complexity creates barriers</li>
+                                <li><strong>Supplier Power:</strong> Low (3/10) - Commoditized hardware, multiple cloud options</li>
+                                <li><strong>Buyer Power:</strong> Medium (5/10) - Fragmented consumers, switching costs increase over time</li>
+                                <li><strong>Threat of Substitutes:</strong> Medium-High (7/10) - Traditional vets, pet insurance, manual observation</li>
+                                <li><strong>Competitive Rivalry:</strong> Medium (5/10) - Growing market allows multiple winners</li>
+                                <li><strong>Overall:</strong> Favorable (5.2/10 average threat) - Attractive industry structure</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Beachhead Selection -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Beachhead Market Selection</h2>
+                    <p class="section-description">Two primary beachhead segments identified for focused go-to-market execution.</p>
+                </div>
+
+                <div class="beachhead-grid">
+                    <div class="beachhead-card primary">
+                        <div class="beachhead-badge">Primary Beachhead</div>
+                        <div class="beachhead-header">
+                            <div class="beachhead-name">Premium Pet Parents</div>
+                            <div class="beachhead-score">42/50</div>
+                        </div>
+                        <div class="beachhead-description">8.4M households spending $150+/year on pet technology. High willingness to pay, strong word-of-mouth potential. Consider pets family members and prioritize health over cost. Key acquisition channels: Instagram influencers, premium pet stores, vet partnerships.</div>
+                    </div>
+
+                    <div class="beachhead-card primary">
+                        <div class="beachhead-badge">Secondary Beachhead</div>
+                        <div class="beachhead-header">
+                            <div class="beachhead-name">Health-Anxious Owners</div>
+                            <div class="beachhead-score">38/50</div>
+                        </div>
+                        <div class="beachhead-description">12.6M households with pets who have chronic conditions or previous health scares. Strong pain point around peace of mind and early detection. Moderate price sensitivity but high motivation. Key acquisition: Pet health forums, breed-specific communities, vet referrals.</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | market-opportunity-analyzer-v1.0.0</p>
+                <p style="margin-top: 5px;">Context Signature: market-opportunity-analyzer-v1.0.0 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        const tooltipConfig = { backgroundColor: '#1a1a1a', titleColor: '#f5f5f5', bodyColor: '#d4d4d4', borderColor: '#10b981', borderWidth: 1 };
+
+        const data = {
+            market: { tam: 10400, sam: 2100, som: 42 },
+            growth: {
+                conservative: [0.5, 2.0, 7.0, 16.0, 28.0],
+                mostLikely: [0.75, 3.6, 10.5, 24.0, 42.0],
+                aggressive: [1.2, 5.5, 16.0, 38.0, 65.0]
+            },
+            beachheads: {
+                labels: ['Accessibility', 'Pain Severity', 'Low Competition', 'Market Size', 'Strategic Value'],
+                segment1: [8, 9, 7, 9, 9],
+                segment2: [9, 8, 6, 8, 7],
+                segment3: [6, 5, 8, 6, 5]
+            },
+            porter: {
+                labels: ['New Entrants', 'Supplier Power', 'Buyer Power', 'Substitutes', 'Rivalry'],
+                values: [6, 3, 5, 7, 5]
+            },
+            competitors: [
+                { label: 'PetPulse', x: 9, y: 8, primary: true },
+                { label: 'Whistle', x: 6, y: 6, primary: false },
+                { label: 'Fi', x: 5, y: 7, primary: false },
+                { label: 'Vetster', x: 7, y: 4, primary: false },
+                { label: 'Wagz', x: 4, y: 5, primary: false }
+            ]
+        };
+
+        // Chart 1: TAM/SAM/SOM Funnel
+        new Chart(document.getElementById('funnelChart'), {
+            type: 'bar',
+            data: {
+                labels: ['TAM ($10.4B)', 'SAM ($2.1B)', 'SOM Y5 ($42M)'],
+                datasets: [{
+                    data: [data.market.tam, data.market.sam, data.market.som],
+                    backgroundColor: ['rgba(16, 185, 129, 0.4)', 'rgba(16, 185, 129, 0.6)', 'rgba(16, 185, 129, 0.9)'],
+                    borderColor: '#10b981', borderWidth: 2, borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+                scales: {
+                    x: { type: 'logarithmic', grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3', callback: v => v >= 1000 ? '$' + (v/1000) + 'B' : '$' + v + 'M' } },
+                    y: { grid: { display: false }, ticks: { color: '#f5f5f5', font: { weight: '600' } } }
+                },
+                plugins: { legend: { display: false }, tooltip: tooltipConfig }
+            }
+        });
+
+        // Chart 2: Growth Projection
+        new Chart(document.getElementById('growthChart'), {
+            type: 'line',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [
+                    { label: 'Conservative', data: data.growth.conservative, borderColor: 'rgba(16, 185, 129, 0.4)', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointRadius: 4 },
+                    { label: 'Most Likely', data: data.growth.mostLikely, borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.1)', borderWidth: 3, fill: true, tension: 0.3, pointRadius: 5 },
+                    { label: 'Aggressive', data: data.growth.aggressive, borderColor: '#14b8a6', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointRadius: 4 }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig },
+                scales: {
+                    x: { grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3' } },
+                    y: { beginAtZero: true, grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3', callback: v => '$' + v + 'M' } }
+                }
+            }
+        });
+
+        // Chart 3: Beachhead Radar
+        new Chart(document.getElementById('beachheadRadar'), {
+            type: 'radar',
+            data: {
+                labels: data.beachheads.labels,
+                datasets: [
+                    { label: 'Premium Pet Parents', data: data.beachheads.segment1, backgroundColor: 'rgba(16, 185, 129, 0.2)', borderColor: '#10b981', borderWidth: 3, pointBackgroundColor: '#10b981', pointRadius: 6 },
+                    { label: 'Health-Anxious Owners', data: data.beachheads.segment2, backgroundColor: 'rgba(20, 184, 166, 0.2)', borderColor: '#14b8a6', borderWidth: 3, pointBackgroundColor: '#14b8a6', pointRadius: 6 },
+                    { label: 'Tech-Forward Owners', data: data.beachheads.segment3, backgroundColor: 'rgba(5, 150, 105, 0.1)', borderColor: '#059669', borderWidth: 2, pointBackgroundColor: '#059669', pointRadius: 4 }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: { r: { beginAtZero: true, max: 10, ticks: { color: '#a3a3a3', stepSize: 2 }, grid: { color: 'rgba(16, 185, 129, 0.1)' }, pointLabels: { color: '#f5f5f5', font: { weight: '600' } } } },
+                plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5', padding: 20 } }, tooltip: tooltipConfig }
+            }
+        });
+
+        // Chart 4: Competitive Positioning
+        new Chart(document.getElementById('positioningChart'), {
+            type: 'scatter',
+            data: {
+                datasets: data.competitors.map(c => ({
+                    label: c.label, data: [{ x: c.x, y: c.y }],
+                    backgroundColor: c.primary ? '#10b981' : '#a3a3a3',
+                    borderColor: c.primary ? '#14b8a6' : '#a3a3a3',
+                    borderWidth: c.primary ? 3 : 1, pointRadius: c.primary ? 16 : 10
+                }))
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: {
+                    x: { title: { display: true, text: 'Feature Completeness →', color: '#a3a3a3', font: { weight: '600' } }, min: 0, max: 10, ticks: { color: '#a3a3a3' }, grid: { color: 'rgba(16, 185, 129, 0.1)' } },
+                    y: { title: { display: true, text: 'Price Position →', color: '#a3a3a3', font: { weight: '600' } }, min: 0, max: 10, ticks: { color: '#a3a3a3' }, grid: { color: 'rgba(16, 185, 129, 0.1)' } }
+                },
+                plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig }
+            }
+        });
+
+        // Chart 5: Porter's Five Forces
+        new Chart(document.getElementById('porterChart'), {
+            type: 'radar',
+            data: {
+                labels: data.porter.labels,
+                datasets: [{
+                    label: 'Force Intensity (10 = High Threat)',
+                    data: data.porter.values,
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)', borderColor: '#10b981', borderWidth: 3,
+                    pointBackgroundColor: '#10b981', pointBorderColor: '#1a1a1a', pointRadius: 6, pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: { r: { beginAtZero: true, max: 10, ticks: { color: '#a3a3a3', stepSize: 2 }, grid: { color: 'rgba(16, 185, 129, 0.1)' }, pointLabels: { color: '#f5f5f5', font: { weight: '600' } } } },
+                plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig }
+            }
+        });
+    </script>
+</body>
+</html>

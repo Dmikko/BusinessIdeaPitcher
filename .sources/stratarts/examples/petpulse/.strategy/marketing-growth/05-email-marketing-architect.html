@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Marketing Architect - PetPulse</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background: #0a0a0a;
+            padding: 0;
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            position: relative;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .report-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .report-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 3rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.25rem;
+        }
+
+        .meta-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        /* Score Banner */
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            padding: 2rem 4rem;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(#10b981 0deg 302deg, #2a2a2a 302deg 360deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .score-circle::before {
+            content: '';
+            width: 90px;
+            height: 90px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .score-value {
+            position: relative;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #10b981;
+        }
+
+        .score-interpretation {
+            flex: 1;
+        }
+
+        .interpretation-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .interpretation-text {
+            color: #888;
+            font-size: 0.95rem;
+        }
+
+        .verdict-badge {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Content Sections */
+        .content-section {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 28px;
+            background: linear-gradient(to bottom, #10b981, #059669);
+            border-radius: 2px;
+        }
+
+        .section-description {
+            color: #888;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+
+        .subsection-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 2rem 0 1rem 0;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        /* Metric Cards */
+        .metric-card {
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .info-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-card li {
+            color: #ccc;
+            font-size: 0.9rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .info-card li:last-child {
+            border-bottom: none;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border: 1px solid #2a2a2a;
+            min-height: 300px;
+        }
+
+        /* Email Marketing Specific Styles */
+        .email-funnel {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin: 2rem 0;
+        }
+
+        .funnel-stage-email {
+            display: flex;
+            align-items: center;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            position: relative;
+            padding: 1.25rem 1.5rem;
+        }
+
+        .funnel-stage-email:first-child {
+            border-radius: 12px 12px 0 0;
+        }
+
+        .funnel-stage-email:last-child {
+            border-radius: 0 0 12px 12px;
+        }
+
+        .funnel-stage-email::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #10b981, #059669);
+        }
+
+        .stage-number {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .stage-content {
+            flex: 1;
+        }
+
+        .stage-name-email {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .stage-emails {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .stage-metrics {
+            display: flex;
+            gap: 1.5rem;
+            text-align: right;
+        }
+
+        .stage-metric {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .metric-value-sm {
+            font-weight: 700;
+            color: #10b981;
+            font-size: 1rem;
+        }
+
+        .metric-label-sm {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .email-sequence-card {
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .sequence-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .sequence-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .sequence-info {
+            flex: 1;
+        }
+
+        .sequence-name {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .sequence-trigger {
+            color: #10b981;
+            font-size: 0.8rem;
+        }
+
+        .email-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .email-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+        }
+
+        .email-day {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .email-subject {
+            flex: 1;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .email-goal {
+            color: #888;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 4px;
+        }
+
+        .segment-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .segment-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .segment-name {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        .segment-size {
+            color: #10b981;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .segment-criteria {
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .criteria-label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .criteria-value {
+            color: #ccc;
+            font-size: 0.85rem;
+        }
+
+        .segment-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .action-tag {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+        }
+
+        .automation-flow {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: #1a1a1a;
+            border-radius: 12px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .flow-step {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .flow-arrow {
+            color: #10b981;
+            font-size: 1.25rem;
+        }
+
+        .flow-condition {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .template-preview {
+            background: #0a0a0a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+            margin: 1rem 0;
+        }
+
+        .template-header {
+            border-bottom: 1px solid #2a2a2a;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .template-from {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 0.25rem;
+        }
+
+        .template-subject-line {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .template-body {
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .template-cta {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 1rem;
+            text-decoration: none;
+        }
+
+        .kpi-benchmark {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .kpi-benchmark:last-child {
+            border-bottom: none;
+        }
+
+        .benchmark-label {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .benchmark-values {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .benchmark-current {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .benchmark-target {
+            color: #10b981;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1.5rem;
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .timeline-phase {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            white-space: nowrap;
+            height: fit-content;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-tasks {
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline-tasks li {
+            color: #ccc;
+            font-size: 0.9rem;
+            padding: 0.25rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .timeline-tasks li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 6px;
+            height: 6px;
+            background: #10b981;
+            border-radius: 50%;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            padding: 0;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            text-align: center;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .footer-brand {
+            color: #10b981;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-disclaimer {
+            color: #666;
+            font-size: 0.85rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1200px) {
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content, .content-section, .footer-content {
+                padding: 2rem;
+            }
+
+            .score-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 2rem;
+            }
+
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .report-title {
+                font-size: 2rem;
+            }
+
+            .funnel-stage-email {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .stage-metrics {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .automation-flow {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            .chart-container {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="header-content">
+            <div class="header-badge">EMAIL MARKETING ARCHITECT</div>
+            <h1 class="report-title">PetPulse</h1>
+            <p class="report-subtitle">Automated email marketing system to nurture leads, convert trials, and retain customers through personalized lifecycle campaigns</p>
+            <div class="header-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Generated</span>
+                    <span class="meta-value">December 18, 2025</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">List Size Target</span>
+                    <span class="meta-value">10,000 (Year 1)</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">ESP Platform</span>
+                    <span class="meta-value">Customer.io</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Score Banner -->
+    <div class="score-banner">
+        <div class="score-container">
+            <div class="score-circle">
+                <span class="score-value">8.4</span>
+            </div>
+            <div class="score-interpretation">
+                <h3 class="interpretation-title">Email Strategy Readiness Score</h3>
+                <p class="interpretation-text">Strong email marketing foundation with clear customer journey stages. Trial-based business model perfectly suited for automated drip campaigns. Pet health content creates high-engagement opportunities with 40%+ expected open rates for pet health tips.</p>
+            </div>
+            <div class="verdict-badge">LAUNCH READY</div>
+        </div>
+    </div>
+
+    <!-- Strategy Overview -->
+    <section class="content-section">
+        <h2 class="section-title">Email Strategy Overview</h2>
+
+        <p class="section-description">PetPulse email marketing focuses on three core objectives: activating trial users within 7 days, converting trials to paid subscriptions, and retaining customers through ongoing pet health value. Our behavior-triggered automation system delivers the right message at the right time based on user actions.</p>
+
+        <div class="grid-4">
+            <div class="metric-card">
+                <div class="metric-label">Target Open Rate</div>
+                <div class="metric-value">35%+</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Target CTR</div>
+                <div class="metric-value">8%+</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Weekly Sends</div>
+                <div class="metric-value">2-3</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Revenue Goal</div>
+                <div class="metric-value">15% attr.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Marketing Funnel -->
+    <section class="content-section">
+        <h2 class="section-title">Email Marketing Funnel</h2>
+
+        <div class="email-funnel">
+            <div class="funnel-stage-email">
+                <div class="stage-number">1</div>
+                <div class="stage-content">
+                    <div class="stage-name-email">Awareness</div>
+                    <div class="stage-emails">Lead magnet downloads, blog subscribers, quiz completers</div>
+                </div>
+                <div class="stage-metrics">
+                    <div class="stage-metric">
+                        <span class="metric-value-sm">5</span>
+                        <span class="metric-label-sm">Emails</span>
+                    </div>
+                    <div class="stage-metric">
+                        <span class="metric-value-sm">45%</span>
+                        <span class="metric-label-sm">Open Rate</span>
+                    </div>
+                </div>
+            </div>
+            <div class="funnel-stage-email">
+                <div class="stage-number">2</div>
+                <div class="stage-content">
+                    <div class="stage-name-email">Trial</div>
+                    <div class="stage-emails">14-day free trial users, onboarding sequence</div>
+                </div>
+                <div class="stage-metrics">
+                    <div class="stage-metric">
+                        <span class="metric-value-sm">7</span>
+                        <span class="metric-label-sm">Emails</span>
+                    </div>
+                    <div class="stage-metric">
+                        <span class="metric-value-sm">55%</span>
+                        <span class="metric-label-sm">Open Rate</span>
+                    </div>
+                </div>
+            </div>
+            <div class="funnel-stage-email">
+                <div class="stage-number">3</div>
+                <div class="stage-content">
+                    <div class="stage-name-email">Activation</div>
+                    <div class="stage-emails">First health insight received, collar connected</div>
+                </div>
+                <div class="stage-metrics">
+                    <div class="stage-metric">
+                        <span class="metric-value-sm">4</span>
+                        <span class="metric-label-sm">Emails</span>
+                    </div>
+                    <div class="stage-metric">
+                        <span class="metric-value-sm">60%</span>
+                        <span class="metric-label-sm">Open Rate</span>
+                    </div>
+                </div>
+            </div>
+            <div class="funnel-stage-email">
+                <div class="stage-number">4</div>
+                <div class="stage-content">
+                    <div class="stage-name-email">Conversion</div>
+                    <div class="stage-emails">Trial ending, upgrade prompts, pricing comparison</div>
+                </div>
+                <div class="stage-metrics">
+                    <div class="stage-metric">
+                        <span class="metric-value-sm">3</span>
+                        <span class="metric-label-sm">Emails</span>
+                    </div>
+                    <div class="stage-metric">
+                        <span class="metric-value-sm">50%</span>
+                        <span class="metric-label-sm">Open Rate</span>
+                    </div>
+                </div>
+            </div>
+            <div class="funnel-stage-email">
+                <div class="stage-number">5</div>
+                <div class="stage-content">
+                    <div class="stage-name-email">Retention</div>
+                    <div class="stage-emails">Weekly health tips, product updates, check-ins</div>
+                </div>
+                <div class="stage-metrics">
+                    <div class="stage-metric">
+                        <span class="metric-value-sm">Ongoing</span>
+                        <span class="metric-label-sm">Emails</span>
+                    </div>
+                    <div class="stage-metric">
+                        <span class="metric-value-sm">35%</span>
+                        <span class="metric-label-sm">Open Rate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="funnelChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Automated Email Sequences -->
+    <section class="content-section">
+        <h2 class="section-title">Automated Email Sequences</h2>
+
+        <p class="section-description">Behavior-triggered email sequences that deliver personalized content based on user actions. Each sequence is designed with specific goals and exit criteria to maximize conversion while avoiding over-emailing.</p>
+
+        <div class="grid-2">
+            <div class="email-sequence-card">
+                <div class="sequence-header">
+                    <div class="sequence-icon">&#128075;</div>
+                    <div class="sequence-info">
+                        <div class="sequence-name">Welcome & Onboarding</div>
+                        <div class="sequence-trigger">Trigger: Trial signup</div>
+                    </div>
+                </div>
+                <div class="email-list">
+                    <div class="email-item">
+                        <span class="email-day">Day 0</span>
+                        <span class="email-subject">Welcome to PetPulse! Let's set up your collar</span>
+                        <span class="email-goal">Setup</span>
+                    </div>
+                    <div class="email-item">
+                        <span class="email-day">Day 1</span>
+                        <span class="email-subject">[Pet Name]'s first health insights are ready!</span>
+                        <span class="email-goal">Activate</span>
+                    </div>
+                    <div class="email-item">
+                        <span class="email-day">Day 3</span>
+                        <span class="email-subject">3 things [Pet Name]'s data tells you</span>
+                        <span class="email-goal">Engage</span>
+                    </div>
+                    <div class="email-item">
+                        <span class="email-day">Day 7</span>
+                        <span class="email-subject">Your first week with PetPulse - what we learned</span>
+                        <span class="email-goal">Value</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="email-sequence-card">
+                <div class="sequence-header">
+                    <div class="sequence-icon">&#128176;</div>
+                    <div class="sequence-info">
+                        <div class="sequence-name">Trial Conversion</div>
+                        <div class="sequence-trigger">Trigger: Trial day 10</div>
+                    </div>
+                </div>
+                <div class="email-list">
+                    <div class="email-item">
+                        <span class="email-day">Day 10</span>
+                        <span class="email-subject">4 days left - keep protecting [Pet Name]</span>
+                        <span class="email-goal">Urgency</span>
+                    </div>
+                    <div class="email-item">
+                        <span class="email-day">Day 12</span>
+                        <span class="email-subject">How Bailey's owner caught early arthritis</span>
+                        <span class="email-goal">Proof</span>
+                    </div>
+                    <div class="email-item">
+                        <span class="email-day">Day 14</span>
+                        <span class="email-subject">Your trial ends today - don't lose access</span>
+                        <span class="email-goal">Convert</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="email-sequence-card">
+                <div class="sequence-header">
+                    <div class="sequence-icon">&#128153;</div>
+                    <div class="sequence-info">
+                        <div class="sequence-name">Customer Success</div>
+                        <div class="sequence-trigger">Trigger: Paid subscription</div>
+                    </div>
+                </div>
+                <div class="email-list">
+                    <div class="email-item">
+                        <span class="email-day">Day 0</span>
+                        <span class="email-subject">Welcome to Premium! Here's what's unlocked</span>
+                        <span class="email-goal">Orient</span>
+                    </div>
+                    <div class="email-item">
+                        <span class="email-day">Day 7</span>
+                        <span class="email-subject">Book your first telehealth consultation</span>
+                        <span class="email-goal">Feature</span>
+                    </div>
+                    <div class="email-item">
+                        <span class="email-day">Day 30</span>
+                        <span class="email-subject">[Pet Name]'s monthly health report is ready</span>
+                        <span class="email-goal">Retain</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="email-sequence-card">
+                <div class="sequence-header">
+                    <div class="sequence-icon">&#128148;</div>
+                    <div class="sequence-info">
+                        <div class="sequence-name">Re-engagement</div>
+                        <div class="sequence-trigger">Trigger: 14+ days inactive</div>
+                    </div>
+                </div>
+                <div class="email-list">
+                    <div class="email-item">
+                        <span class="email-day">Day 14</span>
+                        <span class="email-subject">We miss [Pet Name]! Here's what you're missing</span>
+                        <span class="email-goal">Return</span>
+                    </div>
+                    <div class="email-item">
+                        <span class="email-day">Day 21</span>
+                        <span class="email-subject">New feature: AI sleep analysis now available</span>
+                        <span class="email-goal">FOMO</span>
+                    </div>
+                    <div class="email-item">
+                        <span class="email-day">Day 30</span>
+                        <span class="email-subject">Is everything okay? We're here to help</span>
+                        <span class="email-goal">Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="sequenceChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Segmentation Strategy -->
+    <section class="content-section">
+        <h2 class="section-title">Segmentation Strategy</h2>
+
+        <p class="section-description">Dynamic segmentation based on lifecycle stage, engagement level, and pet profile. Each segment receives tailored messaging, frequency, and CTAs optimized for their specific needs and behaviors.</p>
+
+        <div class="grid-3">
+            <div class="segment-card">
+                <div class="segment-header">
+                    <span class="segment-name">Active Trial Users</span>
+                    <span class="segment-size">25%</span>
+                </div>
+                <div class="segment-criteria">
+                    <div class="criteria-label">Definition</div>
+                    <div class="criteria-value">Trial users who logged in within last 3 days</div>
+                </div>
+                <div class="segment-actions">
+                    <span class="action-tag">Feature education</span>
+                    <span class="action-tag">Soft upgrade prompts</span>
+                    <span class="action-tag">Health tips</span>
+                </div>
+            </div>
+
+            <div class="segment-card">
+                <div class="segment-header">
+                    <span class="segment-name">Premium Subscribers</span>
+                    <span class="segment-size">40%</span>
+                </div>
+                <div class="segment-criteria">
+                    <div class="criteria-label">Definition</div>
+                    <div class="criteria-value">Paying customers on Premium or Premium Plus</div>
+                </div>
+                <div class="segment-actions">
+                    <span class="action-tag">Advanced features</span>
+                    <span class="action-tag">Telehealth reminders</span>
+                    <span class="action-tag">Referral asks</span>
+                </div>
+            </div>
+
+            <div class="segment-card">
+                <div class="segment-header">
+                    <span class="segment-name">At-Risk Customers</span>
+                    <span class="segment-size">10%</span>
+                </div>
+                <div class="segment-criteria">
+                    <div class="criteria-label">Definition</div>
+                    <div class="criteria-value">Paying users inactive for 14+ days</div>
+                </div>
+                <div class="segment-actions">
+                    <span class="action-tag">Win-back offers</span>
+                    <span class="action-tag">Support outreach</span>
+                    <span class="action-tag">New features</span>
+                </div>
+            </div>
+
+            <div class="segment-card">
+                <div class="segment-header">
+                    <span class="segment-name">Multi-Pet Households</span>
+                    <span class="segment-size">15%</span>
+                </div>
+                <div class="segment-criteria">
+                    <div class="criteria-label">Definition</div>
+                    <div class="criteria-value">Users with 2+ pets registered</div>
+                </div>
+                <div class="segment-actions">
+                    <span class="action-tag">Premium Plus upsell</span>
+                    <span class="action-tag">Multi-pet features</span>
+                    <span class="action-tag">Family pricing</span>
+                </div>
+            </div>
+
+            <div class="segment-card">
+                <div class="segment-header">
+                    <span class="segment-name">Newsletter Only</span>
+                    <span class="segment-size">10%</span>
+                </div>
+                <div class="segment-criteria">
+                    <div class="criteria-label">Definition</div>
+                    <div class="criteria-value">Lead magnet subscribers, not in trial</div>
+                </div>
+                <div class="segment-actions">
+                    <span class="action-tag">Pet health content</span>
+                    <span class="action-tag">Trial CTAs</span>
+                    <span class="action-tag">Nurture sequence</span>
+                </div>
+            </div>
+
+            <div class="segment-card">
+                <div class="segment-header">
+                    <span class="segment-name">Churned Users</span>
+                    <span class="segment-size">5%</span>
+                </div>
+                <div class="segment-criteria">
+                    <div class="criteria-label">Definition</div>
+                    <div class="criteria-value">Canceled subscription within last 90 days</div>
+                </div>
+                <div class="segment-actions">
+                    <span class="action-tag">Win-back campaign</span>
+                    <span class="action-tag">Special offers</span>
+                    <span class="action-tag">Feedback request</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="segmentChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Automation Workflows -->
+    <section class="content-section">
+        <h2 class="section-title">Automation Workflows</h2>
+
+        <h3 class="subsection-title">Welcome Series Flow</h3>
+        <div class="automation-flow">
+            <span class="flow-step">Trial Signup</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-step">Welcome Email</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-condition">Collar Connected?</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-step">Day 1: First Insights</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-step">Day 3: Value Email</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-step">Day 7: Weekly Summary</span>
+        </div>
+
+        <h3 class="subsection-title">Trial Conversion Flow</h3>
+        <div class="automation-flow">
+            <span class="flow-step">Day 10 of Trial</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-condition">Not Upgraded?</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-step">Urgency Email</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-step">Day 12: Case Study</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-condition">Still Not Paid?</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-step">Final Day Email</span>
+        </div>
+
+        <h3 class="subsection-title">Re-engagement Flow</h3>
+        <div class="automation-flow">
+            <span class="flow-step">14 Days Inactive</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-step">We Miss You Email</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-condition">Returned?</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-step">Day 21: FOMO Email</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-step">Day 30: Support Check</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-condition">Archive if no response</span>
+        </div>
+    </section>
+
+    <!-- Email Templates -->
+    <section class="content-section">
+        <h2 class="section-title">Email Template Framework</h2>
+
+        <div class="grid-2">
+            <div>
+                <h3 class="subsection-title">Welcome Email Template</h3>
+                <div class="template-preview">
+                    <div class="template-header">
+                        <div class="template-from">From: Sarah from PetPulse</div>
+                        <div class="template-subject-line">[Pet Name], welcome to PetPulse! Let's get started</div>
+                    </div>
+                    <div class="template-body">
+                        <p>Hi [First Name],</p>
+                        <p style="margin-top: 1rem;">Welcome to the PetPulse family! You're about to discover a whole new way to understand [Pet Name]'s health.</p>
+                        <p style="margin-top: 1rem;"><strong>Your first step:</strong> Connect your PetPulse collar to start receiving real-time health insights.</p>
+                        <p style="margin-top: 1rem;">It only takes 3 minutes, and you'll start seeing [Pet Name]'s activity data right away.</p>
+                    </div>
+                    <a class="template-cta">Connect Your Collar</a>
+                </div>
+            </div>
+            <div>
+                <h3 class="subsection-title">Weekly Health Newsletter</h3>
+                <div class="template-preview">
+                    <div class="template-header">
+                        <div class="template-from">From: Dr. Emily at PetPulse</div>
+                        <div class="template-subject-line">5 signs your pet might be stressed (and what to do)</div>
+                    </div>
+                    <div class="template-body">
+                        <p>Hi [First Name],</p>
+                        <p style="margin-top: 1rem;">Did you know pets can experience stress just like humans? This week, we're sharing the subtle signs to watch for.</p>
+                        <p style="margin-top: 1rem;"><strong>In this issue:</strong></p>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem; color: #ccc;">
+                            <li>5 hidden signs of pet stress</li>
+                            <li>How PetPulse detects anxiety patterns</li>
+                            <li>Quick calming techniques</li>
+                        </ul>
+                    </div>
+                    <a class="template-cta">Read Full Article</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- A/B Testing Strategy -->
+    <section class="content-section">
+        <h2 class="section-title">A/B Testing Strategy</h2>
+
+        <div class="grid-2">
+            <div class="info-card">
+                <h4>Subject Line Tests</h4>
+                <ul>
+                    <li>Personalization: "[Pet Name]" vs no pet name</li>
+                    <li>Urgency: "Last chance" vs "Don't miss out"</li>
+                    <li>Curiosity: Question vs statement</li>
+                    <li>Length: Short (30 chars) vs long (50 chars)</li>
+                    <li>Emoji: With emoji vs without</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h4>Content Tests</h4>
+                <ul>
+                    <li>CTA button color: Green vs blue</li>
+                    <li>Email length: Short vs detailed</li>
+                    <li>Image placement: Top vs inline</li>
+                    <li>Social proof: With testimonial vs without</li>
+                    <li>Send time: Morning vs evening</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="testingChart"></canvas>
+        </div>
+    </section>
+
+    <!-- KPIs & Benchmarks -->
+    <section class="content-section">
+        <h2 class="section-title">KPIs & Industry Benchmarks</h2>
+
+        <div class="grid-2">
+            <div class="info-card">
+                <h4>Performance Metrics</h4>
+                <div class="kpi-benchmark">
+                    <span class="benchmark-label">Open Rate</span>
+                    <div class="benchmark-values">
+                        <span class="benchmark-current">Industry: 20%</span>
+                        <span class="benchmark-target">Target: 35%</span>
+                    </div>
+                </div>
+                <div class="kpi-benchmark">
+                    <span class="benchmark-label">Click-Through Rate</span>
+                    <div class="benchmark-values">
+                        <span class="benchmark-current">Industry: 3%</span>
+                        <span class="benchmark-target">Target: 8%</span>
+                    </div>
+                </div>
+                <div class="kpi-benchmark">
+                    <span class="benchmark-label">Conversion Rate</span>
+                    <div class="benchmark-values">
+                        <span class="benchmark-current">Industry: 1%</span>
+                        <span class="benchmark-target">Target: 3%</span>
+                    </div>
+                </div>
+                <div class="kpi-benchmark">
+                    <span class="benchmark-label">Unsubscribe Rate</span>
+                    <div class="benchmark-values">
+                        <span class="benchmark-current">Industry: 0.5%</span>
+                        <span class="benchmark-target">Target: <0.3%</span>
+                    </div>
+                </div>
+                <div class="kpi-benchmark">
+                    <span class="benchmark-label">List Growth Rate</span>
+                    <div class="benchmark-values">
+                        <span class="benchmark-current">Industry: 3%/mo</span>
+                        <span class="benchmark-target">Target: 8%/mo</span>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-container" style="min-height: 280px;">
+                <canvas id="benchmarkChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deliverability Best Practices -->
+    <section class="content-section">
+        <h2 class="section-title">Deliverability Best Practices</h2>
+
+        <div class="grid-3">
+            <div class="info-card">
+                <h4>List Hygiene</h4>
+                <ul>
+                    <li>Double opt-in for all signups</li>
+                    <li>Remove hard bounces immediately</li>
+                    <li>Sunset 6-month inactive subscribers</li>
+                    <li>Run re-engagement before removal</li>
+                    <li>Monitor spam complaint rate (<0.1%)</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h4>Authentication</h4>
+                <ul>
+                    <li>SPF record configured</li>
+                    <li>DKIM signature enabled</li>
+                    <li>DMARC policy set</li>
+                    <li>Custom sending domain</li>
+                    <li>Warm up new domain slowly</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h4>Engagement</h4>
+                <ul>
+                    <li>Segment by engagement level</li>
+                    <li>Send less to unengaged users</li>
+                    <li>Personalize subject lines</li>
+                    <li>Optimize send times by timezone</li>
+                    <li>Use preference center</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Timeline -->
+    <section class="content-section">
+        <h2 class="section-title">Implementation Timeline</h2>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="timeline-phase">Phase 1</span>
+                <div class="timeline-content">
+                    <div class="timeline-title">Foundation Setup (Weeks 1-2)</div>
+                    <ul class="timeline-tasks">
+                        <li>Configure Customer.io with PetPulse product events</li>
+                        <li>Set up SPF, DKIM, and DMARC authentication</li>
+                        <li>Create branded email templates (header, footer, CTA styles)</li>
+                        <li>Build Welcome & Onboarding sequence (4 emails)</li>
+                        <li>Set up trial conversion campaign (3 emails)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <span class="timeline-phase">Phase 2</span>
+                <div class="timeline-content">
+                    <div class="timeline-title">Automation & Segmentation (Weeks 3-6)</div>
+                    <ul class="timeline-tasks">
+                        <li>Build behavioral segmentation logic (6 segments)</li>
+                        <li>Create Customer Success sequence (3 emails)</li>
+                        <li>Build Re-engagement workflow (3 emails)</li>
+                        <li>Launch weekly pet health newsletter</li>
+                        <li>Run first A/B tests on subject lines</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <span class="timeline-phase">Phase 3</span>
+                <div class="timeline-content">
+                    <div class="timeline-title">Optimization & Scale (Weeks 7-12)</div>
+                    <ul class="timeline-tasks">
+                        <li>Analyze campaign performance vs benchmarks</li>
+                        <li>Iterate on underperforming sequences</li>
+                        <li>Build upsell campaign for Essential users</li>
+                        <li>Create referral program email series</li>
+                        <li>Scale to 10,000+ subscribers with optimized workflows</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p class="footer-brand">Generated by StratArts Email Marketing Architect v1.0.0</p>
+            <p class="footer-disclaimer">This email strategy provides a framework for email marketing. Monitor deliverability metrics and adjust based on engagement data. Context Signature: email-marketing-architect-v1.0.0</p>
+            <p style="color: #444; font-size: 0.75rem; margin-top: 1rem;">StratArts Business Strategy Skills Library</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Funnel Chart
+        const funnelCtx = document.getElementById('funnelChart');
+        if (funnelCtx) {
+            new Chart(funnelCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Subscribers', 'Opens (35%)', 'Clicks (8%)', 'Conversions (3%)'],
+                    datasets: [{
+                        label: 'Funnel Performance',
+                        data: [10000, 3500, 800, 240],
+                        backgroundColor: [
+                            '#10b981',
+                            '#059669',
+                            '#047857',
+                            '#065f46'
+                        ],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Email Funnel Conversion (Year 1 Projection)',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Sequence Performance Chart
+        const sequenceCtx = document.getElementById('sequenceChart');
+        if (sequenceCtx) {
+            new Chart(sequenceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Welcome Series', 'Onboarding', 'Trial Conversion', 'Customer Success', 'Re-engagement'],
+                    datasets: [{
+                        label: 'Open Rate %',
+                        data: [65, 55, 50, 40, 30],
+                        backgroundColor: '#10b981',
+                        borderRadius: 4
+                    }, {
+                        label: 'Click Rate %',
+                        data: [25, 20, 15, 12, 8],
+                        backgroundColor: '#059669',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 80,
+                            ticks: {
+                                color: '#888',
+                                callback: function(value) { return value + '%'; }
+                            },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Sequence Performance Comparison (Expected)',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: {
+                            labels: { color: '#ccc' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Segment Distribution Chart
+        const segmentCtx = document.getElementById('segmentChart');
+        if (segmentCtx) {
+            new Chart(segmentCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Premium Subscribers', 'Active Trial Users', 'Multi-Pet Households', 'Newsletter Only', 'At-Risk', 'Churned'],
+                    datasets: [{
+                        data: [40, 25, 15, 10, 5, 5],
+                        backgroundColor: [
+                            '#10b981',
+                            '#059669',
+                            '#047857',
+                            '#6b7280',
+                            '#f59e0b',
+                            '#ef4444'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Subscriber Segment Distribution (Target)',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: {
+                            position: 'right',
+                            labels: { color: '#ccc', padding: 15 }
+                        }
+                    }
+                }
+            });
+        }
+
+        // A/B Testing Chart
+        const testingCtx = document.getElementById('testingChart');
+        if (testingCtx) {
+            new Chart(testingCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Pet Name Subject', 'Generic Subject', 'Urgency CTA', 'Soft CTA', 'Morning Send', 'Evening Send'],
+                    datasets: [{
+                        label: 'Performance %',
+                        data: [42, 28, 35, 22, 38, 32],
+                        backgroundColor: function(context) {
+                            const index = context.dataIndex;
+                            return index % 2 === 0 ? '#10b981' : '#6b7280';
+                        },
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#888',
+                                callback: function(value) { return value + '%'; }
+                            },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'A/B Test Results (Winners in Green)',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Benchmark Chart
+        const benchmarkCtx = document.getElementById('benchmarkChart');
+        if (benchmarkCtx) {
+            new Chart(benchmarkCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Open Rate', 'Click Rate', 'Conversion', 'List Growth', 'Engagement', 'Deliverability'],
+                    datasets: [{
+                        label: 'PetPulse Target',
+                        data: [35, 8, 3, 8, 45, 99],
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        borderColor: '#10b981',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#10b981'
+                    }, {
+                        label: 'Industry Benchmark',
+                        data: [20, 3, 1, 3, 25, 95],
+                        backgroundColor: 'rgba(107, 114, 128, 0.2)',
+                        borderColor: '#6b7280',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#6b7280'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { color: '#888', stepSize: 20 },
+                            grid: { color: '#2a2a2a' },
+                            pointLabels: { color: '#ccc', font: { size: 11 } }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Performance vs Industry Benchmarks',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: {
+                            labels: { color: '#ccc' }
+                        }
+                    }
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>

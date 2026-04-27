@@ -1,0 +1,1819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Content Planner - PetPulse</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background: #0a0a0a;
+            padding: 0;
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            position: relative;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .report-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .report-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 3rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.25rem;
+        }
+
+        .meta-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        /* Score Banner */
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            padding: 2rem 4rem;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(#10b981 0deg 295deg, #2a2a2a 295deg 360deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .score-circle::before {
+            content: '';
+            width: 90px;
+            height: 90px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .score-value {
+            position: relative;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #10b981;
+        }
+
+        .score-interpretation {
+            flex: 1;
+        }
+
+        .interpretation-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .interpretation-text {
+            color: #888;
+            font-size: 0.95rem;
+        }
+
+        .verdict-badge {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Content Sections */
+        .content-section {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 28px;
+            background: linear-gradient(to bottom, #10b981, #059669);
+            border-radius: 2px;
+        }
+
+        .section-description {
+            color: #888;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+
+        .subsection-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 2rem 0 1rem 0;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        /* Metric Cards */
+        .metric-card {
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .info-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-card li {
+            color: #ccc;
+            font-size: 0.9rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .info-card li:last-child {
+            border-bottom: none;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border: 1px solid #2a2a2a;
+            min-height: 300px;
+        }
+
+        /* SEO Content Planner Specific Styles */
+        .keyword-cluster {
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .cluster-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .cluster-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .cluster-volume {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .pillar-keyword {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .supporting-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .supporting-keyword {
+            background: #0a0a0a;
+            color: #ccc;
+            padding: 0.375rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .keyword-volume {
+            color: #888;
+            font-size: 0.7rem;
+        }
+
+        .keyword-difficulty {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .difficulty-easy { background: #10b981; }
+        .difficulty-medium { background: #f59e0b; }
+        .difficulty-hard { background: #ef4444; }
+
+        .content-gap-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+            border-left: 4px solid #10b981;
+        }
+
+        .gap-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+
+        .gap-title {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        .gap-priority {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .gap-high { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        .gap-medium { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .gap-low { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+
+        .gap-metrics {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .gap-metric {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .gap-metric-label {
+            color: #888;
+        }
+
+        .gap-metric-value {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .serp-feature-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .content-calendar-seo {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .calendar-week {
+            display: flex;
+            align-items: stretch;
+            gap: 1rem;
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .week-label {
+            width: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-right: 1rem;
+            border-right: 1px solid #2a2a2a;
+        }
+
+        .week-number {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .week-dates {
+            font-size: 0.85rem;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .week-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .content-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+        }
+
+        .content-type-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        .type-pillar { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .type-cluster { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .type-update { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
+
+        .content-title {
+            flex: 1;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .content-target-kw {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        .technical-seo-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .technical-seo-item:last-child {
+            border-bottom: none;
+        }
+
+        .seo-status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .status-good { background: #10b981; }
+        .status-warning { background: #f59e0b; }
+        .status-error { background: #ef4444; }
+
+        .seo-item-info {
+            flex: 1;
+        }
+
+        .seo-item-name {
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .seo-item-description {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        .seo-item-action {
+            color: #10b981;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .competitor-seo-row {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .competitor-seo-row:last-child {
+            border-bottom: none;
+        }
+
+        .competitor-name {
+            flex: 1;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .competitor-da {
+            width: 80px;
+            text-align: center;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .competitor-keywords {
+            width: 100px;
+            text-align: center;
+            color: #ccc;
+        }
+
+        .competitor-traffic {
+            width: 100px;
+            text-align: right;
+            color: #888;
+        }
+
+        .optimization-checklist {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .check-done {
+            background: #10b981;
+            color: #ffffff;
+        }
+
+        .check-pending {
+            background: #2a2a2a;
+            color: #888;
+        }
+
+        .checklist-text {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1.5rem;
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .timeline-phase {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            white-space: nowrap;
+            height: fit-content;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-tasks {
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline-tasks li {
+            color: #ccc;
+            font-size: 0.9rem;
+            padding: 0.25rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .timeline-tasks li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 6px;
+            height: 6px;
+            background: #10b981;
+            border-radius: 50%;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            padding: 0;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            text-align: center;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .footer-brand {
+            color: #10b981;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-disclaimer {
+            color: #666;
+            font-size: 0.85rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1200px) {
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content, .content-section, .footer-content {
+                padding: 2rem;
+            }
+
+            .score-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 2rem;
+            }
+
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .report-title {
+                font-size: 2rem;
+            }
+
+            .calendar-week {
+                flex-direction: column;
+            }
+
+            .week-label {
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-between;
+                padding-right: 0;
+                padding-bottom: 0.75rem;
+                border-right: none;
+                border-bottom: 1px solid #2a2a2a;
+            }
+
+            .competitor-seo-row {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .competitor-name {
+                width: 100%;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            .chart-container {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="header-content">
+            <div class="header-badge">SEO CONTENT PLANNER</div>
+            <h1 class="report-title">PetPulse</h1>
+            <p class="report-subtitle">Comprehensive SEO strategy to capture pet health search traffic and establish topical authority in the pet wellness monitoring space</p>
+            <div class="header-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Generated</span>
+                    <span class="meta-value">December 18, 2025</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Domain Authority</span>
+                    <span class="meta-value">15 (New Site)</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Target Keywords</span>
+                    <span class="meta-value">75 Keywords</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Score Banner -->
+    <div class="score-banner">
+        <div class="score-container">
+            <div class="score-circle">
+                <span class="score-value">8.2</span>
+            </div>
+            <div class="score-interpretation">
+                <h3 class="interpretation-title">SEO Opportunity Score</h3>
+                <p class="interpretation-text">Excellent SEO opportunity in the pet health monitoring niche. Low competition for long-tail keywords with high purchase intent. Content cluster strategy around pet health topics will establish topical authority. Pet parents actively search for health monitoring solutions with strong commercial intent.</p>
+            </div>
+            <div class="verdict-badge">HIGH OPPORTUNITY</div>
+        </div>
+    </div>
+
+    <!-- SEO Strategy Overview -->
+    <section class="content-section">
+        <h2 class="section-title">SEO Strategy Overview</h2>
+
+        <p class="section-description">Build topical authority in pet health monitoring through comprehensive content clusters. Target informational queries to capture awareness traffic, then convert through commercial comparison content. Leverage pet health expertise to earn backlinks from veterinary and pet care publications.</p>
+
+        <div class="grid-4">
+            <div class="metric-card">
+                <div class="metric-label">6-Month Traffic Goal</div>
+                <div class="metric-value">10K/mo</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Keywords to Rank</div>
+                <div class="metric-value">50+ Top 10</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Content Pieces</div>
+                <div class="metric-value">45 Articles</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Target DA</div>
+                <div class="metric-value">35+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Keyword Clusters Section -->
+    <section class="content-section">
+        <h2 class="section-title">Keyword Clusters</h2>
+
+        <p class="section-description">Three primary content clusters targeting different stages of the buyer journey. Each cluster builds around a comprehensive pillar page supported by 10-15 targeted articles covering specific subtopics.</p>
+
+        <div class="grid-2">
+            <div class="keyword-cluster">
+                <div class="cluster-header">
+                    <span class="cluster-name">Pet Health Monitoring</span>
+                    <span class="cluster-volume">8,500/mo</span>
+                </div>
+                <div class="pillar-keyword">pet health monitoring guide</div>
+                <div class="supporting-keywords">
+                    <span class="supporting-keyword">
+                        <span class="keyword-difficulty difficulty-easy"></span>
+                        dog health tracker
+                        <span class="keyword-volume">720</span>
+                    </span>
+                    <span class="supporting-keyword">
+                        <span class="keyword-difficulty difficulty-easy"></span>
+                        pet wellness monitoring
+                        <span class="keyword-volume">480</span>
+                    </span>
+                    <span class="supporting-keyword">
+                        <span class="keyword-difficulty difficulty-medium"></span>
+                        pet vital signs normal
+                        <span class="keyword-volume">390</span>
+                    </span>
+                    <span class="supporting-keyword">
+                        <span class="keyword-difficulty difficulty-easy"></span>
+                        dog activity levels by age
+                        <span class="keyword-volume">320</span>
+                    </span>
+                    <span class="supporting-keyword">
+                        <span class="keyword-difficulty difficulty-easy"></span>
+                        how to monitor pet health
+                        <span class="keyword-volume">260</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="keyword-cluster">
+                <div class="cluster-header">
+                    <span class="cluster-name">Smart Pet Technology</span>
+                    <span class="cluster-volume">6,200/mo</span>
+                </div>
+                <div class="pillar-keyword">smart pet collar guide</div>
+                <div class="supporting-keywords">
+                    <span class="supporting-keyword">
+                        <span class="keyword-difficulty difficulty-medium"></span>
+                        best pet health tracker
+                        <span class="keyword-volume">880</span>
+                    </span>
+                    <span class="supporting-keyword">
+                        <span class="keyword-difficulty difficulty-medium"></span>
+                        dog fitness tracker
+                        <span class="keyword-volume">590</span>
+                    </span>
+                    <span class="supporting-keyword">
+                        <span class="keyword-difficulty difficulty-easy"></span>
+                        pet wearable technology
+                        <span class="keyword-volume">210</span>
+                    </span>
+                    <span class="supporting-keyword">
+                        <span class="keyword-difficulty difficulty-hard"></span>
+                        Fi collar vs Whistle
+                        <span class="keyword-volume">1,200</span>
+                    </span>
+                    <span class="supporting-keyword">
+                        <span class="keyword-difficulty difficulty-easy"></span>
+                        AI pet health detection
+                        <span class="keyword-volume">140</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="keyword-cluster">
+                <div class="cluster-header">
+                    <span class="cluster-name">Pet Telehealth</span>
+                    <span class="cluster-volume">4,800/mo</span>
+                </div>
+                <div class="pillar-keyword">pet telehealth guide</div>
+                <div class="supporting-keywords">
+                    <span class="supporting-keyword">
+                        <span class="keyword-difficulty difficulty-easy"></span>
+                        online vet consultation
+                        <span class="keyword-volume">1,600</span>
+                    </span>
+                    <span class="supporting-keyword">
+                        <span class="keyword-difficulty difficulty-medium"></span>
+                        virtual vet visit
+                        <span class="keyword-volume">720</span>
+                    </span>
+                    <span class="supporting-keyword">
+                        <span class="keyword-difficulty difficulty-easy"></span>
+                        when to call vet vs telehealth
+                        <span class="keyword-volume">290</span>
+                    </span>
+                    <span class="supporting-keyword">
+                        <span class="keyword-difficulty difficulty-easy"></span>
+                        telehealth for pets benefits
+                        <span class="keyword-volume">180</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="keyword-cluster">
+                <div class="cluster-header">
+                    <span class="cluster-name">Pet Health Signs</span>
+                    <span class="cluster-volume">12,000/mo</span>
+                </div>
+                <div class="pillar-keyword">signs your pet is sick</div>
+                <div class="supporting-keywords">
+                    <span class="supporting-keyword">
+                        <span class="keyword-difficulty difficulty-easy"></span>
+                        dog lethargy causes
+                        <span class="keyword-volume">2,400</span>
+                    </span>
+                    <span class="supporting-keyword">
+                        <span class="keyword-difficulty difficulty-easy"></span>
+                        pet not eating what to do
+                        <span class="keyword-volume">1,800</span>
+                    </span>
+                    <span class="supporting-keyword">
+                        <span class="keyword-difficulty difficulty-easy"></span>
+                        dog sleeping too much
+                        <span class="keyword-volume">1,300</span>
+                    </span>
+                    <span class="supporting-keyword">
+                        <span class="keyword-difficulty difficulty-medium"></span>
+                        early signs of illness in dogs
+                        <span class="keyword-volume">890</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="keywordChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Content Gap Analysis -->
+    <section class="content-section">
+        <h2 class="section-title">Content Gap Analysis</h2>
+
+        <p class="section-description">High-opportunity keywords where competitors rank but no comprehensive content exists. These represent quick wins for traffic acquisition with moderate effort.</p>
+
+        <div class="grid-2">
+            <div class="content-gap-card">
+                <div class="gap-header">
+                    <span class="gap-title">Pet Health Monitoring vs Vet Visits</span>
+                    <span class="gap-priority gap-high">High Priority</span>
+                </div>
+                <div class="gap-metrics">
+                    <div class="gap-metric">
+                        <span class="gap-metric-label">Volume:</span>
+                        <span class="gap-metric-value">2,100/mo</span>
+                    </div>
+                    <div class="gap-metric">
+                        <span class="gap-metric-label">Difficulty:</span>
+                        <span class="gap-metric-value">25 (Easy)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-gap-card">
+                <div class="gap-header">
+                    <span class="gap-title">AI Pet Health Detection Accuracy</span>
+                    <span class="gap-priority gap-high">High Priority</span>
+                </div>
+                <div class="gap-metrics">
+                    <div class="gap-metric">
+                        <span class="gap-metric-label">Volume:</span>
+                        <span class="gap-metric-value">890/mo</span>
+                    </div>
+                    <div class="gap-metric">
+                        <span class="gap-metric-label">Difficulty:</span>
+                        <span class="gap-metric-value">18 (Easy)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-gap-card">
+                <div class="gap-header">
+                    <span class="gap-title">Best Pet Health Apps 2025</span>
+                    <span class="gap-priority gap-medium">Medium Priority</span>
+                </div>
+                <div class="gap-metrics">
+                    <div class="gap-metric">
+                        <span class="gap-metric-label">Volume:</span>
+                        <span class="gap-metric-value">3,400/mo</span>
+                    </div>
+                    <div class="gap-metric">
+                        <span class="gap-metric-label">Difficulty:</span>
+                        <span class="gap-metric-value">42 (Medium)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-gap-card">
+                <div class="gap-header">
+                    <span class="gap-title">Pet Activity Monitoring for Senior Dogs</span>
+                    <span class="gap-priority gap-high">High Priority</span>
+                </div>
+                <div class="gap-metrics">
+                    <div class="gap-metric">
+                        <span class="gap-metric-label">Volume:</span>
+                        <span class="gap-metric-value">1,200/mo</span>
+                    </div>
+                    <div class="gap-metric">
+                        <span class="gap-metric-label">Difficulty:</span>
+                        <span class="gap-metric-value">22 (Easy)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="gapChart"></canvas>
+        </div>
+    </section>
+
+    <!-- SEO Content Calendar -->
+    <section class="content-section">
+        <h2 class="section-title">SEO Content Calendar (90 Days)</h2>
+
+        <div class="content-calendar-seo">
+            <div class="calendar-week">
+                <div class="week-label">
+                    <span class="week-number">Week 1-2</span>
+                    <span class="week-dates">Jan 1-14</span>
+                </div>
+                <div class="week-content">
+                    <div class="content-item">
+                        <span class="content-type-badge type-pillar">Pillar</span>
+                        <span class="content-title">Complete Guide to Pet Health Monitoring</span>
+                        <span class="content-target-kw">pet health monitoring guide</span>
+                    </div>
+                    <div class="content-item">
+                        <span class="content-type-badge type-cluster">Cluster</span>
+                        <span class="content-title">10 Signs Your Dog Might Be Getting Sick</span>
+                        <span class="content-target-kw">early signs of illness in dogs</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calendar-week">
+                <div class="week-label">
+                    <span class="week-number">Week 3-4</span>
+                    <span class="week-dates">Jan 15-28</span>
+                </div>
+                <div class="week-content">
+                    <div class="content-item">
+                        <span class="content-type-badge type-cluster">Cluster</span>
+                        <span class="content-title">Why Is My Dog Sleeping So Much? A Health Guide</span>
+                        <span class="content-target-kw">dog sleeping too much</span>
+                    </div>
+                    <div class="content-item">
+                        <span class="content-type-badge type-cluster">Cluster</span>
+                        <span class="content-title">Normal Activity Levels for Dogs by Age and Breed</span>
+                        <span class="content-target-kw">dog activity levels by age</span>
+                    </div>
+                    <div class="content-item">
+                        <span class="content-type-badge type-cluster">Cluster</span>
+                        <span class="content-title">Pet Health Monitoring vs Regular Vet Visits</span>
+                        <span class="content-target-kw">pet health monitoring vs vet visits</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calendar-week">
+                <div class="week-label">
+                    <span class="week-number">Week 5-6</span>
+                    <span class="week-dates">Jan 29-Feb 11</span>
+                </div>
+                <div class="week-content">
+                    <div class="content-item">
+                        <span class="content-type-badge type-pillar">Pillar</span>
+                        <span class="content-title">Ultimate Guide to Smart Pet Collars</span>
+                        <span class="content-target-kw">smart pet collar guide</span>
+                    </div>
+                    <div class="content-item">
+                        <span class="content-type-badge type-cluster">Cluster</span>
+                        <span class="content-title">How AI Is Revolutionizing Pet Health Detection</span>
+                        <span class="content-target-kw">AI pet health detection</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calendar-week">
+                <div class="week-label">
+                    <span class="week-number">Week 7-8</span>
+                    <span class="week-dates">Feb 12-25</span>
+                </div>
+                <div class="week-content">
+                    <div class="content-item">
+                        <span class="content-type-badge type-cluster">Cluster</span>
+                        <span class="content-title">Best Pet Health Trackers: Complete Comparison</span>
+                        <span class="content-target-kw">best pet health tracker</span>
+                    </div>
+                    <div class="content-item">
+                        <span class="content-type-badge type-cluster">Cluster</span>
+                        <span class="content-title">Dog Fitness Trackers: Features That Matter</span>
+                        <span class="content-target-kw">dog fitness tracker</span>
+                    </div>
+                    <div class="content-item">
+                        <span class="content-type-badge type-update">Update</span>
+                        <span class="content-title">Update pillar pages with internal links</span>
+                        <span class="content-target-kw">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calendar-week">
+                <div class="week-label">
+                    <span class="week-number">Week 9-12</span>
+                    <span class="week-dates">Feb 26-Mar 31</span>
+                </div>
+                <div class="week-content">
+                    <div class="content-item">
+                        <span class="content-type-badge type-pillar">Pillar</span>
+                        <span class="content-title">Complete Guide to Pet Telehealth</span>
+                        <span class="content-target-kw">pet telehealth guide</span>
+                    </div>
+                    <div class="content-item">
+                        <span class="content-type-badge type-cluster">Cluster</span>
+                        <span class="content-title">8 cluster articles for Pet Telehealth topic</span>
+                        <span class="content-target-kw">various</span>
+                    </div>
+                    <div class="content-item">
+                        <span class="content-type-badge type-cluster">Cluster</span>
+                        <span class="content-title">Continue Pet Health Signs cluster (5 articles)</span>
+                        <span class="content-target-kw">various</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="productionChart"></canvas>
+        </div>
+    </section>
+
+    <!-- SERP Features Strategy -->
+    <section class="content-section">
+        <h2 class="section-title">SERP Features Strategy</h2>
+
+        <p class="section-description">Target rich SERP features to maximize click-through rates and establish authority. Pet health queries frequently trigger featured snippets and People Also Ask boxes.</p>
+
+        <div class="grid-3">
+            <div class="info-card">
+                <h4>Featured Snippets</h4>
+                <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 1rem;">Target definition and list snippets for pet health queries with concise, structured answers.</p>
+                <div>
+                    <span class="serp-feature-badge">Definition</span>
+                    <span class="serp-feature-badge">List</span>
+                    <span class="serp-feature-badge">Table</span>
+                </div>
+            </div>
+            <div class="info-card">
+                <h4>People Also Ask</h4>
+                <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 1rem;">Include FAQ sections on all articles to capture PAA real estate for pet health questions.</p>
+                <div>
+                    <span class="serp-feature-badge">FAQ Schema</span>
+                    <span class="serp-feature-badge">Q&A Format</span>
+                </div>
+            </div>
+            <div class="info-card">
+                <h4>Rich Results</h4>
+                <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 1rem;">Implement Product and Review schema for pet tracker comparison content.</p>
+                <div>
+                    <span class="serp-feature-badge">Product</span>
+                    <span class="serp-feature-badge">Review</span>
+                    <span class="serp-feature-badge">HowTo</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical SEO Checklist -->
+    <section class="content-section">
+        <h2 class="section-title">Technical SEO Checklist</h2>
+
+        <div class="grid-2">
+            <div class="info-card">
+                <h4>Site Health</h4>
+                <div class="technical-seo-item">
+                    <span class="seo-status status-good"></span>
+                    <div class="seo-item-info">
+                        <div class="seo-item-name">HTTPS Security</div>
+                        <div class="seo-item-description">SSL certificate installed</div>
+                    </div>
+                    <span class="seo-item-action">Configured</span>
+                </div>
+                <div class="technical-seo-item">
+                    <span class="seo-status status-warning"></span>
+                    <div class="seo-item-info">
+                        <div class="seo-item-name">Page Speed</div>
+                        <div class="seo-item-description">Target LCP under 2.5s</div>
+                    </div>
+                    <span class="seo-item-action">Optimize</span>
+                </div>
+                <div class="technical-seo-item">
+                    <span class="seo-status status-good"></span>
+                    <div class="seo-item-info">
+                        <div class="seo-item-name">Mobile Responsive</div>
+                        <div class="seo-item-description">Mobile-first design</div>
+                    </div>
+                    <span class="seo-item-action">Configured</span>
+                </div>
+                <div class="technical-seo-item">
+                    <span class="seo-status status-warning"></span>
+                    <div class="seo-item-info">
+                        <div class="seo-item-name">XML Sitemap</div>
+                        <div class="seo-item-description">Submit to Search Console</div>
+                    </div>
+                    <span class="seo-item-action">Create</span>
+                </div>
+                <div class="technical-seo-item">
+                    <span class="seo-status status-error"></span>
+                    <div class="seo-item-info">
+                        <div class="seo-item-name">Schema Markup</div>
+                        <div class="seo-item-description">Product + FAQ schema needed</div>
+                    </div>
+                    <span class="seo-item-action">Implement</span>
+                </div>
+            </div>
+            <div class="chart-container" style="min-height: 280px;">
+                <canvas id="technicalChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- On-Page Optimization -->
+    <section class="content-section">
+        <h2 class="section-title">On-Page Optimization Checklist</h2>
+
+        <div class="grid-2">
+            <div class="optimization-checklist">
+                <h4 style="color: #ffffff; margin-bottom: 1rem;">Content Optimization</h4>
+                <div class="checklist-item">
+                    <span class="check-icon check-pending">&#9744;</span>
+                    <span class="checklist-text">Target keyword in H1 (exact or close variation)</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon check-pending">&#9744;</span>
+                    <span class="checklist-text">Keyword in first 100 words of content</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon check-pending">&#9744;</span>
+                    <span class="checklist-text">2,000+ words for pillar content, 1,500+ for cluster</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon check-pending">&#9744;</span>
+                    <span class="checklist-text">Include FAQ section with schema markup</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon check-pending">&#9744;</span>
+                    <span class="checklist-text">3-5 internal links to related content</span>
+                </div>
+            </div>
+            <div class="optimization-checklist">
+                <h4 style="color: #ffffff; margin-bottom: 1rem;">Technical Optimization</h4>
+                <div class="checklist-item">
+                    <span class="check-icon check-pending">&#9744;</span>
+                    <span class="checklist-text">Title tag under 60 chars with target keyword</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon check-pending">&#9744;</span>
+                    <span class="checklist-text">Meta description 150-160 chars with CTA</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon check-pending">&#9744;</span>
+                    <span class="checklist-text">URL slug includes target keyword</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon check-pending">&#9744;</span>
+                    <span class="checklist-text">All images have descriptive alt text</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon check-pending">&#9744;</span>
+                    <span class="checklist-text">Image files compressed (WebP format)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitor SEO Analysis -->
+    <section class="content-section">
+        <h2 class="section-title">SEO Competitor Analysis</h2>
+
+        <div class="info-card">
+            <div class="competitor-seo-row" style="font-weight: 600; color: #888; font-size: 0.8rem;">
+                <span class="competitor-name">Domain</span>
+                <span class="competitor-da">DA</span>
+                <span class="competitor-keywords">Keywords</span>
+                <span class="competitor-traffic">Traffic</span>
+            </div>
+            <div class="competitor-seo-row">
+                <span class="competitor-name">fi.co</span>
+                <span class="competitor-da">52</span>
+                <span class="competitor-keywords">8,400</span>
+                <span class="competitor-traffic">125K/mo</span>
+            </div>
+            <div class="competitor-seo-row">
+                <span class="competitor-name">whistle.com</span>
+                <span class="competitor-da">48</span>
+                <span class="competitor-keywords">6,200</span>
+                <span class="competitor-traffic">89K/mo</span>
+            </div>
+            <div class="competitor-seo-row">
+                <span class="competitor-name">fuzzy.com</span>
+                <span class="competitor-da">42</span>
+                <span class="competitor-keywords">4,800</span>
+                <span class="competitor-traffic">52K/mo</span>
+            </div>
+            <div class="competitor-seo-row">
+                <span class="competitor-name">petmd.com</span>
+                <span class="competitor-da">78</span>
+                <span class="competitor-keywords">180K</span>
+                <span class="competitor-traffic">2.4M/mo</span>
+            </div>
+            <div class="competitor-seo-row">
+                <span class="competitor-name" style="color: #10b981;">petpulse.com (You)</span>
+                <span class="competitor-da" style="color: #888;">15</span>
+                <span class="competitor-keywords" style="color: #888;">0</span>
+                <span class="competitor-traffic" style="color: #888;">0/mo</span>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="competitorChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Link Building Strategy -->
+    <section class="content-section">
+        <h2 class="section-title">Link Building Strategy</h2>
+
+        <div class="grid-2">
+            <div class="info-card">
+                <h4>Target Backlinks</h4>
+                <ul>
+                    <li>Pet industry publications (PetAge, Pet Business)</li>
+                    <li>Veterinary blogs and practice websites</li>
+                    <li>Pet parent communities (TheDodo, BarkPost)</li>
+                    <li>Technology review sites (TechCrunch, Wired)</li>
+                    <li>Pet health resource pages (ASPCA, AKC)</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h4>Link Building Tactics</h4>
+                <ul>
+                    <li>Guest posts on pet health blogs (2/month)</li>
+                    <li>Create "State of Pet Health" annual report</li>
+                    <li>Broken link building on pet resource pages</li>
+                    <li>HARO responses for pet/tech topics</li>
+                    <li>Partner with vet clinics for co-marketing</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- KPIs & Tracking -->
+    <section class="content-section">
+        <h2 class="section-title">KPIs & Tracking</h2>
+
+        <div class="grid-2">
+            <div class="info-card">
+                <h4>Monthly Targets</h4>
+                <ul>
+                    <li>Organic traffic: +25% month-over-month</li>
+                    <li>New content published: 8 articles/month</li>
+                    <li>New backlinks: 10 referring domains</li>
+                    <li>Keywords in top 10: +15 keywords/month</li>
+                    <li>Organic conversions: 50 trial signups</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h4>Quarterly Goals</h4>
+                <ul>
+                    <li>Q1: Establish 2 content clusters, 5K traffic</li>
+                    <li>Q2: Complete all clusters, 10K traffic, DA 25+</li>
+                    <li>Q3: 20K traffic, 100+ keywords ranking</li>
+                    <li>Q4: 40K traffic, 200+ organic conversions/mo</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="projectionChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Implementation Timeline -->
+    <section class="content-section">
+        <h2 class="section-title">Implementation Timeline</h2>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="timeline-phase">Phase 1</span>
+                <div class="timeline-content">
+                    <div class="timeline-title">Foundation & Quick Wins (Weeks 1-4)</div>
+                    <ul class="timeline-tasks">
+                        <li>Set up Google Search Console and Analytics</li>
+                        <li>Configure XML sitemap and robots.txt</li>
+                        <li>Implement basic schema markup (Organization, Website)</li>
+                        <li>Publish Pet Health Monitoring pillar page</li>
+                        <li>Publish 4 supporting cluster articles</li>
+                        <li>Begin guest post outreach (5 pitches)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <span class="timeline-phase">Phase 2</span>
+                <div class="timeline-content">
+                    <div class="timeline-title">Content Execution (Weeks 5-8)</div>
+                    <ul class="timeline-tasks">
+                        <li>Publish Smart Pet Technology pillar page</li>
+                        <li>Publish 8 cluster articles across both clusters</li>
+                        <li>Implement FAQ schema on all content</li>
+                        <li>Internal linking optimization</li>
+                        <li>Secure first 5 guest post placements</li>
+                        <li>Create "State of Pet Health" linkable asset</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <span class="timeline-phase">Phase 3</span>
+                <div class="timeline-content">
+                    <div class="timeline-title">Scale & Optimize (Weeks 9-12)</div>
+                    <ul class="timeline-tasks">
+                        <li>Publish Pet Telehealth pillar page + cluster</li>
+                        <li>Complete Pet Health Signs cluster</li>
+                        <li>Analyze top-performing content, update underperformers</li>
+                        <li>Scale link building to 15 new domains/month</li>
+                        <li>A/B test title tags for CTR optimization</li>
+                        <li>Target featured snippets on high-ranking content</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p class="footer-brand">Generated by StratArts SEO Content Planner v1.0.0</p>
+            <p class="footer-disclaimer">This SEO strategy provides a framework for organic growth. Monitor rankings and adjust based on algorithm updates and competitor movements. Context Signature: seo-content-planner-v1.0.0</p>
+            <p style="color: #444; font-size: 0.75rem; margin-top: 1rem;">StratArts Business Strategy Skills Library</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Keyword Distribution Chart
+        const keywordCtx = document.getElementById('keywordChart');
+        if (keywordCtx) {
+            new Chart(keywordCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Pet Health Monitoring', 'Smart Pet Tech', 'Pet Telehealth', 'Pet Health Signs'],
+                    datasets: [{
+                        label: 'Monthly Search Volume',
+                        data: [8500, 6200, 4800, 12000],
+                        backgroundColor: '#10b981',
+                        borderRadius: 4
+                    }, {
+                        label: 'Avg Keyword Difficulty',
+                        data: [28, 38, 25, 22],
+                        backgroundColor: '#059669',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Keyword Cluster Analysis',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: {
+                            labels: { color: '#ccc' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Content Gap Chart
+        const gapCtx = document.getElementById('gapChart');
+        if (gapCtx) {
+            new Chart(gapCtx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Content Opportunities',
+                        data: [
+                            { x: 2100, y: 25 },
+                            { x: 890, y: 18 },
+                            { x: 3400, y: 42 },
+                            { x: 1200, y: 22 },
+                            { x: 1600, y: 28 },
+                            { x: 720, y: 15 }
+                        ],
+                        backgroundColor: '#10b981',
+                        pointRadius: 12,
+                        pointHoverRadius: 14
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Search Volume',
+                                color: '#ccc'
+                            },
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Keyword Difficulty',
+                                color: '#ccc'
+                            },
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' },
+                            max: 60
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Content Gap Opportunity Matrix (Lower Right = Best)',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Content Production Chart
+        const productionCtx = document.getElementById('productionChart');
+        if (productionCtx) {
+            new Chart(productionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Week 1-2', 'Week 3-4', 'Week 5-6', 'Week 7-8', 'Week 9-10', 'Week 11-12'],
+                    datasets: [{
+                        label: 'Pillar Content',
+                        data: [1, 0, 1, 0, 1, 0],
+                        backgroundColor: '#10b981',
+                        borderRadius: 4
+                    }, {
+                        label: 'Cluster Content',
+                        data: [1, 3, 1, 3, 4, 4],
+                        backgroundColor: '#059669',
+                        borderRadius: 4
+                    }, {
+                        label: 'Updates',
+                        data: [0, 0, 0, 1, 1, 1],
+                        backgroundColor: '#047857',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            stacked: true,
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            stacked: true,
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Content Production Schedule',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: {
+                            labels: { color: '#ccc' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Technical SEO Chart
+        const technicalCtx = document.getElementById('technicalChart');
+        if (technicalCtx) {
+            new Chart(technicalCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Passing', 'Warnings', 'Errors'],
+                    datasets: [{
+                        data: [60, 30, 10],
+                        backgroundColor: [
+                            '#10b981',
+                            '#f59e0b',
+                            '#ef4444'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Technical SEO Health Score',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: {
+                            position: 'right',
+                            labels: { color: '#ccc', padding: 15 }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Competitor Comparison Chart
+        const competitorCtx = document.getElementById('competitorChart');
+        if (competitorCtx) {
+            new Chart(competitorCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Domain Authority', 'Backlinks', 'Keywords', 'Traffic', 'Content Volume', 'Page Speed'],
+                    datasets: [{
+                        label: 'PetPulse (Target)',
+                        data: [35, 40, 50, 40, 45, 80],
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        borderColor: '#10b981',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#10b981'
+                    }, {
+                        label: 'Fi Collar (Leader)',
+                        data: [52, 65, 60, 55, 70, 60],
+                        backgroundColor: 'rgba(107, 114, 128, 0.2)',
+                        borderColor: '#6b7280',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#6b7280'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { color: '#888', stepSize: 20 },
+                            grid: { color: '#2a2a2a' },
+                            pointLabels: { color: '#ccc', font: { size: 11 } }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'SEO Competitive Gap Analysis (6-Month Target)',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: {
+                            labels: { color: '#ccc' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Projection Chart
+        const projectionCtx = document.getElementById('projectionChart');
+        if (projectionCtx) {
+            new Chart(projectionCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                    datasets: [{
+                        label: 'Organic Traffic',
+                        data: [500, 1500, 3500, 6000, 8500, 10000],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        yAxisID: 'y'
+                    }, {
+                        label: 'Keywords Top 10',
+                        data: [5, 15, 30, 50, 70, 100],
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'transparent',
+                        tension: 0.4,
+                        yAxisID: 'y1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            beginAtZero: true,
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' },
+                            title: {
+                                display: true,
+                                text: 'Organic Traffic',
+                                color: '#ccc'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            beginAtZero: true,
+                            ticks: { color: '#888' },
+                            grid: { drawOnChartArea: false },
+                            title: {
+                                display: true,
+                                text: 'Keywords Ranked',
+                                color: '#ccc'
+                            }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '6-Month SEO Growth Projection',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: {
+                            labels: { color: '#ccc' }
+                        }
+                    }
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>

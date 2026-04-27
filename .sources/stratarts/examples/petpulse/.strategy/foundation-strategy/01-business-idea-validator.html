@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Idea Validation Report | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+
+           Color Palette:
+           - Primary: #10b981 (emerald)
+           - Primary Dark: #059669
+           - Background: #0a0a0a
+           - Container: #1a1a1a
+           - Text Primary: #f5f5f5
+           - Text Secondary: #a3a3a3
+           - Text Muted: #d4d4d4
+           - Border: rgba(16, 185, 129, 0.2)
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        /* === RESET & BASE === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #0a0a0a;
+        }
+
+        /* === HEADER (Edge-to-Edge with Centered Content) === */
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .header-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* === SCORE BANNER === */
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-main {
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .score-interpretation {
+            border-left: 3px solid #10b981;
+            padding-left: 2rem;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #f5f5f5;
+        }
+
+        .interpretation-text {
+            color: #d4d4d4;
+            line-height: 1.7;
+        }
+
+        .verdict-badge {
+            background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(237, 137, 54, 0.3);
+        }
+
+        /* === CONTENT SECTIONS === */
+        .content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 4rem;
+            background: #0a0a0a;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section:last-child {
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: #d4d4d4;
+            max-width: 800px;
+        }
+
+        /* === CHART LAYOUTS === */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-subtitle {
+            font-size: 0.9rem;
+            color: #a3a3a3;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-wrapper.tall {
+            height: 450px;
+        }
+
+        /* === INSIGHTS PANEL === */
+        .insights-panel {
+            background: #0a0a0a;
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .insight-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .insight-list {
+            list-style: none;
+        }
+
+        .insight-list li {
+            padding: 0.6rem 0;
+            color: #d4d4d4;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .insight-list li:last-child {
+            border-bottom: none;
+        }
+
+        .insight-list li strong {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        /* === METRIC CARDS (3-column) === */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+
+        .metric-card .label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .metric-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #10b981;
+            line-height: 1.2;
+        }
+
+        .metric-card .range {
+            font-size: 0.9rem;
+            color: #d4d4d4;
+            margin-top: 0.5rem;
+        }
+
+        .metric-card .description {
+            font-size: 0.85rem;
+            color: #a3a3a3;
+            margin-top: 0.75rem;
+            line-height: 1.5;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content p {
+            margin: 0.3rem 0;
+        }
+
+        .footer-content strong {
+            color: #10b981;
+        }
+
+        /* === PRINT STYLES === */
+        @media print {
+            body {
+                background: white;
+                color: #000000;
+            }
+
+            .container {
+                background: white;
+            }
+
+            header {
+                background: white;
+            }
+
+            .header-content {
+                background: white;
+                color: #000000;
+                border: 2px solid #10b981;
+            }
+
+            .header-content::before {
+                display: none;
+            }
+
+            .kicker {
+                color: #666666;
+            }
+
+            h1 {
+                color: #000000;
+            }
+
+            .subtitle {
+                color: #333333;
+            }
+
+            .meta-item {
+                color: #666666;
+            }
+
+            .score-banner {
+                background: white;
+            }
+
+            .score-container {
+                background: white;
+                border: 2px solid #10b981;
+            }
+
+            .score-number {
+                background: none;
+                -webkit-text-fill-color: #10b981;
+                color: #10b981;
+            }
+
+            .score-label {
+                color: #666666;
+            }
+
+            .score-interpretation {
+                border-left: 3px solid #10b981;
+            }
+
+            .interpretation-title {
+                color: #000000;
+            }
+
+            .interpretation-text {
+                color: #333333;
+            }
+
+            .verdict-badge {
+                border: 2px solid #10b981;
+                color: #000000;
+            }
+
+            .content {
+                background: white;
+            }
+
+            .section-title {
+                color: #000000;
+            }
+
+            .section-description {
+                color: #333333;
+            }
+
+            .chart-card, .metric-card, .feature-card, .small-card {
+                background: white;
+                border: 2px solid #10b981;
+                page-break-inside: avoid;
+            }
+
+            .chart-title, .metric-card .label, .feature-name, .small-name {
+                color: #000000;
+                font-weight: 900;
+            }
+
+            .chart-subtitle {
+                color: #666666;
+            }
+
+            .insights-panel {
+                background: #f5f5f5;
+                border: 2px solid #10b981;
+            }
+
+            .insight-title {
+                color: #10b981;
+                font-weight: 900;
+            }
+
+            .insight-list li {
+                color: #333333;
+                border-bottom: 1px solid #cccccc;
+            }
+
+            .insight-list li strong {
+                color: #000000;
+                font-weight: 900;
+            }
+
+            footer {
+                background: white;
+            }
+
+            .footer-content {
+                background: white;
+                color: #666666;
+                border-top: 2px solid #10b981;
+            }
+
+            .footer-content strong {
+                color: #10b981;
+                font-weight: 900;
+            }
+
+            canvas {
+                max-width: 100%;
+                height: auto !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 1400px) {
+            .small-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .dimension-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .dimension-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .small-grid { grid-template-columns: 1fr; }
+            .dimension-grid { grid-template-columns: 1fr; }
+            .score-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .score-interpretation {
+                border-left: none;
+                border-top: 3px solid #10b981;
+                padding-left: 0;
+                padding-top: 1.5rem;
+            }
+            .header-content { padding: 2rem; }
+            .score-container { padding: 2rem; }
+            .content { padding: 2rem 2rem; }
+            .footer-content { padding: 2rem; }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           SKILL-SPECIFIC CSS - business-idea-validator
+           ═══════════════════════════════════════════════════════════════════════════ */
+        /* Dimension Cards (5-column grid for validation dimensions) */
+        .dimension-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .dimension-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.25rem;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .dimension-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+
+        .dimension-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .dimension-name {
+            font-weight: 700;
+            color: #f5f5f5;
+            font-size: 0.95rem;
+        }
+
+        .dimension-score {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .dimension-description {
+            font-size: 0.85rem;
+            color: #d4d4d4;
+            line-height: 1.5;
+        }
+
+        .dimension-weight {
+            font-size: 0.75rem;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* Verdict Badge Colors */
+        .verdict-badge.strong-go {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .verdict-badge.conditional-go {
+            background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+            box-shadow: 0 4px 15px rgba(237, 137, 54, 0.3);
+        }
+
+        .verdict-badge.pivot-required {
+            background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
+            box-shadow: 0 4px 15px rgba(245, 101, 101, 0.3);
+        }
+
+        .verdict-badge.no-go {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+            box-shadow: 0 4px 15px rgba(229, 62, 62, 0.3);
+        }
+
+        /* Print */
+        @media print {
+            .dimension-card {
+                background: white;
+                border: 2px solid #10b981;
+                page-break-inside: avoid;
+            }
+            .dimension-name {
+                color: #000000;
+                font-weight: 900;
+            }
+            .dimension-score {
+                color: #10b981;
+                font-weight: 900;
+            }
+            .dimension-description {
+                color: #333333;
+            }
+            .dimension-weight {
+                color: #666666;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ════════════════════════════════════════════════════════════════════════
+             HEADER
+             ════════════════════════════════════════════════════════════════════════ -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">StratArts Business Analysis</div>
+                <h1>Business Idea Validation Report</h1>
+                <div class="subtitle">PetPulse - Smart Pet Health Monitoring Platform</div>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span>📅</span>
+                        <span>Generated: December 18, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>📊</span>
+                        <span>Analysis Type: Foundation Strategy</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🎯</span>
+                        <span>Version 1.0.0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ════════════════════════════════════════════════════════════════════════
+             SCORE BANNER
+             ════════════════════════════════════════════════════════════════════════ -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">7.8</div>
+                    <div class="score-label">Composite Score</div>
+                </div>
+
+                <div class="score-interpretation">
+                    <div class="interpretation-title">What This Score Means</div>
+                    <div class="interpretation-text">
+                        PetPulse scores in the Conditional Go range, indicating a promising opportunity that requires validation of key assumptions before full commitment. Strong problem-solution fit and market opportunity are offset by moderate competitive moats and hardware execution complexity. Recommend software-first MVP approach to de-risk before hardware investment.
+                    </div>
+                </div>
+
+                <div class="verdict-badge conditional-go">
+                    ⚠️ CONDITIONAL GO
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════════════
+             MAIN CONTENT
+             ════════════════════════════════════════════════════════════════════════ -->
+        <div class="content">
+            <!-- Section 1: Five Core Validation Dimensions -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Five Core Validation Dimensions</h2>
+                    <p class="section-description">
+                        Each business idea is evaluated across five critical dimensions, weighted by importance.
+                        These scores combine to create the composite validation score shown above.
+                    </p>
+                </div>
+
+                <div class="dimension-grid">
+                    <div class="dimension-card">
+                        <div class="dimension-header">
+                            <div class="dimension-name">Problem-Solution Fit</div>
+                            <div class="dimension-score">8.0</div>
+                        </div>
+                        <div class="dimension-description">
+                            Strong alignment between pet health anxiety and continuous monitoring solution. Clear value proposition with measurable ROI (early detection vs. emergency costs).
+                        </div>
+                        <div class="dimension-weight">Weight: 25% of total score</div>
+                    </div>
+
+                    <div class="dimension-card">
+                        <div class="dimension-header">
+                            <div class="dimension-name">Market Opportunity</div>
+                            <div class="dimension-score">8.0</div>
+                        </div>
+                        <div class="dimension-description">
+                            $10.4B TAM in pet tech/telehealth growing at 14.3% CAGR. Strong tailwinds from pet humanization trend with 78% treating pets as family.
+                        </div>
+                        <div class="dimension-weight">Weight: 20% of total score</div>
+                    </div>
+
+                    <div class="dimension-card">
+                        <div class="dimension-header">
+                            <div class="dimension-name">Competitive Advantage</div>
+                            <div class="dimension-score">6.0</div>
+                        </div>
+                        <div class="dimension-description">
+                            Clear differentiation today (monitoring + telehealth integration), but moats are buildable by well-funded competitors like Mars (Whistle) or Chewy.
+                        </div>
+                        <div class="dimension-weight">Weight: 20% of total score</div>
+                    </div>
+
+                    <div class="dimension-card">
+                        <div class="dimension-header">
+                            <div class="dimension-name">Founder-Market Fit</div>
+                            <div class="dimension-score">8.0</div>
+                        </div>
+                        <div class="dimension-description">
+                            Strong technical background in IoT/wearables combined with healthcare operations experience. Genuine passion as pet owner building for pet owners.
+                        </div>
+                        <div class="dimension-weight">Weight: 20% of total score</div>
+                    </div>
+
+                    <div class="dimension-card">
+                        <div class="dimension-header">
+                            <div class="dimension-name">Execution Feasibility</div>
+                            <div class="dimension-score">7.0</div>
+                        </div>
+                        <div class="dimension-description">
+                            Feasible but challenging. Hardware manufacturing adds complexity. Software-first approach recommended to validate demand before major hardware investment.
+                        </div>
+                        <div class="dimension-weight">Weight: 15% of total score</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Visual Analysis -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Visual Analysis</h2>
+                    <p class="section-description">
+                        Data visualizations revealing patterns, positioning, and comparative strengths
+                        across key business metrics.
+                    </p>
+                </div>
+
+                <div class="chart-grid">
+                    <!-- Chart 1: Weighted Dimension Breakdown (Bar Chart) -->
+                    <div class="chart-card">
+                        <div class="chart-title">Weighted Dimension Breakdown</div>
+                        <div class="chart-subtitle">
+                            Each dimension contributes to the final score based on its strategic importance
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="dimensionChart"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Key Observations</div>
+                            <ul class="insight-list">
+                                <li><strong>Highest:</strong> Problem-Solution Fit & Market Opportunity at 8.0/10 - Core strengths to leverage</li>
+                                <li><strong>Lowest:</strong> Competitive Advantage at 6.0/10 - Requires faster execution to build moats</li>
+                                <li><strong>Weighted Impact:</strong> Top two dimensions account for 45% of total score</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Chart 2: Score Distribution (Gauge Chart) -->
+                    <div class="chart-card">
+                        <div class="chart-title">Score Distribution</div>
+                        <div class="chart-subtitle">
+                            Visual representation of overall validation score against decision thresholds
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="gaugeChart"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Score Interpretation Guide</div>
+                            <ul class="insight-list">
+                                <li><strong>8.0-10.0:</strong> Strong Go - Pursue aggressively with confidence</li>
+                                <li><strong>6.0-7.9:</strong> Conditional Go - Validate assumptions first</li>
+                                <li><strong>4.0-5.9:</strong> Pivot Required - Fundamental changes needed</li>
+                                <li><strong>Below 4.0:</strong> No Go - Consider alternative opportunities</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Chart 3: Risk vs. Opportunity Positioning (Scatter Chart) -->
+                    <div class="chart-card">
+                        <div class="chart-title">Risk vs. Opportunity Positioning</div>
+                        <div class="chart-subtitle">
+                            Strategic positioning showing the relationship between market opportunity and execution risk
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="scatterChart"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Strategic Position</div>
+                            <ul class="insight-list">
+                                <li><strong>Position:</strong> Upper-Right Quadrant (High Opportunity, Medium-High Risk)</li>
+                                <li><strong>Opportunity Level:</strong> 8.0/10 - Large growing market with strong tailwinds</li>
+                                <li><strong>Risk Level:</strong> 6.5/10 - Hardware complexity and competitive threats</li>
+                                <li><strong>Recommendation:</strong> Proceed with software-first de-risking strategy</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Chart 4: Competitive Advantage Analysis (Radar Chart) -->
+                    <div class="chart-card">
+                        <div class="chart-title">Competitive Advantage Analysis</div>
+                        <div class="chart-subtitle">
+                            Multi-dimensional assessment of sustainable competitive positioning across key factors
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="radarChart"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Advantage Breakdown</div>
+                            <ul class="insight-list">
+                                <li><strong>Differentiation:</strong> 7/10 - Unique integration of monitoring + telehealth</li>
+                                <li><strong>Defensibility:</strong> 5/10 - Features can be replicated by competitors</li>
+                                <li><strong>Unfair Advantage:</strong> 6/10 - Data moat potential as algorithms improve</li>
+                                <li><strong>Time to Market:</strong> 6/10 - 12-18 months for full product</li>
+                                <li><strong>Brand Recognition:</strong> 4/10 - No established brand yet</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════════════
+             FOOTER
+             ════════════════════════════════════════════════════════════════════════ -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | business-idea-validator-v1.0.0</p>
+                <p style="margin-top: 5px;">Context Signature: business-idea-validator-v1.0.0 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // ════════════════════════════════════════════════════════════════════════════
+        // CHART.JS GLOBAL CONFIGURATION
+        // ════════════════════════════════════════════════════════════════════════════
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        // Standard tooltip configuration
+        const tooltipConfig = {
+            backgroundColor: '#1a1a1a',
+            titleColor: '#f5f5f5',
+            bodyColor: '#d4d4d4',
+            borderColor: '#10b981',
+            borderWidth: 1
+        };
+
+        // Color palette
+        const COLORS = {
+            primary: '#10b981',
+            primaryLight: '#14b8a6',
+            primaryDark: '#059669',
+            primaryDarker: '#047857',
+            primaryDarkest: '#065f46',
+            gray: '#a3a3a3',
+            backgrounds: [
+                'rgba(16, 185, 129, 0.4)',
+                'rgba(16, 185, 129, 0.6)',
+                'rgba(16, 185, 129, 0.8)',
+                'rgba(16, 185, 129, 0.9)',
+                'rgba(20, 184, 166, 0.8)',
+                'rgba(5, 150, 105, 0.8)'
+            ],
+            borders: ['#10b981', '#14b8a6', '#059669', '#047857', '#065f46']
+        };
+
+        // ════════════════════════════════════════════════════════════════════════════
+        // SKILL-SPECIFIC CHART CODE - business-idea-validator
+        // ════════════════════════════════════════════════════════════════════════════
+
+        // Data object (populated from analysis)
+        const data = {
+            dimensions: {
+                labels: ['Problem-Solution\nFit', 'Market\nOpportunity', 'Competitive\nAdvantage', 'Founder-Market\nFit', 'Execution\nFeasibility'],
+                values: [8.0, 8.0, 6.0, 8.0, 7.0]
+            },
+            competitive: {
+                labels: ['Differentiation', 'Defensibility', 'Unfair Advantage', 'Time to Market', 'Brand Recognition'],
+                values: [7, 5, 6, 6, 4]
+            },
+            composite: 7.8,
+            riskOpportunity: {
+                x: 6.5,
+                y: 8.0
+            }
+        };
+
+        // Chart 1: Dimension Scores (Horizontal Bar)
+        const dimensionCtx = document.getElementById('dimensionChart').getContext('2d');
+        new Chart(dimensionCtx, {
+            type: 'bar',
+            data: {
+                labels: data.dimensions.labels,
+                datasets: [{
+                    label: 'Score',
+                    data: data.dimensions.values,
+                    backgroundColor: '#10b981',
+                    borderRadius: 6,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 10,
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        ticks: { color: '#a3a3a3', font: { size: 12 } }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { color: '#f5f5f5', font: { size: 12, weight: '600' } }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        ...tooltipConfig,
+                        callbacks: {
+                            label: function(context) {
+                                return 'Score: ' + context.parsed.x.toFixed(1) + '/10';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Composite Score Gauge (Half Doughnut)
+        const gaugeCtx = document.getElementById('gaugeChart').getContext('2d');
+        new Chart(gaugeCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Score', 'Remaining'],
+                datasets: [{
+                    data: [data.composite, 10 - data.composite],
+                    backgroundColor: [
+                        data.composite >= 8 ? '#10b981' :
+                        data.composite >= 6 ? '#f6ad55' :
+                        data.composite >= 4 ? '#fc8181' :
+                        '#e53e3e',
+                        'rgba(255, 255, 255, 0.1)'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                circumference: 180,
+                rotation: 270,
+                cutout: '75%',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false }
+                }
+            },
+            plugins: [{
+                id: 'gaugeText',
+                afterDatasetsDraw(chart) {
+                    const { ctx, chartArea: { width, height } } = chart;
+                    ctx.save();
+                    ctx.font = 'bold 56px -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif';
+                    ctx.fillStyle = '#10b981';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(data.composite.toFixed(1) + '/10', width / 2, height / 2 + 20);
+
+                    ctx.font = 'bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif';
+                    ctx.fillStyle = '#a3a3a3';
+                    const verdict = data.composite >= 8 ? 'STRONG GO' :
+                                   data.composite >= 6 ? 'CONDITIONAL GO' :
+                                   data.composite >= 4 ? 'PIVOT REQUIRED' : 'NO GO';
+                    ctx.fillText(verdict, width / 2, height / 2 + 60);
+                    ctx.restore();
+                }
+            }]
+        });
+
+        // Chart 3: Risk vs. Opportunity Scatter
+        const scatterCtx = document.getElementById('scatterChart').getContext('2d');
+        new Chart(scatterCtx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'PetPulse',
+                    data: [{ x: data.riskOpportunity.x, y: data.riskOpportunity.y }],
+                    backgroundColor: '#10b981',
+                    borderColor: '#14b8a6',
+                    borderWidth: 3,
+                    pointRadius: 16,
+                    pointHoverRadius: 20
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Risk Level →', color: '#a3a3a3', font: { size: 12, weight: '600' } },
+                        min: 0,
+                        max: 10,
+                        ticks: { color: '#a3a3a3', font: { size: 11 } },
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' }
+                    },
+                    y: {
+                        title: { display: true, text: 'Opportunity Level →', color: '#a3a3a3', font: { size: 12, weight: '600' } },
+                        min: 0,
+                        max: 10,
+                        ticks: { color: '#a3a3a3', font: { size: 11 } },
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        ...tooltipConfig,
+                        callbacks: {
+                            label: function(context) {
+                                return `Risk: ${context.parsed.x.toFixed(1)}, Opportunity: ${context.parsed.y.toFixed(1)}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 4: Competitive Advantage Radar
+        const radarCtx = document.getElementById('radarChart').getContext('2d');
+        new Chart(radarCtx, {
+            type: 'radar',
+            data: {
+                labels: data.competitive.labels,
+                datasets: [{
+                    label: 'Score',
+                    data: data.competitive.values,
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                    borderColor: '#10b981',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#10b981',
+                    pointBorderColor: '#1a1a1a',
+                    pointRadius: 6,
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: { color: '#a3a3a3', stepSize: 2, font: { size: 11 } },
+                        grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                        pointLabels: { color: '#f5f5f5', font: { size: 12, weight: '600' } }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        // Print-friendly chart colors
+        window.addEventListener('beforeprint', function() {
+            Chart.defaults.color = '#000000';
+        });
+
+        window.addEventListener('afterprint', function() {
+            Chart.defaults.color = '#a3a3a3';
+        });
+    </script>
+</body>
+</html>

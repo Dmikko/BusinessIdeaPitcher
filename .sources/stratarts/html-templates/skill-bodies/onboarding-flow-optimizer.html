@@ -1,0 +1,788 @@
+<!-- ═══ SKILL CSS START ═══ -->
+<style>
+    /* Onboarding Flow Optimizer Specific Styles */
+    .aha-moment-container {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
+        border: 2px solid rgba(16, 185, 129, 0.3);
+        border-radius: 20px;
+        padding: 2rem;
+        text-align: center;
+        margin: 2rem 0;
+    }
+
+    .aha-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .aha-event {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #10b981;
+        margin-bottom: 0.5rem;
+    }
+
+    .aha-description {
+        color: #888;
+        font-size: 0.95rem;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .activation-funnel {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        margin: 2rem 0;
+    }
+
+    .funnel-step {
+        display: flex;
+        align-items: center;
+        background: #1a1a1a;
+        border: 1px solid #2a2a2a;
+        padding: 1rem 1.5rem;
+        position: relative;
+    }
+
+    .funnel-step:first-child {
+        border-radius: 12px 12px 0 0;
+    }
+
+    .funnel-step:last-child {
+        border-radius: 0 0 12px 12px;
+    }
+
+    .step-bar {
+        height: 8px;
+        background: linear-gradient(90deg, #10b981, #059669);
+        border-radius: 4px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+    }
+
+    .step-name {
+        flex: 1;
+        font-weight: 500;
+        color: #ffffff;
+        font-size: 0.95rem;
+    }
+
+    .step-users {
+        width: 100px;
+        text-align: center;
+        font-weight: 600;
+        color: #10b981;
+    }
+
+    .step-dropoff {
+        width: 80px;
+        text-align: center;
+        font-size: 0.85rem;
+        color: #ef4444;
+    }
+
+    .checklist-container {
+        background: #1a1a1a;
+        border-radius: 16px;
+        padding: 1.5rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .checklist-progress {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .progress-bar-container {
+        flex: 1;
+        height: 8px;
+        background: #2a2a2a;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .progress-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #10b981, #059669);
+        border-radius: 4px;
+        transition: width 0.3s ease;
+    }
+
+    .progress-text {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #10b981;
+    }
+
+    .checklist-step {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .checklist-step:last-child {
+        border-bottom: none;
+    }
+
+    .step-number {
+        width: 32px;
+        height: 32px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+    }
+
+    .step-content {
+        flex: 1;
+    }
+
+    .step-title {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .step-reason {
+        color: #888;
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .step-time {
+        color: #10b981;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .tour-step-card {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .tour-step-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .tour-step-number {
+        width: 28px;
+        height: 28px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 0.8rem;
+    }
+
+    .tour-step-title {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 0.95rem;
+    }
+
+    .tour-highlight {
+        background: #0a0a0a;
+        border-radius: 8px;
+        padding: 0.75rem;
+        margin-bottom: 0.75rem;
+        border-left: 3px solid #10b981;
+    }
+
+    .highlight-message {
+        color: #ccc;
+        font-size: 0.85rem;
+        font-style: italic;
+    }
+
+    .tour-action {
+        color: #888;
+        font-size: 0.8rem;
+    }
+
+    .tour-action span {
+        color: #10b981;
+        font-weight: 500;
+    }
+
+    .content-type-card {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+        text-align: center;
+    }
+
+    .content-icon {
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .content-type-name {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .content-description {
+        color: #888;
+        font-size: 0.8rem;
+    }
+
+    .path-card {
+        background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+        border-radius: 16px;
+        padding: 1.5rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .path-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+
+    .path-name {
+        font-weight: 700;
+        color: #ffffff;
+        font-size: 1.125rem;
+    }
+
+    .path-goal {
+        color: #10b981;
+        font-size: 0.85rem;
+    }
+
+    .path-checklist {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .path-step {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: #0a0a0a;
+        border-radius: 8px;
+        padding: 0.75rem;
+    }
+
+    .path-step-num {
+        width: 24px;
+        height: 24px;
+        background: rgba(16, 185, 129, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #10b981;
+        font-weight: 600;
+        font-size: 0.75rem;
+    }
+
+    .path-step-text {
+        color: #ccc;
+        font-size: 0.85rem;
+    }
+
+    .email-timeline {
+        position: relative;
+        padding-left: 2rem;
+        margin: 1.5rem 0;
+    }
+
+    .email-timeline::before {
+        content: '';
+        position: absolute;
+        left: 8px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, #10b981, #059669);
+    }
+
+    .email-item {
+        position: relative;
+        padding-bottom: 1.5rem;
+    }
+
+    .email-item:last-child {
+        padding-bottom: 0;
+    }
+
+    .email-dot {
+        position: absolute;
+        left: -24px;
+        top: 4px;
+        width: 16px;
+        height: 16px;
+        background: #10b981;
+        border-radius: 50%;
+        border: 3px solid #0a0a0a;
+    }
+
+    .email-day {
+        font-weight: 700;
+        color: #10b981;
+        font-size: 0.85rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .email-subject {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .email-body {
+        color: #888;
+        font-size: 0.85rem;
+    }
+
+    .ab-test-card {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .ab-test-header {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .ab-test-metric {
+        color: #10b981;
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .ab-variants {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+    }
+
+    .variant {
+        background: #0a0a0a;
+        border-radius: 8px;
+        padding: 0.75rem;
+    }
+
+    .variant-label {
+        font-size: 0.7rem;
+        color: #888;
+        text-transform: uppercase;
+        margin-bottom: 0.25rem;
+    }
+
+    .variant-description {
+        color: #ccc;
+        font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+        .funnel-step {
+            flex-direction: column;
+            gap: 0.5rem;
+            text-align: center;
+        }
+
+        .step-name,
+        .step-users,
+        .step-dropoff {
+            width: auto;
+        }
+
+        .ab-variants {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<div class="report-container">
+    <!-- Header Section -->
+    <header class="report-header">
+        <div class="header-content">
+            <div class="header-badge">ONBOARDING OPTIMIZATION</div>
+            <h1 class="report-title">{{COMPANY_NAME}}</h1>
+            <p class="report-subtitle">{{ONBOARDING_MISSION}}</p>
+        </div>
+        <div class="header-meta">
+            <div class="meta-item">
+                <span class="meta-label">Generated</span>
+                <span class="meta-value">{{GENERATION_DATE}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Activation Rate</span>
+                <span class="meta-value">{{ACTIVATION_RATE}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Time to Activate</span>
+                <span class="meta-value">{{TIME_TO_ACTIVATE}}</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Aha Moment Section -->
+    <section class="content-section">
+        <h2 class="section-title">Activation Definition</h2>
+
+        <div class="aha-moment-container">
+            <div class="aha-icon">💡</div>
+            <div class="aha-event">{{AHA_MOMENT}}</div>
+            <div class="aha-description">{{AHA_DESCRIPTION}}</div>
+        </div>
+
+        <div class="grid-4">
+            <div class="metric-card">
+                <div class="metric-label">Current Activation</div>
+                <div class="metric-value">{{ACTIVATION_CURRENT}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Target Activation</div>
+                <div class="metric-value">{{ACTIVATION_TARGET}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">D7 Retention</div>
+                <div class="metric-value">{{D7_RETENTION}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Checklist Steps</div>
+                <div class="metric-value">{{CHECKLIST_COUNT}}</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activation Funnel Section -->
+    <section class="content-section">
+        <h2 class="section-title">Activation Funnel Analysis</h2>
+
+        <p class="section-description">{{FUNNEL_OVERVIEW}}</p>
+
+        <div class="activation-funnel">
+            {{FUNNEL_STEPS}}
+        </div>
+
+        <!-- Funnel Chart -->
+        <div class="chart-container">
+            <canvas id="funnelChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Onboarding Checklist Section -->
+    <section class="content-section">
+        <h2 class="section-title">Onboarding Checklist</h2>
+
+        <div class="checklist-container">
+            <div class="checklist-progress">
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" style="width: 60%;"></div>
+                </div>
+                <div class="progress-text">3 of 5 complete</div>
+            </div>
+
+            {{CHECKLIST_STEPS}}
+        </div>
+    </section>
+
+    <!-- Product Tour Section -->
+    <section class="content-section">
+        <h2 class="section-title">Product Tour Design</h2>
+
+        <p class="section-description">{{TOUR_OVERVIEW}}</p>
+
+        <div class="grid-3">
+            {{TOUR_STEPS}}
+        </div>
+    </section>
+
+    <!-- Educational Content Section -->
+    <section class="content-section">
+        <h2 class="section-title">Educational Content</h2>
+
+        <div class="grid-3">
+            {{CONTENT_CARDS}}
+        </div>
+    </section>
+
+    <!-- Personalized Paths Section -->
+    <section class="content-section">
+        <h2 class="section-title">Personalized Onboarding Paths</h2>
+
+        <p class="section-description">{{PATHS_OVERVIEW}}</p>
+
+        <div class="grid-2">
+            {{PATH_CARDS}}
+        </div>
+    </section>
+
+    <!-- Email Sequence Section -->
+    <section class="content-section">
+        <h2 class="section-title">Email Onboarding Sequence</h2>
+
+        <div class="grid-2">
+            <div class="email-timeline">
+                {{EMAIL_ITEMS}}
+            </div>
+            <div class="chart-container" style="min-height: 300px;">
+                <canvas id="emailChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- A/B Testing Section -->
+    <section class="content-section">
+        <h2 class="section-title">A/B Testing Plan</h2>
+
+        <div class="grid-3">
+            {{AB_TEST_CARDS}}
+        </div>
+    </section>
+
+    <!-- Time Distribution Section -->
+    <section class="content-section">
+        <h2 class="section-title">Time-to-Activate Distribution</h2>
+
+        <div class="grid-2">
+            <div class="chart-container">
+                <canvas id="timeChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="retentionChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Roadmap -->
+    <section class="content-section">
+        <h2 class="section-title">90-Day Implementation Roadmap</h2>
+
+        <div class="timeline">
+            {{IMPLEMENTATION_TIMELINE}}
+        </div>
+    </section>
+
+    <!-- Report Footer -->
+    <footer class="report-footer">
+        <div class="footer-content">
+            <p class="footer-brand">Generated by StratArts Onboarding Flow Optimizer</p>
+            <p class="footer-disclaimer">This onboarding strategy provides a framework for improving activation and early retention. Continuously A/B test and iterate based on user behavior data.</p>
+        </div>
+    </footer>
+</div>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Funnel Chart
+    const funnelCtx = document.getElementById('funnelChart');
+    if (funnelCtx) {
+        new Chart(funnelCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Signup', 'Email Verified', 'Profile Complete', 'First Action', 'Activated'],
+                datasets: [{
+                    label: 'Users',
+                    data: [1000, 850, 680, 510, 420],
+                    backgroundColor: function(context) {
+                        const index = context.dataIndex;
+                        const colors = ['#10b981', '#059669', '#047857', '#065f46', '#064e3b'];
+                        return colors[index];
+                    },
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Activation Funnel',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // Time Distribution Chart
+    const timeCtx = document.getElementById('timeChart');
+    if (timeCtx) {
+        new Chart(timeCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['<1 hour', '1-24 hours', '1-7 days', '7+ days'],
+                datasets: [{
+                    data: [25, 35, 30, 10],
+                    backgroundColor: [
+                        '#10b981',
+                        '#059669',
+                        '#047857',
+                        '#6b7280'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Time-to-Activate Distribution',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        position: 'right',
+                        labels: { color: '#ccc', padding: 15 }
+                    }
+                }
+            }
+        });
+    }
+
+    // Retention Chart
+    const retentionCtx = document.getElementById('retentionChart');
+    if (retentionCtx) {
+        new Chart(retentionCtx, {
+            type: 'line',
+            data: {
+                labels: ['D0', 'D1', 'D3', 'D7', 'D14', 'D30'],
+                datasets: [{
+                    label: 'Retention %',
+                    data: [100, 68, 58, 52, 45, 38],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            color: '#888',
+                            callback: function(value) { return value + '%'; }
+                        },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Early Retention Curve',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // Email Performance Chart
+    const emailCtx = document.getElementById('emailChart');
+    if (emailCtx) {
+        new Chart(emailCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Day 0', 'Day 1', 'Day 3', 'Day 5', 'Day 7'],
+                datasets: [{
+                    label: 'Open Rate %',
+                    data: [65, 55, 42, 38, 35],
+                    backgroundColor: '#10b981',
+                    borderRadius: 4
+                }, {
+                    label: 'Click Rate %',
+                    data: [25, 18, 12, 10, 8],
+                    backgroundColor: '#059669',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 80,
+                        ticks: {
+                            color: '#888',
+                            callback: function(value) { return value + '%'; }
+                        },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Email Sequence Performance',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+<!-- ═══ SKILL JS END ═══ -->

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{BUSINESS_NAME}} - Financial Model</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color: #e0e0e0; line-height: 1.6; }
+
+        /* === CANONICAL HEADER === */
+        header { background: #0a0a0a; padding: 0; }
+        .header-content { max-width: 1600px; margin: 0 auto; background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%); padding: 4rem 4rem 3rem 4rem; display: flex; justify-content: space-between; align-items: flex-start; }
+        .header-text h1 { font-size: 2.5rem; font-weight: 700; color: white; margin-bottom: 0.5rem; }
+        .header-text .subtitle { font-size: 1.25rem; color: rgba(255,255,255,0.9); }
+        .header-meta { text-align: right; color: rgba(255,255,255,0.9); }
+        .header-meta .date { font-size: 1rem; margin-bottom: 0.25rem; }
+        .header-meta .version { font-size: 0.875rem; opacity: 0.8; }
+
+        /* === CANONICAL SCORE BANNER === */
+        .score-banner { background: #0a0a0a; padding: 0; }
+        .score-container { display: grid; grid-template-columns: auto 1fr auto; gap: 3rem; align-items: center; max-width: 1600px; margin: 0 auto; background: #1a1a1a; padding: 2rem 4rem; border-bottom: 1px solid #333; }
+        .primary-score { text-align: center; padding-right: 3rem; border-right: 1px solid #333; }
+        .primary-score .score-value { font-size: 4rem; font-weight: 800; color: #10b981; line-height: 1; }
+        .primary-score .score-label { font-size: 0.875rem; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.5rem; }
+        .score-details { display: flex; gap: 3rem; justify-content: center; }
+        .score-item { text-align: center; }
+        .score-item .value { font-size: 1.75rem; font-weight: 700; color: #10b981; }
+        .score-item .label { font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 0.05em; }
+        .verdict-box { background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%); padding: 1.5rem 2rem; border-radius: 12px; text-align: center; }
+        .verdict-box .verdict-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.8); margin-bottom: 0.25rem; }
+        .verdict-box .verdict-text { font-size: 1.25rem; font-weight: 700; color: white; }
+
+        /* === MAIN CONTENT === */
+        main { max-width: 1600px; margin: 0 auto; padding: 3rem 4rem; }
+        section { margin-bottom: 3rem; }
+        section h2 { font-size: 1.5rem; color: #10b981; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid #10b981; }
+        section h3 { font-size: 1.125rem; color: #e0e0e0; margin: 1.5rem 0 1rem 0; }
+
+        .summary-text { background: #1a1a1a; padding: 2rem; border-radius: 12px; border-left: 4px solid #10b981; margin-bottom: 2rem; }
+        .summary-text p { margin-bottom: 1rem; color: #ccc; }
+        .summary-text p:last-child { margin-bottom: 0; }
+
+        /* === DATA TABLES === */
+        .data-table { width: 100%; border-collapse: collapse; background: #1a1a1a; border-radius: 12px; overflow: hidden; margin-bottom: 1.5rem; }
+        .data-table th { background: #0f0f0f; color: #10b981; padding: 1rem; text-align: left; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .data-table th.right, .data-table td.right { text-align: right; }
+        .data-table td { padding: 1rem; border-bottom: 1px solid #333; color: #ccc; }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table .row-label { font-weight: 600; color: #fff; }
+        .data-table .total-row { background: #0f0f0f; }
+        .data-table .total-row td { font-weight: 700; color: #10b981; }
+        .positive { color: #10b981 !important; }
+        .negative { color: #ef4444 !important; }
+
+        /* === METRICS GRID === */
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .metric-card { background: #1a1a1a; padding: 1.5rem; border-radius: 12px; text-align: center; }
+        .metric-card .value { font-size: 2rem; font-weight: 700; color: #10b981; margin-bottom: 0.25rem; }
+        .metric-card .label { font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 0.05em; }
+        .metric-card .sublabel { font-size: 0.7rem; color: #666; margin-top: 0.25rem; }
+
+        /* === UNIT ECONOMICS === */
+        .unit-econ-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .unit-econ-card { background: #1a1a1a; padding: 2rem; border-radius: 12px; text-align: center; border-top: 4px solid #10b981; }
+        .unit-econ-card .metric-name { font-size: 0.85rem; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+        .unit-econ-card .metric-value { font-size: 2.5rem; font-weight: 800; color: #10b981; margin-bottom: 0.5rem; }
+        .unit-econ-card .metric-formula { font-size: 0.75rem; color: #666; }
+        .unit-econ-card .metric-benchmark { font-size: 0.8rem; color: #888; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid #333; }
+        .benchmark-good { color: #10b981; }
+        .benchmark-warning { color: #f59e0b; }
+        .benchmark-bad { color: #ef4444; }
+
+        /* === SCENARIO CARDS === */
+        .scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .scenario-card { background: #1a1a1a; padding: 1.5rem; border-radius: 12px; }
+        .scenario-card.base { border-top: 4px solid #10b981; }
+        .scenario-card.upside { border-top: 4px solid #3b82f6; }
+        .scenario-card.downside { border-top: 4px solid #f59e0b; }
+        .scenario-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .scenario-name { font-size: 1.125rem; font-weight: 600; color: #fff; }
+        .scenario-probability { font-size: 0.8rem; color: #888; background: #0f0f0f; padding: 0.25rem 0.5rem; border-radius: 4px; }
+        .scenario-metrics { list-style: none; }
+        .scenario-metrics li { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #333; }
+        .scenario-metrics li:last-child { border-bottom: none; }
+        .scenario-metrics .metric-label { color: #888; }
+        .scenario-metrics .metric-value { color: #fff; font-weight: 600; }
+
+        /* === PROFITABILITY === */
+        .profitability-timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .profitability-milestone { background: #1a1a1a; padding: 1.5rem; border-radius: 12px; text-align: center; }
+        .milestone-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .milestone-name { color: #10b981; font-weight: 600; margin-bottom: 0.5rem; }
+        .milestone-date { font-size: 0.9rem; color: #fff; margin-bottom: 0.5rem; }
+        .milestone-description { font-size: 0.8rem; color: #888; }
+
+        /* === RULE OF 40 === */
+        .rule40-container { background: #1a1a1a; padding: 2rem; border-radius: 12px; }
+        .rule40-current { display: flex; align-items: center; justify-content: center; gap: 2rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid #333; }
+        .rule40-component { text-align: center; }
+        .rule40-component .value { font-size: 2rem; font-weight: 700; color: #fff; }
+        .rule40-component .label { font-size: 0.8rem; color: #888; }
+        .rule40-plus { font-size: 2rem; color: #10b981; }
+        .rule40-equals { font-size: 2rem; color: #888; }
+        .rule40-result { text-align: center; }
+        .rule40-result .value { font-size: 3rem; font-weight: 800; }
+        .rule40-result .value.healthy { color: #10b981; }
+        .rule40-result .value.warning { color: #f59e0b; }
+        .rule40-result .label { font-size: 0.9rem; color: #888; }
+
+        /* === CHARTS === */
+        .chart-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 2rem; }
+        .chart-container { background: #1a1a1a; padding: 1.5rem; border-radius: 12px; }
+        .chart-container h4 { color: #10b981; margin-bottom: 1rem; font-size: 1rem; }
+        .chart-wrapper { position: relative; height: 300px; }
+
+        /* === ROADMAP === */
+        .roadmap-phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .phase-card { background: #1a1a1a; padding: 1.5rem; border-radius: 12px; border-top: 4px solid #10b981; }
+        .phase-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .phase-name { font-size: 1rem; color: #10b981; font-weight: 600; }
+        .phase-timing { font-size: 0.75rem; color: #888; background: #0f0f0f; padding: 0.25rem 0.5rem; border-radius: 12px; }
+        .phase-tasks { list-style: none; }
+        .phase-tasks li { padding: 0.4rem 0; border-bottom: 1px solid #333; color: #ccc; font-size: 0.8rem; }
+        .phase-tasks li:last-child { border-bottom: none; }
+        .phase-tasks li::before { content: '[ ]'; color: #10b981; margin-right: 0.5rem; font-family: monospace; font-size: 0.7rem; }
+
+        /* === CANONICAL FOOTER === */
+        footer { background: #0a0a0a; margin-top: 4rem; }
+        .footer-content { max-width: 1600px; margin: 0 auto; padding: 2rem 4rem; border-top: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
+        .footer-brand { color: #10b981; font-weight: 600; }
+        .footer-meta { color: #666; font-size: 0.875rem; }
+
+        @media (max-width: 1200px) { .roadmap-phases { grid-template-columns: repeat(2, 1fr); } .scenario-grid { grid-template-columns: 1fr; } .unit-econ-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .header-content { flex-direction: column; padding: 2rem; } .score-container { grid-template-columns: 1fr; text-align: center; } .primary-score { border-right: none; padding-bottom: 1rem; border-bottom: 1px solid #333; } main { padding: 2rem; } .chart-grid { grid-template-columns: 1fr; } .roadmap-phases { grid-template-columns: 1fr; } .profitability-timeline { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-text">
+                <h1>{{BUSINESS_NAME}}</h1>
+                <div class="subtitle">{{FORECAST_YEARS}} Financial Model</div>
+            </div>
+            <div class="header-meta">
+                <div class="date">{{DATE}}</div>
+                <div class="version">StratArts v1.0</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="score-banner">
+        <div class="score-container">
+            <div class="primary-score">
+                <div class="score-value">{{YEAR5_ARR}}</div>
+                <div class="score-label">Year 5 ARR</div>
+            </div>
+            <div class="score-details">
+                <div class="score-item">
+                    <div class="value">{{CURRENT_MRR}}</div>
+                    <div class="label">Current MRR</div>
+                </div>
+                <div class="score-item">
+                    <div class="value">{{RUNWAY}}</div>
+                    <div class="label">Runway</div>
+                </div>
+                <div class="score-item">
+                    <div class="value">{{LTV_CAC}}</div>
+                    <div class="label">LTV:CAC</div>
+                </div>
+                <div class="score-item">
+                    <div class="value">{{YEAR5_HEADCOUNT}}</div>
+                    <div class="label">Y5 Team</div>
+                </div>
+            </div>
+            <div class="verdict-box">
+                <div class="verdict-label">Rule of 40</div>
+                <div class="verdict-text">{{RULE_OF_40}}</div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <!-- Executive Summary -->
+        <section id="executive-summary">
+            <h2>Executive Summary</h2>
+            <div class="summary-text">
+                {{EXECUTIVE_SUMMARY}}
+            </div>
+            <div class="metrics-grid">
+                {{SUMMARY_METRICS}}
+            </div>
+        </section>
+
+        <!-- Revenue Projections -->
+        <section id="revenue">
+            <h2>Revenue Model</h2>
+            <h3>Revenue Assumptions</h3>
+            <div class="metrics-grid">
+                {{REVENUE_ASSUMPTIONS}}
+            </div>
+            <h3>5-Year Revenue Projection</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th class="right">Customers</th>
+                        <th class="right">ARPU</th>
+                        <th class="right">MRR</th>
+                        <th class="right">ARR</th>
+                        <th class="right">Churn</th>
+                        <th class="right">NRR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{REVENUE_ROWS}}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Cost Structure -->
+        <section id="costs">
+            <h2>Cost Structure</h2>
+            <h3>Gross Margin</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th class="right">Revenue</th>
+                        <th class="right">COGS</th>
+                        <th class="right">Gross Profit</th>
+                        <th class="right">Gross Margin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{COGS_ROWS}}
+                </tbody>
+            </table>
+            <h3>Operating Expenses</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        {{OPEX_YEAR_HEADERS}}
+                    </tr>
+                </thead>
+                <tbody>
+                    {{OPEX_ROWS}}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Headcount Plan -->
+        <section id="headcount">
+            <h2>Headcount Plan</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Department</th>
+                        {{HEADCOUNT_YEAR_HEADERS}}
+                    </tr>
+                </thead>
+                <tbody>
+                    {{HEADCOUNT_ROWS}}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Unit Economics -->
+        <section id="unit-economics">
+            <h2>Unit Economics</h2>
+            <div class="unit-econ-grid">
+                {{UNIT_ECON_CARDS}}
+            </div>
+            <h3>Unit Economics Roadmap</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th class="right">CAC</th>
+                        <th class="right">LTV</th>
+                        <th class="right">LTV:CAC</th>
+                        <th class="right">Payback</th>
+                        <th class="right">Magic #</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{UNIT_ECON_ROWS}}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Cash Flow -->
+        <section id="cash-flow">
+            <h2>Cash Flow & Burn Rate</h2>
+            <div class="metrics-grid">
+                {{CASHFLOW_METRICS}}
+            </div>
+            <h3>Cash Flow Projection</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th class="right">Revenue</th>
+                        <th class="right">Expenses</th>
+                        <th class="right">Net Burn</th>
+                        <th class="right">Fundraising</th>
+                        <th class="right">Cash Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{CASHFLOW_ROWS}}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Scenario Planning -->
+        <section id="scenarios">
+            <h2>Scenario Planning</h2>
+            <div class="scenario-grid">
+                {{SCENARIO_CARDS}}
+            </div>
+        </section>
+
+        <!-- Path to Profitability -->
+        <section id="profitability">
+            <h2>Path to Profitability</h2>
+            <div class="profitability-timeline">
+                {{PROFITABILITY_MILESTONES}}
+            </div>
+            <h3>Rule of 40 Trajectory</h3>
+            <div class="rule40-container">
+                <div class="rule40-current">
+                    <div class="rule40-component">
+                        <div class="value">{{GROWTH_RATE}}</div>
+                        <div class="label">ARR Growth</div>
+                    </div>
+                    <div class="rule40-plus">+</div>
+                    <div class="rule40-component">
+                        <div class="value">{{NET_MARGIN}}</div>
+                        <div class="label">Net Margin</div>
+                    </div>
+                    <div class="rule40-equals">=</div>
+                    <div class="rule40-result">
+                        <div class="value {{RULE40_CLASS}}">{{RULE_OF_40}}</div>
+                        <div class="label">Rule of 40</div>
+                    </div>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th class="right">ARR Growth</th>
+                            <th class="right">Net Margin</th>
+                            <th class="right">Rule of 40</th>
+                            <th class="right">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{RULE40_ROWS}}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Charts -->
+        <section id="charts">
+            <h2>Financial Projections</h2>
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <h4>ARR Growth</h4>
+                    <div class="chart-wrapper">
+                        <canvas id="arrChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h4>Expense Breakdown</h4>
+                    <div class="chart-wrapper">
+                        <canvas id="expenseChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h4>Cash Flow</h4>
+                    <div class="chart-wrapper">
+                        <canvas id="cashflowChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h4>Headcount Growth</h4>
+                    <div class="chart-wrapper">
+                        <canvas id="headcountChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap -->
+        <section id="roadmap">
+            <h2>Model Build Roadmap</h2>
+            <div class="roadmap-phases">
+                {{ROADMAP_PHASES}}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">StratArts - Business Strategy Skills Library</div>
+            <div class="footer-meta">Financial Model Architect &bull; {{DATE}}</div>
+        </div>
+    </footer>
+
+    <script>
+        Chart.defaults.color = '#888';
+        Chart.defaults.borderColor = '#333';
+
+        // ARR Chart
+        new Chart(document.getElementById('arrChart'), {
+            type: 'bar',
+            data: {
+                labels: {{YEAR_LABELS}},
+                datasets: [{
+                    label: 'ARR ($M)',
+                    data: {{ARR_DATA}},
+                    backgroundColor: '#10b981',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true, grid: { color: '#333' } }, x: { grid: { display: false } } }
+            }
+        });
+
+        // Expense Breakdown Chart
+        new Chart(document.getElementById('expenseChart'), {
+            type: 'doughnut',
+            data: {
+                labels: {{EXPENSE_LABELS}},
+                datasets: [{
+                    data: {{EXPENSE_DATA}},
+                    backgroundColor: ['#10b981', '#14b8a6', '#2dd4bf', '#5eead4'],
+                    borderWidth: 0
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+        });
+
+        // Cash Flow Chart
+        new Chart(document.getElementById('cashflowChart'), {
+            type: 'line',
+            data: {
+                labels: {{YEAR_LABELS}},
+                datasets: [{
+                    label: 'Cash Balance',
+                    data: {{CASH_DATA}},
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true, tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { grid: { color: '#333' } }, x: { grid: { color: '#333' } } }
+            }
+        });
+
+        // Headcount Chart
+        new Chart(document.getElementById('headcountChart'), {
+            type: 'bar',
+            data: {
+                labels: {{YEAR_LABELS}},
+                datasets: [{
+                    label: 'Headcount',
+                    data: {{HEADCOUNT_DATA}},
+                    backgroundColor: '#14b8a6',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true, grid: { color: '#333' } }, x: { grid: { display: false } } }
+            }
+        });
+    </script>
+</body>
+</html>

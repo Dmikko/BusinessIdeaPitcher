@@ -1,0 +1,2278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth Hacking Playbook - PetPulse | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #0a0a0a;
+        }
+
+        /* === HEADER === */
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .header-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* === SCORE BANNER === */
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-main {
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .score-interpretation {
+            border-left: 3px solid #10b981;
+            padding-left: 2rem;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #f5f5f5;
+        }
+
+        .interpretation-text {
+            color: #d4d4d4;
+            line-height: 1.7;
+        }
+
+        .verdict-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        /* === CONTENT SECTIONS === */
+        .content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 4rem;
+            background: #0a0a0a;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section:last-child {
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: #d4d4d4;
+            max-width: 800px;
+        }
+
+        /* === CHART LAYOUTS === */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-subtitle {
+            font-size: 0.9rem;
+            color: #a3a3a3;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-wrapper.tall {
+            height: 450px;
+        }
+
+        /* === METRIC CARDS === */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+
+        .metric-card .label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .metric-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #10b981;
+            line-height: 1.2;
+        }
+
+        .metric-card .range {
+            font-size: 0.9rem;
+            color: #d4d4d4;
+            margin-top: 0.5rem;
+        }
+
+        .metric-card .description {
+            font-size: 0.85rem;
+            color: #a3a3a3;
+            margin-top: 0.75rem;
+            line-height: 1.5;
+        }
+
+        /* === FEATURE CARDS === */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: #1a1a1a;
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .feature-card.primary {
+            border-color: #10b981;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            border-color: #10b981;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.2);
+        }
+
+        .feature-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .feature-name {
+            font-weight: 700;
+            color: #f5f5f5;
+            font-size: 1.1rem;
+        }
+
+        .feature-score {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .feature-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            color: #d4d4d4;
+            line-height: 1.6;
+        }
+
+        /* === SMALL CARDS === */
+        .small-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .small-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.25rem;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .small-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+
+        .small-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .small-name {
+            font-weight: 700;
+            color: #f5f5f5;
+            font-size: 0.95rem;
+        }
+
+        .small-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .small-description {
+            font-size: 0.85rem;
+            color: #d4d4d4;
+            line-height: 1.5;
+        }
+
+        .small-meta {
+            font-size: 0.75rem;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* === INSIGHTS PANEL === */
+        .insights-panel {
+            background: #0a0a0a;
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .insight-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .insight-list {
+            list-style: none;
+        }
+
+        .insight-list li {
+            padding: 0.6rem 0;
+            color: #d4d4d4;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .insight-list li:last-child {
+            border-bottom: none;
+        }
+
+        .insight-list li strong {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content p {
+            margin: 0.3rem 0;
+        }
+
+        .footer-content strong {
+            color: #10b981;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           GROWTH HACKING PLAYBOOK SPECIFIC STYLES
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .bullseye-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .bullseye {
+            position: relative;
+            width: 320px;
+            height: 320px;
+        }
+
+        .bullseye-ring {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .bullseye-ring:hover {
+            transform: scale(1.02);
+        }
+
+        .ring-outer {
+            width: 320px;
+            height: 320px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            top: 0;
+            left: 0;
+        }
+
+        .ring-middle {
+            width: 220px;
+            height: 220px;
+            background: rgba(16, 185, 129, 0.3);
+            border: 2px solid rgba(16, 185, 129, 0.5);
+            top: 50px;
+            left: 50px;
+        }
+
+        .ring-inner {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            top: 100px;
+            left: 100px;
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+
+        .ring-label {
+            position: absolute;
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ring-label.outer-label {
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(16, 185, 129, 0.8);
+        }
+
+        .ring-label.middle-label {
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(16, 185, 129, 0.9);
+        }
+
+        .experiment-card {
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+            position: relative;
+        }
+
+        .experiment-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .status-planned {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .status-completed {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+        }
+
+        .experiment-header {
+            margin-bottom: 1rem;
+            padding-right: 80px;
+        }
+
+        .experiment-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+        }
+
+        .experiment-channel {
+            font-size: 0.8rem;
+            color: #10b981;
+        }
+
+        .experiment-hypothesis {
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid #10b981;
+        }
+
+        .hypothesis-label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .hypothesis-text {
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .experiment-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+
+        .exp-metric {
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 0.75rem;
+            text-align: center;
+        }
+
+        .exp-metric-label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .exp-metric-value {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .channel-ranking {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .channel-rank-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .rank-number {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .rank-info {
+            flex: 1;
+        }
+
+        .rank-channel {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .rank-rationale {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .rank-score {
+            text-align: right;
+        }
+
+        .score-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .score-label-sm {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .viral-loop-diagram {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: #1a1a1a;
+            border-radius: 16px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .loop-step {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            min-width: 140px;
+        }
+
+        .loop-arrow {
+            font-size: 1.5rem;
+            color: #10b981;
+        }
+
+        .north-star-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .north-star-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .north-star-metric {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+        }
+
+        .north-star-description {
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+
+        .growth-lever {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+            margin-bottom: 0.75rem;
+        }
+
+        .lever-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .lever-info {
+            flex: 1;
+        }
+
+        .lever-name {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .lever-description {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .lever-impact {
+            text-align: right;
+        }
+
+        .impact-bar {
+            display: flex;
+            gap: 3px;
+        }
+
+        .impact-segment {
+            width: 8px;
+            height: 24px;
+            background: #2a2a2a;
+            border-radius: 2px;
+        }
+
+        .impact-segment.filled {
+            background: linear-gradient(to top, #10b981, #059669);
+        }
+
+        .funnel-stage-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .funnel-stage {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .stage-label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stage-name {
+            font-weight: 700;
+            color: #10b981;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stage-rate {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f5f5f5;
+        }
+
+        .stage-target {
+            font-size: 0.8rem;
+            color: #a3a3a3;
+            margin-top: 0.25rem;
+        }
+
+        .timeline-container {
+            margin-top: 2rem;
+        }
+
+        .timeline-phase {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #10b981;
+        }
+
+        .timeline-phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-phase-title {
+            font-weight: 700;
+            color: #f5f5f5;
+            font-size: 1.1rem;
+        }
+
+        .timeline-phase-period {
+            font-size: 0.85rem;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .timeline-items {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            color: #d4d4d4;
+            font-size: 0.9rem;
+        }
+
+        .timeline-item::before {
+            content: '□';
+            color: #10b981;
+            font-size: 0.8rem;
+        }
+
+        .kfactor-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.1));
+            border: 2px solid rgba(16, 185, 129, 0.4);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .kfactor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .kfactor-title {
+            font-weight: 700;
+            color: #f5f5f5;
+            font-size: 1.25rem;
+        }
+
+        .kfactor-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .kfactor-formula {
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 1.25rem;
+            font-family: monospace;
+            color: #d4d4d4;
+            margin-bottom: 1rem;
+        }
+
+        .kfactor-breakdown {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .kfactor-component {
+            text-align: center;
+        }
+
+        .kfactor-component-label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .kfactor-component-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #f5f5f5;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 1400px) {
+            .small-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .funnel-stage-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .funnel-stage-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .small-grid { grid-template-columns: 1fr; }
+            .score-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .score-interpretation {
+                border-left: none;
+                border-top: 3px solid #10b981;
+                padding-left: 0;
+                padding-top: 1.5rem;
+            }
+            .header-content { padding: 2rem; }
+            .score-container { padding: 2rem; }
+            .content { padding: 2rem 2rem; }
+            .footer-content { padding: 2rem; }
+            .bullseye {
+                width: 280px;
+                height: 280px;
+            }
+            .ring-outer {
+                width: 280px;
+                height: 280px;
+            }
+            .ring-middle {
+                width: 180px;
+                height: 180px;
+                top: 50px;
+                left: 50px;
+            }
+            .ring-inner {
+                width: 100px;
+                height: 100px;
+                top: 90px;
+                left: 90px;
+                font-size: 0.8rem;
+            }
+            .experiment-metrics {
+                grid-template-columns: 1fr;
+            }
+            .viral-loop-diagram {
+                flex-direction: column;
+            }
+            .loop-arrow {
+                transform: rotate(90deg);
+            }
+            .kfactor-breakdown {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">Growth Hacking Playbook</div>
+                <h1>PetPulse</h1>
+                <div class="subtitle">Data-driven growth strategy to achieve 2,500 active pets monitored in 90 days through product-led and content-driven acquisition</div>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span>📅</span>
+                        <span>Generated: December 18, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>📊</span>
+                        <span>Analysis Type: Growth Loops & AARRR Framework</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🎯</span>
+                        <span>Version 1.0.0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SCORE BANNER -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">8.2</div>
+                    <div class="score-label">Growth Readiness</div>
+                </div>
+
+                <div class="score-interpretation">
+                    <div class="interpretation-title">What This Score Means</div>
+                    <div class="interpretation-text">
+                        Strong growth foundation with excellent unit economics (LTV:CAC 4.8:1). Product-led growth model
+                        combined with content marketing creates sustainable acquisition. Current K-factor of 0.75 shows
+                        viral potential that can exceed 1.0 with referral program optimization. Focus on activation
+                        and referral loops for exponential growth.
+                    </div>
+                </div>
+
+                <div class="verdict-badge">
+                    GROWTH READY
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+
+            <!-- NORTH STAR METRIC SECTION -->
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-title">North Star Metric</div>
+                    <div class="section-description">The single metric that best represents value delivered to customers and predicts sustainable growth.</div>
+                </div>
+
+                <div class="north-star-card">
+                    <div class="north-star-icon">⭐</div>
+                    <div class="north-star-metric">Active Pets Monitored</div>
+                    <div class="north-star-description">The number of pets with active PetPulse subscriptions being continuously monitored. This metric represents real value delivery (health monitoring) and correlates directly with revenue, retention, and customer satisfaction.</div>
+                </div>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <div class="label">Current Value</div>
+                        <div class="value">0</div>
+                        <div class="range">Pre-Launch</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">30-Day Target</div>
+                        <div class="value">500</div>
+                        <div class="range">Launch milestone</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">90-Day Target</div>
+                        <div class="value">2,500</div>
+                        <div class="range">Growth milestone</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TRACTION BULLSEYE SECTION -->
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-title">Traction Bullseye Framework</div>
+                    <div class="section-description">Prioritized acquisition channels based on reach, cost efficiency, conversion potential, and control. Focus 70% effort on core channel, 20% on promising, 10% on testing.</div>
+                </div>
+
+                <div class="bullseye-container">
+                    <div class="bullseye">
+                        <div class="bullseye-ring ring-outer">
+                            <span class="ring-label outer-label">Testing (10%)</span>
+                        </div>
+                        <div class="bullseye-ring ring-middle">
+                            <span class="ring-label middle-label">Promising (20%)</span>
+                        </div>
+                        <div class="bullseye-ring ring-inner">
+                            Core<br>Focus
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="color: #f5f5f5; font-size: 1.1rem; margin-bottom: 1rem;">Channel Priority Ranking</h3>
+                <div class="channel-ranking">
+                    <div class="channel-rank-item">
+                        <div class="rank-number">1</div>
+                        <div class="rank-info">
+                            <div class="rank-channel">Content Marketing (SEO)</div>
+                            <div class="rank-rationale">High-intent pet health searches, sustainable organic traffic, strong LTV alignment</div>
+                        </div>
+                        <div class="rank-score">
+                            <div class="score-value">36/40</div>
+                            <div class="score-label-sm">Focus</div>
+                        </div>
+                    </div>
+                    <div class="channel-rank-item">
+                        <div class="rank-number">2</div>
+                        <div class="rank-info">
+                            <div class="rank-channel">Referral Program</div>
+                            <div class="rank-rationale">Pet parents trust peer recommendations, low CAC, high retention</div>
+                        </div>
+                        <div class="rank-score">
+                            <div class="score-value">34/40</div>
+                            <div class="score-label-sm">Focus</div>
+                        </div>
+                    </div>
+                    <div class="channel-rank-item">
+                        <div class="rank-number">3</div>
+                        <div class="rank-info">
+                            <div class="rank-channel">Social Media (Instagram/TikTok)</div>
+                            <div class="rank-rationale">Visual pet content performs well, high engagement, community building</div>
+                        </div>
+                        <div class="rank-score">
+                            <div class="score-value">30/40</div>
+                            <div class="score-label-sm">Promising</div>
+                        </div>
+                    </div>
+                    <div class="channel-rank-item">
+                        <div class="rank-number">4</div>
+                        <div class="rank-info">
+                            <div class="rank-channel">Email Marketing</div>
+                            <div class="rank-rationale">Nurture leads, drive activation, retain customers, owned channel</div>
+                        </div>
+                        <div class="rank-score">
+                            <div class="score-value">28/40</div>
+                            <div class="score-label-sm">Promising</div>
+                        </div>
+                    </div>
+                    <div class="channel-rank-item">
+                        <div class="rank-number">5</div>
+                        <div class="rank-info">
+                            <div class="rank-channel">Vet Clinic Partnerships</div>
+                            <div class="rank-rationale">High trust, endorsement value, co-marketing potential</div>
+                        </div>
+                        <div class="rank-score">
+                            <div class="score-value">24/40</div>
+                            <div class="score-label-sm">Testing</div>
+                        </div>
+                    </div>
+                    <div class="channel-rank-item">
+                        <div class="rank-number">6</div>
+                        <div class="rank-info">
+                            <div class="rank-channel">Paid Ads (Meta/Google)</div>
+                            <div class="rank-rationale">Scalable but requires proven unit economics, test after organic baseline</div>
+                        </div>
+                        <div class="rank-score">
+                            <div class="score-value">22/40</div>
+                            <div class="score-label-sm">Testing</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card full-width">
+                    <div class="chart-title">Channel Scoring Matrix</div>
+                    <div class="chart-subtitle">Reach, Cost, Conversion, and Control scores by channel</div>
+                    <div class="chart-wrapper">
+                        <canvas id="channelChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIRAL LOOP SECTION -->
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-title">Viral Loop Design</div>
+                    <div class="section-description">Self-reinforcing growth cycle where output (new users) feeds back as input, creating compounding growth.</div>
+                </div>
+
+                <div class="viral-loop-diagram">
+                    <div class="loop-step">1. Pet Parent<br>Signs Up</div>
+                    <div class="loop-arrow">→</div>
+                    <div class="loop-step">2. Experiences<br>Health Value</div>
+                    <div class="loop-arrow">→</div>
+                    <div class="loop-step">3. Shares Story<br>+ Invites</div>
+                    <div class="loop-arrow">→</div>
+                    <div class="loop-step">4. Friends<br>Join</div>
+                    <div class="loop-arrow">→</div>
+                    <div class="loop-step">🔄 Loop<br>Repeats</div>
+                </div>
+
+                <div class="kfactor-card">
+                    <div class="kfactor-header">
+                        <div class="kfactor-title">Viral Coefficient (K-Factor)</div>
+                        <div class="kfactor-value">0.75</div>
+                    </div>
+                    <div class="kfactor-formula">
+                        K = (Avg invites per user) × (Invite conversion rate)<br>
+                        K = 3.0 invites × 25% conversion = 0.75
+                    </div>
+                    <div class="kfactor-breakdown">
+                        <div class="kfactor-component">
+                            <div class="kfactor-component-label">Invites per User</div>
+                            <div class="kfactor-component-value">3.0</div>
+                        </div>
+                        <div class="kfactor-component">
+                            <div class="kfactor-component-label">Conversion Rate</div>
+                            <div class="kfactor-component-value">25%</div>
+                        </div>
+                        <div class="kfactor-component">
+                            <div class="kfactor-component-label">Cycle Time</div>
+                            <div class="kfactor-component-value">14 days</div>
+                        </div>
+                    </div>
+                    <div class="insights-panel" style="margin-top: 1.5rem;">
+                        <div class="insight-title">K-Factor Optimization Path</div>
+                        <ul class="insight-list">
+                            <li><strong>Target K > 1.0:</strong> Need 4 invites at 25% conversion OR 3 invites at 34% conversion</li>
+                            <li><strong>Increase invites:</strong> Prompt at activation, incentivize sharing, make one-click easy</li>
+                            <li><strong>Boost conversion:</strong> Personal invite message, friend discount, social proof ("3 friends using")</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <div class="label">Referral Rate</div>
+                        <div class="value">15%</div>
+                        <div class="description">% of users who refer at least one friend</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Cycle Time</div>
+                        <div class="value">14 days</div>
+                        <div class="description">Time from activation to friend signup</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Target K-Factor</div>
+                        <div class="value">>1.0</div>
+                        <div class="description">Needed for viral growth</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PIRATE METRICS SECTION -->
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-title">AARRR Pirate Metrics</div>
+                    <div class="section-description">Full-funnel metrics tracking from acquisition through revenue to identify growth bottlenecks.</div>
+                </div>
+
+                <div class="funnel-stage-grid">
+                    <div class="funnel-stage">
+                        <div class="stage-label">Stage 1</div>
+                        <div class="stage-name">Acquisition</div>
+                        <div class="stage-rate">100%</div>
+                        <div class="stage-target">Baseline visitors</div>
+                    </div>
+                    <div class="funnel-stage">
+                        <div class="stage-label">Stage 2</div>
+                        <div class="stage-name">Activation</div>
+                        <div class="stage-rate">45%</div>
+                        <div class="stage-target">Target: 55%</div>
+                    </div>
+                    <div class="funnel-stage">
+                        <div class="stage-label">Stage 3</div>
+                        <div class="stage-name">Retention</div>
+                        <div class="stage-rate">85%</div>
+                        <div class="stage-target">D30 retention</div>
+                    </div>
+                    <div class="funnel-stage">
+                        <div class="stage-label">Stage 4</div>
+                        <div class="stage-name">Referral</div>
+                        <div class="stage-rate">15%</div>
+                        <div class="stage-target">Target: 25%</div>
+                    </div>
+                    <div class="funnel-stage">
+                        <div class="stage-label">Stage 5</div>
+                        <div class="stage-name">Revenue</div>
+                        <div class="stage-rate">65%</div>
+                        <div class="stage-target">Trial → Paid</div>
+                    </div>
+                </div>
+
+                <div class="chart-grid" style="margin-top: 2rem;">
+                    <div class="chart-card">
+                        <div class="chart-title">AARRR Funnel Conversion</div>
+                        <div class="chart-subtitle">User progression through growth funnel stages</div>
+                        <div class="chart-wrapper">
+                            <canvas id="funnelChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Funnel Projections (90 Days)</div>
+                        <div class="chart-subtitle">Expected improvement with optimization experiments</div>
+                        <div class="chart-wrapper">
+                            <canvas id="funnelProjectionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GROWTH EXPERIMENTS SECTION -->
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-title">Growth Experiments</div>
+                    <div class="section-description">Prioritized experiments using ICE scoring (Impact × Confidence × Ease). Focus on high-leverage tests that move the North Star metric.</div>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="experiment-card">
+                        <div class="experiment-status status-active">Week 1-4</div>
+                        <div class="experiment-header">
+                            <div class="experiment-name">Double-Sided Referral Program</div>
+                            <div class="experiment-channel">Viral / Referral</div>
+                        </div>
+                        <div class="experiment-hypothesis">
+                            <div class="hypothesis-label">Hypothesis</div>
+                            <div class="hypothesis-text">Offering 1 month free to both referrer and referee will increase K-factor from 0.75 to >1.0 by boosting invite conversion rate.</div>
+                        </div>
+                        <div class="experiment-metrics">
+                            <div class="exp-metric">
+                                <div class="exp-metric-label">Impact</div>
+                                <div class="exp-metric-value">9/10</div>
+                            </div>
+                            <div class="exp-metric">
+                                <div class="exp-metric-label">Confidence</div>
+                                <div class="exp-metric-value">8/10</div>
+                            </div>
+                            <div class="exp-metric">
+                                <div class="exp-metric-label">Ease</div>
+                                <div class="exp-metric-value">7/10</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="experiment-card">
+                        <div class="experiment-status status-active">Week 1-4</div>
+                        <div class="experiment-header">
+                            <div class="experiment-name">Pet Health Quiz Lead Magnet</div>
+                            <div class="experiment-channel">Content / Acquisition</div>
+                        </div>
+                        <div class="experiment-hypothesis">
+                            <div class="hypothesis-label">Hypothesis</div>
+                            <div class="hypothesis-text">An interactive "Is Your Pet Healthy?" quiz will capture 3x more email leads than static content by providing personalized value.</div>
+                        </div>
+                        <div class="experiment-metrics">
+                            <div class="exp-metric">
+                                <div class="exp-metric-label">Impact</div>
+                                <div class="exp-metric-value">8/10</div>
+                            </div>
+                            <div class="exp-metric">
+                                <div class="exp-metric-label">Confidence</div>
+                                <div class="exp-metric-value">7/10</div>
+                            </div>
+                            <div class="exp-metric">
+                                <div class="exp-metric-label">Ease</div>
+                                <div class="exp-metric-value">8/10</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="experiment-card">
+                        <div class="experiment-status status-planned">Week 5-8</div>
+                        <div class="experiment-header">
+                            <div class="experiment-name">Vet Clinic Partnership Pilot</div>
+                            <div class="experiment-channel">Partnerships / B2B2C</div>
+                        </div>
+                        <div class="experiment-hypothesis">
+                            <div class="hypothesis-label">Hypothesis</div>
+                            <div class="hypothesis-text">Partnering with 10 vet clinics to recommend PetPulse will generate 50+ qualified leads per clinic with 40% conversion (trust factor).</div>
+                        </div>
+                        <div class="experiment-metrics">
+                            <div class="exp-metric">
+                                <div class="exp-metric-label">Impact</div>
+                                <div class="exp-metric-value">9/10</div>
+                            </div>
+                            <div class="exp-metric">
+                                <div class="exp-metric-label">Confidence</div>
+                                <div class="exp-metric-value">6/10</div>
+                            </div>
+                            <div class="exp-metric">
+                                <div class="exp-metric-label">Ease</div>
+                                <div class="exp-metric-value">5/10</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="experiment-card">
+                        <div class="experiment-status status-planned">Week 5-8</div>
+                        <div class="experiment-header">
+                            <div class="experiment-name">Instagram Reels Campaign</div>
+                            <div class="experiment-channel">Social Media / Awareness</div>
+                        </div>
+                        <div class="experiment-hypothesis">
+                            <div class="hypothesis-label">Hypothesis</div>
+                            <div class="hypothesis-text">Creating 20 short-form pet health videos will generate 100K+ impressions and 500+ website visits at <$1 CPV through organic reach.</div>
+                        </div>
+                        <div class="experiment-metrics">
+                            <div class="exp-metric">
+                                <div class="exp-metric-label">Impact</div>
+                                <div class="exp-metric-value">7/10</div>
+                            </div>
+                            <div class="exp-metric">
+                                <div class="exp-metric-label">Confidence</div>
+                                <div class="exp-metric-value">7/10</div>
+                            </div>
+                            <div class="exp-metric">
+                                <div class="exp-metric-label">Ease</div>
+                                <div class="exp-metric-value">6/10</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="experiment-card">
+                        <div class="experiment-status status-planned">Week 9-12</div>
+                        <div class="experiment-header">
+                            <div class="experiment-name">Abandoned Cart Email Sequence</div>
+                            <div class="experiment-channel">Email / Conversion</div>
+                        </div>
+                        <div class="experiment-hypothesis">
+                            <div class="hypothesis-label">Hypothesis</div>
+                            <div class="hypothesis-text">A 3-email abandoned cart sequence (2hr, 24hr, 72hr) will recover 15% of abandoned checkouts with personalized pet health messaging.</div>
+                        </div>
+                        <div class="experiment-metrics">
+                            <div class="exp-metric">
+                                <div class="exp-metric-label">Impact</div>
+                                <div class="exp-metric-value">8/10</div>
+                            </div>
+                            <div class="exp-metric">
+                                <div class="exp-metric-label">Confidence</div>
+                                <div class="exp-metric-value">8/10</div>
+                            </div>
+                            <div class="exp-metric">
+                                <div class="exp-metric-label">Ease</div>
+                                <div class="exp-metric-value">9/10</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="experiment-card">
+                        <div class="experiment-status status-planned">Week 9-12</div>
+                        <div class="experiment-header">
+                            <div class="experiment-name">Onboarding Gamification</div>
+                            <div class="experiment-channel">Activation / Product</div>
+                        </div>
+                        <div class="experiment-hypothesis">
+                            <div class="hypothesis-label">Hypothesis</div>
+                            <div class="hypothesis-text">Adding progress badges and "first health insight" celebration will increase Day 7 activation from 45% to 60% through reward mechanics.</div>
+                        </div>
+                        <div class="experiment-metrics">
+                            <div class="exp-metric">
+                                <div class="exp-metric-label">Impact</div>
+                                <div class="exp-metric-value">8/10</div>
+                            </div>
+                            <div class="exp-metric">
+                                <div class="exp-metric-label">Confidence</div>
+                                <div class="exp-metric-value">7/10</div>
+                            </div>
+                            <div class="exp-metric">
+                                <div class="exp-metric-label">Ease</div>
+                                <div class="exp-metric-value">6/10</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card full-width" style="margin-top: 2rem;">
+                    <div class="chart-title">Experiment Priority Matrix (ICE)</div>
+                    <div class="chart-subtitle">Impact vs. Ease with bubble size representing confidence</div>
+                    <div class="chart-wrapper">
+                        <canvas id="experimentChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GROWTH LEVERS SECTION -->
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-title">Growth Levers</div>
+                    <div class="section-description">Key leverage points where small improvements create outsized impact on North Star metric.</div>
+                </div>
+
+                <div class="growth-lever">
+                    <div class="lever-icon">📈</div>
+                    <div class="lever-info">
+                        <div class="lever-name">Activation Rate (45% → 60%)</div>
+                        <div class="lever-description">Improve sign-up to device connection rate through streamlined onboarding and faster time-to-value</div>
+                    </div>
+                    <div class="lever-impact">
+                        <div class="impact-bar">
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment filled"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="growth-lever">
+                    <div class="lever-icon">🔄</div>
+                    <div class="lever-info">
+                        <div class="lever-name">K-Factor (0.75 → 1.2)</div>
+                        <div class="lever-description">Launch referral program with double-sided incentives and optimize invite-to-signup conversion</div>
+                    </div>
+                    <div class="lever-impact">
+                        <div class="impact-bar">
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment filled"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="growth-lever">
+                    <div class="lever-icon">🔍</div>
+                    <div class="lever-info">
+                        <div class="lever-name">Organic Traffic (0 → 10K/mo)</div>
+                        <div class="lever-description">Build SEO foundation with pet health content targeting high-intent keywords</div>
+                    </div>
+                    <div class="lever-impact">
+                        <div class="impact-bar">
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="growth-lever">
+                    <div class="lever-icon">💳</div>
+                    <div class="lever-info">
+                        <div class="lever-name">Trial Conversion (65% → 75%)</div>
+                        <div class="lever-description">Optimize pricing page, add social proof, implement abandoned cart recovery</div>
+                    </div>
+                    <div class="lever-impact">
+                        <div class="impact-bar">
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="growth-lever">
+                    <div class="lever-icon">🔔</div>
+                    <div class="lever-info">
+                        <div class="lever-name">Day 30 Retention (85% → 90%)</div>
+                        <div class="lever-description">Weekly health insights email, proactive AI alerts, and engagement triggers</div>
+                    </div>
+                    <div class="lever-impact">
+                        <div class="impact-bar">
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment filled"></div>
+                            <div class="impact-segment"></div>
+                            <div class="impact-segment"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card full-width" style="margin-top: 2rem;">
+                    <div class="chart-title">Growth Lever Performance Radar</div>
+                    <div class="chart-subtitle">Current vs. target performance across key growth dimensions</div>
+                    <div class="chart-wrapper">
+                        <canvas id="leversChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 90-DAY SPRINT PLAN -->
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-title">90-Day Growth Sprint</div>
+                    <div class="section-description">Phased execution plan focusing on activation (Month 1), viral growth (Month 2), and retention/monetization (Month 3).</div>
+                </div>
+
+                <div class="timeline-container">
+                    <div class="timeline-phase">
+                        <div class="timeline-phase-header">
+                            <div class="timeline-phase-title">Phase 1: Foundation & Activation</div>
+                            <div class="timeline-phase-period">Weeks 1-4</div>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">Instrument analytics: Product analytics, UTM tracking, funnel metrics</div>
+                            <div class="timeline-item">Launch pet health quiz lead magnet on website</div>
+                            <div class="timeline-item">Optimize onboarding flow: Reduce steps from 5 to 3</div>
+                            <div class="timeline-item">Build referral program infrastructure (unique links, tracking)</div>
+                            <div class="timeline-item">Publish 8 SEO-optimized blog posts (pet health pillar content)</div>
+                            <div class="timeline-item">Set up email welcome sequence (5 emails)</div>
+                        </div>
+                        <div class="metric-grid" style="margin-top: 1rem;">
+                            <div class="metric-card">
+                                <div class="label">Target NSM</div>
+                                <div class="value">500</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="label">Activation Rate</div>
+                                <div class="value">50%</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="label">Email Subs</div>
+                                <div class="value">1,000</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-phase">
+                        <div class="timeline-phase-header">
+                            <div class="timeline-phase-title">Phase 2: Viral & Channel Growth</div>
+                            <div class="timeline-phase-period">Weeks 5-8</div>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">Launch double-sided referral program (1 month free each)</div>
+                            <div class="timeline-item">Run vet clinic partnership pilot (10 clinics)</div>
+                            <div class="timeline-item">Launch Instagram Reels campaign (20 videos)</div>
+                            <div class="timeline-item">Optimize invite flow: One-click sharing, personalized messages</div>
+                            <div class="timeline-item">A/B test referral incentives: 1 month vs. $20 credit</div>
+                            <div class="timeline-item">Publish 8 more blog posts, target 5K organic visits</div>
+                        </div>
+                        <div class="metric-grid" style="margin-top: 1rem;">
+                            <div class="metric-card">
+                                <div class="label">Target NSM</div>
+                                <div class="value">1,500</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="label">K-Factor</div>
+                                <div class="value">>1.0</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="label">Referral Rate</div>
+                                <div class="value">20%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-phase">
+                        <div class="timeline-phase-header">
+                            <div class="timeline-phase-title">Phase 3: Retention & Monetization</div>
+                            <div class="timeline-phase-period">Weeks 9-12</div>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">Launch abandoned cart email sequence (3 emails)</div>
+                            <div class="timeline-item">Implement weekly health insights engagement email</div>
+                            <div class="timeline-item">Test annual pricing discount (17% off)</div>
+                            <div class="timeline-item">Add onboarding gamification (progress badges)</div>
+                            <div class="timeline-item">Launch win-back campaign for at-risk users</div>
+                            <div class="timeline-item">Analyze Q1 results, plan Q2 experiments</div>
+                        </div>
+                        <div class="metric-grid" style="margin-top: 1rem;">
+                            <div class="metric-card">
+                                <div class="label">Target NSM</div>
+                                <div class="value">2,500</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="label">Trial → Paid</div>
+                                <div class="value">70%</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="label">D30 Retention</div>
+                                <div class="value">88%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GROWTH BUDGET SECTION -->
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-title">Growth Investment</div>
+                    <div class="section-description">Recommended budget allocation for 90-day growth sprint. Total estimated investment: $15,000.</div>
+                </div>
+
+                <div class="chart-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">Budget Allocation</div>
+                        <div class="chart-subtitle">Investment distribution across growth activities</div>
+                        <div class="chart-wrapper">
+                            <canvas id="budgetChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Budget Breakdown</div>
+                        <div class="chart-subtitle">Detailed allocation by category</div>
+                        <div style="padding: 1rem 0;">
+                            <div class="growth-lever">
+                                <div class="lever-info">
+                                    <div class="lever-name">Content Production</div>
+                                    <div class="lever-description">Blog posts, videos, quiz development</div>
+                                </div>
+                                <div class="lever-impact">
+                                    <div class="small-value">$4,500</div>
+                                </div>
+                            </div>
+                            <div class="growth-lever">
+                                <div class="lever-info">
+                                    <div class="lever-name">Referral Incentives</div>
+                                    <div class="lever-description">Free month credits for referrals</div>
+                                </div>
+                                <div class="lever-impact">
+                                    <div class="small-value">$3,000</div>
+                                </div>
+                            </div>
+                            <div class="growth-lever">
+                                <div class="lever-info">
+                                    <div class="lever-name">Tools & Software</div>
+                                    <div class="lever-description">Analytics, email, A/B testing</div>
+                                </div>
+                                <div class="lever-impact">
+                                    <div class="small-value">$2,250</div>
+                                </div>
+                            </div>
+                            <div class="growth-lever">
+                                <div class="lever-info">
+                                    <div class="lever-name">Paid Testing</div>
+                                    <div class="lever-description">Small-scale ad experiments</div>
+                                </div>
+                                <div class="lever-impact">
+                                    <div class="small-value">$2,250</div>
+                                </div>
+                            </div>
+                            <div class="growth-lever">
+                                <div class="lever-info">
+                                    <div class="lever-name">Partnership Development</div>
+                                    <div class="lever-description">Vet clinic outreach, co-marketing</div>
+                                </div>
+                                <div class="lever-impact">
+                                    <div class="small-value">$1,500</div>
+                                </div>
+                            </div>
+                            <div class="growth-lever">
+                                <div class="lever-info">
+                                    <div class="lever-name">Community Building</div>
+                                    <div class="lever-description">Social engagement, events</div>
+                                </div>
+                                <div class="lever-impact">
+                                    <div class="small-value">$1,500</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SUCCESS METRICS SECTION -->
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-title">Success Metrics Dashboard</div>
+                    <div class="section-description">Key metrics to track weekly with 90-day targets. Green indicates on-track, yellow needs attention, red requires immediate action.</div>
+                </div>
+
+                <div class="small-grid">
+                    <div class="small-card">
+                        <div class="small-header">
+                            <div class="small-name">Active Pets</div>
+                            <div class="small-value">2,500</div>
+                        </div>
+                        <div class="small-description">North Star Metric - 90-day target</div>
+                        <div class="small-meta">Current: 0 (pre-launch)</div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-header">
+                            <div class="small-name">K-Factor</div>
+                            <div class="small-value">>1.0</div>
+                        </div>
+                        <div class="small-description">Viral coefficient target</div>
+                        <div class="small-meta">Current: 0.75</div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-header">
+                            <div class="small-name">Activation</div>
+                            <div class="small-value">55%</div>
+                        </div>
+                        <div class="small-description">Sign-up to device connect</div>
+                        <div class="small-meta">Current: 45%</div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-header">
+                            <div class="small-name">D30 Retention</div>
+                            <div class="small-value">88%</div>
+                        </div>
+                        <div class="small-description">30-day retention rate</div>
+                        <div class="small-meta">Current: 85%</div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-header">
+                            <div class="small-name">Trial → Paid</div>
+                            <div class="small-value">70%</div>
+                        </div>
+                        <div class="small-description">Free trial conversion</div>
+                        <div class="small-meta">Current: 65%</div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-header">
+                            <div class="small-name">Referral Rate</div>
+                            <div class="small-value">25%</div>
+                        </div>
+                        <div class="small-description">Users who refer friends</div>
+                        <div class="small-meta">Current: 15%</div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-header">
+                            <div class="small-name">Organic Traffic</div>
+                            <div class="small-value">10K</div>
+                        </div>
+                        <div class="small-description">Monthly organic visitors</div>
+                        <div class="small-meta">Current: 0</div>
+                    </div>
+                    <div class="small-card">
+                        <div class="small-header">
+                            <div class="small-name">CAC</div>
+                            <div class="small-value"><$218</div>
+                        </div>
+                        <div class="small-description">Blended acquisition cost</div>
+                        <div class="small-meta">Target: Maintain LTV:CAC >4:1</div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | growth-hacking-playbook-v1.0.0</p>
+                <p style="margin-top: 5px;">Context Signature: growth-hacking-playbook-v1.0.0-petpulse | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Chart.js Global Configuration
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        const tooltipConfig = {
+            backgroundColor: '#1a1a1a',
+            titleColor: '#f5f5f5',
+            bodyColor: '#d4d4d4',
+            borderColor: '#10b981',
+            borderWidth: 1
+        };
+
+        const COLORS = {
+            primary: '#10b981',
+            primaryLight: '#14b8a6',
+            primaryDark: '#059669',
+            primaryDarker: '#047857',
+            primaryDarkest: '#065f46',
+            gray: '#a3a3a3'
+        };
+
+        // Channel Scoring Chart
+        const channelCtx = document.getElementById('channelChart');
+        if (channelCtx) {
+            new Chart(channelCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Content/SEO', 'Referral', 'Social Media', 'Email', 'Vet Partners', 'Paid Ads'],
+                    datasets: [{
+                        label: 'Channel Score',
+                        data: [36, 34, 30, 28, 24, 22],
+                        backgroundColor: function(context) {
+                            const value = context.raw;
+                            if (value >= 32) return '#10b981';
+                            if (value >= 26) return '#059669';
+                            return '#047857';
+                        },
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 40,
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        y: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Traction Channel Scoring (Max 40)',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: { display: false },
+                        tooltip: tooltipConfig
+                    }
+                }
+            });
+        }
+
+        // AARRR Funnel Chart
+        const funnelCtx = document.getElementById('funnelChart');
+        if (funnelCtx) {
+            new Chart(funnelCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Acquisition', 'Activation', 'Retention', 'Referral', 'Revenue'],
+                    datasets: [{
+                        label: 'Conversion Rate %',
+                        data: [100, 45, 85, 15, 65],
+                        backgroundColor: [
+                            '#10b981',
+                            '#059669',
+                            '#047857',
+                            '#065f46',
+                            '#064e3b'
+                        ],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                color: '#888',
+                                callback: function(value) { return value + '%'; }
+                            },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Current AARRR Funnel',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: { display: false },
+                        tooltip: tooltipConfig
+                    }
+                }
+            });
+        }
+
+        // Funnel Projection Chart
+        const projectionCtx = document.getElementById('funnelProjectionChart');
+        if (projectionCtx) {
+            new Chart(projectionCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 0', 'Week 4', 'Week 8', 'Week 12'],
+                    datasets: [{
+                        label: 'Activation %',
+                        data: [45, 50, 55, 60],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'Referral %',
+                        data: [15, 18, 22, 25],
+                        borderColor: '#14b8a6',
+                        backgroundColor: 'rgba(20, 184, 166, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'Trial→Paid %',
+                        data: [65, 67, 69, 72],
+                        borderColor: '#059669',
+                        backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                color: '#888',
+                                callback: function(value) { return value + '%'; }
+                            },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { color: '#2a2a2a' }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Projected Improvement',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: {
+                            labels: { color: '#ccc' }
+                        },
+                        tooltip: tooltipConfig
+                    }
+                }
+            });
+        }
+
+        // Experiment Priority Matrix
+        const expCtx = document.getElementById('experimentChart');
+        if (expCtx) {
+            new Chart(expCtx, {
+                type: 'bubble',
+                data: {
+                    datasets: [{
+                        label: 'Referral Program',
+                        data: [{ x: 7, y: 9, r: 16 }],
+                        backgroundColor: 'rgba(16, 185, 129, 0.7)',
+                        borderColor: '#10b981'
+                    }, {
+                        label: 'Pet Health Quiz',
+                        data: [{ x: 8, y: 8, r: 14 }],
+                        backgroundColor: 'rgba(20, 184, 166, 0.7)',
+                        borderColor: '#14b8a6'
+                    }, {
+                        label: 'Vet Partnerships',
+                        data: [{ x: 5, y: 9, r: 12 }],
+                        backgroundColor: 'rgba(5, 150, 105, 0.7)',
+                        borderColor: '#059669'
+                    }, {
+                        label: 'Instagram Reels',
+                        data: [{ x: 6, y: 7, r: 14 }],
+                        backgroundColor: 'rgba(4, 120, 87, 0.7)',
+                        borderColor: '#047857'
+                    }, {
+                        label: 'Abandoned Cart',
+                        data: [{ x: 9, y: 8, r: 16 }],
+                        backgroundColor: 'rgba(6, 95, 70, 0.7)',
+                        borderColor: '#065f46'
+                    }, {
+                        label: 'Gamification',
+                        data: [{ x: 6, y: 8, r: 14 }],
+                        backgroundColor: 'rgba(6, 78, 59, 0.7)',
+                        borderColor: '#064e3b'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            min: 0,
+                            max: 10,
+                            title: {
+                                display: true,
+                                text: 'Ease of Implementation →',
+                                color: '#ccc'
+                            },
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        y: {
+                            min: 0,
+                            max: 10,
+                            title: {
+                                display: true,
+                                text: 'Expected Impact →',
+                                color: '#ccc'
+                            },
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Experiment Prioritization (Bubble = Confidence)',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: {
+                            position: 'bottom',
+                            labels: { color: '#ccc', padding: 12 }
+                        },
+                        tooltip: tooltipConfig
+                    }
+                }
+            });
+        }
+
+        // Growth Levers Radar Chart
+        const leversCtx = document.getElementById('leversChart');
+        if (leversCtx) {
+            new Chart(leversCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Acquisition', 'Activation', 'Retention', 'Referral', 'Revenue', 'Virality'],
+                    datasets: [{
+                        label: 'Current Performance',
+                        data: [5, 6, 8, 4, 7, 5],
+                        backgroundColor: 'rgba(107, 114, 128, 0.3)',
+                        borderColor: '#6b7280',
+                        borderWidth: 2
+                    }, {
+                        label: 'Target Performance (90 Days)',
+                        data: [8, 8, 9, 7, 8, 8],
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        borderColor: '#10b981',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#10b981'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 10,
+                            ticks: { color: '#888', stepSize: 2 },
+                            grid: { color: '#2a2a2a' },
+                            pointLabels: { color: '#ccc', font: { size: 11 } }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Growth Lever Performance',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: {
+                            labels: { color: '#ccc' }
+                        },
+                        tooltip: tooltipConfig
+                    }
+                }
+            });
+        }
+
+        // Budget Allocation Chart
+        const budgetCtx = document.getElementById('budgetChart');
+        if (budgetCtx) {
+            new Chart(budgetCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Content', 'Referral Incentives', 'Tools', 'Paid Testing', 'Partnerships', 'Community'],
+                    datasets: [{
+                        data: [30, 20, 15, 15, 10, 10],
+                        backgroundColor: [
+                            '#10b981',
+                            '#059669',
+                            '#047857',
+                            '#065f46',
+                            '#064e3b',
+                            '#14b8a6'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Budget Allocation ($15K Total)',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: {
+                            position: 'right',
+                            labels: { color: '#ccc', padding: 12 }
+                        },
+                        tooltip: tooltipConfig
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Positioning Expert | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif; background: #0a0a0a; color: #f5f5f5; line-height: 1.6; }
+        .container { margin: 0 auto; background: #0a0a0a; }
+
+        /* === HEADER === */
+        header { background: #0a0a0a; padding: 0; color: white; display: flex; justify-content: center; }
+        .header-content { position: relative; z-index: 1; max-width: 1600px; width: 100%; background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%); padding: 4rem 4rem 3rem 4rem; border-bottom: 1px solid rgba(16, 185, 129, 0.3); }
+        .header-content::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>'); opacity: 0.3; z-index: -1; }
+        .kicker { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; opacity: 0.9; margin-bottom: 0.5rem; }
+        h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
+        .subtitle { font-size: 1.3rem; opacity: 0.95; font-weight: 400; margin-bottom: 2rem; }
+        .meta-info { display: flex; gap: 2rem; font-size: 0.9rem; opacity: 0.9; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.2); }
+        .meta-item { display: flex; align-items: center; gap: 0.5rem; }
+
+        /* === SCORE BANNER === */
+        .score-banner { background: #0a0a0a; padding: 0; display: flex; justify-content: center; }
+        .score-container { display: grid; grid-template-columns: auto 1fr auto; gap: 3rem; align-items: center; max-width: 1600px; width: 100%; margin: 0 auto; padding: 3rem 4rem; background: #1a1a1a; border-bottom: 1px solid rgba(16, 185, 129, 0.2); }
+        .score-main { text-align: center; }
+        .score-number { font-size: 5rem; font-weight: 700; background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+        .score-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; color: #a3a3a3; margin-top: 0.5rem; font-weight: 600; }
+        .score-interpretation { border-left: 3px solid #10b981; padding-left: 2rem; }
+        .interpretation-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; color: #f5f5f5; }
+        .interpretation-text { color: #d4d4d4; line-height: 1.7; }
+        .verdict-badge { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 1rem 2rem; border-radius: 50px; font-weight: 700; font-size: 1.1rem; white-space: nowrap; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+
+        /* === CONTENT === */
+        .content { max-width: 1600px; margin: 0 auto; padding: 4rem 4rem; background: #0a0a0a; }
+        .section { margin-bottom: 4rem; }
+        .section:last-child { margin-bottom: 2rem; }
+        .section-header { margin-bottom: 2rem; }
+        .section-title { font-size: 2rem; font-weight: 700; color: #f5f5f5; margin-bottom: 0.5rem; }
+        .section-description { font-size: 1.05rem; color: #d4d4d4; max-width: 800px; }
+
+        /* === CHART LAYOUTS === */
+        .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        .chart-card { background: #1a1a1a; border-radius: 12px; padding: 2rem; border: 1px solid rgba(16, 185, 129, 0.2); }
+        .chart-card.full-width { grid-column: 1 / -1; }
+        .chart-title { font-weight: 700; font-size: 1.1rem; color: #f5f5f5; margin-bottom: 0.5rem; }
+        .chart-subtitle { font-size: 0.9rem; color: #a3a3a3; margin-bottom: 1.5rem; }
+        .chart-wrapper { position: relative; height: 350px; margin-bottom: 1.5rem; }
+        .insights-panel { background: #0a0a0a; border-left: 4px solid #10b981; padding: 1.5rem; margin-top: 1rem; border-radius: 0 8px 8px 0; }
+        .insight-title { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: #10b981; margin-bottom: 1rem; }
+        .insight-list { list-style: none; }
+        .insight-list li { padding: 0.6rem 0; color: #d4d4d4; font-size: 0.95rem; border-bottom: 1px solid rgba(16, 185, 129, 0.1); }
+        .insight-list li:last-child { border-bottom: none; }
+        .insight-list li strong { color: #10b981; font-weight: 600; }
+
+        /* === FOOTER === */
+        footer { background: #0a0a0a; display: flex; justify-content: center; }
+        .footer-content { max-width: 1600px; width: 100%; background: #1a1a1a; color: #a3a3a3; padding: 2rem 4rem; font-size: 0.85rem; text-align: center; border-top: 1px solid rgba(16, 185, 129, 0.2); }
+        .footer-content p { margin: 0.3rem 0; }
+        .footer-content strong { color: #10b981; }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .score-container { grid-template-columns: 1fr; text-align: center; }
+            .score-interpretation { border-left: none; border-top: 3px solid #10b981; padding-left: 0; padding-top: 1.5rem; }
+            .header-content, .score-container, .content, .footer-content { padding: 2rem; }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           SKILL-SPECIFIC CSS - PRODUCT POSITIONING EXPERT
+           ═══════════════════════════════════════════════════════════════════════════ */
+        /* === POSITIONING CANVAS === */
+        .positioning-canvas { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 2rem; margin-top: 2rem; }
+        .canvas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .canvas-block { background: rgba(10, 10, 10, 0.5); border: 1px solid rgba(16, 185, 129, 0.15); border-radius: 8px; padding: 1.25rem; }
+        .canvas-title { font-weight: 700; color: #10b981; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+        .canvas-content { font-size: 0.95rem; color: #d4d4d4; line-height: 1.6; }
+        .canvas-highlight { background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%); border: 2px solid rgba(16, 185, 129, 0.3); }
+
+        /* === POSITIONING STATEMENT === */
+        .positioning-statement { background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; }
+        .statement-label { font-size: 0.8rem; color: #10b981; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; font-weight: 600; }
+        .statement-text { font-size: 1.25rem; color: #f5f5f5; line-height: 1.8; font-weight: 500; }
+
+        /* === COMPETITOR COMPARISON === */
+        .competitor-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+        .competitor-table th { background: rgba(16, 185, 129, 0.1); color: #f5f5f5; font-weight: 600; font-size: 0.9rem; padding: 1rem; text-align: center; border-bottom: 2px solid rgba(16, 185, 129, 0.3); }
+        .competitor-table th:first-child { text-align: left; color: #10b981; }
+        .competitor-table th.you { background: rgba(16, 185, 129, 0.2); }
+        .competitor-table td { padding: 0.75rem 1rem; color: #d4d4d4; font-size: 0.9rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); text-align: center; }
+        .competitor-table td:first-child { text-align: left; font-weight: 500; color: #f5f5f5; }
+        .competitor-table td.you { background: rgba(16, 185, 129, 0.05); }
+        .competitor-table tr:hover td { background: rgba(16, 185, 129, 0.05); }
+        .score-high { color: #10b981; font-weight: 700; }
+        .score-medium { color: #f6ad55; font-weight: 600; }
+        .score-low { color: #fc8181; font-weight: 600; }
+
+        /* === DIFFERENTIATOR CARDS === */
+        .diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .diff-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; position: relative; overflow: hidden; }
+        .diff-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #10b981 0%, #14b8a6 100%); }
+        .diff-number { font-size: 3rem; font-weight: 900; color: rgba(16, 185, 129, 0.15); position: absolute; top: 0.5rem; right: 1rem; line-height: 1; }
+        .diff-type { font-weight: 700; color: #10b981; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+        .diff-name { font-weight: 700; color: #f5f5f5; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .diff-description { font-size: 0.9rem; color: #d4d4d4; line-height: 1.5; margin-bottom: 1rem; }
+        .diff-proof { font-size: 0.85rem; color: #a3a3a3; font-style: italic; padding-top: 0.75rem; border-top: 1px solid rgba(16, 185, 129, 0.1); }
+
+        /* === MESSAGING FRAMEWORK === */
+        .messaging-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
+        .messaging-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1.25rem; }
+        .messaging-audience { font-weight: 700; color: #10b981; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+        .messaging-headline { font-size: 1.1rem; color: #f5f5f5; font-weight: 600; margin-bottom: 0.5rem; line-height: 1.3; }
+        .messaging-subheadline { font-size: 0.9rem; color: #d4d4d4; line-height: 1.4; }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 1024px) { .canvas-grid { grid-template-columns: 1fr; } .diff-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { .diff-grid, .messaging-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">StratArts Business Analysis</div>
+                <h1>Product Positioning Expert</h1>
+                <div class="subtitle">PetPulse - Smart Pet Health Monitoring Platform</div>
+                <div class="meta-info">
+                    <div class="meta-item"><span>📅</span><span>Generated: December 18, 2025</span></div>
+                    <div class="meta-item"><span>📊</span><span>Analysis Type: April Dunford Framework</span></div>
+                    <div class="meta-item"><span>🎯</span><span>Version 1.0.0</span></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SCORE BANNER -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">8.7/10</div>
+                    <div class="score-label">Positioning Strength</div>
+                </div>
+                <div class="score-interpretation">
+                    <div class="interpretation-title">What This Score Means</div>
+                    <div class="interpretation-text">
+                        PetPulse's positioning scores 8.7/10, indicating strong market differentiation with clear competitive advantages. The AI + telehealth integration creates a defensible position in an uncrowded market segment, with particularly strong differentiation from GPS-focused pet trackers.
+                    </div>
+                </div>
+                <div class="verdict-badge">✓ STRONG POSITIONING</div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+            <!-- Section 1: Positioning Canvas -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Positioning Canvas</h2>
+                    <p class="section-description">April Dunford's positioning framework applied to PetPulse.</p>
+                </div>
+                <div class="positioning-canvas">
+                    <div class="canvas-grid">
+                        <div class="canvas-block">
+                            <div class="canvas-title">Target Customer</div>
+                            <div class="canvas-content">Premium pet parents with household income $100K+, ages 30-55, living in urban/suburban areas. They view pets as family members and prioritize proactive health care over reactive treatment.</div>
+                        </div>
+                        <div class="canvas-block">
+                            <div class="canvas-title">Problem/Need</div>
+                            <div class="canvas-content">Anxiety about pet health and missing early warning signs of illness. Pets can't verbalize symptoms, leading to expensive emergency vet visits when issues aren't caught early. 2-3 week wait times for non-emergency vet appointments.</div>
+                        </div>
+                        <div class="canvas-block">
+                            <div class="canvas-title">Category</div>
+                            <div class="canvas-content">Smart Pet Health Monitoring Platform — creating a new category at the intersection of pet wearables and veterinary telehealth. Not a GPS tracker, not standalone telehealth.</div>
+                        </div>
+                        <div class="canvas-block">
+                            <div class="canvas-title">Primary Benefit</div>
+                            <div class="canvas-content">Early illness detection combined with instant veterinary access. Catch problems before they become emergencies, reducing ER visits by 40% and saving $1,200+/year on average.</div>
+                        </div>
+                        <div class="canvas-block canvas-highlight" style="grid-column: 1 / -1;">
+                            <div class="canvas-title">Unique Differentiator</div>
+                            <div class="canvas-content">Only platform combining AI-powered health monitoring with integrated on-demand veterinary telehealth. GPS trackers (Fi, Whistle) focus on location. Telehealth (Fuzzy) lacks continuous monitoring. PetPulse is the only product that detects health anomalies AND connects you with a vet in 4 minutes — all in one subscription.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Positioning Statement -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Positioning Statement</h2>
+                    <p class="section-description">Synthesized positioning for consistent market communication.</p>
+                </div>
+                <div class="positioning-statement">
+                    <div class="statement-label">Core Positioning Statement</div>
+                    <div class="statement-text">
+                        For <strong>premium pet parents</strong> who <strong>worry about missing early signs of pet illness</strong>,<br><br>
+                        <strong>PetPulse</strong> is a <strong>smart pet health monitoring platform</strong><br><br>
+                        that <strong>detects early warning signs and provides instant vet access 24/7</strong>.<br><br>
+                        Unlike <strong>GPS trackers or standalone telehealth</strong>,<br><br>
+                        we <strong>combine AI-powered health monitoring with integrated veterinary consultations</strong> — reducing emergency vet visits by 40%.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Competitive Comparison -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Competitive Comparison</h2>
+                    <p class="section-description">Feature and benefit comparison against key competitors.</p>
+                </div>
+                <table class="competitor-table">
+                    <thead>
+                        <tr>
+                            <th>Attribute</th>
+                            <th class="you">PetPulse</th>
+                            <th>Fi Collar</th>
+                            <th>Whistle</th>
+                            <th>Fuzzy</th>
+                            <th>Traditional Vet</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Health Monitoring</td>
+                            <td class="you score-high">✓ AI-powered</td>
+                            <td class="score-low">✗</td>
+                            <td class="score-medium">Basic activity</td>
+                            <td class="score-low">✗</td>
+                            <td class="score-medium">Annual exams</td>
+                        </tr>
+                        <tr>
+                            <td>Vet Access</td>
+                            <td class="you score-high">✓ 24/7 telehealth</td>
+                            <td class="score-low">✗</td>
+                            <td class="score-low">✗</td>
+                            <td class="score-high">✓ 24/7</td>
+                            <td class="score-medium">Business hours</td>
+                        </tr>
+                        <tr>
+                            <td>Early Detection</td>
+                            <td class="you score-high">✓ Hours</td>
+                            <td class="score-low">✗</td>
+                            <td class="score-low">✗</td>
+                            <td class="score-low">✗</td>
+                            <td class="score-medium">At visit</td>
+                        </tr>
+                        <tr>
+                            <td>GPS Tracking</td>
+                            <td class="you score-medium">Optional</td>
+                            <td class="score-high">✓ Primary</td>
+                            <td class="score-high">✓ Primary</td>
+                            <td class="score-low">✗</td>
+                            <td class="score-low">✗</td>
+                        </tr>
+                        <tr>
+                            <td>Response Time</td>
+                            <td class="you score-high">4 min avg</td>
+                            <td class="score-low">N/A</td>
+                            <td class="score-low">N/A</td>
+                            <td class="score-high">5 min avg</td>
+                            <td class="score-low">2-3 weeks</td>
+                        </tr>
+                        <tr>
+                            <td>Price/Month</td>
+                            <td class="you">$25</td>
+                            <td>$8-15</td>
+                            <td>$8-12</td>
+                            <td>$20-40</td>
+                            <td>$0-50 (visits)</td>
+                        </tr>
+                        <tr>
+                            <td>Primary Focus</td>
+                            <td class="you score-high">Health</td>
+                            <td>Location</td>
+                            <td>Location</td>
+                            <td>Telehealth</td>
+                            <td>Treatment</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Section 4: Key Differentiators -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Key Differentiators</h2>
+                    <p class="section-description">Primary competitive advantages with supporting evidence.</p>
+                </div>
+                <div class="diff-grid">
+                    <div class="diff-card">
+                        <div class="diff-number">1</div>
+                        <div class="diff-type">Technology</div>
+                        <div class="diff-name">AI-Powered Early Detection</div>
+                        <div class="diff-description">Proprietary algorithms analyze vital signs, activity patterns, and sleep data to detect anomalies up to 72 hours before visible symptoms appear.</div>
+                        <div class="diff-proof">Proof: 15,000+ early detections in beta, 40% reduction in emergency vet visits</div>
+                    </div>
+                    <div class="diff-card">
+                        <div class="diff-number">2</div>
+                        <div class="diff-type">Integration</div>
+                        <div class="diff-name">Integrated Telehealth</div>
+                        <div class="diff-description">Only platform combining continuous monitoring WITH on-demand vet consultations. Health data is automatically shared with vets for informed consultations.</div>
+                        <div class="diff-proof">Proof: 4-minute average response time, licensed vets in all 50 states</div>
+                    </div>
+                    <div class="diff-card">
+                        <div class="diff-number">3</div>
+                        <div class="diff-type">Focus</div>
+                        <div class="diff-name">Health-First (Not GPS)</div>
+                        <div class="diff-description">Unlike GPS trackers that monitor location, PetPulse monitors what matters most: your pet's health. Optional GPS is secondary to health intelligence.</div>
+                        <div class="diff-proof">Proof: 95% of users cite health monitoring (not GPS) as primary value</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Visual Analysis -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Visual Analysis</h2>
+                    <p class="section-description">Competitive positioning maps and perceptual analysis.</p>
+                </div>
+                <div class="chart-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">Competitive Positioning Map</div>
+                        <div class="chart-subtitle">Health Intelligence vs. Vet Access Speed</div>
+                        <div class="chart-wrapper"><canvas id="positioningMap"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Position Analysis</div>
+                            <ul class="insight-list">
+                                <li><strong>Own the upper-right</strong> — Only player with both high health intelligence AND fast vet access</li>
+                                <li><strong>Clear white space</strong> — No direct competitors in PetPulse's quadrant</li>
+                                <li><strong>GPS trackers bottom-right</strong> — Good tech, but wrong focus (location vs health)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Feature Comparison Radar</div>
+                        <div class="chart-subtitle">Capability comparison across key dimensions</div>
+                        <div class="chart-wrapper"><canvas id="featureRadar"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Feature Analysis</div>
+                            <ul class="insight-list">
+                                <li><strong>Health monitoring gap</strong> — Massive advantage vs. GPS-focused competitors</li>
+                                <li><strong>Vet access parity</strong> — Matches dedicated telehealth (Fuzzy)</li>
+                                <li><strong>GPS acceptable</strong> — Not best-in-class, but sufficient for use case</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Differentiator Strength</div>
+                        <div class="chart-subtitle">Competitive advantage scoring</div>
+                        <div class="chart-wrapper"><canvas id="differentiatorChart"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Advantage Analysis</div>
+                            <ul class="insight-list">
+                                <li><strong>AI Detection (9.2)</strong> — Strongest differentiator, hardest to replicate</li>
+                                <li><strong>Integration (8.8)</strong> — Unique combination creates moat</li>
+                                <li><strong>Health Focus (8.5)</strong> — Category positioning vs GPS trackers</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Brand Perception Targets</div>
+                        <div class="chart-subtitle">Desired brand attribute association</div>
+                        <div class="chart-wrapper"><canvas id="perceptionChart"></canvas></div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Perception Insights</div>
+                            <ul class="insight-list">
+                                <li><strong>Trust (9.0)</strong> — Critical for pet health decisions</li>
+                                <li><strong>Innovation (8.5)</strong> — AI/tech credibility for early detection</li>
+                                <li><strong>Caring (8.8)</strong> — Emotional connection with pet parents</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Messaging Framework -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Channel Messaging</h2>
+                    <p class="section-description">Tailored messaging for different marketing channels.</p>
+                </div>
+                <div class="messaging-grid">
+                    <div class="messaging-card">
+                        <div class="messaging-audience">Website Hero</div>
+                        <div class="messaging-headline">Know your pet is healthy. Every day.</div>
+                        <div class="messaging-subheadline">PetPulse monitors your pet's health 24/7 and connects you with vets instantly — because early detection saves lives (and money).</div>
+                    </div>
+                    <div class="messaging-card">
+                        <div class="messaging-audience">Twitter Bio</div>
+                        <div class="messaging-headline">Smart pet health monitoring 🐕</div>
+                        <div class="messaging-subheadline">AI-powered early detection + instant vet access. 40% fewer emergency visits. Your pet's health, monitored 24/7. Try free.</div>
+                    </div>
+                    <div class="messaging-card">
+                        <div class="messaging-audience">LinkedIn Tagline</div>
+                        <div class="messaging-headline">Pet Health Monitoring Platform</div>
+                        <div class="messaging-subheadline">Combining AI-powered health intelligence with on-demand veterinary telehealth. Helping premium pet parents catch health issues before they become emergencies.</div>
+                    </div>
+                    <div class="messaging-card">
+                        <div class="messaging-audience">30-Second Pitch</div>
+                        <div class="messaging-headline">Problem → Solution → Proof</div>
+                        <div class="messaging-subheadline">"Pet parents worry constantly about their pet's health — and most issues start with subtle signs that are easy to miss. PetPulse is a smart collar that monitors health 24/7 and connects you with vets instantly. Unlike GPS trackers, we focus on health. 40% fewer emergency visits for our users."</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Unlike Statements -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Competitive Unlike Statements</h2>
+                    <p class="section-description">Positioning against specific competitors.</p>
+                </div>
+                <div class="diff-grid">
+                    <div class="diff-card">
+                        <div class="diff-type">vs. Fi / Whistle</div>
+                        <div class="diff-name">"Unlike GPS Trackers"</div>
+                        <div class="diff-description">Unlike Fi and Whistle, which tell you where your pet is, PetPulse tells you HOW your pet is. We monitor health, not just location.</div>
+                        <div class="diff-proof">When to use: When prospects mention GPS trackers or ask "how is this different from my Fi collar?"</div>
+                    </div>
+                    <div class="diff-card">
+                        <div class="diff-type">vs. Fuzzy Telehealth</div>
+                        <div class="diff-name">"Unlike Standalone Telehealth"</div>
+                        <div class="diff-description">Unlike Fuzzy, which only offers reactive consultations, PetPulse monitors your pet continuously and shares health data with vets automatically.</div>
+                        <div class="diff-proof">When to use: When prospects ask about vet telehealth alternatives</div>
+                    </div>
+                    <div class="diff-card">
+                        <div class="diff-type">vs. Traditional Vet</div>
+                        <div class="diff-name">"Unlike Annual Checkups"</div>
+                        <div class="diff-description">Unlike waiting for annual vet visits, PetPulse monitors your pet every day. We catch issues in hours, not months.</div>
+                        <div class="diff-proof">When to use: When prospects say "my vet is enough"</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | product-positioning-expert-v1.0.0</p>
+                <p style="margin-top: 5px;">Context Signature: product-positioning-expert-v1.0.0 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Chart.js Configuration
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+        const tooltipConfig = { backgroundColor: '#1a1a1a', titleColor: '#f5f5f5', bodyColor: '#d4d4d4', borderColor: '#10b981', borderWidth: 1 };
+        const COLORS = {
+            primary: '#10b981',
+            backgrounds: ['rgba(16, 185, 129, 0.4)', 'rgba(16, 185, 129, 0.6)', 'rgba(16, 185, 129, 0.8)', 'rgba(20, 184, 166, 0.8)', 'rgba(5, 150, 105, 0.8)']
+        };
+
+        const data = {
+            positioning: {
+                you: { x: 8.5, y: 8.8, label: 'PetPulse' },
+                competitors: [
+                    { x: 7.0, y: 3.0, label: 'Fi' },
+                    { x: 6.5, y: 2.5, label: 'Whistle' },
+                    { x: 3.0, y: 8.0, label: 'Fuzzy' },
+                    { x: 2.0, y: 2.0, label: 'Trad. Vet' }
+                ]
+            },
+            features: {
+                labels: ['Health Monitoring', 'Vet Access', 'Early Detection', 'GPS Tracking', 'Mobile App', 'Integration'],
+                you: [9.5, 9.0, 9.2, 6.0, 8.5, 8.8],
+                competitors: [3.0, 4.0, 2.0, 8.5, 7.0, 3.5]
+            },
+            differentiators: {
+                labels: ['AI-Powered Detection', 'Integrated Telehealth', 'Health-First Focus'],
+                values: [9.2, 8.8, 8.5]
+            },
+            perception: {
+                labels: ['Trust', 'Innovation', 'Caring', 'Premium', 'Reliability'],
+                values: [9.0, 8.5, 8.8, 7.5, 8.2]
+            }
+        };
+
+        // Chart 1: Positioning Map
+        new Chart(document.getElementById('positioningMap'), {
+            type: 'scatter',
+            data: { datasets: [
+                { label: data.positioning.you.label, data: [{ x: data.positioning.you.x, y: data.positioning.you.y }], backgroundColor: '#10b981', borderColor: '#14b8a6', borderWidth: 3, pointRadius: 16 },
+                { label: 'Competitors', data: data.positioning.competitors, backgroundColor: 'rgba(163, 163, 163, 0.6)', borderColor: '#a3a3a3', pointRadius: 10 }
+            ] },
+            options: { responsive: true, maintainAspectRatio: false, scales: { x: { title: { display: true, text: 'Health Intelligence', color: '#a3a3a3' }, min: 0, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' } }, y: { title: { display: true, text: 'Vet Access Speed', color: '#a3a3a3' }, min: 0, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' } } }, plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig } }
+        });
+
+        // Chart 2: Feature Radar
+        new Chart(document.getElementById('featureRadar'), {
+            type: 'radar',
+            data: { labels: data.features.labels, datasets: [
+                { label: 'PetPulse', data: data.features.you, backgroundColor: 'rgba(16, 185, 129, 0.2)', borderColor: '#10b981', borderWidth: 3, pointBackgroundColor: '#10b981', pointRadius: 5 },
+                { label: 'Avg Competitor', data: data.features.competitors, backgroundColor: 'rgba(163, 163, 163, 0.1)', borderColor: '#a3a3a3', borderWidth: 2, borderDash: [5, 5], pointRadius: 4 }
+            ] },
+            options: { responsive: true, maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 10, ticks: { color: '#a3a3a3', stepSize: 2 }, grid: { color: 'rgba(16, 185, 129, 0.1)' }, pointLabels: { color: '#f5f5f5', font: { size: 11 } } } }, plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig } }
+        });
+
+        // Chart 3: Differentiator Bar
+        new Chart(document.getElementById('differentiatorChart'), {
+            type: 'bar',
+            data: { labels: data.differentiators.labels, datasets: [{ data: data.differentiators.values, backgroundColor: '#10b981', borderRadius: 6 }] },
+            options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { beginAtZero: true, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' } }, y: { grid: { display: false }, ticks: { color: '#f5f5f5' } } }, plugins: { legend: { display: false }, tooltip: tooltipConfig } }
+        });
+
+        // Chart 4: Perception Polar Area
+        new Chart(document.getElementById('perceptionChart'), {
+            type: 'polarArea',
+            data: { labels: data.perception.labels, datasets: [{ data: data.perception.values, backgroundColor: COLORS.backgrounds }] },
+            options: { responsive: true, maintainAspectRatio: false, scales: { r: { beginAtZero: true, ticks: { color: '#a3a3a3' }, grid: { color: 'rgba(16, 185, 129, 0.1)' } } }, plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig } }
+        });
+    </script>
+
+    <!-- STRATARTS_CONTEXT_SIGNATURE
+    skill: product-positioning-expert
+    version: 1.0.0
+    date: 2025-12-18
+    project_dir: D:\AI\projects\stratarts\examples\petpulse
+    business_name: PetPulse
+    key_outputs:
+      - Positioning Statement (April Dunford framework)
+      - Target Customer: Premium pet parents ($100K+ income, 30-55, urban/suburban)
+      - Category: Smart Pet Health Monitoring Platform
+      - Key Differentiators: AI detection (9.2), Integrated telehealth (8.8), Health-first focus (8.5)
+      - Competitive Map: Health Intelligence x Vet Access Speed
+      - Unlike Statements: vs Fi/Whistle, vs Fuzzy, vs Traditional Vet
+      - Channel Messaging: Website, Twitter, LinkedIn, 30-sec pitch
+    END_STRATARTS_CONTEXT -->
+</body>
+</html>

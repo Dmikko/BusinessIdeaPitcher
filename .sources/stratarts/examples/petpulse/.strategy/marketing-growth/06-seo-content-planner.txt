@@ -1,0 +1,448 @@
+
+================================================================================
+                          SEO CONTENT PLANNER
+                              PetPulse
+================================================================================
+                    Generated: December 18, 2025
+                    Analysis: Keyword Strategy & Content Clusters
+                    Version: 1.0.0
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         SEO OPPORTUNITY SCORE                               │
+│                                                                             │
+│                             ████████░░ 8.2/10                              │
+│                                                                             │
+│  Strong SEO opportunity in emerging smart pet health monitoring niche.     │
+│  Low-to-medium keyword competition with high purchase intent. Content      │
+│  marketing can establish authority within 6-12 months with consistent      │
+│  publishing cadence.                                                        │
+│                                                                             │
+│                      VERDICT: HIGH OPPORTUNITY                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+================================================================================
+                         SEO SNAPSHOT
+================================================================================
+
+  ┌────────────────────────┬────────────────────────┬────────────────────────┐
+  │ TOTAL KEYWORDS         │ MONTHLY SEARCHES       │ CONTENT PIECES         │
+  ├────────────────────────┼────────────────────────┼────────────────────────┤
+  │        75              │       31,500           │        45              │
+  │   (target keywords)    │   (combined volume)    │   (planned articles)   │
+  └────────────────────────┴────────────────────────┴────────────────────────┘
+
+================================================================================
+                         KEYWORD CLUSTERS
+================================================================================
+
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ CLUSTER 1: PET HEALTH MONITORING                        8,500 searches/mo  │
+  ├─────────────────────────────────────────────────────────────────────────────┤
+  │ Intent: Informational → Commercial                                          │
+  │ Competition: Medium                                                         │
+  │ Priority: ★★★★★ HIGHEST                                                    │
+  │                                                                             │
+  │ Pillar: "Ultimate Guide to Pet Health Monitoring in 2025"                  │
+  │                                                                             │
+  │ Keywords:                                                                   │
+  │ • pet health monitoring devices        │ 2,400/mo │ KD: 35 │ Commercial   │
+  │ • how to monitor dog health at home    │ 1,800/mo │ KD: 28 │ Informational│
+  │ • cat health tracking technology       │ 1,200/mo │ KD: 32 │ Commercial   │
+  │ • pet vital signs normal ranges        │ 1,600/mo │ KD: 22 │ Informational│
+  │ • wearable health monitor for dogs     │   900/mo │ KD: 38 │ Commercial   │
+  │ • pet health data tracking app         │   600/mo │ KD: 30 │ Commercial   │
+  └─────────────────────────────────────────────────────────────────────────────┘
+
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ CLUSTER 2: SMART PET TECHNOLOGY                         6,200 searches/mo  │
+  ├─────────────────────────────────────────────────────────────────────────────┤
+  │ Intent: Commercial → Transactional                                          │
+  │ Competition: Medium-High                                                    │
+  │ Priority: ★★★★☆ HIGH                                                       │
+  │                                                                             │
+  │ Pillar: "Smart Pet Devices: Complete Buyer's Guide 2025"                   │
+  │                                                                             │
+  │ Keywords:                                                                   │
+  │ • best smart dog collar 2025           │ 1,900/mo │ KD: 45 │ Transactional│
+  │ • smart pet technology reviews         │ 1,400/mo │ KD: 40 │ Commercial   │
+  │ • AI pet health devices                │   800/mo │ KD: 35 │ Commercial   │
+  │ • connected pet collar comparison      │   700/mo │ KD: 38 │ Commercial   │
+  │ • smart collar vs GPS tracker          │   900/mo │ KD: 32 │ Informational│
+  │ • pet tech worth buying                │   500/mo │ KD: 28 │ Informational│
+  └─────────────────────────────────────────────────────────────────────────────┘
+
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ CLUSTER 3: PET TELEHEALTH                               4,800 searches/mo  │
+  ├─────────────────────────────────────────────────────────────────────────────┤
+  │ Intent: Informational → Commercial                                          │
+  │ Competition: Low-Medium                                                     │
+  │ Priority: ★★★★☆ HIGH                                                       │
+  │                                                                             │
+  │ Pillar: "Pet Telehealth: When to Use Virtual Vet Services"                 │
+  │                                                                             │
+  │ Keywords:                                                                   │
+  │ • online vet consultation              │ 1,800/mo │ KD: 42 │ Transactional│
+  │ • pet telehealth services              │ 1,100/mo │ KD: 35 │ Commercial   │
+  │ • virtual vet visit cost               │   800/mo │ KD: 28 │ Informational│
+  │ • when to see vet vs telehealth        │   500/mo │ KD: 22 │ Informational│
+  │ • best pet telehealth apps             │   400/mo │ KD: 38 │ Commercial   │
+  │ • 24/7 vet advice online               │   200/mo │ KD: 30 │ Commercial   │
+  └─────────────────────────────────────────────────────────────────────────────┘
+
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ CLUSTER 4: PET HEALTH SYMPTOMS                         12,000 searches/mo  │
+  ├─────────────────────────────────────────────────────────────────────────────┤
+  │ Intent: Informational (Urgent)                                              │
+  │ Competition: Medium                                                         │
+  │ Priority: ★★★★★ HIGHEST (Traffic driver)                                   │
+  │                                                                             │
+  │ Pillar: "Pet Health Warning Signs Every Owner Should Know"                 │
+  │                                                                             │
+  │ Keywords:                                                                   │
+  │ • signs my dog is sick                 │ 3,200/mo │ KD: 35 │ Informational│
+  │ • dog lethargy causes                  │ 2,100/mo │ KD: 30 │ Informational│
+  │ • cat not eating warning signs         │ 1,800/mo │ KD: 28 │ Informational│
+  │ • when to take dog to vet              │ 2,400/mo │ KD: 32 │ Informational│
+  │ • pet emergency symptoms               │ 1,500/mo │ KD: 25 │ Informational│
+  │ • dog breathing problems signs         │ 1,000/mo │ KD: 22 │ Informational│
+  └─────────────────────────────────────────────────────────────────────────────┘
+
+================================================================================
+                         CONTENT GAP ANALYSIS
+================================================================================
+
+  HIGH PRIORITY GAPS (Competitor Content We're Missing)
+  ─────────────────────────────────────────────────────────────────────────────
+
+  ┌────────────────────────────────────────┬──────────┬────────┬───────────────┐
+  │ CONTENT GAP                            │ VOLUME   │ KD     │ COMPETITORS   │
+  ├────────────────────────────────────────┼──────────┼────────┼───────────────┤
+  │ "Smart collar battery life comparison" │ 720/mo   │ 25     │ Fi, Whistle   │
+  │ "Dog heart rate by breed"              │ 1,200/mo │ 20     │ PetMD         │
+  │ "Pet activity tracking accuracy"       │ 540/mo   │ 30     │ Fi            │
+  │ "GPS pet tracker subscription costs"   │ 880/mo   │ 35     │ Whistle, Fi   │
+  └────────────────────────────────────────┴──────────┴────────┴───────────────┘
+
+  UNIQUE OPPORTUNITY GAPS (Content Nobody Has Created)
+  ─────────────────────────────────────────────────────────────────────────────
+
+  ┌────────────────────────────────────────┬──────────┬────────┬───────────────┐
+  │ OPPORTUNITY                            │ VOLUME   │ KD     │ CONTENT TYPE  │
+  ├────────────────────────────────────────┼──────────┼────────┼───────────────┤
+  │ "AI pet health predictions explained"  │ 320/mo   │ 15     │ Educational   │
+  │ "Early illness detection in pets"      │ 480/mo   │ 18     │ Pillar        │
+  │ "Pet health data privacy guide"        │ 180/mo   │ 12     │ Trust-builder │
+  │ "Vet-approved health monitoring tips"  │ 390/mo   │ 22     │ Authority     │
+  └────────────────────────────────────────┴──────────┴────────┴───────────────┘
+
+================================================================================
+                         90-DAY CONTENT CALENDAR
+================================================================================
+
+  MONTH 1: Foundation Content
+  ─────────────────────────────────────────────────────────────────────────────
+
+  Week 1:
+  □ [PILLAR] Ultimate Guide to Pet Health Monitoring (3,000 words)
+  □ [SUPPORT] Top 10 Signs Your Dog Needs a Vet Visit (1,500 words)
+
+  Week 2:
+  □ [SUPPORT] Understanding Your Pet's Vital Signs (1,800 words)
+  □ [SUPPORT] Pet Health Monitoring: Manual vs Smart Devices (1,200 words)
+
+  Week 3:
+  □ [PILLAR] Smart Pet Devices Buyer's Guide 2025 (2,500 words)
+  □ [SUPPORT] What to Look for in a Pet Health Tracker (1,400 words)
+
+  Week 4:
+  □ [SUPPORT] Dog Heart Rate: Normal Ranges by Breed (1,600 words)
+  □ [SUPPORT] Cat Activity Levels: What's Normal? (1,200 words)
+
+  MONTH 2: Cluster Expansion
+  ─────────────────────────────────────────────────────────────────────────────
+
+  Week 5:
+  □ [PILLAR] Pet Telehealth Complete Guide (2,800 words)
+  □ [SUPPORT] When to Use Virtual Vet vs In-Person (1,500 words)
+
+  Week 6:
+  □ [SUPPORT] Pet Health Data: What Your Vet Wants to See (1,400 words)
+  □ [SUPPORT] Early Warning Signs of Pet Illness (1,800 words)
+
+  Week 7:
+  □ [PILLAR] Pet Health Warning Signs Guide (2,500 words)
+  □ [SUPPORT] Dog Breathing Problems: When to Worry (1,600 words)
+
+  Week 8:
+  □ [SUPPORT] Cat Lethargy: Causes and When to Act (1,400 words)
+  □ [SUPPORT] Pet Emergency Symptoms Checklist (1,200 words)
+
+  MONTH 3: Authority Building
+  ─────────────────────────────────────────────────────────────────────────────
+
+  Week 9:
+  □ [AUTHORITY] Interview: Veterinarian on Pet Health Tech
+  □ [SUPPORT] How AI Detects Pet Health Issues Early (1,800 words)
+
+  Week 10:
+  □ [SUPPORT] Smart Collar Battery Life Comparison (1,400 words)
+  □ [SUPPORT] GPS vs Health: Which Pet Tracker is Right? (1,600 words)
+
+  Week 11:
+  □ [SUPPORT] Pet Health Tracking Privacy Guide (1,200 words)
+  □ [SUPPORT] Setting Up Pet Health Monitoring at Home (1,500 words)
+
+  Week 12:
+  □ [ROUNDUP] Best Pet Health Monitors 2025 (2,000 words)
+  □ [SUPPORT] Pet Health Monitoring ROI Calculator (Interactive)
+
+================================================================================
+                         SERP FEATURES STRATEGY
+================================================================================
+
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ FEATURED SNIPPETS TARGETS                                                   │
+  ├─────────────────────────────────────────────────────────────────────────────┤
+  │ Query: "what is a normal heart rate for a dog"                             │
+  │ Format: Table (breed, resting BPM, active BPM)                             │
+  │ Article: Dog Heart Rate: Normal Ranges by Breed                            │
+  │                                                                             │
+  │ Query: "signs my dog is sick"                                              │
+  │ Format: Numbered list (10 warning signs)                                   │
+  │ Article: Top 10 Signs Your Dog Needs a Vet Visit                           │
+  │                                                                             │
+  │ Query: "when to take dog to vet"                                           │
+  │ Format: Bulleted list (emergency vs wait)                                  │
+  │ Article: Pet Emergency Symptoms Checklist                                  │
+  └─────────────────────────────────────────────────────────────────────────────┘
+
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ PEOPLE ALSO ASK OPPORTUNITIES                                               │
+  ├─────────────────────────────────────────────────────────────────────────────┤
+  │ • How can I monitor my pet's health at home?                               │
+  │ • What vital signs should I track for my dog?                              │
+  │ • Are smart pet collars worth it?                                          │
+  │ • How accurate are pet health monitoring devices?                          │
+  │ • When should I use pet telehealth vs go to the vet?                       │
+  │ • What does a pet health tracker measure?                                  │
+  └─────────────────────────────────────────────────────────────────────────────┘
+
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ RICH RESULTS TARGETS                                                        │
+  ├─────────────────────────────────────────────────────────────────────────────┤
+  │ Schema Type        │ Content                    │ Pages                     │
+  │ ───────────────────┼────────────────────────────┼───────────────────────────│
+  │ HowTo              │ Setup guides               │ 5 articles                │
+  │ FAQ                │ Common questions           │ All pillar pages          │
+  │ Product            │ Comparison articles        │ Buyer's guides            │
+  │ Article            │ All blog posts             │ 45 articles               │
+  │ BreadcrumbList     │ Site navigation            │ All pages                 │
+  └─────────────────────────────────────────────────────────────────────────────┘
+
+================================================================================
+                         TECHNICAL SEO CHECKLIST
+================================================================================
+
+  CRITICAL (Fix Immediately)
+  ─────────────────────────────────────────────────────────────────────────────
+  ✓ HTTPS enabled and enforced
+  ✓ Mobile-responsive design
+  ⚠ Page speed optimization needed (target: <3s LCP)
+  ✗ Schema markup not implemented
+  ⚠ XML sitemap needs blog integration
+
+  HIGH PRIORITY
+  ─────────────────────────────────────────────────────────────────────────────
+  ⚠ Internal linking structure needs improvement
+  ✗ Breadcrumb navigation missing
+  ⚠ Image optimization (WebP, lazy loading)
+  ✗ Canonical URLs not configured
+  ⚠ Meta descriptions need optimization
+
+  MEDIUM PRIORITY
+  ─────────────────────────────────────────────────────────────────────────────
+  □ Implement hreflang (if expanding internationally)
+  □ Add FAQ schema to pillar pages
+  □ Create HTML sitemap for users
+  □ Optimize URL structure (remove dates)
+  □ Add table of contents to long articles
+
+================================================================================
+                         ON-PAGE SEO TEMPLATE
+================================================================================
+
+  PILLAR PAGE STRUCTURE
+  ─────────────────────────────────────────────────────────────────────────────
+  □ H1: Primary keyword (exact match)
+  □ Meta Title: Primary KW | Brand (55-60 chars)
+  □ Meta Description: Primary + secondary KW, CTA (150-160 chars)
+  □ H2s: Secondary keywords (4-6 sections)
+  □ H3s: Long-tail variations
+  □ Internal links: 5+ to supporting content
+  □ External links: 2-3 to authoritative sources
+  □ Images: 4-6 with descriptive alt text
+  □ FAQ section: 5 questions with schema
+  □ Word count: 2,500-3,500 words
+  □ Table of contents: Linked to H2s
+
+  SUPPORTING ARTICLE STRUCTURE
+  ─────────────────────────────────────────────────────────────────────────────
+  □ H1: Long-tail keyword variation
+  □ Meta Title: Target keyword | PetPulse (55-60 chars)
+  □ Meta Description: Keyword + benefit + CTA
+  □ H2s: 3-4 main sections
+  □ Internal links: 3+ (1 to pillar, 2+ to cluster)
+  □ Word count: 1,200-1,800 words
+  □ CTA: Link to pillar or product page
+
+================================================================================
+                         COMPETITOR SEO ANALYSIS
+================================================================================
+
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ COMPETITOR        │ DA    │ ORGANIC   │ TOP KEYWORDS  │ CONTENT GAP       │
+  │                   │       │ TRAFFIC   │               │                   │
+  ├───────────────────┼───────┼───────────┼───────────────┼───────────────────┤
+  │ Fi Collar         │ 52    │ 45K/mo    │ GPS tracking  │ Health content    │
+  │ Whistle           │ 48    │ 38K/mo    │ Pet GPS       │ AI/health focus   │
+  │ Fuzzy             │ 42    │ 22K/mo    │ Pet telehealth│ Hardware content  │
+  │ PetMD             │ 78    │ 8.2M/mo   │ Pet symptoms  │ Tech/monitoring   │
+  └─────────────────────────────────────────────────────────────────────────────┘
+
+  COMPETITIVE ADVANTAGES FOR PETPULSE:
+  ─────────────────────────────────────────────────────────────────────────────
+  • Fi/Whistle focus on GPS → We can own "health monitoring" keywords
+  • Fuzzy lacks hardware → We bridge telehealth + device content
+  • PetMD has no product → We provide solutions to symptoms content
+
+  CONTENT STRATEGY VS COMPETITORS:
+  ─────────────────────────────────────────────────────────────────────────────
+  • Position as "health-first" smart collar (vs GPS-first competitors)
+  • Create comprehensive symptom → solution content paths
+  • Build authority through vet partnerships and expert content
+  • Own the "AI pet health" emerging keyword cluster
+
+================================================================================
+                         LINK BUILDING STRATEGY
+================================================================================
+
+  LINK ACQUISITION PRIORITIES
+  ─────────────────────────────────────────────────────────────────────────────
+
+  #1  Pet Industry Publications                              Target: 10 links
+      Pet Business Magazine, Pet Product News, Pet Age
+      Tactic: Product reviews, expert commentary, press releases
+
+  #2  Veterinary & Pet Health Sites                          Target: 8 links
+      Veterinary journals, pet health blogs, vet clinic sites
+      Tactic: Expert contributions, research citations, partnerships
+
+  #3  Tech & Gadget Publications                             Target: 6 links
+      TechCrunch, The Verge, Engadget, Wired
+      Tactic: Product launches, innovation stories, founder interviews
+
+  #4  Pet Parent Bloggers                                    Target: 15 links
+      Pet lifestyle bloggers, dog/cat enthusiast sites
+      Tactic: Product reviews, affiliate partnerships, guest posts
+
+  LINK-WORTHY CONTENT IDEAS
+  ─────────────────────────────────────────────────────────────────────────────
+  • Annual Pet Health Statistics Report (original research)
+  • Interactive Pet Health Cost Calculator
+  • Pet Vital Signs Reference Guide (downloadable PDF)
+  • Expert Roundup: Vets on Pet Health Technology
+  • Pet Tech Industry Trends Report
+
+================================================================================
+                         6-MONTH SEO PROJECTIONS
+================================================================================
+
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ METRIC                 │ CURRENT │ MONTH 3 │ MONTH 6 │ GROWTH             │
+  ├────────────────────────┼─────────┼─────────┼─────────┼────────────────────┤
+  │ Organic Traffic        │    0    │  2,500  │ 10,000  │ ████████████ +∞%  │
+  │ Keywords Ranking (p1)  │    0    │    15   │    45   │ ████████████ +∞%  │
+  │ Keywords Top 10        │    0    │    35   │   100   │ ████████████ +∞%  │
+  │ Domain Authority       │    0    │    15   │    25   │ ████████████ +25  │
+  │ Backlinks              │    0    │    50   │   150   │ ████████████ +150 │
+  │ Indexed Pages          │    5    │    25   │    50   │ ████████░░░░ +900%│
+  └─────────────────────────────────────────────────────────────────────────────┘
+
+  TRAFFIC PROJECTION BY CLUSTER
+  ─────────────────────────────────────────────────────────────────────────────
+
+                          Month 6 Traffic Projection (10,000 total)
+
+  Pet Health Symptoms     ████████████████████████████████  4,000 (40%)
+  Pet Health Monitoring   ██████████████████████           2,500 (25%)
+  Smart Pet Technology    ████████████████                 2,000 (20%)
+  Pet Telehealth          ████████████                     1,500 (15%)
+
+================================================================================
+                         KPI TRACKING DASHBOARD
+================================================================================
+
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ KPI                    │ TARGET (M6) │ BENCHMARK    │ TRACKING TOOL       │
+  ├────────────────────────┼─────────────┼──────────────┼─────────────────────┤
+  │ Organic Sessions       │ 10,000/mo   │ Top 10%      │ Google Analytics    │
+  │ Organic CTR            │ 4.5%        │ Industry: 3% │ Search Console      │
+  │ Avg Position           │ 15          │ Page 2       │ Search Console      │
+  │ Pages Indexed          │ 50          │ -            │ Search Console      │
+  │ Domain Authority       │ 25          │ Competitors  │ Moz / Ahrefs        │
+  │ Backlinks              │ 150         │ -            │ Ahrefs              │
+  │ Bounce Rate            │ <55%        │ Industry:60% │ Google Analytics    │
+  │ Time on Page           │ >3 min      │ Industry:2m  │ Google Analytics    │
+  │ Organic Conversions    │ 200/mo      │ 2% CVR       │ Google Analytics    │
+  └─────────────────────────────────────────────────────────────────────────────┘
+
+================================================================================
+                           NEXT STEPS
+================================================================================
+
+  THIS WEEK:
+  ─────────────────────────────────────────────────────────────────────────────
+  □ Set up Google Search Console and Analytics
+  □ Implement Article schema on existing pages
+  □ Begin keyword research validation with Ahrefs/SEMrush
+  □ Draft first pillar article outline
+
+  THIS MONTH:
+  ─────────────────────────────────────────────────────────────────────────────
+  □ Publish 8 pieces of content (2 pillars + 6 supporting)
+  □ Complete technical SEO audit fixes
+  □ Begin outreach for 10 initial backlinks
+  □ Set up rank tracking for 75 target keywords
+
+  THIS QUARTER:
+  ─────────────────────────────────────────────────────────────────────────────
+  □ Publish 24 total pieces of content
+  □ Achieve 100 keywords in top 100
+  □ Reach 10,000 monthly organic sessions
+  □ Build 150+ quality backlinks
+
+================================================================================
+                           SUMMARY
+================================================================================
+
+  SEO MODEL: Content-Led Growth + Authority Building
+  PRIMARY CLUSTERS: Pet Health Symptoms (traffic) + Pet Health Monitoring (intent)
+  NORTH STAR METRIC: Organic Conversions (signups from organic traffic)
+
+  KEY SUCCESS FACTORS:
+  1. Publish 2-3 high-quality articles weekly
+  2. Optimize for featured snippets on symptom queries
+  3. Build topical authority through comprehensive pillar content
+  4. Acquire backlinks from pet industry and tech publications
+
+  COMPETITIVE EDGE:
+  Own the "health monitoring" keyword space that GPS-focused
+  competitors (Fi, Whistle) are ignoring. Bridge the gap between
+  symptom content (PetMD) and product solutions.
+
+================================================================================
+  Context Signature: seo-content-planner-v1.0.0 | Final Report
+  StratArts Business Strategy Skills Library
+================================================================================
+

@@ -1,0 +1,189 @@
+<!-- ═══ SKILL CSS START ═══ -->
+/* === POSITIONING CANVAS === */
+.positioning-canvas { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 2rem; margin-top: 2rem; }
+.canvas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.canvas-block { background: rgba(10, 10, 10, 0.5); border: 1px solid rgba(16, 185, 129, 0.15); border-radius: 8px; padding: 1.25rem; }
+.canvas-title { font-weight: 700; color: #10b981; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+.canvas-content { font-size: 0.95rem; color: #d4d4d4; line-height: 1.6; }
+.canvas-highlight { background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%); border: 2px solid rgba(16, 185, 129, 0.3); }
+
+/* === POSITIONING STATEMENT === */
+.positioning-statement { background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; }
+.statement-label { font-size: 0.8rem; color: #10b981; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; font-weight: 600; }
+.statement-text { font-size: 1.25rem; color: #f5f5f5; line-height: 1.8; font-weight: 500; }
+
+/* === COMPETITOR COMPARISON === */
+.competitor-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+.competitor-table th { background: rgba(16, 185, 129, 0.1); color: #f5f5f5; font-weight: 600; font-size: 0.9rem; padding: 1rem; text-align: center; border-bottom: 2px solid rgba(16, 185, 129, 0.3); }
+.competitor-table th:first-child { text-align: left; color: #10b981; }
+.competitor-table th.you { background: rgba(16, 185, 129, 0.2); }
+.competitor-table td { padding: 0.75rem 1rem; color: #d4d4d4; font-size: 0.9rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); text-align: center; }
+.competitor-table td:first-child { text-align: left; font-weight: 500; color: #f5f5f5; }
+.competitor-table td.you { background: rgba(16, 185, 129, 0.05); }
+.competitor-table tr:hover td { background: rgba(16, 185, 129, 0.05); }
+.score-high { color: #10b981; font-weight: 700; }
+.score-medium { color: #f6ad55; font-weight: 600; }
+.score-low { color: #fc8181; font-weight: 600; }
+
+/* === DIFFERENTIATOR CARDS === */
+.diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+.diff-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; position: relative; overflow: hidden; }
+.diff-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #10b981 0%, #14b8a6 100%); }
+.diff-number { font-size: 3rem; font-weight: 900; color: rgba(16, 185, 129, 0.15); position: absolute; top: 0.5rem; right: 1rem; line-height: 1; }
+.diff-type { font-weight: 700; color: #10b981; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+.diff-name { font-weight: 700; color: #f5f5f5; font-size: 1.1rem; margin-bottom: 0.5rem; }
+.diff-description { font-size: 0.9rem; color: #d4d4d4; line-height: 1.5; margin-bottom: 1rem; }
+.diff-proof { font-size: 0.85rem; color: #a3a3a3; font-style: italic; padding-top: 0.75rem; border-top: 1px solid rgba(16, 185, 129, 0.1); }
+
+/* === MESSAGING FRAMEWORK === */
+.messaging-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
+.messaging-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1.25rem; }
+.messaging-audience { font-weight: 700; color: #10b981; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+.messaging-headline { font-size: 1.1rem; color: #f5f5f5; font-weight: 600; margin-bottom: 0.5rem; line-height: 1.3; }
+.messaging-subheadline { font-size: 0.9rem; color: #d4d4d4; line-height: 1.4; }
+
+/* === RESPONSIVE === */
+@media (max-width: 1024px) { .canvas-grid { grid-template-columns: 1fr; } .diff-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .diff-grid, .messaging-grid { grid-template-columns: 1fr; } }
+
+/* === PRINT === */
+@media print { .positioning-canvas, .diff-card, .messaging-card { background: white; border: 2px solid #10b981; } }
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<!-- Section 1: Positioning Canvas -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Positioning Canvas</h2>
+        <p class="section-description">April Dunford's positioning framework applied to your product.</p>
+    </div>
+    <div class="positioning-canvas">
+        <div class="canvas-grid">
+            <div class="canvas-block"><div class="canvas-title">Target Customer</div><div class="canvas-content">{{TARGET_CUSTOMER}}</div></div>
+            <div class="canvas-block"><div class="canvas-title">Problem/Need</div><div class="canvas-content">{{PROBLEM_NEED}}</div></div>
+            <div class="canvas-block"><div class="canvas-title">Category</div><div class="canvas-content">{{CATEGORY}}</div></div>
+            <div class="canvas-block"><div class="canvas-title">Primary Benefit</div><div class="canvas-content">{{PRIMARY_BENEFIT}}</div></div>
+            <div class="canvas-block canvas-highlight" style="grid-column: 1 / -1;"><div class="canvas-title">Unique Differentiator</div><div class="canvas-content">{{UNIQUE_DIFFERENTIATOR}}</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 2: Positioning Statement -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Positioning Statement</h2>
+        <p class="section-description">Synthesized positioning for consistent market communication.</p>
+    </div>
+    <div class="positioning-statement">
+        <div class="statement-label">Core Positioning Statement</div>
+        <div class="statement-text">{{POSITIONING_STATEMENT}}</div>
+    </div>
+</section>
+
+<!-- Section 3: Competitive Comparison -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Competitive Comparison</h2>
+        <p class="section-description">Feature and benefit comparison against key competitors.</p>
+    </div>
+    <table class="competitor-table">
+        <thead><tr><th>Attribute</th>{{COMPETITOR_HEADERS}}</tr></thead>
+        <tbody>{{COMPETITOR_ROWS}}</tbody>
+    </table>
+</section>
+
+<!-- Section 4: Key Differentiators -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Key Differentiators</h2>
+        <p class="section-description">Primary competitive advantages with supporting evidence.</p>
+    </div>
+    <div class="diff-grid">{{DIFFERENTIATOR_CARDS}}</div>
+</section>
+
+<!-- Section 5: Visual Analysis -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Visual Analysis</h2>
+        <p class="section-description">Competitive positioning maps and perceptual analysis.</p>
+    </div>
+    <div class="chart-grid">
+        <div class="chart-card">
+            <div class="chart-title">Competitive Positioning Map</div>
+            <div class="chart-subtitle">{{POS_X_AXIS}} vs. {{POS_Y_AXIS}}</div>
+            <div class="chart-wrapper"><canvas id="positioningMap"></canvas></div>
+            <div class="insights-panel"><div class="insight-title">Position Analysis</div><ul class="insight-list">{{POSITION_INSIGHTS}}</ul></div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">Feature Comparison Radar</div>
+            <div class="chart-subtitle">Capability comparison across key dimensions</div>
+            <div class="chart-wrapper"><canvas id="featureRadar"></canvas></div>
+            <div class="insights-panel"><div class="insight-title">Feature Analysis</div><ul class="insight-list">{{FEATURE_INSIGHTS}}</ul></div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">Differentiator Strength</div>
+            <div class="chart-subtitle">Competitive advantage scoring</div>
+            <div class="chart-wrapper"><canvas id="differentiatorChart"></canvas></div>
+            <div class="insights-panel"><div class="insight-title">Advantage Analysis</div><ul class="insight-list">{{DIFF_INSIGHTS}}</ul></div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">Market Perception</div>
+            <div class="chart-subtitle">Brand attribute association</div>
+            <div class="chart-wrapper"><canvas id="perceptionChart"></canvas></div>
+            <div class="insights-panel"><div class="insight-title">Perception Insights</div><ul class="insight-list">{{PERCEPTION_INSIGHTS}}</ul></div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 6: Messaging Framework -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Messaging Framework</h2>
+        <p class="section-description">Tailored messaging for different audience segments.</p>
+    </div>
+    <div class="messaging-grid">{{MESSAGING_CARDS}}</div>
+</section>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+const data = {
+    positioning: { you: { x: {{POS_YOU_X}}, y: {{POS_YOU_Y}}, label: '{{PROJECT_NAME}}' }, competitors: [{{COMPETITOR_POSITIONS}}] },
+    features: { labels: [{{FEATURE_LABELS}}], you: [{{FEATURE_YOU}}], competitors: [{{FEATURE_COMPETITORS}}] },
+    differentiators: { labels: [{{DIFF_LABELS}}], values: [{{DIFF_VALUES}}] },
+    perception: { labels: [{{PERCEPTION_LABELS}}], values: [{{PERCEPTION_VALUES}}] }
+};
+
+// Chart 1: Positioning Map Scatter
+new Chart(document.getElementById('positioningMap'), {
+    type: 'scatter',
+    data: { datasets: [
+        { label: data.positioning.you.label, data: [{ x: data.positioning.you.x, y: data.positioning.you.y }], backgroundColor: '#10b981', borderColor: '#14b8a6', borderWidth: 3, pointRadius: 16 },
+        { label: 'Competitors', data: data.positioning.competitors, backgroundColor: 'rgba(163, 163, 163, 0.6)', borderColor: '#a3a3a3', pointRadius: 10 }
+    ] },
+    options: { responsive: true, maintainAspectRatio: false, scales: { x: { title: { display: true, text: '{{POS_X_AXIS}}', color: '#a3a3a3' }, min: 0, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' } }, y: { title: { display: true, text: '{{POS_Y_AXIS}}', color: '#a3a3a3' }, min: 0, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' } } }, plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig } }
+});
+
+// Chart 2: Feature Radar
+new Chart(document.getElementById('featureRadar'), {
+    type: 'radar',
+    data: { labels: data.features.labels, datasets: [
+        { label: '{{PROJECT_NAME}}', data: data.features.you, backgroundColor: 'rgba(16, 185, 129, 0.2)', borderColor: '#10b981', borderWidth: 3, pointBackgroundColor: '#10b981', pointRadius: 5 },
+        { label: 'Avg Competitor', data: data.features.competitors, backgroundColor: 'rgba(163, 163, 163, 0.1)', borderColor: '#a3a3a3', borderWidth: 2, borderDash: [5, 5], pointRadius: 4 }
+    ] },
+    options: { responsive: true, maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 10, ticks: { color: '#a3a3a3', stepSize: 2 }, grid: { color: 'rgba(16, 185, 129, 0.1)' }, pointLabels: { color: '#f5f5f5', font: { size: 11 } } } }, plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig } }
+});
+
+// Chart 3: Differentiator Bar
+new Chart(document.getElementById('differentiatorChart'), {
+    type: 'bar',
+    data: { labels: data.differentiators.labels, datasets: [{ data: data.differentiators.values, backgroundColor: '#10b981', borderRadius: 6 }] },
+    options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { beginAtZero: true, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' } }, y: { grid: { display: false }, ticks: { color: '#f5f5f5' } } }, plugins: { legend: { display: false }, tooltip: tooltipConfig } }
+});
+
+// Chart 4: Perception Polar Area
+new Chart(document.getElementById('perceptionChart'), {
+    type: 'polarArea',
+    data: { labels: data.perception.labels, datasets: [{ data: data.perception.values, backgroundColor: COLORS.backgrounds }] },
+    options: { responsive: true, maintainAspectRatio: false, scales: { r: { beginAtZero: true, ticks: { color: '#a3a3a3' }, grid: { color: 'rgba(16, 185, 129, 0.1)' } } }, plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig } }
+});
+<!-- ═══ SKILL JS END ═══ -->

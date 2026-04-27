@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{COMPANY_NAME}} - Investor Brief | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ========================================
+           STRATARTS EDITORIAL DARK THEME
+           Canonical Header/Score-Banner/Footer
+           ======================================== */
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --bg-card: #1a1a1a;
+            --border-primary: #2a2a2a;
+            --border-accent: #10b981;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --text-muted: #6b7280;
+            --accent-primary: #10b981;
+            --accent-secondary: #059669;
+            --accent-tertiary: #34d399;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* ========================================
+           CANONICAL HEADER
+           ======================================== */
+        .header {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            border-bottom: 1px solid var(--border-primary);
+            margin-bottom: 2rem;
+        }
+
+        .header-label {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--border-accent);
+            border-radius: 2rem;
+            color: var(--accent-primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .header-company {
+            font-size: 1.25rem;
+            color: var(--accent-primary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .header-meta {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* ========================================
+           CANONICAL SCORE BANNER
+           ======================================== */
+        .score-banner {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .score-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .score-item:not(:last-child) {
+            border-right: 1px solid var(--border-primary);
+        }
+
+        .score-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .score-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ========================================
+           SECTION STYLING
+           ======================================== */
+        .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        .section-number {
+            width: 2rem;
+            height: 2rem;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* ========================================
+           ONE-PAGER PREVIEW
+           ======================================== */
+        .onepager-preview {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-accent);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .onepager-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        .onepager-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .onepager-tagline {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .onepager-contact {
+            text-align: right;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .onepager-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .onepager-section {
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 0.5rem;
+        }
+
+        .onepager-section h4 {
+            font-size: 0.75rem;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .onepager-section p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .onepager-section.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .onepager-metrics {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .onepager-metric {
+            text-align: center;
+        }
+
+        .onepager-metric-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .onepager-metric-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* ========================================
+           EMAIL BRIEF
+           ======================================== */
+        .email-preview {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .email-header {
+            padding: 1rem 1.5rem;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        .email-field {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .email-field:last-child {
+            margin-bottom: 0;
+        }
+
+        .email-label {
+            color: var(--text-muted);
+            min-width: 60px;
+        }
+
+        .email-value {
+            color: var(--text-primary);
+        }
+
+        .email-subject {
+            font-weight: 600;
+            color: var(--accent-primary);
+        }
+
+        .email-body {
+            padding: 1.5rem;
+        }
+
+        .email-body p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .email-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .email-signature {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* ========================================
+           CONTENT GRID
+           ======================================== */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .content-card {
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 0.75rem;
+        }
+
+        .content-card h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .content-card p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* ========================================
+           TRACTION METRICS
+           ======================================== */
+        .traction-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .traction-card {
+            padding: 1.25rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+
+        .traction-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .traction-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .traction-growth {
+            font-size: 0.75rem;
+            color: var(--success);
+            margin-top: 0.25rem;
+        }
+
+        /* ========================================
+           TEAM SECTION
+           ======================================== */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .team-card {
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+
+        .team-avatar {
+            width: 4rem;
+            height: 4rem;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--bg-primary);
+        }
+
+        .team-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .team-title {
+            font-size: 0.75rem;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-bio {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* ========================================
+           EMAIL TEMPLATES
+           ======================================== */
+        .template-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .template-tab {
+            padding: 0.5rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .template-tab.active {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            border-color: var(--accent-primary);
+        }
+
+        /* ========================================
+           DISTRIBUTION STRATEGY
+           ======================================== */
+        .distribution-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .distribution-card {
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 0.75rem;
+        }
+
+        .distribution-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .distribution-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .distribution-desc {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* ========================================
+           INVESTOR LIST
+           ======================================== */
+        .investor-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .investor-table th,
+        .investor-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        .investor-table th {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: var(--bg-secondary);
+        }
+
+        .investor-table td {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .investor-priority {
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .priority-tier1 {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-primary);
+        }
+
+        .priority-tier2 {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        /* ========================================
+           CHART CONTAINERS
+           ======================================== */
+        .chart-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .chart-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 250px;
+        }
+
+        /* ========================================
+           NEXT STEPS
+           ======================================== */
+        .next-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .next-step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 0.5rem;
+        }
+
+        .step-priority {
+            padding: 0.25rem 0.5rem;
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-primary);
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .step-text {
+            flex: 1;
+            font-size: 0.875rem;
+            color: var(--text-primary);
+        }
+
+        .step-timing {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ========================================
+           CANONICAL FOOTER
+           ======================================== */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border-primary);
+            margin-top: 2rem;
+        }
+
+        .footer-brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-tagline {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 1024px) {
+            .score-banner {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .content-grid,
+            .onepager-grid {
+                grid-template-columns: 1fr;
+            }
+            .traction-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .team-grid,
+            .distribution-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .score-banner {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .score-item:not(:last-child) {
+                border-right: none;
+            }
+            .traction-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========================================
+         CANONICAL HEADER
+         ======================================== -->
+    <header class="header">
+        <div class="header-label">Investor Brief</div>
+        <h1>{{COMPANY_NAME}} Investor Brief</h1>
+        <div class="header-company">{{ROUND_NAME}} Investment Materials</div>
+        <div class="header-meta">Generated {{TIMESTAMP}} | StratArts investor-brief-writer v1.0</div>
+    </header>
+
+    <div class="container">
+        <!-- ========================================
+             CANONICAL SCORE BANNER
+             ======================================== -->
+        <div class="score-banner">
+            <div class="score-item">
+                <div class="score-value">{{RAISE_AMOUNT}}</div>
+                <div class="score-label">Raising</div>
+            </div>
+            <div class="score-item">
+                <div class="score-value">{{MRR}}</div>
+                <div class="score-label">Current MRR</div>
+            </div>
+            <div class="score-item">
+                <div class="score-value">{{GROWTH_RATE}}</div>
+                <div class="score-label">MoM Growth</div>
+            </div>
+            <div class="score-item">
+                <div class="score-value">{{CUSTOMERS}}</div>
+                <div class="score-label">Customers</div>
+            </div>
+            <div class="score-item">
+                <div class="score-value">{{TAM}}</div>
+                <div class="score-label">TAM</div>
+            </div>
+            <div class="score-item">
+                <div class="score-value">{{TARGET_INVESTORS}}</div>
+                <div class="score-label">Target Investors</div>
+            </div>
+        </div>
+
+        <!-- Section 1: Executive Summary -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="section-title">Executive Summary</h2>
+            </div>
+            <div class="content-grid">
+                {{EXEC_SUMMARY_CARDS}}
+            </div>
+        </section>
+
+        <!-- Section 2: One-Pager Preview -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="section-title">One-Pager Preview</h2>
+            </div>
+            <div class="onepager-preview">
+                <div class="onepager-header">
+                    <div>
+                        <div class="onepager-logo">{{COMPANY_NAME}}</div>
+                        <div class="onepager-tagline">{{TAGLINE}}</div>
+                    </div>
+                    <div class="onepager-contact">
+                        {{CONTACT_INFO}}
+                    </div>
+                </div>
+                <div class="onepager-grid">
+                    {{ONEPAGER_SECTIONS}}
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Traction Metrics -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="section-title">Traction Metrics</h2>
+            </div>
+            <div class="traction-grid">
+                {{TRACTION_CARDS}}
+            </div>
+            <div class="chart-container">
+                <div class="chart-title">Revenue Growth</div>
+                <div class="chart-wrapper">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Team -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="section-title">Team</h2>
+            </div>
+            <div class="team-grid">
+                {{TEAM_CARDS}}
+            </div>
+        </section>
+
+        <!-- Section 5: Cold Outreach Email -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <h2 class="section-title">Cold Outreach Email</h2>
+            </div>
+            <div class="email-preview">
+                <div class="email-header">
+                    <div class="email-field">
+                        <span class="email-label">To:</span>
+                        <span class="email-value">[Investor Name]</span>
+                    </div>
+                    <div class="email-field">
+                        <span class="email-label">Subject:</span>
+                        <span class="email-subject">{{EMAIL_SUBJECT}}</span>
+                    </div>
+                </div>
+                <div class="email-body">
+                    {{EMAIL_BODY}}
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Email Templates -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">6</div>
+                <h2 class="section-title">Email Templates</h2>
+            </div>
+            {{EMAIL_TEMPLATES}}
+        </section>
+
+        <!-- Section 7: Distribution Strategy -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">7</div>
+                <h2 class="section-title">Distribution Strategy</h2>
+            </div>
+            <div class="distribution-grid">
+                {{DISTRIBUTION_CARDS}}
+            </div>
+        </section>
+
+        <!-- Section 8: Target Investor List -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">8</div>
+                <h2 class="section-title">Target Investor List</h2>
+            </div>
+            <table class="investor-table">
+                <thead>
+                    <tr>
+                        <th>Investor / Fund</th>
+                        <th>Tier</th>
+                        <th>Focus</th>
+                        <th>Check Size</th>
+                        <th>Intro Path</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{INVESTOR_ROWS}}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Section 9: Next Steps -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">9</div>
+                <h2 class="section-title">Next Steps</h2>
+            </div>
+            <div class="next-steps">
+                {{NEXT_STEPS}}
+            </div>
+        </section>
+    </div>
+
+    <!-- ========================================
+         CANONICAL FOOTER
+         ======================================== -->
+    <footer class="footer">
+        <div class="footer-brand">StratArts</div>
+        <div class="footer-tagline">AI-Powered Business Strategy</div>
+        <p class="footer-note">
+            This investor brief was generated using the investor-brief-writer skill.
+            Customize email templates for each investor. Personalization significantly
+            increases response rates. Regenerate as your traction metrics evolve.
+        </p>
+    </footer>
+
+    <script>
+        // Chart.js configuration for dark theme
+        Chart.defaults.color = '#a0a0a0';
+        Chart.defaults.borderColor = '#2a2a2a';
+
+        // Revenue Growth Chart
+        new Chart(document.getElementById('revenueChart'), {
+            type: 'line',
+            data: {
+                labels: {{REVENUE_LABELS}},
+                datasets: [{
+                    label: 'MRR ($K)',
+                    data: {{REVENUE_DATA}},
+                    borderColor: 'rgba(16, 185, 129, 1)',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        grid: { color: '#2a2a2a' }
+                    },
+                    y: {
+                        grid: { color: '#2a2a2a' },
+                        title: { display: true, text: 'MRR ($K)' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

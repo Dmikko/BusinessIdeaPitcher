@@ -1,0 +1,198 @@
+<!-- ═══ SKILL CSS START ═══ -->
+/* === COMPETITOR CARDS === */
+.competitor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.competitor-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; }
+.competitor-card.direct { border-left: 4px solid #f97316; }
+.competitor-card.indirect { border-left: 4px solid #3b82f6; }
+.competitor-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+.competitor-name { font-weight: 700; color: #f5f5f5; font-size: 1.1rem; }
+.competitor-type { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 600; }
+.competitor-type.direct { background: rgba(249, 115, 22, 0.2); color: #f97316; }
+.competitor-type.indirect { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+.competitor-description { color: rgba(245, 245, 245, 0.7); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem; }
+.competitor-meta { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; font-size: 0.8rem; padding-top: 1rem; border-top: 1px solid rgba(16, 185, 129, 0.1); }
+.competitor-meta-item { display: flex; gap: 0.5rem; }
+.competitor-meta-label { color: rgba(245, 245, 245, 0.5); }
+.competitor-meta-value { color: #10b981; font-weight: 600; }
+.threat-level { display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem; }
+.threat-bar { flex: 1; height: 8px; background: rgba(16, 185, 129, 0.1); border-radius: 4px; overflow: hidden; }
+.threat-fill { height: 100%; border-radius: 4px; }
+.threat-fill.high { background: #ef4444; }
+.threat-fill.medium { background: #f97316; }
+.threat-fill.low { background: #10b981; }
+.threat-score { font-weight: 700; font-size: 0.9rem; }
+
+/* === PORTER'S FORCES === */
+.forces-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.force-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; }
+.force-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(16, 185, 129, 0.1); }
+.force-name { font-weight: 700; color: #f5f5f5; font-size: 1rem; }
+.force-level { font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.75rem; border-radius: 12px; text-transform: uppercase; }
+.force-level.high { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+.force-level.medium { background: rgba(249, 115, 22, 0.2); color: #f97316; }
+.force-level.low { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+.force-description { font-size: 0.9rem; color: #d4d4d4; line-height: 1.5; margin-bottom: 1rem; }
+.force-factors { list-style: none; padding: 0; margin: 0; }
+.force-factors li { font-size: 0.85rem; color: #a3a3a3; padding: 0.3rem 0; display: flex; align-items: flex-start; gap: 0.5rem; }
+.force-factors li::before { content: '•'; color: #10b981; }
+
+/* === SWOT GRID === */
+.swot-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem; }
+.swot-card { background: #1a1a1a; border-radius: 12px; padding: 1.5rem; }
+.swot-card.strengths { border: 2px solid #10b981; }
+.swot-card.weaknesses { border: 2px solid #f97316; }
+.swot-card.opportunities { border: 2px solid #3b82f6; }
+.swot-card.threats { border: 2px solid #ef4444; }
+.swot-title { font-weight: 700; font-size: 1rem; margin-bottom: 1rem; }
+.swot-card.strengths .swot-title { color: #10b981; }
+.swot-card.weaknesses .swot-title { color: #f97316; }
+.swot-card.opportunities .swot-title { color: #3b82f6; }
+.swot-card.threats .swot-title { color: #ef4444; }
+.swot-list { list-style: none; padding: 0; margin: 0; }
+.swot-list li { font-size: 0.9rem; color: #d4d4d4; padding: 0.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: flex; gap: 0.5rem; }
+.swot-list li:last-child { border-bottom: none; }
+.swot-list li::before { content: '→'; font-weight: bold; }
+.swot-card.strengths .swot-list li::before { color: #10b981; }
+.swot-card.weaknesses .swot-list li::before { color: #f97316; }
+.swot-card.opportunities .swot-list li::before { color: #3b82f6; }
+.swot-card.threats .swot-list li::before { color: #ef4444; }
+
+/* === BATTLECARD === */
+.battlecard { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; }
+.battlecard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(16, 185, 129, 0.2); }
+.battlecard-name { font-weight: 700; color: #f5f5f5; font-size: 1.25rem; }
+.battlecard-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.battlecard-section { }
+.battlecard-title { font-weight: 700; color: #10b981; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+.battlecard-list { list-style: none; padding: 0; margin: 0; }
+.battlecard-list li { font-size: 0.85rem; color: #d4d4d4; padding: 0.4rem 0; display: flex; gap: 0.5rem; }
+.battlecard-list li::before { content: '•'; color: #10b981; }
+.battlecard-list.weaknesses li::before { color: #fc8181; }
+
+/* === RESPONSIVE === */
+@media (max-width: 1024px) { .swot-grid { grid-template-columns: 1fr; } .battlecard-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { .forces-grid { grid-template-columns: 1fr; } }
+
+/* === PRINT === */
+@media print { .competitor-card, .force-card, .swot-card, .battlecard { background: white; } }
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<!-- Section 1: Competitive Landscape -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Competitive Landscape</h2>
+        <p class="section-description">Direct and indirect competitors with threat assessment.</p>
+    </div>
+    <div class="competitor-grid">{{COMPETITOR_CARDS}}</div>
+</section>
+
+<!-- Section 2: Porter's Five Forces -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Porter's Five Forces</h2>
+        <p class="section-description">Industry structure analysis revealing competitive dynamics.</p>
+    </div>
+    <div class="forces-grid">{{FORCES_CARDS}}</div>
+</section>
+
+<!-- Section 3: SWOT Analysis -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">SWOT Analysis</h2>
+        <p class="section-description">Internal strengths/weaknesses and external opportunities/threats.</p>
+    </div>
+    <div class="swot-grid">
+        <div class="swot-card strengths"><div class="swot-title">Strengths</div><ul class="swot-list">{{STRENGTHS}}</ul></div>
+        <div class="swot-card weaknesses"><div class="swot-title">Weaknesses</div><ul class="swot-list">{{WEAKNESSES}}</ul></div>
+        <div class="swot-card opportunities"><div class="swot-title">Opportunities</div><ul class="swot-list">{{OPPORTUNITIES}}</ul></div>
+        <div class="swot-card threats"><div class="swot-title">Threats</div><ul class="swot-list">{{THREATS}}</ul></div>
+    </div>
+</section>
+
+<!-- Section 4: Visual Analysis -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Visual Analysis</h2>
+        <p class="section-description">Competitive positioning and market dynamics visualization.</p>
+    </div>
+    <div class="chart-grid">
+        <div class="chart-card">
+            <div class="chart-title">Porter's Five Forces Radar</div>
+            <div class="chart-subtitle">Industry force intensity assessment</div>
+            <div class="chart-wrapper"><canvas id="porterRadar"></canvas></div>
+            <div class="insights-panel"><div class="insight-title">Force Analysis</div><ul class="insight-list">{{PORTER_INSIGHTS}}</ul></div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">Competitive Positioning Map</div>
+            <div class="chart-subtitle">{{POS_X_AXIS}} vs. {{POS_Y_AXIS}}</div>
+            <div class="chart-wrapper"><canvas id="positioningMap"></canvas></div>
+            <div class="insights-panel"><div class="insight-title">Position Insights</div><ul class="insight-list">{{POSITION_INSIGHTS}}</ul></div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">Threat Level by Competitor</div>
+            <div class="chart-subtitle">Competitive threat assessment</div>
+            <div class="chart-wrapper"><canvas id="threatChart"></canvas></div>
+            <div class="insights-panel"><div class="insight-title">Threat Analysis</div><ul class="insight-list">{{THREAT_INSIGHTS}}</ul></div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">Feature Comparison Radar</div>
+            <div class="chart-subtitle">Capability benchmarking</div>
+            <div class="chart-wrapper"><canvas id="featureRadar"></canvas></div>
+            <div class="insights-panel"><div class="insight-title">Feature Gaps</div><ul class="insight-list">{{FEATURE_INSIGHTS}}</ul></div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 5: Competitor Battlecards -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Competitor Battlecards</h2>
+        <p class="section-description">Quick-reference cards for sales and positioning.</p>
+    </div>
+    {{BATTLECARDS}}
+</section>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+const data = {
+    porter: { labels: ['New Entrants', 'Supplier Power', 'Buyer Power', 'Substitutes', 'Rivalry'], values: [{{PORTER_VALUES}}] },
+    positioning: { you: { x: {{POS_YOU_X}}, y: {{POS_YOU_Y}}, label: '{{PROJECT_NAME}}' }, competitors: [{{COMPETITOR_POSITIONS}}] },
+    threats: { labels: [{{THREAT_LABELS}}], values: [{{THREAT_VALUES}}] },
+    features: { labels: [{{FEATURE_LABELS}}], you: [{{FEATURE_YOU}}], competitors: [{{FEATURE_COMPETITORS}}] }
+};
+
+// Chart 1: Porter's Five Forces Radar
+new Chart(document.getElementById('porterRadar'), {
+    type: 'radar',
+    data: { labels: data.porter.labels, datasets: [{ label: 'Force Intensity', data: data.porter.values, backgroundColor: 'rgba(16, 185, 129, 0.2)', borderColor: '#10b981', borderWidth: 3, pointBackgroundColor: '#10b981', pointRadius: 6 }] },
+    options: { responsive: true, maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 10, ticks: { color: '#a3a3a3', stepSize: 2 }, grid: { color: 'rgba(16, 185, 129, 0.1)' }, pointLabels: { color: '#f5f5f5', font: { size: 11 } } } }, plugins: { legend: { display: false }, tooltip: tooltipConfig } }
+});
+
+// Chart 2: Competitive Positioning Scatter
+new Chart(document.getElementById('positioningMap'), {
+    type: 'scatter',
+    data: { datasets: [
+        { label: data.positioning.you.label, data: [{ x: data.positioning.you.x, y: data.positioning.you.y }], backgroundColor: '#10b981', borderColor: '#14b8a6', borderWidth: 3, pointRadius: 16 },
+        { label: 'Competitors', data: data.positioning.competitors, backgroundColor: 'rgba(163, 163, 163, 0.6)', borderColor: '#a3a3a3', pointRadius: 10 }
+    ] },
+    options: { responsive: true, maintainAspectRatio: false, scales: { x: { title: { display: true, text: '{{POS_X_AXIS}}', color: '#a3a3a3' }, min: 0, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' } }, y: { title: { display: true, text: '{{POS_Y_AXIS}}', color: '#a3a3a3' }, min: 0, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' } } }, plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig } }
+});
+
+// Chart 3: Threat Level Bar
+new Chart(document.getElementById('threatChart'), {
+    type: 'bar',
+    data: { labels: data.threats.labels, datasets: [{ data: data.threats.values, backgroundColor: data.threats.values.map(v => v >= 7 ? '#ef4444' : v >= 5 ? '#f97316' : '#10b981'), borderRadius: 6 }] },
+    options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { beginAtZero: true, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' } }, y: { grid: { display: false }, ticks: { color: '#f5f5f5' } } }, plugins: { legend: { display: false }, tooltip: tooltipConfig } }
+});
+
+// Chart 4: Feature Comparison Radar
+new Chart(document.getElementById('featureRadar'), {
+    type: 'radar',
+    data: { labels: data.features.labels, datasets: [
+        { label: '{{PROJECT_NAME}}', data: data.features.you, backgroundColor: 'rgba(16, 185, 129, 0.2)', borderColor: '#10b981', borderWidth: 3, pointBackgroundColor: '#10b981', pointRadius: 5 },
+        { label: 'Avg Competitor', data: data.features.competitors, backgroundColor: 'rgba(163, 163, 163, 0.1)', borderColor: '#a3a3a3', borderWidth: 2, borderDash: [5, 5], pointRadius: 4 }
+    ] },
+    options: { responsive: true, maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 10, ticks: { color: '#a3a3a3', stepSize: 2 }, grid: { color: 'rgba(16, 185, 129, 0.1)' }, pointLabels: { color: '#f5f5f5', font: { size: 11 } } } }, plugins: { legend: { position: 'bottom', labels: { color: '#f5f5f5' } }, tooltip: tooltipConfig } }
+});
+<!-- ═══ SKILL JS END ═══ -->

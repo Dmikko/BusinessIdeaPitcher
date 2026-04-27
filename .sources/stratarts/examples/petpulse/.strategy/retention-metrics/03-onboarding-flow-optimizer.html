@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding Flow Optimizer - PetPulse | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #0a0a0a;
+        }
+
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-main {
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .score-interpretation {
+            border-left: 3px solid #10b981;
+            padding-left: 2rem;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #f5f5f5;
+        }
+
+        .interpretation-text {
+            color: #d4d4d4;
+            line-height: 1.7;
+        }
+
+        .verdict-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 4rem;
+            background: #0a0a0a;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: #d4d4d4;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-card .label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .metric-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #10b981;
+            line-height: 1.2;
+        }
+
+        .metric-card .description {
+            font-size: 0.85rem;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .small-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .small-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        footer {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content strong {
+            color: #10b981;
+        }
+
+        /* Onboarding Flow Optimizer Specific Styles */
+        .aha-moment-container {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .aha-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .aha-event {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+        }
+
+        .aha-description {
+            color: #888;
+            font-size: 0.95rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .activation-funnel {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin: 2rem 0;
+        }
+
+        .funnel-step {
+            display: flex;
+            align-items: center;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            padding: 1rem 1.5rem;
+            position: relative;
+        }
+
+        .funnel-step:first-child {
+            border-radius: 12px 12px 0 0;
+        }
+
+        .funnel-step:last-child {
+            border-radius: 0 0 12px 12px;
+        }
+
+        .step-bar {
+            height: 8px;
+            background: linear-gradient(90deg, #10b981, #059669);
+            border-radius: 4px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        .step-name {
+            flex: 1;
+            font-weight: 500;
+            color: #ffffff;
+            font-size: 0.95rem;
+        }
+
+        .step-users {
+            width: 100px;
+            text-align: center;
+            font-weight: 600;
+            color: #10b981;
+        }
+
+        .step-dropoff {
+            width: 80px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #ef4444;
+        }
+
+        .checklist-container {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .checklist-progress {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-bar-container {
+            flex: 1;
+            height: 8px;
+            background: #2a2a2a;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #059669);
+            border-radius: 4px;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #10b981;
+        }
+
+        .checklist-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .checklist-step:last-child {
+            border-bottom: none;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .step-reason {
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-time {
+            color: #10b981;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .tour-step-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .tour-step-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .tour-step-number {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        .tour-step-title {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.95rem;
+        }
+
+        .tour-highlight {
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid #10b981;
+        }
+
+        .highlight-message {
+            color: #ccc;
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        .tour-action {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        .tour-action span {
+            color: #10b981;
+            font-weight: 500;
+        }
+
+        .content-type-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+        }
+
+        .content-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .content-type-name {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .content-description {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        .path-card {
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .path-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .path-name {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1.125rem;
+        }
+
+        .path-goal {
+            color: #10b981;
+            font-size: 0.85rem;
+        }
+
+        .path-checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .path-step {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 0.75rem;
+        }
+
+        .path-step-num {
+            width: 24px;
+            height: 24px;
+            background: rgba(16, 185, 129, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #10b981;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+
+        .path-step-text {
+            color: #ccc;
+            font-size: 0.85rem;
+        }
+
+        .email-timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .email-timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #10b981, #059669);
+        }
+
+        .email-item {
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .email-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .email-dot {
+            position: absolute;
+            left: -24px;
+            top: 4px;
+            width: 16px;
+            height: 16px;
+            background: #10b981;
+            border-radius: 50%;
+            border: 3px solid #0a0a0a;
+        }
+
+        .email-day {
+            font-weight: 700;
+            color: #10b981;
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .email-subject {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .email-body {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .ab-test-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .ab-test-header {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .ab-test-metric {
+            color: #10b981;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .ab-variants {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .variant {
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 0.75rem;
+        }
+
+        .variant-label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .variant-description {
+            color: #ccc;
+            font-size: 0.85rem;
+        }
+
+        .roadmap-phase {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+            margin-bottom: 1.5rem;
+        }
+
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .phase-name {
+            font-weight: 700;
+            color: #10b981;
+            font-size: 1.1rem;
+        }
+
+        .phase-timing {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .phase-goal {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .phase-tasks {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .phase-task {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .phase-task::before {
+            content: '□';
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .metric-grid { grid-template-columns: repeat(2, 1fr); }
+            .small-grid { grid-template-columns: 1fr; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .score-container { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">ONBOARDING OPTIMIZATION</div>
+                <h1>PetPulse</h1>
+                <div class="subtitle">Reduce time-to-value and increase activation rates by designing clear paths to the "aha moment"</div>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span>📅</span>
+                        <span>Generated: December 18, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>📊</span>
+                        <span>Analysis Type: Onboarding Strategy</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🎯</span>
+                        <span>Version 1.0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Score Banner -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">45%</div>
+                    <div class="score-label">Current Activation Rate</div>
+                </div>
+
+                <div class="score-interpretation">
+                    <div class="interpretation-title">What This Score Means</div>
+                    <div class="interpretation-text">
+                        PetPulse's 45% activation rate is slightly below the B2B SaaS benchmark of 50-60%. With a connected hardware product, activation requires both device setup AND feature adoption. The 4-hour median time-to-activate is excellent given the physical setup required. Focus: Collar sync completion and first health alert experience.
+                    </div>
+                </div>
+
+                <div class="verdict-badge">
+                    Target: 65% by Q2
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Aha Moment Section -->
+            <div class="section">
+                <h2 class="section-title">Activation Definition</h2>
+
+                <div class="aha-moment-container">
+                    <div class="aha-icon">💡</div>
+                    <div class="aha-event">First Health Alert Reviewed</div>
+                    <div class="aha-description">When a pet owner receives and reviews their first health alert from PetPulse, they experience the core value: peace of mind through proactive pet health monitoring.</div>
+                </div>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <div class="label">Current Activation</div>
+                        <div class="value">45%</div>
+                        <div class="description">Within 7 days</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Target Activation</div>
+                        <div class="value">65%</div>
+                        <div class="description">Goal by Q2 2026</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">D7 Retention</div>
+                        <div class="value">72%</div>
+                        <div class="description">Activated users</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Checklist Steps</div>
+                        <div class="value">5</div>
+                        <div class="description">~8 min to complete</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activation Funnel -->
+            <div class="section">
+                <h2 class="section-title">Activation Funnel Analysis</h2>
+                <p class="section-description">Hardware + software product creates unique funnel with physical setup step. Biggest drop-off occurs at collar sync - a technical friction point requiring immediate intervention.</p>
+
+                <div class="activation-funnel">
+                    <div class="funnel-step">
+                        <span class="step-name">1. Account Created</span>
+                        <span class="step-users">1,000</span>
+                        <span class="step-dropoff">—</span>
+                        <div class="step-bar" style="width: 100%;"></div>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="step-name">2. Email Verified</span>
+                        <span class="step-users">920</span>
+                        <span class="step-dropoff">-8%</span>
+                        <div class="step-bar" style="width: 92%;"></div>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="step-name">3. Pet Profile Created</span>
+                        <span class="step-users">850</span>
+                        <span class="step-dropoff">-7.6%</span>
+                        <div class="step-bar" style="width: 85%;"></div>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="step-name">4. Collar Synced</span>
+                        <span class="step-users">620</span>
+                        <span class="step-dropoff">-27%</span>
+                        <div class="step-bar" style="width: 62%;"></div>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="step-name">5. First Alert Reviewed (Activated)</span>
+                        <span class="step-users">450</span>
+                        <span class="step-dropoff">-27.4%</span>
+                        <div class="step-bar" style="width: 45%;"></div>
+                    </div>
+                </div>
+
+                <div class="chart-card full-width">
+                    <div class="chart-title">Activation Funnel Visualization</div>
+                    <div class="chart-wrapper">
+                        <canvas id="funnelChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Onboarding Checklist -->
+            <div class="section">
+                <h2 class="section-title">Onboarding Checklist</h2>
+
+                <div class="checklist-container">
+                    <div class="checklist-progress">
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" style="width: 60%;"></div>
+                        </div>
+                        <div class="progress-text">3 of 5 complete</div>
+                    </div>
+
+                    <div class="checklist-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Create Your Pet Profile</div>
+                            <div class="step-reason">Personalizes health monitoring with breed-specific baselines and age-appropriate alerts</div>
+                            <div class="step-time">⏱️ 2 minutes</div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Sync Your PetPulse Collar</div>
+                            <div class="step-reason">Connects the hardware to start collecting health data immediately</div>
+                            <div class="step-time">⏱️ 3 minutes</div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Set Alert Preferences</div>
+                            <div class="step-reason">Choose which health metrics trigger notifications (heart rate, activity, sleep)</div>
+                            <div class="step-time">⏱️ 1 minute</div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <div class="step-title">Add Emergency Vet Contact</div>
+                            <div class="step-reason">One-tap access to your vet when alerts occur - peace of mind when it matters</div>
+                            <div class="step-time">⏱️ 1 minute</div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <div class="step-title">Review Your First Health Insight</div>
+                            <div class="step-reason">Experience the core value - see your pet's health data in action</div>
+                            <div class="step-time">⏱️ 1 minute</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Tour -->
+            <div class="section">
+                <h2 class="section-title">Product Tour Design</h2>
+                <p class="section-description">5-step interactive tooltip tour highlighting key features. Skippable but recommended - completion rate target: 70%.</p>
+
+                <div class="small-grid">
+                    <div class="tour-step-card">
+                        <div class="tour-step-header">
+                            <div class="tour-step-number">1</div>
+                            <div class="tour-step-title">Welcome & Goal</div>
+                        </div>
+                        <div class="tour-highlight">
+                            <div class="highlight-message">"Welcome to PetPulse! Let's set up Max's health monitoring in under 5 minutes."</div>
+                        </div>
+                        <div class="tour-action">Action: <span>Click "Let's Go" to begin</span></div>
+                    </div>
+
+                    <div class="tour-step-card">
+                        <div class="tour-step-header">
+                            <div class="tour-step-number">2</div>
+                            <div class="tour-step-title">Health Dashboard</div>
+                        </div>
+                        <div class="tour-highlight">
+                            <div class="highlight-message">"This is your command center - see heart rate, activity, and sleep at a glance."</div>
+                        </div>
+                        <div class="tour-action">Action: <span>Tap any metric to see details</span></div>
+                    </div>
+
+                    <div class="tour-step-card">
+                        <div class="tour-step-header">
+                            <div class="tour-step-number">3</div>
+                            <div class="tour-step-title">Alert System</div>
+                        </div>
+                        <div class="tour-highlight">
+                            <div class="highlight-message">"Get notified when something needs attention - customize what matters to you."</div>
+                        </div>
+                        <div class="tour-action">Action: <span>Review alert preferences</span></div>
+                    </div>
+
+                    <div class="tour-step-card">
+                        <div class="tour-step-header">
+                            <div class="tour-step-number">4</div>
+                            <div class="tour-step-title">Health History</div>
+                        </div>
+                        <div class="tour-highlight">
+                            <div class="highlight-message">"Track trends over time - share reports with your vet for better care."</div>
+                        </div>
+                        <div class="tour-action">Action: <span>View sample health report</span></div>
+                    </div>
+
+                    <div class="tour-step-card">
+                        <div class="tour-step-header">
+                            <div class="tour-step-number">5</div>
+                            <div class="tour-step-title">You're All Set!</div>
+                        </div>
+                        <div class="tour-highlight">
+                            <div class="highlight-message">"Max's collar is monitoring 24/7. We'll alert you if anything needs attention."</div>
+                        </div>
+                        <div class="tour-action">Action: <span>Explore on your own</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Educational Content -->
+            <div class="section">
+                <h2 class="section-title">Educational Content</h2>
+
+                <div class="small-grid">
+                    <div class="content-type-card">
+                        <div class="content-icon">💬</div>
+                        <div class="content-type-name">Contextual Tooltips</div>
+                        <div class="content-description">First-time feature hints explaining health metrics and what they mean</div>
+                    </div>
+
+                    <div class="content-type-card">
+                        <div class="content-icon">📭</div>
+                        <div class="content-type-name">Smart Empty States</div>
+                        <div class="content-description">"No data yet - your collar is collecting. Check back in 2 hours!"</div>
+                    </div>
+
+                    <div class="content-type-card">
+                        <div class="content-icon">🎬</div>
+                        <div class="content-type-name">Quick-Start Video</div>
+                        <div class="content-description">90-second collar setup walkthrough embedded in app</div>
+                    </div>
+
+                    <div class="content-type-card">
+                        <div class="content-icon">📚</div>
+                        <div class="content-type-name">Help Center</div>
+                        <div class="content-description">Searchable docs: collar pairing, metrics explained, troubleshooting</div>
+                    </div>
+
+                    <div class="content-type-card">
+                        <div class="content-icon">🔔</div>
+                        <div class="content-type-name">In-App Messages</div>
+                        <div class="content-description">Triggered nudges: "Try setting a daily activity goal for Max!"</div>
+                    </div>
+
+                    <div class="content-type-card">
+                        <div class="content-icon">📞</div>
+                        <div class="content-type-name">Concierge Onboarding</div>
+                        <div class="content-description">Premium plan: 15-min setup call with Pet Health Specialist</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personalized Paths -->
+            <div class="section">
+                <h2 class="section-title">Personalized Onboarding Paths</h2>
+                <p class="section-description">Segmented by pet type and owner experience level. Asked at signup: "Is this your first smart collar?" and "Dog or Cat?"</p>
+
+                <div class="feature-grid">
+                    <div class="path-card">
+                        <div class="path-header">
+                            <div class="path-name">🐕 New Dog Parent</div>
+                            <div class="path-goal">Goal: Full activation in 10 min</div>
+                        </div>
+                        <div class="path-checklist">
+                            <div class="path-step">
+                                <div class="path-step-num">1</div>
+                                <div class="path-step-text">Create dog profile with breed</div>
+                            </div>
+                            <div class="path-step">
+                                <div class="path-step-num">2</div>
+                                <div class="path-step-text">Watch 90-second collar video</div>
+                            </div>
+                            <div class="path-step">
+                                <div class="path-step-num">3</div>
+                                <div class="path-step-text">Guided collar sync with live support</div>
+                            </div>
+                            <div class="path-step">
+                                <div class="path-step-num">4</div>
+                                <div class="path-step-text">Set activity goal (auto-suggested)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="path-card">
+                        <div class="path-header">
+                            <div class="path-name">🐕 Experienced Dog Owner</div>
+                            <div class="path-goal">Goal: Self-serve in 5 min</div>
+                        </div>
+                        <div class="path-checklist">
+                            <div class="path-step">
+                                <div class="path-step-num">1</div>
+                                <div class="path-step-text">Quick profile setup (minimal fields)</div>
+                            </div>
+                            <div class="path-step">
+                                <div class="path-step-num">2</div>
+                                <div class="path-step-text">Skip video - direct to sync</div>
+                            </div>
+                            <div class="path-step">
+                                <div class="path-step-num">3</div>
+                                <div class="path-step-text">Customize all alert thresholds</div>
+                            </div>
+                            <div class="path-step">
+                                <div class="path-step-num">4</div>
+                                <div class="path-step-text">Import vet records (optional)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="path-card">
+                        <div class="path-header">
+                            <div class="path-name">🐈 Cat Owner</div>
+                            <div class="path-goal">Goal: Cat-specific experience</div>
+                        </div>
+                        <div class="path-checklist">
+                            <div class="path-step">
+                                <div class="path-step-num">1</div>
+                                <div class="path-step-text">Cat profile with indoor/outdoor status</div>
+                            </div>
+                            <div class="path-step">
+                                <div class="path-step-num">2</div>
+                                <div class="path-step-text">Collar fitting guide (cats are tricky!)</div>
+                            </div>
+                            <div class="path-step">
+                                <div class="path-step-num">3</div>
+                                <div class="path-step-text">Feline-specific alert thresholds</div>
+                            </div>
+                            <div class="path-step">
+                                <div class="path-step-num">4</div>
+                                <div class="path-step-text">Sleep pattern focus (cats sleep 15h/day)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="path-card">
+                        <div class="path-header">
+                            <div class="path-name">💎 Premium Subscriber</div>
+                            <div class="path-goal">Goal: White-glove experience</div>
+                        </div>
+                        <div class="path-checklist">
+                            <div class="path-step">
+                                <div class="path-step-num">1</div>
+                                <div class="path-step-text">Schedule 15-min onboarding call</div>
+                            </div>
+                            <div class="path-step">
+                                <div class="path-step-num">2</div>
+                                <div class="path-step-text">Specialist assists with setup</div>
+                            </div>
+                            <div class="path-step">
+                                <div class="path-step-num">3</div>
+                                <div class="path-step-text">Connect to telehealth vet</div>
+                            </div>
+                            <div class="path-step">
+                                <div class="path-step-num">4</div>
+                                <div class="path-step-text">Schedule first health review</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Sequence -->
+            <div class="section">
+                <h2 class="section-title">Email Onboarding Sequence</h2>
+
+                <div class="chart-grid">
+                    <div class="email-timeline">
+                        <div class="email-item">
+                            <div class="email-dot"></div>
+                            <div class="email-day">Day 0 (Immediate)</div>
+                            <div class="email-subject">"Welcome to PetPulse! Let's get Max set up"</div>
+                            <div class="email-body">Quick-start video, collar pairing guide, support chat link</div>
+                        </div>
+
+                        <div class="email-item">
+                            <div class="email-dot"></div>
+                            <div class="email-day">Day 1</div>
+                            <div class="email-subject">"Max's first 24 hours of health data"</div>
+                            <div class="email-body">First insights summary, what the metrics mean, explore dashboard CTA</div>
+                        </div>
+
+                        <div class="email-item">
+                            <div class="email-dot"></div>
+                            <div class="email-day">Day 3</div>
+                            <div class="email-subject">"How Sarah used PetPulse to catch her dog's heart condition early"</div>
+                            <div class="email-body">Customer success story, peace of mind messaging, share feature</div>
+                        </div>
+
+                        <div class="email-item">
+                            <div class="email-dot"></div>
+                            <div class="email-day">Day 5</div>
+                            <div class="email-subject">"You're almost there! Complete your setup"</div>
+                            <div class="email-body">Progress reminder, incomplete step nudge, special offer for Premium</div>
+                        </div>
+
+                        <div class="email-item">
+                            <div class="email-dot"></div>
+                            <div class="email-day">Day 7</div>
+                            <div class="email-subject">"Need help getting started?"</div>
+                            <div class="email-body">Book setup call, FAQ link, live chat reminder, human touch</div>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-title">Email Sequence Performance</div>
+                        <div class="chart-wrapper">
+                            <canvas id="emailChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- A/B Tests -->
+            <div class="section">
+                <h2 class="section-title">A/B Testing Plan</h2>
+
+                <div class="small-grid">
+                    <div class="ab-test-card">
+                        <div class="ab-test-header">Collar Sync Method</div>
+                        <div class="ab-test-metric">Metric: Collar sync completion rate</div>
+                        <div class="ab-variants">
+                            <div class="variant">
+                                <div class="variant-label">Variant A</div>
+                                <div class="variant-description">Self-serve with video guide</div>
+                            </div>
+                            <div class="variant">
+                                <div class="variant-label">Variant B</div>
+                                <div class="variant-description">Live chat support prompt</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ab-test-card">
+                        <div class="ab-test-header">Checklist Length</div>
+                        <div class="ab-test-metric">Metric: Activation rate</div>
+                        <div class="ab-variants">
+                            <div class="variant">
+                                <div class="variant-label">Variant A</div>
+                                <div class="variant-description">5 steps (current)</div>
+                            </div>
+                            <div class="variant">
+                                <div class="variant-label">Variant B</div>
+                                <div class="variant-description">3 steps (essentials only)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ab-test-card">
+                        <div class="ab-test-header">Product Tour</div>
+                        <div class="ab-test-metric">Metric: Feature discovery rate</div>
+                        <div class="ab-variants">
+                            <div class="variant">
+                                <div class="variant-label">Variant A</div>
+                                <div class="variant-description">Optional tour (skippable)</div>
+                            </div>
+                            <div class="variant">
+                                <div class="variant-label">Variant B</div>
+                                <div class="variant-description">Auto-play first 2 steps</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ab-test-card">
+                        <div class="ab-test-header">Activation Incentive</div>
+                        <div class="ab-test-metric">Metric: D7 activation rate</div>
+                        <div class="ab-variants">
+                            <div class="variant">
+                                <div class="variant-label">Variant A</div>
+                                <div class="variant-description">No incentive (control)</div>
+                            </div>
+                            <div class="variant">
+                                <div class="variant-label">Variant B</div>
+                                <div class="variant-description">Free month for Day 1 setup</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Time Distribution -->
+            <div class="section">
+                <h2 class="section-title">Time-to-Activate Distribution</h2>
+
+                <div class="chart-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">Time Distribution</div>
+                        <div class="chart-wrapper">
+                            <canvas id="timeChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-title">Early Retention Curve</div>
+                        <div class="chart-wrapper">
+                            <canvas id="retentionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Implementation Roadmap -->
+            <div class="section">
+                <h2 class="section-title">90-Day Implementation Roadmap</h2>
+
+                <div class="roadmap-phase">
+                    <div class="phase-header">
+                        <div class="phase-name">Phase 1: Foundation</div>
+                        <div class="phase-timing">Weeks 1-3</div>
+                    </div>
+                    <div class="phase-goal">Goal: Implement core onboarding elements and tracking</div>
+                    <div class="phase-tasks">
+                        <div class="phase-task">Define activation event tracking in Mixpanel</div>
+                        <div class="phase-task">Build 5-step onboarding checklist UI</div>
+                        <div class="phase-task">Deploy email sequence in Customer.io</div>
+                        <div class="phase-task">Create collar sync troubleshooting flow</div>
+                        <div class="phase-task">Set up activation funnel dashboard</div>
+                    </div>
+                </div>
+
+                <div class="roadmap-phase">
+                    <div class="phase-header">
+                        <div class="phase-name">Phase 2: Education</div>
+                        <div class="phase-timing">Weeks 4-6</div>
+                    </div>
+                    <div class="phase-goal">Goal: Add product tour, tooltips, and help resources</div>
+                    <div class="phase-tasks">
+                        <div class="phase-task">Build 5-step tooltip product tour</div>
+                        <div class="phase-task">Add contextual tooltips for health metrics</div>
+                        <div class="phase-task">Create 90-second quick-start video</div>
+                        <div class="phase-task">Launch smart empty states</div>
+                        <div class="phase-task">Deploy help center with 20 articles</div>
+                    </div>
+                </div>
+
+                <div class="roadmap-phase">
+                    <div class="phase-header">
+                        <div class="phase-name">Phase 3: Personalization & Optimization</div>
+                        <div class="phase-timing">Weeks 7-12</div>
+                    </div>
+                    <div class="phase-goal">Goal: Personalize paths and run A/B tests</div>
+                    <div class="phase-tasks">
+                        <div class="phase-task">Implement 4 personalized onboarding paths</div>
+                        <div class="phase-task">Run A/B test #1: Collar sync method</div>
+                        <div class="phase-task">Run A/B test #2: Checklist length</div>
+                        <div class="phase-task">Launch Premium concierge onboarding</div>
+                        <div class="phase-task">Iterate based on data (target: 45% → 55%)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Metrics -->
+            <div class="section">
+                <h2 class="section-title">Success Metrics & Targets</h2>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <div class="label">Activation Rate</div>
+                        <div class="value">45% → 65%</div>
+                        <div class="description">+20 points by Q2</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Time-to-Activate</div>
+                        <div class="value">4h → 2h</div>
+                        <div class="description">50% faster</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Checklist Completion</div>
+                        <div class="value">60% → 80%</div>
+                        <div class="description">Current → Target</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Tour Completion</div>
+                        <div class="value">N/A → 70%</div>
+                        <div class="description">New metric</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | onboarding-flow-optimizer-v1.0</p>
+                <p style="margin-top: 5px;">Context Signature: PETPULSE-ONBOARDING-2025-12 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        // Funnel Chart
+        const funnelCtx = document.getElementById('funnelChart');
+        if (funnelCtx) {
+            new Chart(funnelCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Account Created', 'Email Verified', 'Pet Profile', 'Collar Synced', 'Activated'],
+                    datasets: [{
+                        label: 'Users',
+                        data: [1000, 920, 850, 620, 450],
+                        backgroundColor: function(context) {
+                            const colors = ['#10b981', '#0ea572', '#0d9463', '#0b8354', '#0a7245'];
+                            return colors[context.dataIndex];
+                        },
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        y: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Time Distribution Chart
+        const timeCtx = document.getElementById('timeChart');
+        if (timeCtx) {
+            new Chart(timeCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['<1 hour', '1-4 hours', '4-24 hours', '1-7 days', '7+ days'],
+                    datasets: [{
+                        data: [15, 30, 25, 20, 10],
+                        backgroundColor: ['#10b981', '#059669', '#047857', '#065f46', '#6b7280'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Time-to-Activate Distribution',
+                            color: '#ffffff',
+                            font: { size: 14, weight: '600' }
+                        },
+                        legend: {
+                            position: 'right',
+                            labels: { color: '#ccc', padding: 15 }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Retention Chart
+        const retentionCtx = document.getElementById('retentionChart');
+        if (retentionCtx) {
+            new Chart(retentionCtx, {
+                type: 'line',
+                data: {
+                    labels: ['D0', 'D1', 'D3', 'D7', 'D14', 'D30'],
+                    datasets: [{
+                        label: 'Retention %',
+                        data: [100, 85, 78, 72, 68, 65],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                color: '#888',
+                                callback: function(value) { return value + '%'; }
+                            },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Email Performance Chart
+        const emailCtx = document.getElementById('emailChart');
+        if (emailCtx) {
+            new Chart(emailCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Day 0', 'Day 1', 'Day 3', 'Day 5', 'Day 7'],
+                    datasets: [{
+                        label: 'Open Rate %',
+                        data: [72, 58, 45, 42, 38],
+                        backgroundColor: '#10b981',
+                        borderRadius: 4
+                    }, {
+                        label: 'Click Rate %',
+                        data: [35, 22, 15, 12, 10],
+                        backgroundColor: '#059669',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 80,
+                            ticks: {
+                                color: '#888',
+                                callback: function(value) { return value + '%'; }
+                            },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: { color: '#ccc' }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

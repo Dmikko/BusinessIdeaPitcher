@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Roadmap | PetPulse | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container { margin: 0 auto; background: #0a0a0a; }
+
+        /* Header */
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .header-content::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
+        .subtitle { font-size: 1.3rem; opacity: 0.95; font-weight: 400; margin-bottom: 2rem; }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item { display: flex; align-items: center; gap: 0.5rem; }
+
+        /* Score Banner */
+        .score-banner { background: #0a0a0a; padding: 0; display: flex; justify-content: center; }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-main { text-align: center; }
+
+        .score-number {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .score-interpretation { border-left: 3px solid #10b981; padding-left: 2rem; }
+        .interpretation-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; color: #f5f5f5; }
+        .interpretation-text { color: #d4d4d4; line-height: 1.7; }
+
+        .verdict-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Content */
+        .content { max-width: 1600px; margin: 0 auto; padding: 4rem; background: #0a0a0a; }
+        .section { margin-bottom: 4rem; }
+        .section:last-child { margin-bottom: 2rem; }
+        .section-header { margin-bottom: 2rem; }
+        .section-title { font-size: 2rem; font-weight: 700; color: #f5f5f5; margin-bottom: 0.5rem; }
+        .section-description { font-size: 1.05rem; color: #d4d4d4; max-width: 800px; }
+
+        /* Charts */
+        .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        .chart-card { background: #1a1a1a; border-radius: 12px; padding: 2rem; border: 1px solid rgba(16, 185, 129, 0.2); }
+        .chart-title { font-weight: 700; font-size: 1.1rem; color: #f5f5f5; margin-bottom: 0.5rem; }
+        .chart-subtitle { font-size: 0.9rem; color: #a3a3a3; margin-bottom: 1.5rem; }
+        .chart-wrapper { position: relative; height: 350px; margin-bottom: 1.5rem; }
+
+        /* Insights */
+        .insights-panel { background: #0a0a0a; border-left: 4px solid #10b981; padding: 1.5rem; margin-top: 1rem; border-radius: 0 8px 8px 0; }
+        .insight-title { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: #10b981; margin-bottom: 1rem; }
+        .insight-list { list-style: none; }
+        .insight-list li { padding: 0.6rem 0; color: #d4d4d4; font-size: 0.95rem; border-bottom: 1px solid rgba(16, 185, 129, 0.1); }
+        .insight-list li:last-child { border-bottom: none; }
+        .insight-list li strong { color: #10b981; font-weight: 600; }
+
+        /* Footer */
+        footer { background: #0a0a0a; display: flex; justify-content: center; }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content p { margin: 0.3rem 0; }
+        .footer-content strong { color: #10b981; }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATEGIC ROADMAP SPECIFIC CSS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        /* Vision Card */
+        .vision-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .vision-label { font-size: 0.8rem; color: #10b981; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+        .vision-statement { font-size: 1.5rem; font-weight: 700; color: #f5f5f5; line-height: 1.4; max-width: 900px; margin: 0 auto; }
+        .vision-timeline { font-size: 0.9rem; color: #a3a3a3; margin-top: 1rem; }
+
+        /* OKR Cards */
+        .okr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+
+        .okr-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .okr-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1); }
+        .okr-header { background: rgba(16, 185, 129, 0.1); padding: 1.25rem; border-bottom: 1px solid rgba(16, 185, 129, 0.2); }
+        .okr-number { font-size: 0.75rem; color: #10b981; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+        .okr-objective { font-size: 1.1rem; font-weight: 700; color: #f5f5f5; line-height: 1.4; }
+        .okr-body { padding: 1.25rem; }
+        .kr-item { padding: 0.75rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .kr-item:last-child { border-bottom: none; }
+        .kr-label { font-size: 0.75rem; color: #10b981; font-weight: 600; }
+        .kr-text { font-size: 0.9rem; color: #d4d4d4; margin-top: 0.25rem; }
+        .kr-metrics { display: flex; gap: 1rem; margin-top: 0.5rem; }
+        .kr-metric { font-size: 0.8rem; color: #a3a3a3; }
+        .kr-metric span { color: #10b981; font-weight: 600; }
+
+        /* Phase Timeline */
+        .phase-timeline { margin-top: 2rem; }
+
+        .phase-block {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .phase-header {
+            background: rgba(16, 185, 129, 0.1);
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .phase-title { display: flex; align-items: center; gap: 1rem; }
+
+        .phase-number {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            font-weight: 700;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .phase-name { font-size: 1.15rem; font-weight: 700; color: #f5f5f5; }
+        .phase-dates { font-size: 0.85rem; color: #a3a3a3; }
+        .phase-body { padding: 1.5rem; }
+        .phase-goal { font-size: 0.95rem; color: #d4d4d4; margin-bottom: 1.5rem; padding-left: 1rem; border-left: 3px solid #10b981; }
+        .phase-sections { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .phase-section { background: rgba(16, 185, 129, 0.02); border-radius: 6px; padding: 1rem; }
+        .phase-section-title { font-size: 0.8rem; color: #10b981; text-transform: uppercase; font-weight: 600; margin-bottom: 0.75rem; }
+        .phase-list { list-style: none; padding: 0; margin: 0; }
+        .phase-list li { font-size: 0.9rem; color: #d4d4d4; padding: 0.4rem 0; padding-left: 1.25rem; position: relative; }
+        .phase-list li::before { content: "\2192"; position: absolute; left: 0; color: #10b981; }
+
+        /* Resource Table */
+        .resource-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+        .resource-table th, .resource-table td { padding: 0.85rem 1rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .resource-table th { background: rgba(16, 185, 129, 0.1); color: #10b981; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; }
+        .resource-table td { color: #d4d4d4; font-size: 0.9rem; }
+        .resource-table tr:hover { background: rgba(16, 185, 129, 0.05); }
+        .resource-table .total-row { background: rgba(16, 185, 129, 0.1); font-weight: 700; }
+        .resource-table .total-row td { color: #10b981; }
+
+        /* Assumptions */
+        .assumptions-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem; margin-top: 1.5rem; }
+
+        .assumption-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .assumption-card.high-risk { border-left: 4px solid #fc8181; }
+        .assumption-card.medium-risk { border-left: 4px solid #f6ad55; }
+        .assumption-card.low-risk { border-left: 4px solid #10b981; }
+        .assumption-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
+        .assumption-text { font-weight: 600; color: #f5f5f5; font-size: 0.95rem; flex: 1; }
+
+        .assumption-risk {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .assumption-risk.high { background: rgba(252, 129, 129, 0.2); color: #fc8181; }
+        .assumption-risk.medium { background: rgba(246, 173, 85, 0.2); color: #f6ad55; }
+        .assumption-risk.low { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .assumption-details { font-size: 0.85rem; color: #a3a3a3; margin-top: 0.5rem; }
+        .assumption-test { font-size: 0.85rem; color: #d4d4d4; margin-top: 0.5rem; padding-left: 0.75rem; border-left: 2px solid #10b981; }
+
+        /* Quarterly Grid */
+        .quarterly-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
+        .quarterly-card { background: #1a1a1a; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; text-align: center; }
+        .quarterly-month { font-size: 0.75rem; color: #a3a3a3; text-transform: uppercase; }
+        .quarterly-name { font-size: 1rem; font-weight: 700; color: #10b981; margin: 0.5rem 0; }
+        .quarterly-focus { font-size: 0.85rem; color: #d4d4d4; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .phase-sections { grid-template-columns: 1fr; }
+            .quarterly-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .okr-grid, .assumptions-grid { grid-template-columns: 1fr; }
+            .quarterly-grid { grid-template-columns: 1fr; }
+            .score-container { grid-template-columns: 1fr; text-align: center; }
+            .score-interpretation { border-left: none; border-top: 3px solid #10b981; padding-left: 0; padding-top: 1.5rem; }
+            .header-content, .score-container, .content, .footer-content { padding: 2rem; }
+        }
+
+        /* Print */
+        @media print {
+            body { background: white; color: #000000; }
+            .vision-card, .okr-card, .phase-block, .assumption-card { background: white; border: 2px solid #10b981; page-break-inside: avoid; }
+            .vision-statement, .okr-objective, .phase-name { color: #000000; }
+            footer { background: white; }
+            .footer-content { background: white; color: #666666; border-top: 2px solid #10b981; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">Market & Product Strategy</div>
+                <h1>Strategic Roadmap</h1>
+                <div class="subtitle">18-month OKR-driven execution plan with milestone-based phases, resource allocation, and risk mitigation strategies</div>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span>&#128197;</span>
+                        <span>Generated: December 18, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>&#128202;</span>
+                        <span>Analysis Type: OKR Framework</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>&#127919;</span>
+                        <span>Version 1.0.0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SCORE BANNER -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">8.7</div>
+                    <div class="score-label">Roadmap Confidence</div>
+                </div>
+
+                <div class="score-interpretation">
+                    <div class="interpretation-title">What This Score Means</div>
+                    <div class="interpretation-text">
+                        Comprehensive 18-month plan with validated market opportunity and clear execution path.
+                        Critical success factors well-defined. Primary risks identified with mitigation strategies.
+                        Total capital requirement of $1.85M aligns with projected revenue growth to $250K MRR by Month 18.
+                    </div>
+                </div>
+
+                <div class="verdict-badge">
+                    EXECUTE
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+            <!-- Section 1: Vision & OKRs -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Vision & Strategic Objectives</h2>
+                    <p class="section-description">
+                        The north star guiding all strategic decisions. This vision defines where PetPulse
+                        will be in 5 years and what success looks like in 18 months.
+                    </p>
+                </div>
+
+                <div class="vision-card">
+                    <div class="vision-label">Vision Statement</div>
+                    <div class="vision-statement">In 5 years, PetPulse will be the leading pet health intelligence platform, monitoring 1 million pets and preventing 100,000 emergency vet visits annually through AI-powered early detection.</div>
+                    <div class="vision-timeline">Horizon: 5 Years (2030)</div>
+                </div>
+
+                <div class="okr-grid">
+                    <div class="okr-card">
+                        <div class="okr-header">
+                            <div class="okr-number">Objective 1</div>
+                            <div class="okr-objective">Achieve Product-Market Fit in Premium Pet Parent Segment</div>
+                        </div>
+                        <div class="okr-body">
+                            <div class="kr-item">
+                                <div class="kr-label">KR 1.1</div>
+                                <div class="kr-text">Acquire 5,000 paying subscribers</div>
+                                <div class="kr-metrics">
+                                    <div class="kr-metric">Baseline: <span>0</span></div>
+                                    <div class="kr-metric">Target: <span>5,000 by M12</span></div>
+                                </div>
+                            </div>
+                            <div class="kr-item">
+                                <div class="kr-label">KR 1.2</div>
+                                <div class="kr-text">Achieve 45%+ monthly retention rate</div>
+                                <div class="kr-metrics">
+                                    <div class="kr-metric">Baseline: <span>TBD</span></div>
+                                    <div class="kr-metric">Target: <span>45% by M9</span></div>
+                                </div>
+                            </div>
+                            <div class="kr-item">
+                                <div class="kr-label">KR 1.3</div>
+                                <div class="kr-text">Reach 60+ NPS (Net Promoter Score)</div>
+                                <div class="kr-metrics">
+                                    <div class="kr-metric">Baseline: <span>TBD</span></div>
+                                    <div class="kr-metric">Target: <span>60+ by M12</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="okr-card">
+                        <div class="okr-header">
+                            <div class="okr-number">Objective 2</div>
+                            <div class="okr-objective">Build Defensible AI Health Detection Moat</div>
+                        </div>
+                        <div class="okr-body">
+                            <div class="kr-item">
+                                <div class="kr-label">KR 2.1</div>
+                                <div class="kr-text">Train AI on 100,000+ pet health data points</div>
+                                <div class="kr-metrics">
+                                    <div class="kr-metric">Baseline: <span>0</span></div>
+                                    <div class="kr-metric">Target: <span>100K by M12</span></div>
+                                </div>
+                            </div>
+                            <div class="kr-item">
+                                <div class="kr-label">KR 2.2</div>
+                                <div class="kr-text">Achieve 85%+ AI health alert accuracy</div>
+                                <div class="kr-metrics">
+                                    <div class="kr-metric">Baseline: <span>70%</span></div>
+                                    <div class="kr-metric">Target: <span>85% by M15</span></div>
+                                </div>
+                            </div>
+                            <div class="kr-item">
+                                <div class="kr-label">KR 2.3</div>
+                                <div class="kr-text">Document 500 early detection success stories</div>
+                                <div class="kr-metrics">
+                                    <div class="kr-metric">Baseline: <span>0</span></div>
+                                    <div class="kr-metric">Target: <span>500 by M18</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="okr-card">
+                        <div class="okr-header">
+                            <div class="okr-number">Objective 3</div>
+                            <div class="okr-objective">Scale Revenue to Fundraising Readiness</div>
+                        </div>
+                        <div class="okr-body">
+                            <div class="kr-item">
+                                <div class="kr-label">KR 3.1</div>
+                                <div class="kr-text">Reach $250K MRR by Month 18</div>
+                                <div class="kr-metrics">
+                                    <div class="kr-metric">Baseline: <span>$0</span></div>
+                                    <div class="kr-metric">Target: <span>$250K MRR</span></div>
+                                </div>
+                            </div>
+                            <div class="kr-item">
+                                <div class="kr-label">KR 3.2</div>
+                                <div class="kr-text">Maintain LTV:CAC ratio of 4:1 or higher</div>
+                                <div class="kr-metrics">
+                                    <div class="kr-metric">Baseline: <span>TBD</span></div>
+                                    <div class="kr-metric">Target: <span>4:1+ by M12</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Phase Roadmap -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">18-Month Phase Roadmap</h2>
+                    <p class="section-description">
+                        Execution plan broken into three 6-month phases. Each phase has specific milestones,
+                        metrics targets, and success criteria that build toward the strategic objectives.
+                    </p>
+                </div>
+
+                <div class="phase-timeline">
+                    <div class="phase-block">
+                        <div class="phase-header">
+                            <div class="phase-title">
+                                <div class="phase-number">1</div>
+                                <div class="phase-name">Launch & Validate</div>
+                            </div>
+                            <div class="phase-dates">Months 1-6</div>
+                        </div>
+                        <div class="phase-body">
+                            <div class="phase-goal">Launch MVP collar and subscription service to 2,500 early adopters, validate AI health detection accuracy, and establish telehealth partner network.</div>
+                            <div class="phase-sections">
+                                <div class="phase-section">
+                                    <div class="phase-section-title">Key Milestones</div>
+                                    <ul class="phase-list">
+                                        <li>MVP hardware production complete (M2)</li>
+                                        <li>Beta launch with 500 users (M3)</li>
+                                        <li>Public launch - 2,500 subscribers (M6)</li>
+                                    </ul>
+                                </div>
+                                <div class="phase-section">
+                                    <div class="phase-section-title">Metrics Targets</div>
+                                    <ul class="phase-list">
+                                        <li>2,500 paying subscribers</li>
+                                        <li>$75K MRR</li>
+                                        <li>35%+ monthly retention</li>
+                                    </ul>
+                                </div>
+                                <div class="phase-section">
+                                    <div class="phase-section-title">Major Initiatives</div>
+                                    <ul class="phase-list">
+                                        <li>Hardware manufacturing partnership</li>
+                                        <li>Telehealth vet partner onboarding</li>
+                                        <li>AI model v1.0 training and validation</li>
+                                    </ul>
+                                </div>
+                                <div class="phase-section">
+                                    <div class="phase-section-title">Success Criteria</div>
+                                    <ul class="phase-list">
+                                        <li>50+ users say "I'd be disappointed if PetPulse disappeared"</li>
+                                        <li>3+ documented early health detection saves</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="phase-block">
+                        <div class="phase-header">
+                            <div class="phase-title">
+                                <div class="phase-number">2</div>
+                                <div class="phase-name">Scale & Optimize</div>
+                            </div>
+                            <div class="phase-dates">Months 7-12</div>
+                        </div>
+                        <div class="phase-body">
+                            <div class="phase-goal">Scale to 5,000 subscribers, launch cat support, optimize CAC through proven channels, and achieve product-market fit metrics.</div>
+                            <div class="phase-sections">
+                                <div class="phase-section">
+                                    <div class="phase-section-title">Key Milestones</div>
+                                    <ul class="phase-list">
+                                        <li>Cat collar launch (M8)</li>
+                                        <li>5,000 total subscribers (M12)</li>
+                                        <li>Series A preparation complete (M12)</li>
+                                    </ul>
+                                </div>
+                                <div class="phase-section">
+                                    <div class="phase-section-title">Metrics Targets</div>
+                                    <ul class="phase-list">
+                                        <li>5,000 paying subscribers</li>
+                                        <li>$145K MRR</li>
+                                        <li>45%+ monthly retention</li>
+                                    </ul>
+                                </div>
+                                <div class="phase-section">
+                                    <div class="phase-section-title">Major Initiatives</div>
+                                    <ul class="phase-list">
+                                        <li>Cat-specific AI model development</li>
+                                        <li>Influencer marketing expansion</li>
+                                        <li>Referral program launch</li>
+                                    </ul>
+                                </div>
+                                <div class="phase-section">
+                                    <div class="phase-section-title">Success Criteria</div>
+                                    <ul class="phase-list">
+                                        <li>LTV:CAC ratio exceeds 4:1</li>
+                                        <li>NPS score reaches 60+</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="phase-block">
+                        <div class="phase-header">
+                            <div class="phase-title">
+                                <div class="phase-number">3</div>
+                                <div class="phase-name">Growth & Expansion</div>
+                            </div>
+                            <div class="phase-dates">Months 13-18</div>
+                        </div>
+                        <div class="phase-body">
+                            <div class="phase-goal">Scale to 8,500+ subscribers, close Series A funding, expand to veterinary clinic partnerships, and build enterprise sales motion.</div>
+                            <div class="phase-sections">
+                                <div class="phase-section">
+                                    <div class="phase-section-title">Key Milestones</div>
+                                    <ul class="phase-list">
+                                        <li>Series A close - $5M (M14)</li>
+                                        <li>Vet clinic partnership pilot (M15)</li>
+                                        <li>8,500 total subscribers (M18)</li>
+                                    </ul>
+                                </div>
+                                <div class="phase-section">
+                                    <div class="phase-section-title">Metrics Targets</div>
+                                    <ul class="phase-list">
+                                        <li>8,500 paying subscribers</li>
+                                        <li>$250K MRR</li>
+                                        <li>50%+ monthly retention</li>
+                                    </ul>
+                                </div>
+                                <div class="phase-section">
+                                    <div class="phase-section-title">Major Initiatives</div>
+                                    <ul class="phase-list">
+                                        <li>Enterprise/clinic sales team hire</li>
+                                        <li>International expansion planning</li>
+                                        <li>AI model v2.0 with advanced diagnostics</li>
+                                    </ul>
+                                </div>
+                                <div class="phase-section">
+                                    <div class="phase-section-title">Success Criteria</div>
+                                    <ul class="phase-list">
+                                        <li>Series A closed at $20M+ valuation</li>
+                                        <li>5+ vet clinic partnerships signed</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Visual Analysis -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Visual Analysis</h2>
+                    <p class="section-description">
+                        Data visualizations showing milestone timeline, resource allocation,
+                        metrics trajectory, and risk assessment across the 18-month horizon.
+                    </p>
+                </div>
+
+                <div class="chart-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">Milestone Timeline</div>
+                        <div class="chart-subtitle">Key milestones plotted across 18-month roadmap</div>
+                        <div class="chart-wrapper">
+                            <canvas id="milestoneChart"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Critical Path</div>
+                            <ul class="insight-list">
+                                <li><strong>Phase 1:</strong> Public launch with 2,500 users (M6)</li>
+                                <li><strong>Phase 2:</strong> Cat support + PMF validation (M12)</li>
+                                <li><strong>Phase 3:</strong> Series A + vet partnerships (M15)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-title">Resource Allocation by Phase</div>
+                        <div class="chart-subtitle">Budget distribution across team, infrastructure, marketing</div>
+                        <div class="chart-wrapper">
+                            <canvas id="resourceChart"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Investment Focus</div>
+                            <ul class="insight-list">
+                                <li><strong>Phase 1:</strong> $350K (Product + Hardware)</li>
+                                <li><strong>Phase 2:</strong> $650K (Growth + Team)</li>
+                                <li><strong>Phase 3:</strong> $850K (Scale + Expansion)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-title">Metrics Trajectory</div>
+                        <div class="chart-subtitle">Projected growth of customers and MRR over 18 months</div>
+                        <div class="chart-wrapper">
+                            <canvas id="metricsChart"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Growth Targets</div>
+                            <ul class="insight-list">
+                                <li><strong>Customers:</strong> 0 &#8594; 8,500</li>
+                                <li><strong>MRR:</strong> $0 &#8594; $250K</li>
+                                <li><strong>Retention:</strong> 35% &#8594; 50%</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-title">Risk Assessment</div>
+                        <div class="chart-subtitle">Critical assumptions mapped by impact and probability</div>
+                        <div class="chart-wrapper">
+                            <canvas id="riskChart"></canvas>
+                        </div>
+                        <div class="insights-panel">
+                            <div class="insight-title">Top Risks</div>
+                            <ul class="insight-list">
+                                <li><strong>High:</strong> 2 assumptions require testing</li>
+                                <li><strong>Medium:</strong> 2 assumptions to monitor</li>
+                                <li><strong>Low:</strong> 0 assumptions validated</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Resource Allocation -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Resource Allocation</h2>
+                    <p class="section-description">
+                        Team growth plan and capital allocation across the 18-month roadmap.
+                    </p>
+                </div>
+
+                <table class="resource-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Phase 1 (M1-6)</th>
+                            <th>Phase 2 (M7-12)</th>
+                            <th>Phase 3 (M13-18)</th>
+                            <th>Total 18M</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Personnel</td>
+                            <td>$180K</td>
+                            <td>$350K</td>
+                            <td>$500K</td>
+                            <td>$1,030K</td>
+                        </tr>
+                        <tr>
+                            <td>Infrastructure/Hardware</td>
+                            <td>$100K</td>
+                            <td>$150K</td>
+                            <td>$180K</td>
+                            <td>$430K</td>
+                        </tr>
+                        <tr>
+                            <td>Marketing/Sales</td>
+                            <td>$50K</td>
+                            <td>$120K</td>
+                            <td>$140K</td>
+                            <td>$310K</td>
+                        </tr>
+                        <tr>
+                            <td>Tools/Software</td>
+                            <td>$20K</td>
+                            <td>$30K</td>
+                            <td>$30K</td>
+                            <td>$80K</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td>Total</td>
+                            <td>$350K</td>
+                            <td>$650K</td>
+                            <td>$850K</td>
+                            <td>$1,850K</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Section 5: Assumptions -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Assumptions & De-Risking</h2>
+                    <p class="section-description">
+                        Critical assumptions that must be true for the roadmap to succeed.
+                    </p>
+                </div>
+
+                <div class="assumptions-grid">
+                    <div class="assumption-card high-risk">
+                        <div class="assumption-header">
+                            <div class="assumption-text">Premium pet parents will pay $29+/mo for AI health monitoring</div>
+                            <span class="assumption-risk high">High</span>
+                        </div>
+                        <div class="assumption-details">Impact: Revenue model breaks if conversion &lt;5%</div>
+                        <div class="assumption-test">Test: Beta pricing experiment with 500 users (M3-M5)</div>
+                    </div>
+
+                    <div class="assumption-card high-risk">
+                        <div class="assumption-header">
+                            <div class="assumption-text">AI can detect health anomalies with 80%+ accuracy</div>
+                            <span class="assumption-risk high">High</span>
+                        </div>
+                        <div class="assumption-details">Impact: Core differentiator fails, revert to activity-only</div>
+                        <div class="assumption-test">Test: Validate against 1,000+ health events by M6</div>
+                    </div>
+
+                    <div class="assumption-card medium-risk">
+                        <div class="assumption-header">
+                            <div class="assumption-text">CAC can be maintained under $250 via social + influencer</div>
+                            <span class="assumption-risk medium">Medium</span>
+                        </div>
+                        <div class="assumption-details">Impact: Need more capital or slower growth</div>
+                        <div class="assumption-test">Test: Track CAC by channel monthly, pivot if &gt;$350</div>
+                    </div>
+
+                    <div class="assumption-card medium-risk">
+                        <div class="assumption-header">
+                            <div class="assumption-text">Telehealth vets available at scale for 24/7 coverage</div>
+                            <span class="assumption-risk medium">Medium</span>
+                        </div>
+                        <div class="assumption-details">Impact: Service quality degradation, churn increase</div>
+                        <div class="assumption-test">Test: Partner capacity audit quarterly</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Quarterly Reviews -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Quarterly Review Schedule</h2>
+                    <p class="section-description">
+                        Scheduled checkpoints to review OKR progress and adjust roadmap.
+                    </p>
+                </div>
+
+                <div class="quarterly-grid">
+                    <div class="quarterly-card">
+                        <div class="quarterly-month">Month 3</div>
+                        <div class="quarterly-name">Q1 Review</div>
+                        <div class="quarterly-focus">Beta validation, AI accuracy check</div>
+                    </div>
+                    <div class="quarterly-card">
+                        <div class="quarterly-month">Month 6</div>
+                        <div class="quarterly-name">Q2 Review</div>
+                        <div class="quarterly-focus">Phase 1 results, finalize Phase 2</div>
+                    </div>
+                    <div class="quarterly-card">
+                        <div class="quarterly-month">Month 9</div>
+                        <div class="quarterly-name">Q3 Review</div>
+                        <div class="quarterly-focus">Growth velocity, cat launch readiness</div>
+                    </div>
+                    <div class="quarterly-card">
+                        <div class="quarterly-month">Month 12</div>
+                        <div class="quarterly-name">Q4 Review</div>
+                        <div class="quarterly-focus">PMF metrics, Series A prep</div>
+                    </div>
+                    <div class="quarterly-card">
+                        <div class="quarterly-month">Month 15</div>
+                        <div class="quarterly-name">Q5 Review</div>
+                        <div class="quarterly-focus">Series A progress, vet partnerships</div>
+                    </div>
+                    <div class="quarterly-card">
+                        <div class="quarterly-month">Month 18</div>
+                        <div class="quarterly-name">Q6 Review</div>
+                        <div class="quarterly-focus">18-month retrospective, next 18M plan</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p>StratArts Business Strategy Skills | strategic-roadmap-builder-v1.0.0</p>
+                <p>Context Signature: strategic-roadmap-builder-v1.0.0 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        const tooltipConfig = {
+            backgroundColor: '#1a1a1a',
+            titleColor: '#f5f5f5',
+            bodyColor: '#d4d4d4',
+            borderColor: '#10b981',
+            borderWidth: 1
+        };
+
+        // Data
+        const roadmapData = {
+            milestones: {
+                labels: ['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10', 'M11', 'M12', 'M13', 'M14', 'M15', 'M16', 'M17', 'M18'],
+                phase1: [100, 100, 100, 100, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                phase2: [0, 0, 0, 0, 0, 0, 100, 100, 100, 100, 100, 100, 0, 0, 0, 0, 0, 0],
+                phase3: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 100, 100, 100, 100, 100]
+            },
+            resources: {
+                labels: ['Phase 1', 'Phase 2', 'Phase 3'],
+                personnel: [180000, 350000, 500000],
+                infra: [100000, 150000, 180000],
+                marketing: [50000, 120000, 140000],
+                tools: [20000, 30000, 30000]
+            },
+            metrics: {
+                labels: ['M1', 'M3', 'M6', 'M9', 'M12', 'M15', 'M18'],
+                customers: [0, 500, 2500, 3800, 5000, 6800, 8500],
+                mrr: [0, 15000, 75000, 110000, 145000, 200000, 250000]
+            },
+            risks: {
+                labels: ['Premium Pricing', 'AI Accuracy', 'CAC Target', 'Telehealth Capacity'],
+                impact: [9, 8, 6, 5],
+                probability: [6, 5, 5, 4]
+            }
+        };
+
+        // Chart 1: Milestone Timeline
+        const milestoneCtx = document.getElementById('milestoneChart').getContext('2d');
+        new Chart(milestoneCtx, {
+            type: 'bar',
+            data: {
+                labels: roadmapData.milestones.labels,
+                datasets: [
+                    { label: 'Phase 1', data: roadmapData.milestones.phase1, backgroundColor: '#10b981', borderRadius: 2 },
+                    { label: 'Phase 2', data: roadmapData.milestones.phase2, backgroundColor: '#14b8a6', borderRadius: 2 },
+                    { label: 'Phase 3', data: roadmapData.milestones.phase3, backgroundColor: '#34d399', borderRadius: 2 }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { stacked: true, grid: { display: false }, ticks: { color: '#a3a3a3', font: { size: 10 } } },
+                    y: { stacked: true, beginAtZero: true, max: 100, grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3', callback: v => v + '%' } }
+                },
+                plugins: { legend: { display: true, position: 'bottom', labels: { color: '#d4d4d4', font: { size: 10 }, padding: 15 } }, tooltip: tooltipConfig }
+            }
+        });
+
+        // Chart 2: Resources
+        const resourceCtx = document.getElementById('resourceChart').getContext('2d');
+        new Chart(resourceCtx, {
+            type: 'bar',
+            data: {
+                labels: roadmapData.resources.labels,
+                datasets: [
+                    { label: 'Personnel', data: roadmapData.resources.personnel, backgroundColor: '#10b981', borderRadius: 4 },
+                    { label: 'Infrastructure', data: roadmapData.resources.infra, backgroundColor: '#14b8a6', borderRadius: 4 },
+                    { label: 'Marketing', data: roadmapData.resources.marketing, backgroundColor: '#34d399', borderRadius: 4 },
+                    { label: 'Tools', data: roadmapData.resources.tools, backgroundColor: '#6ee7b7', borderRadius: 4 }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { stacked: true, grid: { display: false }, ticks: { color: '#f5f5f5', font: { size: 12, weight: '600' } } },
+                    y: { stacked: true, beginAtZero: true, grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3', callback: v => '$' + (v/1000) + 'K' } }
+                },
+                plugins: { legend: { display: true, position: 'bottom', labels: { color: '#d4d4d4', font: { size: 10 }, padding: 15 } }, tooltip: tooltipConfig }
+            }
+        });
+
+        // Chart 3: Metrics
+        const metricsCtx = document.getElementById('metricsChart').getContext('2d');
+        new Chart(metricsCtx, {
+            type: 'line',
+            data: {
+                labels: roadmapData.metrics.labels,
+                datasets: [
+                    { label: 'Customers', data: roadmapData.metrics.customers, borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.1)', fill: true, tension: 0.3, borderWidth: 3, pointRadius: 5, yAxisID: 'y' },
+                    { label: 'MRR ($)', data: roadmapData.metrics.mrr, borderColor: '#14b8a6', backgroundColor: 'transparent', tension: 0.3, borderWidth: 3, pointRadius: 5, borderDash: [5, 5], yAxisID: 'y1' }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                scales: {
+                    x: { grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3' } },
+                    y: { type: 'linear', display: true, position: 'left', beginAtZero: true, grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#10b981' }, title: { display: true, text: 'Customers', color: '#10b981' } },
+                    y1: { type: 'linear', display: true, position: 'right', beginAtZero: true, grid: { drawOnChartArea: false }, ticks: { color: '#14b8a6', callback: v => '$' + (v/1000) + 'K' }, title: { display: true, text: 'MRR', color: '#14b8a6' } }
+                },
+                plugins: { legend: { display: true, position: 'bottom', labels: { color: '#d4d4d4', font: { size: 10 }, padding: 15 } }, tooltip: tooltipConfig }
+            }
+        });
+
+        // Chart 4: Risk
+        const riskCtx = document.getElementById('riskChart').getContext('2d');
+        new Chart(riskCtx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Assumptions',
+                    data: roadmapData.risks.labels.map((name, i) => ({ x: roadmapData.risks.probability[i], y: roadmapData.risks.impact[i], name: name })),
+                    backgroundColor: roadmapData.risks.impact.map((impact, i) => {
+                        const prob = roadmapData.risks.probability[i];
+                        if (impact >= 7 && prob >= 5) return '#fc8181';
+                        if (impact >= 5 || prob >= 5) return '#f6ad55';
+                        return '#10b981';
+                    }),
+                    borderColor: '#1a1a1a',
+                    borderWidth: 2,
+                    pointRadius: 12,
+                    pointHoverRadius: 16
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { title: { display: true, text: 'Probability', color: '#a3a3a3' }, min: 0, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3' } },
+                    y: { title: { display: true, text: 'Impact', color: '#a3a3a3' }, min: 0, max: 10, grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3' } }
+                },
+                plugins: { legend: { display: false }, tooltip: { ...tooltipConfig, callbacks: { label: ctx => ctx.raw.name + ': Impact ' + ctx.parsed.y + ', Prob ' + ctx.parsed.x } } }
+            }
+        });
+    </script>
+</body>
+</html>

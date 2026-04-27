@@ -1,0 +1,921 @@
+<!-- ═══ SKILL CSS START ═══ -->
+<style>
+    /* SEO Content Planner Specific Styles */
+    .keyword-cluster {
+        background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+        border-radius: 16px;
+        padding: 1.5rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .cluster-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+
+    .cluster-name {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #ffffff;
+    }
+
+    .cluster-volume {
+        background: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .pillar-keyword {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: #ffffff;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        display: inline-block;
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+
+    .supporting-keywords {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .supporting-keyword {
+        background: #0a0a0a;
+        color: #ccc;
+        padding: 0.375rem 0.75rem;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .keyword-volume {
+        color: #888;
+        font-size: 0.7rem;
+    }
+
+    .keyword-difficulty {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+    }
+
+    .difficulty-easy { background: #10b981; }
+    .difficulty-medium { background: #f59e0b; }
+    .difficulty-hard { background: #ef4444; }
+
+    .content-gap-card {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+        border-left: 4px solid #10b981;
+    }
+
+    .gap-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.75rem;
+    }
+
+    .gap-title {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 1rem;
+    }
+
+    .gap-priority {
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .gap-high { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+    .gap-medium { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+    .gap-low { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+
+    .gap-metrics {
+        display: flex;
+        gap: 1.5rem;
+        font-size: 0.85rem;
+    }
+
+    .gap-metric {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .gap-metric-label {
+        color: #888;
+    }
+
+    .gap-metric-value {
+        color: #10b981;
+        font-weight: 600;
+    }
+
+    .serp-feature-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        background: rgba(59, 130, 246, 0.2);
+        color: #3b82f6;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .content-calendar-seo {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin: 1.5rem 0;
+    }
+
+    .calendar-week {
+        display: flex;
+        align-items: stretch;
+        gap: 1rem;
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .week-label {
+        width: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-right: 1rem;
+        border-right: 1px solid #2a2a2a;
+    }
+
+    .week-number {
+        font-size: 0.7rem;
+        color: #888;
+        text-transform: uppercase;
+    }
+
+    .week-dates {
+        font-size: 0.85rem;
+        color: #10b981;
+        font-weight: 600;
+    }
+
+    .week-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .content-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: #0a0a0a;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+    }
+
+    .content-type-badge {
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        min-width: 70px;
+        text-align: center;
+    }
+
+    .type-pillar { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+    .type-cluster { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+    .type-update { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
+
+    .content-title {
+        flex: 1;
+        color: #ccc;
+        font-size: 0.9rem;
+    }
+
+    .content-target-kw {
+        color: #888;
+        font-size: 0.8rem;
+    }
+
+    .technical-seo-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .technical-seo-item:last-child {
+        border-bottom: none;
+    }
+
+    .seo-status {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    .status-good { background: #10b981; }
+    .status-warning { background: #f59e0b; }
+    .status-error { background: #ef4444; }
+
+    .seo-item-info {
+        flex: 1;
+    }
+
+    .seo-item-name {
+        color: #ffffff;
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+
+    .seo-item-description {
+        color: #888;
+        font-size: 0.8rem;
+    }
+
+    .seo-item-action {
+        color: #10b981;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .competitor-seo-row {
+        display: flex;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .competitor-seo-row:last-child {
+        border-bottom: none;
+    }
+
+    .competitor-name {
+        flex: 1;
+        font-weight: 500;
+        color: #ffffff;
+    }
+
+    .competitor-da {
+        width: 80px;
+        text-align: center;
+        color: #10b981;
+        font-weight: 600;
+    }
+
+    .competitor-keywords {
+        width: 100px;
+        text-align: center;
+        color: #ccc;
+    }
+
+    .competitor-traffic {
+        width: 100px;
+        text-align: right;
+        color: #888;
+    }
+
+    .optimization-checklist {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .checklist-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .checklist-item:last-child {
+        border-bottom: none;
+    }
+
+    .check-icon {
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        flex-shrink: 0;
+    }
+
+    .check-done {
+        background: #10b981;
+        color: #ffffff;
+    }
+
+    .check-pending {
+        background: #2a2a2a;
+        color: #888;
+    }
+
+    .checklist-text {
+        color: #ccc;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+        .calendar-week {
+            flex-direction: column;
+        }
+
+        .week-label {
+            width: 100%;
+            flex-direction: row;
+            justify-content: space-between;
+            padding-right: 0;
+            padding-bottom: 0.75rem;
+            border-right: none;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .competitor-seo-row {
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .competitor-name {
+            width: 100%;
+        }
+    }
+</style>
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<div class="report-container">
+    <!-- Header Section -->
+    <header class="report-header">
+        <div class="header-content">
+            <div class="header-badge">SEO CONTENT PLAN</div>
+            <h1 class="report-title">{{COMPANY_NAME}}</h1>
+            <p class="report-subtitle">{{SEO_MISSION}}</p>
+        </div>
+        <div class="header-meta">
+            <div class="meta-item">
+                <span class="meta-label">Generated</span>
+                <span class="meta-value">{{GENERATION_DATE}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Domain Authority</span>
+                <span class="meta-value">{{DOMAIN_AUTHORITY}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Target Keywords</span>
+                <span class="meta-value">{{TARGET_KEYWORDS_COUNT}}</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- SEO Overview Section -->
+    <section class="content-section">
+        <h2 class="section-title">SEO Strategy Overview</h2>
+
+        <p class="section-description">{{STRATEGY_OVERVIEW}}</p>
+
+        <div class="grid-4">
+            <div class="metric-card">
+                <div class="metric-label">Organic Traffic Goal</div>
+                <div class="metric-value">{{TRAFFIC_GOAL}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Keywords to Rank</div>
+                <div class="metric-value">{{KEYWORDS_GOAL}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Content Pieces</div>
+                <div class="metric-value">{{CONTENT_PIECES}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Target DA</div>
+                <div class="metric-value">{{TARGET_DA}}</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Keyword Clusters Section -->
+    <section class="content-section">
+        <h2 class="section-title">Keyword Clusters</h2>
+
+        <p class="section-description">{{CLUSTERS_OVERVIEW}}</p>
+
+        <div class="grid-2">
+            {{KEYWORD_CLUSTERS}}
+        </div>
+
+        <!-- Keyword Distribution Chart -->
+        <div class="chart-container">
+            <canvas id="keywordChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Content Gap Analysis -->
+    <section class="content-section">
+        <h2 class="section-title">Content Gap Analysis</h2>
+
+        <p class="section-description">{{GAP_OVERVIEW}}</p>
+
+        <div class="grid-2">
+            {{CONTENT_GAPS}}
+        </div>
+
+        <!-- Gap Opportunity Chart -->
+        <div class="chart-container">
+            <canvas id="gapChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Content Calendar Section -->
+    <section class="content-section">
+        <h2 class="section-title">SEO Content Calendar</h2>
+
+        <div class="content-calendar-seo">
+            {{CONTENT_CALENDAR}}
+        </div>
+
+        <!-- Content Production Chart -->
+        <div class="chart-container">
+            <canvas id="productionChart"></canvas>
+        </div>
+    </section>
+
+    <!-- SERP Features Strategy -->
+    <section class="content-section">
+        <h2 class="section-title">SERP Features Strategy</h2>
+
+        <p class="section-description">{{SERP_OVERVIEW}}</p>
+
+        <div class="grid-3">
+            <div class="info-card">
+                <h4>Featured Snippets</h4>
+                <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 1rem;">{{FEATURED_SNIPPETS_STRATEGY}}</p>
+                <div>
+                    {{FEATURED_SNIPPET_BADGES}}
+                </div>
+            </div>
+            <div class="info-card">
+                <h4>People Also Ask</h4>
+                <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 1rem;">{{PAA_STRATEGY}}</p>
+                <div>
+                    {{PAA_BADGES}}
+                </div>
+            </div>
+            <div class="info-card">
+                <h4>Rich Results</h4>
+                <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 1rem;">{{RICH_RESULTS_STRATEGY}}</p>
+                <div>
+                    {{RICH_RESULTS_BADGES}}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical SEO Audit -->
+    <section class="content-section">
+        <h2 class="section-title">Technical SEO Checklist</h2>
+
+        <div class="grid-2">
+            <div class="info-card">
+                <h4>Site Health</h4>
+                {{TECHNICAL_SEO_ITEMS}}
+            </div>
+            <div class="chart-container" style="min-height: 250px;">
+                <canvas id="technicalChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- On-Page Optimization -->
+    <section class="content-section">
+        <h2 class="section-title">On-Page Optimization Checklist</h2>
+
+        <div class="grid-2">
+            <div class="optimization-checklist">
+                <h4 style="color: #ffffff; margin-bottom: 1rem;">Content Optimization</h4>
+                {{CONTENT_OPTIMIZATION}}
+            </div>
+            <div class="optimization-checklist">
+                <h4 style="color: #ffffff; margin-bottom: 1rem;">Technical Optimization</h4>
+                {{TECHNICAL_OPTIMIZATION}}
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitor Analysis -->
+    <section class="content-section">
+        <h2 class="section-title">SEO Competitor Analysis</h2>
+
+        <div class="info-card">
+            <div class="competitor-seo-row" style="font-weight: 600; color: #888; font-size: 0.8rem;">
+                <span class="competitor-name">Domain</span>
+                <span class="competitor-da">DA</span>
+                <span class="competitor-keywords">Keywords</span>
+                <span class="competitor-traffic">Traffic</span>
+            </div>
+            {{COMPETITOR_ROWS}}
+        </div>
+
+        <!-- Competitor Comparison Chart -->
+        <div class="chart-container">
+            <canvas id="competitorChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Link Building Strategy -->
+    <section class="content-section">
+        <h2 class="section-title">Link Building Strategy</h2>
+
+        <div class="grid-2">
+            <div class="info-card">
+                <h4>Target Backlinks</h4>
+                {{BACKLINK_TARGETS}}
+            </div>
+            <div class="info-card">
+                <h4>Link Building Tactics</h4>
+                {{LINK_TACTICS}}
+            </div>
+        </div>
+    </section>
+
+    <!-- KPIs & Tracking -->
+    <section class="content-section">
+        <h2 class="section-title">KPIs & Tracking</h2>
+
+        <div class="grid-2">
+            <div class="info-card">
+                <h4>Monthly Targets</h4>
+                {{MONTHLY_TARGETS}}
+            </div>
+            <div class="info-card">
+                <h4>Quarterly Goals</h4>
+                {{QUARTERLY_GOALS}}
+            </div>
+        </div>
+
+        <!-- Performance Projection Chart -->
+        <div class="chart-container">
+            <canvas id="projectionChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Implementation Timeline -->
+    <section class="content-section">
+        <h2 class="section-title">Implementation Timeline</h2>
+
+        <div class="timeline">
+            {{IMPLEMENTATION_TIMELINE}}
+        </div>
+    </section>
+
+    <!-- Report Footer -->
+    <footer class="report-footer">
+        <div class="footer-content">
+            <p class="footer-brand">Generated by StratArts SEO Content Planner</p>
+            <p class="footer-disclaimer">This SEO strategy provides a framework for organic growth. Monitor rankings and adjust based on algorithm updates and competitor movements.</p>
+        </div>
+    </footer>
+</div>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Keyword Distribution Chart
+    const keywordCtx = document.getElementById('keywordChart');
+    if (keywordCtx) {
+        new Chart(keywordCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4', 'Cluster 5'],
+                datasets: [{
+                    label: 'Monthly Search Volume',
+                    data: [12000, 8500, 6200, 4800, 3200],
+                    backgroundColor: '#10b981',
+                    borderRadius: 4
+                }, {
+                    label: 'Keyword Difficulty',
+                    data: [45, 38, 52, 28, 35],
+                    backgroundColor: '#059669',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Keyword Cluster Analysis',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+
+    // Content Gap Chart
+    const gapCtx = document.getElementById('gapChart');
+    if (gapCtx) {
+        new Chart(gapCtx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Content Opportunities',
+                    data: [
+                        { x: 8000, y: 25 },
+                        { x: 5500, y: 35 },
+                        { x: 12000, y: 55 },
+                        { x: 3200, y: 20 },
+                        { x: 7500, y: 42 },
+                        { x: 4800, y: 30 }
+                    ],
+                    backgroundColor: '#10b981',
+                    pointRadius: 10,
+                    pointHoverRadius: 12
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Search Volume →',
+                            color: '#ccc'
+                        },
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Keyword Difficulty →',
+                            color: '#ccc'
+                        },
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Content Gap Opportunity Matrix',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // Content Production Chart
+    const productionCtx = document.getElementById('productionChart');
+    if (productionCtx) {
+        new Chart(productionCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8'],
+                datasets: [{
+                    label: 'Pillar Content',
+                    data: [1, 0, 1, 0, 1, 0, 1, 0],
+                    backgroundColor: '#10b981',
+                    borderRadius: 4
+                }, {
+                    label: 'Cluster Content',
+                    data: [2, 3, 2, 3, 2, 3, 2, 3],
+                    backgroundColor: '#059669',
+                    borderRadius: 4
+                }, {
+                    label: 'Updates',
+                    data: [1, 1, 1, 1, 1, 1, 1, 1],
+                    backgroundColor: '#047857',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stacked: true,
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        stacked: true,
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Content Production Schedule',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+
+    // Technical SEO Chart
+    const technicalCtx = document.getElementById('technicalChart');
+    if (technicalCtx) {
+        new Chart(technicalCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Passing', 'Warnings', 'Errors'],
+                datasets: [{
+                    data: [75, 18, 7],
+                    backgroundColor: [
+                        '#10b981',
+                        '#f59e0b',
+                        '#ef4444'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Technical SEO Health Score',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        position: 'right',
+                        labels: { color: '#ccc', padding: 15 }
+                    }
+                }
+            }
+        });
+    }
+
+    // Competitor Comparison Chart
+    const competitorCtx = document.getElementById('competitorChart');
+    if (competitorCtx) {
+        new Chart(competitorCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Domain Authority', 'Backlinks', 'Keywords', 'Traffic', 'Content Volume', 'Page Speed'],
+                datasets: [{
+                    label: 'Your Site',
+                    data: [35, 45, 40, 35, 50, 75],
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                    borderColor: '#10b981',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#10b981'
+                }, {
+                    label: 'Top Competitor',
+                    data: [55, 70, 65, 60, 80, 65],
+                    backgroundColor: 'rgba(107, 114, 128, 0.2)',
+                    borderColor: '#6b7280',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#6b7280'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: { color: '#888', stepSize: 20 },
+                        grid: { color: '#2a2a2a' },
+                        pointLabels: { color: '#ccc', font: { size: 11 } }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'SEO Competitive Analysis',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+
+    // Projection Chart
+    const projectionCtx = document.getElementById('projectionChart');
+    if (projectionCtx) {
+        new Chart(projectionCtx, {
+            type: 'line',
+            data: {
+                labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                datasets: [{
+                    label: 'Organic Traffic',
+                    data: [5000, 7500, 12000, 18000, 28000, 42000],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    yAxisID: 'y'
+                }, {
+                    label: 'Keywords Ranked',
+                    data: [50, 85, 140, 220, 320, 450],
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'transparent',
+                    tension: 0.4,
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        beginAtZero: true,
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        beginAtZero: true,
+                        ticks: { color: '#888' },
+                        grid: { drawOnChartArea: false }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '6-Month SEO Growth Projection',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+<!-- ═══ SKILL JS END ═══ -->

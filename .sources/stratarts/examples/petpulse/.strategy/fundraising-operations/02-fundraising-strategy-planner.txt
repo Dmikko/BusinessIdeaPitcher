@@ -1,0 +1,424 @@
+
+================================================================================
+                     FUNDRAISING STRATEGY PLANNER
+                          PetPulse Analysis
+                         Generated: 2025-12-18
+================================================================================
+
++-----------------------------------------------------------------------------+
+|                      SERIES A FUNDRAISING OVERVIEW                           |
+|                                                                             |
+|   Raise: $5M   |   Valuation: $20M Post   |   Timeline: 5 months           |
+|                                                                             |
+|   Target Investors: 80   |   Term Sheets: 2-3   |   Current Runway: 18 mo  |
+|                                                                             |
+|                        Status: READY TO LAUNCH                              |
++-----------------------------------------------------------------------------+
+
+================================================================================
+                          EXECUTIVE SUMMARY
+================================================================================
+
+    +-------------------+-------------------+-------------------+-------------------+
+    |   Raise Goals     |  Current Traction |  Investor Profile |  Expected Outcome |
+    +-------------------+-------------------+-------------------+-------------------+
+    |      $5M          |      $360K        |    Pet Tech       |       2-3         |
+    |   Series A        |       ARR         |   Consumer IoT    |   Term Sheets     |
+    |                   |                   |                   |                   |
+    | $15M pre-money    | 7,300 users       | Seed/Series A VCs | Close by Q4 2026  |
+    | $20M post-money   | 85% D30 retention | Pet wellness focus|                   |
+    | 25% dilution      | 4.8:1 LTV:CAC     |                   |                   |
+    +-------------------+-------------------+-------------------+-------------------+
+
+    FUNDRAISING THESIS:
+    +-- Why Now: Pet tech market expanding to $260B by 2027
+    +-- Why PetPulse: Proven unit economics, hardware+subscription moat
+    +-- Use of Funds: Scale to 16K subscribers, hit $2M ARR for Series B
+    +-- Trigger Metrics: $2M ARR, 8,000 subscribers, 88% D30 retention
+
+================================================================================
+                      FUNDRAISING TIMELINE (20 WEEKS)
+================================================================================
+
+    PHASE 1: PREPARATION (Weeks 1-4) - July 2026
+    ------------------------------------------------------------------------
+    [ ] Finalize Series A pitch deck (15 slides)
+    [ ] Update financial model with $2M ARR projections
+    [ ] Build investor target list (80 investors)
+    [ ] Secure 15-20 warm intro commitments from network
+    [ ] Prepare data room (financials, metrics, legal)
+
+    PHASE 2: OUTREACH (Weeks 5-8) - August 2026
+    ------------------------------------------------------------------------
+    [ ] Send 15 warm intro requests per week
+    [ ] Cold outreach to Tier 2/3 investors (10/week)
+    [ ] Hold 25-30 intro meetings (15-30 min)
+    [ ] Identify 8-10 interested investors for partner meetings
+
+    PHASE 3: PARTNER MEETINGS & DUE DILIGENCE (Weeks 9-14) - Sep-Oct 2026
+    ------------------------------------------------------------------------
+    [ ] Hold 8-10 partner meetings (full partnership)
+    [ ] Share data room with top 5 interested investors
+    [ ] Investor customer reference calls (5 customers)
+    [ ] Technical due diligence (hardware, app, AI)
+    [ ] Back-channel reference checks
+
+    PHASE 4: TERM SHEET & CLOSING (Weeks 15-20) - Nov-Dec 2026
+    ------------------------------------------------------------------------
+    [ ] Receive 2-3 term sheets, evaluate and negotiate
+    [ ] Select lead investor (prioritize value-add)
+    [ ] Legal due diligence and document drafting
+    [ ] Wire transfer and close round
+    [ ] Announce fundraise (press, social media)
+
+    TIMELINE VISUALIZATION:
+    +--------------------------------------------------------------------------+
+    | Phase          | Wk1-4 | Wk5-8 | Wk9-14 | Wk15-20 |                      |
+    +----------------+-------+-------+--------+---------+                      |
+    | Preparation    | ████████                                                |
+    | Outreach       |       ████████                                          |
+    | Partner/DD     |               ████████████                              |
+    | Term/Close     |                        ████████████                     |
+    +--------------------------------------------------------------------------+
+
+================================================================================
+                         INVESTOR TARGETING
+================================================================================
+
+    TARGET: 80 INVESTORS ACROSS 3 TIERS
+
+    +----------------------+----------------------+----------------------+
+    |    TIER 1 (15)       |    TIER 2 (25)       |    TIER 3 (40)       |
+    |    Best Fit          |    Good Fit          |    Possible Fit      |
+    +----------------------+----------------------+----------------------+
+    |                      |                      |                      |
+    | Pet Tech / Consumer  | Consumer SaaS /      | Generalist Seed/A    |
+    | IoT specialists      | Hardware investors   | funds                |
+    |                      |                      |                      |
+    | Examples:            | Examples:            | Examples:            |
+    | - Sequoia Scout      | - First Round        | - Regional VCs       |
+    | - a16z Bio           | - Forerunner         | - Emerging managers  |
+    | - Maveron            | - Lightspeed Scout   | - Pet industry angels|
+    | - Arena VC           | - Kleiner Perkins    |                      |
+    | - Lerer Hippeau      |                      |                      |
+    |                      |                      |                      |
+    | Strategy:            | Strategy:            | Strategy:            |
+    | WARM INTROS ONLY     | Warm + Targeted Cold | Cold Outreach        |
+    +----------------------+----------------------+----------------------+
+
+    INVESTOR SELECTION CRITERIA:
+    +-- Stage Fit: Series A checks $3-10M
+    +-- Sector Focus: Pet tech, consumer IoT, subscription
+    +-- Geography: US nationwide, preference Bay Area
+    +-- Portfolio: No direct competitors (FitBark, Whistle)
+    +-- Value-Add: Consumer brand building, hardware ops
+
+================================================================================
+                        OUTREACH STRATEGY
+================================================================================
+
+    +---------------------------------+---------------------------------+
+    |     WARM INTRODUCTIONS          |       COLD OUTREACH             |
+    +---------------------------------+---------------------------------+
+    |                                 |                                 |
+    | Target: 40 warm intro requests  | Target: 40 cold emails          |
+    |                                 | (10/week x 4 weeks)             |
+    |                                 |                                 |
+    | Sources:                        | Cadence:                        |
+    | - Seed investors (Series A      | - Email 1: Initial (Day 0)      |
+    |   friends)                      | - Email 2: Follow-up (Day 5)    |
+    | - 5 advisors with VC            | - Email 3: Final (Day 10)       |
+    |   connections                   |                                 |
+    | - 10 founder peers in           | Best Practices:                 |
+    |   pet/consumer                  | - Lead with $360K ARR           |
+    |                                 | - Reference their portfolio     |
+    |                                 | - Personalize every email       |
+    |                                 |                                 |
+    | Response Rate: 55%              | Response Rate: 12%              |
+    |                                 |                                 |
+    +---------------------------------+---------------------------------+
+
+    INTRO REQUEST EMAIL TEMPLATE:
+    ---------------------------------------------------------------------------
+    Subject: Intro to [Investor Name]?
+
+    Hi [Mutual Connection],
+
+    Hope you're well! We're raising a $5M Series A for PetPulse and I saw
+    that you know [Investor Name] at [Fund].
+
+    Quick context: We're at $360K ARR, 7,300 users, 85% D30 retention -
+    building the health monitoring platform for pet parents.
+
+    Would you be comfortable making an intro? One-pager attached.
+
+    Thanks,
+    [Founder Name]
+    ---------------------------------------------------------------------------
+
+================================================================================
+                       FUNDRAISING FUNNEL
+================================================================================
+
+    EXPECTED CONVERSION AT EACH STAGE:
+
+    +-------------------------------------------------------------------------+
+    |                                                                         |
+    |  OUTREACH SENT               ████████████████████████████████████  80   |
+    |  100%                                                                   |
+    |                                                                         |
+    |  INTRO MEETINGS                ████████████████████████████  28         |
+    |  35% response rate                                                      |
+    |                                                                         |
+    |  PARTNER MEETINGS                    ████████████████  10               |
+    |  36% conversion                                                         |
+    |                                                                         |
+    |  DUE DILIGENCE                          ████████  5                     |
+    |  50% conversion                                                         |
+    |                                                                         |
+    |  TERM SHEETS                              ██████  3                     |
+    |  60% conversion                                                         |
+    |                                                                         |
+    |  CLOSED (Lead + Follow-on)                ████  2                       |
+    |  67% close rate                                                         |
+    |                                                                         |
+    +-------------------------------------------------------------------------+
+
+    FUNNEL MATH:
+    +-- 80 outreach x 35% response = 28 intro meetings
+    +-- 28 intro x 36% conversion = 10 partner meetings
+    +-- 10 partner x 50% conversion = 5 due diligence
+    +-- 5 DD x 60% conversion = 3 term sheets
+    +-- 3 term sheets x 67% close = 2 investors (lead + follow-on)
+
+================================================================================
+                       MEETING PROGRESSION
+================================================================================
+
+    STAGE 1: INTRO MEETING (15-30 min)
+    ---------------------------------------------------------------------------
+    Who: You + 1 Partner
+    Goal: Gauge interest, get to partner meeting
+    What to Present: Condensed pitch (10 slides)
+    Key Questions: Market size, traction, team background
+    Success: "Let's schedule a partner meeting"
+
+    STAGE 2: PARTNER MEETING (45-60 min)
+    ---------------------------------------------------------------------------
+    Who: You + Full Partnership (3-6 partners)
+    Goal: Deep dive, build conviction for DD
+    What to Present: Full pitch deck + 20-min Q&A
+    Key Questions: Unit economics, competitive moat, roadmap
+    Success: "We'd like to move forward with due diligence"
+
+    STAGE 3: DUE DILIGENCE (1-2 weeks)
+    ---------------------------------------------------------------------------
+    Who: You + Investor team + Stakeholders
+    Goal: Validate claims, assess risks
+    Activities:
+    - Data room review (financials, metrics, contracts)
+    - Customer reference calls (5 customers)
+    - Technical DD (hardware, app architecture)
+    - Back-channel references
+    Success: Investor gives term sheet
+
+    STAGE 4: TERM SHEET (1 week)
+    ---------------------------------------------------------------------------
+    Who: You + Investor + Lawyers
+    Goal: Negotiate terms, select lead
+    What to Negotiate: Valuation, board, pro-rata, option pool
+    Success: Sign term sheet
+
+    STAGE 5: CLOSING (2-4 weeks)
+    ---------------------------------------------------------------------------
+    Who: You + Investor + Lawyers
+    Goal: Legal DD, finalize documents, wire funds
+    Activities: SPA, IRA, Voting Agreement, signatures
+    Success: Money in bank
+
+================================================================================
+                    DUE DILIGENCE PREPARATION
+================================================================================
+
+    DATA ROOM CONTENTS (DocSend):
+
+    +-- FINANCIAL DOCUMENTS
+    |   [ ] 5-Year Financial Model (revenue, costs, headcount)
+    |   [ ] Historical P&L, Cash Flow, Balance Sheet (2024-2025)
+    |   [ ] Current Cap Table with SAFE conversions
+    |   [ ] Monthly Budget vs Actual
+    |   [ ] Bank Statements (last 6 months)
+    |
+    +-- METRICS & KPIs
+    |   [ ] MRR/ARR Dashboard (Stripe + internal)
+    |   [ ] Cohort Analysis (retention by month)
+    |   [ ] Unit Economics (CAC $185, LTV $892, LTV:CAC 4.8:1)
+    |   [ ] NPS Score (42) and CSAT (87%)
+    |   [ ] Funnel Metrics (AARRR framework)
+    |
+    +-- CUSTOMER & PRODUCT
+    |   [ ] Top 20 Customers by LTV
+    |   [ ] 10 Referenceable Customers (prepped)
+    |   [ ] 18-Month Product Roadmap
+    |   [ ] Product Demo Video (5 min)
+    |   [ ] Hardware Manufacturing Partner Info
+    |
+    +-- LEGAL & TEAM
+        [ ] Certificate of Incorporation, Bylaws
+        [ ] All Employee Agreements + IP Assignments
+        [ ] Key Customer/Vendor Contracts
+        [ ] Org Chart + Extended Team Bios
+        [ ] 12-Month Hiring Plan
+
+    CUSTOMER REFERENCES (10 Referenceable):
+    +-- Choose: NPS 9-10, long-term users, high engagement
+    +-- Prep: Brief on common investor questions
+    +-- Provide: Name, title, company, email to investor
+
+================================================================================
+                       TERM SHEET TERMS
+================================================================================
+
+    +---------------+-------------------+-----------------------------------+
+    |    Term       |     Target        |     Notes                         |
+    +---------------+-------------------+-----------------------------------+
+    | Valuation     | $15M Pre          | Range: $12-18M depending on       |
+    |               | $20M Post         | competitive dynamics              |
+    +---------------+-------------------+-----------------------------------+
+    | Board         | 3 Seats           | 1 Founder, 1 Investor,            |
+    | Composition   |                   | 1 Independent                     |
+    +---------------+-------------------+-----------------------------------+
+    | Liquidation   | 1x Non-           | Standard, founder-friendly.       |
+    | Preference    | Participating     | Reject 2x or participating.       |
+    +---------------+-------------------+-----------------------------------+
+    | Option Pool   | 15% Post-Money    | Sufficient for 2-year hiring      |
+    |               |                   | plan (12 roles)                   |
+    +---------------+-------------------+-----------------------------------+
+    | Pro-Rata      | Major Investors   | >5% ownership gets pro-rata       |
+    | Rights        | Only              | rights for follow-on              |
+    +---------------+-------------------+-----------------------------------+
+    | Vesting       | 4yr / 1yr Cliff   | Credit existing time served       |
+    +---------------+-------------------+-----------------------------------+
+
+    HANDLING MULTIPLE TERM SHEETS:
+    +-- Zero: Lower valuation, increase outreach, improve traction
+    +-- One: Negotiate politely, don't rush into bad terms
+    +-- Multiple: Create urgency, pick best partner (not just highest $)
+
+    HOW TO PICK LEAD INVESTOR:
+    1. Brand/Reputation (top-tier vs emerging)
+    2. Value-Add (network, recruiting, domain expertise)
+    3. Founder-Friendly (ask back-channel references)
+    4. Terms (valuation, board, liquidation preference)
+    5. Chemistry (trust, support in hard times)
+
+================================================================================
+                        CLOSING PROCESS
+================================================================================
+
+    WEEK 1: SIGN TERM SHEET
+    ---------------------------------------------------------------------------
+    [ ] Select lead investor, negotiate final terms
+    [ ] Sign binding term sheet
+    [ ] Announce to other interested investors (create urgency for follow-on)
+
+    WEEK 2: LEGAL DUE DILIGENCE
+    ---------------------------------------------------------------------------
+    [ ] Investor lawyers review contracts, IP, employment agreements
+    [ ] Address any issues (cap table cleanup, contract amendments)
+
+    WEEK 3: DOCUMENT DRAFTING
+    ---------------------------------------------------------------------------
+    [ ] Draft Stock Purchase Agreement (SPA)
+    [ ] Draft Investor Rights Agreement (IRA)
+    [ ] Draft Voting Agreement
+    [ ] Draft ROFR/Co-Sale Agreement
+
+    WEEK 4: SIGNATURES & WIRE
+    ---------------------------------------------------------------------------
+    [ ] All parties sign final documents
+    [ ] Investor wires $5M
+    [ ] Issue stock certificates, update cap table
+    [ ] Board meeting to ratify
+
+    POST-CLOSE: ANNOUNCE & THANK
+    ---------------------------------------------------------------------------
+    [ ] Press release, blog post, social media announcement
+    [ ] Thank all investors who participated
+    [ ] Send update to investors who passed (maintain relationships)
+
+================================================================================
+                     FUNDRAISING DISCIPLINE
+================================================================================
+
+    +-------------------+-------------------+-------------------+-------------------+
+    |   Hard Deadline   |  CEO Time Limit   |  Meeting Window   |     Plan B        |
+    +-------------------+-------------------+-------------------+-------------------+
+    |                   |                   |                   |                   |
+    |    Dec 31, 2026   |       50%         |      6 weeks      |    Cut Burn       |
+    |                   |                   |                   |                   |
+    | Close by end of   | Max half of CEO   | Compress all      | Cut burn 30%,     |
+    | 2026 or pivot to  | time on           | meetings to       | extend runway to  |
+    | Plan B            | fundraising       | create FOMO       | 24mo, try Q2 2027 |
+    +-------------------+-------------------+-------------------+-------------------+
+
+    DISCIPLINE PRINCIPLES:
+    +-- Track Everything: Use Notion/Airtable CRM for every investor
+    +-- Weekly Reviews: Review funnel every Friday
+    +-- Batch Meetings: Compress into 6 weeks, don't spread over 9 months
+    +-- Value-Add > Valuation: Pick investor for network and expertise
+
+================================================================================
+                       90-DAY EXECUTION PLAN
+================================================================================
+
+    THIS WEEK (Week 1):
+    [ ] Update pitch deck with latest metrics ($360K ARR, 85% retention)
+    [ ] Refresh financial model projections
+    [ ] Prepare one-pager for intro requests
+
+    WEEK 2:
+    [ ] Research 80 investors (Crunchbase, AngelList)
+    [ ] Prioritize into Tier 1/2/3
+    [ ] Map warm intro paths
+
+    WEEK 3:
+    [ ] Email advisors for intro requests
+    [ ] Ask seed investors for Series A intros
+    [ ] Prep data room (DocSend)
+
+    WEEK 4:
+    [ ] Identify 10 referenceable customers
+    [ ] Request permission for investor calls
+    [ ] Brief on common investor questions
+
+    WEEK 5:
+    [ ] Send first batch of warm intros
+    [ ] Begin cold outreach to Tier 2/3
+    [ ] Schedule first intro meetings
+
+    ONGOING:
+    [ ] Weekly funnel review (Friday)
+    [ ] Adjust messaging based on feedback
+    [ ] Maintain 50% CEO time limit
+
+================================================================================
+                       CONTEXT SIGNATURE
+================================================================================
+
+    PETPULSE FUNDRAISING CONTEXT:
+    +-- Round: Series A
+    +-- Raise Target: $5M
+    +-- Valuation: $15M Pre / $20M Post
+    +-- Timeline: 5 months (July - December 2026)
+    +-- Target Investors: 80 (15 Tier 1, 25 Tier 2, 40 Tier 3)
+    +-- Expected Funnel: 80 -> 28 -> 10 -> 5 -> 3 -> 2 closed
+    +-- Current Runway: 18 months
+    +-- Key Metrics: $360K ARR, 7,300 users, 85% D30, 4.8:1 LTV:CAC
+    +-- Lead Investor Criteria: Pet tech expertise, consumer brand building
+    +-- Generated: 2025-12-18
+
+================================================================================
+                         END OF ANALYSIS
+================================================================================
+

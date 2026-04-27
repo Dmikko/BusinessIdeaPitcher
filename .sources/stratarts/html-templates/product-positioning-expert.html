@@ -1,0 +1,1029 @@
+<!--
+═══════════════════════════════════════════════════════════════════════════════
+STRATARTS HTML SKELETON TEMPLATE
+Skill: product-positioning-expert
+Version: 1.0.0
+
+INSTRUCTIONS:
+1. Read base-template.html first for shared CSS/JS structure
+2. Replace all {{PLACEHOLDER}} markers with actual data
+3. This template defines skill-specific content sections and charts
+═══════════════════════════════════════════════════════════════════════════════
+-->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     TEMPLATE VARIABLES (Replace with actual data)
+     ════════════════════════════════════════════════════════════════════════════
+
+     HEADER:
+     {{PAGE_TITLE}}          = "Positioning & Messaging Strategy"
+     {{KICKER}}              = "StratArts Business Analysis"
+     {{TITLE}}               = "Product Positioning Expert"
+     {{SUBTITLE}}            = "{BUSINESS_NAME} - {BUSINESS_DESCRIPTION}"
+     {{DATE}}                = "November 28, 2025"
+     {{ANALYSIS_TYPE}}       = "Foundation Strategy"
+     {{VERSION}}             = "1.0"
+
+     SCORE BANNER:
+     {{PRIMARY_SCORE}}       = "8.2" (positioning strength 0-10)
+     {{SCORE_LABEL}}         = "Positioning Strength"
+     {{SCORE_INTERPRETATION}}= "This positioning score indicates..."
+     {{VERDICT}}             = "✓ STRONG POSITIONING" | "⚠️ NEEDS REFINEMENT" | "✗ WEAK - MAJOR REVISION NEEDED"
+
+     FOOTER:
+     {{PROJECT_NAME}}        = "{PROJECT_FOLDER_NAME}"
+     {{SKILL_NAME}}          = "product-positioning-expert"
+     {{CONTEXT_SIGNATURE}}   = "product-positioning-expert-v1.0.0"
+     {{ITERATIONS}}          = "1"
+     {{ITERATIONS_PLURAL}}   = "" or "s"
+
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     SKILL-SPECIFIC CSS (Add to {{SKILL_SPECIFIC_CSS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+<style>
+/* Positioning Statement Box */
+.positioning-statement {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.positioning-statement .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #10b981;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.positioning-statement .statement-text {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: #f5f5f5;
+    font-style: italic;
+}
+
+.positioning-statement .statement-text strong {
+    color: #10b981;
+    font-style: normal;
+}
+
+/* Differentiator Cards */
+.differentiator-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.differentiator-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.differentiator-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(16, 185, 129, 0.4);
+}
+
+.differentiator-number {
+    width: 36px;
+    height: 36px;
+    background: rgba(16, 185, 129, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #10b981;
+    margin-bottom: 1rem;
+}
+
+.differentiator-title {
+    font-weight: 700;
+    color: #f5f5f5;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+}
+
+.differentiator-description {
+    color: rgba(245, 245, 245, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.differentiator-proof {
+    font-size: 0.8rem;
+    color: #10b981;
+    border-top: 1px solid rgba(16, 185, 129, 0.2);
+    padding-top: 0.75rem;
+}
+
+/* Messaging Pillars */
+.pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.pillar-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border-left: 4px solid #10b981;
+}
+
+.pillar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.pillar-name {
+    font-weight: 700;
+    color: #10b981;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.pillar-headline {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #f5f5f5;
+    margin-bottom: 0.75rem;
+}
+
+.pillar-description {
+    color: rgba(245, 245, 245, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.pillar-proof {
+    font-size: 0.8rem;
+    color: rgba(245, 245, 245, 0.5);
+    font-style: italic;
+}
+
+/* Competitive Matrix Table */
+.competitive-matrix {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
+
+.competitive-matrix th {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(16, 185, 129, 0.3);
+}
+
+.competitive-matrix td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+    color: rgba(245, 245, 245, 0.8);
+}
+
+.competitive-matrix tr:hover td {
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.competitive-matrix .your-business {
+    background: rgba(16, 185, 129, 0.1);
+    font-weight: 600;
+}
+
+.competitive-matrix .your-business td {
+    color: #f5f5f5;
+}
+
+/* Unlike Statements */
+.unlike-grid {
+    display: grid;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.unlike-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 1.25rem;
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+.unlike-competitor {
+    font-weight: 700;
+    color: #f97316;
+    font-size: 0.9rem;
+}
+
+.unlike-statement {
+    color: rgba(245, 245, 245, 0.8);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.unlike-statement strong {
+    color: #10b981;
+}
+
+/* Objection Handling */
+.objection-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.objection-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.objection-header {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.objection-label {
+    background: rgba(249, 115, 22, 0.2);
+    color: #f97316;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.objection-text {
+    font-size: 1.1rem;
+    color: #f5f5f5;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.objection-response {
+    background: rgba(16, 185, 129, 0.1);
+    border-left: 3px solid #10b981;
+    padding: 1rem;
+    border-radius: 0 8px 8px 0;
+}
+
+.objection-response-label {
+    font-size: 0.75rem;
+    color: #10b981;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.objection-response-text {
+    color: rgba(245, 245, 245, 0.8);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Channel Messaging Cards */
+.channel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.channel-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.channel-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.channel-name {
+    font-weight: 700;
+    color: #10b981;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.channel-headline {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #f5f5f5;
+    margin-bottom: 0.5rem;
+}
+
+.channel-subheadline {
+    color: rgba(245, 245, 245, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.channel-cta {
+    display: inline-block;
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Brand Voice Attributes */
+.voice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.voice-attribute {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.voice-name {
+    font-weight: 700;
+    color: #10b981;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.voice-description {
+    color: rgba(245, 245, 245, 0.7);
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+/* Hero Messaging Preview */
+.hero-preview {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    border-radius: 16px;
+    padding: 3rem;
+    text-align: center;
+    margin-top: 2rem;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.hero-preview .preview-label {
+    font-size: 0.75rem;
+    color: rgba(16, 185, 129, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+}
+
+.hero-preview .headline {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.hero-preview .subheadline {
+    font-size: 1.1rem;
+    color: rgba(245, 245, 245, 0.7);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-preview .cta-button {
+    display: inline-block;
+    background: #10b981;
+    color: #0a0a0a;
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* A/B Test Roadmap */
+.test-timeline {
+    margin-top: 2rem;
+    position: relative;
+}
+
+.test-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.test-week {
+    font-weight: 700;
+    color: #10b981;
+    font-size: 0.9rem;
+}
+
+.test-content h4 {
+    color: #f5f5f5;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.test-variants {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 0.75rem;
+}
+
+.test-variant {
+    background: rgba(16, 185, 129, 0.05);
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+.test-variant-label {
+    font-weight: 600;
+    color: #10b981;
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+}
+
+.test-variant-text {
+    color: rgba(245, 245, 245, 0.7);
+}
+</style>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CONTENT SECTIONS
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- SECTION: Executive Summary -->
+<section class="content-section">
+    <h2>Executive Summary</h2>
+    <div class="summary-text">
+        {{EXECUTIVE_SUMMARY}}
+    </div>
+
+    <div class="key-metrics-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem;">
+        <div class="metric-box">
+            <div class="metric-label">Target Customer</div>
+            <div class="metric-value">{{TARGET_CUSTOMER_SHORT}}</div>
+        </div>
+        <div class="metric-box">
+            <div class="metric-label">Core Problem</div>
+            <div class="metric-value">{{CORE_PROBLEM_SHORT}}</div>
+        </div>
+        <div class="metric-box">
+            <div class="metric-label">Key Differentiation</div>
+            <div class="metric-value">{{KEY_DIFFERENTIATION_SHORT}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: Positioning Statement -->
+<section class="content-section">
+    <h2>Positioning Statement</h2>
+
+    <div class="positioning-statement">
+        <div class="label">April Dunford Framework</div>
+        <div class="statement-text">
+            For <strong>{{TARGET_CUSTOMER}}</strong><br>
+            Who <strong>{{NEED_STATE}}</strong><br>
+            {{PRODUCT_NAME}} is a <strong>{{MARKET_CATEGORY}}</strong><br>
+            That <strong>{{KEY_BENEFIT}}</strong><br>
+            Unlike <strong>{{PRIMARY_ALTERNATIVE}}</strong><br>
+            We <strong>{{KEY_DIFFERENTIATION}}</strong>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: Key Differentiators -->
+<section class="content-section">
+    <h2>Key Differentiators</h2>
+
+    <div class="differentiator-grid">
+        <!-- Repeat for each differentiator (typically 3) -->
+        <div class="differentiator-card">
+            <div class="differentiator-number">1</div>
+            <div class="differentiator-title">{{DIFF_1_TITLE}}</div>
+            <div class="differentiator-description">{{DIFF_1_DESCRIPTION}}</div>
+            <div class="differentiator-proof">Proof: {{DIFF_1_PROOF}}</div>
+        </div>
+        <div class="differentiator-card">
+            <div class="differentiator-number">2</div>
+            <div class="differentiator-title">{{DIFF_2_TITLE}}</div>
+            <div class="differentiator-description">{{DIFF_2_DESCRIPTION}}</div>
+            <div class="differentiator-proof">Proof: {{DIFF_2_PROOF}}</div>
+        </div>
+        <div class="differentiator-card">
+            <div class="differentiator-number">3</div>
+            <div class="differentiator-title">{{DIFF_3_TITLE}}</div>
+            <div class="differentiator-description">{{DIFF_3_DESCRIPTION}}</div>
+            <div class="differentiator-proof">Proof: {{DIFF_3_PROOF}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: Messaging Pillars -->
+<section class="content-section">
+    <h2>Messaging Pillars</h2>
+
+    <!-- Chart: Pillar Strength Radar -->
+    <div class="chart-container">
+        <canvas id="pillarRadarChart"></canvas>
+    </div>
+
+    <div class="pillar-grid">
+        <!-- Repeat for each pillar (3-5) -->
+        <div class="pillar-card">
+            <div class="pillar-header">
+                <span class="pillar-name">{{PILLAR_1_NAME}}</span>
+            </div>
+            <div class="pillar-headline">{{PILLAR_1_HEADLINE}}</div>
+            <div class="pillar-description">{{PILLAR_1_DESCRIPTION}}</div>
+            <div class="pillar-proof">{{PILLAR_1_PROOF}}</div>
+        </div>
+        <div class="pillar-card">
+            <div class="pillar-header">
+                <span class="pillar-name">{{PILLAR_2_NAME}}</span>
+            </div>
+            <div class="pillar-headline">{{PILLAR_2_HEADLINE}}</div>
+            <div class="pillar-description">{{PILLAR_2_DESCRIPTION}}</div>
+            <div class="pillar-proof">{{PILLAR_2_PROOF}}</div>
+        </div>
+        <div class="pillar-card">
+            <div class="pillar-header">
+                <span class="pillar-name">{{PILLAR_3_NAME}}</span>
+            </div>
+            <div class="pillar-headline">{{PILLAR_3_HEADLINE}}</div>
+            <div class="pillar-description">{{PILLAR_3_DESCRIPTION}}</div>
+            <div class="pillar-proof">{{PILLAR_3_PROOF}}</div>
+        </div>
+        <!-- Add more pillars as needed -->
+    </div>
+</section>
+
+<!-- SECTION: Competitive Positioning -->
+<section class="content-section">
+    <h2>Competitive Positioning</h2>
+
+    <!-- Chart: Competitive Position Map -->
+    <div class="chart-container">
+        <canvas id="competitivePositionChart"></canvas>
+    </div>
+
+    <table class="competitive-matrix">
+        <thead>
+            <tr>
+                <th>Dimension</th>
+                <th>{{BUSINESS_NAME}}</th>
+                <th>{{COMPETITOR_A}}</th>
+                <th>{{COMPETITOR_B}}</th>
+                <th>{{COMPETITOR_C}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="your-business">
+                <td>Target Customer</td>
+                <td>{{YOUR_TARGET}}</td>
+                <td>{{COMP_A_TARGET}}</td>
+                <td>{{COMP_B_TARGET}}</td>
+                <td>{{COMP_C_TARGET}}</td>
+            </tr>
+            <tr>
+                <td>Primary Benefit</td>
+                <td>{{YOUR_BENEFIT}}</td>
+                <td>{{COMP_A_BENEFIT}}</td>
+                <td>{{COMP_B_BENEFIT}}</td>
+                <td>{{COMP_C_BENEFIT}}</td>
+            </tr>
+            <tr>
+                <td>Key Differentiator</td>
+                <td>{{YOUR_DIFF}}</td>
+                <td>{{COMP_A_DIFF}}</td>
+                <td>{{COMP_B_DIFF}}</td>
+                <td>{{COMP_C_DIFF}}</td>
+            </tr>
+            <tr>
+                <td>Positioning</td>
+                <td>{{YOUR_POSITION}}</td>
+                <td>{{COMP_A_POSITION}}</td>
+                <td>{{COMP_B_POSITION}}</td>
+                <td>{{COMP_C_POSITION}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 style="margin-top: 2rem;">Unlike Statements</h3>
+    <div class="unlike-grid">
+        <div class="unlike-card">
+            <div class="unlike-competitor">vs. {{COMPETITOR_A}}</div>
+            <div class="unlike-statement">Unlike {{COMPETITOR_A}}, we <strong>{{UNLIKE_A_STATEMENT}}</strong></div>
+        </div>
+        <div class="unlike-card">
+            <div class="unlike-competitor">vs. {{COMPETITOR_B}}</div>
+            <div class="unlike-statement">Unlike {{COMPETITOR_B}}, we <strong>{{UNLIKE_B_STATEMENT}}</strong></div>
+        </div>
+        <div class="unlike-card">
+            <div class="unlike-competitor">vs. {{COMPETITOR_C}}</div>
+            <div class="unlike-statement">Unlike {{COMPETITOR_C}}, we <strong>{{UNLIKE_C_STATEMENT}}</strong></div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: Objection Handling -->
+<section class="content-section">
+    <h2>Objection Handling</h2>
+
+    <div class="objection-grid">
+        <!-- Repeat for each objection (typically 3) -->
+        <div class="objection-card">
+            <div class="objection-header">
+                <span class="objection-label">Common Objection</span>
+            </div>
+            <div class="objection-text">"{{OBJECTION_1_TEXT}}"</div>
+            <div class="objection-response">
+                <div class="objection-response-label">Reframe Response</div>
+                <div class="objection-response-text">{{OBJECTION_1_RESPONSE}}</div>
+            </div>
+        </div>
+        <div class="objection-card">
+            <div class="objection-header">
+                <span class="objection-label">Common Objection</span>
+            </div>
+            <div class="objection-text">"{{OBJECTION_2_TEXT}}"</div>
+            <div class="objection-response">
+                <div class="objection-response-label">Reframe Response</div>
+                <div class="objection-response-text">{{OBJECTION_2_RESPONSE}}</div>
+            </div>
+        </div>
+        <div class="objection-card">
+            <div class="objection-header">
+                <span class="objection-label">Common Objection</span>
+            </div>
+            <div class="objection-text">"{{OBJECTION_3_TEXT}}"</div>
+            <div class="objection-response">
+                <div class="objection-response-label">Reframe Response</div>
+                <div class="objection-response-text">{{OBJECTION_3_RESPONSE}}</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: Channel-Specific Messaging -->
+<section class="content-section">
+    <h2>Channel-Specific Messaging</h2>
+
+    <!-- Website Hero Preview -->
+    <h3>Website Hero</h3>
+    <div class="hero-preview">
+        <div class="preview-label">Homepage Hero Preview</div>
+        <div class="headline">{{HERO_HEADLINE}}</div>
+        <div class="subheadline">{{HERO_SUBHEADLINE}}</div>
+        <div class="cta-button">{{HERO_CTA}}</div>
+    </div>
+
+    <h3 style="margin-top: 3rem;">Channel Messaging</h3>
+    <div class="channel-grid">
+        <div class="channel-card">
+            <div class="channel-icon">🐦</div>
+            <div class="channel-name">Twitter/X</div>
+            <div class="channel-headline">{{TWITTER_BIO}}</div>
+        </div>
+        <div class="channel-card">
+            <div class="channel-icon">💼</div>
+            <div class="channel-name">LinkedIn</div>
+            <div class="channel-headline">{{LINKEDIN_TAGLINE}}</div>
+        </div>
+        <div class="channel-card">
+            <div class="channel-icon">📧</div>
+            <div class="channel-name">Email Subject</div>
+            <div class="channel-headline">{{EMAIL_SUBJECT}}</div>
+        </div>
+        <div class="channel-card">
+            <div class="channel-icon">🎯</div>
+            <div class="channel-name">Elevator Pitch</div>
+            <div class="channel-subheadline">{{ELEVATOR_PITCH}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: Brand Voice -->
+<section class="content-section">
+    <h2>Brand Voice & Tone</h2>
+
+    <!-- Chart: Voice Balance -->
+    <div class="chart-container">
+        <canvas id="voiceBalanceChart"></canvas>
+    </div>
+
+    <h3 style="margin-top: 2rem;">Voice Attributes</h3>
+    <div class="voice-grid">
+        <div class="voice-attribute">
+            <div class="voice-name">{{VOICE_1_NAME}}</div>
+            <div class="voice-description">{{VOICE_1_DESCRIPTION}}</div>
+        </div>
+        <div class="voice-attribute">
+            <div class="voice-name">{{VOICE_2_NAME}}</div>
+            <div class="voice-description">{{VOICE_2_DESCRIPTION}}</div>
+        </div>
+        <div class="voice-attribute">
+            <div class="voice-name">{{VOICE_3_NAME}}</div>
+            <div class="voice-description">{{VOICE_3_DESCRIPTION}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: A/B Testing Roadmap -->
+<section class="content-section">
+    <h2>A/B Testing Roadmap</h2>
+
+    <div class="test-timeline">
+        <div class="test-item">
+            <div class="test-week">Week 1-2</div>
+            <div class="test-content">
+                <h4>{{TEST_1_NAME}}</h4>
+                <div class="test-variants">
+                    <div class="test-variant">
+                        <div class="test-variant-label">Control</div>
+                        <div class="test-variant-text">{{TEST_1_CONTROL}}</div>
+                    </div>
+                    <div class="test-variant">
+                        <div class="test-variant-label">Variant</div>
+                        <div class="test-variant-text">{{TEST_1_VARIANT}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="test-item">
+            <div class="test-week">Week 3-4</div>
+            <div class="test-content">
+                <h4>{{TEST_2_NAME}}</h4>
+                <div class="test-variants">
+                    <div class="test-variant">
+                        <div class="test-variant-label">Control</div>
+                        <div class="test-variant-text">{{TEST_2_CONTROL}}</div>
+                    </div>
+                    <div class="test-variant">
+                        <div class="test-variant-label">Variant</div>
+                        <div class="test-variant-text">{{TEST_2_VARIANT}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="test-item">
+            <div class="test-week">Week 5-6</div>
+            <div class="test-content">
+                <h4>{{TEST_3_NAME}}</h4>
+                <div class="test-variants">
+                    <div class="test-variant">
+                        <div class="test-variant-label">Control</div>
+                        <div class="test-variant-text">{{TEST_3_CONTROL}}</div>
+                    </div>
+                    <div class="test-variant">
+                        <div class="test-variant-label">Variant</div>
+                        <div class="test-variant-text">{{TEST_3_VARIANT}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: Next Steps -->
+<section class="content-section">
+    <h2>Implementation Checklist</h2>
+
+    <div class="checklist-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+        <div>
+            <h3 style="color: #10b981; margin-bottom: 1rem;">This Week</h3>
+            <ul class="checklist">
+                <li>{{NEXT_STEP_1}}</li>
+                <li>{{NEXT_STEP_2}}</li>
+                <li>{{NEXT_STEP_3}}</li>
+            </ul>
+        </div>
+        <div>
+            <h3 style="color: #10b981; margin-bottom: 1rem;">This Month</h3>
+            <ul class="checklist">
+                <li>{{MONTHLY_STEP_1}}</li>
+                <li>{{MONTHLY_STEP_2}}</li>
+                <li>{{MONTHLY_STEP_3}}</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CHART INITIALIZATION SCRIPTS
+     ════════════════════════════════════════════════════════════════════════════ -->
+<script>
+// Chart 1: Messaging Pillar Radar
+const pillarRadarCtx = document.getElementById('pillarRadarChart').getContext('2d');
+new Chart(pillarRadarCtx, {
+    type: 'radar',
+    data: {
+        labels: [
+            '{{PILLAR_1_NAME}}',
+            '{{PILLAR_2_NAME}}',
+            '{{PILLAR_3_NAME}}',
+            '{{PILLAR_4_NAME}}',
+            '{{PILLAR_5_NAME}}'
+        ],
+        datasets: [{
+            label: 'Pillar Strength',
+            data: [{{PILLAR_1_SCORE}}, {{PILLAR_2_SCORE}}, {{PILLAR_3_SCORE}}, {{PILLAR_4_SCORE}}, {{PILLAR_5_SCORE}}],
+            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+            borderColor: '#10b981',
+            borderWidth: 2,
+            pointBackgroundColor: '#10b981',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: '#10b981'
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { display: false }
+        },
+        scales: {
+            r: {
+                beginAtZero: true,
+                max: 10,
+                ticks: {
+                    color: 'rgba(245, 245, 245, 0.6)',
+                    backdropColor: 'transparent'
+                },
+                grid: { color: 'rgba(16, 185, 129, 0.2)' },
+                pointLabels: {
+                    color: '#f5f5f5',
+                    font: { size: 12, weight: 600 }
+                }
+            }
+        }
+    }
+});
+
+// Chart 2: Competitive Position Scatter
+const competitiveCtx = document.getElementById('competitivePositionChart').getContext('2d');
+new Chart(competitiveCtx, {
+    type: 'scatter',
+    data: {
+        datasets: [
+            {
+                label: '{{BUSINESS_NAME}}',
+                data: [{ x: {{YOUR_X_POSITION}}, y: {{YOUR_Y_POSITION}} }],
+                backgroundColor: '#10b981',
+                borderColor: '#10b981',
+                pointRadius: 12,
+                pointHoverRadius: 14
+            },
+            {
+                label: '{{COMPETITOR_A}}',
+                data: [{ x: {{COMP_A_X}}, y: {{COMP_A_Y}} }],
+                backgroundColor: '#f97316',
+                borderColor: '#f97316',
+                pointRadius: 10,
+                pointHoverRadius: 12
+            },
+            {
+                label: '{{COMPETITOR_B}}',
+                data: [{ x: {{COMP_B_X}}, y: {{COMP_B_Y}} }],
+                backgroundColor: '#3b82f6',
+                borderColor: '#3b82f6',
+                pointRadius: 10,
+                pointHoverRadius: 12
+            },
+            {
+                label: '{{COMPETITOR_C}}',
+                data: [{ x: {{COMP_C_X}}, y: {{COMP_C_Y}} }],
+                backgroundColor: '#8b5cf6',
+                borderColor: '#8b5cf6',
+                pointRadius: 10,
+                pointHoverRadius: 12
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                labels: { color: '#f5f5f5' }
+            },
+            title: {
+                display: true,
+                text: '{{POSITION_CHART_TITLE}}',
+                color: '#f5f5f5',
+                font: { size: 14 }
+            }
+        },
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: '{{X_AXIS_LABEL}}',
+                    color: 'rgba(245, 245, 245, 0.7)'
+                },
+                min: 0,
+                max: 10,
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: { color: 'rgba(245, 245, 245, 0.6)' }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: '{{Y_AXIS_LABEL}}',
+                    color: 'rgba(245, 245, 245, 0.7)'
+                },
+                min: 0,
+                max: 10,
+                grid: { color: 'rgba(16, 185, 129, 0.1)' },
+                ticks: { color: 'rgba(245, 245, 245, 0.6)' }
+            }
+        }
+    }
+});
+
+// Chart 3: Voice Balance (Rational vs Emotional)
+const voiceCtx = document.getElementById('voiceBalanceChart').getContext('2d');
+new Chart(voiceCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Rational', 'Emotional'],
+        datasets: [{
+            data: [{{RATIONAL_PERCENT}}, {{EMOTIONAL_PERCENT}}],
+            backgroundColor: ['#3b82f6', '#f97316'],
+            borderColor: '#0a0a0a',
+            borderWidth: 3
+        }]
+    },
+    options: {
+        responsive: true,
+        cutout: '60%',
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    color: '#f5f5f5',
+                    padding: 20,
+                    usePointStyle: true
+                }
+            },
+            title: {
+                display: true,
+                text: 'Messaging Balance',
+                color: '#f5f5f5',
+                font: { size: 14 }
+            }
+        }
+    }
+});
+</script>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     REQUIRED CHARTS SUMMARY:
+
+     1. pillarRadarChart - Radar chart showing messaging pillar strengths
+     2. competitivePositionChart - Scatter plot positioning vs competitors
+     3. voiceBalanceChart - Doughnut showing rational/emotional balance
+
+     ════════════════════════════════════════════════════════════════════════════ -->

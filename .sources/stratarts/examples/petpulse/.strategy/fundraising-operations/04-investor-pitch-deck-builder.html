@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Pitch Deck Builder - PetPulse | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #10b981;
+            --accent-dark: #059669;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #0a0a0a;
+        }
+
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* === SCORE BANNER === */
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .score-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .score-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+        }
+
+        /* === CONTENT SECTIONS === */
+        .content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 4rem;
+            background: #0a0a0a;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(16, 185, 129, 0.3);
+        }
+
+        /* Investor Pitch Deck Builder Specific Styles */
+        .slide-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .slide-card {
+            aspect-ratio: 16/9;
+            background: #1a1a1a;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .slide-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .slide-thumbnail {
+            width: 100%;
+            height: 70%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(16, 185, 129, 0.05);
+            font-size: 2rem;
+        }
+
+        .slide-info {
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .slide-number {
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            background: var(--accent);
+            color: #0a0a0a;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .slide-title {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .slide-detail {
+            padding: 24px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 20px 0;
+        }
+
+        .slide-detail-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .slide-detail-icon {
+            font-size: 2.5rem;
+        }
+
+        .slide-detail-title h3 {
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        .slide-detail-subtitle {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .slide-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .talking-points h4,
+        .visual-elements h4 {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .talking-points ul,
+        .visual-elements ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .talking-points li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .talking-points li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .visual-elements li {
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Cards Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .summary-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .summary-card h4 {
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .summary-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .metric-card .label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 0.5rem;
+        }
+
+        .metric-card .change {
+            font-size: 0.8rem;
+            color: #10b981;
+            margin-top: 0.25rem;
+        }
+
+        /* Competitor Matrix */
+        .competitor-matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .matrix-quadrant {
+            padding: 24px;
+            background: #1a1a1a;
+            text-align: center;
+        }
+
+        .matrix-quadrant h4 {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+        }
+
+        .matrix-quadrant.highlight {
+            background: rgba(16, 185, 129, 0.15);
+        }
+
+        .matrix-quadrant.highlight h4 {
+            color: var(--accent);
+        }
+
+        .matrix-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .team-member-card {
+            display: flex;
+            gap: 16px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+        }
+
+        .member-avatar {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--accent), #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #0a0a0a;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .member-info h4 {
+            margin-bottom: 4px;
+        }
+
+        .member-title {
+            color: var(--accent);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .member-background {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Financial Table */
+        .financial-projection-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+
+        .financial-projection-table th,
+        .financial-projection-table td {
+            padding: 12px 16px;
+            text-align: right;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .financial-projection-table th {
+            background: rgba(16, 185, 129, 0.1);
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .financial-projection-table th:first-child,
+        .financial-projection-table td:first-child {
+            text-align: left;
+        }
+
+        /* Use of Funds */
+        .use-of-funds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .funds-card {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .funds-percentage {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .funds-category {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 8px 0;
+        }
+
+        .funds-amount {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Design Principles */
+        .design-principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .design-principle {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .design-principle .icon {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .design-principle h4 {
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        /* Narrative Arc */
+        .narrative-arc {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .arc-stage {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .arc-number {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent);
+            color: #0a0a0a;
+            border-radius: 50%;
+            font-weight: 700;
+        }
+
+        /* Next Steps */
+        .next-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .next-step-item {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .next-step-item strong {
+            color: var(--accent);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .chart-container canvas {
+            max-height: 350px;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content strong {
+            color: #10b981;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .score-container { grid-template-columns: repeat(3, 1fr); }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .slide-content-grid { grid-template-columns: 1fr; }
+            .header-content { padding: 2rem; }
+            .content { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="kicker">StratArts Investor Pitch Deck Builder</div>
+                <h1>PetPulse Series A Pitch Deck</h1>
+                <div class="subtitle">12-slide investor pitch deck for the smart pet health monitoring platform</div>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span>Generated: December 18, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>Stage: Series A</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>Version 1.0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-item">
+                    <div class="score-value">$5M</div>
+                    <div class="score-label">Raising</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">$20M</div>
+                    <div class="score-label">Valuation</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">$30K</div>
+                    <div class="score-label">MRR</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">$260B</div>
+                    <div class="score-label">TAM</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">12</div>
+                    <div class="score-label">Slides</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">12 min</div>
+                    <div class="score-label">Pitch Time</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Section 1: Executive Summary -->
+            <section class="section">
+                <h2 class="section-title">1. Executive Summary</h2>
+                <div class="card-grid">
+                    <div class="summary-card">
+                        <h4>The Pitch</h4>
+                        <p>"PetPulse is the Oura Ring for pets - a smart health monitoring collar + app that catches health issues 3-4 weeks before visible symptoms, reducing emergency vet costs by 40%."</p>
+                    </div>
+                    <div class="summary-card">
+                        <h4>The Ask</h4>
+                        <p>Raising $5M Series A at $20M post-money valuation. 25% dilution for 18 months runway to hit $2M ARR trigger for Series B.</p>
+                    </div>
+                    <div class="summary-card">
+                        <h4>Why Now</h4>
+                        <p>Pet ownership up 15% post-COVID. Pet humanization trend accelerating. No consumer solution provides AI-powered continuous health monitoring.</p>
+                    </div>
+                    <div class="summary-card">
+                        <h4>Milestones</h4>
+                        <p>With $5M: Scale to 16K subscribers, achieve $2M ARR, 88% D30 retention, launch Gen 2 collar, build out GTM team.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Slide Overview -->
+            <section class="section">
+                <h2 class="section-title">2. Slide Overview</h2>
+                <div class="slide-overview">
+                    <div class="slide-card">
+                        <div class="slide-thumbnail">PetPulse</div>
+                        <div class="slide-info">
+                            <span class="slide-number">01</span>
+                            <span class="slide-title">Title</span>
+                        </div>
+                    </div>
+                    <div class="slide-card">
+                        <div class="slide-thumbnail">!</div>
+                        <div class="slide-info">
+                            <span class="slide-number">02</span>
+                            <span class="slide-title">Problem</span>
+                        </div>
+                    </div>
+                    <div class="slide-card">
+                        <div class="slide-thumbnail">...</div>
+                        <div class="slide-info">
+                            <span class="slide-number">03</span>
+                            <span class="slide-title">Solution</span>
+                        </div>
+                    </div>
+                    <div class="slide-card">
+                        <div class="slide-thumbnail">$</div>
+                        <div class="slide-info">
+                            <span class="slide-number">04</span>
+                            <span class="slide-title">Market</span>
+                        </div>
+                    </div>
+                    <div class="slide-card">
+                        <div class="slide-thumbnail">%</div>
+                        <div class="slide-info">
+                            <span class="slide-number">05</span>
+                            <span class="slide-title">Business</span>
+                        </div>
+                    </div>
+                    <div class="slide-card">
+                        <div class="slide-thumbnail">^</div>
+                        <div class="slide-info">
+                            <span class="slide-number">06</span>
+                            <span class="slide-title">Traction</span>
+                        </div>
+                    </div>
+                    <div class="slide-card">
+                        <div class="slide-thumbnail">[]</div>
+                        <div class="slide-info">
+                            <span class="slide-number">07</span>
+                            <span class="slide-title">Product</span>
+                        </div>
+                    </div>
+                    <div class="slide-card">
+                        <div class="slide-thumbnail">vs</div>
+                        <div class="slide-info">
+                            <span class="slide-number">08</span>
+                            <span class="slide-title">Competition</span>
+                        </div>
+                    </div>
+                    <div class="slide-card">
+                        <div class="slide-thumbnail">-></div>
+                        <div class="slide-info">
+                            <span class="slide-number">09</span>
+                            <span class="slide-title">GTM</span>
+                        </div>
+                    </div>
+                    <div class="slide-card">
+                        <div class="slide-thumbnail">@</div>
+                        <div class="slide-info">
+                            <span class="slide-number">10</span>
+                            <span class="slide-title">Team</span>
+                        </div>
+                    </div>
+                    <div class="slide-card">
+                        <div class="slide-thumbnail">#</div>
+                        <div class="slide-info">
+                            <span class="slide-number">11</span>
+                            <span class="slide-title">Financials</span>
+                        </div>
+                    </div>
+                    <div class="slide-card">
+                        <div class="slide-thumbnail">?</div>
+                        <div class="slide-info">
+                            <span class="slide-number">12</span>
+                            <span class="slide-title">The Ask</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Key Slides Detail -->
+            <section class="section">
+                <h2 class="section-title">3. Key Slides Detail</h2>
+
+                <!-- Problem Slide -->
+                <div class="slide-detail">
+                    <div class="slide-detail-header">
+                        <div class="slide-detail-icon">!</div>
+                        <div class="slide-detail-title">
+                            <h3>Slide 2: The Problem</h3>
+                            <div class="slide-detail-subtitle">Pet health issues cost billions and cause heartbreak</div>
+                        </div>
+                    </div>
+                    <div class="slide-content-grid">
+                        <div class="talking-points">
+                            <h4>Talking Points</h4>
+                            <ul>
+                                <li>Pet parents spend $136B annually on pet care, yet preventable health issues cost $4,800 per emergency visit</li>
+                                <li>67% of pet health conditions are detected too late for optimal treatment</li>
+                                <li>Pets can't tell us when they're feeling sick - symptoms appear only when conditions are advanced</li>
+                                <li>Current solutions: annual vet visits (reactive) or activity trackers (insufficient data)</li>
+                                <li>No consumer solution provides continuous, AI-powered health monitoring</li>
+                            </ul>
+                        </div>
+                        <div class="visual-elements">
+                            <h4>Visual Elements</h4>
+                            <ul>
+                                <li>Photo of worried pet parent at vet</li>
+                                <li>Stat callout: "$4,800 avg emergency vet bill"</li>
+                                <li>Timeline showing late detection issue</li>
+                                <li>Quote from pet parent interview</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Solution Slide -->
+                <div class="slide-detail">
+                    <div class="slide-detail-header">
+                        <div class="slide-detail-icon">...</div>
+                        <div class="slide-detail-title">
+                            <h3>Slide 3: The Solution</h3>
+                            <div class="slide-detail-subtitle">AI-powered health monitoring that catches issues early</div>
+                        </div>
+                    </div>
+                    <div class="slide-content-grid">
+                        <div class="talking-points">
+                            <h4>Talking Points</h4>
+                            <ul>
+                                <li>Smart collar with 5 health sensors: heart rate, temperature, activity, sleep, respiration</li>
+                                <li>AI analyzes patterns to detect anomalies 3-4 weeks before visible symptoms</li>
+                                <li>App provides real-time health dashboard, trend analysis, and vet-sharable reports</li>
+                                <li>Veterinarian-validated algorithms trained on 7,300+ pets</li>
+                                <li>Reduces emergency costs by 40%, catches conditions like heart disease, arthritis, infections early</li>
+                            </ul>
+                        </div>
+                        <div class="visual-elements">
+                            <h4>Visual Elements</h4>
+                            <ul>
+                                <li>Product hero shot (collar + app)</li>
+                                <li>App screenshot showing health dashboard</li>
+                                <li>Before/After timeline comparison</li>
+                                <li>Key stats: "85% D30 retention"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Traction Slide -->
+                <div class="slide-detail">
+                    <div class="slide-detail-header">
+                        <div class="slide-detail-icon">^</div>
+                        <div class="slide-detail-title">
+                            <h3>Slide 6: Traction</h3>
+                            <div class="slide-detail-subtitle">Hockey stick growth with exceptional retention</div>
+                        </div>
+                    </div>
+                    <div class="slide-content-grid">
+                        <div class="talking-points">
+                            <h4>Talking Points</h4>
+                            <ul>
+                                <li>$360K ARR, growing 18% month-over-month</li>
+                                <li>7,300 active users across all 50 states</li>
+                                <li>85% D30 retention vs. 40% industry average</li>
+                                <li>4.8:1 LTV:CAC ratio - exceptional unit economics</li>
+                                <li>NPS of 42, 87% CSAT - customers love the product</li>
+                            </ul>
+                        </div>
+                        <div class="visual-elements">
+                            <h4>Visual Elements</h4>
+                            <ul>
+                                <li>Hockey stick MRR chart</li>
+                                <li>Retention cohort curves</li>
+                                <li>4 key metric callouts</li>
+                                <li>Customer testimonial quote</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Traction Metrics -->
+            <section class="section">
+                <h2 class="section-title">4. Traction Metrics</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="value">$360K</div>
+                        <div class="label">Annual Recurring Revenue</div>
+                        <div class="change">+18% MoM</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value">7,300</div>
+                        <div class="label">Active Users</div>
+                        <div class="change">+15% MoM</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value">85%</div>
+                        <div class="label">D30 Retention</div>
+                        <div class="change">2x Industry Avg</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value">4.8:1</div>
+                        <div class="label">LTV:CAC Ratio</div>
+                        <div class="change">Target >3:1</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="customerChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Section 5: Competitive Position -->
+            <section class="section">
+                <h2 class="section-title">5. Competitive Position</h2>
+                <div class="competitor-matrix">
+                    <div class="matrix-quadrant">
+                        <h4>High Price / Low Capability</h4>
+                        <div class="matrix-label">Whistle GPS ($12.95/mo)<br>GPS only, no health</div>
+                    </div>
+                    <div class="matrix-quadrant highlight">
+                        <h4>High Price / High Capability</h4>
+                        <div class="matrix-label"><strong>PetPulse ($19-49/mo)</strong><br>Full health monitoring + AI</div>
+                    </div>
+                    <div class="matrix-quadrant">
+                        <h4>Low Price / Low Capability</h4>
+                        <div class="matrix-label">Manual tracking (free)<br>Unreliable, no insights</div>
+                    </div>
+                    <div class="matrix-quadrant">
+                        <h4>Low Price / High Capability</h4>
+                        <div class="matrix-label">FitBark ($9.95/mo)<br>Activity only, no health AI</div>
+                    </div>
+                </div>
+                <div class="slide-detail">
+                    <h4 style="color: var(--accent); margin-bottom: 1rem;">Competitive Advantages</h4>
+                    <div class="talking-points">
+                        <ul>
+                            <li><strong>Hardware + Subscription Moat:</strong> Proprietary collar + ML models = high switching costs</li>
+                            <li><strong>Veterinary Validation:</strong> First consumer pet device with clinical validation (3 vet clinic partnerships)</li>
+                            <li><strong>Data Network Effects:</strong> 7,300+ pets generating training data; each new user improves accuracy for all</li>
+                            <li><strong>Early Detection:</strong> Only solution that catches issues 3-4 weeks before symptoms</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Team -->
+            <section class="section">
+                <h2 class="section-title">6. Team</h2>
+                <div class="team-grid">
+                    <div class="team-member-card">
+                        <div class="member-avatar">SM</div>
+                        <div class="member-info">
+                            <h4>Sarah Mitchell</h4>
+                            <div class="member-title">CEO & Co-Founder</div>
+                            <div class="member-background">Former Product Lead at Chewy. 8 years consumer products. MBA Stanford GSB. Built $50M revenue line.</div>
+                        </div>
+                    </div>
+                    <div class="team-member-card">
+                        <div class="member-avatar">JC</div>
+                        <div class="member-info">
+                            <h4>James Chen</h4>
+                            <div class="member-title">CTO & Co-Founder</div>
+                            <div class="member-background">Ex-Apple Watch Health Team. 10 years wearable engineering. MS CS MIT. 4 patents in health sensors.</div>
+                        </div>
+                    </div>
+                    <div class="team-member-card">
+                        <div class="member-avatar">ER</div>
+                        <div class="member-info">
+                            <h4>Dr. Emily Rodriguez</h4>
+                            <div class="member-title">Chief Veterinary Officer</div>
+                            <div class="member-background">15 years veterinary practice. DVM UC Davis. Published researcher in pet health technology.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Financial Projections -->
+            <section class="section">
+                <h2 class="section-title">7. Financial Projections</h2>
+                <table class="financial-projection-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>2025</th>
+                            <th>2026</th>
+                            <th>2027</th>
+                            <th>2028</th>
+                            <th>2029</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Revenue (ARR)</td>
+                            <td>$610K</td>
+                            <td>$1.82M</td>
+                            <td>$4.25M</td>
+                            <td>$7.91M</td>
+                            <td>$12.17M</td>
+                        </tr>
+                        <tr>
+                            <td>Subscribers</td>
+                            <td>1,650</td>
+                            <td>4,000</td>
+                            <td>8,000</td>
+                            <td>12,000</td>
+                            <td>16,000</td>
+                        </tr>
+                        <tr>
+                            <td>Gross Margin</td>
+                            <td>65%</td>
+                            <td>68%</td>
+                            <td>72%</td>
+                            <td>75%</td>
+                            <td>77%</td>
+                        </tr>
+                        <tr>
+                            <td>Headcount</td>
+                            <td>9</td>
+                            <td>16</td>
+                            <td>26</td>
+                            <td>39</td>
+                            <td>53</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="chart-container">
+                    <canvas id="projectionChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Section 8: Use of Funds -->
+            <section class="section">
+                <h2 class="section-title">8. Use of Funds</h2>
+                <div class="use-of-funds-grid">
+                    <div class="funds-card">
+                        <div class="funds-percentage">40%</div>
+                        <div class="funds-category">Engineering</div>
+                        <div class="funds-amount">$2.0M - Expand ML team, Gen 2 collar, platform scalability</div>
+                    </div>
+                    <div class="funds-card">
+                        <div class="funds-percentage">35%</div>
+                        <div class="funds-category">Sales & Marketing</div>
+                        <div class="funds-amount">$1.75M - Scale to 16K subscribers, content marketing</div>
+                    </div>
+                    <div class="funds-card">
+                        <div class="funds-percentage">15%</div>
+                        <div class="funds-category">Operations</div>
+                        <div class="funds-amount">$750K - Manufacturing partnerships, supply chain</div>
+                    </div>
+                    <div class="funds-card">
+                        <div class="funds-percentage">10%</div>
+                        <div class="funds-category">G&A / Buffer</div>
+                        <div class="funds-amount">$500K - Infrastructure, compliance, runway buffer</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="fundsChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Section 9: Design & Storytelling -->
+            <section class="section">
+                <h2 class="section-title">9. Design & Storytelling</h2>
+                <div class="design-principles-grid">
+                    <div class="design-principle">
+                        <div class="icon">Simple</div>
+                        <h4>Simple & Clean</h4>
+                        <p>Minimal text, lots of white space, large fonts. One idea per slide.</p>
+                    </div>
+                    <div class="design-principle">
+                        <div class="icon">Visual</div>
+                        <h4>Visual-First</h4>
+                        <p>Use charts, screenshots, photos. Investors want to see, not read.</p>
+                    </div>
+                    <div class="design-principle">
+                        <div class="icon">Brand</div>
+                        <h4>Consistent Branding</h4>
+                        <p>PetPulse emerald green, clean typography throughout.</p>
+                    </div>
+                    <div class="design-principle">
+                        <div class="icon">Focus</div>
+                        <h4>One Idea Per Slide</h4>
+                        <p>Each slide has one clear message that builds the story.</p>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--accent); margin: 2rem 0 1rem 0;">Narrative Arc</h3>
+                <div class="narrative-arc">
+                    <div class="arc-stage">
+                        <div class="arc-number">1</div>
+                        <div><strong>Hook</strong> - "67% of pet health conditions are detected too late. We're changing that."</div>
+                    </div>
+                    <div class="arc-stage">
+                        <div class="arc-number">2</div>
+                        <div><strong>Setup</strong> - $136B spent on pet care, $4,800 emergency bills, pets can't tell us when sick</div>
+                    </div>
+                    <div class="arc-stage">
+                        <div class="arc-number">3</div>
+                        <div><strong>Solution</strong> - Smart collar + AI catches issues 3-4 weeks before symptoms</div>
+                    </div>
+                    <div class="arc-stage">
+                        <div class="arc-number">4</div>
+                        <div><strong>Proof</strong> - $360K ARR, 85% retention, 4.8:1 LTV:CAC, 7,300 happy users</div>
+                    </div>
+                    <div class="arc-stage">
+                        <div class="arc-number">5</div>
+                        <div><strong>Vision</strong> - Hardware + data moat, vet validation, network effects</div>
+                    </div>
+                    <div class="arc-stage">
+                        <div class="arc-number">6</div>
+                        <div><strong>Ask</strong> - $5M to scale to $2M ARR, 16K subscribers, Series B trigger</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 10: Next Steps -->
+            <section class="section">
+                <h2 class="section-title">10. Next Steps</h2>
+                <div class="next-steps">
+                    <div class="next-step-item">
+                        <strong>This Week</strong><br>
+                        Finalize deck design in Pitch or Keynote with product screenshots
+                    </div>
+                    <div class="next-step-item">
+                        <strong>Week 2</strong><br>
+                        Practice pitch with 3 advisors, get feedback, refine timing to 12 min
+                    </div>
+                    <div class="next-step-item">
+                        <strong>Week 3</strong><br>
+                        Build target investor list (80 names from fundraising strategy)
+                    </div>
+                    <div class="next-step-item">
+                        <strong>Week 4</strong><br>
+                        Send first batch of warm intro requests (20 investors)
+                    </div>
+                    <div class="next-step-item">
+                        <strong>Ongoing</strong><br>
+                        After every pitch, note questions asked and update deck accordingly
+                    </div>
+                    <div class="next-step-item">
+                        <strong>Target</strong><br>
+                        28 intro meetings -> 10 partner meetings -> 3 term sheets -> 2 closed
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | investor-pitch-deck-builder-v1.0</p>
+                <p style="margin-top: 5px;">Traction is the most important slide. Practice until you can pitch in 10-15 minutes. Iterate based on investor questions.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        // Revenue Growth Chart (Hockey Stick)
+        const revenueCtx = document.getElementById('revenueChart');
+        if (revenueCtx) {
+            new Chart(revenueCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'MRR',
+                        data: [12000, 14000, 16500, 19000, 21500, 24000, 26500, 28500, 30000, 32000, 34000, 36000],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#10b981'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'MRR Growth (Hockey Stick)', color: '#ffffff' }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: 'rgba(255,255,255,0.7)', callback: v => '$' + (v/1000).toFixed(0) + 'K' },
+                            grid: { color: 'rgba(255,255,255,0.1)' }
+                        },
+                        x: { ticks: { color: 'rgba(255,255,255,0.7)' }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // Customer Growth Chart
+        const customerCtx = document.getElementById('customerChart');
+        if (customerCtx) {
+            new Chart(customerCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Q1 2025', 'Q2 2025', 'Q3 2025', 'Q4 2025'],
+                    datasets: [{
+                        label: 'Customers',
+                        data: [2500, 4200, 5800, 7300],
+                        backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                        borderColor: '#3b82f6',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'Customer Growth', color: '#ffffff' }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: 'rgba(255,255,255,0.7)' },
+                            grid: { color: 'rgba(255,255,255,0.1)' }
+                        },
+                        x: { ticks: { color: 'rgba(255,255,255,0.7)' }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // 5-Year Projection Chart
+        const projectionCtx = document.getElementById('projectionChart');
+        if (projectionCtx) {
+            new Chart(projectionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2025', '2026', '2027', '2028', '2029'],
+                    datasets: [{
+                        label: 'ARR',
+                        data: [610000, 1820000, 4250000, 7910000, 12170000],
+                        backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                        borderColor: '#10b981',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: '5-Year ARR Projection', color: '#ffffff' }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: 'rgba(255,255,255,0.7)', callback: v => '$' + (v/1000000).toFixed(1) + 'M' },
+                            grid: { color: 'rgba(255,255,255,0.1)' }
+                        },
+                        x: { ticks: { color: 'rgba(255,255,255,0.7)' }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // Use of Funds Chart
+        const fundsCtx = document.getElementById('fundsChart');
+        if (fundsCtx) {
+            new Chart(fundsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Engineering', 'Sales & Marketing', 'Operations', 'G&A / Buffer'],
+                    datasets: [{
+                        data: [40, 35, 15, 10],
+                        backgroundColor: [
+                            'rgba(16, 185, 129, 0.8)',
+                            'rgba(59, 130, 246, 0.8)',
+                            'rgba(245, 158, 11, 0.8)',
+                            'rgba(156, 163, 175, 0.8)'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: '#ffffff' } },
+                        title: { display: true, text: 'Use of Funds ($5M)', color: '#ffffff' }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

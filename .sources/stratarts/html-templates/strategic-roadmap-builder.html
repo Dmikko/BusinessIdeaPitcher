@@ -1,0 +1,1174 @@
+<!--
+═══════════════════════════════════════════════════════════════════════════════
+STRATARTS HTML SKELETON TEMPLATE
+Skill: strategic-roadmap-builder
+Version: 1.0.0
+
+INSTRUCTIONS:
+1. Read VERIFICATION-CHECKLIST.md FIRST for canonical patterns
+2. Read base-template.html for shared CSS/JS structure
+3. Replace all {{PLACEHOLDER}} markers with actual data
+4. This template defines skill-specific content sections and charts
+═══════════════════════════════════════════════════════════════════════════════
+-->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     TEMPLATE VARIABLES (Replace with actual data)
+     ════════════════════════════════════════════════════════════════════════════
+
+     HEADER:
+     {{PAGE_TITLE}}          = "Strategic Roadmap"
+     {{KICKER}}              = "StratArts Business Analysis"
+     {{TITLE}}               = "Strategic Roadmap Builder"
+     {{SUBTITLE}}            = "{PRODUCT_NAME} - {PRODUCT_DESCRIPTION}"
+     {{DATE}}                = "November 28, 2025"
+     {{ANALYSIS_TYPE}}       = "Market & Product Strategy"
+     {{VERSION}}             = "1.0.0"
+
+     SCORE BANNER:
+     {{PRIMARY_SCORE}}       = "18" or "3 Phases"
+     {{SCORE_LABEL}}         = "Month Roadmap" or "Strategic Phases"
+     {{SCORE_INTERPRETATION}}= "This roadmap outlines..."
+     {{VERDICT}}             = "EXECUTION READY" | "NEEDS REFINEMENT" | "HIGH RISK"
+
+     FOOTER:
+     {{PROJECT_NAME}}        = "{PROJECT_FOLDER_NAME}"
+     {{SKILL_NAME}}          = "strategic-roadmap-builder"
+     {{CONTEXT_SIGNATURE}}   = "strategic-roadmap-builder-v1.0.0"
+     {{ITERATIONS}}          = "1"
+     {{ITERATIONS_PLURAL}}   = "" or "s"
+
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     SKILL-SPECIFIC CSS (Add to {{SKILL_SPECIFIC_CSS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+<style>
+/* Vision Card */
+.vision-card {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, #1a1a1a 100%);
+    border: 2px solid #10b981;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.vision-label {
+    font-size: 0.75rem;
+    color: #10b981;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+}
+
+.vision-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    line-height: 1.4;
+}
+
+.vision-subtext {
+    font-size: 0.95rem;
+    color: #a3a3a3;
+    margin-top: 1rem;
+}
+
+/* OKR Cards */
+.okr-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.okr-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.okr-number {
+    display: inline-block;
+    background: #10b981;
+    color: #0a0a0a;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.75rem;
+}
+
+.okr-objective {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    margin-bottom: 1rem;
+}
+
+.kr-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.kr-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.kr-item:last-child {
+    border-bottom: none;
+}
+
+.kr-icon {
+    color: #10b981;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.kr-text {
+    font-size: 0.85rem;
+    color: #d4d4d4;
+}
+
+.kr-target {
+    font-weight: 600;
+    color: #10b981;
+}
+
+/* Phase Timeline */
+.phase-timeline {
+    position: relative;
+    margin-top: 2rem;
+}
+
+.phase-timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #10b981 0%, #047857 100%);
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.phase-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    width: 45%;
+}
+
+.phase-card:nth-child(odd) {
+    margin-left: 0;
+}
+
+.phase-card:nth-child(even) {
+    margin-left: 55%;
+}
+
+.phase-card::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #10b981;
+    border: 4px solid #0a0a0a;
+    border-radius: 50%;
+    top: 2rem;
+}
+
+.phase-card:nth-child(odd)::before {
+    right: -12%;
+}
+
+.phase-card:nth-child(even)::before {
+    left: -12%;
+}
+
+.phase-badge {
+    display: inline-block;
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+}
+
+.phase-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    margin-bottom: 0.5rem;
+}
+
+.phase-dates {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    margin-bottom: 1rem;
+}
+
+.phase-goal {
+    font-size: 0.95rem;
+    color: #d4d4d4;
+    padding: 1rem;
+    background: rgba(16, 185, 129, 0.05);
+    border-left: 3px solid #10b981;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 1rem;
+}
+
+/* Milestones List */
+.milestones-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.milestone-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.milestone-item:last-child {
+    border-bottom: none;
+}
+
+.milestone-marker {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 0.4rem;
+}
+
+.milestone-content {
+    flex: 1;
+}
+
+.milestone-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #f5f5f5;
+}
+
+.milestone-date {
+    font-size: 0.75rem;
+    color: #a3a3a3;
+    margin-top: 0.25rem;
+}
+
+/* Resource Allocation Table */
+.resource-table-container {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    overflow-x: auto;
+}
+
+.resource-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.resource-table th {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 2px solid rgba(16, 185, 129, 0.3);
+}
+
+.resource-table td {
+    padding: 0.75rem 1rem;
+    color: #d4d4d4;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.resource-table tr:hover td {
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.resource-table .total-row {
+    font-weight: 700;
+    color: #f5f5f5;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+/* Metrics Dashboard */
+.metrics-dashboard {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.metric-tile {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.metric-category {
+    font-size: 0.7rem;
+    color: #a3a3a3;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.metric-name {
+    font-size: 0.85rem;
+    color: #d4d4d4;
+    margin-bottom: 0.5rem;
+}
+
+.metric-targets {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #a3a3a3;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.metric-phase {
+    text-align: center;
+}
+
+.metric-phase-label {
+    font-size: 0.65rem;
+    color: #a3a3a3;
+}
+
+.metric-phase-value {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #10b981;
+}
+
+/* Assumptions Grid */
+.assumptions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.assumption-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.assumption-card.high-risk {
+    border-color: #fc8181;
+}
+
+.assumption-card.medium-risk {
+    border-color: #f6ad55;
+}
+
+.assumption-card.low-risk {
+    border-color: #10b981;
+}
+
+.risk-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+
+.risk-badge.high {
+    background: rgba(252, 129, 129, 0.2);
+    color: #fc8181;
+}
+
+.risk-badge.medium {
+    background: rgba(246, 173, 85, 0.2);
+    color: #f6ad55;
+}
+
+.risk-badge.low {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.assumption-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #f5f5f5;
+    margin-bottom: 0.75rem;
+}
+
+.assumption-details {
+    font-size: 0.85rem;
+    color: #a3a3a3;
+}
+
+.assumption-details dt {
+    font-weight: 600;
+    color: #d4d4d4;
+    margin-top: 0.5rem;
+}
+
+.assumption-details dd {
+    margin-left: 0;
+    margin-top: 0.25rem;
+}
+
+/* Gantt-Style Timeline */
+.gantt-container {
+    background: #1a1a1a;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    overflow-x: auto;
+}
+
+.gantt-header {
+    display: flex;
+    border-bottom: 2px solid rgba(16, 185, 129, 0.3);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.gantt-label {
+    width: 150px;
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    color: #a3a3a3;
+    text-transform: uppercase;
+}
+
+.gantt-months {
+    display: flex;
+    flex: 1;
+}
+
+.gantt-month {
+    flex: 1;
+    text-align: center;
+    font-size: 0.7rem;
+    color: #a3a3a3;
+    min-width: 40px;
+}
+
+.gantt-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.gantt-row-label {
+    width: 150px;
+    flex-shrink: 0;
+    font-size: 0.85rem;
+    color: #f5f5f5;
+}
+
+.gantt-bar-container {
+    display: flex;
+    flex: 1;
+}
+
+.gantt-bar {
+    height: 24px;
+    background: linear-gradient(90deg, #10b981 0%, #047857 100%);
+    border-radius: 4px;
+}
+
+.gantt-bar.phase-1 {
+    background: linear-gradient(90deg, #10b981 0%, #047857 100%);
+}
+
+.gantt-bar.phase-2 {
+    background: linear-gradient(90deg, #047857 0%, #065f46 100%);
+}
+
+.gantt-bar.phase-3 {
+    background: linear-gradient(90deg, #065f46 0%, #064e3b 100%);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .okr-grid { grid-template-columns: 1fr; }
+    .phase-card { width: 100%; margin-left: 0 !important; }
+    .phase-timeline::before { left: 20px; }
+    .phase-card::before { left: 8px !important; right: auto !important; }
+    .metrics-dashboard { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .assumptions-grid { grid-template-columns: 1fr; }
+    .metrics-dashboard { grid-template-columns: 1fr; }
+}
+
+/* Print */
+@media print {
+    .vision-card, .okr-card, .phase-card, .assumption-card, .resource-table-container, .gantt-container {
+        background: white;
+        border: 2px solid #10b981;
+        page-break-inside: avoid;
+    }
+    .phase-name, .okr-objective, .assumption-text { color: #000000; }
+    .resource-table th { background: #f5f5f5; color: #000000; }
+}
+</style>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CONTENT SECTIONS (Replace {{CONTENT_SECTIONS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- Section 1: Vision & Executive Summary -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Vision & Strategic Overview</h2>
+        <p class="section-description">
+            Long-term vision and 18-month strategic objectives for {{PRODUCT_NAME}}.
+        </p>
+    </div>
+
+    <div class="vision-card">
+        <div class="vision-label">5-Year Vision</div>
+        <div class="vision-text">{{VISION_STATEMENT}}</div>
+        <div class="vision-subtext">{{VISION_DESCRIPTION}}</div>
+    </div>
+
+    <div class="metric-grid">
+        <div class="metric-card">
+            <div class="label">18-Month Goal</div>
+            <div class="value" style="font-size: 1.5rem;">{{PRIMARY_GOAL}}</div>
+            <div class="description">{{GOAL_DESCRIPTION}}</div>
+        </div>
+        <div class="metric-card">
+            <div class="label">Total Capital Required</div>
+            <div class="value">{{TOTAL_CAPITAL}}</div>
+            <div class="description">Across all 3 phases</div>
+        </div>
+        <div class="metric-card">
+            <div class="label">Team Growth</div>
+            <div class="value" style="font-size: 1.5rem;">{{TEAM_GROWTH}}</div>
+            <div class="description">{{TEAM_DESCRIPTION}}</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 2: Strategic Objectives (OKRs) -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Strategic Objectives (OKRs)</h2>
+        <p class="section-description">
+            Objectives and Key Results for the 18-month roadmap.
+        </p>
+    </div>
+
+    <div class="okr-grid">
+        <!-- OKR 1 -->
+        <div class="okr-card">
+            <span class="okr-number">Objective 1</span>
+            <div class="okr-objective">{{OKR_1_OBJECTIVE}}</div>
+            <ul class="kr-list">
+                <li class="kr-item">
+                    <span class="kr-icon">&#9679;</span>
+                    <span class="kr-text">{{OKR_1_KR1}} <span class="kr-target">{{OKR_1_KR1_TARGET}}</span></span>
+                </li>
+                <li class="kr-item">
+                    <span class="kr-icon">&#9679;</span>
+                    <span class="kr-text">{{OKR_1_KR2}} <span class="kr-target">{{OKR_1_KR2_TARGET}}</span></span>
+                </li>
+                <li class="kr-item">
+                    <span class="kr-icon">&#9679;</span>
+                    <span class="kr-text">{{OKR_1_KR3}} <span class="kr-target">{{OKR_1_KR3_TARGET}}</span></span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- OKR 2 -->
+        <div class="okr-card">
+            <span class="okr-number">Objective 2</span>
+            <div class="okr-objective">{{OKR_2_OBJECTIVE}}</div>
+            <ul class="kr-list">
+                <li class="kr-item">
+                    <span class="kr-icon">&#9679;</span>
+                    <span class="kr-text">{{OKR_2_KR1}} <span class="kr-target">{{OKR_2_KR1_TARGET}}</span></span>
+                </li>
+                <li class="kr-item">
+                    <span class="kr-icon">&#9679;</span>
+                    <span class="kr-text">{{OKR_2_KR2}} <span class="kr-target">{{OKR_2_KR2_TARGET}}</span></span>
+                </li>
+                <li class="kr-item">
+                    <span class="kr-icon">&#9679;</span>
+                    <span class="kr-text">{{OKR_2_KR3}} <span class="kr-target">{{OKR_2_KR3_TARGET}}</span></span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- OKR 3 -->
+        <div class="okr-card">
+            <span class="okr-number">Objective 3</span>
+            <div class="okr-objective">{{OKR_3_OBJECTIVE}}</div>
+            <ul class="kr-list">
+                <li class="kr-item">
+                    <span class="kr-icon">&#9679;</span>
+                    <span class="kr-text">{{OKR_3_KR1}} <span class="kr-target">{{OKR_3_KR1_TARGET}}</span></span>
+                </li>
+                <li class="kr-item">
+                    <span class="kr-icon">&#9679;</span>
+                    <span class="kr-text">{{OKR_3_KR2}} <span class="kr-target">{{OKR_3_KR2_TARGET}}</span></span>
+                </li>
+                <li class="kr-item">
+                    <span class="kr-icon">&#9679;</span>
+                    <span class="kr-text">{{OKR_3_KR3}} <span class="kr-target">{{OKR_3_KR3_TARGET}}</span></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: Phase-Based Roadmap -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Phase-Based Roadmap</h2>
+        <p class="section-description">
+            18-month execution plan divided into 3 strategic phases.
+        </p>
+    </div>
+
+    <div class="phase-timeline">
+        <!-- Phase 1 -->
+        <div class="phase-card">
+            <span class="phase-badge">Phase 1</span>
+            <div class="phase-name">{{PHASE_1_NAME}}</div>
+            <div class="phase-dates">{{PHASE_1_DATES}}</div>
+            <div class="phase-goal">{{PHASE_1_GOAL}}</div>
+            <ul class="milestones-list">
+                <li class="milestone-item">
+                    <span class="milestone-marker"></span>
+                    <div class="milestone-content">
+                        <div class="milestone-name">{{PHASE_1_M1}}</div>
+                        <div class="milestone-date">{{PHASE_1_M1_DATE}}</div>
+                    </div>
+                </li>
+                <li class="milestone-item">
+                    <span class="milestone-marker"></span>
+                    <div class="milestone-content">
+                        <div class="milestone-name">{{PHASE_1_M2}}</div>
+                        <div class="milestone-date">{{PHASE_1_M2_DATE}}</div>
+                    </div>
+                </li>
+                <li class="milestone-item">
+                    <span class="milestone-marker"></span>
+                    <div class="milestone-content">
+                        <div class="milestone-name">{{PHASE_1_M3}}</div>
+                        <div class="milestone-date">{{PHASE_1_M3_DATE}}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="phase-card">
+            <span class="phase-badge">Phase 2</span>
+            <div class="phase-name">{{PHASE_2_NAME}}</div>
+            <div class="phase-dates">{{PHASE_2_DATES}}</div>
+            <div class="phase-goal">{{PHASE_2_GOAL}}</div>
+            <ul class="milestones-list">
+                <li class="milestone-item">
+                    <span class="milestone-marker"></span>
+                    <div class="milestone-content">
+                        <div class="milestone-name">{{PHASE_2_M1}}</div>
+                        <div class="milestone-date">{{PHASE_2_M1_DATE}}</div>
+                    </div>
+                </li>
+                <li class="milestone-item">
+                    <span class="milestone-marker"></span>
+                    <div class="milestone-content">
+                        <div class="milestone-name">{{PHASE_2_M2}}</div>
+                        <div class="milestone-date">{{PHASE_2_M2_DATE}}</div>
+                    </div>
+                </li>
+                <li class="milestone-item">
+                    <span class="milestone-marker"></span>
+                    <div class="milestone-content">
+                        <div class="milestone-name">{{PHASE_2_M3}}</div>
+                        <div class="milestone-date">{{PHASE_2_M3_DATE}}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="phase-card">
+            <span class="phase-badge">Phase 3</span>
+            <div class="phase-name">{{PHASE_3_NAME}}</div>
+            <div class="phase-dates">{{PHASE_3_DATES}}</div>
+            <div class="phase-goal">{{PHASE_3_GOAL}}</div>
+            <ul class="milestones-list">
+                <li class="milestone-item">
+                    <span class="milestone-marker"></span>
+                    <div class="milestone-content">
+                        <div class="milestone-name">{{PHASE_3_M1}}</div>
+                        <div class="milestone-date">{{PHASE_3_M1_DATE}}</div>
+                    </div>
+                </li>
+                <li class="milestone-item">
+                    <span class="milestone-marker"></span>
+                    <div class="milestone-content">
+                        <div class="milestone-name">{{PHASE_3_M2}}</div>
+                        <div class="milestone-date">{{PHASE_3_M2_DATE}}</div>
+                    </div>
+                </li>
+                <li class="milestone-item">
+                    <span class="milestone-marker"></span>
+                    <div class="milestone-content">
+                        <div class="milestone-name">{{PHASE_3_M3}}</div>
+                        <div class="milestone-date">{{PHASE_3_M3_DATE}}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Section 4: Visual Analysis -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Visual Analysis</h2>
+        <p class="section-description">
+            Resource allocation, growth trajectory, and milestone timeline.
+        </p>
+    </div>
+
+    <div class="chart-grid">
+        <!-- Chart 1: Capital Allocation -->
+        <div class="chart-card">
+            <div class="chart-title">Capital Allocation by Phase</div>
+            <div class="chart-subtitle">Budget distribution across 18 months</div>
+            <div class="chart-wrapper">
+                <canvas id="capitalAllocationChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Investment Strategy</div>
+                <ul class="insight-list">
+                    <li><strong>Phase 1:</strong> {{PHASE_1_CAPITAL}}</li>
+                    <li><strong>Phase 2:</strong> {{PHASE_2_CAPITAL}}</li>
+                    <li><strong>Phase 3:</strong> {{PHASE_3_CAPITAL}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 2: Team Growth -->
+        <div class="chart-card">
+            <div class="chart-title">Team Growth Trajectory</div>
+            <div class="chart-subtitle">Headcount evolution over 18 months</div>
+            <div class="chart-wrapper">
+                <canvas id="teamGrowthChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Hiring Milestones</div>
+                <ul class="insight-list">
+                    <li><strong>Month 6:</strong> {{M6_TEAM}}</li>
+                    <li><strong>Month 12:</strong> {{M12_TEAM}}</li>
+                    <li><strong>Month 18:</strong> {{M18_TEAM}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 3: Revenue Projection -->
+        <div class="chart-card">
+            <div class="chart-title">Revenue Projection</div>
+            <div class="chart-subtitle">MRR growth trajectory</div>
+            <div class="chart-wrapper">
+                <canvas id="revenueProjectionChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">Revenue Milestones</div>
+                <ul class="insight-list">
+                    <li><strong>Month 6:</strong> {{M6_MRR}}</li>
+                    <li><strong>Month 12:</strong> {{M12_MRR}}</li>
+                    <li><strong>Month 18:</strong> {{M18_MRR}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chart 4: Metrics Progress -->
+        <div class="chart-card">
+            <div class="chart-title">Key Metrics by Phase</div>
+            <div class="chart-subtitle">Target achievement across phases</div>
+            <div class="chart-wrapper">
+                <canvas id="metricsRadarChart"></canvas>
+            </div>
+            <div class="insights-panel">
+                <div class="insight-title">North Star Metric</div>
+                <ul class="insight-list">
+                    <li><strong>Metric:</strong> {{NORTH_STAR_METRIC}}</li>
+                    <li><strong>Target:</strong> {{NORTH_STAR_TARGET}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 5: Resource Allocation -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Resource Allocation</h2>
+        <p class="section-description">
+            Team growth plan and capital allocation across phases.
+        </p>
+    </div>
+
+    <div class="resource-table-container">
+        <table class="resource-table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Phase 1 (M1-6)</th>
+                    <th>Phase 2 (M7-12)</th>
+                    <th>Phase 3 (M13-18)</th>
+                    <th>Total 18M</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Personnel</td>
+                    <td>{{PERSONNEL_P1}}</td>
+                    <td>{{PERSONNEL_P2}}</td>
+                    <td>{{PERSONNEL_P3}}</td>
+                    <td>{{PERSONNEL_TOTAL}}</td>
+                </tr>
+                <tr>
+                    <td>Infrastructure</td>
+                    <td>{{INFRA_P1}}</td>
+                    <td>{{INFRA_P2}}</td>
+                    <td>{{INFRA_P3}}</td>
+                    <td>{{INFRA_TOTAL}}</td>
+                </tr>
+                <tr>
+                    <td>Marketing/Sales</td>
+                    <td>{{MARKETING_P1}}</td>
+                    <td>{{MARKETING_P2}}</td>
+                    <td>{{MARKETING_P3}}</td>
+                    <td>{{MARKETING_TOTAL}}</td>
+                </tr>
+                <tr>
+                    <td>Tools/Software</td>
+                    <td>{{TOOLS_P1}}</td>
+                    <td>{{TOOLS_P2}}</td>
+                    <td>{{TOOLS_P3}}</td>
+                    <td>{{TOOLS_TOTAL}}</td>
+                </tr>
+                <tr class="total-row">
+                    <td>Total</td>
+                    <td>{{TOTAL_P1}}</td>
+                    <td>{{TOTAL_P2}}</td>
+                    <td>{{TOTAL_P3}}</td>
+                    <td>{{GRAND_TOTAL}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- Section 6: Critical Assumptions & De-Risking -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Critical Assumptions & De-Risking</h2>
+        <p class="section-description">
+            Key assumptions that must be validated and mitigation strategies.
+        </p>
+    </div>
+
+    <div class="assumptions-grid">
+        <div class="assumption-card high-risk">
+            <span class="risk-badge high">High Risk</span>
+            <div class="assumption-text">{{ASSUMPTION_1}}</div>
+            <dl class="assumption-details">
+                <dt>Impact if Wrong</dt>
+                <dd>{{ASSUMPTION_1_IMPACT}}</dd>
+                <dt>Test Plan</dt>
+                <dd>{{ASSUMPTION_1_TEST}}</dd>
+                <dt>Pivot Trigger</dt>
+                <dd>{{ASSUMPTION_1_PIVOT}}</dd>
+            </dl>
+        </div>
+
+        <div class="assumption-card high-risk">
+            <span class="risk-badge high">High Risk</span>
+            <div class="assumption-text">{{ASSUMPTION_2}}</div>
+            <dl class="assumption-details">
+                <dt>Impact if Wrong</dt>
+                <dd>{{ASSUMPTION_2_IMPACT}}</dd>
+                <dt>Test Plan</dt>
+                <dd>{{ASSUMPTION_2_TEST}}</dd>
+                <dt>Pivot Trigger</dt>
+                <dd>{{ASSUMPTION_2_PIVOT}}</dd>
+            </dl>
+        </div>
+
+        <div class="assumption-card medium-risk">
+            <span class="risk-badge medium">Medium Risk</span>
+            <div class="assumption-text">{{ASSUMPTION_3}}</div>
+            <dl class="assumption-details">
+                <dt>Impact if Wrong</dt>
+                <dd>{{ASSUMPTION_3_IMPACT}}</dd>
+                <dt>Test Plan</dt>
+                <dd>{{ASSUMPTION_3_TEST}}</dd>
+                <dt>Pivot Trigger</dt>
+                <dd>{{ASSUMPTION_3_PIVOT}}</dd>
+            </dl>
+        </div>
+
+        <div class="assumption-card low-risk">
+            <span class="risk-badge low">Low Risk</span>
+            <div class="assumption-text">{{ASSUMPTION_4}}</div>
+            <dl class="assumption-details">
+                <dt>Impact if Wrong</dt>
+                <dd>{{ASSUMPTION_4_IMPACT}}</dd>
+                <dt>Test Plan</dt>
+                <dd>{{ASSUMPTION_4_TEST}}</dd>
+                <dt>Pivot Trigger</dt>
+                <dd>{{ASSUMPTION_4_PIVOT}}</dd>
+            </dl>
+        </div>
+    </div>
+</section>
+
+<!-- Section 7: Quarterly Review Schedule -->
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Quarterly OKR Reviews</h2>
+        <p class="section-description">
+            Scheduled checkpoints to review progress and adjust the roadmap.
+        </p>
+    </div>
+
+    <div class="metric-grid">
+        <div class="metric-card">
+            <div class="label">Q1 Review</div>
+            <div class="value" style="font-size: 1.25rem; color: #f5f5f5;">Month 3</div>
+            <div class="description">Review MVP progress, adjust Phase 1 plan</div>
+        </div>
+        <div class="metric-card">
+            <div class="label">Q2 Review</div>
+            <div class="value" style="font-size: 1.25rem; color: #f5f5f5;">Month 6</div>
+            <div class="description">Review Phase 1 results, finalize Phase 2</div>
+        </div>
+        <div class="metric-card">
+            <div class="label">Q4 Review</div>
+            <div class="value" style="font-size: 1.25rem; color: #f5f5f5;">Month 12</div>
+            <div class="description">Review Phase 2 results, finalize Phase 3</div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CHART SCRIPTS (Replace {{CHART_SCRIPTS}} in base-template)
+     ════════════════════════════════════════════════════════════════════════════ -->
+<script>
+// Data object
+const data = {
+    capital: {
+        phase1: {{CAPITAL_P1_NUM}},
+        phase2: {{CAPITAL_P2_NUM}},
+        phase3: {{CAPITAL_P3_NUM}}
+    },
+    team: {
+        months: [1, 3, 6, 9, 12, 15, 18],
+        headcount: [{{TEAM_M1}}, {{TEAM_M3}}, {{TEAM_M6}}, {{TEAM_M9}}, {{TEAM_M12}}, {{TEAM_M15}}, {{TEAM_M18}}]
+    },
+    revenue: {
+        months: [1, 3, 6, 9, 12, 15, 18],
+        mrr: [{{MRR_M1}}, {{MRR_M3}}, {{MRR_M6}}, {{MRR_M9}}, {{MRR_M12}}, {{MRR_M15}}, {{MRR_M18}}]
+    },
+    metrics: {
+        phase1: [{{P1_USERS}}, {{P1_RETENTION}}, {{P1_REVENUE}}, {{P1_NPS}}, {{P1_ENGAGEMENT}}],
+        phase2: [{{P2_USERS}}, {{P2_RETENTION}}, {{P2_REVENUE}}, {{P2_NPS}}, {{P2_ENGAGEMENT}}],
+        phase3: [{{P3_USERS}}, {{P3_RETENTION}}, {{P3_REVENUE}}, {{P3_NPS}}, {{P3_ENGAGEMENT}}]
+    }
+};
+
+// Chart 1: Capital Allocation (Doughnut)
+const capitalCtx = document.getElementById('capitalAllocationChart').getContext('2d');
+new Chart(capitalCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Phase 1', 'Phase 2', 'Phase 3'],
+        datasets: [{
+            data: [data.capital.phase1, data.capital.phase2, data.capital.phase3],
+            backgroundColor: ['#10b981', '#047857', '#065f46'],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '60%',
+        plugins: {
+            legend: { position: 'bottom', labels: { color: '#f5f5f5', font: { size: 11 }, padding: 15 } },
+            tooltip: tooltipConfig
+        }
+    }
+});
+
+// Chart 2: Team Growth (Line)
+const teamCtx = document.getElementById('teamGrowthChart').getContext('2d');
+new Chart(teamCtx, {
+    type: 'line',
+    data: {
+        labels: data.team.months.map(m => 'M' + m),
+        datasets: [{
+            label: 'Team Size',
+            data: data.team.headcount,
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            fill: true,
+            tension: 0.4,
+            pointRadius: 6,
+            pointBackgroundColor: '#10b981'
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: { grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3' } },
+            y: { beginAtZero: true, grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3' } }
+        },
+        plugins: { legend: { display: false }, tooltip: tooltipConfig }
+    }
+});
+
+// Chart 3: Revenue Projection (Line)
+const revenueCtx = document.getElementById('revenueProjectionChart').getContext('2d');
+new Chart(revenueCtx, {
+    type: 'line',
+    data: {
+        labels: data.revenue.months.map(m => 'M' + m),
+        datasets: [{
+            label: 'MRR',
+            data: data.revenue.mrr,
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            fill: true,
+            tension: 0.4,
+            pointRadius: 6,
+            pointBackgroundColor: '#10b981'
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: { grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3' } },
+            y: { beginAtZero: true, grid: { color: 'rgba(16, 185, 129, 0.1)' }, ticks: { color: '#a3a3a3', callback: v => '$' + (v/1000) + 'K' } }
+        },
+        plugins: { legend: { display: false }, tooltip: tooltipConfig }
+    }
+});
+
+// Chart 4: Metrics Radar
+const metricsCtx = document.getElementById('metricsRadarChart').getContext('2d');
+new Chart(metricsCtx, {
+    type: 'radar',
+    data: {
+        labels: ['Users', 'Retention', 'Revenue', 'NPS', 'Engagement'],
+        datasets: [
+            {
+                label: 'Phase 1',
+                data: data.metrics.phase1,
+                borderColor: '#10b981',
+                backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                pointBackgroundColor: '#10b981'
+            },
+            {
+                label: 'Phase 2',
+                data: data.metrics.phase2,
+                borderColor: '#047857',
+                backgroundColor: 'rgba(4, 120, 87, 0.2)',
+                pointBackgroundColor: '#047857'
+            },
+            {
+                label: 'Phase 3',
+                data: data.metrics.phase3,
+                borderColor: '#065f46',
+                backgroundColor: 'rgba(6, 95, 70, 0.2)',
+                pointBackgroundColor: '#065f46'
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            r: {
+                angleLines: { color: 'rgba(16, 185, 129, 0.2)' },
+                grid: { color: 'rgba(16, 185, 129, 0.2)' },
+                pointLabels: { color: '#a3a3a3', font: { size: 10 } },
+                ticks: { display: false }
+            }
+        },
+        plugins: {
+            legend: { position: 'bottom', labels: { color: '#f5f5f5', font: { size: 10 }, padding: 10 } },
+            tooltip: tooltipConfig
+        }
+    }
+});
+</script>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     REQUIRED CHARTS SUMMARY
+     ════════════════════════════════════════════════════════════════════════════
+
+     1. capitalAllocationChart (Doughnut)
+        - Budget distribution by phase
+        - Shows investment trajectory
+
+     2. teamGrowthChart (Line)
+        - Headcount over 18 months
+        - Key hiring milestones
+
+     3. revenueProjectionChart (Line)
+        - MRR growth trajectory
+        - Revenue milestones
+
+     4. metricsRadarChart (Radar)
+        - Key metrics comparison across phases
+        - Users, Retention, Revenue, NPS, Engagement
+
+     ════════════════════════════════════════════════════════════════════════════ -->

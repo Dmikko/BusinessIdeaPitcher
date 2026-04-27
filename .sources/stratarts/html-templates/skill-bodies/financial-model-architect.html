@@ -1,0 +1,605 @@
+<!-- ═══ SKILL CSS START ═══ -->
+<style>
+    /* Financial Model Architect Specific Styles */
+    .model-period-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        background: rgba(16, 185, 129, 0.15);
+        color: var(--accent);
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .revenue-waterfall {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 16px;
+        background: rgba(16, 185, 129, 0.05);
+        border-radius: 8px;
+        margin: 16px 0;
+    }
+
+    .waterfall-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 12px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 4px;
+    }
+
+    .waterfall-row.positive { border-left: 3px solid #10b981; }
+    .waterfall-row.negative { border-left: 3px solid #ef4444; }
+    .waterfall-row.total { background: var(--accent); color: #0a0a0a; font-weight: 700; }
+
+    .unit-econ-formula {
+        font-family: monospace;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: 4px;
+    }
+
+    .scenario-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+    }
+
+    .scenario-card {
+        padding: 20px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .scenario-card.base { border-color: #10b981; }
+    .scenario-card.upside { border-color: #3b82f6; }
+    .scenario-card.downside { border-color: #f59e0b; }
+
+    .scenario-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+
+    .scenario-probability {
+        font-size: 0.8rem;
+        padding: 4px 10px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .projection-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .projection-table th,
+    .projection-table td {
+        padding: 12px 16px;
+        text-align: right;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .projection-table th {
+        background: rgba(16, 185, 129, 0.1);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+    }
+
+    .projection-table th:first-child,
+    .projection-table td:first-child {
+        text-align: left;
+    }
+
+    .projection-table tr:hover {
+        background: rgba(255, 255, 255, 0.03);
+    }
+
+    .profitability-timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin: 16px 0;
+    }
+
+    .profitability-milestone {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+    }
+
+    .milestone-date {
+        min-width: 80px;
+        padding: 8px 12px;
+        background: var(--accent);
+        color: #0a0a0a;
+        border-radius: 4px;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .rule40-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+
+    .rule40-indicator.healthy {
+        background: rgba(16, 185, 129, 0.15);
+        color: #10b981;
+    }
+
+    .rule40-indicator.warning {
+        background: rgba(245, 158, 11, 0.15);
+        color: #f59e0b;
+    }
+
+    .headcount-dept {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        margin-bottom: 8px;
+    }
+
+    .dept-name {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .dept-icon {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(16, 185, 129, 0.15);
+        border-radius: 8px;
+        font-size: 1.1rem;
+    }
+
+    .dept-values {
+        display: flex;
+        gap: 24px;
+        font-size: 0.9rem;
+    }
+
+    .burn-rate-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        border-radius: 12px;
+        text-align: center;
+    }
+
+    .burn-rate-card .value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #ef4444;
+    }
+
+    .runway-indicator {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px;
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 12px;
+    }
+
+    .runway-bar {
+        flex: 1;
+        height: 24px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .runway-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #10b981, #059669);
+        border-radius: 12px;
+    }
+
+    .roadmap-phase {
+        padding: 20px;
+        border-left: 3px solid var(--accent);
+        margin-bottom: 16px;
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    .roadmap-phase h4 {
+        color: var(--accent);
+        margin-bottom: 12px;
+    }
+</style>
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<div class="report-container">
+    <header class="report-header">
+        <div class="header-content">
+            <div class="brand">
+                <div class="brand-icon">📊</div>
+                <span class="brand-text">StratArts</span>
+            </div>
+            <div class="report-title">
+                <h1>Financial Model Architect</h1>
+                <p class="subtitle">{{BUSINESS_NAME}} {{FORECAST_YEARS}} Financial Projections</p>
+            </div>
+            <div class="timestamp">{{DATE}}</div>
+        </div>
+    </header>
+
+    <div class="score-banner">
+        <div class="score-item">
+            <div class="score-value">{{YEAR5_ARR}}</div>
+            <div class="score-label">Y5 ARR</div>
+        </div>
+        <div class="score-item">
+            <div class="score-value">{{CURRENT_MRR}}</div>
+            <div class="score-label">Current MRR</div>
+        </div>
+        <div class="score-item">
+            <div class="score-value">{{RUNWAY}}</div>
+            <div class="score-label">Runway</div>
+        </div>
+        <div class="score-item">
+            <div class="score-value">{{LTV_CAC}}</div>
+            <div class="score-label">LTV:CAC</div>
+        </div>
+        <div class="score-item">
+            <div class="score-value">{{YEAR5_HEADCOUNT}}</div>
+            <div class="score-label">Y5 Headcount</div>
+        </div>
+        <div class="score-item">
+            <div class="score-value {{RULE40_CLASS}}">{{RULE_OF_40}}</div>
+            <div class="score-label">Rule of 40</div>
+        </div>
+    </div>
+
+    <section class="content-section">
+        <h2>1. Executive Summary</h2>
+        {{EXECUTIVE_SUMMARY}}
+        <div class="metrics-grid">
+            {{SUMMARY_METRICS}}
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>2. Revenue Model</h2>
+        <div class="card-grid">
+            {{REVENUE_ASSUMPTIONS}}
+        </div>
+        <h3>Revenue Projections</h3>
+        <table class="projection-table">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Customers</th>
+                    <th>ARPU</th>
+                    <th>MRR</th>
+                    <th>ARR</th>
+                    <th>Churn</th>
+                    <th>NRR</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{REVENUE_ROWS}}
+            </tbody>
+        </table>
+        <div class="chart-container">
+            <canvas id="arrChart"></canvas>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>3. Cost Structure</h2>
+        <h3>Cost of Goods Sold (COGS)</h3>
+        <table class="projection-table">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Revenue</th>
+                    <th>COGS</th>
+                    <th>Gross Profit</th>
+                    <th>Gross Margin</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{COGS_ROWS}}
+            </tbody>
+        </table>
+
+        <h3>Operating Expenses (OpEx)</h3>
+        <table class="projection-table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    {{OPEX_YEAR_HEADERS}}
+                </tr>
+            </thead>
+            <tbody>
+                {{OPEX_ROWS}}
+            </tbody>
+        </table>
+        <div class="chart-container">
+            <canvas id="expenseChart"></canvas>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>4. Headcount Planning</h2>
+        <table class="projection-table">
+            <thead>
+                <tr>
+                    <th>Department</th>
+                    {{HEADCOUNT_YEAR_HEADERS}}
+                </tr>
+            </thead>
+            <tbody>
+                {{HEADCOUNT_ROWS}}
+            </tbody>
+        </table>
+        <div class="chart-container">
+            <canvas id="headcountChart"></canvas>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>5. Unit Economics</h2>
+        <div class="card-grid">
+            {{UNIT_ECON_CARDS}}
+        </div>
+        <h3>Unit Economics Trajectory</h3>
+        <table class="projection-table">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>CAC</th>
+                    <th>LTV</th>
+                    <th>LTV:CAC</th>
+                    <th>Payback (mo)</th>
+                    <th>Magic #</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{UNIT_ECON_ROWS}}
+            </tbody>
+        </table>
+    </section>
+
+    <section class="content-section">
+        <h2>6. Cash Flow & Runway</h2>
+        <div class="metrics-grid">
+            {{CASHFLOW_METRICS}}
+        </div>
+        <h3>Cash Flow Projections</h3>
+        <table class="projection-table">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Revenue</th>
+                    <th>Expenses</th>
+                    <th>Net Burn</th>
+                    <th>Fundraising</th>
+                    <th>Cash Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{CASHFLOW_ROWS}}
+            </tbody>
+        </table>
+        <div class="chart-container">
+            <canvas id="cashChart"></canvas>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>7. Scenario Planning</h2>
+        <div class="scenario-grid">
+            {{SCENARIO_CARDS}}
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>8. Path to Profitability</h2>
+        <h3>Profitability Milestones</h3>
+        <div class="profitability-timeline">
+            {{PROFITABILITY_MILESTONES}}
+        </div>
+
+        <h3>Rule of 40 Trajectory</h3>
+        <div class="rule40-indicator {{RULE40_CLASS}}">
+            Growth Rate: {{GROWTH_RATE}} + Net Margin: {{NET_MARGIN}} = Rule of 40: {{RULE_OF_40}}
+        </div>
+        <table class="projection-table">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>ARR Growth</th>
+                    <th>Net Margin</th>
+                    <th>Rule of 40</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{RULE40_ROWS}}
+            </tbody>
+        </table>
+    </section>
+
+    <section class="content-section">
+        <h2>9. Implementation Roadmap</h2>
+        {{ROADMAP_PHASES}}
+    </section>
+
+    <section class="content-section">
+        <h2>10. Next Steps</h2>
+        <div class="next-steps">
+            {{NEXT_STEPS}}
+        </div>
+    </section>
+
+    <footer class="report-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="brand-icon">📊</span>
+                <span>StratArts Financial Model Architect</span>
+            </div>
+            <p>This financial model provides projections based on stated assumptions. Review assumptions quarterly and update as actuals become available. Consult with a financial advisor before making investment decisions.</p>
+        </div>
+    </footer>
+</div>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const yearLabels = {{YEAR_LABELS}};
+
+    // ARR Growth Chart
+    const arrCtx = document.getElementById('arrChart');
+    if (arrCtx) {
+        new Chart(arrCtx, {
+            type: 'bar',
+            data: {
+                labels: yearLabels,
+                datasets: [{
+                    label: 'ARR',
+                    data: {{ARR_DATA}},
+                    backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                    borderColor: '#10b981',
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'ARR Growth', color: '#ffffff' }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: 'rgba(255,255,255,0.7)', callback: v => '$' + (v/1000000).toFixed(1) + 'M' },
+                        grid: { color: 'rgba(255,255,255,0.1)' }
+                    },
+                    x: { ticks: { color: 'rgba(255,255,255,0.7)' }, grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    // Expense Breakdown Chart
+    const expenseCtx = document.getElementById('expenseChart');
+    if (expenseCtx) {
+        new Chart(expenseCtx, {
+            type: 'doughnut',
+            data: {
+                labels: {{EXPENSE_LABELS}},
+                datasets: [{
+                    data: {{EXPENSE_DATA}},
+                    backgroundColor: ['rgba(16, 185, 129, 0.8)', 'rgba(59, 130, 246, 0.8)', 'rgba(245, 158, 11, 0.8)'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#ffffff' } },
+                    title: { display: true, text: 'Year 5 OpEx Breakdown', color: '#ffffff' }
+                }
+            }
+        });
+    }
+
+    // Cash Flow Chart
+    const cashCtx = document.getElementById('cashChart');
+    if (cashCtx) {
+        new Chart(cashCtx, {
+            type: 'line',
+            data: {
+                labels: yearLabels,
+                datasets: [{
+                    label: 'Cash Balance',
+                    data: {{CASH_DATA}},
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Cash Balance Trajectory', color: '#ffffff' }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: 'rgba(255,255,255,0.7)', callback: v => '$' + (v/1000000).toFixed(1) + 'M' },
+                        grid: { color: 'rgba(255,255,255,0.1)' }
+                    },
+                    x: { ticks: { color: 'rgba(255,255,255,0.7)' }, grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    // Headcount Growth Chart
+    const headcountCtx = document.getElementById('headcountChart');
+    if (headcountCtx) {
+        new Chart(headcountCtx, {
+            type: 'bar',
+            data: {
+                labels: yearLabels,
+                datasets: [{
+                    label: 'Headcount',
+                    data: {{HEADCOUNT_DATA}},
+                    backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                    borderColor: '#3b82f6',
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Team Growth', color: '#ffffff' }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: 'rgba(255,255,255,0.7)' },
+                        grid: { color: 'rgba(255,255,255,0.1)' }
+                    },
+                    x: { ticks: { color: 'rgba(255,255,255,0.7)' }, grid: { display: false } }
+                }
+            }
+        });
+    }
+});
+</script>
+<!-- ═══ SKILL JS END ═══ -->

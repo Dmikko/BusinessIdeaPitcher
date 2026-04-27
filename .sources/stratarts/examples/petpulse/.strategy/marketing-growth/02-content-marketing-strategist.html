@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Marketing Strategist - PetPulse | StratArts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           STRATARTS EDITORIAL DARK THEME - BASE TEMPLATE v2.0
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #0a0a0a;
+        }
+
+        header {
+            background: #0a0a0a;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            padding: 4rem 4rem 3rem 4rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .header-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.05)" width="50" height="50"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .score-banner {
+            background: #0a0a0a;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .score-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-main {
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .score-interpretation {
+            border-left: 3px solid #10b981;
+            padding-left: 2rem;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #f5f5f5;
+        }
+
+        .interpretation-text {
+            color: #d4d4d4;
+            line-height: 1.7;
+        }
+
+        .verdict-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 4rem;
+            background: #0a0a0a;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section:last-child {
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: #d4d4d4;
+            max-width: 800px;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-subtitle {
+            font-size: 0.9rem;
+            color: #a3a3a3;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+            margin-bottom: 1.5rem;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-card .label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3a3a3;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .metric-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #10b981;
+            line-height: 1.2;
+        }
+
+        footer {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            width: 100%;
+            background: #1a1a1a;
+            color: #a3a3a3;
+            padding: 2rem 4rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer-content p {
+            margin: 0.3rem 0;
+        }
+
+        .footer-content strong {
+            color: #10b981;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           CONTENT MARKETING STRATEGIST SPECIFIC STYLES
+           ═══════════════════════════════════════════════════════════════════════════ */
+        .content-pillar {
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-pillar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #10b981, #059669);
+        }
+
+        .pillar-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pillar-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .pillar-percentage {
+            font-size: 0.85rem;
+            color: #10b981;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .pillar-description {
+            color: #888;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .pillar-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .topic-tag {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .content-type-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .type-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .type-info {
+            flex: 1;
+        }
+
+        .type-name {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .type-frequency {
+            color: #10b981;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .type-description {
+            color: #888;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .distribution-channel {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            border: 1px solid #2a2a2a;
+            margin-bottom: 0.75rem;
+        }
+
+        .channel-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        .channel-info {
+            flex: 1;
+        }
+
+        .channel-name {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.95rem;
+        }
+
+        .channel-purpose {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        .channel-priority {
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .priority-high {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .priority-medium {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .priority-low {
+            background: rgba(107, 114, 128, 0.2);
+            color: #9ca3af;
+        }
+
+        .content-ideas-list {
+            background: #1a1a1a;
+            border-radius: 12px;
+            border: 1px solid #2a2a2a;
+            overflow: hidden;
+        }
+
+        .idea-item {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid #2a2a2a;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .idea-item:last-child {
+            border-bottom: none;
+        }
+
+        .idea-number {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .idea-content {
+            flex: 1;
+        }
+
+        .idea-title {
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .idea-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        .funnel-stage {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+        }
+
+        .stage-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .stage-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+        }
+
+        .stage-content-types {
+            font-size: 0.85rem;
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .kpi-card {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .kpi-label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 0.25rem;
+        }
+
+        .kpi-target {
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-marker {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            color: #f5f5f5;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-desc {
+            color: #888;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .timeline-tasks {
+            margin-top: 1rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline-tasks li {
+            padding: 0.4rem 0;
+            color: #ccc;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-tasks li::before {
+            content: "□";
+            color: #10b981;
+        }
+
+        .highlight-box {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .highlight-box p {
+            color: #f5f5f5;
+            margin: 0.5rem 0;
+        }
+
+        .editorial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .editorial-table th,
+        .editorial-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .editorial-table th {
+            background: #1a1a1a;
+            color: #10b981;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .editorial-table td {
+            color: #ccc;
+            font-size: 0.875rem;
+        }
+
+        .editorial-table tr:hover td {
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .pillar-tag {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .pillar-tag.health { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .pillar-tag.tech { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .pillar-tag.lifestyle { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .pillar-tag.product { background: rgba(139, 92, 246, 0.2); color: #8b5cf6; }
+
+        @media print {
+            body { background: white; color: #000000; }
+            .container { background: white; }
+            header { background: white; }
+            .header-content {
+                background: white;
+                color: #000000;
+                border: 2px solid #10b981;
+            }
+            .header-content::before { display: none; }
+            .score-banner { background: white; }
+            .score-container {
+                background: white;
+                border: 2px solid #10b981;
+            }
+            .score-number {
+                background: none;
+                -webkit-text-fill-color: #10b981;
+                color: #10b981;
+            }
+            .content { background: white; }
+            .chart-card, .metric-card, .content-pillar, .content-type-card, .funnel-stage, .kpi-card, .timeline-content {
+                background: white;
+                border: 2px solid #10b981;
+                page-break-inside: avoid;
+            }
+            footer { background: white; }
+            .footer-content {
+                background: white;
+                color: #666666;
+                border-top: 2px solid #10b981;
+            }
+            canvas {
+                max-width: 100%;
+                height: auto !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .metric-grid { grid-template-columns: 1fr; }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .grid-3 { grid-template-columns: 1fr; }
+            .grid-4 { grid-template-columns: 1fr; }
+            .kpi-grid { grid-template-columns: 1fr; }
+            .score-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .score-interpretation {
+                border-left: none;
+                border-top: 3px solid #10b981;
+                padding-left: 0;
+                padding-top: 1.5rem;
+            }
+            .header-content { padding: 2rem; }
+            .score-container { padding: 2rem; }
+            .content { padding: 2rem 2rem; }
+            .footer-content { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-content">
+                <div class="kicker">Content Marketing Strategist</div>
+                <h1>PetPulse</h1>
+                <div class="subtitle">Empowering pet parents with knowledge to keep their furry family members healthy and happy</div>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span>📅</span>
+                        <span>Generated: December 18, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>📊</span>
+                        <span>Planning Horizon: 90 Days</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🎯</span>
+                        <span>Primary Goal: Organic Traffic + Lead Generation</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SCORE BANNER -->
+        <div class="score-banner">
+            <div class="score-container">
+                <div class="score-main">
+                    <div class="score-number">8.5</div>
+                    <div class="score-label">Content Strategy Score</div>
+                </div>
+
+                <div class="score-interpretation">
+                    <div class="interpretation-title">What This Score Means</div>
+                    <div class="interpretation-text">
+                        Strong content strategy foundation with clear pillars aligned to audience needs.
+                        Pet health education content has high SEO potential and differentiates from competitor
+                        product-focused marketing. Distribution strategy leverages owned channels effectively.
+                    </div>
+                </div>
+
+                <div class="verdict-badge">
+                    STRATEGY READY
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+            <!-- Strategy Overview Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Content Strategy Overview</h2>
+                    <p class="section-description">
+                        PetPulse content strategy positions us as the trusted authority on pet health intelligence,
+                        creating value-first content that attracts premium pet parents and establishes thought leadership
+                        in the emerging AI pet health category.
+                    </p>
+                </div>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <div class="label">Primary Audience</div>
+                        <div class="value">Premium Pet Parents</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Content Goal</div>
+                        <div class="value">10K Monthly Visits</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Publishing Cadence</div>
+                        <div class="value">8 Posts/Month</div>
+                    </div>
+                </div>
+
+                <!-- Content Mission -->
+                <div class="highlight-box" style="margin-top: 2rem;">
+                    <p style="font-size: 1.1rem; font-weight: 600; color: #10b981; margin-bottom: 0.5rem;">Content Mission</p>
+                    <p>"We create evidence-based pet health content that empowers pet parents to understand, monitor,
+                    and optimize their pets' wellbeing—turning worry into confidence through knowledge and technology."</p>
+                </div>
+            </section>
+
+            <!-- Content Pillars Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Content Pillars</h2>
+                    <p class="section-description">
+                        Four strategic pillars guide all content creation, ensuring topical authority and SEO clustering
+                        while addressing the full spectrum of pet parent information needs.
+                    </p>
+                </div>
+
+                <div class="grid-2">
+                    <div class="content-pillar">
+                        <div class="pillar-icon">🩺</div>
+                        <div class="pillar-title">Pet Health Education</div>
+                        <div class="pillar-percentage">35% of content</div>
+                        <div class="pillar-description">Evidence-based guides on pet health topics, symptoms, prevention, and care. Establishes authority and attracts high-intent searches.</div>
+                        <div class="pillar-topics">
+                            <span class="topic-tag">Early Warning Signs</span>
+                            <span class="topic-tag">Preventive Care</span>
+                            <span class="topic-tag">Nutrition</span>
+                            <span class="topic-tag">Exercise</span>
+                            <span class="topic-tag">Senior Pet Care</span>
+                        </div>
+                    </div>
+                    <div class="content-pillar">
+                        <div class="pillar-icon">🧠</div>
+                        <div class="pillar-title">AI & Pet Tech</div>
+                        <div class="pillar-percentage">25% of content</div>
+                        <div class="pillar-description">How AI and wearables are transforming pet health monitoring. Thought leadership in the emerging pet tech category.</div>
+                        <div class="pillar-topics">
+                            <span class="topic-tag">AI Health Detection</span>
+                            <span class="topic-tag">Wearable Tech</span>
+                            <span class="topic-tag">Data Insights</span>
+                            <span class="topic-tag">Future of Pet Care</span>
+                        </div>
+                    </div>
+                    <div class="content-pillar">
+                        <div class="pillar-icon">❤️</div>
+                        <div class="pillar-title">Pet Parent Lifestyle</div>
+                        <div class="pillar-percentage">25% of content</div>
+                        <div class="pillar-description">Stories, tips, and community content celebrating the pet-human bond. Drives engagement and social shares.</div>
+                        <div class="pillar-topics">
+                            <span class="topic-tag">Pet Parent Stories</span>
+                            <span class="topic-tag">Travel Tips</span>
+                            <span class="topic-tag">Training</span>
+                            <span class="topic-tag">Breed Guides</span>
+                        </div>
+                    </div>
+                    <div class="content-pillar">
+                        <div class="pillar-icon">📦</div>
+                        <div class="pillar-title">Product & Solutions</div>
+                        <div class="pillar-percentage">15% of content</div>
+                        <div class="pillar-description">PetPulse features, customer success stories, and product education. Converts educated readers to customers.</div>
+                        <div class="pillar-topics">
+                            <span class="topic-tag">Feature Guides</span>
+                            <span class="topic-tag">Success Stories</span>
+                            <span class="topic-tag">Comparisons</span>
+                            <span class="topic-tag">ROI Calculator</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar Distribution Chart -->
+                <div class="chart-card" style="margin-top: 2rem;">
+                    <div class="chart-title">Content Pillar Distribution</div>
+                    <div class="chart-subtitle">Monthly content allocation across pillars</div>
+                    <div class="chart-wrapper">
+                        <canvas id="pillarDistributionChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Content Types & Formats -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Content Types & Formats</h2>
+                    <p class="section-description">
+                        Multi-format content strategy maximizes reach and engagement across different audience preferences
+                        and platforms, with emphasis on SEO-optimized written content and visual storytelling.
+                    </p>
+                </div>
+
+                <div class="grid-2">
+                    <div class="content-type-card">
+                        <div class="type-icon">📝</div>
+                        <div class="type-info">
+                            <div class="type-name">Blog Posts</div>
+                            <div class="type-frequency">8 posts/month</div>
+                            <div class="type-description">Mix of 1,500-word tactical posts and 3,000+ word pillar guides. SEO-optimized for organic traffic.</div>
+                        </div>
+                    </div>
+                    <div class="content-type-card">
+                        <div class="type-icon">🎬</div>
+                        <div class="type-info">
+                            <div class="type-name">Video Content</div>
+                            <div class="type-frequency">4 videos/month</div>
+                            <div class="type-description">Educational tutorials, product demos, and pet parent stories. YouTube + LinkedIn + Instagram.</div>
+                        </div>
+                    </div>
+                    <div class="content-type-card">
+                        <div class="type-icon">📧</div>
+                        <div class="type-info">
+                            <div class="type-name">Email Newsletter</div>
+                            <div class="type-frequency">4 sends/month</div>
+                            <div class="type-description">"PetPulse Weekly" with health tips, new content, and product updates. Key nurture channel.</div>
+                        </div>
+                    </div>
+                    <div class="content-type-card">
+                        <div class="type-icon">📱</div>
+                        <div class="type-info">
+                            <div class="type-name">Social Media</div>
+                            <div class="type-frequency">20+ posts/month</div>
+                            <div class="type-description">Repurposed blog content, quick tips, pet health facts, and community engagement.</div>
+                        </div>
+                    </div>
+                    <div class="content-type-card">
+                        <div class="type-icon">📊</div>
+                        <div class="type-info">
+                            <div class="type-name">Infographics</div>
+                            <div class="type-frequency">2/month</div>
+                            <div class="type-description">Visual guides on pet health topics. Highly shareable, backlink magnets.</div>
+                        </div>
+                    </div>
+                    <div class="content-type-card">
+                        <div class="type-icon">📚</div>
+                        <div class="type-info">
+                            <div class="type-name">Lead Magnets</div>
+                            <div class="type-frequency">1/quarter</div>
+                            <div class="type-description">Comprehensive guides/checklists gated for email capture. "Pet Health Monitoring Checklist".</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Mix Chart -->
+                <div class="chart-card" style="margin-top: 2rem;">
+                    <div class="chart-title">Monthly Content Mix by Type</div>
+                    <div class="chart-subtitle">Volume of content pieces by format</div>
+                    <div class="chart-wrapper">
+                        <canvas id="contentMixChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 90-Day Editorial Calendar -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">90-Day Editorial Calendar</h2>
+                    <p class="section-description">
+                        Week-by-week content plan with titles, formats, and target keywords mapped to content pillars.
+                    </p>
+                </div>
+
+                <table class="editorial-table">
+                    <thead>
+                        <tr>
+                            <th>Week</th>
+                            <th>Title</th>
+                            <th>Pillar</th>
+                            <th>Format</th>
+                            <th>Target Keyword</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>10 Early Warning Signs Your Dog Might Be Sick</td>
+                            <td><span class="pillar-tag health">Health</span></td>
+                            <td>Blog (3,000w)</td>
+                            <td>dog sick signs</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>How AI is Changing Pet Health Monitoring</td>
+                            <td><span class="pillar-tag tech">Tech</span></td>
+                            <td>Video (5 min)</td>
+                            <td>pet health technology</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Complete Guide to Senior Dog Care</td>
+                            <td><span class="pillar-tag health">Health</span></td>
+                            <td>Blog (2,500w)</td>
+                            <td>senior dog care</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Meet the Johnsons: How PetPulse Caught Diabetes Early</td>
+                            <td><span class="pillar-tag product">Product</span></td>
+                            <td>Case Study</td>
+                            <td>pet diabetes detection</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Cat vs Dog Health Monitoring: Key Differences</td>
+                            <td><span class="pillar-tag tech">Tech</span></td>
+                            <td>Blog (1,500w)</td>
+                            <td>cat health monitoring</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>5 Pet Travel Tips for Stress-Free Vacations</td>
+                            <td><span class="pillar-tag lifestyle">Lifestyle</span></td>
+                            <td>Blog (1,200w)</td>
+                            <td>traveling with pets</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Understanding Your Pet's Vital Signs [Infographic]</td>
+                            <td><span class="pillar-tag health">Health</span></td>
+                            <td>Infographic</td>
+                            <td>pet vital signs</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>PetPulse vs Fi vs Whistle: Honest Comparison</td>
+                            <td><span class="pillar-tag product">Product</span></td>
+                            <td>Blog (2,000w)</td>
+                            <td>pet tracker comparison</td>
+                        </tr>
+                        <tr>
+                            <td>5-8</td>
+                            <td colspan="4" style="color: #888; font-style: italic;">Continue pattern: 2 pillar posts + 2 standard posts per week across all pillars</td>
+                        </tr>
+                        <tr>
+                            <td>9-12</td>
+                            <td colspan="4" style="color: #888; font-style: italic;">Scale to 3 posts/week + video content + guest posting outreach</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Weekly Schedule -->
+                <h3 style="color: #f5f5f5; font-size: 1.3rem; margin: 2rem 0 1rem;">Weekly Publishing Schedule</h3>
+                <div class="highlight-box">
+                    <p><strong>Monday:</strong> Primary blog post (Health or Tech pillar)</p>
+                    <p><strong>Wednesday:</strong> Secondary blog post (Lifestyle or Product)</p>
+                    <p><strong>Thursday:</strong> Video content (YouTube + LinkedIn)</p>
+                    <p><strong>Friday:</strong> Email newsletter (PetPulse Weekly)</p>
+                    <p><strong>Daily:</strong> 2-3 social media posts (repurposed content, tips, engagement)</p>
+                </div>
+            </section>
+
+            <!-- Content Ideas Bank -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Content Ideas Bank</h2>
+                    <p class="section-description">Top 10 priority content pieces for Q1, ranked by SEO potential and strategic value.</p>
+                </div>
+
+                <div class="content-ideas-list">
+                    <div class="idea-item">
+                        <div class="idea-number">1</div>
+                        <div class="idea-content">
+                            <div class="idea-title">The Complete Guide to Dog Health Monitoring in 2026</div>
+                            <div class="idea-meta">
+                                <span><span class="pillar-tag health">Health</span></span>
+                                <span>5,000 words</span>
+                                <span>Keyword: dog health monitoring</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="idea-item">
+                        <div class="idea-number">2</div>
+                        <div class="idea-content">
+                            <div class="idea-title">How AI Detects Pet Health Issues Weeks Before Symptoms Appear</div>
+                            <div class="idea-meta">
+                                <span><span class="pillar-tag tech">Tech</span></span>
+                                <span>3,000 words</span>
+                                <span>Keyword: AI pet health</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="idea-item">
+                        <div class="idea-number">3</div>
+                        <div class="idea-content">
+                            <div class="idea-title">Pet Health Monitoring Checklist [Lead Magnet PDF]</div>
+                            <div class="idea-meta">
+                                <span><span class="pillar-tag health">Health</span></span>
+                                <span>Gated download</span>
+                                <span>Lead generation asset</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="idea-item">
+                        <div class="idea-number">4</div>
+                        <div class="idea-content">
+                            <div class="idea-title">State of Pet Health Technology 2026 Report</div>
+                            <div class="idea-meta">
+                                <span><span class="pillar-tag tech">Tech</span></span>
+                                <span>Original research</span>
+                                <span>PR + backlinks</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="idea-item">
+                        <div class="idea-number">5</div>
+                        <div class="idea-content">
+                            <div class="idea-title">Best Pet Wearables Compared: PetPulse vs Fi vs Whistle</div>
+                            <div class="idea-meta">
+                                <span><span class="pillar-tag product">Product</span></span>
+                                <span>2,500 words</span>
+                                <span>Keyword: pet tracker comparison</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Content Funnel Mapping -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Content Funnel Mapping</h2>
+                    <p class="section-description">
+                        Content mapped to buyer journey stages, from problem-aware searchers to loyal customers.
+                    </p>
+                </div>
+
+                <div class="grid-4">
+                    <div class="funnel-stage">
+                        <div class="stage-label">Top of Funnel</div>
+                        <div class="stage-name">Awareness</div>
+                        <div class="stage-content-types">Educational blog posts, infographics, social content, SEO guides</div>
+                    </div>
+                    <div class="funnel-stage">
+                        <div class="stage-label">Middle of Funnel</div>
+                        <div class="stage-name">Consideration</div>
+                        <div class="stage-content-types">Comparison posts, how-to videos, case studies, webinars</div>
+                    </div>
+                    <div class="funnel-stage">
+                        <div class="stage-label">Bottom of Funnel</div>
+                        <div class="stage-name">Decision</div>
+                        <div class="stage-content-types">Product demos, ROI calculator, customer stories, free trial</div>
+                    </div>
+                    <div class="funnel-stage">
+                        <div class="stage-label">Post-Purchase</div>
+                        <div class="stage-name">Retention</div>
+                        <div class="stage-content-types">Onboarding guides, advanced tips, community, referral program</div>
+                    </div>
+                </div>
+
+                <!-- Funnel Chart -->
+                <div class="chart-card" style="margin-top: 2rem;">
+                    <div class="chart-title">Content Distribution by Funnel Stage</div>
+                    <div class="chart-subtitle">Percentage of content effort allocated to each stage</div>
+                    <div class="chart-wrapper">
+                        <canvas id="funnelChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Distribution Strategy -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Distribution Strategy</h2>
+                    <p class="section-description">
+                        Multi-channel distribution maximizes content reach through owned, earned, and paid channels.
+                    </p>
+                </div>
+
+                <h3 style="color: #f5f5f5; font-size: 1.3rem; margin: 1rem 0;">Primary Channels</h3>
+
+                <div class="distribution-channel">
+                    <div class="channel-icon">🌐</div>
+                    <div class="channel-info">
+                        <div class="channel-name">Website/Blog</div>
+                        <div class="channel-purpose">Primary content hub. SEO-optimized for organic discovery.</div>
+                    </div>
+                    <span class="channel-priority priority-high">HIGH</span>
+                </div>
+
+                <div class="distribution-channel">
+                    <div class="channel-icon">📧</div>
+                    <div class="channel-info">
+                        <div class="channel-name">Email Newsletter</div>
+                        <div class="channel-purpose">Weekly digest to nurture subscribers toward conversion.</div>
+                    </div>
+                    <span class="channel-priority priority-high">HIGH</span>
+                </div>
+
+                <div class="distribution-channel">
+                    <div class="channel-icon">💼</div>
+                    <div class="channel-info">
+                        <div class="channel-name">LinkedIn</div>
+                        <div class="channel-purpose">Founder thought leadership + company page content.</div>
+                    </div>
+                    <span class="channel-priority priority-high">HIGH</span>
+                </div>
+
+                <div class="distribution-channel">
+                    <div class="channel-icon">📺</div>
+                    <div class="channel-info">
+                        <div class="channel-name">YouTube</div>
+                        <div class="channel-purpose">Educational videos, product demos, customer stories.</div>
+                    </div>
+                    <span class="channel-priority priority-medium">MEDIUM</span>
+                </div>
+
+                <div class="distribution-channel">
+                    <div class="channel-icon">📸</div>
+                    <div class="channel-info">
+                        <div class="channel-name">Instagram</div>
+                        <div class="channel-purpose">Visual content, pet parent community, brand awareness.</div>
+                    </div>
+                    <span class="channel-priority priority-medium">MEDIUM</span>
+                </div>
+
+                <div class="distribution-channel">
+                    <div class="channel-icon">🏥</div>
+                    <div class="channel-info">
+                        <div class="channel-name">Veterinary Partnerships</div>
+                        <div class="channel-purpose">Co-created content with vet clinics, referral network.</div>
+                    </div>
+                    <span class="channel-priority priority-medium">MEDIUM</span>
+                </div>
+
+                <!-- Channel Chart -->
+                <div class="chart-card" style="margin-top: 2rem;">
+                    <div class="chart-title">Channel Investment vs Expected ROI</div>
+                    <div class="chart-subtitle">Effort allocation compared to anticipated return</div>
+                    <div class="chart-wrapper">
+                        <canvas id="channelChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- KPIs & Measurement -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">KPIs & Measurement</h2>
+                    <p class="section-description">
+                        Key metrics to track content marketing performance with 90-day and 6-month targets.
+                    </p>
+                </div>
+
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Organic Traffic</div>
+                        <div class="kpi-value">10K/mo</div>
+                        <div class="kpi-target">Target by Month 6</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Email Subscribers</div>
+                        <div class="kpi-value">2,000</div>
+                        <div class="kpi-target">Target by Month 6</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Avg Time on Page</div>
+                        <div class="kpi-value">3:30</div>
+                        <div class="kpi-target">Minutes target</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Bounce Rate</div>
+                        <div class="kpi-value">&lt;50%</div>
+                        <div class="kpi-target">Target threshold</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Keywords Top 10</div>
+                        <div class="kpi-value">25</div>
+                        <div class="kpi-target">Target by Month 6</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Backlinks</div>
+                        <div class="kpi-value">50</div>
+                        <div class="kpi-target">Target by Month 6</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Social Followers</div>
+                        <div class="kpi-value">5K</div>
+                        <div class="kpi-target">Combined channels</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Content → Leads</div>
+                        <div class="kpi-value">3%</div>
+                        <div class="kpi-target">Conversion rate</div>
+                    </div>
+                </div>
+
+                <!-- Performance Chart -->
+                <div class="chart-card" style="margin-top: 2rem;">
+                    <div class="chart-title">Projected Growth Trajectory</div>
+                    <div class="chart-subtitle">6-month forecast for organic traffic and email subscribers</div>
+                    <div class="chart-wrapper">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Implementation Timeline -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Implementation Timeline</h2>
+                    <p class="section-description">
+                        Phased rollout of content marketing infrastructure and production.
+                    </p>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">1</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Phase 1: Foundation (Weeks 1-2)</div>
+                            <div class="timeline-desc">Set up content infrastructure and produce first content batch</div>
+                            <ul class="timeline-tasks">
+                                <li>Finalize content pillars and keyword research</li>
+                                <li>Set up blog on website with SEO optimization</li>
+                                <li>Create email newsletter in ConvertKit</li>
+                                <li>Publish first 4 blog posts</li>
+                                <li>Create content production workflow in Notion</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Phase 2: Momentum (Weeks 3-6)</div>
+                            <div class="timeline-desc">Establish publishing cadence and distribution rhythms</div>
+                            <ul class="timeline-tasks">
+                                <li>Publish 2 posts/week consistently</li>
+                                <li>Launch first video content on YouTube</li>
+                                <li>Send weekly email newsletter</li>
+                                <li>Begin social media repurposing workflow</li>
+                                <li>Create first lead magnet (Pet Health Checklist)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">3</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Phase 3: Scale (Weeks 7-10)</div>
+                            <div class="timeline-desc">Increase output and launch earned media efforts</div>
+                            <ul class="timeline-tasks">
+                                <li>Scale to 3 posts/week</li>
+                                <li>Publish first pillar content (5,000+ word guide)</li>
+                                <li>Begin guest posting outreach (2-3 pitches/week)</li>
+                                <li>Launch podcast interview campaign</li>
+                                <li>Implement content repurposing playbook</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">4</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Phase 4: Optimize (Weeks 11-12)</div>
+                            <div class="timeline-desc">Analyze performance and optimize for Q2</div>
+                            <ul class="timeline-tasks">
+                                <li>Conduct 90-day content audit</li>
+                                <li>Identify top-performing content for promotion</li>
+                                <li>Update underperforming posts (SEO refresh)</li>
+                                <li>Plan Q2 editorial calendar</li>
+                                <li>Document learnings and optimize workflows</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <p><strong>Generated:</strong> December 18, 2025 | <strong>Project:</strong> PetPulse</p>
+                <p style="margin-top: 5px;">StratArts Business Strategy Skills | content-marketing-strategist-v1.0.0</p>
+                <p style="margin-top: 5px;">Context Signature: content-marketing-strategist-petpulse-2025-12-18 | Final Report (1 iteration)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+        Chart.defaults.color = '#a3a3a3';
+
+        const tooltipConfig = {
+            backgroundColor: '#1a1a1a',
+            titleColor: '#f5f5f5',
+            bodyColor: '#d4d4d4',
+            borderColor: '#10b981',
+            borderWidth: 1
+        };
+
+        // Pillar Distribution Chart
+        const pillarCtx = document.getElementById('pillarDistributionChart');
+        if (pillarCtx) {
+            new Chart(pillarCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Pet Health Education', 'AI & Pet Tech', 'Pet Parent Lifestyle', 'Product & Solutions'],
+                    datasets: [{
+                        data: [35, 25, 25, 15],
+                        backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#8b5cf6'],
+                        borderWidth: 2,
+                        borderColor: '#0a0a0a'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: tooltipConfig,
+                        legend: {
+                            position: 'right',
+                            labels: { color: '#ccc', padding: 15, font: { size: 11 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Content Mix Chart
+        const mixCtx = document.getElementById('contentMixChart');
+        if (mixCtx) {
+            new Chart(mixCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Blog Posts', 'Videos', 'Newsletters', 'Social Posts', 'Infographics', 'Lead Magnets'],
+                    datasets: [{
+                        label: 'Monthly Volume',
+                        data: [8, 4, 4, 20, 2, 0.3],
+                        backgroundColor: '#10b981',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        tooltip: tooltipConfig,
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Funnel Chart
+        const funnelCtx = document.getElementById('funnelChart');
+        if (funnelCtx) {
+            new Chart(funnelCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['TOFU - Awareness', 'MOFU - Consideration', 'BOFU - Decision', 'Retention'],
+                    datasets: [{
+                        label: 'Content Allocation %',
+                        data: [40, 30, 20, 10],
+                        backgroundColor: ['#10b981', '#059669', '#047857', '#065f46'],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 50,
+                            ticks: {
+                                color: '#888',
+                                callback: function(value) { return value + '%'; }
+                            },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        y: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        tooltip: tooltipConfig,
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Channel Chart
+        const channelCtx = document.getElementById('channelChart');
+        if (channelCtx) {
+            new Chart(channelCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Website/Blog', 'Email', 'LinkedIn', 'YouTube', 'Instagram', 'Vet Partnerships'],
+                    datasets: [{
+                        label: 'Effort Investment',
+                        data: [9, 8, 7, 6, 5, 5],
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        borderColor: '#10b981',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#10b981'
+                    }, {
+                        label: 'Expected ROI',
+                        data: [9, 9, 7, 6, 5, 8],
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: '#3b82f6',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#3b82f6'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 10,
+                            ticks: { color: '#888', stepSize: 2, backdropColor: 'transparent' },
+                            grid: { color: '#2a2a2a' },
+                            pointLabels: { color: '#ccc', font: { size: 11 } },
+                            angleLines: { color: '#2a2a2a' }
+                        }
+                    },
+                    plugins: {
+                        tooltip: tooltipConfig,
+                        legend: { labels: { color: '#ccc' } }
+                    }
+                }
+            });
+        }
+
+        // Performance Chart
+        const perfCtx = document.getElementById('performanceChart');
+        if (perfCtx) {
+            new Chart(perfCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                    datasets: [{
+                        label: 'Organic Traffic',
+                        data: [500, 1200, 2500, 4500, 7000, 10000],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'Email Subscribers',
+                        data: [100, 300, 600, 1000, 1500, 2000],
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'transparent',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#888' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        x: {
+                            ticks: { color: '#ccc' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        tooltip: tooltipConfig,
+                        legend: { labels: { color: '#ccc' } }
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('beforeprint', function() {
+            Chart.defaults.color = '#000000';
+        });
+
+        window.addEventListener('afterprint', function() {
+            Chart.defaults.color = '#a3a3a3';
+        });
+    </script>
+</body>
+</html>

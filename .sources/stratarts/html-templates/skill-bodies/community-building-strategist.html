@@ -1,0 +1,949 @@
+<!-- ═══ SKILL CSS START ═══ -->
+<style>
+    /* Community Building Strategist Specific Styles */
+    .engagement-ladder {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        margin: 2rem 0;
+    }
+
+    .ladder-rung {
+        display: flex;
+        align-items: center;
+        background: #1a1a1a;
+        border: 1px solid #2a2a2a;
+        padding: 1.25rem 1.5rem;
+        position: relative;
+    }
+
+    .ladder-rung:first-child {
+        border-radius: 12px 12px 0 0;
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), #1a1a1a);
+    }
+
+    .ladder-rung:last-child {
+        border-radius: 0 0 12px 12px;
+    }
+
+    .rung-level {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: #ffffff;
+        font-size: 1.125rem;
+        margin-right: 1.25rem;
+        flex-shrink: 0;
+    }
+
+    .rung-content {
+        flex: 1;
+    }
+
+    .rung-name {
+        font-weight: 700;
+        color: #ffffff;
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .rung-description {
+        color: #888;
+        font-size: 0.85rem;
+    }
+
+    .rung-percentage {
+        text-align: right;
+    }
+
+    .percentage-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #10b981;
+    }
+
+    .percentage-label {
+        font-size: 0.7rem;
+        color: #888;
+        text-transform: uppercase;
+    }
+
+    .platform-selection {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin: 1.5rem 0;
+    }
+
+    .platform-option {
+        flex: 1;
+        min-width: 200px;
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.5rem;
+        border: 2px solid #2a2a2a;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .platform-option.selected {
+        border-color: #10b981;
+        background: rgba(16, 185, 129, 0.05);
+    }
+
+    .platform-icon-lg {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .platform-name-lg {
+        font-weight: 700;
+        color: #ffffff;
+        font-size: 1.125rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .platform-fit {
+        color: #888;
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+
+    .fit-score {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-weight: 600;
+    }
+
+    .ritual-card {
+        background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+        border-radius: 16px;
+        padding: 1.5rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .ritual-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .ritual-icon {
+        width: 48px;
+        height: 48px;
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .ritual-info {
+        flex: 1;
+    }
+
+    .ritual-name {
+        font-weight: 700;
+        color: #ffffff;
+        font-size: 1.125rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .ritual-frequency {
+        color: #10b981;
+        font-size: 0.8rem;
+    }
+
+    .ritual-description {
+        color: #888;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+
+    .ritual-benefits {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .benefit-tag {
+        background: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+        font-size: 0.75rem;
+    }
+
+    .member-persona {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+    }
+
+    .persona-avatar {
+        width: 64px;
+        height: 64px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.75rem;
+        margin: 0 auto 1rem;
+    }
+
+    .persona-name {
+        text-align: center;
+        font-weight: 700;
+        color: #ffffff;
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .persona-type {
+        text-align: center;
+        color: #10b981;
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+
+    .persona-traits {
+        background: #0a0a0a;
+        border-radius: 8px;
+        padding: 1rem;
+    }
+
+    .trait-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .trait-item:last-child {
+        border-bottom: none;
+    }
+
+    .trait-label {
+        color: #888;
+        font-size: 0.85rem;
+    }
+
+    .trait-value {
+        color: #ccc;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .growth-milestone {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid #2a2a2a;
+        margin-bottom: 0.75rem;
+    }
+
+    .milestone-target {
+        min-width: 80px;
+        text-align: center;
+    }
+
+    .target-number {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #10b981;
+    }
+
+    .target-label {
+        font-size: 0.7rem;
+        color: #888;
+        text-transform: uppercase;
+    }
+
+    .milestone-info {
+        flex: 1;
+        border-left: 1px solid #2a2a2a;
+        padding-left: 1rem;
+    }
+
+    .milestone-name {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .milestone-actions {
+        color: #888;
+        font-size: 0.85rem;
+    }
+
+    .milestone-timeline {
+        color: #10b981;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .moderation-rule {
+        display: flex;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .moderation-rule:last-child {
+        border-bottom: none;
+    }
+
+    .rule-icon {
+        width: 36px;
+        height: 36px;
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .rule-content {
+        flex: 1;
+    }
+
+    .rule-title {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .rule-description {
+        color: #888;
+        font-size: 0.85rem;
+    }
+
+    .health-metric {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .health-metric:last-child {
+        border-bottom: none;
+    }
+
+    .metric-name {
+        color: #ccc;
+        font-size: 0.9rem;
+    }
+
+    .metric-score {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .score-bar {
+        width: 100px;
+        height: 8px;
+        background: #2a2a2a;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .score-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #10b981, #059669);
+        border-radius: 4px;
+    }
+
+    .score-value {
+        color: #10b981;
+        font-weight: 600;
+        font-size: 0.9rem;
+        min-width: 40px;
+        text-align: right;
+    }
+
+    @media (max-width: 768px) {
+        .ladder-rung {
+            flex-direction: column;
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .rung-level {
+            margin-right: 0;
+        }
+
+        .platform-selection {
+            flex-direction: column;
+        }
+
+        .platform-option {
+            min-width: auto;
+        }
+    }
+</style>
+<!-- ═══ SKILL CSS END ═══ -->
+
+<!-- ═══ SKILL HTML START ═══ -->
+<div class="report-container">
+    <!-- Header Section -->
+    <header class="report-header">
+        <div class="header-content">
+            <div class="header-badge">COMMUNITY STRATEGY</div>
+            <h1 class="report-title">{{COMPANY_NAME}}</h1>
+            <p class="report-subtitle">{{COMMUNITY_MISSION}}</p>
+        </div>
+        <div class="header-meta">
+            <div class="meta-item">
+                <span class="meta-label">Generated</span>
+                <span class="meta-value">{{GENERATION_DATE}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Community Type</span>
+                <span class="meta-value">{{COMMUNITY_TYPE}}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Target Platform</span>
+                <span class="meta-value">{{TARGET_PLATFORM}}</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Strategy Overview Section -->
+    <section class="content-section">
+        <h2 class="section-title">Community Strategy Overview</h2>
+
+        <p class="section-description">{{STRATEGY_OVERVIEW}}</p>
+
+        <div class="grid-4">
+            <div class="metric-card">
+                <div class="metric-label">6-Month Target</div>
+                <div class="metric-value">{{MEMBER_TARGET}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Engagement Goal</div>
+                <div class="metric-value">{{ENGAGEMENT_GOAL}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Weekly Events</div>
+                <div class="metric-value">{{WEEKLY_EVENTS}}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Champion Target</div>
+                <div class="metric-value">{{CHAMPION_TARGET}}</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Selection Section -->
+    <section class="content-section">
+        <h2 class="section-title">Platform Selection</h2>
+
+        <p class="section-description">{{PLATFORM_OVERVIEW}}</p>
+
+        <div class="platform-selection">
+            {{PLATFORM_OPTIONS}}
+        </div>
+
+        <!-- Platform Comparison Chart -->
+        <div class="chart-container">
+            <canvas id="platformChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Engagement Ladder Section -->
+    <section class="content-section">
+        <h2 class="section-title">Engagement Ladder</h2>
+
+        <p class="section-description">{{LADDER_OVERVIEW}}</p>
+
+        <div class="engagement-ladder">
+            {{LADDER_RUNGS}}
+        </div>
+
+        <!-- Engagement Distribution Chart -->
+        <div class="chart-container">
+            <canvas id="engagementChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Member Personas Section -->
+    <section class="content-section">
+        <h2 class="section-title">Member Personas</h2>
+
+        <div class="grid-4">
+            {{MEMBER_PERSONAS}}
+        </div>
+    </section>
+
+    <!-- Programming & Rituals Section -->
+    <section class="content-section">
+        <h2 class="section-title">Community Programming & Rituals</h2>
+
+        <p class="section-description">{{RITUALS_OVERVIEW}}</p>
+
+        <div class="grid-2">
+            {{RITUAL_CARDS}}
+        </div>
+
+        <!-- Programming Calendar Chart -->
+        <div class="chart-container">
+            <canvas id="programmingChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Content Strategy Section -->
+    <section class="content-section">
+        <h2 class="section-title">Community Content Strategy</h2>
+
+        <div class="grid-3">
+            <div class="info-card">
+                <h4>Discussion Topics</h4>
+                {{DISCUSSION_TOPICS}}
+            </div>
+            <div class="info-card">
+                <h4>Content Formats</h4>
+                {{CONTENT_FORMATS}}
+            </div>
+            <div class="info-card">
+                <h4>UGC Opportunities</h4>
+                {{UGC_OPPORTUNITIES}}
+            </div>
+        </div>
+
+        <!-- Content Mix Chart -->
+        <div class="chart-container">
+            <canvas id="contentMixChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Growth Milestones Section -->
+    <section class="content-section">
+        <h2 class="section-title">Growth Milestones</h2>
+
+        {{GROWTH_MILESTONES}}
+
+        <!-- Growth Projection Chart -->
+        <div class="chart-container">
+            <canvas id="growthChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Moderation & Guidelines Section -->
+    <section class="content-section">
+        <h2 class="section-title">Moderation & Community Guidelines</h2>
+
+        <div class="grid-2">
+            <div class="info-card">
+                <h4>Community Rules</h4>
+                {{MODERATION_RULES}}
+            </div>
+            <div class="info-card">
+                <h4>Moderation Workflow</h4>
+                {{MODERATION_WORKFLOW}}
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Metrics Section -->
+    <section class="content-section">
+        <h2 class="section-title">Community Health Metrics</h2>
+
+        <div class="grid-2">
+            <div class="info-card">
+                <h4>Health Scorecard</h4>
+                {{HEALTH_METRICS}}
+            </div>
+            <div class="chart-container" style="min-height: 250px;">
+                <canvas id="healthChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Champion Program Section -->
+    <section class="content-section">
+        <h2 class="section-title">Community Champion Program</h2>
+
+        <p class="section-description">{{CHAMPION_OVERVIEW}}</p>
+
+        <div class="grid-3">
+            <div class="info-card">
+                <h4>Selection Criteria</h4>
+                {{CHAMPION_CRITERIA}}
+            </div>
+            <div class="info-card">
+                <h4>Champion Benefits</h4>
+                {{CHAMPION_BENEFITS}}
+            </div>
+            <div class="info-card">
+                <h4>Champion Responsibilities</h4>
+                {{CHAMPION_RESPONSIBILITIES}}
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools & Resources Section -->
+    <section class="content-section">
+        <h2 class="section-title">Tools & Resources</h2>
+
+        <div class="grid-2">
+            <div class="info-card">
+                <h4>Platform Tools</h4>
+                {{PLATFORM_TOOLS}}
+            </div>
+            <div class="info-card">
+                <h4>Analytics & Reporting</h4>
+                {{ANALYTICS_TOOLS}}
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Timeline -->
+    <section class="content-section">
+        <h2 class="section-title">Implementation Timeline</h2>
+
+        <div class="timeline">
+            {{IMPLEMENTATION_TIMELINE}}
+        </div>
+    </section>
+
+    <!-- Report Footer -->
+    <footer class="report-footer">
+        <div class="footer-content">
+            <p class="footer-brand">Generated by StratArts Community Building Strategist</p>
+            <p class="footer-disclaimer">This community strategy provides a framework for building engaged communities. Monitor health metrics and adapt programming based on member feedback.</p>
+        </div>
+    </footer>
+</div>
+<!-- ═══ SKILL HTML END ═══ -->
+
+<!-- ═══ SKILL JS START ═══ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Platform Comparison Chart
+    const platformCtx = document.getElementById('platformChart');
+    if (platformCtx) {
+        new Chart(platformCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Ease of Use', 'Engagement Features', 'Moderation Tools', 'Analytics', 'Scalability', 'Cost'],
+                datasets: [{
+                    label: 'Discord',
+                    data: [8, 9, 8, 6, 9, 9],
+                    backgroundColor: 'rgba(88, 101, 242, 0.2)',
+                    borderColor: '#5865f2',
+                    borderWidth: 2
+                }, {
+                    label: 'Slack',
+                    data: [9, 7, 7, 7, 7, 5],
+                    backgroundColor: 'rgba(74, 21, 75, 0.2)',
+                    borderColor: '#4a154b',
+                    borderWidth: 2
+                }, {
+                    label: 'Circle',
+                    data: [7, 8, 9, 9, 8, 6],
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                    borderColor: '#10b981',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: { color: '#888', stepSize: 2 },
+                        grid: { color: '#2a2a2a' },
+                        pointLabels: { color: '#ccc', font: { size: 11 } }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Platform Comparison',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+
+    // Engagement Distribution Chart
+    const engagementCtx = document.getElementById('engagementChart');
+    if (engagementCtx) {
+        new Chart(engagementCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Champions', 'Contributors', 'Participants', 'Observers', 'Lurkers'],
+                datasets: [{
+                    label: 'Member Distribution %',
+                    data: [2, 8, 15, 25, 50],
+                    backgroundColor: [
+                        '#10b981',
+                        '#059669',
+                        '#047857',
+                        '#065f46',
+                        '#064e3b'
+                    ],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 60,
+                        ticks: {
+                            color: '#888',
+                            callback: function(value) { return value + '%'; }
+                        },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    y: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Engagement Ladder Distribution',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    // Programming Chart
+    const programmingCtx = document.getElementById('programmingChart');
+    if (programmingCtx) {
+        new Chart(programmingCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Discussions',
+                    data: [2, 1, 2, 1, 2, 0, 1],
+                    backgroundColor: '#10b981',
+                    borderRadius: 4
+                }, {
+                    label: 'Events',
+                    data: [0, 1, 0, 1, 0, 1, 0],
+                    backgroundColor: '#059669',
+                    borderRadius: 4
+                }, {
+                    label: 'Content Drops',
+                    data: [1, 0, 1, 0, 1, 0, 0],
+                    backgroundColor: '#047857',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stacked: true,
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        stacked: true,
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Weekly Programming Schedule',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+
+    // Content Mix Chart
+    const contentCtx = document.getElementById('contentMixChart');
+    if (contentCtx) {
+        new Chart(contentCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Educational', 'Discussion', 'Announcements', 'User-Generated', 'Events'],
+                datasets: [{
+                    data: [30, 25, 15, 20, 10],
+                    backgroundColor: [
+                        '#10b981',
+                        '#059669',
+                        '#047857',
+                        '#065f46',
+                        '#064e3b'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Content Mix Distribution',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        position: 'right',
+                        labels: { color: '#ccc', padding: 15 }
+                    }
+                }
+            }
+        });
+    }
+
+    // Growth Chart
+    const growthCtx = document.getElementById('growthChart');
+    if (growthCtx) {
+        new Chart(growthCtx, {
+            type: 'line',
+            data: {
+                labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                datasets: [{
+                    label: 'Total Members',
+                    data: [50, 150, 350, 700, 1200, 2000],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    yAxisID: 'y'
+                }, {
+                    label: 'Active Members',
+                    data: [40, 100, 200, 350, 550, 800],
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'transparent',
+                    tension: 0.4,
+                    yAxisID: 'y'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#888' },
+                        grid: { color: '#2a2a2a' }
+                    },
+                    x: {
+                        ticks: { color: '#ccc' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '6-Month Growth Projection',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+
+    // Health Chart
+    const healthCtx = document.getElementById('healthChart');
+    if (healthCtx) {
+        new Chart(healthCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Engagement Rate', 'Retention', 'Growth Rate', 'Sentiment', 'Response Time', 'Content Quality'],
+                datasets: [{
+                    label: 'Current Health',
+                    data: [7, 6, 8, 8, 7, 7],
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                    borderColor: '#10b981',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#10b981'
+                }, {
+                    label: 'Target Health',
+                    data: [9, 8, 9, 9, 9, 9],
+                    backgroundColor: 'rgba(107, 114, 128, 0.1)',
+                    borderColor: '#6b7280',
+                    borderWidth: 2,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: { color: '#888', stepSize: 2 },
+                        grid: { color: '#2a2a2a' },
+                        pointLabels: { color: '#ccc', font: { size: 11 } }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Community Health Score',
+                        color: '#ffffff',
+                        font: { size: 14, weight: '600' }
+                    },
+                    legend: {
+                        labels: { color: '#ccc' }
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+<!-- ═══ SKILL JS END ═══ -->
