@@ -1,0 +1,38 @@
+name: Docker Smoke
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  docker-smoke:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t business-idea-pitcher:ci .
+
+      - name: Start container
+        run: docker run -d --name business-idea-pitcher-ci -e OPENAI_API_KEY= -p 4173:4173 business-idea-pitcher:ci
+
+      - name: Wait for bootstrap endpoint
+        run: |
+          for attempt in 1 2 3 4 5 6 7 8 9 10; do
+            if curl --fail --silent http://127.0.0.1:4173/api/bootstrap > /tmp/bootstrap.json; then
+              cat /tmp/bootstrap.json
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Bootstrap endpoint did not become ready in time."
+          exit 1
+
+      - name: Stop container
+        if: always()
+        run: docker rm -f business-idea-pitcher-ci

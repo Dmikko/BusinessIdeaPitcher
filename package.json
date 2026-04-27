@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "desktop": "electron .",
+    "desktop": "node electron/launch.js",
+    "test": "node --test --test-isolation=none test/server.test.js test/electron-launch.test.js",
     "dist": "electron-builder --win nsis"
   },
   "devDependencies": {

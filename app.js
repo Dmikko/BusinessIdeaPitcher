@@ -876,7 +876,7 @@ function renderAgentCheckout() {
     const title = createAgentSectionTitle(`${index + 1}. ${agent.name}`);
     const role = document.createElement("div");
     role.className = "role-stance";
-    role.textContent = `${agent.role} · ${agent.priority}`;
+    role.textContent = `${agent.role} - ${agent.priority}`;
 
     const purpose = document.createElement("p");
     purpose.className = "muted";
@@ -1043,7 +1043,7 @@ function describeProjectProgress(project) {
     0,
   );
 
-  return `${activePhase?.shortLabel || "Phase"} · ${messageCount} messages`;
+  return `${activePhase?.shortLabel || "Phase"} - ${messageCount} messages`;
 }
 
 function setDrawerOpen(isOpen) {

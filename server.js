@@ -21,6 +21,14 @@ const MIME_TYPES = {
   ".json": "application/json; charset=utf-8",
   ".md": "text/markdown; charset=utf-8",
 };
+const PUBLIC_ASSET_PATHS = new Set(["/index.html", "/app.js", "/styles.css"]);
+
+class HttpError extends Error {
+  constructor(statusCode, message) {
+    super(message);
+    this.statusCode = statusCode;
+  }
+}
 
 function createServer() {
   return http.createServer(async (request, response) => {
@@ -60,8 +68,11 @@ function createServer() {
 
       return sendJson(response, 405, { error: "Method not allowed" });
     } catch (error) {
-      return sendJson(response, 500, {
-        error: "Server error",
+      const statusCode =
+        typeof error?.statusCode === "number" ? error.statusCode : 500;
+
+      return sendJson(response, statusCode, {
+        error: statusCode === 400 ? "Bad request" : "Server error",
         detail: error instanceof Error ? error.message : String(error),
       });
     }
@@ -781,7 +792,7 @@ function buildSystemPrompt(phase, panelists, repoInsights) {
       : ["- No room-specific reference repos are assigned yet. Use the phase objective and panel roles as the primary guide."];
 
   return [
-    "You orchestrate one room in a 3-phase business idea pitcher app.",
+    "You orchestrate one room in a 4-phase business idea pitcher app.",
     `Current room: ${phase.shortLabel} - ${phase.name}.`,
     `Objective: ${phase.objective}`,
     `Exit criteria: ${phase.exitCriteria}`,
@@ -1255,19 +1266,37 @@ async function readJsonBody(request) {
   }
 
   const rawBody = Buffer.concat(chunks).toString("utf8");
-  return rawBody ? JSON.parse(rawBody) : {};
+
+  try {
+    return rawBody ? JSON.parse(rawBody) : {};
+  } catch (error) {
+    throw new HttpError(
+      400,
+      error instanceof Error ? error.message : "Invalid JSON request body",
+    );
+  }
 }
 
 function serveStaticAsset(urlPath, response) {
   const requestedPath = urlPath === "/" ? "/index.html" : urlPath;
-  const filePath = path.join(ROOT_DIR, requestedPath);
+
+  if (!PUBLIC_ASSET_PATHS.has(requestedPath)) {
+    return sendJson(response, 404, { error: "Not found" });
+  }
+
+  const filePath = path.join(ROOT_DIR, requestedPath.slice(1));
 
   if (!filePath.startsWith(ROOT_DIR) || !fs.existsSync(filePath)) {
     return sendJson(response, 404, { error: "Not found" });
   }
 
   const extension = path.extname(filePath);
-  const contentType = MIME_TYPES[extension] || "application/octet-stream";
+  const contentType = MIME_TYPES[extension];
+
+  if (!contentType) {
+    return sendJson(response, 404, { error: "Not found" });
+  }
+
   const content = fs.readFileSync(filePath);
 
   response.writeHead(200, { "Content-Type": contentType });

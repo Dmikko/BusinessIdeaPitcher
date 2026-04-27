@@ -2,7 +2,7 @@
 
 ## Product direction
 
-Build a local-first 3-phase idea pitcher where the user moves through
+Build a local-first 4-phase idea pitcher where the user moves through
 different expert rooms:
 
 1. `Phase 1 - Ideation Qualification`
@@ -27,7 +27,7 @@ The prototype optimizes for:
 - one thread per phase
 - one phase team sidebar
 - one synthesis card per active phase
-- one reference-synthesis card
+- one Phase 4 checkout surface for generating implementation agents
 
 ### Backend
 
@@ -36,12 +36,13 @@ The prototype optimizes for:
 - exposes:
   - `GET /api/bootstrap`
   - `POST /api/chat`
+  - `POST /api/agent-team`
 
 ### Data layer
 
 - `data/phases.json` stores phase metadata, examples, and exit criteria
 - `data/panelists.json` stores role definitions
-- `data/reference-insights.json` stores repo synthesis plus phase assignment
+- `data/reference-insights.json` stores repo synthesis plus phase assignment for the prompt layer
 
 ### Model adapter
 

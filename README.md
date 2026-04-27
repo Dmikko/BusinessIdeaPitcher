@@ -1,6 +1,6 @@
 # Business Idea Pitcher
 
-Local prototype for a 3-phase idea pitcher with separate expert rooms for:
+Local prototype for a 4-phase idea pitcher with separate expert rooms for:
 
 - `Phase 1` Ideation Qualification
 - `Phase 2` Spec
@@ -38,6 +38,15 @@ You can also use:
 npm start
 ```
 
+## Run tests
+
+```bash
+npm test
+```
+
+The test suite uses Node's built-in test runner and covers the local server,
+API contracts, and the Electron launcher wrapper.
+
 ## Run as a desktop app
 
 1. Install dependencies:
@@ -55,23 +64,8 @@ npm start
 This starts the existing local Node server inside Electron and opens the app in
 a desktop window.
 
-If Electron starts in plain Node mode instead of opening a window, your shell
-may have `ELECTRON_RUN_AS_NODE=1` set globally. In that case, clear it for the
-launch command:
-
-PowerShell:
-
-```powershell
-$env:ELECTRON_RUN_AS_NODE = $null
-npm run desktop
-```
-
-Command Prompt:
-
-```bat
-set ELECTRON_RUN_AS_NODE=
-npm run desktop
-```
+`npm run desktop` now clears `ELECTRON_RUN_AS_NODE` for the Electron child
+process, so it still works even if that variable is set globally in your shell.
 
 ## Build a Windows installer
 
@@ -89,7 +83,7 @@ Docker runs the web app server, not the Electron desktop app.
 
 ### Option 1: Docker Compose
 
-1. Make sure `.env` exists if you want to use your OpenAI settings.
+1. Optional: create `.env` if you want to use your OpenAI settings.
 2. Start the app:
 
    ```bash
@@ -145,7 +139,8 @@ The server uses the OpenAI `Responses API` with Structured Outputs. If
 - `server.js` local server and panel orchestration
 - `data/phases.json` phase metadata, examples, and exit criteria
 - `data/panelists.json` role registry for the panel
-- `data/reference-insights.json` repo synthesis used by the UI and prompt layer
+- `data/reference-insights.json` repo synthesis used by the prompt layer
+- `KANBAN.md` current backlog, next steps, and completed work
 - `docs/reference-analysis.md` what we adopted from each reference repo
 - `docs/architecture.md` current local prototype architecture
 - `index.html`, `styles.css`, `app.js` frontend

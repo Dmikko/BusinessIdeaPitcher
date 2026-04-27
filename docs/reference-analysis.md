@@ -17,19 +17,15 @@ what the local prototype now borrows from each phase set.
 
 Key files inspected:
 
-- `.sources/phase3-spec-kit/README.md`
-- `.sources/phase3-spec-kit/spec-driven.md`
-- `.sources/phase3-spec-kit/workflows/speckit/workflow.yml`
-- `.sources/phase3-spec-kit/templates/plan-template.md`
-- `.sources/phase3-spec-kit/templates/tasks-template.md`
-- `AGENTS.md`
-- `.claude/commands/qualify.md`
-- `project.manifest.yaml`
-- `core/prompts/workflows/qualify-idea.md`
-- `core/prompts/workflows/council-deliberation.md`
-- `core/prompts/workflows/business-opportunity-advisor.md`
-- `core/prompts/roles/competitive-analyst.md`
-- `.claude/agents/market-researcher/agent.md`
+- `.sources/worth-building/README.md`
+- `.sources/worth-building/AGENTS.md`
+- `.sources/worth-building/project.manifest.yaml`
+- `.sources/worth-building/.claude/commands/qualify.md`
+- `.sources/worth-building/.claude/agents/market-researcher/agent.md`
+- `.sources/worth-building/.claude/agents/competitive-analyst/agent.md`
+- `.sources/worth-building/core/prompts/workflows/qualify-idea.md`
+- `.sources/worth-building/core/prompts/workflows/council-deliberation.md`
+- `.sources/worth-building/core/prompts/workflows/business-opportunity-advisor.md`
 
 Adopt:
 
@@ -47,14 +43,12 @@ Avoid:
 
 Key files inspected:
 
-- `.sources/phase3-azure-architecture-review-agent/README.md`
-- `.sources/phase3-azure-architecture-review-agent/tools.py`
-- `.sources/phase3-azure-architecture-review-agent/run_local.py`
-- `.sources/phase3-azure-architecture-review-agent/scenarios/healthcare_platform.yaml`
-- `.sources/phase3-azure-architecture-review-agent/tests/test_tools.py`
-- `CLAUDE.md`
-- `.claude/skills/validating-ideas/SKILL.md`
-- `.claude/skills/shaping-product-strategy/SKILL.md`
+- `.sources/startup-skills/README.md`
+- `.sources/startup-skills/CLAUDE.md`
+- `.sources/startup-skills/.claude/skills/validating-ideas/SKILL.md`
+- `.sources/startup-skills/.claude/skills/shaping-product-strategy/SKILL.md`
+- `.sources/startup-skills/.claude/skills/designing-business-models/SKILL.md`
+- `.sources/startup-skills/.claude/skills/gathering-competitive-intelligence/SKILL.md`
 
 Adopt:
 
@@ -71,13 +65,11 @@ Avoid:
 
 Key files inspected:
 
-- `.sources/phase3-architecture-decision-record/README.md`
-- `.sources/phase3-architecture-decision-record/locales/en/templates/index.md`
-- `.sources/phase3-architecture-decision-record/locales/en/templates/decision-record-template-by-michael-nygard/index.md`
-- `.sources/phase3-architecture-decision-record/locales/en/templates/decision-record-template-of-the-madr-project/index.md`
-- `QUICK-START.md`
-- `stratarts/commands/business-idea-validator.md`
-- `stratarts/.claude-plugin/plugin.json`
+- `.sources/stratarts/README.md`
+- `.sources/stratarts/QUICK-START.md`
+- `.sources/stratarts/stratarts/commands/business-idea-validator.md`
+- `.sources/stratarts/.claude-plugin/marketplace.json`
+- `.sources/stratarts/html-templates/ASSEMBLY-WORKFLOW.md`
 
 Adopt:
 
@@ -96,14 +88,12 @@ Avoid:
 
 Key files inspected:
 
-- `.sources/phase3-12-factor-agents/README.md`
-- `.sources/phase3-12-factor-agents/content/factor-04-tools-are-structured-outputs.md`
-- `.sources/phase3-12-factor-agents/content/factor-05-unify-execution-state.md`
-- `.sources/phase3-12-factor-agents/content/factor-08-own-your-control-flow.md`
-- `.sources/phase3-12-factor-agents/content/factor-10-small-focused-agents.md`
-- `get-shit-done/templates/spec.md`
-- workflow and template listings under `get-shit-done/templates/` and
-  `get-shit-done/workflows/`
+- `.sources/phase2-get-shit-done/README.md`
+- `.sources/phase2-get-shit-done/get-shit-done/templates/spec.md`
+- `.sources/phase2-get-shit-done/get-shit-done/templates/README.md`
+- workflow and template listings under
+  `.sources/phase2-get-shit-done/get-shit-done/templates/` and
+  `.sources/phase2-get-shit-done/get-shit-done/workflows/`
 
 What stands out:
 
