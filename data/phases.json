@@ -52,5 +52,23 @@
       "nextStep": "Freeze the boring defaults: stack, repo shape, ADRs, task sequence, test strategy, auth, data handling, and release gates.",
       "exitCriteria": "Move on only when engineering guidance is clear enough to create tickets and start implementation safely."
     }
+  },
+  {
+    "id": "phase-4-agent-team",
+    "shortLabel": "Phase 4",
+    "name": "Agent Team Generator",
+    "objective": "Turn the approved idea, spec, and technical plan into a lean team of specialized IDE prompts for implementation.",
+    "exitCriteria": "A smallest-useful agent team, shared project context prompt, agent ownership, boundaries, and copy-ready IDE prompts are explicit.",
+    "accent": "#6f5fb8",
+    "intro": "Use this checkout room to generate the practical IDE agent team for building the project. The generator should use the full context from Phases 1-3, recommend only the roles the build actually needs, and produce copy-ready prompts rather than generic agent descriptions.",
+    "examplePrompt": "Generate the recommended IDE agent team for this project using the current Phase 1-3 context.",
+    "defaultSummary": {
+      "signal": "Agent team pending",
+      "confidence": "Medium",
+      "focus": "Use this phase to create a lean, project-specific implementation team of IDE prompts.",
+      "mainRisk": "Generating too many generic agents creates coordination noise instead of execution leverage.",
+      "nextStep": "Generate the recommended agent team after Phase 1-3 context is specific enough.",
+      "exitCriteria": "Move on only when each agent has a clear purpose, ownership boundary, and ready-to-paste prompt."
+    }
   }
 ]

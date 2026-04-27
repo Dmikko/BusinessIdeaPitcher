@@ -31,7 +31,7 @@ function createServer() {
         return sendJson(response, 200, buildBootstrapPayload());
       }
 
-      if (request.method === "POST" && url.pathname === "/api/chat") {
+    if (request.method === "POST" && url.pathname === "/api/chat") {
       const body = await readJsonBody(request);
       const message = typeof body?.message === "string" ? body.message.trim() : "";
       const thread = Array.isArray(body?.thread) ? body.thread : [];
@@ -44,7 +44,15 @@ function createServer() {
 
       const payload = await buildPanelTurn({ phaseId, message, thread, projectContext });
       return sendJson(response, 200, payload);
-      }
+    }
+
+    if (request.method === "POST" && url.pathname === "/api/agent-team") {
+      const body = await readJsonBody(request);
+      const projectContext = normalizeProjectContext(body?.projectContext);
+      const constraints = normalizeAgentTeamConstraints(body?.constraints);
+      const payload = await buildAgentTeam({ projectContext, constraints });
+      return sendJson(response, 200, payload);
+    }
 
       if (request.method === "GET") {
         return serveStaticAsset(url.pathname, response);
@@ -195,6 +203,486 @@ function formatProjectContext(projectContext, currentPhaseId) {
   });
 
   return lines.join("\n");
+}
+
+function normalizeAgentTeamConstraints(constraints) {
+  if (!constraints || typeof constraints !== "object") {
+    return {
+      teamSize: "recommended",
+      targetFormat: "IDE prompt blocks",
+      detailLevel: "practical",
+    };
+  }
+
+  return {
+    teamSize: cleanText(constraints.teamSize) || "recommended",
+    targetFormat: cleanText(constraints.targetFormat) || "IDE prompt blocks",
+    detailLevel: cleanText(constraints.detailLevel) || "practical",
+    skillLevel: cleanText(constraints.skillLevel),
+    deadline: cleanText(constraints.deadline),
+    collaborationMode: cleanText(constraints.collaborationMode),
+  };
+}
+
+async function buildAgentTeam({ projectContext, constraints }) {
+  const runtimeState = getRuntimeState();
+  let agentTeam;
+  let runtime = runtimeState;
+
+  if (runtimeState.llmConfigured) {
+    try {
+      agentTeam = await callLiveAgentTeamModel({ projectContext, constraints });
+      runtime = {
+        ...runtimeState,
+        mode: "live",
+        label: "Live LLM",
+        note: `Live Phase 4 agent team generation via ${process.env.OPENAI_MODEL || "gpt-5.4"}.`,
+      };
+    } catch (error) {
+      agentTeam = buildMockAgentTeam({ projectContext, constraints });
+      runtime = {
+        ...runtimeState,
+        mode: "fallback",
+        label: "Mock fallback",
+        note:
+          "Live model call failed, so the server generated a local recommended agent team.",
+        fallbackReason: error instanceof Error ? error.message : String(error),
+      };
+    }
+  } else {
+    agentTeam = buildMockAgentTeam({ projectContext, constraints });
+  }
+
+  return {
+    runtime,
+    agentTeam,
+  };
+}
+
+async function callLiveAgentTeamModel({ projectContext, constraints }) {
+  const response = await fetch(getOpenAIResponsesUrl(), {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: process.env.OPENAI_MODEL || "gpt-5.4",
+      store: parseBooleanEnv(process.env.OPENAI_STORE, false),
+      instructions: buildAgentTeamSystemPrompt(),
+      input: [
+        {
+          role: "user",
+          content: [
+            "Generate the smallest useful IDE agent team for this software project.",
+            "",
+            "Project context:",
+            formatProjectContext(projectContext, "phase-4-agent-team"),
+            "",
+            "User constraints:",
+            JSON.stringify(constraints, null, 2),
+          ].join("\n"),
+        },
+      ],
+      text: {
+        format: {
+          type: "json_schema",
+          name: "agent_team_output",
+          strict: true,
+          schema: buildAgentTeamSchema(),
+        },
+      },
+    }),
+  });
+
+  if (!response.ok) {
+    const errorBody = await safeReadText(response);
+    throw new Error(`OpenAI request failed with ${response.status}: ${errorBody}`);
+  }
+
+  const payload = await response.json();
+  const content = extractOpenAIOutputText(payload);
+  const parsed = tryParseJson(content);
+
+  if (!parsed) {
+    throw new Error("Could not parse JSON from model response");
+  }
+
+  return normalizeAgentTeamOutput(parsed);
+}
+
+function buildAgentTeamSystemPrompt() {
+  return [
+    "You are Phase 4: Agent Team Generator.",
+    "Your job is to generate a practical AI agent team for IDE-based software development work, based only on the project context from previous phases.",
+    "Do not generate generic agents.",
+    "Do not generate more agents than the project realistically needs.",
+    "Do not invent unnecessary roles.",
+    "Generate only 3-6 agents.",
+    "Prefer fewer, sharper agents over many vague agents.",
+    "For each agent, define ownership and boundaries clearly.",
+    "Every prompt must be ready to paste into an IDE agent or coding assistant.",
+    "Reject unnecessary agents and briefly explain why.",
+    "Output valid JSON only.",
+  ].join("\n");
+}
+
+function buildAgentTeamSchema() {
+  const agent = {
+    type: "object",
+    additionalProperties: false,
+    required: [
+      "id",
+      "name",
+      "role",
+      "priority",
+      "purpose",
+      "responsibilities",
+      "boundaries",
+      "whenToUse",
+      "prompt",
+    ],
+    properties: {
+      id: { type: "string" },
+      name: { type: "string" },
+      role: { type: "string" },
+      priority: { type: "string", enum: ["core", "optional"] },
+      purpose: { type: "string" },
+      responsibilities: { type: "array", items: { type: "string" } },
+      boundaries: { type: "array", items: { type: "string" } },
+      whenToUse: { type: "array", items: { type: "string" } },
+      prompt: { type: "string" },
+    },
+  };
+
+  return {
+    type: "object",
+    additionalProperties: false,
+    required: [
+      "projectSummary",
+      "sharedContextPrompt",
+      "recommendedAgents",
+      "rejectedAgents",
+      "usageGuide",
+    ],
+    properties: {
+      projectSummary: { type: "string" },
+      sharedContextPrompt: { type: "string" },
+      recommendedAgents: {
+        type: "array",
+        minItems: 3,
+        maxItems: 6,
+        items: agent,
+      },
+      rejectedAgents: {
+        type: "array",
+        items: {
+          type: "object",
+          additionalProperties: false,
+          required: ["name", "reason"],
+          properties: {
+            name: { type: "string" },
+            reason: { type: "string" },
+          },
+        },
+      },
+      usageGuide: { type: "string" },
+    },
+  };
+}
+
+function normalizeAgentTeamOutput(output) {
+  const fallback = buildMockAgentTeam({ projectContext: null, constraints: {} });
+  const agents = Array.isArray(output?.recommendedAgents)
+    ? output.recommendedAgents.slice(0, 6).map((agent, index) => ({
+        id: cleanText(agent?.id) || `agent-${index + 1}`,
+        name: cleanText(agent?.name) || `Agent ${index + 1}`,
+        role: cleanText(agent?.role) || "Implementation support",
+        priority: cleanText(agent?.priority) === "optional" ? "optional" : "core",
+        purpose: cleanText(agent?.purpose) || "Support implementation work.",
+        responsibilities: normalizeStringList(agent?.responsibilities),
+        boundaries: normalizeStringList(agent?.boundaries),
+        whenToUse: normalizeStringList(agent?.whenToUse),
+        prompt: cleanText(agent?.prompt) || "Use the shared project context and help implement your assigned workstream.",
+      }))
+    : fallback.recommendedAgents;
+
+  return {
+    projectSummary: cleanText(output?.projectSummary) || fallback.projectSummary,
+    sharedContextPrompt:
+      cleanText(output?.sharedContextPrompt) || fallback.sharedContextPrompt,
+    recommendedAgents: agents.length >= 3 ? agents : fallback.recommendedAgents,
+    rejectedAgents: Array.isArray(output?.rejectedAgents)
+      ? output.rejectedAgents.map((agent) => ({
+          name: cleanText(agent?.name) || "Unneeded agent",
+          reason: cleanText(agent?.reason) || "Not required for this build.",
+        }))
+      : fallback.rejectedAgents,
+    usageGuide: cleanText(output?.usageGuide) || fallback.usageGuide,
+  };
+}
+
+function buildMockAgentTeam({ projectContext, constraints }) {
+  const contextText = formatProjectContext(projectContext, "phase-4-agent-team");
+  const lower = contextText.toLowerCase();
+  const needsBackend = /(api|backend|auth|server|database|postgres|sqlite|payment|integration|llm|openai)/.test(lower);
+  const needsDatabase = /(database|postgres|sqlite|prisma|model|persistence|patient|record|storage)/.test(lower);
+  const needsDeployment = /(deploy|docker|production|hosting|compliance|clinic|saas)/.test(lower);
+  const needsFrontend = !/(cli only|api only|backend only)/.test(lower);
+
+  const summary = extractProjectSummary(projectContext);
+  const sharedContextPrompt = [
+    "You are working on this software project. Use this shared context before any role-specific instructions.",
+    "",
+    summary,
+    "",
+    "Phase context:",
+    contextText,
+    "",
+    `Constraints: ${JSON.stringify(constraints || {}, null, 2)}`,
+    "",
+    "Keep scope tight. Do not add features outside the approved MVP unless explicitly asked.",
+  ].join("\n");
+
+  const agents = [
+    makeAgent({
+      id: "product-architect",
+      name: "Product Architect Agent",
+      role: "Scope, product logic, and implementation slicing",
+      purpose:
+        "Own product logic, MVP discipline, user flows, and feature breakdown before implementation work expands.",
+      responsibilities: [
+        "Translate Phase 1-2 context into build slices.",
+        "Keep implementation aligned with approved MVP scope.",
+        "Clarify ambiguous user flows before coding starts.",
+      ],
+      boundaries: [
+        "Do not write production code unless explicitly asked.",
+        "Do not add features outside the approved MVP.",
+      ],
+      whenToUse: [
+        "When scope needs to be cut or sequenced.",
+        "When a coding task needs clearer acceptance criteria.",
+      ],
+      sharedContextPrompt,
+    }),
+  ];
+
+  if (needsFrontend) {
+    agents.push(
+      makeAgent({
+        id: "frontend-implementation",
+        name: "Frontend Implementation Agent",
+        role: "UI, client state, and interaction implementation",
+        purpose:
+          "Own the user-facing experience, frontend state, responsive UI, and ergonomic workflows.",
+        responsibilities: [
+          "Implement screens, components, and frontend state.",
+          "Preserve existing design conventions.",
+          "Make user workflows efficient across desktop and mobile.",
+        ],
+        boundaries: [
+          "Do not change backend contracts without coordination.",
+          "Do not introduce visual redesigns unrelated to the task.",
+        ],
+        whenToUse: [
+          "When building or changing UI behavior.",
+          "When implementing client-side persistence or interactions.",
+        ],
+        sharedContextPrompt,
+      }),
+    );
+  }
+
+  if (needsBackend) {
+    agents.push(
+      makeAgent({
+        id: "backend-api",
+        name: "Backend/API Agent",
+        role: "Server logic, API contracts, and integrations",
+        purpose:
+          "Own server routes, API contracts, integration boundaries, and backend behavior.",
+        responsibilities: [
+          "Implement API endpoints and server orchestration.",
+          "Keep request and response contracts explicit.",
+          "Handle integration failures with clear fallback behavior.",
+        ],
+        boundaries: [
+          "Do not change frontend UX without confirming the contract impact.",
+          "Do not store secrets or sensitive data in client-visible code.",
+        ],
+        whenToUse: [
+          "When adding endpoints or server-side behavior.",
+          "When integrating external APIs or model calls.",
+        ],
+        sharedContextPrompt,
+      }),
+    );
+  }
+
+  if (needsDatabase && agents.length < 6) {
+    agents.push(
+      makeAgent({
+        id: "database-data-model",
+        name: "Database & Data Model Agent",
+        role: "Persistence, schemas, and data lifecycle",
+        purpose:
+          "Own data modeling, persistence boundaries, migrations, and data lifecycle decisions.",
+        responsibilities: [
+          "Define entities, relationships, and persistence rules.",
+          "Protect sensitive data through minimal storage and clear retention.",
+          "Keep migrations and seed data predictable.",
+        ],
+        boundaries: [
+          "Do not add persistence before the product workflow needs it.",
+          "Do not weaken privacy or audit expectations.",
+        ],
+        whenToUse: [
+          "When the app needs saved user/project data.",
+          "When data shape affects API or compliance decisions.",
+        ],
+        sharedContextPrompt,
+      }),
+    );
+  }
+
+  agents.push(
+    makeAgent({
+      id: "qa-test",
+      name: "QA/Test Agent",
+      role: "Verification strategy and regression protection",
+      purpose:
+        "Own test planning, acceptance-to-test mapping, and release confidence.",
+      responsibilities: [
+        "Map requirements into unit, integration, and end-to-end checks.",
+        "Define regression tests for critical workflows.",
+        "Call out manual checks that cannot be automated cheaply yet.",
+      ],
+      boundaries: [
+        "Do not create broad test suites unrelated to release risk.",
+        "Do not accept vague done criteria.",
+      ],
+      whenToUse: [
+        "Before merging implementation work.",
+        "When acceptance criteria need concrete verification.",
+      ],
+      sharedContextPrompt,
+    }),
+  );
+
+  if (needsDeployment && agents.length < 6) {
+    agents.push(
+      makeAgent({
+        id: "devops-deployment",
+        name: "DevOps/Deployment Agent",
+        role: "Packaging, environment, and release workflow",
+        purpose:
+          "Own Docker, environment configuration, deployment ergonomics, and release checks.",
+        responsibilities: [
+          "Keep local, container, and packaged runtime paths aligned.",
+          "Define environment variable and secret handling.",
+          "Make startup, health checks, and release commands repeatable.",
+        ],
+        boundaries: [
+          "Do not introduce infrastructure the project does not need.",
+          "Do not bake secrets into images or packaged artifacts.",
+        ],
+        whenToUse: [
+          "When changing Docker, packaging, or deployment setup.",
+          "When preparing handoff or installation workflows.",
+        ],
+        sharedContextPrompt,
+      }),
+    );
+  }
+
+  const rejectedAgents = [
+    {
+      name: "Documentation/Report Agent",
+      reason:
+        "Documentation can be owned by the implementing agents until the project has enough surface area to justify a dedicated role.",
+    },
+  ];
+
+  if (!needsDatabase) {
+    rejectedAgents.push({
+      name: "Database & Data Model Agent",
+      reason: "No durable data model is clearly required by the current context.",
+    });
+  }
+
+  if (!needsDeployment) {
+    rejectedAgents.push({
+      name: "DevOps/Deployment Agent",
+      reason: "Deployment work is not yet complex enough for a dedicated agent.",
+    });
+  }
+
+  return {
+    projectSummary: summary,
+    sharedContextPrompt,
+    recommendedAgents: agents.slice(0, 6),
+    rejectedAgents,
+    usageGuide:
+      "Paste the shared context first, then paste exactly one agent prompt for the workstream you are assigning. Keep agents scoped to their ownership areas and avoid running multiple agents on the same files unless their responsibilities are clearly separated.",
+  };
+}
+
+function makeAgent({
+  id,
+  name,
+  role,
+  purpose,
+  responsibilities,
+  boundaries,
+  whenToUse,
+  sharedContextPrompt,
+}) {
+  return {
+    id,
+    name,
+    role,
+    priority: "core",
+    purpose,
+    responsibilities,
+    boundaries,
+    whenToUse,
+    prompt: [
+      `You are the ${name} for this project.`,
+      "",
+      "Shared project context:",
+      sharedContextPrompt,
+      "",
+      "Your responsibilities:",
+      ...responsibilities.map((item) => `- ${item}`),
+      "",
+      "Your boundaries:",
+      ...boundaries.map((item) => `- ${item}`),
+      "",
+      "Working rules:",
+      "- Stay inside your ownership area unless explicitly asked to coordinate.",
+      "- Surface assumptions before implementing decisions that change scope, architecture, data, or user experience.",
+      "- Prefer small, verifiable changes with clear acceptance checks.",
+    ].join("\n"),
+  };
+}
+
+function extractProjectSummary(projectContext) {
+  if (!projectContext?.phases?.length) {
+    return "A software project moving from idea qualification through specification, technical planning, and implementation handoff.";
+  }
+
+  const summaries = projectContext.phases
+    .filter((phase) => phase.phaseId !== "phase-4-agent-team")
+    .map((phase) => `${phase.shortLabel || phase.name}: ${phase.summary?.focus || phase.summary?.signal || "context pending"}`);
+
+  return summaries.join(" ");
+}
+
+function normalizeStringList(value) {
+  return Array.isArray(value)
+    ? value.map((item) => cleanText(item)).filter(Boolean).slice(0, 8)
+    : [];
 }
 
 async function buildPanelTurn({ phaseId, message, thread, projectContext }) {

@@ -97,6 +97,22 @@
               </button>
             </div>
           </form>
+
+          <section id="agentCheckout" class="agent-checkout" hidden>
+            <div class="checkout-header">
+              <div>
+                <div class="eyebrow">Phase 4 Checkout</div>
+                <h3>Recommended agent team</h3>
+              </div>
+              <button id="generateAgentTeam" class="primary" type="button">
+                Generate Recommended Agent Team
+              </button>
+            </div>
+            <p class="muted">
+              Uses the active pitch context from Phases 1-3 to generate a lean IDE agent team.
+            </p>
+            <div id="agentTeamOutput" class="agent-team-output"></div>
+          </section>
         </section>
 
         <article class="card insight-card">

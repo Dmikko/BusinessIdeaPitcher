@@ -8,6 +8,7 @@ different expert rooms:
 1. `Phase 1 - Ideation Qualification`
 2. `Phase 2 - Spec`
 3. `Phase 3 - Dev`
+4. `Phase 4 - Agent Team Generator`
 
 The prototype optimizes for:
 
@@ -134,6 +135,20 @@ Room behavior:
 - records stack and architecture choices with ADR-style reasoning
 - reviews architecture risks, boundaries, data flow, integrations, and trust
   assumptions before implementation starts
+
+### Phase 4 - Agent Team Generator
+
+Role:
+
+- Agent Team Generator
+
+Room behavior:
+
+- consumes the saved cross-phase context from Phases 1-3
+- recommends only the smallest useful set of IDE agents
+- generates shared project context, agent ownership, boundaries, use cases, and
+  ready-to-paste prompts
+- rejects unnecessary agents with short reasons
 
 ## Reference blend
 

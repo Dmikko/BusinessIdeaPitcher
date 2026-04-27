@@ -1,4 +1,5 @@
 const STORAGE_KEY = "business-idea-pitcher.projects.v1";
+const AGENT_TEAM_PHASE_ID = "phase-4-agent-team";
 
 const state = {
   phases: [],
@@ -43,6 +44,9 @@ const newProjectButton = document.querySelector("#newProjectButton");
 const renameProjectButton = document.querySelector("#renameProjectButton");
 const projectList = document.querySelector("#projectList");
 const activeProjectLabel = document.querySelector("#activeProjectLabel");
+const agentCheckout = document.querySelector("#agentCheckout");
+const generateAgentTeamButton = document.querySelector("#generateAgentTeam");
+const agentTeamOutput = document.querySelector("#agentTeamOutput");
 
 bootstrap();
 
@@ -118,6 +122,10 @@ renameProjectButton.addEventListener("click", () => {
   }
 
   renameActiveProject();
+});
+
+generateAgentTeamButton.addEventListener("click", () => {
+  void handleGenerateAgentTeam();
 });
 
 async function bootstrap() {
@@ -232,6 +240,69 @@ async function handleSubmit() {
   }
 }
 
+async function handleGenerateAgentTeam() {
+  if (state.pending) {
+    return;
+  }
+
+  setPending(true);
+  generateAgentTeamButton.disabled = true;
+  generateAgentTeamButton.textContent = "Generating...";
+
+  try {
+    const payload = await fetchJson("/api/agent-team", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        projectContext: buildProjectContextPayload(AGENT_TEAM_PHASE_ID),
+        constraints: {
+          teamSize: "recommended",
+          targetFormat: "IDE prompt blocks",
+          detailLevel: "practical",
+        },
+      }),
+    });
+
+    state.runtime = payload.runtime;
+    renderRuntime();
+    const session = ensurePhaseSession(AGENT_TEAM_PHASE_ID);
+    session.agentTeam = payload.agentTeam;
+    session.summary = {
+      signal: "Agent team ready",
+      confidence: "High",
+      focus: payload.agentTeam.projectSummary,
+      mainRisk:
+        payload.agentTeam.rejectedAgents?.[0]?.reason ||
+        "Keep agent ownership narrow so implementation stays coordinated.",
+      nextStep: "Copy the shared context and the relevant agent prompts into your IDE agent workflow.",
+      exitCriteria: "Shared context and copy-ready prompts are available for the selected build team.",
+    };
+
+    appendMessage({
+      type: "system",
+      title: "Phase 4",
+      body: `Generated ${payload.agentTeam.recommendedAgents.length} recommended IDE agents for this pitch.`,
+      tags: ["agent team", "checkout"],
+    }, AGENT_TEAM_PHASE_ID);
+
+    saveActiveProject();
+    renderAgentCheckout();
+    updateSummary(session.summary);
+  } catch (error) {
+    appendMessage({
+      type: "system",
+      title: "Runtime",
+      body: "The agent team request failed. Check the local server and try again.",
+    }, AGENT_TEAM_PHASE_ID);
+  } finally {
+    setPending(false);
+    generateAgentTeamButton.disabled = false;
+    generateAgentTeamButton.textContent = "Generate Recommended Agent Team";
+  }
+}
+
 function switchPhase(phaseId) {
   const phase = getPhase(phaseId);
   if (!phase) {
@@ -255,6 +326,7 @@ function switchPhase(phaseId) {
   renderThread();
   updateSummary(getActiveSession().summary);
   renderProjectShell();
+  renderAgentCheckout();
 }
 
 function ensurePhaseSession(phaseId) {
@@ -691,6 +763,7 @@ function normalizePhaseSessions(phaseSessions) {
     const session = phaseSessions?.[phase.id];
     normalized[phase.id] = {
       summary: session?.summary ? { ...clone(phase.defaultSummary), ...clone(session.summary) } : clone(phase.defaultSummary),
+      agentTeam: session?.agentTeam || null,
       thread:
         Array.isArray(session?.thread) && session.thread.length > 0
           ? session.thread.map(normalizeThreadEntry).filter(Boolean)
@@ -722,6 +795,7 @@ function createDefaultPhaseSessions() {
       phase.id,
       {
         summary: clone(phase.defaultSummary),
+        agentTeam: null,
         thread: createDefaultPhaseThread(phase),
       },
     ]),
@@ -758,6 +832,172 @@ function renderAll() {
   renderStageCopy();
   renderThread();
   updateSummary(getActiveSession().summary);
+  renderAgentCheckout();
+}
+
+function renderAgentCheckout() {
+  const isCheckout = state.activePhaseId === AGENT_TEAM_PHASE_ID;
+  agentCheckout.hidden = !isCheckout;
+  composer.hidden = isCheckout;
+
+  if (!isCheckout) {
+    return;
+  }
+
+  const agentTeam = ensurePhaseSession(AGENT_TEAM_PHASE_ID).agentTeam;
+  agentTeamOutput.innerHTML = "";
+
+  if (!agentTeam) {
+    const empty = document.createElement("div");
+    empty.className = "empty-checkout";
+    empty.textContent = "Generate the recommended agent team when Phase 1-3 are specific enough to hand off.";
+    agentTeamOutput.append(empty);
+    return;
+  }
+
+  const shared = document.createElement("article");
+  shared.className = "agent-card shared-context-card";
+  shared.append(
+    createAgentSectionTitle("Shared Project Context"),
+    createPreBlock(agentTeam.sharedContextPrompt),
+    createCopyButton("Copy shared context", agentTeam.sharedContextPrompt),
+  );
+  agentTeamOutput.append(shared);
+
+  const fullText = formatAgentTeamMarkdown(agentTeam);
+  const fullActions = document.createElement("div");
+  fullActions.className = "checkout-actions";
+  fullActions.append(createCopyButton("Copy Full Team", fullText));
+  agentTeamOutput.append(fullActions);
+
+  agentTeam.recommendedAgents.forEach((agent, index) => {
+    const card = document.createElement("article");
+    card.className = "agent-card";
+    const title = createAgentSectionTitle(`${index + 1}. ${agent.name}`);
+    const role = document.createElement("div");
+    role.className = "role-stance";
+    role.textContent = `${agent.role} · ${agent.priority}`;
+
+    const purpose = document.createElement("p");
+    purpose.className = "muted";
+    purpose.textContent = agent.purpose;
+
+    card.append(
+      title,
+      role,
+      purpose,
+      createListBlock("Owns", agent.responsibilities),
+      createListBlock("Must not", agent.boundaries),
+      createListBlock("Use when", agent.whenToUse),
+      createPreBlock(agent.prompt),
+      createCopyButton("Copy Prompt", agent.prompt),
+    );
+    agentTeamOutput.append(card);
+  });
+
+  if (agentTeam.rejectedAgents?.length) {
+    const rejected = document.createElement("article");
+    rejected.className = "agent-card rejected-card";
+    rejected.append(createAgentSectionTitle("Rejected Agents"));
+    agentTeam.rejectedAgents.forEach((agent) => {
+      const item = document.createElement("p");
+      item.className = "muted";
+      item.textContent = `${agent.name}: ${agent.reason}`;
+      rejected.append(item);
+    });
+    agentTeamOutput.append(rejected);
+  }
+}
+
+function createAgentSectionTitle(text) {
+  const title = document.createElement("h3");
+  title.textContent = text;
+  return title;
+}
+
+function createPreBlock(text) {
+  const pre = document.createElement("pre");
+  pre.className = "prompt-block";
+  pre.textContent = text || "";
+  return pre;
+}
+
+function createListBlock(title, items = []) {
+  const section = document.createElement("div");
+  section.className = "agent-list-block";
+  const heading = document.createElement("div");
+  heading.className = "agent-list-title";
+  heading.textContent = title;
+  const list = document.createElement("ul");
+  items.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    list.append(li);
+  });
+  section.append(heading, list);
+  return section;
+}
+
+function createCopyButton(label, text) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "ghost compact";
+  button.textContent = label;
+  button.addEventListener("click", async () => {
+    await navigator.clipboard.writeText(text || "");
+    button.textContent = "Copied";
+    setTimeout(() => {
+      button.textContent = label;
+    }, 1200);
+  });
+  return button;
+}
+
+function formatAgentTeamMarkdown(agentTeam) {
+  const agentSections = agentTeam.recommendedAgents
+    .map(
+      (agent, index) => `### ${index + 1}. ${agent.name}
+Purpose:
+${agent.purpose}
+
+Owns:
+${agent.responsibilities.map((item) => `- ${item}`).join("\n")}
+
+Must not:
+${agent.boundaries.map((item) => `- ${item}`).join("\n")}
+
+Use when:
+${agent.whenToUse.map((item) => `- ${item}`).join("\n")}
+
+Prompt:
+\`\`\`txt
+${agent.prompt}
+\`\`\``,
+    )
+    .join("\n\n");
+
+  const rejected = (agentTeam.rejectedAgents || [])
+    .map((agent) => `- ${agent.name}: ${agent.reason}`)
+    .join("\n");
+
+  return `# Phase 4: Recommended Agent Team
+
+## Project Summary
+${agentTeam.projectSummary}
+
+## Shared Project Context
+\`\`\`txt
+${agentTeam.sharedContextPrompt}
+\`\`\`
+
+## Suggested Team
+${agentSections}
+
+## Rejected Agents
+${rejected || "- None"}
+
+## Usage Guide
+${agentTeam.usageGuide}`;
 }
 
 function renderProjectShell() {

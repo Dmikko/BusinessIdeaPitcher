@@ -166,5 +166,19 @@
       "Make auth, logging, privacy, and audit expectations explicit.",
       "Define tool permissions, recovery paths, and compliance assumptions before implementation."
     ]
+  },
+  {
+    "id": "agent-team-generator",
+    "phaseId": "phase-4-agent-team",
+    "name": "Agent Team Generator",
+    "focus": "Recommend the smallest useful team of IDE agents based on the full project context.",
+    "stance": "Fewer, sharper agents beat broad agent cosplay.",
+    "accent": "#6f5fb8",
+    "inspiredBy": ["spec-kit", "12-factor-agents", "architecture-decision-record"],
+    "promptNotes": [
+      "Use Phase 1-3 context before recommending roles.",
+      "Generate practical IDE prompts with ownership and boundaries.",
+      "Reject agents the project does not realistically need."
+    ]
   }
 ]

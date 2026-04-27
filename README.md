@@ -5,6 +5,7 @@ Local prototype for a 3-phase idea pitcher with separate expert rooms for:
 - `Phase 1` Ideation Qualification
 - `Phase 2` Spec
 - `Phase 3` Dev
+- `Phase 4` Agent Team Generator
 
 ## Current shape
 
@@ -160,6 +161,10 @@ The server uses the OpenAI `Responses API` with Structured Outputs. If
   Turn the spec into an engineering plan, ADR-backed stack choices, task
   sequence, architecture risk review, testing, security, and compliance
   expectations.
+- `Phase 4 - Agent Team Generator`
+  Generate a lean, project-specific team of IDE agent prompts from the Phase
+  1-3 context, including shared context, ownership, boundaries, and copy-ready
+  prompts.
 
 Each phase has its own team, its own chat history, and its own exit criteria.
 
