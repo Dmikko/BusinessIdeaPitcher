@@ -17,7 +17,11 @@ what the local prototype now borrows from each phase set.
 
 Key files inspected:
 
-- `README.md`
+- `.sources/phase3-spec-kit/README.md`
+- `.sources/phase3-spec-kit/spec-driven.md`
+- `.sources/phase3-spec-kit/workflows/speckit/workflow.yml`
+- `.sources/phase3-spec-kit/templates/plan-template.md`
+- `.sources/phase3-spec-kit/templates/tasks-template.md`
 - `AGENTS.md`
 - `.claude/commands/qualify.md`
 - `project.manifest.yaml`
@@ -43,7 +47,11 @@ Avoid:
 
 Key files inspected:
 
-- `README.md`
+- `.sources/phase3-azure-architecture-review-agent/README.md`
+- `.sources/phase3-azure-architecture-review-agent/tools.py`
+- `.sources/phase3-azure-architecture-review-agent/run_local.py`
+- `.sources/phase3-azure-architecture-review-agent/scenarios/healthcare_platform.yaml`
+- `.sources/phase3-azure-architecture-review-agent/tests/test_tools.py`
 - `CLAUDE.md`
 - `.claude/skills/validating-ideas/SKILL.md`
 - `.claude/skills/shaping-product-strategy/SKILL.md`
@@ -63,7 +71,10 @@ Avoid:
 
 Key files inspected:
 
-- `README.md`
+- `.sources/phase3-architecture-decision-record/README.md`
+- `.sources/phase3-architecture-decision-record/locales/en/templates/index.md`
+- `.sources/phase3-architecture-decision-record/locales/en/templates/decision-record-template-by-michael-nygard/index.md`
+- `.sources/phase3-architecture-decision-record/locales/en/templates/decision-record-template-of-the-madr-project/index.md`
 - `QUICK-START.md`
 - `stratarts/commands/business-idea-validator.md`
 - `stratarts/.claude-plugin/plugin.json`
@@ -85,7 +96,11 @@ Avoid:
 
 Key files inspected:
 
-- `README.md`
+- `.sources/phase3-12-factor-agents/README.md`
+- `.sources/phase3-12-factor-agents/content/factor-04-tools-are-structured-outputs.md`
+- `.sources/phase3-12-factor-agents/content/factor-05-unify-execution-state.md`
+- `.sources/phase3-12-factor-agents/content/factor-08-own-your-control-flow.md`
+- `.sources/phase3-12-factor-agents/content/factor-10-small-focused-agents.md`
 - `get-shit-done/templates/spec.md`
 - workflow and template listings under `get-shit-done/templates/` and
   `get-shit-done/workflows/`

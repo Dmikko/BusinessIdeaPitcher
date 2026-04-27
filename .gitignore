@@ -3,6 +3,5 @@ dist/
 build/
 .env
 .env.*
-.sources/
 .DS_Store
 Thumbs.db
