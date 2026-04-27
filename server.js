@@ -4,7 +4,7 @@ const path = require("path");
 
 loadEnvFile(path.join(__dirname, ".env"));
 
-const PORT = Number(process.env.PORT || 4173);
+const DEFAULT_PORT = Number(process.env.PORT || 4173);
 const ROOT_DIR = __dirname;
 const PHASES_PATH = path.join(ROOT_DIR, "data", "phases.json");
 const PANELISTS_PATH = path.join(ROOT_DIR, "data", "panelists.json");
@@ -22,44 +22,62 @@ const MIME_TYPES = {
   ".md": "text/markdown; charset=utf-8",
 };
 
-const server = http.createServer(async (request, response) => {
-  const url = new URL(request.url, `http://${request.headers.host}`);
+function createServer() {
+  return http.createServer(async (request, response) => {
+    const url = new URL(request.url, `http://${request.headers.host}`);
 
-  try {
-    if (request.method === "GET" && url.pathname === "/api/bootstrap") {
-      return sendJson(response, 200, buildBootstrapPayload());
-    }
-
-    if (request.method === "POST" && url.pathname === "/api/chat") {
-      const body = await readJsonBody(request);
-      const message = typeof body?.message === "string" ? body.message.trim() : "";
-      const thread = Array.isArray(body?.thread) ? body.thread : [];
-      const phaseId = typeof body?.phaseId === "string" ? body.phaseId : "";
-
-      if (!message) {
-        return sendJson(response, 400, { error: "Missing message" });
+    try {
+      if (request.method === "GET" && url.pathname === "/api/bootstrap") {
+        return sendJson(response, 200, buildBootstrapPayload());
       }
 
-      const payload = await buildPanelTurn({ phaseId, message, thread });
-      return sendJson(response, 200, payload);
-    }
+      if (request.method === "POST" && url.pathname === "/api/chat") {
+        const body = await readJsonBody(request);
+        const message = typeof body?.message === "string" ? body.message.trim() : "";
+        const thread = Array.isArray(body?.thread) ? body.thread : [];
+        const phaseId = typeof body?.phaseId === "string" ? body.phaseId : "";
 
-    if (request.method === "GET") {
-      return serveStaticAsset(url.pathname, response);
-    }
+        if (!message) {
+          return sendJson(response, 400, { error: "Missing message" });
+        }
 
-    return sendJson(response, 405, { error: "Method not allowed" });
-  } catch (error) {
-    return sendJson(response, 500, {
-      error: "Server error",
-      detail: error instanceof Error ? error.message : String(error),
+        const payload = await buildPanelTurn({ phaseId, message, thread });
+        return sendJson(response, 200, payload);
+      }
+
+      if (request.method === "GET") {
+        return serveStaticAsset(url.pathname, response);
+      }
+
+      return sendJson(response, 405, { error: "Method not allowed" });
+    } catch (error) {
+      return sendJson(response, 500, {
+        error: "Server error",
+        detail: error instanceof Error ? error.message : String(error),
+      });
+    }
+  });
+}
+
+function startServer(port = DEFAULT_PORT) {
+  const server = createServer();
+
+  return new Promise((resolve, reject) => {
+    server.once("error", reject);
+    server.listen(port, () => {
+      server.off("error", reject);
+      const address = server.address();
+      const resolvedPort =
+        typeof address === "object" && address ? address.port : port;
+
+      resolve({
+        server,
+        port: resolvedPort,
+        url: `http://localhost:${resolvedPort}`,
+      });
     });
-  }
-});
-
-server.listen(PORT, () => {
-  console.log(`Business Idea Pitcher running at http://localhost:${PORT}`);
-});
+  });
+}
 
 function loadEnvFile(filePath) {
   if (!fs.existsSync(filePath)) {
@@ -788,3 +806,23 @@ async function safeReadText(response) {
     return "";
   }
 }
+
+if (require.main === module) {
+  startServer()
+    .then(({ url }) => {
+      console.log(`Business Idea Pitcher running at ${url}`);
+    })
+    .catch((error) => {
+      console.error(
+        "Failed to start Business Idea Pitcher:",
+        error instanceof Error ? error.message : String(error),
+      );
+      process.exit(1);
+    });
+}
+
+module.exports = {
+  createServer,
+  loadEnvFile,
+  startServer,
+};

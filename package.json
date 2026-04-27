@@ -3,8 +3,40 @@
   "version": "0.1.0",
   "private": true,
   "description": "Local prototype for a multi-role business sparring partner.",
+  "main": "electron/main.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "desktop": "electron .",
+    "dist": "electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^37.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.businessideapitcher.app",
+    "productName": "Business Idea Pitcher",
+    "files": [
+      "app.js",
+      "data/**/*",
+      "docs/**/*",
+      "electron/**/*",
+      "index.html",
+      "package.json",
+      "server.js",
+      "styles.css"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   }
 }

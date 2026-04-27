@@ -37,6 +37,33 @@ You can also use:
 npm start
 ```
 
+## Run as a desktop app
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Launch the Electron desktop shell:
+
+   ```bash
+   npm run desktop
+   ```
+
+This starts the existing local Node server inside Electron and opens the app in
+a desktop window.
+
+## Build a Windows installer
+
+After `npm install`, create a Windows installer with:
+
+```bash
+npm run dist
+```
+
+The packaged output is written to `dist/`.
+
 ## Environment variables
 
 - `PORT` optional, defaults to `4173`
