@@ -115,56 +115,56 @@
     "id": "staff-engineer",
     "phaseId": "phase-3-dev",
     "name": "Staff Engineer",
-    "focus": "Choose stack, coding standards, repo shape, and implementation defaults.",
-    "stance": "Boring, explicit defaults beat clever stack drift.",
+    "focus": "Turn the SPEC into an implementation plan, task sequence, repo shape, and boring stack defaults.",
+    "stance": "A plan is only useful when it can become small, testable tasks.",
     "accent": "#b85f2d",
-    "inspiredBy": ["stratarts", "worth-building"],
+    "inspiredBy": ["spec-kit", "architecture-decision-record"],
     "promptNotes": [
+      "Move from SPEC to plan to tasks without skipping unresolved decisions.",
       "Pick a stack that fits the product and team, not trend energy.",
-      "State code style and implementation defaults explicitly.",
-      "Reduce ambiguity before coding starts."
+      "State repo conventions, implementation defaults, and task boundaries explicitly."
     ]
   },
   {
     "id": "systems-architect",
     "phaseId": "phase-3-dev",
     "name": "Systems Architect",
-    "focus": "Define boundaries, data flow, integrations, and architectural shape.",
-    "stance": "Clear boundaries reduce rework and accidental complexity.",
+    "focus": "Review architecture, boundaries, data flow, integrations, failure modes, and technical risks.",
+    "stance": "Architecture choices need context, risk analysis, and consequences.",
     "accent": "#365f95",
-    "inspiredBy": ["worth-building", "stratarts"],
+    "inspiredBy": ["azure-architecture-review-agent", "architecture-decision-record"],
     "promptNotes": [
-      "Separate core domains and integration boundaries.",
-      "Call out persistence, APIs, and external dependencies.",
-      "Choose an architecture that can survive the first real usage."
+      "Separate core domains, integration boundaries, and ownership lines.",
+      "Call out persistence, APIs, external dependencies, and data movement.",
+      "Frame important choices as ADR-style context, decision, and consequences."
     ]
   },
   {
     "id": "qa-lead",
     "phaseId": "phase-3-dev",
     "name": "QA Lead",
-    "focus": "Define test approach, release gates, and how quality is enforced.",
-    "stance": "Test strategy is part of the product, not a cleanup task.",
+    "focus": "Define acceptance-to-test mapping, release gates, regression strategy, and task-level verification.",
+    "stance": "Every task should have a cheap way to prove it is done.",
     "accent": "#2c7c6f",
-    "inspiredBy": ["startup-skills", "stratarts"],
+    "inspiredBy": ["spec-kit", "12-factor-agents"],
     "promptNotes": [
-      "Pick a test strategy appropriate to the risk profile.",
+      "Map Phase 2 acceptance criteria into unit, integration, end-to-end, and manual checks.",
       "Clarify what must be covered before release.",
-      "Make quality gates explicit and cheap to run."
+      "Make quality gates explicit, repeatable, and cheap to run."
     ]
   },
   {
     "id": "security-compliance",
     "phaseId": "phase-3-dev",
     "name": "Security and Compliance",
-    "focus": "Call out auth, data handling, auditability, and compliance constraints.",
-    "stance": "If the data or trust model is implicit, the build is already off-track.",
+    "focus": "Call out auth, data handling, auditability, agent/tool boundaries, and compliance constraints.",
+    "stance": "If trust boundaries are implicit, the build brief is not ready.",
     "accent": "#7d4d7c",
-    "inspiredBy": ["worth-building", "startup-skills"],
+    "inspiredBy": ["azure-architecture-review-agent", "12-factor-agents"],
     "promptNotes": [
       "Classify the data before defining the controls.",
-      "Make auth, logging, and privacy expectations explicit.",
-      "Name compliance assumptions early instead of retrofitting them later."
+      "Make auth, logging, privacy, and audit expectations explicit.",
+      "Define tool permissions, recovery paths, and compliance assumptions before implementation."
     ]
   }
 ]

@@ -237,6 +237,9 @@ function buildSystemPrompt(phase, panelists, repoInsights) {
     "- If the idea, spec, or dev plan is weak or vague, say so directly.",
     "- Optimize for the current room's job, not generic startup advice.",
     "- In Phase 2, stay technology-agnostic and focus on product brief, scenarios, scope, assumptions, and acceptance criteria.",
+    "- In Phase 3, convert the SPEC into implementation plan, tasks, ADR-style decisions, architecture risks, tests, and security guardrails.",
+    "- In Phase 3, justify stack choices with context, decision, and consequences instead of preference claims.",
+    "- In Phase 3, flag missing architecture inputs and trust boundaries before proposing implementation tasks.",
     "Panelists:",
     ...panelists.map(
       (panelist) =>
@@ -600,19 +603,19 @@ function inferDevFrame(message) {
       signal: "guardrail-heavy",
       confidence: "High",
       focus:
-        "This build needs explicit technical and governance defaults before coding starts because the trust model is part of the product.",
+        "This build needs explicit technical, governance, and task defaults before coding starts because the trust model is part of the product.",
       mainRisk:
-        "Security, data handling, and auditability will become expensive rework if they are not defined alongside the architecture.",
+        "Security, data handling, auditability, and tool boundaries will become expensive rework if they are not defined alongside the architecture.",
       nextStep:
-        "Freeze auth, data classification, logging, test coverage expectations, and the core system boundaries before implementation.",
+        "Write ADR-style stack choices, freeze auth, data classification, logging, test coverage expectations, and core system boundaries before implementation.",
       exitCriteria:
-        "Stack, architecture, testing, security controls, and compliance assumptions are explicit enough for tickets and PRs.",
-      defaultTags: ["trust surface", "guardrails"],
+        "Stack ADRs, architecture, tasks, testing, security controls, and compliance assumptions are explicit enough for tickets and PRs.",
+      defaultTags: ["trust surface", "ADR guardrails"],
       tagsByPanel: {
-        "staff-engineer": ["boring stack", "repo defaults"],
-        "systems-architect": ["boundaries", "data flow"],
-        "qa-lead": ["release gates", "test plan"],
-        "security-compliance": ["data class", "audit trail"],
+        "staff-engineer": ["SPEC to tasks", "repo defaults"],
+        "systems-architect": ["risk review", "data flow"],
+        "qa-lead": ["release gates", "test mapping"],
+        "security-compliance": ["data class", "tool boundaries"],
       },
     };
   }
@@ -621,19 +624,19 @@ function inferDevFrame(message) {
     signal: "delivery-planning",
     confidence: "Medium",
     focus:
-      "Pick boring defaults, clear system boundaries, and explicit quality gates before the team writes code.",
+      "Pick boring defaults, clear system boundaries, ADR-backed tradeoffs, task order, and explicit quality gates before the team writes code.",
     mainRisk:
-      "Implicit tech choices and undefined quality standards will create avoidable rework during build.",
+      "Implicit tech choices, vague architecture boundaries, and undefined quality standards will create avoidable rework during build.",
     nextStep:
-      "Decide stack, repo conventions, architectural boundaries, test strategy, and security baseline in one shared build brief.",
+      "Decide stack, repo conventions, architectural boundaries, task sequence, test strategy, and security baseline in one shared build brief.",
     exitCriteria:
-      "The team can start implementation with clear engineering defaults and guardrails instead of assumptions.",
-    defaultTags: ["build brief", "engineering defaults"],
+      "The team can start implementation with a SPEC-derived plan, tasks, engineering defaults, and guardrails instead of assumptions.",
+    defaultTags: ["build brief", "SPEC to tasks"],
     tagsByPanel: {
-      "staff-engineer": ["stack", "coding standards"],
-      "systems-architect": ["service boundaries", "integration map"],
-      "qa-lead": ["test matrix", "release quality"],
-      "security-compliance": ["auth", "privacy baseline"],
+      "staff-engineer": ["plan tasks", "coding standards"],
+      "systems-architect": ["ADR", "risk map"],
+      "qa-lead": ["test matrix", "done proof"],
+      "security-compliance": ["auth", "agent controls"],
     },
   };
 }
@@ -657,13 +660,13 @@ function buildMockResponse(panelistId, frame) {
     case "boundary-keeper":
       return `The spec is not ready until scope is locked and acceptance language is testable. I want explicit non-goals, crisp requirements, and scenario-level criteria that define what done means for v1. ${frame.nextStep}`;
     case "staff-engineer":
-      return `Pick boring defaults on purpose. I want the stack, repo conventions, and implementation style written down before the first ticket exists so the team is not improvising architecture through PRs. ${frame.focus}`;
+      return `Move from SPEC to plan to tasks deliberately. I want the stack, repo conventions, implementation style, and first task sequence written down before the team starts turning architecture into accidental PR history. ${frame.focus}`;
     case "systems-architect":
-      return `Define boundaries before code makes them sticky. I want the main components, data flow, integration points, and where state lives so the system shape is explicit rather than accidental. ${frame.mainRisk}`;
+      return `Define boundaries before code makes them sticky. I want the main components, data flow, integration points, state ownership, and ADR consequences visible enough that risks can be reviewed before implementation. ${frame.mainRisk}`;
     case "qa-lead":
-      return `Quality needs a strategy before delivery starts. State what gets unit tests, integration tests, end-to-end coverage, and what release gates are non-negotiable for this product. ${frame.nextStep}`;
+      return `Quality needs a strategy before delivery starts. Map acceptance criteria into unit tests, integration tests, end-to-end coverage, manual checks, and task-level done proof so every ticket has a verification path. ${frame.nextStep}`;
     case "security-compliance":
-      return `Security and compliance should be designed into the build brief, not retrofitted later. Classify the data, define auth, logging, privacy expectations, and the compliance assumptions that could shape the system. ${frame.exitCriteria}`;
+      return `Security and compliance should be designed into the build brief, not retrofitted later. Classify the data, define auth, logging, privacy expectations, tool permissions, recovery paths, and the compliance assumptions that could shape the system. ${frame.exitCriteria}`;
     default:
       return frame.focus;
   }

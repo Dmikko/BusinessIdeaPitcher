@@ -39,18 +39,18 @@
     "id": "phase-3-dev",
     "shortLabel": "Phase 3",
     "name": "Dev",
-    "objective": "Turn the spec into clear engineering instructions and guardrails before coding starts.",
-    "exitCriteria": "Stack, architecture, testing, security, and compliance expectations are explicit.",
+    "objective": "Turn the spec into an engineering plan, ADR-backed decisions, task breakdown, and guardrails before coding starts.",
+    "exitCriteria": "Stack decisions, architecture, task sequence, testing, security, and compliance expectations are explicit.",
     "accent": "#365f95",
-    "intro": "Use this room to translate the product spec into engineering direction. The team should define stack choices, repo and code standards, architectural boundaries, testing strategy, and security or compliance requirements.",
-    "examplePrompt": "Given a PT clinic AI scribe SaaS, what stack, testing strategy, architecture, and security baseline should we set before building?",
+    "intro": "Use this room to translate the product spec into engineering direction. The team should define stack choices with ADR reasoning, repo and code standards, architectural boundaries, task sequencing, testing strategy, and security or compliance requirements.",
+    "examplePrompt": "Given this PT clinic AI scribe spec, turn it into a build plan: stack ADRs, architecture, task sequence, tests, and security baseline.",
     "defaultSummary": {
       "signal": "Delivery planning",
       "confidence": "Medium",
-      "focus": "Use this phase to lock implementation defaults and technical guardrails before code is written.",
-      "mainRisk": "Coding without explicit architectural, quality, or security constraints creates expensive rework.",
-      "nextStep": "Freeze the boring defaults: stack, repo shape, test strategy, auth, data handling, and release gates.",
-      "exitCriteria": "Move on only when engineering guidance is clear enough to start implementation safely."
+      "focus": "Use this phase to lock implementation defaults, ADR-backed tradeoffs, task flow, and technical guardrails before code is written.",
+      "mainRisk": "Coding without explicit architectural, quality, task, or security constraints creates expensive rework.",
+      "nextStep": "Freeze the boring defaults: stack, repo shape, ADRs, task sequence, test strategy, auth, data handling, and release gates.",
+      "exitCriteria": "Move on only when engineering guidance is clear enough to create tickets and start implementation safely."
     }
   }
 ]

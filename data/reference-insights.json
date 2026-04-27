@@ -78,12 +78,13 @@
     "id": "spec-kit",
     "name": "spec-kit",
     "url": "https://github.com/github/spec-kit",
-    "phaseIds": ["phase-2-spec"],
-    "strength": "Best source for clarification discipline, spec quality checks, and separation of what versus how.",
+    "phaseIds": ["phase-2-spec", "phase-3-dev"],
+    "strength": "Best source for clarification discipline, spec quality checks, and the SPEC -> plan -> tasks handoff.",
     "adopt": [
       "clarify before plan",
       "technology-agnostic requirement writing",
-      "spec readiness checks"
+      "spec readiness checks",
+      "technical plan and task breakdown after the spec is ready"
     ],
     "avoid": [
       "large command workflow dumps in the main chat"
@@ -102,6 +103,53 @@
     ],
     "avoid": [
       "full step-by-step facilitator workflow during normal chat turns"
+    ]
+  },
+  {
+    "id": "azure-architecture-review-agent",
+    "name": "Azure Architecture Review Agent",
+    "url": "https://github.com/Azure-Samples/agent-architecture-review-sample",
+    "phaseIds": ["phase-3-dev"],
+    "strength": "Best source for architecture review behavior over prose, YAML, design docs, and inferred system descriptions.",
+    "adopt": [
+      "smart input parsing from rough design material",
+      "risk detection with severity and recommendations",
+      "component, dependency, and data-flow review"
+    ],
+    "avoid": [
+      "Azure-specific deployment assumptions unless the product actually needs them",
+      "diagram generation as a required chat output"
+    ]
+  },
+  {
+    "id": "architecture-decision-record",
+    "name": "Architecture Decision Record",
+    "url": "https://github.com/joelparkerhenderson/architecture-decision-record",
+    "phaseIds": ["phase-3-dev"],
+    "strength": "Best source for making stack and architecture choices explicit through context, decision, and consequences.",
+    "adopt": [
+      "ADR-style reasoning for stack and architecture choices",
+      "context before decision",
+      "consequences and tradeoffs after each major choice"
+    ],
+    "avoid": [
+      "bureaucratic ADR volume for trivial decisions"
+    ]
+  },
+  {
+    "id": "12-factor-agents",
+    "name": "12-Factor Agents",
+    "url": "https://github.com/humanlayer/12-factor-agents",
+    "phaseIds": ["phase-3-dev"],
+    "strength": "Best source for stable agentic workflow design, explicit control flow, and production-minded AI system boundaries.",
+    "adopt": [
+      "structured agent state and explicit transitions",
+      "tool calls as typed contracts",
+      "human-visible control flow and recovery paths"
+    ],
+    "avoid": [
+      "treating agent behavior as a single giant prompt",
+      "adding agent infrastructure before the product needs it"
     ]
   }
 ]
