@@ -84,23 +84,41 @@ The packaged output is written to `dist/`.
 
 ## Run with Docker
 
-Build and start the local web app container:
+Docker runs the web app server, not the Electron desktop app.
 
-```bash
-docker compose up --build
-```
+### Option 1: Docker Compose
 
-Open `http://localhost:4173`.
+1. Make sure `.env` exists if you want to use your OpenAI settings.
+2. Start the app:
 
-The container runs the Node server, not the Electron desktop shell. It reads
-runtime configuration from `.env` through Compose. If `OPENAI_API_KEY` is not
-set, the app runs in mock mode.
+   ```bash
+   docker compose up --build
+   ```
 
-Stop it with:
+3. Open `http://localhost:4173`
+4. Stop it when you are done:
 
-```bash
-docker compose down
-```
+   ```bash
+   docker compose down
+   ```
+
+### Option 2: Docker only
+
+1. Build the image:
+
+   ```bash
+   docker build -t business-idea-pitcher .
+   ```
+
+2. Run the container:
+
+   ```bash
+   docker run --rm -p 4173:4173 --env-file .env business-idea-pitcher
+   ```
+
+3. Open `http://localhost:4173`
+
+If `OPENAI_API_KEY` is not set, the app runs in mock mode.
 
 ## Environment variables
 
