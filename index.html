@@ -7,10 +7,34 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div id="drawerBackdrop" class="drawer-backdrop" hidden></div>
+    <aside id="projectDrawer" class="project-drawer" aria-label="Idea pitches" aria-hidden="true">
+      <div class="drawer-header">
+        <div>
+          <div class="eyebrow">Projects</div>
+          <h2>Idea pitches</h2>
+        </div>
+        <button id="closeProjectDrawer" class="icon-button" type="button" aria-label="Close projects drawer">
+          x
+        </button>
+      </div>
+
+      <div class="drawer-actions">
+        <button id="newProjectButton" class="primary" type="button">New pitch</button>
+        <button id="renameProjectButton" class="ghost" type="button">Rename</button>
+      </div>
+
+      <div id="projectList" class="project-list" aria-label="Saved idea pitches"></div>
+    </aside>
+
     <div class="shell">
       <aside class="card roster">
-        <div class="eyebrow">Panel Room</div>
+        <div class="roster-top">
+          <div class="eyebrow">Panel Room</div>
+          <button id="openProjectDrawer" class="ghost compact" type="button">Projects</button>
+        </div>
         <h1>Business Idea Pitcher</h1>
+        <div id="activeProjectLabel" class="active-project-label"></div>
         <p class="lede">
           A local prototype for a 3-phase idea pitcher with different expert
           teams in each room.
