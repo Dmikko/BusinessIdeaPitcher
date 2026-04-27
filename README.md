@@ -18,7 +18,7 @@ Local prototype for a 3-phase idea pitcher with separate expert rooms for:
 - Phase-specific repo synthesis:
   - `Phase 1`: `kommuniker/worth-building`, `maigentic/stratarts`, `bwerneckm/startup-skills`
   - `Phase 2`: `gsd-build/get-shit-done`, `Fission-AI/OpenSpec`, `github/spec-kit`, `bmad-code-org/BMAD-METHOD`
-  - `Phase 3`: no dedicated source repos assigned yet
+  - `Phase 3`: `github/spec-kit`, `Azure-Samples/agent-architecture-review-sample`, `joelparkerhenderson/architecture-decision-record`, `humanlayer/12-factor-agents`
 
 ## Run locally
 
@@ -74,8 +74,9 @@ The server uses the OpenAI `Responses API` with Structured Outputs. If
   Turn a qualified idea into a product brief, core scenarios, scope boundaries,
   assumptions, and acceptance criteria.
 - `Phase 3 - Dev`
-  Turn the spec into explicit engineering instructions, testing, security, and
-  compliance expectations.
+  Turn the spec into an engineering plan, ADR-backed stack choices, task
+  sequence, architecture risk review, testing, security, and compliance
+  expectations.
 
 Each phase has its own team, its own chat history, and its own exit criteria.
 
@@ -89,3 +90,6 @@ Each phase has its own team, its own chat history, and its own exit criteria.
 - `OpenSpec` supplies requirements-plus-scenarios artifact thinking
 - `spec-kit` supplies clarification discipline and spec readiness checks
 - `BMAD-METHOD` supplies PRD-style product framing and workflow facilitation
+- `Azure Architecture Review Agent` supplies architecture risk and recommendation behavior
+- `Architecture Decision Record` supplies context, decision, and consequences for stack choices
+- `12-Factor Agents` supplies stable agent workflow and tool-boundary principles

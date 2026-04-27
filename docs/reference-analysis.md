@@ -9,7 +9,7 @@ what the local prototype now borrows from each phase set.
 | --- | --- | --- |
 | `Phase 1 - Ideation Qualification` | `worth-building`, `startup-skills`, `stratarts` | Qualification pressure, multi-voice sparring, validation bias, structured output |
 | `Phase 2 - Spec` | `get-shit-done`, `OpenSpec`, `spec-kit`, `BMAD-METHOD` | Product briefing, clarification discipline, workflow/spec structure, scope boundaries |
-| `Phase 3 - Dev` | none assigned yet | Uses the local phase contract and role prompts until dedicated repos are added |
+| `Phase 3 - Dev` | `spec-kit`, `Azure Architecture Review Agent`, `Architecture Decision Record`, `12-Factor Agents` | SPEC -> plan/tasks, architecture risk review, ADR-backed stack decisions, stable agent/workflow guardrails |
 
 ## Phase 1 references
 
@@ -180,13 +180,104 @@ Avoid:
 
 - full step-file facilitator workflow in normal chat turns
 
+## Phase 3 references
+
+### `spec-kit`
+
+Key files inspected:
+
+- `README.md`
+
+What stands out:
+
+- Explicit `/speckit.specify` -> `/speckit.plan` -> `/speckit.tasks` -> `/speckit.implement` flow
+- `/speckit.plan` is where tech stack and architecture choices belong
+- Planning should follow a ready spec instead of being mixed into product discovery
+
+Adopt:
+
+- SPEC -> plan -> tasks discipline
+- stack and architecture choices inside the planning handoff
+- task breakdown only after unresolved spec questions are visible
+
+Avoid:
+
+- exposing slash-command mechanics in every panel reply
+- treating the command workflow as a UI requirement
+
+### `Azure Architecture Review Agent`
+
+Key files inspected:
+
+- `README.md`
+
+What stands out:
+
+- Accepts YAML, Markdown, plaintext, code, and design docs as architecture input
+- Infers components and connections when the architecture is unstructured
+- Produces risk analysis, prioritized recommendations, and component/dependency review
+
+Adopt:
+
+- architecture-review persona that can work from rough text
+- severity-aware risk and recommendation language
+- component, dependency, data-flow, and failure-mode checks
+
+Avoid:
+
+- Azure-specific deployment defaults unless the product calls for Azure
+- making generated diagrams mandatory in the normal chat turn
+
+### `Architecture Decision Record`
+
+Key files inspected:
+
+- `README.md`
+
+What stands out:
+
+- ADRs make architecture choices durable by recording context, decision, and consequences
+- Useful for stack choices that otherwise become ungrounded preference debates
+
+Adopt:
+
+- context -> decision -> consequences framing for major stack and architecture choices
+- visible tradeoffs for choices the team will pay for later
+
+Avoid:
+
+- creating heavy ADR ceremony for trivial implementation details
+
+### `12-Factor Agents`
+
+Key files inspected:
+
+- `README.md`
+
+What stands out:
+
+- Production agent workflows need explicit state, control flow, tool contracts, and recovery paths
+- Agent systems should not be one giant prompt with hidden behavior
+
+Adopt:
+
+- structured state and explicit transitions for agent-heavy products
+- tool calls as typed contracts
+- human-visible control flow, permissions, and recovery paths
+
+Avoid:
+
+- adding agent infrastructure before the product needs it
+- relying on prompt-only behavior for critical workflow guarantees
+
 ## Product decision
 
 The prototype now uses two distinct source stacks:
 
 1. `Phase 1` is a qualification room.
 2. `Phase 2` is a spec room.
-3. `Phase 3` remains a local handoff room until dedicated dev repos are added.
+3. `Phase 3` is a dev-planning room that turns a ready SPEC into plan,
+   ADR-backed decisions, tasks, review risks, tests, and guardrails.
 
 That means the backend should:
 
@@ -212,3 +303,22 @@ Together they should pressure-test:
 - v1 scope and non-goals
 - open assumptions
 - acceptance criteria needed before Phase 3
+
+## Resulting Phase 3 room shape
+
+The `Dev` room now behaves as an implementation-readiness panel, not a generic
+engineering advice panel. Its roles are:
+
+- `Staff Engineer`
+- `Systems Architect`
+- `QA Lead`
+- `Security and Compliance`
+
+Together they should pressure-test:
+
+- whether the Phase 2 SPEC is ready to plan from
+- stack choices with ADR-style context, decision, and consequences
+- architecture boundaries, data flow, integrations, and risk severity
+- task sequence and implementation slices
+- acceptance-to-test mapping and release gates
+- data classification, auth, auditability, tool permissions, and compliance assumptions

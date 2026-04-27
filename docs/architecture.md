@@ -128,11 +128,12 @@ Roles:
 - QA Lead
 - Security and Compliance
 
-Note:
+Room behavior:
 
-- `Phase 3` does not yet have dedicated source repos assigned, so it currently
-  relies on the phase contract, role definitions, and general orchestration
-  rules.
+- turns a ready spec into a technical plan and task sequence
+- records stack and architecture choices with ADR-style reasoning
+- reviews architecture risks, boundaries, data flow, integrations, and trust
+  assumptions before implementation starts
 
 ## Reference blend
 
@@ -224,6 +225,57 @@ Adopt:
 Avoid for v0:
 
 - full facilitator workflow during normal panel turns
+
+### `Phase 3 sources`
+
+`spec-kit`
+
+Adopt:
+
+- SPEC -> plan -> tasks progression
+- stack and architecture choices during the planning handoff
+- task breakdown only after spec ambiguity is visible
+
+Avoid for v0:
+
+- exposing slash-command mechanics as the product UX
+
+`Azure Architecture Review Agent`
+
+Adopt:
+
+- architecture review from rough text, YAML, Markdown, or design docs
+- component, dependency, data-flow, and risk checks
+- severity-aware recommendations
+
+Avoid for v0:
+
+- Azure-specific deployment assumptions unless chosen by the user
+- mandatory diagram generation in every chat turn
+
+`Architecture Decision Record`
+
+Adopt:
+
+- context, decision, and consequences framing for stack choices
+- explicit tradeoffs for durable architecture decisions
+
+Avoid for v0:
+
+- heavy ADR ceremony for trivial choices
+
+`12-Factor Agents`
+
+Adopt:
+
+- explicit agent state and workflow transitions
+- typed tool contracts and recoverable control flow
+- human-visible permissions and failure paths
+
+Avoid for v0:
+
+- treating agent behavior as one giant prompt
+- adding agent infrastructure before the product needs it
 
 ## Near-term next steps
 
