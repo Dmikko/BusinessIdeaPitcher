@@ -32,17 +32,18 @@ function createServer() {
       }
 
       if (request.method === "POST" && url.pathname === "/api/chat") {
-        const body = await readJsonBody(request);
-        const message = typeof body?.message === "string" ? body.message.trim() : "";
-        const thread = Array.isArray(body?.thread) ? body.thread : [];
-        const phaseId = typeof body?.phaseId === "string" ? body.phaseId : "";
+      const body = await readJsonBody(request);
+      const message = typeof body?.message === "string" ? body.message.trim() : "";
+      const thread = Array.isArray(body?.thread) ? body.thread : [];
+      const phaseId = typeof body?.phaseId === "string" ? body.phaseId : "";
+      const projectContext = normalizeProjectContext(body?.projectContext);
 
-        if (!message) {
-          return sendJson(response, 400, { error: "Missing message" });
-        }
+      if (!message) {
+        return sendJson(response, 400, { error: "Missing message" });
+      }
 
-        const payload = await buildPanelTurn({ phaseId, message, thread });
-        return sendJson(response, 200, payload);
+      const payload = await buildPanelTurn({ phaseId, message, thread, projectContext });
+      return sendJson(response, 200, payload);
       }
 
       if (request.method === "GET") {
@@ -127,7 +128,76 @@ function buildBootstrapPayload() {
   };
 }
 
-async function buildPanelTurn({ phaseId, message, thread }) {
+function normalizeProjectContext(projectContext) {
+  if (!projectContext || typeof projectContext !== "object") {
+    return null;
+  }
+
+  const phases = Array.isArray(projectContext.phases)
+    ? projectContext.phases.slice(0, 6).map((phase) => ({
+        phaseId: cleanText(phase?.phaseId),
+        shortLabel: cleanText(phase?.shortLabel),
+        name: cleanText(phase?.name),
+        summary:
+          phase?.summary && typeof phase.summary === "object"
+            ? {
+                signal: cleanText(phase.summary.signal),
+                confidence: cleanText(phase.summary.confidence),
+                focus: cleanText(phase.summary.focus),
+                mainRisk: cleanText(phase.summary.mainRisk),
+                nextStep: cleanText(phase.summary.nextStep),
+                exitCriteria: cleanText(phase.summary.exitCriteria),
+              }
+            : null,
+        recentThread: Array.isArray(phase?.recentThread)
+          ? phase.recentThread.slice(-8).map((entry) => ({
+              type: cleanText(entry?.type),
+              speaker: cleanText(entry?.speaker),
+              body: cleanText(entry?.body).slice(0, 1200),
+              tags: normalizeTags(entry?.tags),
+            }))
+          : [],
+      }))
+    : [];
+
+  return {
+    projectId: cleanText(projectContext.projectId),
+    projectName: cleanText(projectContext.projectName) || "Untitled pitch",
+    currentPhaseId: cleanText(projectContext.currentPhaseId),
+    phases: phases.filter((phase) => phase.phaseId && phase.name),
+  };
+}
+
+function formatProjectContext(projectContext, currentPhaseId) {
+  if (!projectContext?.phases?.length) {
+    return "(no saved cross-phase context yet)";
+  }
+
+  const lines = [`Project: ${projectContext.projectName}`];
+
+  projectContext.phases.forEach((phase) => {
+    const marker = phase.phaseId === currentPhaseId ? "current" : "related";
+    const summary = phase.summary;
+    lines.push(`- ${phase.shortLabel || phase.name} (${marker}):`);
+    if (summary) {
+      lines.push(`  summary=${summary.signal || "n/a"}; focus=${summary.focus || "n/a"}; risk=${summary.mainRisk || "n/a"}; next=${summary.nextStep || "n/a"}`);
+    }
+
+    const recent = phase.recentThread
+      .filter((entry) => entry.body)
+      .slice(-4)
+      .map((entry) => `  [${entry.speaker || entry.type}] ${entry.body}`);
+
+    if (recent.length > 0) {
+      lines.push("  recent:");
+      lines.push(...recent);
+    }
+  });
+
+  return lines.join("\n");
+}
+
+async function buildPanelTurn({ phaseId, message, thread, projectContext }) {
   const phases = readJsonFile(PHASES_PATH);
   const panelists = readJsonFile(PANELISTS_PATH);
   const repoInsights = readJsonFile(REFERENCE_INSIGHTS_PATH);
@@ -145,6 +215,7 @@ async function buildPanelTurn({ phaseId, message, thread }) {
         phase,
         message,
         thread,
+        projectContext,
         panelists: phasePanelists,
         repoInsights: phaseRepoInsights,
       });
@@ -177,7 +248,7 @@ async function buildPanelTurn({ phaseId, message, thread }) {
   };
 }
 
-async function callLiveModel({ phase, message, thread, panelists, repoInsights }) {
+async function callLiveModel({ phase, message, thread, projectContext, panelists, repoInsights }) {
   const response = await fetch(getOpenAIResponsesUrl(), {
     method: "POST",
     headers: {
@@ -189,6 +260,7 @@ async function callLiveModel({ phase, message, thread, panelists, repoInsights }
         phase,
         message,
         thread,
+        projectContext,
         panelists,
         repoInsights,
       }),
@@ -269,7 +341,7 @@ function buildSystemPrompt(phase, panelists, repoInsights) {
   ].join("\n");
 }
 
-function buildUserPrompt(phase, thread, message, panelists) {
+function buildUserPrompt(phase, thread, message, panelists, projectContext) {
   const transcript = thread
     .slice(-10)
     .map((entry) => `[${entry.speaker || entry.type}] ${entry.body}`)
@@ -279,6 +351,9 @@ function buildUserPrompt(phase, thread, message, panelists) {
     `Current phase: ${phase.shortLabel} - ${phase.name}`,
     `Phase objective: ${phase.objective}`,
     `Phase exit criteria: ${phase.exitCriteria}`,
+    "",
+    "Cross-phase project context:",
+    formatProjectContext(projectContext, phase.id),
     "",
     "Conversation transcript so far:",
     transcript || "(empty)",
@@ -291,7 +366,7 @@ function buildUserPrompt(phase, thread, message, panelists) {
   ].join("\n");
 }
 
-function buildOpenAIRequestBody({ phase, message, thread, panelists, repoInsights }) {
+function buildOpenAIRequestBody({ phase, message, thread, projectContext, panelists, repoInsights }) {
   return {
     model: process.env.OPENAI_MODEL || "gpt-5.4",
     store: parseBooleanEnv(process.env.OPENAI_STORE, false),
@@ -299,7 +374,7 @@ function buildOpenAIRequestBody({ phase, message, thread, panelists, repoInsight
     input: [
       {
         role: "user",
-        content: buildUserPrompt(phase, thread, message, panelists),
+        content: buildUserPrompt(phase, thread, message, panelists, projectContext),
       },
     ],
     text: {

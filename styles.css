@@ -39,6 +39,106 @@ textarea {
   font: inherit;
 }
 
+button {
+  color: inherit;
+}
+
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: rgba(9, 17, 31, 0.32);
+}
+
+.project-drawer {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 30;
+  width: min(420px, calc(100vw - 28px));
+  padding: 24px;
+  background: rgba(255, 251, 245, 0.96);
+  box-shadow: 24px 0 70px rgba(16, 22, 37, 0.24);
+  border-right: 1px solid var(--line);
+  transform: translateX(-104%);
+  transition: transform 220ms ease;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.project-drawer.open {
+  transform: translateX(0);
+}
+
+.drawer-header,
+.roster-top {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.drawer-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.project-list {
+  display: grid;
+  gap: 10px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.project-button {
+  width: 100%;
+  min-height: 74px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.68);
+  text-align: left;
+  cursor: pointer;
+  display: grid;
+  gap: 6px;
+}
+
+.project-button.active {
+  background: linear-gradient(
+    135deg,
+    rgba(44, 124, 111, 0.14),
+    rgba(54, 95, 149, 0.12)
+  );
+  border-color: rgba(44, 124, 111, 0.24);
+}
+
+.project-title {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.project-meta,
+.active-project-label {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.active-project-label {
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+.icon-button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(19, 32, 47, 0.06);
+  cursor: pointer;
+  font-weight: 700;
+}
+
 .shell {
   width: min(1360px, calc(100% - 32px));
   margin: 0 auto;
@@ -400,6 +500,11 @@ h2 {
   font-weight: 700;
   cursor: pointer;
   transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.compact {
+  padding: 9px 13px;
+  font-size: 0.9rem;
 }
 
 .primary:hover,
